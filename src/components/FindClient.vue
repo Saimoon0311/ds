@@ -1,7 +1,7 @@
 <template lang="">
     <div class="hello">
         <MainHeader />
-        <div class="mt-5 pt-5">
+        <div class=" pt-4">
 
         <div class="bg-dark text-white text-center m-3 p-3 find-client" style="border-radius: 10px">
         <form action="index" method="post" class="px-md-5 m-md-3" data-gtm-form-interact-id="0">
@@ -81,13 +81,17 @@ export default {
 }
 </script>
 <style scoped>
+* {
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 .hello {
     min-height: 100vh;
-
 }
-
 .find-client {
-    width: 30%;
+    width: 35%;
     margin: 0 auto !important;
     margin-top: 50px;
 }

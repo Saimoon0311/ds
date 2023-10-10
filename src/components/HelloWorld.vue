@@ -31,8 +31,9 @@
         <p>Simply subscribe for an opportunity to find clients
           in your practice area without leaving your desk.
         </p>
-        <a href="./find-clients/index" class="text-white fs-5">Sign up now to be first to
-          access new clients</a>
+          <router-link to="/find-client" class="text-white fs-5">Sign up now to be first to
+          access new clients</router-link>
+
       </div>
     </div>
   </div>
