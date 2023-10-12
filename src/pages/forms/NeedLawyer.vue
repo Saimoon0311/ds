@@ -33,7 +33,8 @@
     </div>
 </template>
 <script >
-import MainHeader from './global/MainHeader.vue';
+import MainHeader from '../../components/global/MainHeader.vue'
+
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {

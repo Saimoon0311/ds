@@ -1,7 +1,7 @@
 <template lang="">
     <div class="hello">
         <MainHeader />
-        <div class=" pt-4">
+        <div class=" pt-4 center-main">
 
         <div class="bg-dark text-white text-center m-3 p-3 find-client" style="border-radius: 10px">
         <Form @submit="submitData" class="px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
@@ -81,7 +81,8 @@
     </div>
 </template>
 <script>
-import MainHeader from './global/MainHeader.vue'
+
+import MainHeader from '../../components/global/MainHeader.vue'
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
@@ -135,14 +136,10 @@ export default {
 }
 </script>
 <style scoped>
-* {
-  font-family: 'Montserrat', sans-serif;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+
 .hello {
     min-height: 100vh;
+    display: grid;
 }
 .find-client {
     width: 35%;
