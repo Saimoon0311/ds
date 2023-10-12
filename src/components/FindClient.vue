@@ -10,6 +10,9 @@
             
             <div class="d-flex flex-row align-items-center mb-4">
                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                 <!-- Add the style and icon you want using the String format -->
+                <font-awesome-icon icon="fa-solid fa-user-secret" />
+                <font-awesome-icon icon="fa-solid fa-envelope" />
                 <div class="form-outline flex-fill mb-0">
                     <Field type="email"  class="form-control" name="email" placeholder="Email" :class="{'is-invalid' : errors.email}"  /> 
                     <span class="invalid-feedback">{{errors.email}}</span>
@@ -56,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="d-flex align-items-between justify-content-center mb-4">
+            <div class="d-flex align-items-between justify-content-center mb-4 inline-table">
                 <Field class="form-check-Field" type="checkbox" id="termsAndConditions" name="tandc" value="true" :class="{'is-invalid' : errors.tandc}" />
                 <label class="form-check-label" for="termsAndConditions">
                     &nbsp;I have read and agree to the 
@@ -152,5 +155,8 @@ export default {
     align-items: flex-start;
     justify-content: center;
     flex-wrap: wrap;
+}
+.inline-table{
+    display: inline-block !important;
 }
 </style>
