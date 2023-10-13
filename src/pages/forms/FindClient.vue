@@ -1,14 +1,12 @@
 <template lang="">
-    <div class="hello">
+    <div class="hello container">
         <MainHeader />
-        <div class=" pt-4 center-main">
-
-        <div class="bg-dark text-white text-center m-3 p-3 find-client" style="border-radius: 10px">
-        <Form @submit="submitData" class="px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
-            <p class="m-4 fs-3 mx-5 px-md-5">Sign up to find clients</p>
-
-            
-            <div class="d-flex flex-row align-items-center mb-4">
+        <div class=" pt-4 center-main row justify-content-center">
+        <div class="col-md-7">        
+        <div class="bg-dark text-white text-center m-3 p-3 find-client " style="border-radius: 10px">
+        <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
+            <p class="m-4 fs-3 mx-5 ">Sign up to find clients</p>
+            <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                  <!-- Add the style and icon you want using the String format -->
              
@@ -18,7 +16,7 @@
                 </div>
             </div>
 
-            <div class="d-flex flex-row align-items-center mb-4">
+            <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                 <div class="form-outline flex-fill mb-0">
                     <Field type="text" class="form-control" name="fname" placeholder="First Name" :class="{'is-invalid' : errors.fname}" />
@@ -26,7 +24,7 @@
                 </div>
             </div>
 
-            <div class="d-flex flex-row align-items-center mb-4">
+            <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                 <div class="form-outline flex-fill mb-0">
                     <Field type="text"  class="form-control" name="lname" placeholder="Last Name" :class="{'is-invalid' : errors.lname}" />
@@ -34,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="d-flex flex-row align-items-center mb-4">
+            <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                 <div class="form-outline flex-fill mb-0">
                     <Field type="tel" class="form-control" name="number" placeholder="Phone Number" :class="{'is-invalid' : errors.number}" />
@@ -42,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="d-flex flex-row align-items-center mb-4">
+            <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                 <div class="form-outline flex-fill mb-0">
                     <Field type="password"  class="form-control" name="password" placeholder="Password" :class="{'is-invalid' : errors.password}" />
@@ -50,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="d-flex flex-row align-items-center mb-4">
+            <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                 <div class="form-outline flex-fill mb-0">
                     <Field type="password" id="form3Example4cd" class="form-control" name="confirm_password" placeholder="Repeat Password" :class="{'is-invalid' : errors.confirm_password}" />
@@ -64,16 +62,17 @@
                     &nbsp;I have read and agree to the 
                     <a href="../profile/terms-and-conditions.html" target="_blank">terms and conditions.</a>
                 </label>
-                <span class="invalid-feedback">{{errors.tandc}}</span>
+                <span class="invalid-feedback text-center">{{errors.tandc}}</span>
             </div>
 
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                 <button class="btn btn-outline-light btn-lg px-5">Sign up</button>
             </div>
 
-            <!-- <p>Already have an account?<br> <a href="../legal-marketplace/index.php">Login</a></p> -->
+            <p>Already have an account?<br> <router-link  to="/login">Login</router-link ></p>
         </Form>
     </div>
+</div>
 </div>
 
         
@@ -89,8 +88,7 @@ export default {
         const schema = yup.object().shape({
             fname: yup.string().required('First Name is Required.'),
             lname: yup.string().required('Last Name is Required.'),
-            number: yup.string().required('Please enter your number'),
-
+            number: yup.string().required('Phone number is Required.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
             email: yup.string()
             .min(3, 'Email must be valid')
             .max(50, 'Email must be valid')
@@ -137,22 +135,25 @@ export default {
 <style scoped>
 
 .hello {
-    min-height: 100vh;
-    display: grid;
+    /* min-height: 100vh;
+    display: grid; */
 }
 .find-client {
-    width: 35%;
-    margin: 0 auto !important;
-    margin-top: 50px;
+    /* width: 35%;
+    margin: 0 auto !important; */
+    /* margin-top: 50px; */
 }
 
-.center-main {
+/* .center-main {
     display: flex;
     align-items: flex-start;
     justify-content: center;
     flex-wrap: wrap;
-}
+} */
 .inline-table{
     display: inline-block !important;
+}
+.align-baseline{
+    align-items: baseline !important;
 }
 </style>
