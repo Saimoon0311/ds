@@ -54,7 +54,7 @@
               <tbody>
                 <tr>
                   <td>
-                    pyvugefuha@mailinator.com (Yardley Palmer Ria Fischer)
+                    test@mailinator.com (Yardley Palmer )
                     <details class="lawyerSummary" open="">
                       <summary data-open="Less" data-close="More">more</summary>
                       <table class="table table-striped">
@@ -62,21 +62,21 @@
                           <tr>
                             <td class="fw-bold">Profile</td>
                             <td>
-                              <img
-                                src="https://makinglawsimple.com.au/lawyer/uploads/21_hyp3.jpg"
+                              <!-- <img
+                                src=""
                                 alt="profile picture"
                                 width="100"
                                 height="100"
-                              />
+                              /> -->
                             </td>
                           </tr>
                           <tr>
                             <td class="fw-bold">Email</td>
-                            <td>pyvugefuha@mailinator.com</td>
+                            <td>test@mailinator.com</td>
                           </tr>
                           <tr>
                             <td class="fw-bold">Name</td>
-                            <td>Yardley Palmer Ria Fischer</td>
+                            <td>Yardley Palmer</td>
                           </tr>
                           <tr>
                             <td class="fw-bold">Job Title</td>
@@ -138,20 +138,25 @@ export default {
 </script>
 <style scoped>
 ul#pills-tab {
-    text-align: center;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    width: 225px;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  width: 225px;
 }
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: white;
-    background-color: #808080;
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: white;
+  background-color: #808080;
 }
-.nav-pills .nav-link, .nav-link:focus, .nav-link:hover{
-    color: #6d6f73 ;
+
+.nav-pills .nav-link,
+.nav-link:focus,
+.nav-link:hover {
+  color: #6d6f73;
 }
 </style>

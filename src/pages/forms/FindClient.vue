@@ -60,7 +60,7 @@
                 <Field class="form-check-Field" type="checkbox" id="termsAndConditions" name="tandc" value="true" :class="{'is-invalid' : errors.tandc}" />
                 <label class="form-check-label" for="termsAndConditions">
                     &nbsp;I have read and agree to the 
-                    <a href="../profile/terms-and-conditions.html" target="_blank">terms and conditions.</a>
+                    <router-link to="/privacy-policy" >terms and conditions.</router-link>
                 </label>
                 <span class="invalid-feedback text-center">{{errors.tandc}}</span>
             </div>
@@ -84,37 +84,37 @@ import MainHeader from '../../components/global/MainHeader.vue'
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
-    data(){
+    data() {
         const schema = yup.object().shape({
             fname: yup.string().required('First Name is Required.'),
             lname: yup.string().required('Last Name is Required.'),
             number: yup.string().required('Phone number is Required.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
             email: yup.string()
-            .min(3, 'Email must be valid')
-            .max(50, 'Email must be valid')
-            .required('Please Enter your email')
-            .matches(
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-      'Please enter valid email',
-            ),
+                .min(3, 'Email must be valid')
+                .max(50, 'Email must be valid')
+                .required('Please Enter your email')
+                .matches(
+                    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                    'Please enter valid email',
+                ),
             password: yup
-            .string()
-            .required('Please Enter your password')
-            .min(6, 'Password must be greater then 6 digit')
-            .max(16, 'Password must be less then 16 digit')
-            .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
-            ),
+                .string()
+                .required('Please Enter your password')
+                .min(6, 'Password must be greater then 6 digit')
+                .max(16, 'Password must be less then 16 digit')
+                .matches(
+                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                    'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
+                ),
             confirm_password: yup
                 .string()
                 .required('Confirm password is required')
                 .oneOf([yup.ref('password'), null], 'Password must match'),
             tandc: yup.bool() // use bool instead of boolean
-            .required('You must accept the terms and conditions')
-        .oneOf([true], "You must accept the terms and conditions")
+                .required('You must accept the terms and conditions')
+                .oneOf([true], "You must accept the terms and conditions")
         });
-        return{
+        return {
             schema
         }
     },
@@ -124,8 +124,8 @@ export default {
         Field,
         // MainFooter
     },
-    methods:{
-        submitData(){
+    methods: {
+        submitData() {
             alert('data has been submitted.')
         }
     },
@@ -133,11 +133,11 @@ export default {
 }
 </script>
 <style scoped>
-
 .hello {
     /* min-height: 100vh;
     display: grid; */
 }
+
 .find-client {
     /* width: 35%;
     margin: 0 auto !important; */
@@ -150,10 +150,11 @@ export default {
     justify-content: center;
     flex-wrap: wrap;
 } */
-.inline-table{
+.inline-table {
     display: inline-block !important;
 }
-.align-baseline{
+
+.align-baseline {
     align-items: baseline !important;
 }
 </style>

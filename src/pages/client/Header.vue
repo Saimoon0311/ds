@@ -20,7 +20,7 @@
                        <div>
 
                          
-                           <router-link to="/admin-login"  class="nav-link float-right logOutBtn active " id="clients" aria-current="page">Logout</router-link>
+                           <router-link to="/login"  class="nav-link float-right logOutBtn active " id="clients" aria-current="page">Logout</router-link>
                        </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
 export default {
 
     components: {
-        
+
     },
     methods: {
 
@@ -49,13 +49,14 @@ export default {
 }
 </script>
 <style scoped>
-.router-link-exact-active.menuItem-active-link{
+.router-link-exact-active.menuItem-active-link {
     background: grey;
     border: 1px solid grey;
     border-radius: 10px;
     color: white;
-    }
-.navbar-nav{
+}
+
+.navbar-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -81,11 +82,13 @@ export default {
     border-radius: 10px;
     color: white;
 }
-.navbar-nav .left-menu{
+
+.navbar-nav .left-menu {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
 }
+
 .bg-grey {
     background: grey;
     color: white;
@@ -94,5 +97,4 @@ export default {
 .bg-grey:hover {
     background: grey;
     color: white;
-}
-</style>
+}</style>
