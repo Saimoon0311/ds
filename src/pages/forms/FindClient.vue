@@ -56,13 +56,13 @@
                 </div>
             </div>
 
-            <div class="d-flex align-items-between justify-content-center mb-4 inline-table">
+            <div class="d-flex align-items-between justify-content-center mb-4 inline-table terms-check">
                 <Field class="form-check-Field" type="checkbox" id="termsAndConditions" name="tandc" value="true" :class="{'is-invalid' : errors.tandc}" />
                 <label class="form-check-label" for="termsAndConditions">
                     &nbsp;I have read and agree to the 
-                    <router-link to="/privacy-policy" >terms and conditions.</router-link>
+                    <router-link to="/terms-of-use" >terms and conditions.</router-link>
                 </label>
-                <span class="invalid-feedback text-center">{{errors.tandc}}</span>
+                <span class="invalid-feedback">{{errors.tandc}}</span>
             </div>
 
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
@@ -156,5 +156,11 @@ export default {
 
 .align-baseline {
     align-items: baseline !important;
+}
+
+.terms-check {
+    width: 100%;
+    text-align: left;
+    margin-left: 40px;
 }
 </style>
