@@ -1,9 +1,7 @@
 <template>
   <div class="hello">
     <MainHeader />
-    <div
-      class="d-flex flex-wrap justify-content-center align-items-center flex-column"
-    >
+    <div class="d-flex flex-wrap justify-content-center align-items-center flex-column">
       <div class="mb-5 text-center">
         <p>
           An Australian legal marketplace making law simple by helping you find
@@ -14,9 +12,7 @@
         </p>
       </div>
       <div class="d-flex flex-wrap justify-content-center align-items-center">
-        <div
-          class="homepage-circles d-flex flex-column align-items-center justify-content-center"
-        >
+        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center">
           <p class="fw-bold">I'm looking for a lawyer</p>
           <div class="showhover">
             <p>Need a lawyer and don't know where to begin?</p>
@@ -26,20 +22,14 @@
             </p>
             <p>Simply make one enquiry and wait for lawyers to come to you.</p>
             <div class="d-flex align-items-center justify-content-center">
-              <router-link to="/lawyer-login" class="text-dark fs-5 p-2"
-                >Sign in</router-link
-              >
+              <router-link to="/client-login" class="text-dark fs-5 p-2">Sign in</router-link>
               <p>Or</p>
-              <router-link to="/lawyer-register" class="text-dark fs-5 p-2"
-                >Sign up</router-link
-              >
+              <router-link to="/client-register" class="text-dark fs-5 p-2">Sign up</router-link>
             </div>
             <!-- <a href="./need-a-lawyer/index" class="text-black fs-5">Register to be notified when the platform goes live.</a> -->
           </div>
         </div>
-        <div
-          class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white"
-        >
+        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white">
           <p class="fw-bold">I'm looking for clients</p>
           <div class="showhover">
             <p>
@@ -55,13 +45,9 @@
               practice area without leaving your desk.
             </p>
             <div class="d-flex align-items-center justify-content-center">
-              <router-link to="/client-login" class="text-white fs-5 p-2"
-                >Sign in</router-link
-              >
+              <router-link to="/lawyer-login" class="text-white fs-5 p-2">Sign in</router-link>
               <p>Or</p>
-              <router-link to="/client-register" class="text-white fs-5 p-2"
-                >Sign up</router-link
-              >
+              <router-link to="/lawyer-register" class="text-white fs-5 p-2">Sign up</router-link>
             </div>
           </div>
         </div>
@@ -163,9 +149,11 @@ export default {
     width: 100%;
   }
 }
+
 .homepage-circles:hover .showhover {
   display: block;
 }
+
 .homepage-circles .showhover {
   display: none;
   transition: ease-in-out 0.5;

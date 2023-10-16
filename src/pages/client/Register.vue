@@ -5,7 +5,7 @@
         <div class="col-md-7">        
         <div class="bg-dark text-white text-center m-3 p-3 find-client " style="border-radius: 10px">
         <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
-            <p class="m-4 fs-3 mx-5 ">Sign up to find clients</p>
+            <p class="m-4 fs-3 mx-5 ">Sign up to find Lawyers</p>
             <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                  <!-- Add the style and icon you want using the String format -->

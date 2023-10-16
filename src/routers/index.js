@@ -28,16 +28,20 @@ const routes = [
     component: PlatForm,
   },
   {
-    path: '/lawyer-register',
-    component: LawyerRegister,
+    path: "/client-login",
+    component: ClientLoginForm,
   },
   {
-    path: '/lawyer-login',
+    path: "/client-register",
+    component: ClientRegister,
+  },
+  {
+    path: "/lawyer-login",
     component: LawyerLoginForm,
   },
   {
-    path: '/client-register',
-    component: ClientRegister,
+    path: "/lawyer-register",
+    component: LawyerRegister,
   },
   {
     path: "/about",
@@ -54,10 +58,6 @@ const routes = [
   {
     path: "/login",
     component: LoginForm,
-  },
-  {
-    path: '/client-login',
-    component: ClientLoginForm,
   },
   {
     path: "/admin-login",
