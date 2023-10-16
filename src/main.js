@@ -13,7 +13,8 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+// import "bootstrap";
 
 /* add icons to the library */
 library.add(faUserSecret);
