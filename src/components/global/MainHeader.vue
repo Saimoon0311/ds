@@ -1,7 +1,7 @@
 <template lang="">
     <div class="text-center">
       <router-link to="/"> 
-      <img src="../../assets/images/logo.png" class="img-fluid" />
+      <img src="../../assets/images/logo.jpg" class="img-fluid" />
     </router-link>
       </div>
 </template>
