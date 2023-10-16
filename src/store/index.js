@@ -1,16 +1,23 @@
 import { createStore } from 'vuex';
 
-export default createStore({
+const store = createStore({
   state: {
-    fullName : "Hammad hasan"
+    fullName : "Hammad hasan",
+    isLoading : false,
+    type : null,
+    isAuthenticated : false,
   },
   mutations: {
-    // Your mutations go here
+    SET_AUTHENTICATED(state, status) {
+      state.isAuthenticated = status;
+    },
   },
   actions: {
     // Your actions go here
   },
   getters: {
-    // Your getters go here
+    isAuthenticated: (state) => state.isAuthenticated,
   },
 });
+
+export default store;

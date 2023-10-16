@@ -37,32 +37,33 @@
     </div>
 </template>
 <script >
-import MainHeader from '../../components/global/MainHeader.vue'
 
+import api from "../../config/api.js";
+import MainHeader from '../../components/global/MainHeader.vue'
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
-    data(){
+    data() {
         const schema = yup.object().shape({
             email: yup.string()
-            .min(3, 'Email must be valid')
-            .max(50, 'Email must be valid')
-            .required('Please Enter your email')
-            .matches(
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-      'Please enter valid email',
-            ),
+                .min(3, 'Email must be valid')
+                .max(50, 'Email must be valid')
+                .required('Please Enter your email')
+                .matches(
+                    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                    'Please enter valid email',
+                ),
             password: yup
-            .string()
-            .required('Please Enter your password')
-            .min(6, 'Password must be greater then 6 digit')
-            .max(16, 'Password must be less then 16 digit')
-            .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
-            ),
+                .string()
+                .required('Please Enter your password')
+                .min(6, 'Password must be greater then 6 digit')
+                .max(16, 'Password must be less then 16 digit')
+                .matches(
+                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                    'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
+                ),
         });
-        return{
+        return {
             schema
         }
     },
@@ -70,19 +71,32 @@ export default {
         MainHeader,
         Form,
         Field,
-    // MainFooter
-  },
-  methods:{
-    submitData(){
-        alert('data has been submitted.')
-    }
-  },
+        // MainFooter
+    },
+    methods: {
+        submitData(formData) {
+            try {
+                formData.type = "client";
+                console.log(formData)
+                api.post('/login', formData)
+                    .then(res => {
+                        localStorage.setItem("token", res.data.token);
+                        this.$store.commit('SET_AUTHENTICATED', true);
+                        this.$router.push({ path: '/' });
+                        console.log('successfully login : ', res?.data)
+                    })
+                    .catch(error => console.log("getResults : ", error));
+                console.log(formData);
+            } catch (error) {
+                console.error('API request error:', error);
+            }
+        }
+    },
     name: 'LoginForm',
 }
 
 </script>
 <style scoped>
-
 .hello {
     min-height: 100vh;
     display: grid;
@@ -94,9 +108,10 @@ export default {
     justify-content: center;
     flex-wrap: wrap;
 } */
-.align-baseline{
+.align-baseline {
     align-items: baseline !important;
 }
+
 /* .login-main {
     width: 35%;
     margin: 0 auto !important;
