@@ -12,7 +12,7 @@
             <li><a class="dropdown-item" href="#">Contact Us</a></li> 
           </ul>
             <span>
-                <a class="a" target="_blank" href="https://www.linkedin.com/simplawfylaw"><i class="fa-brands fa-linkedin"></i></a> 
+                <a class="a" target="_blank" href="https://www.linkedin.com/company/simplawfylaw"><i class="fa-brands fa-linkedin"></i></a> 
                 <a class="a" target="_blank" href="https://www.facebook.com/simplawfy"><i class="fa-brands fa-facebook-f"></i></a>
                 <a class="a" target="_blank" href="https://www.instagram.com/simplawfylaw/"><i class="fa-brands fa-instagram"></i></a>
             </span>
@@ -41,14 +41,14 @@ export default {
     text-align: center;
     padding: 10px 0;
     font-size: 15px;
-    font-weight: 900;
+    font-weight: 500;
     text-transform: uppercase;
     color: #858585;
 }
 
 .footer-main .a {
     color: #858585;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .footer-main .a:nth-child(2) {
@@ -65,7 +65,7 @@ export default {
 
 .footer-main .link {
     /* font-size: 15px; */
-    font-weight: 900;
+    font-weight: 500;
     text-transform: uppercase;
     color: #858585;
     text-decoration: none;
