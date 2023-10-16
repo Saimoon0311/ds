@@ -86,25 +86,25 @@ import * as yup from "yup";
 export default {
     data() {
         const schema = yup.object().shape({
-            fname: yup.string().required('First Name is Required.'),
-            lname: yup.string().required('Last Name is Required.'),
-            number: yup.string().required('Phone number is Required.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
+            fname: yup.string().required('First name is required.'),
+            lname: yup.string().required('Last name is required.'),
+            number: yup.string().required('Phone number is required.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
             email: yup.string()
                 .min(3, 'Email must be valid')
                 .max(50, 'Email must be valid')
-                .required('Please Enter your email')
+                .required('Please enter your email')
                 .matches(
                     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
                     'Please enter valid email',
                 ),
             password: yup
                 .string()
-                .required('Please Enter your password')
+                .required('Please enter your password')
                 .min(6, 'Password must be greater then 6 digit')
                 .max(16, 'Password must be less then 16 digit')
                 .matches(
                     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                    'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
+                    'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
                 ),
             confirm_password: yup
                 .string()

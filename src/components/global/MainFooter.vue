@@ -39,7 +39,7 @@ export default {
     width: 100%;
     background: rgb(241, 241, 241);
     text-align: center;
-    padding: 10px 0;
+    padding: 4px 0;
     font-size: 15px;
     font-weight: 500;
     text-transform: uppercase;
@@ -55,6 +55,14 @@ export default {
     margin: 0px 10px;
     position: relative;
     top: -1px;
+    font-size: 17px;
+}
+
+.footer-main .a:last-child {
+    font-size: 20px;
+    position: relative;
+    top: 0.5px;
+
 }
 
 .footer-main span {

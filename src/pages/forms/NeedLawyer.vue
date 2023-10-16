@@ -39,19 +39,19 @@ import MainHeader from '../../components/global/MainHeader.vue'
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
-    data(){
+    data() {
         const schema = yup.object().shape({
-            name: yup.string().required('Name is Required.'),
+            name: yup.string().required('Name is required.'),
             email: yup.string()
-            .min(3, 'Email must be valid')
-            .max(50, 'Email must be valid')
-            .required('Please Enter your email')
-            .matches(
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-      'Please enter valid email',
-            ),
+                .min(3, 'Email must be valid')
+                .max(50, 'Email must be valid')
+                .required('Please enter your email')
+                .matches(
+                    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                    'Please enter valid email',
+                ),
         });
-        return{
+        return {
             schema
         }
     },
@@ -59,19 +59,18 @@ export default {
         MainHeader,
         Form,
         Field,
-    // MainFooter
-  },
-  methods:{
-    submitData(){
-        alert('data has been submitted.')
-    }
-  },
+        // MainFooter
+    },
+    methods: {
+        submitData() {
+            alert('data has been submitted.')
+        }
+    },
     name: 'NeedLawyer',
 }
 
 </script>
 <style scoped>
-
 .hello {
     min-height: 100vh;
     display: grid;
