@@ -30,7 +30,7 @@
             aria-controls="pills-profile"
             aria-selected="false"
           >
-            Approval
+            Approved
           </button>
         </li>
       </ul>
@@ -145,7 +145,7 @@ ul#pills-tab {
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  width: 225px;
+  width: 230px;
 }
 
 .nav-pills .nav-link.active,

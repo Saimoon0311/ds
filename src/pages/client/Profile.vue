@@ -653,40 +653,90 @@
         been verified and you have an active subscription.
       </p>
     </main>
-    
+    <div class="modal fade" id="hammad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button 
+    type="button" 
+    class="btn btn-primary" 
+    @click="openModal" 
+>
+    Launch demo modal
+</button>
+
   </div>
 </template>
 <script>
 import ClientHeader from "./Header.vue";
+import * as bootstrap from "bootstrap"
+import { reactive, onMounted } from 'vue';
 
 export default {
-  components: {
-    ClientHeader,
-  },
-
-  methods: {},
-  name: "ClientProfile",
+    name: "ClientProfile",
+    components: {
+        ClientHeader,
+    },
 };
+</script>
+<script setup>
+
+
+const state = reactive({
+    modal_demo: null,
+})
+
+onMounted(() => {
+    state.modal_demo = new bootstrap.Modal('#hammad', {})
+})
+
+    function openModal()
+    {
+        state.modal_demo.show()
+    }
+    
+    // function closeModal()
+    // {
+    //     state.modal_demo.hide()
+    // }
+
+
+
 </script>
 <style scoped>
 ul#pills-tab {
-  text-align: center;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-  width: 225px;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    width: 225px;
 }
+
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-  color: white;
-  background-color: #808080;
+.nav-pills .show>.nav-link {
+    color: white;
+    background-color: #808080;
 }
+
 .nav-pills .nav-link,
 .nav-link:focus,
 .nav-link:hover {
-  color: #6d6f73;
+    color: #6d6f73;
 }
 </style>

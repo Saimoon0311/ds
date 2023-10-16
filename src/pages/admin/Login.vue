@@ -29,7 +29,7 @@
           </div>
 
           <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-            <button class="btn btn-outline-light btn-lg px-5">Sign up</button>
+            <button class="btn btn-outline-light btn-lg px-5">Login</button>
           </div>
 
           <!-- <p>Already have an account?<br> <a href="../legal-marketplace/index.php">Login</a></p> -->
