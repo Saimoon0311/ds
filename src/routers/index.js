@@ -12,11 +12,32 @@ import AdminClients from "@/pages/admin/Clients.vue";
 import ClientProfile from "@/pages/client/Profile.vue";
 import privacyPolicy from "@/pages/privacy-policy.vue";
 import termsOfUse from "@/pages/terms-of-use.vue";
+import PlatForm from "@/components/PlatForm.vue";
+import ClientLoginForm from "@/pages/client/Login.vue";
+import ClientRegister from "@/pages/client/Register.vue";
+import LawyerLoginForm from "@/pages/lawyer/Login.vue";
+import LawyerRegister from "@/pages/lawyer/Register.vue";
 
 const routes = [
   {
     path: "/",
     component: HelloWorld,
+  },
+  {
+    path: "/platform",
+    component: PlatForm,
+  },
+  {
+    path: '/lawyer-register',
+    component: LawyerRegister,
+  },
+  {
+    path: '/lawyer-login',
+    component: LawyerLoginForm,
+  },
+  {
+    path: '/client-register',
+    component: ClientRegister,
   },
   {
     path: "/about",
@@ -33,6 +54,10 @@ const routes = [
   {
     path: "/login",
     component: LoginForm,
+  },
+  {
+    path: '/client-login',
+    component: ClientLoginForm,
   },
   {
     path: "/admin-login",
