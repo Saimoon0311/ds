@@ -27,13 +27,7 @@
             </div>
         </nav>
     </header>        
-    <button @click="showElement" v-if="isVisibleButton">Show Element</button>
-    <div v-if="isVisible">
-      This is a hidden element.
-    </div>
-    <div v-if="isVisible">
-      This is a hidden element.
-    </div>
+    
     </div>
 
 
@@ -46,18 +40,14 @@
 export default {
     data() {
         return {
-            isVisible: false,
-            isVisibleButton: true
+
         };
     },
     components: {
 
     },
     methods: {
-        showElement() {
-            this.isVisible = !this.isVisible;
-            this.isVisibleButton = !this.isVisibleButton;
-        }
+
     },
     name: 'ClientHeader',
 }

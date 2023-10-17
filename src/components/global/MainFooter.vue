@@ -4,7 +4,7 @@
             
             © 2023 simplawfy pty ltd. | <router-link class="link" to="/privacy-policy">privacy policy</router-link> | <router-link class="link" to="/terms-of-use">website terms of use</router-link> | contact | <a class="sitemap link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 site map <i class=" caret-ico fa-solid fa-angle-up"></i>
-          </a>&nbsp;&nbsp;&nbsp;| 
+          </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="#">About Us</a></li>
             <li><a class="dropdown-item" href="#">How Simplawfy Works</a></li>
@@ -67,7 +67,7 @@ export default {
 
 .footer-main span {
     position: relative;
-    top: 5px;
+    top: 3px;
     margin-left: 8px;
 }
 
@@ -88,6 +88,10 @@ export default {
 
 .sitemap {
     position: relative;
+}
+
+.sitemap.dropdown-toggle::after {
+    display: none;
 }
 
 .dropdown-item {

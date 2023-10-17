@@ -1,7 +1,7 @@
 <template lang="">
   <div class="hello">
-    <ClientHeader />
-    <main class="container">
+    <LawyerHeader />
+    <div class="container">
       <h3 class="mt-3">Profile</h3>
       <p>
         Please complete this information so Simplawfy and clients can get to
@@ -11,7 +11,11 @@
       <!-- Photo -->
       <div class="d-flex">
         <div>
-          <div >
+          <form
+            action="profile.php"
+            method="POST"
+            enctype="multipart/form-data"
+          >
             <label for="photo">Photo:</label>
             <input
               type="file"
@@ -27,7 +31,7 @@
               name="photo-submit"
               value="Upload"
             />
-          </div>
+          </form>
         </div>
       </div>
 
@@ -37,12 +41,11 @@
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
-        style="display: none"
       >
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Job Title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Edit Job Title</h5>
               <button
                 type="button"
                 class="close btn btn-dark"
@@ -54,14 +57,14 @@
             </div>
 
             <div class="modal-body">
-              <form action="index.php" method="post"></form>
+              <form action="profile.php" method="post"></form>
               <div class="form-group">
                 <input
                   type="text"
                   name="job-title"
                   maxlength="200"
                   class="form-control"
-                  id="job-title"
+                  id="phone"
                   value=""
                 />
                 <button
@@ -82,7 +85,6 @@
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
-        style="display: none"
       >
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -99,7 +101,7 @@
             </div>
 
             <div class="modal-body">
-              <form action="index.php" method="post"></form>
+              <form action="profile.php" method="post"></form>
               <div class="form-group">
                 <input
                   type="text"
@@ -126,7 +128,6 @@
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
-        style="display: none"
       >
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -145,7 +146,7 @@
             </div>
 
             <div class="modal-body">
-              <form action="index.php" method="post"></form>
+              <form action="profile.php" method="post"></form>
               <div class="form-group">
                 <input
                   type="text"
@@ -172,12 +173,13 @@
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
-        style="display: none"
       >
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Phone</h5>
+              <h5 class="modal-title" id="exampleModalLabel">
+                Edit phone number
+              </h5>
               <button
                 type="button"
                 class="close btn btn-dark"
@@ -189,6 +191,7 @@
             </div>
 
             <div class="modal-body">
+              <form action="profile.php" method="post"></form>
               <div class="form-group">
                 <input
                   type="tel"
@@ -196,7 +199,7 @@
                   maxlength="10"
                   class="form-control"
                   id="phone"
-                  value="8119719693"
+                  value="0310000000"
                 />
                 <button
                   type="submit"
@@ -234,6 +237,7 @@
             </div>
 
             <div class="modal-body">
+              <form action="profile.php" method="post"></form>
               <div class="form-group">
                 <input
                   type="text"
@@ -266,7 +270,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
-                Areas of Practice
+                Areas of practice
               </h5>
               <button
                 type="button"
@@ -280,7 +284,7 @@
 
             <div class="modal-body w-100">
               <form
-                action="index.php"
+                action="profile.php"
                 method="post"
                 id="form-bs-select-1"
               ></form>
@@ -291,9 +295,6 @@
                   name="expertise[]"
                   form="form-bs-select-1"
                 >
-                  <option value="Banking and finance / insolvency ">
-                    Banking &amp; finance / insolvency
-                  </option>
                   <option value="Commercial">Commercial (business)</option>
                   <option value="Consumer">Consumer</option>
                   <option value="Criminal">Criminal</option>
@@ -302,9 +303,6 @@
                   </option>
                   <option value="Environmental">Environmental</option>
                   <option value="Family">Family</option>
-                  <option value="Health / disability / aged care">
-                    Health / disability / aged care
-                  </option>
                   <option value="Human rights / constitutional">
                     Human rights / constitutional
                   </option>
@@ -313,13 +311,10 @@
                   <option value="Intellectual property">
                     Intellectual property
                   </option>
-                  <option value="Liquor licensing / hospitality">
-                    Liquor licensing / hospitality
-                  </option>
+                  <option value="Liquor licensing">Liquor licensing</option>
                   <option value="Litigation">
                     Litigation (civil court cases)
                   </option>
-                  <option value="Mediation">Mediation</option>
                   <option value="Notary public">Notary public</option>
                   <option value="Personal injury">
                     Personal injury (compensation)
@@ -402,7 +397,7 @@
 
             <div class="modal-body w-100">
               <form
-                action="index.php"
+                action="profile.php"
                 method="post"
                 id="form-bs-select-2"
               ></form>
@@ -474,19 +469,19 @@
           <!--  Email -->
           <tr>
             <td class="col-md-3">Email:</td>
-            <td>admin2@mailinator.com</td>
+            <td>asd1@mailinator.com</td>
           </tr>
 
           <!-- First Name -->
           <tr>
             <td class="col-md-3">First Name:</td>
-            <td>Ashton</td>
+            <td>John</td>
           </tr>
 
           <!-- Last Name -->
           <tr>
             <td class="col-md-3">Last Name:</td>
-            <td>Wolfe</td>
+            <td>Doe</td>
           </tr>
 
           <!-- Job Title -->
@@ -570,7 +565,7 @@
 
             <!-- Modal ends here -->
 
-            <td>8119719693</td>
+            <td>0310000000</td>
           </tr>
 
           <!-- About Me -->
@@ -597,8 +592,8 @@
 
           <!-- Areas of Practice -->
           <tr>
-            <td class="text-end align-middle">
-              <span class="d-inline-block float-start">Areas of Practice:</span>
+            <td class="d-flex align-items-center justify-content-between">
+              Areas of Practice:
               <button
                 type="button"
                 class="btn btn-secondary btn-sm"
@@ -621,10 +616,8 @@
 
           <!-- State/Territory -->
           <tr>
-            <td class="text-end align-middle">
-              <span class="d-inline-block float-start"
-                >States/Territories:</span
-              >
+            <td class="d-flex align-items-center justify-content-between">
+              State/territory:
               <button
                 type="button"
                 class="btn btn-secondary btn-sm"
@@ -647,93 +640,63 @@
         </tbody>
       </table>
       <p class="text-center">
-        Access to the Simplawfy platform will be available once your profile has
-        been verified and you have an active subscription.
+        Your entries are automatically saved, so you can logout when you're
+        ready
       </p>
-    </main>
-    <div class="modal fade" id="hammad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
     </div>
-  </div>
-</div>
-<button 
-    type="button" 
-    class="btn btn-primary" 
-    @click="openModal" 
->
-    Launch demo modal
-</button>
-
   </div>
 </template>
 <script>
-import ClientHeader from "./Header.vue";
-import * as bootstrap from "bootstrap"
-import { reactive, onMounted } from 'vue';
-
+import LawyerHeader from "./Header.vue";
 export default {
-  name: "ClientProfile",
-  components: {
-    ClientHeader,
-  },
+    components: {
+        LawyerHeader,
+    },
+    methods: {},
+    name: "ProfileTab",
 };
 </script>
-<script setup>
-
-
-const state = reactive({
-  modal_demo: null,
-})
-
-onMounted(() => {
-  state.modal_demo = new bootstrap.Modal('#hammad', {})
-})
-
-function openModal() {
-  state.modal_demo.show()
-}
-
-// function closeModal()
-// {
-//     state.modal_demo.hide()
-// }
-
-
-
-</script>
 <style scoped>
-ul#pills-tab {
-  text-align: center;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-  width: 225px;
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
-.nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
-  color: white;
-  background-color: #808080;
+.logo-small {
+    width: 175px;
+    height: 50px;
 }
 
-.nav-pills .nav-link,
-.nav-link:focus,
-.nav-link:hover {
-  color: #6d6f73;
+.law-img {
+    width: 15vw;
+    height: 15vw;
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+.navActive {
+    background: grey;
+    border: 1px solid grey;
+    border-radius: 10px;
+    color: white;
+}
+
+.navbar-nav .left-menu {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.bg-grey {
+    background: grey;
+    color: white;
+}
+
+.bg-grey:hover {
+    background: grey;
+    color: white;
 }
 </style>

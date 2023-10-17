@@ -17,6 +17,13 @@ import ClientLoginForm from "@/pages/client/Login.vue";
 import ClientRegister from "@/pages/client/Register.vue";
 import LawyerLoginForm from "@/pages/lawyer/Login.vue";
 import LawyerRegister from "@/pages/lawyer/Register.vue";
+import LawyerDashboard from "@/pages/lawyer/Dashboard.vue";
+import LawyerBids from "@/pages/lawyer/Bids.vue";
+import LawyerProfile from "@/pages/lawyer/Profile.vue";
+import LawyerAccount from "@/pages/lawyer/Account.vue";
+import LawyerSubscribe from "@/pages/lawyer/Subscribe.vue";
+import LawyerBidding from "@/pages/lawyer/Bidding.vue";
+import RequestInfo from "@/pages/lawyer/RequestInfo.vue";
 
 const routes = [
   {
@@ -35,6 +42,7 @@ const routes = [
     path: "/client-register",
     component: ClientRegister,
   },
+  // lawyer
   {
     path: "/lawyer-login",
     component: LawyerLoginForm,
@@ -42,6 +50,34 @@ const routes = [
   {
     path: "/lawyer-register",
     component: LawyerRegister,
+  },
+  {
+    path: "/lawyer-dashboard",
+    component: LawyerDashboard,
+  },
+  {
+    path: "/lawyer-bids",
+    component: LawyerBids,
+  },
+  {
+    path: "/lawyer-profile",
+    component: LawyerProfile,
+  },
+  {
+    path: "/lawyer-account",
+    component: LawyerAccount,
+  },
+  {
+    path: "/subscribe",
+    component: LawyerSubscribe,
+  },
+  {
+    path: "/bidding",
+    component: LawyerBidding,
+  },
+  {
+    path: "/request-info",
+    component: RequestInfo,
   },
   {
     path: "/about",
@@ -72,11 +108,11 @@ const routes = [
     component: AdminLawyer,
   },
   {
-    path: "/admin-job",
+    path: "/job",
     component: AdminJobs,
   },
   {
-    path: "/admin-client",
+    path: "/client",
     component: AdminClients,
   },
   {

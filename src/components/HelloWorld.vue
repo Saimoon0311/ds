@@ -51,6 +51,7 @@
       </div>
     </div>
     <!-- <ToastComponent /> -->
+
     <MainFooter />
   </div>
 </template>
@@ -95,6 +96,10 @@ export default {
   text-align: center;
   width: 500px;
   height: 500px;
+}
+
+.toast {
+  display: block;
 }
 
 @media (min-width: 400px) and (max-width: 450px) {
