@@ -15,6 +15,11 @@ import PlatForm from "@/components/PlatForm.vue";
 import ClientLoginForm from "@/pages/client/Login.vue";
 import ClientRegister from "@/pages/client/Register.vue";
 import ClientAccount from "@/pages/client/Account.vue";
+import ClientDashboard from "@/pages/client/Dashboard.vue";
+import PostingJob from "@/pages/client/PostingJob.vue";
+import AreaOfLaw from "@/pages/client/AreaOfLaw.vue";
+import ViewBids from "@/pages/client/ViewBids.vue";
+import ReplyInfoRequest from "@/pages/client/ReplyInfoRequest.vue";
 
 // lawyer
 import LawyerLoginForm from "@/pages/lawyer/Login.vue";
@@ -124,6 +129,27 @@ const routes = [
     path: "/client-account",
     component: ClientAccount,
   },
+  {
+    path: "/client-dashboard",
+    component: ClientDashboard,
+  },
+  {
+    path: "/area-of-law",
+    component: AreaOfLaw,
+  },
+  {
+    path: "/posting-job",
+    component: PostingJob,
+  },
+  {
+    path: "/view-bids",
+    component: ViewBids,
+  },
+  {
+    path: "/reply-info-request",
+    component: ReplyInfoRequest,
+  },
+
   // other
   {
     path: "/privacy-policy",

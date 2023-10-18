@@ -41,7 +41,7 @@ export default {
     LawyerHeader,
   },
   methods: {},
-  name: "DashboardTab",
+  name: "RequestInfo",
 };
 </script>
 <style scoped>
