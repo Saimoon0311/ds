@@ -20,7 +20,7 @@
               <p><b>Posted by:</b> junucyme@mailinator.com</p>
               <p>
                 <b> Deadline:</b>
-                
+
                 27-12-2023
               </p>
               <p><b> Preferred contact time:</b> Flexible</p>
@@ -58,29 +58,32 @@
               class="selectpicker w-100 border rounded"
               name="chargeType"
               id="charge-category-select"
-              v-model="selectedOption" @change="updateDivContent"
+              v-model="selectedOption"
+              @change="updateDivContent"
               required=""
               tabindex="null"
             >
               <option disabled="" selected="" hidden="" value="none">
                 Select an option
               </option>
-              <option value="Fixed">Fixed fee</option>
+              <option  value="Fixed">Fixed fee</option>
               <option value="Hourly">Hourly rate</option>
               <option value="Success">Success fee</option>
-              <option value="Pro">Pro bono</option></select
-            >
+              <option value="Pro">Pro bono</option>
+            </select>
             <div
               class="dropdown-menu"
               style="max-height: 434.781px; overflow: hidden; min-height: 114px"
-            >
-             
-            </div>
+            ></div>
           </div>
         </div>
 
         <!-- If they select ‘Fixed fee’ -->
-        <div class="form-group" id="fixed-fee" v-if="selectedOption === 'Fixed'">
+        <div
+          class="form-group"
+          id="fixed-fee"
+          v-if="selectedOption === 'Fixed'"
+        >
           <label
             >Fixed fee amount (in AUD and excluding GST and disbursements):<sup
               ><code>*</code></sup
@@ -101,7 +104,11 @@
         </div>
 
         <!-- If they select ‘Hourly rate’ -->
-        <div class="form-group " id="hourly-rate" v-if="selectedOption === 'Hourly'">
+        <div
+          class="form-group"
+          id="hourly-rate"
+          v-if="selectedOption === 'Hourly'"
+        >
           <div class="form-group mb-3" id="addAdditionalFeeEarnersRadio">
             How many fee earners will be working on this matter?
             <div class="form-check">
@@ -265,7 +272,11 @@
         </div>
 
         <!-- If they select ‘Success Fee’ -->
-        <div class="form-group " id="success-fee" v-if="selectedOption === 'Success'">
+        <div
+          class="form-group"
+          id="success-fee"
+          v-if="selectedOption === 'Success'"
+        >
           <label
             >Uplift percentage (%):<sup><code>*</code></sup></label
           >
@@ -292,7 +303,11 @@
         </div>
 
         <!-- Upfront payment -->
-        <div class="form-group my-2 " id="upfrontPayRadio" v-if="selectedOption === 'Pro'">
+        <div
+          class="form-group my-2"
+          id="upfrontPayRadio"
+          v-if="selectedOption === 'Pro'"
+        >
           <label
             >Do you require an upfront payment?<sup><code>*</code></sup></label
           >
@@ -302,11 +317,16 @@
               type="radio"
               name="upfrontPayment"
               id="upfrontYes"
-             
               value="yes"
               checked=""
             />
-            <label class="form-check-label" for="upfrontYes" @click="setOption('Yes')"> Yes </label>
+            <label
+              class="form-check-label"
+              for="upfrontYes"
+              @click="setPayment('Yes')"
+            >
+              Yes
+            </label>
           </div>
           <div class="form-check">
             <input
@@ -314,13 +334,18 @@
               type="radio"
               name="upfrontPayment"
               id="upfrontNo"
-              
               value="no"
             />
-            <label class="form-check-label" for="upfrontNo" @click="setOption('No')"> No </label>
+            <label
+              class="form-check-label"
+              for="upfrontNo"
+              @click="setPayment('No')"
+            >
+              No
+            </label>
           </div>
 
-          <div class="my-3" id="upfrontPayAmount" v-if="option === 'Yes'">
+          <div class="my-3" id="upfrontPayAmount" v-if="payment === 'Yes'">
             <label
               >How much upfront payment do you require?<sup
                 ><code>*</code></sup
@@ -367,11 +392,16 @@
               type="radio"
               name="deadlineFlexibility"
               id="deadlineYes"
-              onclick="handleDeadlineAcceptanceChange()"
               value="yes"
               checked=""
             />
-            <label class="form-check-label" for="deadlineYes"> Yes </label>
+            <label
+              class="form-check-label"
+              for="deadlineYes"
+              @click="showDeadline('Yes')"
+            >
+              Yes
+            </label>
           </div>
           <div class="form-check">
             <input
@@ -379,15 +409,20 @@
               type="radio"
               name="deadlineFlexibility"
               id="deadlineNo"
-              onchange="handleDeadlineAcceptanceChange()"
               value="no"
             />
-            <label class="form-check-label" for="deadlineNo"> No </label>
+            <label
+              class="form-check-label"
+              for="deadlineNo"
+              @click="showDeadline('No')"
+            >
+              No
+            </label>
           </div>
         </div>
 
         <!-- Can't meet deadline explanation box -->
-        <div class="form-group d-none" id="div-deadline">
+        <div class="form-group" id="div-deadline" v-if="deadline === 'Yes'">
           <label
             >Please explain why you can't meet potential client's deadline:<sup
               ><code>*</code></sup
@@ -406,16 +441,20 @@
         <!-- Do you offer a free or discounted first consultation? -->
         <div class="form-group m-2" id="freeFirstConsultationRadio">
           <label>Do you offer a free or discounted first consultation?</label>
-          <div class="form-check" >
+          <div class="form-check">
             <input
               class="form-check-input"
               type="radio"
               name="freeFirstConsultation"
               id="freeFirstConsultationYes"
               value="yes"
-            
+              checked=""
             />
-            <label class="form-check-label" for="freeFirstConsultationYes" @click="setOption('Yes')">
+            <label
+              class="form-check-label"
+              for="freeFirstConsultationYes"
+              @click="setOption('Yes')"
+            >
               Yes
             </label>
           </div>
@@ -426,9 +465,12 @@
               name="freeFirstConsultation"
               id="freeFirstConsultationNo"
               value="no"
-              
             />
-            <label class="form-check-label" for="freeFirstConsultationNo" @click="setOption('No')">
+            <label
+              class="form-check-label"
+              for="freeFirstConsultationNo"
+              @click="setOption('No')"
+            >
               No
             </label>
           </div>
@@ -436,43 +478,42 @@
 
         <!-- Do you offer a free or discounted first consultation input fields -->
         <div v-if="option === 'Yes'">
-          <div class="form-group  my-3" id="div-freeFirstConsultationFee" >
-          <label for="freeFirstConsultationFee"
-            >Fee:<sup><code>*</code></sup></label
-          >
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">$</div>
+          <div class="form-group my-3" id="div-freeFirstConsultationFee">
+            <label for="freeFirstConsultationFee"
+              >Fee:<sup><code>*</code></sup></label
+            >
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">$</div>
+              </div>
+              <input
+                type="number"
+                min="1"
+                class="form-control"
+                name="freeFirstConsultationFee"
+                id="freeFirstConsultationFee"
+              />
             </div>
-            <input
-              type="number"
-              min="1"
-              class="form-control"
-              name="freeFirstConsultationFee"
-              id="freeFirstConsultationFee"
-            />
           </div>
-        </div>
 
-        <div class="col-auto " id="div-freeFirstConsultationMinutes" >
-          <label for=""
-            >Time limit:<sup><code>*</code></sup></label
-          >
-          <div class="input-group mb-2">
-            <input
-              type="number"
-              class="form-control"
-              name="freeFirstConsultationMinutes"
-              id="freeFirstConsultationMinutes"
-              placeholder="60"
-            />
-            <div class="input-group-prepend">
-              <div class="input-group-text">minutes</div>
+          <div class="col-auto" id="div-freeFirstConsultationMinutes">
+            <label for=""
+              >Time limit:<sup><code>*</code></sup></label
+            >
+            <div class="input-group mb-2">
+              <input
+                type="number"
+                class="form-control"
+                name="freeFirstConsultationMinutes"
+                id="freeFirstConsultationMinutes"
+                placeholder="60"
+              />
+              <div class="input-group-prepend">
+                <div class="input-group-text">minutes</div>
+              </div>
             </div>
           </div>
         </div>
-        </div>
-      
 
         <!-- Submit button -->
         <div class="text-center">
@@ -480,10 +521,6 @@
         </div>
       </form>
     </div>
-
-  
-
-
   </div>
 </template>
 <script>
@@ -494,17 +531,19 @@ export default {
   },
   data() {
     return {
-      selectedOption: 'option1',
-      option: "Yes",  
-      isVisible: "Yes", 
-   
-      
-      
+      selectedOption: "option1",
+      option: "Yes",
+      isVisible: "Yes",
+      payment: "Yes",
+      deadline: "Yes",
     };
   },
   methods: {
     updateDivContent() {
       // No need to update divContent; we're using v-if to conditionally render divs.
+    },
+    setPayment(value) {
+      this.payment = value;
     },
     setOption(value) {
       this.option = value;
@@ -512,8 +551,9 @@ export default {
     showElement(value) {
       this.isVisible = value;
     },
-   
-   
+    showDeadline(value) {
+      this.deadline = value;
+    },
   },
   name: "DashboardTab",
 };
