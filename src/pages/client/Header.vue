@@ -1,56 +1,80 @@
 <template lang="">
-    <div class="hello">
-        <header>
-        <nav class="navbar navbar-expand-lg" style="border-bottom: 1px solid lightgrey">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="http://localhost/admin.simplawfylaw">
-                    <img src="../../assets/images/admin-logo.png" class="logo-small" alt="logo">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                       <div class="left-menu">
-                     
-                        <router-link to="/client-account"  class="nav-link fw-bolder menuItem-active-link " id="lawyers" aria-current="page">Profile</router-link>
-                        
-                       
-                       </div>
-                       <div>
-
-                         
-                           <router-link to="/login"  class="nav-link float-right logOutBtn active " id="clients" aria-current="page">Logout</router-link>
-                       </div>
-                    </div>
-                </div>
+  <div class="hello">
+    <header>
+      <nav
+        class="navbar navbar-expand-lg"
+        style="border-bottom: 1px solid lightgrey"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="http://localhost/admin.simplawfylaw">
+            <img
+              src="../../assets/images/admin-logo.png"
+              class="logo-small"
+              alt="logo"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <div class="left-menu">
+                <router-link
+                  to="/client-dashboard"
+                  class="nav-link fw-bolder menuItem-active-link"
+                  id="lawyers"
+                  aria-current="page"
+                  >Dashboard</router-link
+                >
+                <router-link
+                  to="/area-of-law"
+                  class="nav-link fw-bolder menuItem-active-link"
+                  id="lawyers"
+                  aria-current="page"
+                  >Post a Job</router-link
+                >
+                <router-link
+                  to="/client-account"
+                  class="nav-link fw-bolder menuItem-active-link"
+                  id="lawyers"
+                  aria-current="page"
+                  >Account</router-link
+                >
+                
+              </div>
+              <div>
+                <router-link
+                  to="/login"
+                  class="nav-link float-right logOutBtn active"
+                  id="clients"
+                  aria-current="page"
+                  >Logout</router-link
+                >
+              </div>
             </div>
-        </nav>
-    </header>        
-    
-    </div>
-
-
-
+          </div>
+        </div>
+      </nav>
+    </header>
+  </div>
 </template>
 <script>
-
-
-
 export default {
     data() {
-        return {
-
-        };
+        return {};
     },
-    components: {
-
-    },
-    methods: {
-
-    },
-    name: 'ClientHeader',
-}
+    components: {},
+    methods: {},
+    name: "ClientHeader",
+};
 </script>
 <style scoped>
 .router-link-exact-active.menuItem-active-link {
