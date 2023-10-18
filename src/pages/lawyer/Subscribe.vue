@@ -1,115 +1,135 @@
 <template lang="">
-  <div class="hello">
-    <LawyerHeader />
-    <main class="container">
-      <h3 class="mt-3">
-        <router-link
-          class="btn btn-secondary btn-sm my-3"
-          title="back"
-          to="lawyer-account"
-          ><i class="bi bi-arrow-left"></i> Back</router-link
-        >
-        
-        Subscribe
-      </h3>
-      <p>
-        Access the Simplawfy platform with a 60 day free trial, then for $39 per
-        month. You will not be charged until
-        <span id="trialEndingDate">17-12-2023</span>.
-      </p>
-      <form
-        id="payment-form"
-        action="./backend/create_subscription.php"
-        class="col-md-6 border p-3 rounded"
-        method="post"
-      >
-        <div id="card-element" class="StripeElement StripeElement--empty">
-          <div
-            class="__PrivateStripeElement"
-            style="
-              margin: 0px !important;
-              padding: 0px !important;
-              border: none !important;
-              display: block !important;
-              background: transparent !important;
-              position: relative !important;
-              opacity: 1 !important;
-            "
+    <div class="hello">
+      <LawyerHeader />
+      <main class="container">
+        <h3 class="mt-3">
+          <router-link
+            class="btn btn-secondary btn-sm my-3"
+            title="back"
+            to="lawyer-account"
+            ><i class="bi bi-arrow-left"></i> Back</router-link
           >
-            <iframe
-              name="__privateStripeFrame1676"
-              frameborder="0"
-              allowtransparency="true"
-              scrolling="no"
-              role="presentation"
-              allow="payment *"
-              src="https://js.stripe.com/v3/elements-inner-card-13c9823a2d039be93e07f6cd3696112e.html#wait=false&amp;mids[guid]=NA&amp;mids[muid]=3a7e4dd8-d13f-4b22-bc7b-d370fe0cee7838ebd4&amp;mids[sid]=996b4bf7-a7e6-41a3-8747-ded8d5820894748c6f&amp;rtl=false&amp;componentName=card&amp;keyMode=test&amp;apiKey=pk_test_51NUgYaBknhiYNvPSEv46DkXpdgX4MoovIFoTjRbRFaXJfdj6ZYFVfbcfmjXRIPjFqF8YANCpk3oI64bLr2zkZP3r0073AAlaXc&amp;referrer=http%3A%2F%2Flocalhost%2Fsimplawfy%2Flawyer%2Fsubscribe.php&amp;controllerId=__privateStripeController1671"
-              title="Secure card payment input frame"
-              style="
-                border: none !important;
-                margin: 0px !important;
-                padding: 0px !important;
-                width: 1px !important;
-                min-width: 100% !important;
-                overflow: hidden !important;
-                display: block !important;
-                user-select: none !important;
-                transform: translate(0px) !important;
-                color-scheme: light only !important;
-                height: 16.8px;
-              "
-            ></iframe
-            ><input
-              class="__PrivateStripeElement-input"
-              aria-hidden="true"
-              aria-label=" "
-              autocomplete="false"
-              maxlength="1"
-              style="
-                border: none !important;
-                display: block !important;
-                position: absolute !important;
-                height: 1px !important;
-                top: -1px !important;
-                left: 0px !important;
-                padding: 0px !important;
-                margin: 0px !important;
-                width: 100% !important;
-                opacity: 0 !important;
-                background: transparent !important;
-                pointer-events: none !important;
-                font-size: 16px !important;
-              "
-            />
-          </div>
-        </div>
-        <input
-          type="text"
-          placeholder="Card Holder Name"
-          class="form-control mt-3"
-          required=""
-          name="card-holder-name"
-          id="card-holder-name"
-        />
-        <button type="submit" class="btn btn-dark mt-3">
-          Add Payment Method
-        </button>
-      </form>
+          
+          Subscribe
+        </h3>
+        <p>
+          Access the Simplawfy platform with a 60 day free trial, then for $39 per
+          month. You will not be charged until
+          <span id="trialEndingDate">17-12-2023</span>.
+        </p>
+       
 
-      <small>Payments are processed through Stripe, Inc.</small>
-    </main>
-  </div>
-</template>
+        <div>
+            <div id="card-element"></div>
+            <input type="text" v-model="cardHolderName" placeholder="Card Holder Name" class="form-control mt-3" required
+                name="card-holder-name" id="card-holder-name" />
+            <button type="button" @click="subscribe" class="btn btn-dark mt-3">Add Payment Method</button>
+        </div>
+  
+        <small>Payments are processed through Stripe, Inc.</small>
+      </main>
+    </div>
+  </template>
+
+  
 <script>
+import api from "../../config/api.js";
 import LawyerHeader from "./Header.vue";
 export default {
-  components: {
-    LawyerHeader,
-  },
-  methods: {},
-  name: "SubscribePage",
+    name: "SubscriptionComponent",
+    components: {
+        LawyerHeader,
+    },
+    data() {
+        return {
+            cardHolderName: null,
+            cardElement: null,
+            // paymentMethodId : null,
+            stripeLoaded: false,
+            stripe: null,
+        };
+    },
+    created() {
+        this.initializeStripe();
+    },
+    methods: {
+
+        async subscribe() {
+            try {
+                if (this.cardHolderName != null && this.cardHolderName != "") {
+                    // disable button subscription button while loading
+                    // Create a payment method using the card Element
+                    const {
+                        paymentMethod,
+                        error
+                    } = await this.stripe.createPaymentMethod({
+                        type: 'card',
+                        card: this.cardElement,
+                        billing_details: {
+                            name: this.cardHolderName
+                        },
+                    });
+                    console.log(paymentMethod, error);
+
+                    if (error) {
+                        console.error(error.message);
+                        // form.querySelector('button').disabled = false;
+                    } else {
+                        const formData = {
+                            "email" : this.$store.getters.loginUser,
+                            "card_holder_name": this.cardHolderName,
+                            "payment_method_id": paymentMethod.id
+                        };
+                        api.post('/lawyer/create-subscription', formData)
+                            .then(res => {
+                                console.log('successfully login : ', res?.data)
+                                this.$router.push({ path: '/login' });
+                            })
+                            .catch(error => console.log("getResults : ", error));
+                    }
+                }
+            } catch (error) {
+                console.error('API request error:', error);
+            }
+
+
+
+        },
+
+        async initializeStripe() {
+            if (!this.stripeLoaded) {
+                const stripeScript = document.createElement('script');
+                stripeScript.src = 'https://js.stripe.com/v3/';
+                //   stripeScript.onload = this.loadStripe;
+                console.log(stripeScript);
+                stripeScript.onload = () => {
+                    this.stripe = window.Stripe('pk_test_51NUgYaBknhiYNvPSEv46DkXpdgX4MoovIFoTjRbRFaXJfdj6ZYFVfbcfmjXRIPjFqF8YANCpk3oI64bLr2zkZP3r0073AAlaXc');
+                    this.stripeLoaded = true;
+                    const elements = this.stripe.elements();
+                    // const cardElement = elements.create('card');
+                    // cardElement.mount('#card-element');
+
+                    this.cardElement = elements.create('card');
+                    this.cardElement.mount('#card-element');
+
+                    console.log('sub : ' + this.stripe);
+                }
+                document.head.appendChild(stripeScript);
+            } else {
+                this.loadStripe();
+            }
+        },
+        //   loadStripe() {
+        //     this.stripe = Stripe('pk_test_51NUgYaBknhiYNvPSEv46DkXpdgX4MoovIFoTjRbRFaXJfdj6ZYFVfbcfmjXRIPjFqF8YANCpk3oI64bLr2zkZP3r0073AAlaXc');
+        //     this.stripeLoaded = true;
+        //     console.log(this.stripe);
+        //     // Now you can use this.stripe to interact with Stripe.js
+        //   },
+    },
 };
 </script>
+
+
 <style scoped>
 .navbar-nav {
   display: flex;

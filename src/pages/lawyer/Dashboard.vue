@@ -2,15 +2,21 @@
   <div class="hello">
     <LawyerHeader />
     <div class="container">
-      <p class="h4 m-3">Welcome, John Doe</p>
-      <p class="h5 m-3 text-center">Your profile has not been approved yet.</p>
-      <!-- status after approval -->
-      <div class="alert alert-danger text-center m-0 p-2">
+      <p class="h4 m-3">Welcome, {{ userName }}</p>
+      
+      <div v-if="adminApproval != 'approve'">
+        <p class="h5 m-3 text-center">Your profile has not been approved yet.</p>
+      </div>
+      <div v-else-if="subscriptionStatus != 'subscribed'">
+        <div class="alert alert-danger text-center m-0 p-2">
         You have not subscribed yet.
         <router-link to="/subscribe" class="btn btn-link ps-0"
           >Subscribe now</router-link
         >
+       </div>
       </div>
+      <div v-else>
+
       <!-- after subscribe -->
       <div class="border rounded bg-light p-3 d-flex flex-wrap">
         <p class="mx-auto my-0">
@@ -114,6 +120,7 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 </template>
 <script>
@@ -121,6 +128,21 @@ import LawyerHeader from "./Header.vue";
 export default {
   components: {
     LawyerHeader,
+  },
+  computed: {
+    userName() {
+      return `${this.$store.getters?.loginUser?.first_name} ${this.$store.getters?.loginUser?.last_name}`;
+    },
+    adminApproval() {
+      return this.$store.getters.adminApprovalStatus;
+    },
+    subscriptionStatus() {
+      return this.$store.getters.subscriptionStatus;
+    }
+  },
+  created() {
+    this.checkAdminApproval();
+    this.checkSubscription();
   },
   methods: {},
   name: "DashboardTab",

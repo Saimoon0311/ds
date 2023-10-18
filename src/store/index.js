@@ -7,6 +7,8 @@ const store = createStore({
     type : null,
     isAuthenticated : false,
     loginUser : null,
+    subscriptionStatus : null,
+    adminApprovalStatus : null,
   },
   mutations: {
     SET_AUTHENTICATED(state, status) {
@@ -15,6 +17,12 @@ const store = createStore({
     SET_LOGIN_USER(state, data) {
       state.loginUser = data;
     },
+    SET_SUB_STATUS(state, status) {
+      state.subscriptionStatus = status;
+    },
+    SET_APPROVAL_STATUS(state, status) {
+      state.adminApprovalStatus = status;
+    },
   },
   actions: {
     // Your actions go here
@@ -22,6 +30,8 @@ const store = createStore({
   getters: {
     isAuthenticated: (state) => state.isAuthenticated,
     loginUser: (state) => state.loginUser,
+    subscriptionStatus: (state) => state.subscriptionStatus,
+    adminApprovalStatus: (state) => state.adminApprovalStatus,
   },
 });
 

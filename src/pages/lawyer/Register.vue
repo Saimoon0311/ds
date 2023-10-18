@@ -19,24 +19,24 @@
             <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                 <div class="form-outline flex-fill mb-0">
-                    <Field type="text" class="form-control" name="fname" placeholder="First Name" :class="{'is-invalid' : errors.fname}" />
-                    <span class="invalid-feedback">{{errors.fname}}</span>
+                    <Field type="text" class="form-control" name="first_name" placeholder="First Name" :class="{'is-invalid' : errors.first_name}" />
+                    <span class="invalid-feedback">{{errors.first_name}}</span>
                 </div>
             </div>
 
             <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                 <div class="form-outline flex-fill mb-0">
-                    <Field type="text"  class="form-control" name="lname" placeholder="Last Name" :class="{'is-invalid' : errors.lname}" />
-                    <span class="invalid-feedback">{{errors.lname}}</span>
+                    <Field type="text"  class="form-control" name="last_name" placeholder="Last Name" :class="{'is-invalid' : errors.last_name}" />
+                    <span class="invalid-feedback">{{errors.last_name}}</span>
                 </div>
             </div>
 
             <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                 <div class="form-outline flex-fill mb-0">
-                    <Field type="tel" class="form-control" name="number" placeholder="Phone Number" :class="{'is-invalid' : errors.number}" />
-                    <span class="invalid-feedback">{{errors.number}}</span>
+                    <Field type="tel" class="form-control" name="phone" placeholder="Phone Number" :class="{'is-invalid' : errors.phone}" />
+                    <span class="invalid-feedback">{{errors.phone}}</span>
                 </div>
             </div>
 
@@ -79,16 +79,16 @@
     </div>
 </template>
 <script>
-
+import api from "../../config/api.js";
 import MainHeader from '../../components/global/MainHeader.vue'
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
     data() {
         const schema = yup.object().shape({
-            fname: yup.string().required('First name is required.'),
-            lname: yup.string().required('Last name is required.'),
-            number: yup.string().required('Phone number is required.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
+            first_name: yup.string().required('First name is required.'),
+            last_name: yup.string().required('Last name is required.'),
+            phone: yup.string().required('Phone number is required.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
             email: yup.string()
                 .min(3, 'Email must be valid')
                 .max(50, 'Email must be valid')
@@ -125,9 +125,26 @@ export default {
         // MainFooter
     },
     methods: {
-        submitData() {
-            alert('data has been submitted.')
-        }
+        async submitData(formData) {
+            try {
+                formData.type = "lawyer";
+                console.log(formData)
+                api.post('/signup',formData)
+                    .then(res => {
+                        this.setUserAndRedirect(res,'/lawyer-dashboard');
+                        // localStorage.setItem("token", res.data?.data?.api_token);
+                        // localStorage.setItem("loginUser", res?.data?.data?.email);
+                        // this.$store.commit('SET_AUTHENTICATED', true);
+                        // this.$store.commit('SET_LOGIN_USER', res?.data?.data?.email);
+
+                        // this.$router.push({ path: '/lawyer-dashboard' });
+                    })
+                    .catch(error => console.log("getResults : ", error));
+                // console.log(formData);
+            } catch (error) {
+                console.error('API request error:', error);
+            }
+        },
     },
     name: 'LawyerRegister',
 }

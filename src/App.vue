@@ -5,9 +5,9 @@
 <script>
 export default {
   name: 'App',
-  created(){
+  created(){  
     if(this.$store.getters.loginUser == null || this.$store.getters.loginUser == ""){
-      const loginUser = localStorage.getItem('loginUser');
+      const loginUser = JSON.parse(localStorage.getItem('loginUser'));
       this.$store.commit('SET_LOGIN_USER',loginUser);
     }
   }
