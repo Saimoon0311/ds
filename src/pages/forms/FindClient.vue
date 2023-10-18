@@ -88,15 +88,9 @@ export default {
     name: 'FindClient',
     data() {
         const schema = yup.object().shape({
-<<<<<<< HEAD
             first_name: yup.string().required('First Name is Required.'),
             last_name: yup.string().required('Last Name is Required.'),
             phone: yup.string().required('Phone phone is Required.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone phone is not valid'),
-=======
-            fname: yup.string().required('First name is required.'),
-            lname: yup.string().required('Last name is required.'),
-            number: yup.string().required('Phone number is required.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
->>>>>>> 44849ddfad5c1f6c60a68a1429d849bd25d054e6
             email: yup.string()
                 .min(3, 'Email must be valid')
                 .max(50, 'Email must be valid')

@@ -59,10 +59,10 @@
               class="btn btn-danger btn-sm w-100 my-1"
               to="/request-info"
               >Decline</router-link
-            ><a
+            ><router-link
               class="btn btn-dark btn-sm w-100 my-1"
-              href="http://localhost/simplawfy/lawyer/requestInfo.php?j=28"
-              >Request More Info</a
+              to="/request-info"
+              >Request More Info</router-link
             >
           </div>
         </div>
@@ -105,10 +105,10 @@
               class="btn btn-danger btn-sm w-100 my-1"
               to="/request-info"
               >Decline</router-link
-            ><a
+            ><router-link
               class="btn btn-dark btn-sm w-100 my-1"
-              href="http://localhost/simplawfy/lawyer/requestInfo.php?j=29"
-              >Request More Info</a
+              to="/request-info"
+              >Request More Info</router-link
             >
           </div>
         </div>
@@ -119,54 +119,54 @@
 <script>
 import LawyerHeader from "./Header.vue";
 export default {
-    components: {
-        LawyerHeader,
-    },
-    methods: {},
-    name: "DashboardTab",
+  components: {
+    LawyerHeader,
+  },
+  methods: {},
+  name: "DashboardTab",
 };
 </script>
 <style scoped>
 .navbar-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .logo-small {
-    width: 175px;
-    height: 50px;
+  width: 175px;
+  height: 50px;
 }
 
 .law-img {
-    width: 15vw;
-    height: 15vw;
-    border: 1px solid white;
-    border-radius: 50%;
+  width: 15vw;
+  height: 15vw;
+  border: 1px solid white;
+  border-radius: 50%;
 }
 
 .navActive {
-    background: grey;
-    border: 1px solid grey;
-    border-radius: 10px;
-    color: white;
+  background: grey;
+  border: 1px solid grey;
+  border-radius: 10px;
+  color: white;
 }
 
 .navbar-nav .left-menu {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .bg-grey {
-    background: grey;
-    color: white;
+  background: grey;
+  color: white;
 }
 
 .bg-grey:hover {
-    background: grey;
-    color: white;
+  background: grey;
+  color: white;
 }
 </style>

@@ -45,7 +45,6 @@
               <button class="btn btn-outline-light btn-lg px-5" >Submit</button>
             </div>
             <p class="mb-0">
-<<<<<<< HEAD
 				<br>
 				<router-link to="/forget-password">Forget Password</router-link>
 			</p>
@@ -58,60 +57,17 @@
 </div>
 </div>
         
-=======
-              Don't have an account?
-              <br />
-              <router-link to="/find-client" >Sign Up</router-link>
-            </p>
-
-
-            
-
-          </Form>
-        </div>
-      </div>
->>>>>>> 44849ddfad5c1f6c60a68a1429d849bd25d054e6
     </div>
-  </div>
 </template>
-<<<<<<< HEAD
 <script >
 
 import api from "../../config/api.js";
 import MainHeader from '../../components/global/MainHeader.vue'
 import { Form, Field } from 'vee-validate';
-=======
-<script>
-import MainHeader from "../../components/global/MainHeader.vue";
-import { Form, Field } from "vee-validate";
->>>>>>> 44849ddfad5c1f6c60a68a1429d849bd25d054e6
 import * as yup from "yup";
 export default {
     data() {
         const schema = yup.object().shape({
-<<<<<<< HEAD
-            email: yup.string()
-                .min(3, 'Email must be valid')
-                .max(50, 'Email must be valid')
-                .required('Please Enter your email')
-                .matches(
-                    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                    'Please enter valid email',
-                ),
-            password: yup
-                .string()
-                .required('Please Enter your password')
-                .min(6, 'Password must be greater then 6 digit')
-                .max(16, 'Password must be less then 16 digit')
-                .matches(
-                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                    'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
-                ),
-        });
-        return {
-            schema
-        }
-=======
             email: yup
                 .string()
                 .min(3, "Email must be valid")
@@ -134,7 +90,6 @@ export default {
         return {
             schema,
         };
->>>>>>> 44849ddfad5c1f6c60a68a1429d849bd25d054e6
     },
     components: {
         MainHeader,
@@ -143,7 +98,6 @@ export default {
         // MainFooter
     },
     methods: {
-<<<<<<< HEAD
         submitData(formData) {
             try {
                 formData.type = "client";
@@ -168,14 +122,6 @@ export default {
     name: 'LoginForm',
 }
 
-=======
-        submitData() {
-            alert("data has been submitted.");
-        },
-    },
-    name: "LoginForm",
-};
->>>>>>> 44849ddfad5c1f6c60a68a1429d849bd25d054e6
 </script>
 <style scoped>
 .hello {

@@ -3,10 +3,6 @@ import App from "./App.vue";
 import router from "@/routers";
 import store from "./store";
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 44849ddfad5c1f6c60a68a1429d849bd25d054e6
 /* import the fontawesome core */
 import { library } from "@fortawesome/fontawesome-svg-core";
 

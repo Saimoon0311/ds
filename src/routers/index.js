@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
+// landing
 import HelloWorld from "@/components/HelloWorld.vue";
-import AboutUsPage from "@/components/About.vue";
-import NotFound from "@/components/NotFound.vue";
 import NeedLawyer from "@/pages/forms/NeedLawyer.vue";
 import FindClient from "@/pages/forms/FindClient.vue";
 import LoginForm from "@/pages/forms/LoginForm.vue";
+// admin
 import AdminLogin from "@/pages/admin/Login.vue";
 import AdminLawyer from "@/pages/admin/Lawyers.vue";
 import AdminJobs from "@/pages/admin/Jobs.vue";
@@ -35,12 +35,14 @@ function reverse_guard(to, from, next) {
 //     requiresAuth: true
 //   },
 //   children: [
-import ClientProfile from "@/pages/client/Profile.vue";
-import privacyPolicy from "@/pages/privacy-policy.vue";
-import termsOfUse from "@/pages/terms-of-use.vue";
+// import ClientProfile from "@/pages/client/Profile.vue";
 import PlatForm from "@/components/PlatForm.vue";
+// client
 import ClientLoginForm from "@/pages/client/Login.vue";
 import ClientRegister from "@/pages/client/Register.vue";
+import ClientAccount from "@/pages/client/Account.vue";
+
+// lawyer
 import LawyerLoginForm from "@/pages/lawyer/Login.vue";
 import LawyerRegister from "@/pages/lawyer/Register.vue";
 import LawyerDashboard from "@/pages/lawyer/Dashboard.vue";
@@ -50,6 +52,11 @@ import LawyerAccount from "@/pages/lawyer/Account.vue";
 import LawyerSubscribe from "@/pages/lawyer/Subscribe.vue";
 import LawyerBidding from "@/pages/lawyer/Bidding.vue";
 import RequestInfo from "@/pages/lawyer/RequestInfo.vue";
+// other
+import privacyPolicy from "@/pages/privacy-policy.vue";
+import termsOfUse from "@/pages/terms-of-use.vue";
+import AboutUsPage from "@/components/About.vue";
+import NotFound from "@/components/NotFound.vue";
 
 const routes = [
   {
@@ -59,14 +66,6 @@ const routes = [
   {
     path: "/platform",
     component: PlatForm,
-  },
-  {
-    path: "/client-login",
-    component: ClientLoginForm,
-  },
-  {
-    path: "/client-register",
-    component: ClientRegister,
   },
   // lawyer
   {
@@ -122,6 +121,7 @@ const routes = [
     component: LoginForm,
     beforeEnter: reverse_guard, 
   },
+  // admin
   {
     path: "/admin-login",
     component: AdminLogin,
@@ -161,30 +161,20 @@ const routes = [
     path: "/client",
     component: AdminClients,
   },
-
-  // {
-  //     path: '/',
-  //     // component: layout,
-  //     meta: {
-  //       requiresAuth: true
-  //     },
-  //     children: [
-  //       {
-  //         path: "/",
-  //         component: HelloWorld,
-  //       },
-  //     ]
-  // },
-  
-  
-  // {
-  //   path: "/:catchAll(.*)",
-  //   component: NotFound,
-  // },
+  //clients
   {
-    path: "/client-profile",
-    component: ClientProfile,
+    path: "/client-login",
+    component: ClientLoginForm,
   },
+  {
+    path: "/client-register",
+    component: ClientRegister,
+  },
+  {
+    path: "/client-account",
+    component: ClientAccount,
+  },
+  // other
   {
     path: "/privacy-policy",
     component: privacyPolicy,
