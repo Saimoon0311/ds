@@ -58,109 +58,29 @@
               class="selectpicker w-100 border rounded"
               name="chargeType"
               id="charge-category-select"
-              onchange="handleFormFieldsChange()"
+              v-model="selectedOption" @change="updateDivContent"
               required=""
               tabindex="null"
             >
               <option disabled="" selected="" hidden="" value="none">
                 Select an option
               </option>
-              <option value="Fixed fee">Fixed fee</option>
-              <option value="Hourly rate">Hourly rate</option>
-              <option value="Success fee">Success fee</option>
-              <option value="Pro bono">Pro bono</option></select
-            ><button
-              type="button"
-              tabindex="-1"
-              class="btn dropdown-toggle btn-light"
-              data-bs-toggle="dropdown"
-              role="combobox"
-              aria-owns="bs-select-1"
-              aria-haspopup="listbox"
-              aria-expanded="false"
-              title="Pro bono"
-              data-id="charge-category-select"
+              <option value="Fixed">Fixed fee</option>
+              <option value="Hourly">Hourly rate</option>
+              <option value="Success">Success fee</option>
+              <option value="Pro">Pro bono</option></select
             >
-              <div class="filter-option">
-                <div class="filter-option-inner">
-                  <div class="filter-option-inner-inner">Pro bono</div>
-                </div>
-              </div>
-            </button>
             <div
               class="dropdown-menu"
               style="max-height: 434.781px; overflow: hidden; min-height: 114px"
             >
-              <div
-                class="inner show"
-                role="listbox"
-                id="bs-select-1"
-                tabindex="-1"
-                style="
-                  max-height: 416.781px;
-                  overflow: hidden auto;
-                  min-height: 96px;
-                "
-                aria-activedescendant="bs-select-1-3"
-              >
-                <ul
-                  class="dropdown-menu inner show"
-                  role="presentation"
-                  style="margin-top: 0px; margin-bottom: 0px"
-                >
-                  <li class="">
-                    <a
-                      role="option"
-                      class="dropdown-item"
-                      id="bs-select-1-0"
-                      tabindex="0"
-                      aria-setsize="4"
-                      aria-posinset="1"
-                      ><span class="text">Fixed fee</span></a
-                    >
-                  </li>
-                  <li class="">
-                    <a
-                      role="option"
-                      class="dropdown-item"
-                      id="bs-select-1-1"
-                      tabindex="0"
-                      aria-setsize="4"
-                      aria-posinset="2"
-                      ><span class="text">Hourly rate</span></a
-                    >
-                  </li>
-                  <li class="">
-                    <a
-                      role="option"
-                      class="dropdown-item"
-                      id="bs-select-1-2"
-                      tabindex="0"
-                      aria-setsize="4"
-                      aria-posinset="3"
-                      ><span class="text">Success fee</span></a
-                    >
-                  </li>
-                  <li class="selected active">
-                    <a
-                      role="option"
-                      class="dropdown-item active selected"
-                      id="bs-select-1-3"
-                      tabindex="0"
-                      aria-setsize="4"
-                      aria-posinset="4"
-                      aria-selected="true"
-                      ><span class="text">Pro bono</span></a
-                    >
-                  </li>
-                </ul>
-              </div>
+             
             </div>
           </div>
         </div>
 
         <!-- If they select ‘Fixed fee’ -->
-        <div class="form-group d-none" id="fixed-fee">
+        <div class="form-group" id="fixed-fee" v-if="selectedOption === 'Fixed'">
           <label
             >Fixed fee amount (in AUD and excluding GST and disbursements):<sup
               ><code>*</code></sup
@@ -181,7 +101,7 @@
         </div>
 
         <!-- If they select ‘Hourly rate’ -->
-        <div class="form-group d-none" id="hourly-rate">
+        <div class="form-group " id="hourly-rate" v-if="selectedOption === 'Hourly'">
           <div class="form-group mb-3" id="addAdditionalFeeEarnersRadio">
             How many fee earners will be working on this matter?
             <div class="form-check">
@@ -192,7 +112,7 @@
                   class="form-check-input"
                   id="radioNoOfFeeEarnersSingle"
                   checked=""
-                  onclick="addFeeEarners()"
+                  @click="showElement('Yes')"
                 />
                 Just me
               </label>
@@ -204,14 +124,14 @@
                   name="noOfFeeEarners"
                   class="form-check-input"
                   id="radioNoOfFeeEarnersMultiple"
-                  onclick="addFeeEarners()"
+                  @click="showElement('No')"
                 />
                 I'm part of a team
               </label>
             </div>
           </div>
 
-          <div class="d-none" id="additionalFeeEarners">
+          <div class="" id="additionalFeeEarners" v-if="isVisible === 'No'">
             <fieldset
               class="border p-2 my-2 col-6 bg-light text-center"
               style="margin: auto"
@@ -345,7 +265,7 @@
         </div>
 
         <!-- If they select ‘Success Fee’ -->
-        <div class="form-group d-none" id="success-fee">
+        <div class="form-group " id="success-fee" v-if="selectedOption === 'Success'">
           <label
             >Uplift percentage (%):<sup><code>*</code></sup></label
           >
@@ -372,7 +292,7 @@
         </div>
 
         <!-- Upfront payment -->
-        <div class="form-group my-2 d-none" id="upfrontPayRadio">
+        <div class="form-group my-2 " id="upfrontPayRadio" v-if="selectedOption === 'Pro'">
           <label
             >Do you require an upfront payment?<sup><code>*</code></sup></label
           >
@@ -382,11 +302,11 @@
               type="radio"
               name="upfrontPayment"
               id="upfrontYes"
-              onclick="handleUpfrontPaymentChange()"
+             
               value="yes"
               checked=""
             />
-            <label class="form-check-label" for="upfrontYes"> Yes </label>
+            <label class="form-check-label" for="upfrontYes" @click="setOption('Yes')"> Yes </label>
           </div>
           <div class="form-check">
             <input
@@ -394,13 +314,13 @@
               type="radio"
               name="upfrontPayment"
               id="upfrontNo"
-              onchange="handleUpfrontPaymentChange()"
+              
               value="no"
             />
-            <label class="form-check-label" for="upfrontNo"> No </label>
+            <label class="form-check-label" for="upfrontNo" @click="setOption('No')"> No </label>
           </div>
 
-          <div class="my-3" id="upfrontPayAmount">
+          <div class="my-3" id="upfrontPayAmount" v-if="option === 'Yes'">
             <label
               >How much upfront payment do you require?<sup
                 ><code>*</code></sup
@@ -486,16 +406,16 @@
         <!-- Do you offer a free or discounted first consultation? -->
         <div class="form-group m-2" id="freeFirstConsultationRadio">
           <label>Do you offer a free or discounted first consultation?</label>
-          <div class="form-check">
+          <div class="form-check" >
             <input
               class="form-check-input"
               type="radio"
               name="freeFirstConsultation"
               id="freeFirstConsultationYes"
               value="yes"
-              onchange="handleFirstFeeConsulationDecisionChange()"
+            
             />
-            <label class="form-check-label" for="freeFirstConsultationYes">
+            <label class="form-check-label" for="freeFirstConsultationYes" @click="setOption('Yes')">
               Yes
             </label>
           </div>
@@ -506,16 +426,17 @@
               name="freeFirstConsultation"
               id="freeFirstConsultationNo"
               value="no"
-              onchange="handleFirstFeeConsulationDecisionChange()"
+              
             />
-            <label class="form-check-label" for="freeFirstConsultationNo">
+            <label class="form-check-label" for="freeFirstConsultationNo" @click="setOption('No')">
               No
             </label>
           </div>
         </div>
 
         <!-- Do you offer a free or discounted first consultation input fields -->
-        <div class="form-group d-none my-3" id="div-freeFirstConsultationFee">
+        <div v-if="option === 'Yes'">
+          <div class="form-group  my-3" id="div-freeFirstConsultationFee" >
           <label for="freeFirstConsultationFee"
             >Fee:<sup><code>*</code></sup></label
           >
@@ -533,7 +454,7 @@
           </div>
         </div>
 
-        <div class="col-auto d-none" id="div-freeFirstConsultationMinutes">
+        <div class="col-auto " id="div-freeFirstConsultationMinutes" >
           <label for=""
             >Time limit:<sup><code>*</code></sup></label
           >
@@ -550,6 +471,8 @@
             </div>
           </div>
         </div>
+        </div>
+      
 
         <!-- Submit button -->
         <div class="text-center">
@@ -557,6 +480,10 @@
         </div>
       </form>
     </div>
+
+  
+
+
   </div>
 </template>
 <script>
@@ -565,7 +492,29 @@ export default {
   components: {
     LawyerHeader,
   },
-  methods: {},
+  data() {
+    return {
+      selectedOption: 'option1',
+      option: "Yes",  
+      isVisible: "Yes", 
+   
+      
+      
+    };
+  },
+  methods: {
+    updateDivContent() {
+      // No need to update divContent; we're using v-if to conditionally render divs.
+    },
+    setOption(value) {
+      this.option = value;
+    },
+    showElement(value) {
+      this.isVisible = value;
+    },
+   
+   
+  },
   name: "DashboardTab",
 };
 </script>

@@ -35,12 +35,14 @@
         </div>
       </div>
 
+     
       <div
         class="modal fade edit-job-title-modal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
+        id="Jobtitle"
       >
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -79,12 +81,14 @@
           </div>
         </div>
       </div>
+
       <div
         class="modal fade lawfirm-modal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
+        id="FirmName"
       >
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -122,12 +126,14 @@
           </div>
         </div>
       </div>
+
       <div
         class="modal fade website-modal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
+        id="WebsiteModal"
       >
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -167,12 +173,14 @@
           </div>
         </div>
       </div>
+
       <div
         class="modal fade edit-phone-modal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
+        id="PhoneModal"
       >
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -213,12 +221,14 @@
           </div>
         </div>
       </div>
+
       <div
         class="modal fade bd-example-modal-lg"
         tabindex="-1"
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
+        id="AboutModal"
       >
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -258,13 +268,14 @@
           </div>
         </div>
       </div>
+
       <div
         class="modal fade bd-example-modal-lg"
-        id="field-modal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
+        id="AreaModal"
       >
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -371,13 +382,14 @@
           </div>
         </div>
       </div>
+
       <div
         class="modal fade bd-example-modal-lg"
-        id="location-modal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
+        id="StateModal"
       >
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -464,6 +476,7 @@
           </div>
         </div>
       </div>
+
       <table class="table table-bordered mt-3 table-striped">
         <tbody>
           <!--  Email -->
@@ -491,9 +504,9 @@
               <button
                 type="button"
                 class="btn btn-secondary btn-sm"
-                data-toggle="modal"
                 data-target=".edit-job-title-modal"
                 title="Edit"
+                data-bs-toggle="modal" data-bs-target="#Jobtitle"
               >
                 <i class="fa fa-pencil"></i>
               </button>
@@ -513,7 +526,7 @@
               <button
                 type="button"
                 class="btn btn-secondary btn-sm"
-                data-toggle="modal"
+                data-bs-toggle="modal" data-bs-target="#FirmName"
                 data-target=".lawfirm-modal"
                 title="Edit"
               >
@@ -533,7 +546,7 @@
               <button
                 type="button"
                 class="btn btn-secondary btn-sm"
-                data-toggle="modal"
+                data-bs-toggle="modal" data-bs-target="#WebsiteModal"
                 data-target=".website-modal"
                 title="Edit"
               >
@@ -553,7 +566,7 @@
               <button
                 type="button"
                 class="btn btn-secondary btn-sm"
-                data-toggle="modal"
+                data-bs-toggle="modal" data-bs-target="#PhoneModal"
                 data-target=".edit-phone-modal"
                 title="Edit"
               >
@@ -575,7 +588,7 @@
               <button
                 type="button"
                 class="btn btn-secondary btn-sm"
-                data-toggle="modal"
+                data-bs-toggle="modal" data-bs-target="#AboutModal"
                 data-target=".bd-example-modal-lg"
                 title="Edit"
               >
@@ -597,7 +610,7 @@
               <button
                 type="button"
                 class="btn btn-secondary btn-sm"
-                data-toggle="modal"
+                data-bs-toggle="modal" data-bs-target="#AreaModal"
                 data-target="#field-modal"
                 title="Edit"
               >
@@ -621,7 +634,7 @@
               <button
                 type="button"
                 class="btn btn-secondary btn-sm"
-                data-toggle="modal"
+                data-bs-toggle="modal" data-bs-target="#StateModal"
                 data-target="#location-modal"
                 title="Edit"
               >
