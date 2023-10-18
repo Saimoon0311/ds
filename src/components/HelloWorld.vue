@@ -20,7 +20,7 @@
             lawyer.
           </p>
           <p>Simply make one enquiry and wait for lawyers to come to you.</p>
-          <router-link to="/need-lawyer" class="text-black fs-5">Register to be notified when the platform goes
+          <router-link to="/client-register" class="text-black fs-5">Register to be notified when the platform goes
             live.</router-link>
           <!-- <a href="./need-a-lawyer/index" class="text-black fs-5">Register to be notified when the platform goes live.</a> -->
         </div>
@@ -38,7 +38,7 @@
             Simply subscribe for an opportunity to find clients in your practice
             area without leaving your desk.
           </p>
-          <router-link to="/find-client" class="text-white fs-5">Sign up now to be first to access new
+          <router-link to="/lawyer-register" class="text-white fs-5">Sign up now to be first to access new
             clients</router-link>
         </div>
       </div>
