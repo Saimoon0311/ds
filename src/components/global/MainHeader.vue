@@ -1,11 +1,13 @@
 <template lang="">
     <div class="text-center">
+      <router-link to="/"> 
       <img src="../../assets/images/logo.png" class="img-fluid" />
-    </div>
+    </router-link>
+      </div>
 </template>
 <script>
 export default {
-    name: 'MainHeader'
+  name: 'MainHeader'
 }
 </script>
 <style lang="">

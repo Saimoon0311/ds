@@ -4,17 +4,8 @@
         <div class="row justify-content-center">
         <div class="center-main col-md-7">
             <div class="bg-dark text-white text-center m-3 p-3" style="border-radius: 10px">
-                <p class="m-4 fs-3 ">Login</p>
+                <p class="m-4 fs-3 ">Reset Password</p>
         <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
-            
-            <!-- Email -->
-            <div class="d-flex flex-row align-items-center mb-4 align-baseline">
-                <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                <div class="form-outline flex-fill mb-0">
-                    <Field type="email" class="form-control" name="email" placeholder="Email" :class="{'is-invalid' : errors.email}" />
-                    <span class="invalid-feedback">{{errors.email}}</span>
-                </div>
-            </div>
             <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                 <div class="form-outline flex-fill mb-0">
@@ -22,17 +13,22 @@
                     <span class="invalid-feedback">{{errors.password}}</span>
                 </div>
             </div>
+
+            <div class="d-flex flex-row align-items-center mb-4 align-baseline">
+                <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                <div class="form-outline flex-fill mb-0">
+                    <Field type="password" id="form3Example4cd" class="form-control" name="confirm_password" placeholder="Confirm Password" :class="{'is-invalid' : errors.confirm_password}" />
+                    <span class="invalid-feedback">{{errors.confirm_password}}</span>
+                </div>
+            </div>
+
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                 <button class="btn btn-outline-light btn-lg px-5">Submit</button>
             </div>
-            <p class="mb-0">
-				<br>
-				<router-link to="/forget-password">Forget Password</router-link>
-			</p>
-            <p class="mb-0">Don't have an account?
+            <!-- <p class="mb-0">Don't have an account?
 				<br>
 				<router-link to="/find-client">Sign Up</router-link>
-			</p>
+			</p> -->
         </Form>
     </div>
 </div>
@@ -49,14 +45,6 @@ import * as yup from "yup";
 export default {
     data() {
         const schema = yup.object().shape({
-            email: yup.string()
-                .min(3, 'Email must be valid')
-                .max(50, 'Email must be valid')
-                .required('Please Enter your email')
-                .matches(
-                    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                    'Please enter valid email',
-                ),
             password: yup
                 .string()
                 .required('Please Enter your password')
@@ -66,8 +54,14 @@ export default {
                     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                     'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
                 ),
+            confirm_password: yup
+                .string()
+                .required('Confirm password is required')
+                .oneOf([yup.ref('password'), null], 'Password must match'),
         });
         return {
+            email: null,
+            token: null,
             schema
         }
     },
@@ -77,20 +71,20 @@ export default {
         Field,
         // MainFooter
     },
+    created() {
+        this.email = this.$route.params.email;
+        this.token = this.$route.params.token;
+    },
     methods: {
         submitData(formData) {
             try {
-                formData.type = "client";
                 console.log(formData)
-                api.post('/login', formData)
+                formData.email = this.email;
+                formData.token = this.token;
+                api.post('/forget-password', formData)
                     .then(res => {
-                        console.log('res data : ' , res?.data?.data?.api_token);
-                        localStorage.setItem("token", res?.data?.data?.api_token);
-                        this.$store.commit('SET_AUTHENTICATED', true);
-                        localStorage.setItem("loginUser", res?.data?.data?.email);
-                        this.$store.commit('SET_LOGIN_USER', res?.data?.data?.email);
-                        this.$router.push({ path: '/' });
                         console.log('successfully login : ', res?.data)
+                        this.$router.push({ path: '/login' });
                     })
                     .catch(error => console.log("getResults : ", error));
                 console.log(formData);

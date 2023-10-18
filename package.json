@@ -12,6 +12,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.2",
+    "bootstrap-vue": "^2.23.1",
     "core-js": "^3.8.3",
     "vee-validate": "^4.11.8",
     "vue": "^3.2.13",

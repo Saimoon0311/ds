@@ -6,10 +6,14 @@ const store = createStore({
     isLoading : false,
     type : null,
     isAuthenticated : false,
+    loginUser : null,
   },
   mutations: {
     SET_AUTHENTICATED(state, status) {
       state.isAuthenticated = status;
+    },
+    SET_LOGIN_USER(state, data) {
+      state.loginUser = data;
     },
   },
   actions: {
@@ -17,6 +21,7 @@ const store = createStore({
   },
   getters: {
     isAuthenticated: (state) => state.isAuthenticated,
+    loginUser: (state) => state.loginUser,
   },
 });
 

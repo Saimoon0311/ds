@@ -9,6 +9,7 @@
             <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                  <!-- Add the style and icon you want using the String format -->
+             
                 <div class="form-outline flex-fill mb-0">
                     <Field type="email"  class="form-control" name="email" placeholder="Email" :class="{'is-invalid' : errors.email}"  /> 
                     <span class="invalid-feedback">{{errors.email}}</span>
@@ -59,7 +60,7 @@
                 <Field class="form-check-Field" type="checkbox" id="termsAndConditions" name="tandc" value="true" :class="{'is-invalid' : errors.tandc}" />
                 <label class="form-check-label" for="termsAndConditions">
                     &nbsp;I have read and agree to the 
-                    <a href="../profile/terms-and-conditions.html" target="_blank">terms and conditions.</a>
+                    <router-link to="/privacy-policy" >terms and conditions.</router-link>
                 </label>
                 <span class="invalid-feedback text-center">{{errors.tandc}}</span>
             </div>
@@ -105,7 +106,7 @@ export default {
                 .max(16, 'Password must be less then 16 digit')
                 .matches(
                     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                    'Must Contain 8 Characters, One Uppercase, One Lowercase, One phone and one special case Character',
+                    'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
                 ),
             confirm_password: yup
                 .string()
@@ -132,10 +133,15 @@ export default {
                 console.log(formData)
                 api.post('/signup',formData)
                     .then(res => {
-                        console.log('successfully registered : ' , res?.data)
+                        console.log('res data : ' , res);
+                        localStorage.setItem("token", res.data?.data?.api_token);
+                        this.$store.commit('SET_AUTHENTICATED', true);
+                        localStorage.setItem("loginUser", res?.data?.data?.email);
+                        this.$store.commit('SET_LOGIN_USER', res?.data?.data?.email);
+                        this.$router.push({ path: '/client-dashboard' });
                     })
                     .catch(error => console.log("getResults : ", error));
-                console.log(formData);
+                // console.log(formData);
             } catch (error) {
                 console.error('API request error:', error);
             }

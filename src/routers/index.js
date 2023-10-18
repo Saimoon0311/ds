@@ -1,15 +1,19 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HelloWorld from "@/components/HelloWorld.vue";
 import AboutUsPage from "@/components/About.vue";
-// import NotFound from "@/components/NotFound.vue";
+import NotFound from "@/components/NotFound.vue";
 import NeedLawyer from "@/pages/forms/NeedLawyer.vue";
 import FindClient from "@/pages/forms/FindClient.vue";
 import LoginForm from "@/pages/forms/LoginForm.vue";
 import AdminLogin from "@/pages/admin/Login.vue";
-import AdminDashboard from "@/pages/admin/Dashboard.vue";
 import AdminLawyer from "@/pages/admin/Lawyers.vue";
 import AdminJobs from "@/pages/admin/Jobs.vue";
 import AdminClients from "@/pages/admin/Clients.vue";
+import clientDashboard from "@/pages/client/Dashboard.vue";
+import SubscriptionComponent from "@/pages/client/Subscription.vue";
+import ForgetPassword from "@/pages/forms/ForgetPassword.vue";
+import ResetPassword from "@/pages/forms/ResetPassword.vue";
+
 import api from "../config/api.js"
 
 
@@ -31,6 +35,9 @@ function reverse_guard(to, from, next) {
 //     requiresAuth: true
 //   },
 //   children: [
+import ClientProfile from "@/pages/client/Profile.vue";
+import privacyPolicy from "@/pages/privacy-policy.vue";
+import termsOfUse from "@/pages/terms-of-use.vue";
 
 const routes = [
   {
@@ -66,12 +73,21 @@ const routes = [
 
   {
     path: "/admin-dashboard",
-    component: AdminDashboard,
-  },
-  {
-    path: "/admin-lawyer",
     component: AdminLawyer,
   },
+
+  {
+    path: "/client-dashboard",
+    component: clientDashboard,
+    meta: { requiresAuth: true },
+  },
+
+  {
+    path: "/subscription",
+    component: SubscriptionComponent,
+    meta: { requiresAuth: true },
+  },
+
   {
     path: "/admin-job",
     component: AdminJobs,
@@ -100,11 +116,38 @@ const routes = [
   //   path: "/:catchAll(.*)",
   //   component: NotFound,
   // },
+  {
+    path: "/client-profile",
+    component: ClientProfile,
+  },
+  {
+    path: "/privacy-policy",
+    component: privacyPolicy,
+  },
+  {
+    path: "/terms-of-use",
+    component: termsOfUse,
+  },
+
+  {
+    path : "/forget-password",
+    component: ForgetPassword,
+  },
+
+  {
+    path : "/reset-password/:email/:token",
+    component: ResetPassword,
+  },
+
+  {
+    path: "/:catchAll(.*)",
+    component: NotFound,
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
-  base: process.env.NODE_ENV === 'production' ? '/law-frontend/' : '/',
+  // base: process.env.NODE_ENV === 'production' ? '/law-frontend/' : '/',
   routes
 });
 
