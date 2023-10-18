@@ -28,30 +28,38 @@
             <div class="navbar-nav">
               <div class="left-menu">
                 <router-link
-                  to="/admin-dashboard"
+                  to="/lawyer-dashboard"
                   class="nav-link fw-bolder menuItem-active-link"
                   id="lawyers"
                   aria-current="page"
-                  >Lawyers</router-link
+                  >Dashboard</router-link
                 >
                 <router-link
-                  to="/client"
+                  to="/lawyer-bids"
                   class="nav-link fw-bolder menuItem-active-link"
-                  id="clients"
+                  id="lawyers"
                   aria-current="page"
-                  >Clients</router-link
+                  >Bids</router-link
                 >
+                  
                 <router-link
-                  to="/job"
+                  to="/lawyer-account"
                   class="nav-link fw-bolder menuItem-active-link"
                   id="jobs"
                   aria-current="page"
-                  >Jobs</router-link
+                  >Account</router-link
+                >
+                <router-link
+                  to="/lawyer-profile"
+                  class="nav-link fw-bolder menuItem-active-link"
+                  id="jobs"
+                  aria-current="page"
+                  >Profile</router-link
                 >
               </div>
               <div>
                 <router-link
-                  to="/admin-login"
+                  to="/lawyer-login"
                   class="nav-link float-right logOutBtn active"
                   id="clients"
                   aria-current="page"
@@ -69,7 +77,7 @@
 export default {
   components: {},
   methods: {},
-  name: "AdminHeader",
+  name: "LawyerHeader",
 };
 </script>
 <style scoped>

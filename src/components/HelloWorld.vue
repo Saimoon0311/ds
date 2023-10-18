@@ -50,6 +50,8 @@
         <router-link to="/privacy-policy" class="ms-2 text-dark">Privacy policy</router-link>
       </div>
     </div>
+    <!-- <ToastComponent /> -->
+
     <MainFooter />
   </div>
 </template>
@@ -57,11 +59,13 @@
 <script>
 import MainHeader from "./global/MainHeader.vue";
 import MainFooter from "./global/MainFooter.vue";
+// import ToastComponent from "./ToastComponent.vue";
 
 export default {
   components: {
     MainHeader,
     MainFooter,
+    // ToastComponent
   },
   // name: 'HelloWorld',
   props: {
@@ -92,6 +96,10 @@ export default {
   text-align: center;
   width: 500px;
   height: 500px;
+}
+
+.toast {
+  display: block;
 }
 
 @media (min-width: 400px) and (max-width: 450px) {

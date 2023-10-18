@@ -3,7 +3,10 @@ import App from "./App.vue";
 import router from "@/routers";
 import store from "./store";
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 44849ddfad5c1f6c60a68a1429d849bd25d054e6
 /* import the fontawesome core */
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -14,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap";
 
 /* add icons to the library */

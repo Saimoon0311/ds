@@ -27,7 +27,7 @@
             </div>
         </nav>
     </header>        
-
+    
     </div>
 
 
@@ -38,7 +38,11 @@
 
 
 export default {
+    data() {
+        return {
 
+        };
+    },
     components: {
 
     },
@@ -97,4 +101,5 @@ export default {
 .bg-grey:hover {
     background: grey;
     color: white;
-}</style>
+}
+</style>

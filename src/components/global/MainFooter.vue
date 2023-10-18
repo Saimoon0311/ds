@@ -4,7 +4,7 @@
             
             © 2023 simplawfy pty ltd. | <router-link class="link" to="/privacy-policy">privacy policy</router-link> | <router-link class="link" to="/terms-of-use">website terms of use</router-link> | contact | <a class="sitemap link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 site map <i class=" caret-ico fa-solid fa-angle-up"></i>
-          </a>&nbsp;&nbsp;&nbsp;| 
+          </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="#">About Us</a></li>
             <li><a class="dropdown-item" href="#">How Simplawfy Works</a></li>
@@ -12,7 +12,7 @@
             <li><a class="dropdown-item" href="#">Contact Us</a></li> 
           </ul>
             <span>
-                <a class="a" target="_blank" href="https://www.linkedin.com/simplawfylaw"><i class="fa-brands fa-linkedin"></i></a> 
+                <a class="a" target="_blank" href="https://www.linkedin.com/company/simplawfylaw"><i class="fa-brands fa-linkedin"></i></a> 
                 <a class="a" target="_blank" href="https://www.facebook.com/simplawfy"><i class="fa-brands fa-facebook-f"></i></a>
                 <a class="a" target="_blank" href="https://www.instagram.com/simplawfylaw/"><i class="fa-brands fa-instagram"></i></a>
             </span>
@@ -39,33 +39,41 @@ export default {
     width: 100%;
     background: rgb(241, 241, 241);
     text-align: center;
-    padding: 10px 0;
+    padding: 4px 0;
     font-size: 15px;
-    font-weight: 900;
+    font-weight: 500;
     text-transform: uppercase;
     color: #858585;
 }
 
 .footer-main .a {
     color: #858585;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .footer-main .a:nth-child(2) {
     margin: 0px 10px;
     position: relative;
     top: -1px;
+    font-size: 17px;
+}
+
+.footer-main .a:last-child {
+    font-size: 20px;
+    position: relative;
+    top: 0.5px;
+
 }
 
 .footer-main span {
     position: relative;
-    top: 5px;
+    top: 3px;
     margin-left: 8px;
 }
 
 .footer-main .link {
     /* font-size: 15px; */
-    font-weight: 900;
+    font-weight: 500;
     text-transform: uppercase;
     color: #858585;
     text-decoration: none;
@@ -80,6 +88,10 @@ export default {
 
 .sitemap {
     position: relative;
+}
+
+.sitemap.dropdown-toggle::after {
+    display: none;
 }
 
 .dropdown-item {
