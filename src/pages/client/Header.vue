@@ -13,7 +13,7 @@
                     <div class="navbar-nav">
                        <div class="left-menu">
                      
-                        <router-link to="/client-profile"  class="nav-link fw-bolder menuItem-active-link " id="lawyers" aria-current="page">Profile</router-link>
+                        <router-link to="/client-account"  class="nav-link fw-bolder menuItem-active-link " id="lawyers" aria-current="page">Profile</router-link>
                         
                        
                        </div>
