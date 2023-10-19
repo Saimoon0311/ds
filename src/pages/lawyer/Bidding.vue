@@ -55,7 +55,7 @@
           >
           <div class="dropdown bootstrap-select w-100 border rounded dropup">
             <select
-              class="selectpicker w-100 border rounded"
+              class="selectpicker w-100 border rounded p-1"
               name="chargeType"
               id="charge-category-select"
               v-model="selectedOption"
@@ -101,6 +101,64 @@
             />
           </div>
           <br />
+
+          <div class="my-3">
+        <label
+            >Do you require an upfront payment?<sup><code>*</code></sup></label
+          >
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="upfrontPayment"
+              id="upfrontYes"
+              value="yes"
+              checked=""
+            />
+            <label
+              class="form-check-label"
+              for="upfrontYes"
+              @click="setPayment('Yes')"
+            >
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="upfrontPayment"
+              id="upfrontNo"
+              value="no"
+            />
+            <label
+              class="form-check-label"
+              for="upfrontNo"
+              @click="setPayment('No')"
+            >
+              No
+            </label>
+          </div>
+
+          <div class="my-3" id="upfrontPayAmount" v-if="payment === 'Yes'">
+            <label
+              >How much upfront payment do you require?<sup
+                ><code>*</code></sup
+              ></label
+            >
+            <div>
+              <span class="position-absolute" style="line-height: 36px">$</span>
+              <input
+                id="upfrontAmount"
+                name="upfrontAmount"
+                type="number"
+                min="1"
+                step=".01"
+                class="form-control"
+              />
+            </div>
+          </div>
+        </div>
         </div>
 
         <!-- If they select ‘Hourly rate’ -->
@@ -217,23 +275,25 @@
             </div>
           </div>
 
-          <!-- Invisible filed for posting additional fee earners info -->
-          <input class="d-none" name="feeEarnersInfo" id="feeEarnersInfo" />
-
-          <div id="hourlyRateIndividual">
-            <label
+          <div v-if="isVisible === 'Yes'">
+            
+            <!-- Invisible filed for posting additional fee earners info -->
+            <input class="d-none" name="feeEarnersInfo" id="feeEarnersInfo" />
+            
+            <div id="hourlyRateIndividual">
+              <label
               >Hourly rate (in AUD excluding GST):<sup
-                ><code>*</code></sup
+              ><code>*</code></sup
               ></label
-            >
-            <div>
-              <span class="position-absolute" style="line-height: 36px">
-                $</span
               >
-              <input
-                type="number"
-                id="hourlyRate"
-                name="hourlyRate"
+              <div>
+                <span class="position-absolute" style="line-height: 36px">
+                  $</span
+                  >
+                  <input
+                  type="number"
+                  id="hourlyRate"
+                  name="hourlyRate"
                 min="1"
                 step="0.01"
                 class="form-control"
@@ -255,7 +315,7 @@
               class="form-control"
               oninput="updateHourlyRateIndividual()"
             />
-
+            
             <br />
           </div>
 
@@ -269,6 +329,66 @@
               class="border-0 text-dark bg-white"
             />
           </p>
+        </div>
+
+          <div class="my-3">
+        <label
+            >Do you require an upfront payment?<sup><code>*</code></sup></label
+          >
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="upfrontPayment"
+              id="upfrontYes"
+              value="yes"
+              checked=""
+            />
+            <label
+              class="form-check-label"
+              for="upfrontYes"
+              @click="setPay('Yes')"
+            >
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="upfrontPayment"
+              id="upfrontNo"
+              value="no"
+            />
+            <label
+              class="form-check-label"
+              for="upfrontNo"
+              @click="setPay('No')"
+            >
+              No
+            </label>
+          </div>
+
+          <div class="my-3" id="upfrontPayAmount" v-if="pay === 'Yes'">
+            <label
+              >How much upfront payment do you require?<sup
+                ><code>*</code></sup
+              ></label
+            >
+            <div>
+              <span class="position-absolute" style="line-height: 36px">$</span>
+              <input
+                id="upfrontAmount"
+                name="upfrontAmount"
+                type="number"
+                min="1"
+                step=".01"
+                class="form-control"
+              />
+            </div>
+          </div>
+        </div>
+
         </div>
 
         <!-- If they select ‘Success Fee’ -->
@@ -300,15 +420,9 @@
             class="form-control"
           />
           <br />
-        </div>
 
-        <!-- Upfront payment -->
-        <div
-          class="form-group my-2"
-          id="upfrontPayRadio"
-          v-if="selectedOption === 'Pro'"
-        >
-          <label
+          <div class="my-3">
+        <label
             >Do you require an upfront payment?<sup><code>*</code></sup></label
           >
           <div class="form-check">
@@ -323,7 +437,7 @@
             <label
               class="form-check-label"
               for="upfrontYes"
-              @click="setPayment('Yes')"
+              @click="setPaySucc('Yes')"
             >
               Yes
             </label>
@@ -339,13 +453,13 @@
             <label
               class="form-check-label"
               for="upfrontNo"
-              @click="setPayment('No')"
+              @click="setPaySucc('No')"
             >
               No
             </label>
           </div>
 
-          <div class="my-3" id="upfrontPayAmount" v-if="payment === 'Yes'">
+          <div class="my-3" id="upfrontPayAmount" v-if="paySucc === 'Yes'">
             <label
               >How much upfront payment do you require?<sup
                 ><code>*</code></sup
@@ -364,6 +478,19 @@
             </div>
           </div>
         </div>
+
+        </div>
+
+        <!-- Upfront payment -->
+        <div
+          class="form-group my-2"
+          id="upfrontPayRadio"
+          v-if="selectedOption === 'Pro'"
+        >
+        
+        </div>
+
+       
 
         <!-- Additional information -->
         <div class="form-group">
@@ -384,7 +511,7 @@
         </div>
 
         <!-- Deadline acceptance radio -->
-        <div class="form-group m-2" id="div-deadline-acceptance-radio">
+         <div class="form-group m-2" id="div-deadline-acceptance-radio">
           <label>Can you meet the potential client's deadline?</label>
           <div class="form-check">
             <input
@@ -419,10 +546,10 @@
               No
             </label>
           </div>
-        </div>
+        </div> 
 
         <!-- Can't meet deadline explanation box -->
-        <div class="form-group" id="div-deadline" v-if="deadline === 'Yes'">
+        <div class="form-group" id="div-deadline" v-if="deadline === 'No'">
           <label
             >Please explain why you can't meet potential client's deadline:<sup
               ><code>*</code></sup
@@ -436,7 +563,7 @@
               placeholder="Eg: It's not realistic"
             ></textarea>
           </label>
-        </div>
+        </div> 
 
         <!-- Do you offer a free or discounted first consultation? -->
         <div class="form-group m-2" id="freeFirstConsultationRadio">
@@ -535,7 +662,10 @@ export default {
       option: "Yes",
       isVisible: "Yes",
       payment: "Yes",
+      pay: "Yes",
+      paySucc: "Yes",
       deadline: "Yes",
+      team: 'Yes',
     };
   },
   methods: {
@@ -544,6 +674,15 @@ export default {
     },
     setPayment(value) {
       this.payment = value;
+    },
+    setTeam(value) {
+      this.team = value;
+    },
+    setPay(value) {
+      this.pay = value;
+    },
+    setPaySucc(value) {
+      this.paySucc = value;
     },
     setOption(value) {
       this.option = value;
