@@ -58,13 +58,12 @@
                 >
               </div>
               <div>
-                <router-link
-                  to="/lawyer-login"
+                <button
+                  @click="logout()"
                   class="nav-link float-right logOutBtn active"
                   id="clients"
                   aria-current="page"
-                  >Logout</router-link
-                >
+                  >Logout</button>
               </div>
             </div>
           </div>
@@ -74,9 +73,27 @@
   </div>
 </template>
 <script>
+import api from "../../config/api.js";
 export default {
   components: {},
-  methods: {},
+  methods: {
+    logout(){
+            try {
+                api.get('/logout')
+                    .then(() => {
+                        localStorage.removeItem('token');
+                        this.$store.commit('SET_AUTHENTICATED', false);
+                        localStorage.removeItem("loginUser");
+                        this.$store.commit('SET_LOGIN_USER', null);
+                        this.$router.push({ path: '/lawyer-login' });
+                    })
+                    .catch(error => console.log("getResults : ", error));
+                // console.log(formData);
+            } catch (error) {
+                console.error('API request error:', error);
+            }
+        }
+  },
   name: "LawyerHeader",
 };
 </script>

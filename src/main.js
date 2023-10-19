@@ -30,6 +30,7 @@ app.mixin({
                 "first_name": res?.data?.data?.first_name,
                 "last_name": res?.data?.data?.last_name,
                 "email": res?.data?.data?.email,
+                "type": res?.data?.data?.type,
             }
             localStorage.setItem("token", res.data?.data?.api_token);
             localStorage.setItem("loginUser", JSON.stringify(userData));

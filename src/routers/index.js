@@ -11,36 +11,23 @@ import AdminJobs from "@/pages/admin/Jobs.vue";
 import AdminClients from "@/pages/admin/Clients.vue";
 import clientDashboard from "@/pages/client/Dashboard.vue";
 import SubscriptionComponent from "@/pages/client/Subscription.vue";
-import ForgetPassword from "@/pages/forms/ForgetPassword.vue";
+import LawyerForgetPassword from "@/pages/lawyer/ForgetPassword.vue";
+import ClientForgetPassword from "@/pages/client/ForgetPassword.vue";
 import ResetPassword from "@/pages/forms/ResetPassword.vue";
 
 import api from "../config/api.js"
 
-
-function reverse_guard(to, from, next) {
-  api.get("/verify")
-      .then(() => {
-          next('/');
-      })
-      .catch(() => {
-        next()
-      });
-}
-
-
-// {
-//   path: '/',
-//   component: layout,
-//   meta: {
-//     requiresAuth: true
-//   },
-//   children: [
 // import ClientProfile from "@/pages/client/Profile.vue";
 import PlatForm from "@/components/PlatForm.vue";
 // client
 import ClientLoginForm from "@/pages/client/Login.vue";
 import ClientRegister from "@/pages/client/Register.vue";
 import ClientAccount from "@/pages/client/Account.vue";
+import ClientDashboard from "@/pages/client/Dashboard.vue";
+import PostingJob from "@/pages/client/PostingJob.vue";
+import AreaOfLaw from "@/pages/client/AreaOfLaw.vue";
+import ViewBids from "@/pages/client/ViewBids.vue";
+import ReplyInfoRequest from "@/pages/client/ReplyInfoRequest.vue";
 
 // lawyer
 import LawyerLoginForm from "@/pages/lawyer/Login.vue";
@@ -58,6 +45,19 @@ import termsOfUse from "@/pages/terms-of-use.vue";
 import AboutUsPage from "@/components/About.vue";
 import NotFound from "@/components/NotFound.vue";
 
+
+function reverse_guard(to, from, next) {
+  api.get("/verify")
+      .then(() => {
+        router.go(-1);
+      })
+      .catch(() => {
+        next()
+      });
+}
+
+
+
 const routes = [
   {
     path: "/",
@@ -71,6 +71,7 @@ const routes = [
   {
     path: "/lawyer-login",
     component: LawyerLoginForm,
+    beforeEnter: reverse_guard, 
   },
   {
     path: "/lawyer-register",
@@ -79,18 +80,30 @@ const routes = [
   {
     path: "/lawyer-dashboard",
     component: LawyerDashboard,
+    meta: {
+      requiresAuth: true
+    },
   },
   {
     path: "/lawyer-bids",
     component: LawyerBids,
+    meta: {
+      requiresAuth: true
+    },
   },
   {
     path: "/lawyer-profile",
     component: LawyerProfile,
+    meta: {
+      requiresAuth: true
+    },
   },
   {
     path: "/lawyer-account",
     component: LawyerAccount,
+    meta: {
+      requiresAuth: true
+    },
   },
   {
     path: "/subscribe",
@@ -165,6 +178,7 @@ const routes = [
   {
     path: "/client-login",
     component: ClientLoginForm,
+    beforeEnter: reverse_guard, 
   },
   {
     path: "/client-register",
@@ -174,6 +188,27 @@ const routes = [
     path: "/client-account",
     component: ClientAccount,
   },
+  {
+    path: "/client-dashboard",
+    component: ClientDashboard,
+  },
+  {
+    path: "/area-of-law",
+    component: AreaOfLaw,
+  },
+  {
+    path: "/posting-job",
+    component: PostingJob,
+  },
+  {
+    path: "/view-bids",
+    component: ViewBids,
+  },
+  {
+    path: "/reply-info-request",
+    component: ReplyInfoRequest,
+  },
+
   // other
   {
     path: "/privacy-policy",
@@ -185,8 +220,13 @@ const routes = [
   },
 
   {
-    path : "/forget-password",
-    component: ForgetPassword,
+    path : "/lawyer-forget-password",
+    component: LawyerForgetPassword,
+  },
+
+  {
+    path : "/client-forget-password",
+    component: ClientForgetPassword,
   },
 
   {
@@ -212,10 +252,9 @@ const isLoggedIn = async () => {
 }
 
 router.beforeEach(async (to, from, next) => {
-
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isLoggedIn()) {
-      next({ path: '/login' })
+      next({ path: '/' })
     } else {
       try{
         let result = await api.get('/verify');
@@ -223,7 +262,7 @@ router.beforeEach(async (to, from, next) => {
           next();
         }
       }catch(e){
-        next({ path: '/login' })
+        next({ path: '/' })
       }
     }
   } else {

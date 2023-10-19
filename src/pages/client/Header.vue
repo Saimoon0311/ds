@@ -35,11 +35,18 @@
                   >Dashboard</router-link
                 >
                 <router-link
+                  to="/area-of-law"
+                  class="nav-link fw-bolder menuItem-active-link"
+                  id="lawyers"
+                  aria-current="page"
+                  >Post a Job</router-link
+                >
+                <router-link
                   to="/client-account"
                   class="nav-link fw-bolder menuItem-active-link"
                   id="lawyers"
                   aria-current="page"
-                  >Profile</router-link
+                  >Account</router-link
                 >
                 
               </div>
