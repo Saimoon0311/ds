@@ -2,12 +2,14 @@
   <div>
   <ClientHeader />
   <div class="container">
+
     <div
       class="modal fade first-name-modal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="mySmallModalLabel"
       aria-hidden="true"
+      id="Fname"
     >
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -44,12 +46,14 @@
         </div>
       </div>
     </div>
+
     <div
       class="modal fade last-name-modal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="mySmallModalLabel"
       aria-hidden="true"
+      id="Lname"
     >
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -86,12 +90,14 @@
         </div>
       </div>
     </div>
+
     <div
       class="modal fade phone-modal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="mySmallModalLabel"
       aria-hidden="true"
+      id="Pnum"
     >
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -145,8 +151,7 @@
             <button
               type="button"
               class="btn btn-secondary btn-sm"
-              data-toggle="modal"
-              data-target=".first-name-modal"
+              data-bs-toggle="modal" data-bs-target="#Fname"
               title="Edit"
             >
               <i class="fa fa-pencil"></i>
@@ -167,8 +172,7 @@
             <button
               type="button"
               class="btn btn-secondary btn-sm"
-              data-toggle="modal"
-              data-target=".last-name-modal"
+              data-bs-toggle="modal" data-bs-target="#Lname"
               title="Edit"
             >
               <i class="fa fa-pencil"></i>
@@ -189,8 +193,7 @@
             <button
               type="button"
               class="btn btn-secondary btn-sm"
-              data-toggle="modal"
-              data-target=".phone-modal"
+              data-bs-toggle="modal" data-bs-target="#Pnum"
               title="Edit"
             >
               <i class="fa fa-pencil"></i>
