@@ -34,7 +34,7 @@ import MainHeader from '../../components/global/MainHeader.vue'
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
-    name: 'ClientForgetPassword',
+    name: 'LawyerForgetPassword',
     data() {
         const schema = yup.object().shape({
             email: yup.string()
@@ -62,6 +62,7 @@ export default {
                 console.log(formData)
                 api.post('/send-forget-password-email/',formData)
                     .then(res => {
+                        alert('Reset Password link has been sent to your email address');
                         console.log('successfully sent email : ', res?.data)
                     })
                     .catch(error => console.log("getResults : ", error));

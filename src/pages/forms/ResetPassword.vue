@@ -83,8 +83,8 @@ export default {
                 formData.token = this.token;
                 api.post('/forget-password', formData)
                     .then(res => {
-                        console.log('successfully login : ', res?.data)
-                        this.$router.push({ path: '/login' });
+                        // console.log('successfully login : ', res?.data)
+                        this.$router.push({ path: '/' + res?.data?.redirectUrl });
                     })
                     .catch(error => console.log("getResults : ", error));
                 console.log(formData);

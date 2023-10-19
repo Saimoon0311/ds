@@ -78,13 +78,15 @@ export default {
     methods: {
         submitData(formData) {
             try {
-                formData.type = "client";
-                console.log(formData)
+                formData.type = "lawyer";
                 api.post('/login', formData)
                     .then(res => {
                        this.setUserAndRedirect(res,'/lawyer-dashboard');
                     })
-                    .catch(error => console.log("getResults : ", error));
+                    .catch(error => {
+                        alert('Invalid Credentials');
+                        console.log("getResults : ", error)
+                    });
                 console.log(formData);
             } catch (error) {
                 console.error('API request error:', error);

@@ -62,9 +62,13 @@ export default {
                 console.log(formData)
                 api.post('/send-forget-password-email/',formData)
                     .then(res => {
+                        alert('Reset Password link has been sent to your email address');
                         console.log('successfully sent email : ', res?.data)
                     })
-                    .catch(error => console.log("getResults : ", error));
+                    .catch(error => {
+                        alert('User not found!');
+                        console.log("getResults : ", error)
+                    });
             } catch (error) {
                 console.error('API request error:', error);
             }

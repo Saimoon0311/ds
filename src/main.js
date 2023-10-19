@@ -17,6 +17,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap";
 
+import ToastComponent from "@/components/ToastComponent.vue";
+
 /* add icons to the library */
 library.add(faUserSecret);
 
@@ -69,5 +71,7 @@ app.mixin({
 
 app.use(router);
 app.use(store);
+
+app.component('ToastComponent', ToastComponent);
 
 app.mount("#app");

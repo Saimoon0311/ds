@@ -4,10 +4,11 @@
     <div class="container">
       <p class="h4 m-3">Welcome, {{ userName }}</p>
       
-      <div v-if="adminApproval != 'approve'">
+      <!-- <div v-if="adminApproval != 'approve'"> -->
         <p class="h5 m-3 text-center">Your profile has not been approved yet.</p>
-      </div>
-      <div v-else-if="subscriptionStatus != 'subscribed'">
+      <!-- </div> -->
+      <!-- <div v-else-if="subscriptionStatus != 'subscribed'"> -->
+      <div v-if="subscriptionStatus != 'subscribed'">
         <div class="alert alert-danger text-center m-0 p-2">
         You have not subscribed yet.
         <router-link to="/subscribe" class="btn btn-link ps-0"

@@ -23,6 +23,9 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                <router-link to="/client-forget-password">Forget Password</router-link>
+            </div>
+            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                 <button class="btn btn-outline-light btn-lg px-5">Submit</button>
             </div>
             <p class="mb-0">Don't have an account?
@@ -38,7 +41,7 @@
 </template>
 <script >
 import MainHeader from '../../components/global/MainHeader.vue'
-
+import api from "../../config/api.js";
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
@@ -73,8 +76,19 @@ export default {
         // MainFooter
     },
     methods: {
-        submitData() {
-            alert('data has been submitted.')
+        submitData(formData) {
+            try {
+                formData.type = "client";
+                console.log(formData)
+                api.post('/login', formData)
+                    .then(res => {
+                       this.setUserAndRedirect(res,'/client-dashboard');
+                    })
+                    .catch(error => console.log("getResults : ", error));
+                console.log(formData);
+            } catch (error) {
+                console.error('API request error:', error);
+            }
         }
     },
     name: 'ClientLoginForm',

@@ -1,16 +1,25 @@
 <template lang="">
   <div class="hello">
     <LawyerHeader />
+
     <div class="container">
+
+     <!-- <div v-if="adminApproval != 'approve'"> -->
       <p class="h5 m-3 text-center">Your profile has not been approved yet.</p>
-      <!-- status after approval -->
-      <div class="alert alert-danger text-center m-0 p-2">
-        You have not subscribed yet.
-        <router-link to="/subscribe" class="btn btn-link ps-0"
-          >Subscribe now</router-link
-        >
+      <!-- </div> -->
+      <!-- <div v-else-if="subscriptionStatus != 'subscribed'"> -->
+      <div v-if="subscriptionStatus != 'subscribed'">
+        <div class="alert alert-danger text-center m-0 p-2">You have not subscribed yet.
+          <router-link to="/subscribe" class="btn btn-link ps-0"
+            >Subscribe now</router-link>
+        </div>
       </div>
-    </div>
+      <div v-else>
+
+      
+
+
+
     <!-- after subscribe -->
     <main class="container">
       <br />
@@ -147,6 +156,8 @@
         </tbody>
       </table>
     </main>
+      </div>
+  </div>
   </div>
 </template>
 <script>
@@ -154,6 +165,14 @@ import LawyerHeader from "./Header.vue";
 export default {
   components: {
     LawyerHeader,
+  },
+  computed: {
+    adminApproval() {
+      return this.$store.getters.adminApprovalStatus;
+    },
+    subscriptionStatus() {
+      return this.$store.getters.subscriptionStatus;
+    }
   },
   methods: {},
   name: "BidsTab",

@@ -128,19 +128,11 @@ export default {
         async submitData(formData) {
             try {
                 formData.type = "lawyer";
-                console.log(formData)
                 api.post('/signup',formData)
                     .then(res => {
                         this.setUserAndRedirect(res,'/lawyer-dashboard');
-                        // localStorage.setItem("token", res.data?.data?.api_token);
-                        // localStorage.setItem("loginUser", res?.data?.data?.email);
-                        // this.$store.commit('SET_AUTHENTICATED', true);
-                        // this.$store.commit('SET_LOGIN_USER', res?.data?.data?.email);
-
-                        // this.$router.push({ path: '/lawyer-dashboard' });
                     })
                     .catch(error => console.log("getResults : ", error));
-                // console.log(formData);
             } catch (error) {
                 console.error('API request error:', error);
             }

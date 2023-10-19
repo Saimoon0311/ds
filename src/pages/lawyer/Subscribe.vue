@@ -76,7 +76,7 @@ export default {
                         // form.querySelector('button').disabled = false;
                     } else {
                         const formData = {
-                            "email" : this.$store.getters.loginUser,
+                            "email" : this.$store.getters?.loginUser?.email,
                             "card_holder_name": this.cardHolderName,
                             "payment_method_id": paymentMethod.id
                         };
