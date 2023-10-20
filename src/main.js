@@ -33,6 +33,7 @@ app.mixin({
                 "last_name": res?.data?.data?.last_name,
                 "email": res?.data?.data?.email,
                 "type": res?.data?.data?.type,
+                "phone" : res?.data?.data?.phone,
             }
             localStorage.setItem("token", res.data?.data?.api_token);
             localStorage.setItem("loginUser", JSON.stringify(userData));
@@ -42,30 +43,85 @@ app.mixin({
         },
 
         // check subscription status of login user
-        checkSubscription() {
+        // checkSubscriptionAndAdminApproval() {
+        //     try {
+        //         api.get('/lawyer/subscription-admin-approval')
+        //             .then(res => {
+        //                 this.$store.commit('SET_SUB_STATUS',res?.data?.subscription_status);
+        //                 this.$store.commit('SET_APPROVAL_STATUS',res?.data?.approve_status);
+        //             })
+        //             .catch(error => console.log("api error : ", error.message));
+        //     } catch (error) {
+        //         console.error('API request error:', error);
+        //     }
+        // },
+
+        // check admin approval for lawyer
+        // checkAdminApproval() {
+        //     try {
+        //         api.get('/lawyer/check-admin-approval')
+        //             .then(res => {
+        //                 this.$store.commit('SET_APPROVAL_STATUS',res?.data?.status);
+        //             })
+        //             .catch(error => console.log("api error : ", error.message));
+        //     } catch (error) {
+        //         console.error('API request error:', error);
+        //     }
+        // },
+
+        submitSignupForm(formData,userType,dashboardUrl) {
             try {
-                api.get('/lawyer/check-subscription')
+                formData.type = userType;
+                api.post('/signup',formData)
                     .then(res => {
-                        this.$store.commit('SET_SUB_STATUS',res?.data?.status);
+                        this.setUserAndRedirect(res,dashboardUrl);
                     })
-                    .catch(error => console.log("api error : ", error.message));
+                    .catch(error => {
+                        alert('Invalid Credentials');
+                        console.log("getResults : ", error)
+                    });
             } catch (error) {
                 console.error('API request error:', error);
             }
         },
 
-        // check admin approval for lawyer
-        checkAdminApproval() {
+        goToForgetPasswordPage(url){
+            localStorage.setItem('backUrl',url);
+            this.$router.push({ path : '/forget-password' });
+        },
+        
+        submitLoginForm(formData,userType,dashboardUrl) {
             try {
-                api.get('/lawyer/check-admin-approval')
+                formData.type = userType;
+                api.post('/login', formData)
                     .then(res => {
-                        this.$store.commit('SET_APPROVAL_STATUS',res?.data?.status);
+                       this.setUserAndRedirect(res,dashboardUrl);
                     })
-                    .catch(error => console.log("api error : ", error.message));
+                    .catch(error => {
+                        alert('Invalid Credentials');
+                        console.log("getResults : ", error)
+                    });
+                console.log(formData);
             } catch (error) {
                 console.error('API request error:', error);
             }
         },
+
+        logout(redirectUrl){
+            try {
+                api.get('/logout')
+                    .then(() => {
+                        localStorage.removeItem('token');
+                        this.$store.commit('SET_AUTHENTICATED', false);
+                        localStorage.removeItem("loginUser");
+                        this.$store.commit('SET_LOGIN_USER', null);
+                        this.$router.push({ path: redirectUrl });
+                    })
+                    .catch(error => console.log("getResults : ", error));
+            } catch (error) {
+                console.error('API request error:', error);
+            }
+        }
     }
 });
 

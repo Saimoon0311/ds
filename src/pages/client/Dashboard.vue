@@ -181,14 +181,6 @@ export default {
   components: {
     ClientHeader,
   },
-  data(){
-        return {
-            subscriptionStatus : null
-        }
-    },
-    created(){
-        this.checkSubscription();
-    },
     methods:{
     }
 };

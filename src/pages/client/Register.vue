@@ -80,7 +80,6 @@
 </template>
 <script>
 
-import api from "../../config/api.js";
 import MainHeader from '../../components/global/MainHeader.vue'
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
@@ -126,18 +125,9 @@ export default {
         // MainFooter
     },
     methods: {
-        async submitData(formData) {
-            try {
-                formData.type = "client";
-                api.post('/signup',formData)
-                    .then(res => {
-                        this.setUserAndRedirect(res,'/client-dashboard');
-                    })
-                    .catch(error => console.log("getResults : ", error));
-            } catch (error) {
-                console.error('API request error:', error);
-            }
-        },
+        submitData(formData){
+            this.submitSignupForm(formData,'client','client-dashboard');
+        }
     },
     name: 'ClientRegister',
 }

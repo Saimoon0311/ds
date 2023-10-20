@@ -9,6 +9,7 @@ const store = createStore({
     loginUser : null,
     subscriptionStatus : null,
     adminApprovalStatus : null,
+    subscriptionData : null,
   },
   mutations: {
     SET_AUTHENTICATED(state, status) {
@@ -23,6 +24,9 @@ const store = createStore({
     SET_APPROVAL_STATUS(state, status) {
       state.adminApprovalStatus = status;
     },
+    SET_SUBSCRIPTION_DATA(state,data){
+      state.subscriptionData = data;
+    }
   },
   actions: {
     // Your actions go here
@@ -32,6 +36,7 @@ const store = createStore({
     loginUser: (state) => state.loginUser,
     subscriptionStatus: (state) => state.subscriptionStatus,
     adminApprovalStatus: (state) => state.adminApprovalStatus,
+    subscriptionData: (state) => state.subscriptionData,
   },
 });
 

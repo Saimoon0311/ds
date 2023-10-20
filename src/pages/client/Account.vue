@@ -32,7 +32,7 @@
                 name="fname"
                 class="form-control"
                 id="fname"
-                value="test"
+                v-model="first_name"
               />
               <button
                 type="submit"
@@ -76,7 +76,7 @@
                 name="lname"
                 class="form-control"
                 id="lname"
-                value="client"
+                v-model="last_name"
               />
               <button
                 type="submit"
@@ -121,7 +121,7 @@
                 name="phone"
                 class="form-control"
                 id="phone"
-                value="12312312"
+                v-model="phone"
                 maxlength="10"
               />
               <button
@@ -141,7 +141,7 @@
         <!-- Email -->
         <tr>
           <td class="col-md-3">Email</td>
-          <td>client@mailinator.com</td>
+          <td>{{ loginUser?.email }}</td>
         </tr>
 
         <!-- First name -->
@@ -162,7 +162,7 @@
 
           <!-- Modal ends here -->
 
-          <td>test</td>
+          <td>{{ loginUser?.first_name }}</td>
         </tr>
 
         <!-- Last name -->
@@ -183,7 +183,7 @@
 
           <!-- Modal ends here -->
 
-          <td>client</td>
+          <td>{{ loginUser?.last_name }}</td>
         </tr>
 
         <!-- Phone -->
@@ -204,7 +204,7 @@
 
           <!-- Modal ends here -->
 
-          <td>12312312</td>
+          <td>{{ loginUser?.phone }}</td>
         </tr>
       </tbody>
     </table>
@@ -288,6 +288,12 @@ export default {
   name: "ClientAccount",
   components: {
     ClientHeader,
+  },
+  computed: {
+    loginUser() {
+      // console.log(this.$store.getters.loginUser);
+      return this.$store.getters.loginUser;
+    },
   },
 };
 </script>

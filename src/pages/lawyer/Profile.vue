@@ -482,19 +482,19 @@
           <!--  Email -->
           <tr>
             <td class="col-md-3">Email:</td>
-            <td>asd1@mailinator.com</td>
+            <td>{{ loginUser?.email }}</td>
           </tr>
 
           <!-- First Name -->
           <tr>
             <td class="col-md-3">First Name:</td>
-            <td>John</td>
+            <td>{{ loginUser?.first_name }}</td>
           </tr>
 
           <!-- Last Name -->
           <tr>
             <td class="col-md-3">Last Name:</td>
-            <td>Doe</td>
+            <td>{{ loginUser?.last_name }}</td>
           </tr>
 
           <!-- Job Title -->
@@ -578,7 +578,7 @@
 
             <!-- Modal ends here -->
 
-            <td>0310000000</td>
+            <td>{{ loginUser?.phone }}</td>
           </tr>
 
           <!-- About Me -->
@@ -665,6 +665,11 @@ export default {
     components: {
         LawyerHeader,
     },
+    computed: {
+    loginUser() {
+      return this.$store.getters.loginUser;
+    },
+  },
     methods: {},
     name: "ProfileTab",
 };

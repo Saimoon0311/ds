@@ -11,8 +11,7 @@ import AdminJobs from "@/pages/admin/Jobs.vue";
 import AdminClients from "@/pages/admin/Clients.vue";
 import clientDashboard from "@/pages/client/Dashboard.vue";
 import SubscriptionComponent from "@/pages/client/Subscription.vue";
-import LawyerForgetPassword from "@/pages/lawyer/ForgetPassword.vue";
-import ClientForgetPassword from "@/pages/client/ForgetPassword.vue";
+import ForgetPassword from "@/pages/forms/ForgetPassword.vue";
 import ResetPassword from "@/pages/forms/ResetPassword.vue";
 
 import api from "../config/api.js"
@@ -23,7 +22,6 @@ import PlatForm from "@/components/PlatForm.vue";
 import ClientLoginForm from "@/pages/client/Login.vue";
 import ClientRegister from "@/pages/client/Register.vue";
 import ClientAccount from "@/pages/client/Account.vue";
-import ClientDashboard from "@/pages/client/Dashboard.vue";
 import PostingJob from "@/pages/client/PostingJob.vue";
 import AreaOfLaw from "@/pages/client/AreaOfLaw.vue";
 import ViewBids from "@/pages/client/ViewBids.vue";
@@ -45,33 +43,59 @@ import termsOfUse from "@/pages/terms-of-use.vue";
 import AboutUsPage from "@/components/About.vue";
 import NotFound from "@/components/NotFound.vue";
 
+import store from '../store';
+
 
 function reverse_guard(to, from, next) {
   api.get("/verify")
-      .then(() => {
-        router.go(-1);
-      })
-      .catch(() => {
-        next()
-      });
+    .then(() => {
+      router.go(-1);
+    })
+    .catch(() => {
+      next()
+    });
 }
+
+// function client_not_allowed_guard(to,from,next) {
+//   api.get("/verify")
+//       .then(res => {
+//         if(res.data.data.type != "lawyer")
+//         {
+//           next('/client-dashboard')
+//         }else{
+//            next();
+//         }
+//       })
+//       .catch(() => {
+//         console.log('error in guard verify');
+//       });
+// }
+
+// function lawyer_not_allowed_guard(to, from, next) {
+//   api.get("/verify")
+//       .then(res => {
+//         if(res.data.data.type != "client")
+//         {
+//           next('/lawyer-dashboard')
+//         }else{
+//           next();
+//        }
+//       })
+//       .catch(() => {
+//         console.log('error in guard verify');
+//       });
+// }
 
 
 
 const routes = [
-  {
-    path: "/",
-    component: HelloWorld,
-  },
-  {
-    path: "/platform",
-    component: PlatForm,
-  },
-  // lawyer
+
+
+  // lawyer start
   {
     path: "/lawyer-login",
     component: LawyerLoginForm,
-    beforeEnter: reverse_guard, 
+    beforeEnter: reverse_guard,
   },
   {
     path: "/lawyer-register",
@@ -80,34 +104,69 @@ const routes = [
   {
     path: "/lawyer-dashboard",
     component: LawyerDashboard,
-    meta: {
-      requiresAuth: true
-    },
+    meta: { requiresAuth: true, clientNotAllowed: true },
   },
   {
     path: "/lawyer-bids",
     component: LawyerBids,
-    meta: {
-      requiresAuth: true
-    },
+    meta: { requiresAuth: true, clientNotAllowed: true },
   },
   {
     path: "/lawyer-profile",
     component: LawyerProfile,
-    meta: {
-      requiresAuth: true
-    },
+    meta: { requiresAuth: true, clientNotAllowed: true },
   },
   {
     path: "/lawyer-account",
     component: LawyerAccount,
-    meta: {
-      requiresAuth: true
-    },
+    meta: { requiresAuth: true, clientNotAllowed: true },
   },
   {
     path: "/subscribe",
     component: LawyerSubscribe,
+    meta: { requiresAuth: true, clientNotAllowed: true },
+  },
+  // lawyer end
+
+
+  // client start
+
+  //clients
+  {
+    path: "/client-login",
+    component: ClientLoginForm,
+    beforeEnter: reverse_guard,
+  },
+  {
+    path: "/client-register",
+    component: ClientRegister,
+  },
+  {
+    path: "/client-account",
+    component: ClientAccount,
+    meta: { requiresAuth: true, lawyerNotAllowed: true },
+  },
+  {
+    path: "/area-of-law",
+    component: AreaOfLaw,
+    meta: { requiresAuth: true, lawyerNotAllowed: true },
+  },
+  {
+    path: "/posting-job",
+    component: PostingJob,
+    meta: { requiresAuth: true, lawyerNotAllowed: true },
+  },
+
+  // client end
+
+
+  {
+    path: "/",
+    component: HelloWorld,
+  },
+  {
+    path: "/platform",
+    component: PlatForm,
   },
   {
     path: "/bidding",
@@ -132,7 +191,7 @@ const routes = [
   {
     path: "/login",
     component: LoginForm,
-    beforeEnter: reverse_guard, 
+    beforeEnter: reverse_guard,
   },
   // admin
   {
@@ -157,7 +216,7 @@ const routes = [
   {
     path: "/client-dashboard",
     component: clientDashboard,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, lawyerNotAllowed: true },
   },
 
   {
@@ -174,32 +233,7 @@ const routes = [
     path: "/client",
     component: AdminClients,
   },
-  //clients
-  {
-    path: "/client-login",
-    component: ClientLoginForm,
-    beforeEnter: reverse_guard, 
-  },
-  {
-    path: "/client-register",
-    component: ClientRegister,
-  },
-  {
-    path: "/client-account",
-    component: ClientAccount,
-  },
-  {
-    path: "/client-dashboard",
-    component: ClientDashboard,
-  },
-  {
-    path: "/area-of-law",
-    component: AreaOfLaw,
-  },
-  {
-    path: "/posting-job",
-    component: PostingJob,
-  },
+
   {
     path: "/view-bids",
     component: ViewBids,
@@ -220,17 +254,13 @@ const routes = [
   },
 
   {
-    path : "/lawyer-forget-password",
-    component: LawyerForgetPassword,
+    path: "/forget-password",
+    component: ForgetPassword,
   },
 
-  {
-    path : "/client-forget-password",
-    component: ClientForgetPassword,
-  },
 
   {
-    path : "/reset-password/:email/:token",
+    path: "/reset-password/:email/:token",
     component: ResetPassword,
   },
 
@@ -251,18 +281,41 @@ const isLoggedIn = async () => {
   return localStorage.getItem('token')
 }
 
+// if(result.status == 200){
+//   next();
+// }
+
 router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isLoggedIn()) {
       next({ path: '/' })
     } else {
-      try{
+      try {
         let result = await api.get('/verify');
-        if(result.status == 200){
+        console.log('user all data ::: ', result.data);
+        if (to.meta.clientNotAllowed && result.data.data.type != "lawyer") {
+          router.go(-1);
+          console.log('client access not allowed');
+        } else if (to.meta.lawyerNotAllowed && result.data.data.type != "client") {
+          router.go(-1);
+          console.log('lawyer access not allowed');
+        } else {
+          console.log('cr' , to);
+          console.log('cr 2' , from);
+          if(result?.data?.subscription != null){
+            store.commit('SET_SUB_STATUS','subscribed');
+          }
+          if(result?.data?.data?.admin_approval == 'approve'){
+            store.commit('SET_APPROVAL_STATUS',result?.data?.data?.admin_approval);
+          }
+          if(to?.fullPath == "/lawyer-account"){
+            store.commit('SET_SUBSCRIPTION_DATA',result?.data?.subscription);
+          }
           next();
         }
-      }catch(e){
-        next({ path: '/' })
+      } catch (e) {
+        console.log('error from before : ' , e);
+        // next({ path: '/' })
       }
     }
   } else {

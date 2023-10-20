@@ -51,13 +51,12 @@
                 
               </div>
               <div>
-                <router-link
-                  to="/login"
+                <button
+                  @click="logout('client-login')"
                   class="nav-link float-right logOutBtn active"
                   id="clients"
                   aria-current="page"
-                  >Logout</router-link
-                >
+                  >Logout</button>
               </div>
             </div>
           </div>

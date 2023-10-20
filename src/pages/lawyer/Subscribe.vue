@@ -3,12 +3,15 @@
       <LawyerHeader />
       <main class="container">
         <h3 class="mt-3">
-          <router-link
+          <button  class="btn btn-secondary btn-sm my-3" 
+          @click="()=>this.$router.go(-1)"><i class="bi bi-arrow-left"></i> Back</button>
+          
+          <!-- <router-link
             class="btn btn-secondary btn-sm my-3"
             title="back"
             to="lawyer-account"
             ><i class="bi bi-arrow-left"></i> Back</router-link
-          >
+          > -->
           
           Subscribe
         </h3>
@@ -82,8 +85,10 @@ export default {
                         };
                         api.post('/lawyer/create-subscription', formData)
                             .then(res => {
-                                console.log('successfully login : ', res?.data)
-                                this.$router.push({ path: '/login' });
+                                console.log('successfully login : ', res?.data?.data?.id)
+                                if (res?.data?.data?.id !== undefined && res?.data?.data?.id !== null && res?.data?.data?.id !== '') {
+                                  this.$router.push({ path: '/lawyer-account' });
+                                }
                             })
                             .catch(error => console.log("getResults : ", error));
                     }

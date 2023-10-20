@@ -4,14 +4,15 @@
 
     <div class="container">
 
-     <!-- <div v-if="adminApproval != 'approve'"> -->
-      <p class="h5 m-3 text-center">Your profile has not been approved yet.</p>
-      <!-- </div> -->
-      <!-- <div v-else-if="subscriptionStatus != 'subscribed'"> -->
-      <div v-if="subscriptionStatus != 'subscribed'">
-        <div class="alert alert-danger text-center m-0 p-2">You have not subscribed yet.
+      <div v-if="adminApproval != 'approve'">
+        <p class="h5 m-3 text-center">Your profile has not been approved yet.</p>
+      </div>
+      <div v-else-if="subscriptionStatus != 'subscribed'">
+          <div class="alert alert-danger text-center m-0 p-2">
+          You have not subscribed yet.
           <router-link to="/subscribe" class="btn btn-link ps-0"
-            >Subscribe now</router-link>
+            >Subscribe now</router-link
+          >
         </div>
       </div>
       <div v-else>

@@ -23,6 +23,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                <button @click="goToForgetPasswordPage('lawyer-login')">Forget Password</button>
                 <router-link to="/lawyer-forget-password">Forget Password</router-link>
             </div>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
@@ -40,7 +41,6 @@
     </div>
 </template>
 <script >
-import api from "../../config/api.js";
 import MainHeader from '../../components/global/MainHeader.vue'
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
@@ -76,21 +76,8 @@ export default {
         // MainFooter
     },
     methods: {
-        submitData(formData) {
-            try {
-                formData.type = "lawyer";
-                api.post('/login', formData)
-                    .then(res => {
-                       this.setUserAndRedirect(res,'/lawyer-dashboard');
-                    })
-                    .catch(error => {
-                        alert('Invalid Credentials');
-                        console.log("getResults : ", error)
-                    });
-                console.log(formData);
-            } catch (error) {
-                console.error('API request error:', error);
-            }
+        submitData(formData){
+            this.submitLoginForm(formData,'lawyer','lawyer-dashboard');
         }
     },
     name: 'LawyerLoginForm',

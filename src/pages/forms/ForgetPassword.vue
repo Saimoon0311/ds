@@ -16,12 +16,10 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                <router-link :to="backUrl" class="btn btn-outline-light btn-lg px-5">Back</router-link>
+                &nbsp;
                 <button class="btn btn-outline-light btn-lg px-5">Submit</button>
             </div>
-            <!-- <p class="mb-0">Don't have an account?
-				<br>
-				<router-link to="/find-client">Sign Up</router-link>
-			</p> -->
         </Form>
     </div>
 </div>
@@ -36,7 +34,7 @@ import MainHeader from '../../components/global/MainHeader.vue'
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
-    name: 'LoginForm',
+    name: 'ForgetPassword',
     data() {
         const schema = yup.object().shape({
             email: yup.string()
@@ -49,7 +47,8 @@ export default {
                 ),
         });
         return {
-            schema
+            schema,
+            backUrl : null,
         }
     },
     components: {
@@ -58,15 +57,25 @@ export default {
         Field,
         // MainFooter
     },
+    created(){
+        this.getBackURL();
+    },
     methods: {
+        getBackURL(){
+            this.backUrl = localStorage.getItem('backUrl');
+        },
         submitData(formData) {
             try {
                 console.log(formData)
                 api.post('/send-forget-password-email/',formData)
                     .then(res => {
-                        console.log('successfully login : ', res?.data)
+                        alert('Reset Password link has been sent to your email address');
+                        console.log('successfully sent email : ', res?.data)
                     })
-                    .catch(error => console.log("getResults : ", error));
+                    .catch(error => {
+                        alert('User not found!');
+                        console.log("getResults : ", error)
+                    });
             } catch (error) {
                 console.error('API request error:', error);
             }

@@ -79,7 +79,6 @@
     </div>
 </template>
 <script>
-import api from "../../config/api.js";
 import MainHeader from '../../components/global/MainHeader.vue'
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
@@ -125,18 +124,9 @@ export default {
         // MainFooter
     },
     methods: {
-        async submitData(formData) {
-            try {
-                formData.type = "lawyer";
-                api.post('/signup',formData)
-                    .then(res => {
-                        this.setUserAndRedirect(res,'/lawyer-dashboard');
-                    })
-                    .catch(error => console.log("getResults : ", error));
-            } catch (error) {
-                console.error('API request error:', error);
-            }
-        },
+        submitData(formData){
+            this.submitSignupForm(formData,'lawyer','lawyer-dashboard');
+        }
     },
     name: 'LawyerRegister',
 }
