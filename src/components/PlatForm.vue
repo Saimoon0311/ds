@@ -60,18 +60,18 @@
           <router-link to="/privacy-policy" class="ms-2 text-dark">Privacy policy</router-link>
         </div> -->
     </div>
-    <!-- <MainFooter /> -->
+    <MainFooter />
   </div>
 </template>
 
 <script>
 import MainHeader from "./global/MainHeader.vue";
-//   import MainFooter from "./global/MainFooter.vue";
+import MainFooter from "./global/MainFooter.vue";
 
 export default {
   components: {
     MainHeader,
-    //   MainFooter,
+    MainFooter,
   },
   // name: 'Platform',
   props: {
@@ -82,7 +82,7 @@ export default {
 
 <style scoped>
 .hello {
-  min-height: 80vh;
+  min-height: 100vh;
   display: grid;
 }
 

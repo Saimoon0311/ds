@@ -1,6 +1,6 @@
 <template lang="">
-  <section class=" mt-4 ">
-    <div class="WordSection1 container">
+  <section class="">
+    <div class="WordSection1 container mt-4">
       <MainHeader />
       <div class=" pt-4 center-main row justify-content-center">
         <div class="col-md-7">        
@@ -110,5 +110,21 @@ export default {
 
 .c-form i {
   line-height: 38px;
+}
+
+.footer-main div {
+  position: absolute;
+  bottom: 0;
+}
+
+section {
+  position: relative;
+  height: 100vh;
+}
+
+.footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 </style>

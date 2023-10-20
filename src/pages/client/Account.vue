@@ -246,7 +246,7 @@
             </div>
 
             <div class="modal-body">
-              <form action="account.php" method="post">
+              <form >
                 <div class="form-group">
                   <input
                     type="password"
@@ -263,7 +263,7 @@
                     placeholder="New password"
                   />
                   <button
-                    type="submit"
+                    type=""
                     name="password-submit"
                     class="btn btn-secondary my-3"
                   >
