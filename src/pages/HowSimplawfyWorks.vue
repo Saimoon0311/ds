@@ -76,7 +76,7 @@ export default {
   font-weight: bold;
 }
 
-.footer-main div {
+/* .footer-main div {
   position: absolute;
   bottom: 0;
 }
@@ -90,5 +90,5 @@ section {
   position: absolute;
   width: 100%;
   bottom: 0;
-}
+} */
 </style>
