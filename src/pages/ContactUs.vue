@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 
-                <div class="d-flex flex-row align-items-center mb-4 align-baseline">
+                <div class="d-flex flex-row  mb-4 align-baseline">
                     <i class="fas fa-message fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0 textarea-f">
                       <Field v-slot="{ field}" v-model="comment" name="comment"  >
@@ -50,12 +50,12 @@
         </div>  
       </div>  
     </div>  
-    <div class="footer mt-4"><MainFooter /></div>
+    <!-- <footer class="footer mt-4"><MainFooter /></footer> -->
   </section>
 </template>
 <script>
 import MainHeader from "../components/global/MainHeader.vue";
-import MainFooter from "../components/global/MainFooter.vue";
+// import MainFooter from "../components/global/MainFooter.vue";
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 
@@ -83,7 +83,7 @@ export default {
     }
   },
   components: {
-    MainFooter,
+    // MainFooter,
     MainHeader,
     Form,
     Field
@@ -123,7 +123,7 @@ section {
 }
 
 .footer {
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   bottom: 0;
 }
