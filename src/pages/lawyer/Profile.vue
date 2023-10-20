@@ -51,7 +51,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
@@ -97,7 +97,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
@@ -144,7 +144,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
@@ -191,7 +191,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
@@ -239,7 +239,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
@@ -286,7 +286,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
@@ -400,7 +400,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>

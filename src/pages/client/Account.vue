@@ -18,7 +18,7 @@
             <button
               type="button"
               class="close btn btn-dark"
-              data-dismiss="modal"
+              data-bs-dismiss="modal"
               aria-label="Close"
             >
               <span aria-hidden="true">×</span>
@@ -62,7 +62,7 @@
             <button
               type="button"
               class="close btn btn-dark"
-              data-dismiss="modal"
+              data-bs-dismiss="modal"
               aria-label="Close"
             >
               <span aria-hidden="true">×</span>
@@ -106,7 +106,7 @@
             <button
               type="button"
               class="close btn btn-dark"
-              data-dismiss="modal"
+              data-bs-dismiss="modal"
               aria-label="Close"
             >
               <span aria-hidden="true">×</span>
@@ -214,8 +214,7 @@
       <button
         type="button"
         class="btn btn-secondary"
-        data-toggle="modal"
-        data-target=".change-password-modal"
+        data-bs-toggle="modal" data-bs-target="#Password"
         title="Edit"
       >
         Change password <i class="bi bi-pencil-fill"></i>
@@ -228,6 +227,7 @@
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
+        id="Password"
       >
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -238,7 +238,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
