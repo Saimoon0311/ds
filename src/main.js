@@ -4,6 +4,11 @@ import router from "@/routers";
 import store from "./store";
 import api from "@/config/api.js";
 
+import PrimeVue from "primevue/config";
+import "primevue/resources/themes/lara-light-indigo/theme.css";
+import "primevue/resources/themes/saga-blue/theme.css"; //theme
+import "primevue/resources/primevue.min.css"; //core CSS
+import "primeicons/primeicons.css"; //icons
 /* import the fontawesome core */
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -124,7 +129,7 @@ app.mixin({
         }
     }
 });
-
+app.use(PrimeVue);
 app.use(router);
 app.use(store);
 

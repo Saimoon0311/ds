@@ -51,7 +51,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
@@ -97,7 +97,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
@@ -144,7 +144,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
@@ -191,7 +191,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
@@ -239,7 +239,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
@@ -286,20 +286,22 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
               </button>
             </div>
-
+          
+            
             <div class="modal-body w-100">
+              <Selectic className="mselect  "  placeholder="Nothing Selected" multiple :options="['Commercial (business)', 'Consumer', 'Criminal','Employment / workers compensation','Environmental','Family','Human rights / constitutional','Immigration','Insurance','Intellectual property','Liquor licensing','Litigation (civil court cases)','Notary public','Personal injury (compensation)','Property (real estate) / construction','Traffic','Wills and estates']" v-model="selection"/>
               <form
                 action="profile.php"
                 method="post"
                 id="form-bs-select-1"
               ></form>
-              <div class="dropdown bootstrap-select show-tick w-100">
+              <!-- <div class="dropdown bootstrap-select show-tick w-100">
                 <select
                   class="selectpicker w-100"
                   multiple=""
@@ -371,7 +373,7 @@
                     ></ul>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <input
                 type="submit"
                 name="field-submit"
@@ -400,7 +402,7 @@
               <button
                 type="button"
                 class="close btn btn-dark"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">×</span>
@@ -408,12 +410,14 @@
             </div>
 
             <div class="modal-body w-100">
+              <Selectic className="mselect  "  placeholder="Nothing Selected" multiple :options="['New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','Australian Capital Territory','Northern Territory']" v-model="selection"/>
+
               <form
                 action="profile.php"
                 method="post"
                 id="form-bs-select-2"
               ></form>
-              <div class="dropdown bootstrap-select show-tick w-100">
+              <!-- <div class="dropdown bootstrap-select show-tick w-100">
                 <select
                   class="selectpicker w-100"
                   multiple=""
@@ -465,7 +469,7 @@
                     ></ul>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <input
                 type="submit"
                 name="location-submit"
@@ -661,9 +665,12 @@
 </template>
 <script>
 import LawyerHeader from "./Header.vue";
+import Selectic from 'selectic';
+
 export default {
     components: {
         LawyerHeader,
+        Selectic
     },
     computed: {
     loginUser() {
@@ -673,48 +680,66 @@ export default {
     methods: {},
     name: "ProfileTab",
 };
+
 </script>
+
 <style scoped>
 .navbar-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .logo-small {
-    width: 175px;
-    height: 50px;
+  width: 175px;
+  height: 50px;
 }
 
 .law-img {
-    width: 15vw;
-    height: 15vw;
-    border: 1px solid white;
-    border-radius: 50%;
+  width: 15vw;
+  height: 15vw;
+  border: 1px solid white;
+  border-radius: 50%;
 }
 
 .navActive {
-    background: grey;
-    border: 1px solid grey;
-    border-radius: 10px;
-    color: white;
+  background: grey;
+  border: 1px solid grey;
+  border-radius: 10px;
+  color: white;
 }
 
 .navbar-nav .left-menu {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .bg-grey {
-    background: grey;
-    color: white;
+  background: grey;
+  color: white;
 }
 
 .bg-grey:hover {
-    background: grey;
-    color: white;
+  background: grey;
+  color: white;
+}
+
+.curtain-handler .fa-caret-down {
+  display: none;
+}
+
+.mselect .selectic-input .selectic-item_text {
+  font-style: normal;
+}
+
+.selectic .has-feedback .form-control {
+  height: 60px !important;
+}
+
+.selectic .curtain-handler .fa-caret-down {
+  display: none !important;
 }
 </style>

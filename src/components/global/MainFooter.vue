@@ -6,10 +6,10 @@
                 site map <i class=" caret-ico fa-solid fa-angle-up"></i>
           </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">About Us</a></li>
-            <li><a class="dropdown-item" href="#">How Simplawfy Works</a></li>
-            <li><a class="dropdown-item" href="#">FAQs</a></li> 
-            <li><a class="dropdown-item" href="#">Contact Us</a></li> 
+            <li><router-link class="dropdown-item" to="/about-us">About Us</router-link></li>
+            <li><router-link class="dropdown-item" to="/how-simplawfy-works">How Simplawfy Works</router-link></li>
+            <li><router-link class="dropdown-item" to="/faqs">FAQs</router-link></li> 
+            <li><router-link class="dropdown-item" to="/contact-us">Contact Us</router-link></li> 
           </ul>
             <span>
                 <a class="a" target="_blank" href="https://www.linkedin.com/company/simplawfylaw"><i class="fa-brands fa-linkedin"></i></a> 

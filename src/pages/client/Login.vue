@@ -23,8 +23,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                <button @click="goToForgetPasswordPage('client-login')">Forget Password</button>
-                <router-link to="/client-forget-password">Forget Password</router-link>
+                <button class="forgetp" @click="goToForgetPasswordPage('client-login')">Forget Password</button>
+                <!-- <router-link to="/client-forget-password">Forget Password</router-link> -->
             </div>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                 <button class="btn btn-outline-light btn-lg px-5">Submit</button>
@@ -105,4 +105,11 @@ export default {
     margin: 0 auto !important;
     margin-top: 50px;
 } */
+
+.forgetp{
+    color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));
+    text-decoration: underline;
+    background: no-repeat;
+    border: none;
+}
 </style>
