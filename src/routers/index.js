@@ -34,7 +34,10 @@ import RequestInfo from "@/pages/lawyer/RequestInfo.vue";
 // other
 import privacyPolicy from "@/pages/privacy-policy.vue";
 import termsOfUse from "@/pages/terms-of-use.vue";
-import AboutUsPage from "@/components/About.vue";
+import AboutUs from "@/pages/AboutUs.vue";
+import HowSimplawfyWorks from "@/pages/HowSimplawfyWorks.vue";
+import ContactUs from "@/pages/ContactUs.vue";
+import Faqs from "@/pages/Faqs.vue";
 import NotFound from "@/components/NotFound.vue";
 
 const routes = [
@@ -82,10 +85,6 @@ const routes = [
   {
     path: "/request-info",
     component: RequestInfo,
-  },
-  {
-    path: "/about",
-    component: AboutUsPage,
   },
   {
     path: "/need-lawyer",
@@ -158,6 +157,22 @@ const routes = [
   {
     path: "/terms-of-use",
     component: termsOfUse,
+  },
+  {
+    path: "/about-us",
+    component: AboutUs,
+  },
+  {
+    path: "/how-simplawfy-works",
+    component: HowSimplawfyWorks,
+  },
+  {
+    path: "/faqs",
+    component: Faqs,
+  },
+  {
+    path: "/contact-us",
+    component: ContactUs,
   },
   {
     path: "/:catchAll(.*)",
