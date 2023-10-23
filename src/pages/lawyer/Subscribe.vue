@@ -87,7 +87,12 @@ export default {
                             .then(res => {
                                 console.log('successfully login : ', res?.data?.data?.id)
                                 if (res?.data?.data?.id !== undefined && res?.data?.data?.id !== null && res?.data?.data?.id !== '') {
-                                  this.$router.push({ path: '/lawyer-account' });
+                                  // this.$store.commit('setToast', "you have been subscribed successfully");
+
+                                  this.$swal('You have been subscribed successfully').then(()=>{
+                                    this.$router.push({ path: '/lawyer-account' });
+                                  });
+                                  // this.$router.push({ path: '/lawyer-account' });
                                 }
                             })
                             .catch(error => console.log("getResults : ", error));

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="toastMessage != null">
         <!-- Button to trigger the toast -->
         <button @click="showToast" class="btn btn-primary">Show Toast</button>
 
@@ -20,11 +20,15 @@
 </template>
   
 <script>
+import { mapState } from 'vuex';
 export default {
     data() {
         return {
             toasts: [],
         };
+    },
+    computed: {
+      ...mapState(['toastMessage']),
     },
     methods: {
         showToast() {

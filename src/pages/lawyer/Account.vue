@@ -2,6 +2,11 @@
   <div class="hello">
     <LawyerHeader />
     <div class="container">
+
+      <div v-if="isLoading" class="loading-indicator">
+
+      </div>
+
       <div v-if="adminApproval != 'approve'">
         <p class="h5 m-3 text-center">Your profile has not been approved yet.</p>
       </div>
@@ -82,6 +87,7 @@
             </tbody>
           </table> -->
           <button
+            v-if="subscriptionStatus == 'subscribed'"
             class="btn btn-danger"
             id="cancel-subscription"
             onclick="handleCancelSubscription()"
@@ -92,13 +98,42 @@
 
         <!-- Change account password -->
         <h3 class="my-3 mt-5">Change Password</h3>
-        <form action="account.php" method="post" class="col-md-6 col-sm-12">
+
+        <Form  class="col-md-6 col-sm-12" @submit="changePassword" :validation-schema="schema" v-slot="{errors}">
+
+          <Field type="password" 
+          id="prev_password"
+          :class="['form-control', 'mb-2', { 'is-invalid': errors['prev_password'] }]" 
+          name="prev_password" 
+          placeholder="Old password" 
+          />
+          <span class="invalid-feedback">{{errors.prev_password}}</span>
+
+          <Field type="password" 
+          id="password"
+          :class="['form-control', { 'is-invalid': errors['password'] }]"
+          name="password" 
+          placeholder="New password" 
+          />
+          <span class="invalid-feedback">{{errors.password}}</span>
+
+          <button
+              type="submit"
+              name="password-submit"
+              class="btn btn-secondary my-3"
+            >
+              Save Changes
+            </button>
+
+        </Form>
+
+        <!-- <form action="account.php" method="post" class="col-md-6 col-sm-12">
           <div class="form-group">
             <input
               type="password"
-              name="prev-password"
+              name="prev_password"
               class="form-control mb-2"
-              id="prev-password"
+              id="prev_password"
               placeholder="Old password"
             />
             <input
@@ -116,40 +151,116 @@
               Save Changes
             </button>
           </div>
-        </form>
+        </form> -->
 
         <!-- Delete account permanently -->
         <h3 class="mt-4">Delete Account</h3>
-        <button onclick="deleteAccount(event)" class="btn btn-danger">
+        <button @click="deleteAccount" class="btn btn-danger">
           <i class="bi bi-trash-fill"></i> Delete Account
         </button>
-        <form
+        <!-- <form
           method="POST"
           class="d-none"
           action="./backend/delete_account.php"
         >
           ";
           <input type="submit" value="Delete account" />
-        </form>
+        </form> -->
       </div>
     </div>
   </div>
 </template>
 <script>
 import LawyerHeader from "./Header.vue";
+import { mapState } from 'vuex';
+import * as yup from "yup";
+import { Form, Field } from 'vee-validate';
+import api from "@/config/api.js";
 export default {
   components: {
-    LawyerHeader,
+    LawyerHeader, Form, Field,
+  },
+  data() {
+    const schema = yup.object().shape({
+      prev_password: yup
+        .string()
+        .required('Please enter your current password')
+        .min(6, 'Password must be greater then 6 digit')
+        .max(16, 'Password must be less then 16 digit')
+        .matches(
+          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+          'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
+        ),
+
+      password: yup
+        .string()
+        .required('Please enter your new password')
+        .min(6, 'Password must be greater then 6 digit')
+        .max(16, 'Password must be less then 16 digit')
+        .matches(
+          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+          'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
+        ),
+    });
+    return {
+      schema
+    }
   },
   computed: {
+    ...mapState(['isSuccessMessage']),
     adminApproval() {
       return this.$store.getters.adminApprovalStatus;
     },
     subscriptionData() {
       return this.$store.getters.subscriptionData;
+    },
+    subscriptionStatus() {
+      return this.$store.getters.subscriptionStatus;
     }
   },
-  methods: {},
+  methods: {
+    deleteAccount() {
+      this.$swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this. Deleting your account will also cancel your subscription.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Unsubscribe & Delete Account'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          api.get('/delete-account')
+            .then(() => {
+              this.$swal(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              ).then(()=>{
+                  this.logoutProcess('lawyer-login');
+              });
+            }).catch(() => {
+              this.$swal('Something went wrong! please retry');            
+            });
+        }
+      })
+
+    },
+
+    changePassword(formData) {
+      api.post('/change-password', formData)
+        .then(() => {
+          this.$swal('Success', 'Password has been changed successfully', 'success').then(() => {
+            document.getElementById('prev_password').value = "";
+            document.getElementById('password').value = "";
+          });
+        })
+        .catch(error => {
+          this.$swal('Error', error?.response?.data?.error, 'error');
+          console.log("getResults : ", error?.response?.data?.error)
+        });
+    }
+  },
   name: "AccountTab",
 };
 </script>

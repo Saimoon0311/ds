@@ -26,7 +26,10 @@ const store = createStore({
     },
     SET_SUBSCRIPTION_DATA(state,data){
       state.subscriptionData = data;
-    }
+    },
+    setLoading(state, status) {
+      state.isLoading = status;
+    },
   },
   actions: {
     // Your actions go here
