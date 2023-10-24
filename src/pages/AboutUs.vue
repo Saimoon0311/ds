@@ -2,6 +2,7 @@
   <section class="  ">
     <div class="WordSection1 container mt-4">
       <p class="LNDocumentTitleShort" align="center" style="text-align: center">
+        
         <span
           style="font-size: 20pt;mso-bidi-font-size: 10.5pt;font-family: Montserrat;mso-fareast-font-family: Calibri;text-transform: uppercase;mso-ansi-language: EN-AU;font-weight:bold"
           >About Us<o:p></o:p
@@ -76,20 +77,4 @@ export default {
   font-size: 14pt !important;
   font-weight: bold;
 }
-
-/* .footer-main div {
-  position: absolute;
-  bottom: 0;
-}
-
-section {
-  position: relative;
-  height: 100vh;
-}
-
-.footer {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-} */
 </style>

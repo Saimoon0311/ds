@@ -51,11 +51,15 @@
       </div>  
     </div>  
     <!-- <footer class="footer mt-4"><MainFooter /></footer> -->
+    <div class="footer">
+      <MainFooter />
+    </div>
+
   </section>
 </template>
 <script>
 import MainHeader from "../components/global/MainHeader.vue";
-// import MainFooter from "../components/global/MainFooter.vue";
+import MainFooter from "../components/global/MainFooter.vue";
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 
@@ -83,7 +87,7 @@ export default {
     }
   },
   components: {
-    // MainFooter,
+    MainFooter,
     MainHeader,
     Form,
     Field
@@ -112,7 +116,7 @@ export default {
   line-height: 38px;
 }
 
-.footer-main div {
+/* .footer-main div {
   position: absolute;
   bottom: 0;
 }
@@ -123,8 +127,8 @@ section {
 }
 
 .footer {
-  /* position: absolute; */
+  position: absolute;
   width: 100%;
   bottom: 0;
-}
+} */
 </style>

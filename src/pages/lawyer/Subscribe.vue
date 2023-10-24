@@ -7,8 +7,7 @@
           class="btn btn-secondary btn-sm my-3"
           title="back"
           to="lawyer-account"
-          ><i class="bi bi-arrow-left"></i> Back</router-link
-        >
+          ><i class="bi bi-arrow-left"></i> Back</router-link>
         
         Subscribe
       </h3>

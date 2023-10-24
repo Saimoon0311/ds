@@ -25,11 +25,11 @@ import ReplyInfoRequest from "@/pages/client/ReplyInfoRequest.vue";
 import LawyerLoginForm from "@/pages/lawyer/Login.vue";
 import LawyerRegister from "@/pages/lawyer/Register.vue";
 import LawyerDashboard from "@/pages/lawyer/Dashboard.vue";
-import LawyerBids from "@/pages/lawyer/Bids.vue";
+import LawyerBids from "@/pages/lawyer/Proposals.vue";
 import LawyerProfile from "@/pages/lawyer/Profile.vue";
 import LawyerAccount from "@/pages/lawyer/Account.vue";
 import LawyerSubscribe from "@/pages/lawyer/Subscribe.vue";
-import LawyerBidding from "@/pages/lawyer/Bidding.vue";
+import LawyerBidding from "@/pages/lawyer/Proposal.vue";
 import RequestInfo from "@/pages/lawyer/RequestInfo.vue";
 // other
 import privacyPolicy from "@/pages/privacy-policy.vue";
@@ -39,6 +39,7 @@ import HowSimplawfyWorks from "@/pages/HowSimplawfyWorks.vue";
 import ContactUs from "@/pages/ContactUs.vue";
 import Faqs from "@/pages/Faqs.vue";
 import NotFound from "@/components/NotFound.vue";
+import WizardForm from "../pages/WizardForm.vue";
 
 const routes = [
   {
@@ -63,7 +64,7 @@ const routes = [
     component: LawyerDashboard,
   },
   {
-    path: "/lawyer-bids",
+    path: "/lawyer-proposals",
     component: LawyerBids,
   },
   {
@@ -79,7 +80,7 @@ const routes = [
     component: LawyerSubscribe,
   },
   {
-    path: "/bidding",
+    path: "/proposal",
     component: LawyerBidding,
   },
   {
@@ -173,6 +174,10 @@ const routes = [
   {
     path: "/contact-us",
     component: ContactUs,
+  },
+  {
+    path: "/wizard-form",
+    component: WizardForm,
   },
   {
     path: "/:catchAll(.*)",

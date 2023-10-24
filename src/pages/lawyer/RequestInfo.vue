@@ -23,7 +23,7 @@
             </div>
 
             <div class="form-group">
-                <label for="question">What further information do you need to know from the client in order to submit a bid?<sup><code>*</code></sup></label>
+                <label for="question">What further information do you need to know from the client in order to submit a proposal?<sup><code>*</code></sup></label>
                 <textarea id="question" name="question" class="form-control" required=""></textarea>
             </div>
 

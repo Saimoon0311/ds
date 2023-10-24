@@ -101,7 +101,7 @@
                   <router-link
                     class="btn btn-light btn-sm w-100 py-2 mb-2"
                     to="/view-bids"
-                    >View Bids</router-link
+                    >View Proposals</router-link
                   ><button
                     class="btn btn-danger btn-sm w-100 py-2"
                     onclick="handleCancelJob(event)"

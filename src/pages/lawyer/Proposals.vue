@@ -15,7 +15,7 @@
     <main class="container">
       <br />
       <!-- Table 1 Bids -->
-      <h4 class="m-3 mt-0">Bids</h4>
+      <h4 class="m-3 mt-0">Proposals</h4>
 
       <table class="table table-bordered m-3 table-striped">
         <thead>
@@ -28,7 +28,7 @@
             <th>Deadline achievable?</th>
             <th>Free/discounted first consultation?</th>
             <th>
-              Bid status&nbsp;<i
+              Proposal status&nbsp;<i
                 class="bi bi-question-circle"
                 onmouseover="showBidStatusInfo()"
                 onmouseout="hideBidStatusInfo()"
@@ -38,27 +38,26 @@
                 id="bidStatusToolTip"
               >
                 <dt>Accepted:</dt>
-                <dd class="ms-3">a client has accepted your bid.</dd>
+                <dd class="ms-3">a client has accepted your Proposal.</dd>
                 <dt>Rejected:</dt>
                 <dd class="ms-3">
-                  a client has rejected your bid or withdrawn their job.
+                  a client has rejected your Proposal or withdrawn their job.
                 </dd>
                 <dt>Open:</dt>
-                <dd class="ms-3">a client has not chosen a bid yet.</dd>
+                <dd class="ms-3">a client has not chosen a Proposal yet.</dd>
                 <dt>Closed:</dt>
                 <dd class="ms-3">
-                  a client has accepted another lawyer's bid.
+                  a client has accepted another lawyer's Proposal.
                 </dd>
               </dl>
             </th>
             <th>Actions</th>
           </tr>
-          
         </thead>
         <tbody>
           <tr>
             <td colspan="9" class="text-center">
-              You have not bid on any jobs yet.
+              You have not Proposal on any jobs yet.
             </td>
           </tr>
           <tr data-v-7525850d="">
@@ -78,28 +77,35 @@
                 class="btn btn-sm btn-danger"
                 onclick="rescindBid(event)"
               >
-                <i data-v-7525850d="" class="bi bi-trash-fill"></i>Withdraw Bid
+                <i data-v-7525850d="" class="bi bi-trash-fill"></i>Withdraw
+                Proposal
               </button>
-              <form
-                data-v-7525850d=""
-                action="./backend/rescindBid.php"
-                method="post"
-              >
+              <form>
                 <input data-v-7525850d="" class="d-none" name="bidId" /><button
                   data-v-7525850d=""
                   class="btn btn-sm btn-danger d-none"
                 >
-                  Withdraw Bid
+                  Withdraw Proposal
                 </button>
               </form>
             </td>
+          </tr>
+          <tr>
+            <td><a href="jobInfo.php?id=30">test job</a></td>
+            <td>Fixed fee</td>
+            <td>$100.00</td>
+            <td>Yes - $55.00</td>
+            <td>dummy text</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td><p class="text-success fw-bold">Accepted</p></td>
+            <td class="text-center">-</td>
           </tr>
         </tbody>
       </table>
     </main>
     <!-- after data  -->
     <main class="container">
-
       <!-- Table 2 Request further info -->
       <h4 class="m-3">Information Requests</h4>
       <table class="table table-bordered m-3 table-striped">
@@ -125,7 +131,7 @@
             <td><p>Open</p></td>
             <td>
               <router-link class="btn btn-sm btn-dark mb-1" to="/bidding"
-                >Convert to Bid</router-link
+                >Convert to Proposal</router-link
               ><br />
             </td>
           </tr>
@@ -136,7 +142,7 @@
             <td><p>Open</p></td>
             <td>
               <router-link class="btn btn-sm btn-dark mb-1" to="/bidding"
-                >Convert to Bid</router-link
+                >Convert to Proposal</router-link
               ><br /><router-link
                 class="btn btn-sm btn-secondary w-100"
                 to="/request-info"

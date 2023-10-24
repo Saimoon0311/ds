@@ -59,6 +59,7 @@
           <router-link to="/terms-of-use" class="me-2 text-dark">Terms of use</router-link>
           <router-link to="/privacy-policy" class="ms-2 text-dark">Privacy policy</router-link>
         </div> -->
+
     </div>
     <MainFooter />
   </div>

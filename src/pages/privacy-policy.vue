@@ -527,21 +527,45 @@
         ><span lang="EN-US" style="font-family: Montserrat">. <o:p></o:p></span>
       </p>
     </div>
+    
+
+    <!-- <div class="card flex justify-content-center">
+        <MultiSelectPrime v-model="selectedCities" :options="cities" optionLabel="name" placeholder="Select Cities"
+            :maxSelectedLabels="3" class="w-full md:w-20rem" />
+    </div> -->
+
+
+
+
   </section>
 </template>
 <script>
+// import { ref } from "vue";
+
 
 export default {
-    components: {
+  components: {
 
-    },
+  },
+  // data() {
+  //   return {
+  //     selectedCities: ref(),
+  //     cities: ref([
+  //       { name: 'New York', code: 'NY' },
+  //       { name: 'Rome', code: 'RM' },
+  //       { name: 'London', code: 'LDN' },
+  //       { name: 'Istanbul', code: 'IST' },
+  //       { name: 'Paris', code: 'PRS' }
+  //     ])
+  //   }
+  // },
 
-    name: "privacy-policy",
+  name: "privacy-policy",
 };
 </script>
 <style scoped>
 .LNNumberedHeading1 span {
-    font-size: 14pt !important;
-    font-weight: bold;
+  font-size: 14pt !important;
+  font-weight: bold;
 }
 </style>

@@ -35,11 +35,11 @@
                   >Dashboard</router-link
                 >
                 <router-link
-                  to="/lawyer-bids"
+                  to="/lawyer-proposals"
                   class="nav-link fw-bolder menuItem-active-link"
                   id="lawyers"
                   aria-current="page"
-                  >Bids</router-link
+                  >Proposals</router-link
                 >
                   
                 <router-link

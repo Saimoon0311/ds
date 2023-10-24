@@ -41,7 +41,7 @@
         <br />
 
         <label for="job"
-          >In a few words, why do you need a lawyer?<sup class="text-danger"
+          >Why do you need a lawyer?<sup class="text-danger"
             >*</sup
           ></label
         >
@@ -51,7 +51,10 @@
           type="textarea"
           class="form-control"
           required=""
+          v-model="text" @input="checkCharacterLimit" :maxlength="maxCharacters"
         ></textarea>
+        <div v-if="characterCount >= maxCharacters" class="warning-text">You have reached your character limit.</div>
+        <div class="c-Count">Character Count: {{ characterCount }} / {{ maxCharacters }}</div>
         <br />
 
         <div class="form-check" >
@@ -117,14 +120,14 @@
             id="contactTimeCheck"
             
           />
-          <label class="form-check-label" for="contactTimeCheck" @click="showContact">
+          <label  class="form-check-label lpj" for="contactTimeCheck" @click="showContact">
             I have a preferred contact time
           </label>
         </div>
         <br />
 
-        <div id="contactTimeInput" v-if="isVisibleContact" >
-          <label for="timeframe">When do you prefer to be contacted?</label>
+        <div id="contactTimeInput" v-if="isVisibleContact"  >
+          <label  for="timeframe">When do you prefer to be contacted?</label>
           <input
             name="timeframe"
             id="timeframe"
@@ -153,8 +156,15 @@ export default {
   data() {
     return {
       isVisible: false,
-      isVisibleContact: false
+      isVisibleContact: false,
+      text: "",
+      maxCharacters: 2500,
     };
+  },
+  computed: {
+    characterCount() {
+      return this.text.length;
+    },
   },
   methods: {
     showDate() {
@@ -162,7 +172,12 @@ export default {
     },
     showContact() {
       this.isVisibleContact = !this.isVisibleContact;
-    }
+    },
+    checkCharacterLimit() {
+      if (this.characterCount > this.maxCharacters) {
+        this.text = this.text.slice(0, this.maxCharacters); // Truncate text to the character limit.
+      }
+    },
   },
   components: {
     ClientHeader,
@@ -171,6 +186,15 @@ export default {
 </script>
 
 <style scoped>
+.warning-text {
+  color: red;
+  margin-top: 10px;
+}
+
+.c-Count {
+  margin-top: 10px;
+}
+
 ul#pills-tab {
   text-align: center;
   margin: 0 auto;
@@ -201,4 +225,8 @@ ul#pills-tab {
 .bubbles:hover {
   background: #5c636a;
 }
+
+/* .lpj {
+  margin-top: 1px !important;
+} */
 </style>

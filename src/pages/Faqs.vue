@@ -7,7 +7,7 @@
           >Faq's<o:p></o:p
         ></span>
       </p>
-      <p class="LNDocumentTitleShort" align="center" style="text-align: center">
+      <p class="LNDocumentTitleShort " align="center" style="text-align: center">
         <span
           style="font-size: 20pt;mso-bidi-font-size: 10.5pt;font-family: Montserrat;mso-fareast-font-family: Calibri;text-transform: uppercase;mso-ansi-language: EN-AU;font-weight:bold"
           >Client Faq's<o:p></o:p
@@ -15,106 +15,144 @@
       </p>
 
       <!-- -------   -->
-      
+      <p class="LNNumberedHeading1 mt-4 mb-2"
+        style="margin-left: 0cm;text-indent: 0cm;mso-pagination: none;page-break-after: auto;mso-list: none;tab-stops: 36pt;">
+        <span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
+          > <b>I am considering posting a job. but</b> </span>
+      </p>
       <div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingOne">
-      <button class="accordion-button" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        I am considering posting a job, but what will it cost me to use the platform?
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        We do not charge you anything to use our platform. You may need to pay costs to your lawyer or opponent as part of your legal matter.
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              What will it cost me to use the platform?
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              We do not charge you anything to use our platform. You may need to pay costs to your lawyer or opponent as part of your legal matter.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              I need a lawyer outside of Australia.
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Unfortunately, our platform currently only caters to Australian lawyers. Please [contact us] and let us know where you’re located, and we’ll let you know if we have plans to expand our platform to include lawyers in your country.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              The area of law my job relates to is not listed, or I am not sure what the area of law is.
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Please select ‘I don’t know / Not listed here’ as the area of law. We will categorize your job in the area of law that most closely matches it.
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingTwo">
-      <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        I need a lawyer outside of Australia.
-      </button>
-    </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        Unfortunately, our platform currently only caters to Australian lawyers. Please [contact us] and let us know where you’re located, and we’ll let you know if we have plans to expand our platform to include lawyers in your country.
+      <!-- -------   -->
+      <p class="LNNumberedHeading1 mt-4 mb-2"
+        style="margin-left: 0cm;text-indent: 0cm;mso-pagination: none;page-break-after: auto;mso-list: none;tab-stops: 36pt;">
+        <span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
+          > <b>I have posted a job, but</b> </span>
+      </p>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              It’s been a while, and I haven’t received any proposals.
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Please <router-link to="/contact-us">contact us</router-link> and let us know.
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingThree">
-      <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        The area of law my job relates to is not listed, or I am not sure what the area of law is.
-      </button>
-    </h2>
-    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        Please select ‘I don’t know / Not listed here’ as the area of law. We will categorize your job in the area of law that most closely matches it.
+      <!-- -------   -->
+      <p class="LNNumberedHeading1 mt-4 mb-2"
+        style="margin-left: 0cm;text-indent: 0cm;mso-pagination: none;page-break-after: auto;mso-list: none;tab-stops: 36pt;">
+        <span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
+          > <b>I have received a lawyer’s proposal, but </b> </span>
+      </p>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingFive">
+            <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+              I need more information from them before I make a decision on it.
+            </button>
+          </h2>
+          <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              You are free to message lawyers regarding their proposals, if you require further information about them. Please note that lawyers are only able to send one message to clients before they submit a proposal — this is to avoid the potential for harassment of clients. However, once you message a lawyer back, the messaging channel will be opened and you will be able to communicate freely, until you accept or reject their proposal, subject to the [Messaging Protocol].
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingFour">
-      <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-        I have posted a job, but it’s been a while, and I haven’t received any proposals.
-      </button>
-    </h2>
-    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        Please <router-link to="/contact-us">contact us</router-link> and let us know.
+      <!-- -------   -->
+      <p class="LNNumberedHeading1 mt-4 mb-2"
+        style="margin-left: 0cm;text-indent: 0cm;mso-pagination: none;page-break-after: auto;mso-list: none;tab-stops: 36pt;">
+        <span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
+          > <b>I have accepted a lawyer’s proposal, but </b> </span>
+      </p>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingSix">
+            <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+              Why can’t I continue to message them through the platform?
+            </button>
+          </h2>
+          <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              It is our intention that, once you have accepted a lawyer’s proposal, the formal client engagement and conduct of the matter take place off the platform.
+        For this reason, once a proposal has been accepted, we exchange your contact details with your lawyer to allow you to communicate further externally. We also provide a transcript of any messages exchanged between you and the lawyer, so that you can pick up where you left off.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingSeven">
+            <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+              I cannot contact them using the contact details provided.
+            </button>
+          </h2>
+          <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              If you are unable to contact your lawyer using either their email address or phone number provided to you when you accept their proposal, please [contact us] so that we can attempt to follow up with the lawyer.
+            </div>
+          </div>
+        </div>
+        
       </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingFive">
-      <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-        I have received a lawyer’s proposal, but I need more information from them before I make a decision on it.
-      </button>
-    </h2>
-    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        You are free to message lawyers regarding their proposals, if you require further information about them. Please note that lawyers are only able to send one message to clients before they submit a proposal — this is to avoid the potential for harassment of clients. However, once you message a lawyer back, the messaging channel will be opened and you will be able to communicate freely, until you accept or reject their proposal, subject to the [Messaging Protocol].
+      <!-- -------   -->
+      <p class="LNNumberedHeading1 mt-4 mb-2"
+        style="margin-left: 0cm;text-indent: 0cm;mso-pagination: none;page-break-after: auto;mso-list: none;tab-stops: 36pt;">
+        <span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
+          > <b>I want to message a lawyer through the platform, but </b> </span>
+      </p>
+      <div class="accordion" id="accordionExamplea">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingEight">
+            <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+              Why can’t I ask for or provide personal contact details?
+            </button>
+          </h2>
+          <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExamplea">
+            <div class="accordion-body">
+              To avoid the potential of harassment of clients, and clients abandoning the platform before accepting a lawyer’s proposal, we intend that clients and lawyers communicate exclusively through the platform, until a client has accepted a lawyer’s proposal. Once that happens, we will exchange the contact details of the client and lawyer, so that they can communicate further off the platform.
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingSix">
-      <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-        I have accepted a lawyer’s proposal, but why can’t I continue to message them through the platform?
-      </button>
-    </h2>
-    <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        It is our intention that, once you have accepted a lawyer’s proposal, the formal client engagement and conduct of the matter take place off the platform.
-For this reason, once a proposal has been accepted, we exchange your contact details with your lawyer to allow you to communicate further externally. We also provide a transcript of any messages exchanged between you and the lawyer, so that you can pick up where you left off.
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingSeven">
-      <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-        I cannot contact them using the contact details provided.
-      </button>
-    </h2>
-    <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        If you are unable to contact your lawyer using either their email address or phone number provided to you when you accept their proposal, please [contact us] so that we can attempt to follow up with the lawyer.
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingEight">
-      <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-        I want to message a lawyer through the platform, but why can’t I ask for or provide personal contact details?
-      </button>
-    </h2>
-    <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        To avoid the potential of harassment of clients, and clients abandoning the platform before accepting a lawyer’s proposal, we intend that clients and lawyers communicate exclusively through the platform, until a client has accepted a lawyer’s proposal. Once that happens, we will exchange the contact details of the client and lawyer, so that they can communicate further off the platform.
-      </div>
-    </div>
-  </div>
-</div>
+
 
       <!-- --------- -->
       <p class="LNNumberedHeading1 mt-4 mb-1"
@@ -145,23 +183,37 @@ For this reason, once a proposal has been accepted, we exchange your contact det
       </p>
       <p class="text-center">For the purposes of these FAQs, when we refer to ‘client’, we are referring to those using our platform to request legal services.</p>
       <!-- -------- -->
+      <!-- -------   -->
+      <p class="LNNumberedHeading1 mt-4 mb-2"
+        style="margin-left: 0cm;text-indent: 0cm;mso-pagination: none;page-break-after: auto;mso-list: none;tab-stops: 36pt;">
+        <span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
+          > <b>I have created a profile, but</b> </span>
+      </p>
       <div class="accordion" id="accordionExample1">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headinglOne">
-            <button class="accordion-button" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapselOne" aria-expanded="true" aria-controls="collapselOne">
-              I have created a profile, but why can’t I amend my name or state/territory without your approval?
+            <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapselOne" aria-expanded="true" aria-controls="collapselOne">
+              why can’t I amend my name or state/territory without your approval?
             </button>
           </h2>
-          <div id="collapselOne" class="accordion-collapse collapse show" aria-labelledby="headinglOne" data-bs-parent="#accordionExample1">
+          <div id="collapselOne" class="accordion-collapse collapse " aria-labelledby="headinglOne" data-bs-parent="#accordionExample1">
             <div class="accordion-body">
               You can amend most fields of your profile, such as your profile photo, law firm name and website, and areas of law without restriction. However, some fields require our approval to amend, namely if you change your name (e.g. following marriage) or state of practice (e.g. following becoming qualified to practice in another jurisdiction). This is because we will need to re-conduct the Verification process to ensure that you are listed in the register of lawyers under that new name or in that new state/territory.
             </div>
           </div>
         </div>
+      </div>
+      <!-- -------   -->
+      <p class="LNNumberedHeading1 mt-4 mb-2"
+        style="margin-left: 0cm;text-indent: 0cm;mso-pagination: none;page-break-after: auto;mso-list: none;tab-stops: 36pt;">
+        <span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
+          > <b> I am considering subscribing to your platform, but </b> </span>
+      </p>
+      <div class="accordion" id="accordionExample1">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headinglTwo">
             <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapselTwo" aria-expanded="false" aria-controls="collapselTwo">
-              I am considering subscribing to your platform, but why do you charge a monthly fee?
+             Why do you charge a monthly fee?
             </button>
           </h2>
           <div id="collapselTwo" class="accordion-collapse collapse" aria-labelledby="headinglTwo" data-bs-parent="#accordionExample1">
@@ -170,10 +222,19 @@ For this reason, once a proposal has been accepted, we exchange your contact det
             </div>
           </div>
         </div>
+      </div>
+      <!-- -------   -->
+      <p class="LNNumberedHeading1 mt-4 mb-2"
+        style="margin-left: 0cm;text-indent: 0cm;mso-pagination: none;page-break-after: auto;mso-list: none;tab-stops: 36pt;">
+        <span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
+          > <b> I am considering submitting a proposal for a job, but</b> </span>
+      </p>
+      <div class="accordion" id="accordionExample1">
+        
         <div class="accordion-item">
           <h2 class="accordion-header" id="headinglThree">
             <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapselThree" aria-expanded="false" aria-controls="collapselThree">
-              I am considering submitting a proposal for a job, but I am not sure what to say under ‘Say what you will do for the client’ or how to estimate my costs.
+               I am not sure what to say under ‘Say what you will do for the client’ or how to estimate my costs.
             </button>
           </h2>
           <div id="collapselThree" class="accordion-collapse collapse" aria-labelledby="headinglThree" data-bs-parent="#accordionExample1">
@@ -196,10 +257,19 @@ For this reason, once a proposal has been accepted, we exchange your contact det
             </div>
           </div>
         </div>
+      </div>
+      <!-- -------   -->
+     
+     <p class="LNNumberedHeading1 mt-4 mb-2"
+        style="margin-left: 0cm;text-indent: 0cm;mso-pagination: none;page-break-after: auto;mso-list: none;tab-stops: 36pt;">
+        <span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
+          > <b>I have submitted a proposal to a client, but </b> </span>
+      </p>
+      <div class="accordion" id="accordionExample1">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headinglfive">
             <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapselfive" aria-expanded="false" aria-controls="collapselfive">
-              I have submitted a proposal to a client, but what if they ask for a discount on my costs estimate?
+              what if they ask for a discount on my costs estimate?
             </button>
           </h2>
           <div id="collapselfive" class="accordion-collapse collapse" aria-labelledby="headinglfive" data-bs-parent="#accordionExample1">
@@ -253,10 +323,19 @@ For this reason, once a proposal has been accepted, we exchange your contact det
             </div>
           </div>
         </div>
+      </div>
+      <!-- -------   -->
+      <p class="LNNumberedHeading1 mt-4 mb-2"
+        style="margin-left: 0cm;text-indent: 0cm;mso-pagination: none;page-break-after: auto;mso-list: none;tab-stops: 36pt;">
+        <span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
+          > <b>A client has accepted my proposal, but </b> </span>
+      </p>
+      <!-- -------   -->
+      <div class="accordion" id="accordionExample1">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headinglnine">
             <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapselnine" aria-expanded="false" aria-controls="collapselnine">
-              A client has accepted my proposal, but why can’t I continue to message them through the platform?
+              Why can’t I continue to message them through the platform?
             </button>
           </h2>
           <div id="collapselnine" class="accordion-collapse collapse" aria-labelledby="headinglnine" data-bs-parent="#accordionExample1">
@@ -314,10 +393,19 @@ For this reason, once a proposal has been accepted, we exchange your contact det
             </div>
           </div>
         </div>
-        <div class="accordion-item">
+      </div>
+        
+        <!-- -------   -->
+        <p class="LNNumberedHeading1 mt-4 mb-2"
+        style="margin-left: 0cm;text-indent: 0cm;mso-pagination: none;page-break-after: auto;mso-list: none;tab-stops: 36pt;">
+        <span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
+          > <b>I want to message a client through the platform, but</b> </span>
+      </p>
+      <div class="accordion" id="accordionExample1">
+      <div class="accordion-item">
           <h2 class="accordion-header" id="headinglfourty">
             <button class="accordion-button collapsed" style="font-weight: 600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapselfourty" aria-expanded="false" aria-controls="collapselfourty">
-              I want to message a client through the platform, but why can’t I message/message more than once initially?
+              why can’t I message/message more than once initially?
             </button>
           </h2>
           <div id="collapselfourty" class="accordion-collapse collapse" aria-labelledby="headinglfourty" data-bs-parent="#accordionExample1">
@@ -391,5 +479,9 @@ export default {
 
 .accordion-button:not(.collapsed) {
   background-color: #bbbbbb;
+}
+
+.hd-b {
+  margin-bottom: 10px;
 }
 </style>

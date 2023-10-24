@@ -68,62 +68,62 @@
 </template>
 <script>
 export default {
-    data() {
-        return {};
-    },
-    components: {},
-    methods: {},
-    name: "ClientHeader",
+  data() {
+    return {};
+  },
+  components: {},
+  methods: {},
+  name: "ClientHeader",
 };
 </script>
 <style scoped>
 .router-link-exact-active.menuItem-active-link {
-    background: grey;
-    border: 1px solid grey;
-    border-radius: 10px;
-    color: white;
+  background: grey;
+  border: 1px solid grey;
+  border-radius: 10px;
+  color: white;
 }
 
 .navbar-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .logo-small {
-    width: 175px;
-    height: 40px;
+  width: 175px;
+  height: 40px;
 }
 
 .law-img {
-    width: 15vw;
-    height: 15vw;
-    border: 1px solid white;
-    border-radius: 50%;
+  width: 15vw;
+  height: 15vw;
+  border: 1px solid white;
+  border-radius: 50%;
 }
 
 .navActive {
-    background: grey;
-    border: 1px solid grey;
-    border-radius: 10px;
-    color: white;
+  background: grey;
+  border: 1px solid grey;
+  border-radius: 10px;
+  color: white;
 }
 
 .navbar-nav .left-menu {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .bg-grey {
-    background: grey;
-    color: white;
+  background: grey;
+  color: white;
 }
 
 .bg-grey:hover {
-    background: grey;
-    color: white;
+  background: grey;
+  color: white;
 }
 </style>

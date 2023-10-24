@@ -4,9 +4,12 @@ import router from "@/routers";
 import store from "./store";
 import PrimeVue from "primevue/config";
 import "primevue/resources/themes/lara-light-indigo/theme.css";
-import "primevue/resources/themes/saga-blue/theme.css"; //theme
+// import "primevue/resources/themes/saga-blue/theme.css"; //theme
 import "primevue/resources/primevue.min.css"; //core CSS
 import "primeicons/primeicons.css"; //icons
+
+import MultiSelect from "primevue/multiselect";
+import ToastService from "primevue/toastservice";
 /* import the fontawesome core */
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -27,5 +30,6 @@ const app = createApp(App).component("font-awesome-icon", FontAwesomeIcon);
 app.use(PrimeVue);
 app.use(router);
 app.use(store);
-
+app.component("MultiSelectPrime", MultiSelect);
+app.use(ToastService);
 app.mount("#app");

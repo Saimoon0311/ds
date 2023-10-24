@@ -8,7 +8,7 @@
         to="/client-dashboard"
         ><i class="bi bi-arrow-left"></i> Back</router-link
       >
-      <h4 class="text-center">Bids</h4>
+      <h4 class="text-center">Proposals</h4>
 
       <div data-v-511b78bb="" class="">
         <ul
@@ -167,7 +167,7 @@
               <tbody>
                 <tr>
                   <td colspan="8" class="text-center">
-                    No active bids are available.
+                    No active Proposals are available.
                   </td>
                 </tr>
                 <tr class="text-left"><td>testing client (crinimal)</td><td>Fixed fee</td><td>$100.00</td><td>Yes - $55.00</td><td>dummy text</td><td>Yes</td><td>No</td><td><div class="text-center"><button class="btn btn-light btn-sm border p-1 px-2 mb-1" onclick="handleAcceptBidAction(event)">Accept</button><form method="post" action="backend/acceptBid.php">
@@ -296,7 +296,7 @@
               <tbody>
                 <tr>
                   <td colspan="7" class="text-center">
-                    No closed bids are available.
+                    No closed Proposals are available.
                   </td>
                 </tr>
               </tbody>
@@ -324,7 +324,7 @@
                 <dt>Requested information:</dt>
                 <dd class="ms-3">
                   The lawyer requires some further information about your job in
-                  order to finalise their bid.
+                  order to finalise their Proposal.
                 </dd>
               </dl>
             </th>

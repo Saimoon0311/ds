@@ -2,7 +2,7 @@
   <div class="hello">
     <LawyerHeader />
     <div class="my-3 w-100 text-center">
-      <h6 class="fs-3">Bid for job</h6>
+      <h6 class="fs-3">Proposal for job</h6>
 
       <!-- Job details preview -->
       <div>
@@ -32,9 +32,8 @@
       <form
         id="mainForm"
         class="text-start border rounded p-3 d-inline-block m-3 col-md-5"
-        onsubmit="handleMainFormSubmit(event)"
-        method="post"
-        action="./backend/submitBid.php"
+        
+        
       >
         <!-- Invisible form fields for backend post -->
         <input
@@ -43,7 +42,7 @@
           id="receiver"
           name="receiver"
           value="<br />
-<b>Notice</b>:  Undefined variable: customer in <b>C:\xampp\htdocs\simplawfy\lawyer\bid.php</b> on line <b>63</b><br />
+<b>Notice</b>:  Undefined variable: customer in on line <b>63</b><br />
 "
         />
         <input type="text" class="d-none" name="jobId" value="28" />
@@ -214,6 +213,7 @@
                   autocomplete="on"
                   placeholder="Eg: Associate"
                   class="form-control"
+                  required
                 />
               </label>
               <br />
@@ -230,6 +230,7 @@
                     autocomplete="on"
                     type="number"
                     class="form-control"
+                    required
                   />
                 </div>
               </label>
@@ -243,11 +244,12 @@
                   autocomplete="on"
                   type="number"
                   class="form-control"
+                  required
                 />
               </label>
               <br />
               <br />
-              <button class="btn btn-dark" onclick="addRow(event)">Add</button>
+              <button class="btn btn-dark" >Add</button>
             </fieldset>
 
             <table
