@@ -6,9 +6,12 @@ import api from "@/config/api.js";
 
 import PrimeVue from "primevue/config";
 import "primevue/resources/themes/lara-light-indigo/theme.css";
-import "primevue/resources/themes/saga-blue/theme.css"; //theme
+// import "primevue/resources/themes/saga-blue/theme.css"; //theme
 import "primevue/resources/primevue.min.css"; //core CSS
 import "primeicons/primeicons.css"; //icons
+
+import MultiSelect from "primevue/multiselect";
+import ToastService from "primevue/toastservice";
 /* import the fontawesome core */
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -147,4 +150,6 @@ app.use(router);
 app.use(store);
 app.use(VueSweetalert2);
 
+app.component("MultiSelectPrime", MultiSelect);
+app.use(ToastService);
 app.mount("#app");

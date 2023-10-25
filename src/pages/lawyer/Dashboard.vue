@@ -58,12 +58,12 @@
           >
             <router-link
               class="btn btn-light btn-sm w-100 my-1"
-              to="/bidding"
-              >Bid</router-link
+              to="/proposal"
+              >Proposal</router-link
             ><router-link
               name="decline"
               class="btn btn-danger btn-sm w-100 my-1"
-              to="/request-info"
+              to=""
               >Decline</router-link
             ><router-link
               class="btn btn-dark btn-sm w-100 my-1"
@@ -104,12 +104,12 @@
           >
           <router-link
               class="btn btn-light btn-sm w-100 my-1"
-              to="/bidding"
-              >Bid</router-link
+              to="/proposal"
+              >Proposal</router-link
             ><router-link
               name="decline"
               class="btn btn-danger btn-sm w-100 my-1"
-              to="/request-info"
+              to=""
               >Decline</router-link
             ><router-link
               class="btn btn-dark btn-sm w-100 my-1"
