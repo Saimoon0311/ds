@@ -341,8 +341,8 @@ export default {
       let text = "You won't be able to revert this.";
       let text2 = "Yes, Delete Account";
       if (this.subscriptionStatus == 'subscribed') {
-        let text = "You won't be able to revert this. Deleting your account will also cancel your subscription.";
-        let text2 = "Yes, Unsubscribe & Delete Account";
+        text = "You won't be able to revert this. Deleting your account will also cancel your subscription.";
+        text2 = "Yes, Unsubscribe & Delete Account";
       }
       this.$swal({
         title: 'Are you sure?',
