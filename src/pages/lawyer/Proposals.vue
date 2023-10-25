@@ -25,9 +25,9 @@
     <main class="container">
       <br />
       <!-- Table 1 Bids -->
-      <h4 class="m-3 mt-0">Proposals</h4>
+      <h4 class=" mt-0">Proposals</h4>
 
-      <table class="table table-bordered m-3 table-striped">
+      <table class="table table-bordered table-striped">
         <thead>
           <tr>
             <th class="col-2">Job title</th>
@@ -35,8 +35,8 @@
             <th>Fee estimate</th>
             <th>Upfront payment</th>
             <th>Proposed work</th>
-            <th>Deadline achievable?</th>
-            <th>Free/discounted first consultation?</th>
+            <!-- <th>Deadline achievable?</th>
+            <th>Free/discounted first consultation?</th> -->
             <th>
               Proposal status&nbsp;<i
                 class="bi bi-question-circle"
@@ -78,8 +78,8 @@
             <td data-v-7525850d="">$10,000.00</td>
             <td data-v-7525850d="">Yes - $500.00</td>
             <td data-v-7525850d="">test the potential client</td>
-            <td data-v-7525850d="">Yes</td>
-            <td data-v-7525850d="">Yes - $100 for 30 minutes</td>
+            <!-- <td data-v-7525850d="">Yes</td>
+            <td data-v-7525850d="">Yes - $100 for 30 minutes</td> -->
             <td data-v-7525850d=""><p data-v-7525850d="">Open</p></td>
             <td data-v-7525850d="">
               <button
@@ -106,8 +106,8 @@
             <td>$100.00</td>
             <td>Yes - $55.00</td>
             <td>dummy text</td>
-            <td>Yes</td>
-            <td>No</td>
+            <!-- <td>Yes</td>
+            <td>No</td> -->
             <td><p class="text-success fw-bold">Accepted</p></td>
             <td class="text-center">-</td>
           </tr>

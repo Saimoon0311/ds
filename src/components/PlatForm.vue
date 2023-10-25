@@ -13,8 +13,9 @@
       </div>
       <div class="d-flex flex-wrap justify-content-center align-items-center">
         <div class="homepage-circles d-flex flex-column align-items-center justify-content-center">
-          <p class="fw-bold">I'm looking for a lawyer</p>
+          <p class="fw-bold law-hd">I'm looking for a lawyer</p>
           <div class="showhover">
+            <p class="fw-bold">I'm looking for a lawyer</p>
             <p>Need a lawyer and don't know where to begin?</p>
             <p>
               We take the hassle and uncertainty out of the process of finding a
@@ -30,8 +31,10 @@
           </div>
         </div>
         <div class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white">
-          <p class="fw-bold">I'm looking for clients</p>
+          <p class="fw-bold law-hd">I'm looking for clients</p>
           <div class="showhover">
+            <p class="fw-bold">I'm looking for clients</p>
+
             <p>
               Professional networking eating into your billable hours and not
               producing results?
@@ -149,14 +152,28 @@ export default {
   .logo {
     width: 100%;
   }
+
 }
+
 
 .homepage-circles:hover .showhover {
-  display: block;
+  /* display: block; */
+  visibility: visible;
+  opacity: 1;
 }
 
-.homepage-circles .showhover {
-  display: none;
-  transition: ease-in-out 0.5;
+.homepage-circles .law-hd {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.4s linear;
+  position: absolute;
+}
+
+.homepage-circles .showhover,
+.homepage-circles:hover .law-hd {
+  /* display: none;
+  transition: ease-in-out 0.5; */
+  opacity: 0;
+  transition: visibility 0s, opacity 0.4s linear;
 }
 </style>

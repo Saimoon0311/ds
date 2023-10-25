@@ -399,7 +399,7 @@
         <p class="LNNumberedHeading1 mt-4 mb-2"
         style="margin-left: 0cm;text-indent: 0cm;mso-pagination: none;page-break-after: auto;mso-list: none;tab-stops: 36pt;">
         <span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
-          > <b>I want to message a client through the platform, but</b> </span>
+          > <b>I want to message a client through the platform, but</b> </span>  
       </p>
       <div class="accordion" id="accordionExample1">
       <div class="accordion-item">
