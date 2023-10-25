@@ -29,6 +29,7 @@ import LawyerBids from "@/pages/lawyer/Proposals.vue";
 import LawyerProfile from "@/pages/lawyer/Profile.vue";
 import LawyerAccount from "@/pages/lawyer/Account.vue";
 import LawyerSubscribe from "@/pages/lawyer/Subscribe.vue";
+// import LawyerBidding from "@/pages/lawyer/Proposal.vue";
 import LawyerBidding from "@/pages/lawyer/Proposal.vue";
 import RequestInfo from "@/pages/lawyer/RequestInfo.vue";
 // other

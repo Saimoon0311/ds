@@ -6,7 +6,7 @@
         style="border-bottom: 1px solid lightgrey"
       >
         <div class="container-fluid">
-          <a class="navbar-brand" href="http://localhost/admin.simplawfylaw">
+          <a class="navbar-brand" href="">
             <img
               src="../../assets/images/admin-logo.png"
               class="logo-small"
