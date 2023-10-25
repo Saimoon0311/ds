@@ -1,7 +1,7 @@
 <template lang="">
   <div>
     <ClientHeader />
-    <div class="container-fluid">
+    <div class="container">
       <router-link
         class="btn btn-secondary btn-sm my-3"
         title="back"
@@ -158,8 +158,8 @@
                     </dl>
                   </th>
                   <th>Proposed work</th>
-                  <th>Deadline achievable?</th>
-                  <th>Free/discounted first consultation?</th>
+                  <!-- <th>Deadline achievable?</th>
+                  <th>Free/discounted first consultation?</th> -->
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -170,14 +170,45 @@
                     No active Proposals are available.
                   </td>
                 </tr>
-                <tr class="text-left"><td>testing client (crinimal)</td><td>Fixed fee</td><td>$100.00</td><td>Yes - $55.00</td><td>dummy text</td><td>Yes</td><td>No</td><td><div class="text-center"><button class="btn btn-light btn-sm border p-1 px-2 mb-1" onclick="handleAcceptBidAction(event)">Accept</button><form method="post" action="backend/acceptBid.php">
-                        <input value="146" class="d-none" name="bidId">
-                        <input value="30" class="d-none" name="jobId">
-                        <input value="22" class="d-none" name="lawyerId">
-                        <button class="d-none" name="accept"><i class="bi bi-check-lg"></i> Accept</button></form><button class="btn btn-danger btn-sm p-1 px-2" onclick="handleRejectBidAction(event)">Reject</button><form method="post" action="backend/rejectBid.php">
-                        <input value="146" class="d-none" name="id">
-                        <button class="d-none" name="reject"><i class="bi bi-x-lg"></i>Reject</button>
-                        </form></div></td></tr>
+                <tr class="text-left">
+                  <td>testing client (crinimal)</td>
+                  <td>Fixed fee</td>
+                  <td>$100.00</td>
+                  <td>Yes - $55.00</td>
+                  <td>dummy text</td>
+                  <!-- <td>Yes</td>
+                  <td>No</td> -->
+                  <td>
+                    <div class="text-center">
+                      <button
+                        class="btn btn-light btn-sm border p-1 px-2 mb-1"
+                        onclick="handleAcceptBidAction(event)"
+                      >
+                        Accept
+                      </button>
+                      <form method="post" action="backend/acceptBid.php">
+                        <input value="146" class="d-none" name="bidId" />
+                        <input value="30" class="d-none" name="jobId" />
+                        <input value="22" class="d-none" name="lawyerId" />
+                        <button class="d-none" name="accept">
+                          <i class="bi bi-check-lg"></i> Accept
+                        </button>
+                      </form>
+                      <button
+                        class="btn btn-danger btn-sm p-1 px-2"
+                        onclick="handleRejectBidAction(event)"
+                      >
+                        Reject
+                      </button>
+                      <form method="post" action="backend/rejectBid.php">
+                        <input value="146" class="d-none" name="id" />
+                        <button class="d-none" name="reject">
+                          <i class="bi bi-x-lg"></i>Reject
+                        </button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -289,8 +320,8 @@
                     </dl>
                   </th>
                   <th>Proposed work</th>
-                  <th>Deadline achievable?</th>
-                  <th>Free/discounted first consultation?</th>
+                  <!-- <th>Deadline achievable?</th>
+                  <th>Free/discounted first consultation?</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -351,7 +382,6 @@
           </tr>
         </tbody>
       </table>
-     
     </div>
   </div>
 </template>

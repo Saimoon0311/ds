@@ -1,6 +1,6 @@
 <template lang="">
-  <section class="container mt-5 mb-5">
-    <div class="WordSection1">
+  <section class=" mt-5">
+    <div class="WordSection1 container">
       <p class="LNDocumentTitleShort" align="center" style="text-align: center">
         <span
           style="
@@ -748,18 +748,26 @@
         ><span lang="EN-US" style="font-family: Montserrat">.<o:p></o:p></span>
       </p>
     </div>
+    <div class="footer">
+      <MainFooter />
+    </div>
   </section>
+
 </template>
 <script>
-export default {
-    components: {},
+import MainFooter from "../components/global/MainFooter.vue";
 
-    name: "terms-of-use",
+export default {
+  components: {
+    MainFooter
+  },
+
+  name: "terms-of-use",
 };
 </script>
 <style scoped>
 .LNNumberedHeading1 span {
-    font-size: 14pt !important;
-    font-weight: bold;
+  font-size: 14pt !important;
+  font-weight: bold;
 }
 </style>

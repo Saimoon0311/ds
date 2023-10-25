@@ -1,6 +1,6 @@
 <template lang="">
-  <section class="container mt-5 mb-5">
-    <div class="WordSection1">
+  <section class=" mt-5 ">
+    <div class="WordSection1 container">
       <p class="LNDocumentTitleShort" align="center" style="text-align: center">
         <span
           style="
@@ -535,17 +535,21 @@
     </div> -->
 
 
-
+    <div class="footer">
+      <MainFooter />
+    </div>
 
   </section>
 </template>
 <script>
+import MainFooter from "../components/global/MainFooter.vue";
+
 // import { ref } from "vue";
 
 
 export default {
   components: {
-
+    MainFooter
   },
   // data() {
   //   return {

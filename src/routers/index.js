@@ -142,7 +142,7 @@ const routes = [
     component: PostingJob,
   },
   {
-    path: "/view-bids",
+    path: "/view-proposals",
     component: ViewBids,
   },
   {

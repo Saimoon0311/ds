@@ -1,10 +1,10 @@
 <template lang="">
-  <section class="">
-    <div class="WordSection1 container mt-4">
+  <section class="ct-main">
+    <div class="WordSection1 container pt-4 ">
       <MainHeader />
       <div class=" pt-4 center-main row justify-content-center">
         <div class="col-md-7">        
-          <div class="bg-dark text-white text-center m-3 p-3 find-client " style="border-radius: 10px">
+          <div class="bg-dark text-white text-center m-3 p-3 find-client ct-form" style="border-radius: 10px">
             <Form @submit="submitData" class="p-2 px-md-5 m-md-3 c-form" :validation-schema="schema" v-slot="{errors}">
                 <p class="m-4 fs-3 mx-5 ">Contact Us</p>
                 <div class="d-flex flex-row  mb-4 align-baseline">
@@ -51,7 +51,7 @@
       </div>  
     </div>  
     <!-- <footer class="footer mt-4"><MainFooter /></footer> -->
-    <div class="footer">
+    <div class="footer footer-ct">
       <MainFooter />
     </div>
 
@@ -116,19 +116,19 @@ export default {
   line-height: 38px;
 }
 
-/* .footer-main div {
-  position: absolute;
-  bottom: 0;
+.ct-form {
+  border-radius: 10px;
+  margin-bottom: 60px !important;
 }
 
-section {
+.ct-main {
+  min-height: 100vh;
   position: relative;
-  height: 100vh;
 }
 
-.footer {
+.footer-ct {
   position: absolute;
-  width: 100%;
   bottom: 0;
-} */
+  width: 100%;
+}
 </style>
