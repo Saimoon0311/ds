@@ -77,7 +77,7 @@ export default {
     },
     methods: {
         submitData(formData){
-            this.submitLoginForm(formData,'lawyer','lawyer-dashboard');
+            this.submitLoginForm(formData,'lawyer','lawyer-profile');
         }
     },
     name: 'LawyerLoginForm',

@@ -40,11 +40,43 @@
                   <p>Card Holder Name: {{ subscriptionData?.card_holder_name }}</p>
                   <p>The {{ subscriptionData?.card_brand }} card ending in {{ subscriptionData?.card_last4 }}</p>
                   <p>Expiry: {{ subscriptionData?.card_expiry }}</p>
-                  <a
+                  <button
                     class="btn btn-sm btn-secondary"
-                    href="./replace_payment_method.php"
-                    >Replace Payment Method</a
-                  >
+                    @click="replacePaymentMethod"
+                    >Replace Payment Method</button>
+                </td>
+              </tr>
+              <tr>
+                <th>Receipts</th>
+                <td>
+                  <table v-if="receipts.length > 0" class="table table-bordered table-striped">
+                    <thead>
+                      <th>#</th>
+                      <th>Receipt ID</th>
+                      <th>Amount Paid</th>
+                      <th>Date of issue</th>
+                      <th>Action</th>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(receipt,index) in receipts" :key="receipt.id">
+                        <td>{{ ++index }}</td>
+                        <td>{{ receipt?.id }}</td>
+                        <td>{{ receipt?.amount_paid }}</td>
+                        <td>{{ new Date(receipt?.created * 1000).toLocaleDateString() }}</td>
+                        <td><a class="btn btn-sm btn-secondary" :href="receipt?.invoice_pdf">Download</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p v-else>No Receipts Found!</p>
+
+                  <!-- <ul>
+                  
+                    <li v-for="receipt in receipts" :key="receipt.id">
+                      <strong>Receipt ID:</strong> {{ receipt?.id }}<br>
+                      <strong>Amount:</strong> {{ receipt?.amount_paid / 100 }} USD<br>
+                      <strong>Date:</strong> {{ new Date(receipt?.created * 1000).toLocaleDateString() }}
+                    </li>
+                  </ul> -->
                 </td>
               </tr>
             </tbody>
@@ -86,14 +118,20 @@
               </tr>
             </tbody>
           </table> -->
+
+          <div v-if="subscriptionCancelStatus" class="text-center">
+            <p>Your subscription will be cancelled from 
+              {{ subscriptionData?.current_period_end }}. You can <button class="forgetp" @click="resubscribe">resubscribe</button> at any time. </p>
+          </div>
           <button
-            v-if="subscriptionStatus == 'subscribed'"
+            v-else-if="subscriptionStatus == 'subscribed'"      
             class="btn btn-danger"
             id="cancel-subscription"
-            onclick="handleCancelSubscription()"
+            @click="handleCancelSubscription"
           >
             Cancel Subscription
           </button>
+
         </div>
 
         <!-- Change account password -->
@@ -203,7 +241,8 @@ export default {
         ),
     });
     return {
-      schema
+      schema,
+      receipts: [],
     }
   },
   computed: {
@@ -215,36 +254,120 @@ export default {
       return this.$store.getters.subscriptionData;
     },
     subscriptionStatus() {
+      console.log('ss tt uu : ', this.$store.getters.subscriptionStatus);
       return this.$store.getters.subscriptionStatus;
+    },
+    subscriptionCancelStatus() {
+      console.log('ss tt uu 2: ', this.$store.getters.subscriptionCancelStatus);
+      return this.$store.getters.subscriptionCancelStatus;
     }
   },
+  created() {
+    this.$store.commit('SET_REPLACE_PAYMENT_METHOD', false);
+    this.getReceipts();
+  },
   methods: {
-    deleteAccount() {
+    getReceipts() {
+      api.get('/lawyer/get-receipts')
+        .then(res => {
+          this.receipts = res?.data?.data?.data;
+          console.log('resp id : ', this.receipts?.id);
+          console.log('resp amount : ', this.receipts?.amount_paid);
+          console.log('resp date : ', new Date(this.receipts?.created * 1000).toLocaleDateString());
+          console.log(res.data?.data?.data);
+        })
+        .catch(error => {
+          console.log("getResults : ", error)
+        });
+    },
+    replacePaymentMethod() {
+      this.$store.commit('SET_REPLACE_PAYMENT_METHOD', true);
+      this.$router.push({ path: '/subscribe' });
+    },
+    resubscribe() {
       this.$swal({
         title: 'Are you sure?',
-        text: "You won't be able to revert this. Deleting your account will also cancel your subscription.",
+        text: 'Are you sure you want to resubscribe ?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Unsubscribe & Delete Account'
+        confirmButtonText: 'Yes, Resubscribe'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          api.post('/lawyer/resubscribe')
+            .then(() => {
+              this.$swal(
+                'Success',
+                'You have been resubscribed successfully',
+                'success'
+              ).then(() => {
+                this.$store.commit('SET_SUB_CANCEL_STATUS', false);
+              });
+            }).catch(() => {
+              this.$swal('Error', 'Something went wrong! please retry', 'error');
+            });
+        }
+      })
+    },
+    handleCancelSubscription() {
+      this.$swal({
+        title: 'Are you sure?',
+        text: `Are you sure you want to cancel your subscription? You will not be able to access the Simplawfy platform or have any of your proposal accepted from ${this.subscriptionData?.current_period_end} unless you resubscribe.`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Cancel Subscription'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          api.get('/lawyer/cancel-subscription')
+            .then(() => {
+              this.$swal(
+                'Cancelled!',
+                `Your Subscription will be cancelled from ${this.subscriptionData?.current_period_end} You can resubscribe at any time.`,
+                'success'
+              )
+                .then(() => {
+                  this.$store.commit('SET_SUB_CANCEL_STATUS', true);
+                });
+            }).catch(() => {
+              this.$swal('Error', 'Something went wrong! please retry', 'error');
+            });
+        }
+      })
+    },
+    deleteAccount() {
+      let text = "You won't be able to revert this.";
+      let text2 = "Yes, Delete Account";
+      if (this.subscriptionStatus == 'subscribed') {
+        let text = "You won't be able to revert this. Deleting your account will also cancel your subscription.";
+        let text2 = "Yes, Unsubscribe & Delete Account";
+      }
+      this.$swal({
+        title: 'Are you sure?',
+        text: text,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: text2,
       }).then((result) => {
         if (result.isConfirmed) {
           api.get('/delete-account')
             .then(() => {
               this.$swal(
                 'Deleted!',
-                'Your file has been deleted.',
+                'Your Account has been deleted.',
                 'success'
-              ).then(()=>{
-                  this.logoutProcess('lawyer-login');
+              ).then(() => {
+                this.logoutProcess('lawyer-login');
               });
             }).catch(() => {
-              this.$swal('Something went wrong! please retry');            
+              this.$swal('Error', 'Something went wrong! please retry', 'error');
             });
         }
       })
-
     },
 
     changePassword(formData) {

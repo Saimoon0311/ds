@@ -105,11 +105,4 @@ export default {
     margin: 0 auto !important;
     margin-top: 50px;
 } */
-
-.forgetp{
-    color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));
-    text-decoration: underline;
-    background: no-repeat;
-    border: none;
-}
 </style>

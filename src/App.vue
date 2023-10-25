@@ -21,4 +21,11 @@ export default {
 
 <style>
 
+.forgetp{
+    color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));
+    text-decoration: underline;
+    background: no-repeat;
+    border: none;
+}
+
 </style>

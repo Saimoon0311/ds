@@ -12,9 +12,7 @@
       <div class="d-flex">
         <div>
           <form
-            action="profile.php"
-            method="POST"
-            enctype="multipart/form-data"
+            @submit.prevent="uploadImage"
           >
             <label for="photo">Photo:</label>
             <input
@@ -22,8 +20,9 @@
               id="photo"
               name="profile_picture"
               class="form-control"
-              required=""
               accept="image/*"
+              ref="fileInput"
+              required
             />
             <input
               type="submit"
@@ -32,6 +31,7 @@
               value="Upload"
             />
           </form>
+          
         </div>
       </div>
 
@@ -666,19 +666,39 @@
 <script>
 import LawyerHeader from "./Header.vue";
 import Selectic from 'selectic';
-
+import api from "@/config/api.js";
 export default {
-    components: {
-        LawyerHeader,
-        Selectic
-    },
-    computed: {
+  components: {
+    LawyerHeader,
+    Selectic
+  },
+  computed: {
     loginUser() {
       return this.$store.getters.loginUser;
     },
   },
-    methods: {},
-    name: "ProfileTab",
+  methods: {
+    async uploadImage() {
+      const fileInput = this.$refs.fileInput;
+      const file = fileInput.files[0];
+      if (!file) {
+        return;
+      }
+      const formData = new FormData();
+      formData.append('image', file);
+      try {
+        api.post('/lawyer/upload-image', formData).then(()=>{
+          this.$swal("success","Profile Image has been uploaded successfully","success").then(()=>{
+            fileInput.value = '';
+          });
+        })
+      } catch (error) {
+        this.$swal("Error","Something went wrong, please try again","error")
+        // console.error('Error uploading image', error);
+      }
+    },
+  },
+  name: "ProfileTab",
 };
 
 </script>

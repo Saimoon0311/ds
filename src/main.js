@@ -41,8 +41,12 @@ app.mixin({
                 "type": res?.data?.data?.type,
                 "phone": res?.data?.data?.phone,
             }
-            localStorage.setItem("token", res.data?.data?.api_token);
-            localStorage.setItem("loginUser", JSON.stringify(userData));
+            if (!localStorage.getItem('token')) {
+                localStorage.setItem("token", res.data?.data?.api_token);
+            }
+            if (!localStorage.getItem('loginUser')) {
+                localStorage.setItem("loginUser", JSON.stringify(userData));
+            }
             this.$store.commit('SET_AUTHENTICATED', true);
             this.$store.commit('SET_LOGIN_USER', userData);
             this.$router.push({ path: path });
@@ -119,6 +123,7 @@ app.mixin({
             localStorage.removeItem("loginUser");
             this.$store.commit('SET_LOGIN_USER', null);
             this.$store.commit('SET_SUB_STATUS', null);
+            this.$store.commit('SET_SUB_CANCEL_STATUS', false);
             this.$store.commit('SET_APPROVAL_STATUS', null);
             this.$store.commit('SET_SUBSCRIPTION_DATA', null);
             this.$router.push({ path: redirectUrl });

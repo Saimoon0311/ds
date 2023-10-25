@@ -137,6 +137,7 @@ export default {
       return this.$store.getters.adminApprovalStatus;
     },
     subscriptionStatus() {
+      console.log('ss tt uu : ' , this.$store.getters.subscriptionStatus);
       return this.$store.getters.subscriptionStatus;
     }
   },
