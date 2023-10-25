@@ -1,36 +1,37 @@
 <template>
-    <LawyerHeader />
+  <LawyerHeader />
   <div class="container">
-
     <div>
-        <div
-          class="d-flex justify-content-between border rounded bg-secondary text-white p-3 text-start col-md-6 m-auto mt-3"
-          id="28"
-        >
+      <div
+        class="d-flex justify-content-between border rounded bg-secondary text-white p-3 text-start col-md-6 m-auto mt-3"
+        id="28"
+      >
+        <div>
+          <p class="badge bg-dark" title="Area">Criminal</p>
+          &nbsp;
+          <p class="badge bg-dark" title="Location">Victoria</p>
+          <p><b>City/suburb:</b> karachi</p>
+          <p>afsdfsd f...</p>
           <div>
-            <p class="badge bg-dark" title="Area">Criminal</p>
-            &nbsp;
-            <p class="badge bg-dark" title="Location">Victoria</p>
-            <p><b>City/suburb:</b> karachi</p>
-            <p>afsdfsd f...</p>
-            <div>
-              <p><b>Posted by:</b> junucyme@mailinator.com</p>
-              <p>
-                <b> Deadline:</b>
+            <p><b>Posted by:</b> junucyme@mailinator.com</p>
+            <p>
+              <b> Deadline:</b>
 
-                27-12-2023
-              </p>
-              <p><b> Preferred contact time:</b> Flexible</p>
-            </div>
+              27-12-2023
+            </p>
+            <p><b> Preferred contact time:</b> Flexible</p>
           </div>
         </div>
       </div>
+    </div>
 
-    <Form @submit="nextStep" :validation-schema="currentSchema" keep-values   id="mainForm"
-        class="text-start border rounded p-3 d-inline-block m-3 col-md-6 m-auto flex-wrap flex-column d-flex mt-3">
-     
-      
-
+    <Form
+      @submit="nextStep"
+      :validation-schema="currentSchema"
+      keep-values
+      id="mainForm"
+      class="text-start border rounded p-3 d-inline-block m-3 col-md-6 m-auto flex-wrap flex-column d-flex mt-3"
+    >
       <template v-if="currentStep === 0">
         <div class="form-group">
           <label
@@ -44,12 +45,13 @@
               v-model="selectedOption"
               @change="updateDivContent"
               required=""
-              tabindex="null">
-              <option disabled selected value="">
-                Select an option
-              </option>
-              <option  value="Fixed">Fixed fee</option>
+              tabindex="null"
+            >
+              <option disabled selected value="">Select an option</option>
+              <option value="Fixed">Fixed fee</option>
               <option value="Hourly">Hourly rate</option>
+              <option value="Daily">Daily rate</option>
+              <option value="Item">Item by item for specific task</option>
               <option value="Success">Success fee</option>
               <option value="Pro">Pro bono</option>
             </select>
@@ -59,13 +61,108 @@
             ></div>
           </div>
         </div>
-
-      
       </template>
 
       <template v-if="currentStep === 1">
-  <!-- If they select ‘Fixed fee’ -->
-  <div
+        <!-- If they select ‘Daily Rate’ -->
+        <div
+          class="form-group"
+          id="fixed-fee"
+          v-if="selectedOption === 'Daily'"
+        >
+          <div>
+            <label> Daily Rate </label>
+            <input
+              type="number"
+              id="fixedFeeAmount"
+              name="fixedFeeAmount"
+              class="form-control"
+              min="1"
+              step=".01"
+              placeholder="($AUD) 0.00"
+            />
+          </div>
+        </div>
+
+        <!-- If they select item by item -->
+        <div class="form-group" id="fixed-fee" v-if="selectedOption === 'Item'">
+          <div class="" id="additionalFeeEarners">
+            <fieldset
+              class="border p-2 my-2 col-6 bg-light text-center"
+              style="margin: auto"
+            >
+              <legend
+                class="w-auto"
+                style="float: none; padding: inherit; font-size: 1rem"
+              >
+                Item by Item for Specific Tasks
+              </legend>
+              <label class="w-100 text-start">
+                Task:<sup><code>*</code></sup>
+                <input
+                  id="feeEarnerTitle"
+                  autocomplete="on"
+                  placeholder="Eg: Task one "
+                  class="form-control"
+                  required
+                />
+              </label>
+              <br />
+              <br />
+              <label class="w-100 text-start">
+                Cost (AUD):<sup><code>*</code></sup>
+                <div>
+                  <span class="position-absolute" style="line-height: 36px">
+                    $</span
+                  >
+                  <input
+                    id="feeEarnerHourlyRate"
+                    min="1"
+                    autocomplete="on"
+                    type="number"
+                    class="form-control"
+                    required
+                  />
+                </div>
+              </label>
+              <br />
+
+              <br />
+              <button class="btn btn-dark">Add</button>
+            </fieldset>
+
+            <table
+              class="table table-bordered mb-0"
+              id="additionalFeeEarnersTable"
+            >
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Cost (AUD)</th>
+
+                  <th>Total</th>
+                  
+                </tr>
+              </thead>
+              <tbody id="addFeeEarnersRow">
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td> <p
+                class="mb-0 bg-secondary border p-1 rounded text-white text-center"
+             
+                >Total: $<span id="finalHourlyRateMultiple">0</span></p
+              ></td>
+                </tr>
+              </tbody>
+            </table>
+
+           
+          </div>
+        </div>
+
+        <!-- If they select ‘Fixed fee’ -->
+        <div
           class="form-group"
           id="fixed-fee"
           v-if="selectedOption === 'Fixed'"
@@ -89,62 +186,66 @@
           <br />
 
           <div class="my-3">
-        <label
-            >Do you require an upfront payment?<sup><code>*</code></sup></label
-          >
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="upfrontPayment"
-              id="upfrontYes"
-              value="yes"
-              checked=""
-            />
             <label
-              class="form-check-label"
-              for="upfrontYes"
-              @click="setPayment('Yes')"
-            >
-              Yes
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="upfrontPayment"
-              id="upfrontNo"
-              value="no"
-            />
-            <label
-              class="form-check-label"
-              for="upfrontNo"
-              @click="setPayment('No')"
-            >
-              No
-            </label>
-          </div>
-
-          <div class="my-3" id="upfrontPayAmount" v-if="payment === 'Yes'">
-            <label
-              >How much upfront payment do you require?<sup
+              >Do you require an upfront payment?<sup
                 ><code>*</code></sup
               ></label
             >
-            <div>
-              <span class="position-absolute" style="line-height: 36px">$</span>
+            <div class="form-check">
               <input
-                id="upfrontAmount"
-                name="upfrontAmount"
-                type="number"
-                min="1"
-                step=".01"
-                class="form-control"
+                class="form-check-input"
+                type="radio"
+                name="upfrontPayment"
+                id="upfrontYes"
+                value="yes"
+                checked=""
               />
+              <label
+                class="form-check-label"
+                for="upfrontYes"
+                @click="setPayment('Yes')"
+              >
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="upfrontPayment"
+                id="upfrontNo"
+                value="no"
+              />
+              <label
+                class="form-check-label"
+                for="upfrontNo"
+                @click="setPayment('No')"
+              >
+                No
+              </label>
+            </div>
+
+            <div class="my-3" id="upfrontPayAmount" v-if="payment === 'Yes'">
+              <label
+                >How much upfront payment do you require?<sup
+                  ><code>*</code></sup
+                ></label
+              >
+              <div>
+                <span class="position-absolute" style="line-height: 36px"
+                  >$</span
+                >
+                <input
+                  id="upfrontAmount"
+                  name="upfrontAmount"
+                  type="number"
+                  min="1"
+                  step=".01"
+                  class="form-control"
+                />
+              </div>
             </div>
           </div>
-        </div>
         </div>
 
         <!-- If they select ‘Hourly rate’ -->
@@ -236,7 +337,7 @@
               </label>
               <br />
               <br />
-              <button class="btn btn-dark" >Add</button>
+              <button class="btn btn-dark">Add</button>
             </fieldset>
 
             <table
@@ -249,135 +350,142 @@
                   <th>Hourly rate (in AUD excluding GST)</th>
                   <th>Estimated number of hours</th>
                   <th>Total</th>
-                  <th></th>
+                
                 </tr>
               </thead>
-              <tbody id="addFeeEarnersRow"></tbody>
+              <tbody id="addFeeEarnersRow">
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td> <p
+                class="mb-0 bg-secondary border p-1 rounded text-white text-center"
+               
+                >Total: $<span id="finalHourlyRateMultiple">0</span></p
+              ></td>
+                </tr>
+              </tbody>
             </table>
 
-            <div class="border border-top-0 text-end w-100 p-2">
-              <b
-                class="mb-0 bg-secondary border p-1 rounded text-white"
-                style="margin-right: 17vw"
-                >Total: $<span id="finalHourlyRateMultiple">0</span></b
-              >
-            </div>
+            
           </div>
 
           <div v-if="isVisible === 'Yes'">
-            
             <!-- Invisible filed for posting additional fee earners info -->
             <input class="d-none" name="feeEarnersInfo" id="feeEarnersInfo" />
-            
+
             <div id="hourlyRateIndividual">
               <label
-              >Hourly rate (in AUD excluding GST):<sup
-              ><code>*</code></sup
-              ></label
+                >Hourly rate (in AUD excluding GST):<sup
+                  ><code>*</code></sup
+                ></label
               >
               <div>
                 <span class="position-absolute" style="line-height: 36px">
                   $</span
-                  >
-                  <input
+                >
+                <input
                   type="number"
                   id="hourlyRate"
                   name="hourlyRate"
+                  min="1"
+                  step="0.01"
+                  class="form-control"
+                  oninput="updateHourlyRateIndividual()"
+                />
+              </div>
+
+              <br />
+
+              <label
+                >Estimated number of hours<sup><code>*</code></sup></label
+              >
+              <input
+                type="number"
+                id="noOfHours"
+                name="noOfHours"
                 min="1"
                 step="0.01"
                 class="form-control"
                 oninput="updateHourlyRateIndividual()"
               />
+
+              <br />
             </div>
 
-            <br />
-
-            <label
-              >Estimated number of hours<sup><code>*</code></sup></label
-            >
-            <input
-              type="number"
-              id="noOfHours"
-              name="noOfHours"
-              min="1"
-              step="0.01"
-              class="form-control"
-              oninput="updateHourlyRateIndividual()"
-            />
-            
-            <br />
+            <!-- input field to capture final hourly rate value during form submit -->
+            <p id="finalHourlyRateText">
+              Total: $<input
+                id="finalHourlyRateValue"
+                name="finalHourlyRateValue"
+                type="number"
+                readonly=""
+                class="border-0 text-dark bg-white"
+              />
+            </p>
           </div>
-
-          <!-- input field to capture final hourly rate value during form submit -->
-          <p id="finalHourlyRateText">
-            Total: $<input
-              id="finalHourlyRateValue"
-              name="finalHourlyRateValue"
-              type="number"
-              readonly=""
-              class="border-0 text-dark bg-white"
-            />
-          </p>
-        </div>
 
           <div class="my-3">
-        <label
-            >Do you require an upfront payment?<sup><code>*</code></sup></label
-          >
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="upfrontPayment"
-              id="upfrontYes"
-              value="yes"
-              checked=""
-            />
             <label
-              class="form-check-label"
-              for="upfrontYes"
-              @click="setPay('Yes')"
-            >
-              Yes
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="upfrontPayment"
-              id="upfrontNo"
-              value="no"
-            />
-            <label
-              class="form-check-label"
-              for="upfrontNo"
-              @click="setPay('No')"
-            >
-              No
-            </label>
-          </div>
-
-          <div class="my-3" id="upfrontPayAmount" v-if="pay === 'Yes'">
-            <label
-              >How much upfront payment do you require?<sup
+              >Do you require an upfront payment?<sup
                 ><code>*</code></sup
               ></label
             >
-            <div>
-              <span class="position-absolute" style="line-height: 36px">$</span>
+            <div class="form-check">
               <input
-                id="upfrontAmount"
-                name="upfrontAmount"
-                type="number"
-                min="1"
-                step=".01"
-                class="form-control"
+                class="form-check-input"
+                type="radio"
+                name="upfrontPayment"
+                id="upfrontYes"
+                value="yes"
+                checked=""
               />
+              <label
+                class="form-check-label"
+                for="upfrontYes"
+                @click="setPay('Yes')"
+              >
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="upfrontPayment"
+                id="upfrontNo"
+                value="no"
+              />
+              <label
+                class="form-check-label"
+                for="upfrontNo"
+                @click="setPay('No')"
+              >
+                No
+              </label>
+            </div>
+
+            <div class="my-3" id="upfrontPayAmount" v-if="pay === 'Yes'">
+              <label
+                >How much upfront payment do you require?<sup
+                  ><code>*</code></sup
+                ></label
+              >
+              <div>
+                <span class="position-absolute" style="line-height: 36px"
+                  >$</span
+                >
+                <input
+                  id="upfrontAmount"
+                  name="upfrontAmount"
+                  type="number"
+                  min="1"
+                  step=".01"
+                  class="form-control"
+                />
+              </div>
             </div>
           </div>
-        </div>
-
         </div>
 
         <!-- If they select ‘Success Fee’ -->
@@ -411,63 +519,66 @@
           <br />
 
           <div class="my-3">
-        <label
-            >Do you require an upfront payment?<sup><code>*</code></sup></label
-          >
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="upfrontPayment"
-              id="upfrontYes"
-              value="yes"
-              checked=""
-            />
             <label
-              class="form-check-label"
-              for="upfrontYes"
-              @click="setPaySucc('Yes')"
-            >
-              Yes
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="upfrontPayment"
-              id="upfrontNo"
-              value="no"
-            />
-            <label
-              class="form-check-label"
-              for="upfrontNo"
-              @click="setPaySucc('No')"
-            >
-              No
-            </label>
-          </div>
-
-          <div class="my-3" id="upfrontPayAmount" v-if="paySucc === 'Yes'">
-            <label
-              >How much upfront payment do you require?<sup
+              >Do you require an upfront payment?<sup
                 ><code>*</code></sup
               ></label
             >
-            <div>
-              <span class="position-absolute" style="line-height: 36px">$</span>
+            <div class="form-check">
               <input
-                id="upfrontAmount"
-                name="upfrontAmount"
-                type="number"
-                min="1"
-                step=".01"
-                class="form-control"
+                class="form-check-input"
+                type="radio"
+                name="upfrontPayment"
+                id="upfrontYes"
+                value="yes"
+                checked=""
               />
+              <label
+                class="form-check-label"
+                for="upfrontYes"
+                @click="setPaySucc('Yes')"
+              >
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="upfrontPayment"
+                id="upfrontNo"
+                value="no"
+              />
+              <label
+                class="form-check-label"
+                for="upfrontNo"
+                @click="setPaySucc('No')"
+              >
+                No
+              </label>
+            </div>
+
+            <div class="my-3" id="upfrontPayAmount" v-if="paySucc === 'Yes'">
+              <label
+                >How much upfront payment do you require?<sup
+                  ><code>*</code></sup
+                ></label
+              >
+              <div>
+                <span class="position-absolute" style="line-height: 36px"
+                  >$</span
+                >
+                <input
+                  id="upfrontAmount"
+                  name="upfrontAmount"
+                  type="number"
+                  min="1"
+                  step=".01"
+                  class="form-control"
+                />
+              </div>
             </div>
           </div>
-        </div>
-
         </div>
 
         <!-- Upfront payment -->
@@ -477,13 +588,8 @@
           v-if="selectedOption === 'Pro'"
           ref="content"
         >
-        
-        </div>
-      </template>
-
-      <template v-if="currentStep === 2">
-               <!-- Additional information -->
-        <div class="form-group">
+            <!-- Additional information -->
+            <div class="form-group">
           <label
             >Tell the potential client what you will do for them:<sup
               ><code>*</code></sup
@@ -501,7 +607,7 @@
         </div>
 
         <!-- Deadline acceptance radio -->
-         <div class="form-group m-2" id="div-deadline-acceptance-radio">
+        <div class="form-group m-2" id="div-deadline-acceptance-radio">
           <label>Can you meet the potential client's deadline?</label>
           <div class="form-check">
             <input
@@ -536,7 +642,7 @@
               No
             </label>
           </div>
-        </div> 
+        </div>
 
         <!-- Can't meet deadline explanation box -->
         <div class="form-group" id="div-deadline" v-if="deadline === 'No'">
@@ -553,7 +659,205 @@
               placeholder="Eg: It's not realistic"
             ></textarea>
           </label>
-        </div> 
+        </div>
+
+        <div class="stepbtn mt-3">
+        <button
+          v-if="currentStep !== 0"
+          type="button"
+          @click="prevStep"
+          class="btn btn-dark mr"
+        >
+          Previous
+        </button>
+       
+        <button v-if="currentStep === 1" type="submit" class="btn btn-dark">
+          Finish
+        </button>
+      </div>
+
+       
+      </div>
+      </template>
+
+      <template v-if="currentStep === 2">
+        <div class="form-group">
+            <label> What is the estimated amount for disbursements (excluding GST)?</label>
+            <input
+              type="number"
+              id="fixedFeeAmount"
+              name="fixedFeeAmount"
+              class="form-control"
+              min="1"
+              step=".01"
+              placeholder="($AUD) 0.00"
+            />
+            <button class="btn btn-dark mt-3 mb-3" @click="showItemise">Itemise Disbursements</button>
+            <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
+            <fieldset
+              class="border p-2 my-2 col-6 bg-light text-center"
+              style="margin: auto"
+            >
+              <legend
+                class="w-auto"
+                style="float: none; padding: inherit; font-size: 1rem"
+              >
+              Itemise Disbursements
+              </legend>
+              <label class="w-100 text-start">
+                Task:<sup><code>*</code></sup>
+                <input
+                  id="feeEarnerTitle"
+                  autocomplete="on"
+                  placeholder="Eg: Item one "
+                  class="form-control"
+                  required
+                />
+              </label>
+              <br />
+              <br />
+              <label class="w-100 text-start">
+                Cost (AUD):<sup><code>*</code></sup>
+                <div>
+                  <span class="position-absolute" style="line-height: 36px">
+                    $</span
+                  >
+                  <input
+                    id="feeEarnerHourlyRate"
+                    min="1"
+                    autocomplete="on"
+                    type="number"
+                    class="form-control"
+                    required
+                  />
+                </div>
+              </label>
+              <br />
+
+              <br />
+              <button class="btn btn-dark ">Add</button>
+            </fieldset>
+
+            <table
+              class="table table-bordered mb-0"
+              id="additionalFeeEarnersTable"
+            >
+              <thead>
+                <tr>
+                  <th>Item Disbursement</th>
+                  <th>Cost (AUD)</th>
+
+                  <th>Total</th>
+                 
+                </tr>
+              </thead>
+              <tbody id="addFeeEarnersRow">
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td> 
+              <p
+                class="mb-0 bg-secondary border p-1 rounded text-white text-center"
+                
+                >Total: $<span id="finalHourlyRateMultiple">0</span></p>
+            </td>
+                </tr>
+              
+              </tbody>
+            </table>
+
+           
+          </div>
+          </div>
+
+
+          <div class="form-group mb-3">
+            <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
+            <input
+              type="number"
+              id="fixedFeeAmount"
+              name="fixedFeeAmount"
+              class="form-control"
+              min="1"
+              step=".01"
+              placeholder="($AUD) 0.00"
+            />
+            </div>
+
+
+
+        <!-- Additional information -->
+        <div class="form-group">
+          <label
+            >Tell the potential client what you will do for them:<sup
+              ><code>*</code></sup
+            >
+            <textarea
+              id="additionalInfo"
+              name="additionalInfo"
+              class="form-control"
+              rows="4"
+              cols="100%"
+              required=""
+            ></textarea>
+          </label>
+          <br />
+        </div>
+
+        <!-- Deadline acceptance radio -->
+        <div class="form-group m-2" id="div-deadline-acceptance-radio">
+          <label>Can you meet the potential client's deadline?</label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="deadlineFlexibility"
+              id="deadlineYes"
+              value="yes"
+              checked=""
+            />
+            <label
+              class="form-check-label"
+              for="deadlineYes"
+              @click="showDeadline('Yes')"
+            >
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="deadlineFlexibility"
+              id="deadlineNo"
+              value="no"
+            />
+            <label
+              class="form-check-label"
+              for="deadlineNo"
+              @click="showDeadline('No')"
+            >
+              No
+            </label>
+          </div>
+        </div>
+
+        <!-- Can't meet deadline explanation box -->
+        <div class="form-group" id="div-deadline" v-if="deadline === 'No'">
+          <label
+            >Please explain why you can't meet potential client's deadline:<sup
+              ><code>*</code></sup
+            >
+            <textarea
+              id="txtarea-deadline"
+              name="deadline"
+              class="form-control"
+              rows="4"
+              cols="100%"
+              placeholder="Eg: It's not realistic"
+            ></textarea>
+          </label>
+        </div>
 
         <!-- Do you offer a free or discounted first consultation? -->
         <div class="form-group m-2" id="freeFirstConsultationRadio">
@@ -623,7 +927,7 @@
                 class="form-control"
                 name="freeFirstConsultationMinutes"
                 id="freeFirstConsultationMinutes"
-                placeholder="60"
+                placeholder="E.g. 60"
               />
               <div class="input-group-prepend">
                 <div class="input-group-text">minutes</div>
@@ -631,6 +935,7 @@
             </div>
           </div>
         </div>
+
 
         <!-- Submit button -->
         <!-- <div class="text-center">
@@ -642,25 +947,36 @@
         <p>4</p>
       </template> -->
 
-      <div class="stepbtn mt-3 ">
-        <button v-if="currentStep !== 0" type="button" @click="prevStep" class="btn btn-dark mr ">
+      <div class="stepbtn mt-3">
+        <button
+          v-if="currentStep !== 0"
+          type="button"
+          @click="prevStep"
+          class="btn btn-dark mr"
+        >
           Previous
         </button>
-        <button  v-if="currentStep !== 2" type="submit" :disabled="!selectedOption" class="btn btn-dark ">Next</button>
-        <button v-if="currentStep === 2" type="submit" class="btn btn-dark ">Finish</button>
+        <button
+          v-if="currentStep !== 2"
+          type="submit"
+          :disabled="!selectedOption"
+          class="btn btn-dark"
+        >
+          Next
+        </button>
+        <button v-if="currentStep === 2" type="submit" class="btn btn-dark">
+          Finish
+        </button>
       </div>
-
-
 
       <pre>{{ values }}</pre>
     </Form>
   </div>
 </template>
-<script setup >
-
-import { Form } from 'vee-validate';
+<script setup>
+import { Form } from "vee-validate";
 // import * as yup from 'yup';
-import { ref, computed } from 'vue';
+import { ref, computed } from "vue";
 
 const currentStep = ref(0);
 
@@ -696,7 +1012,7 @@ const currentSchema = computed(() => {
 
 function nextStep(values) {
   if (currentStep.value === 2) {
-    console.log('Done: ', JSON.stringify(values, null, 1));
+    console.log("Done: ", JSON.stringify(values, null, 1));
     return;
   }
 
@@ -710,7 +1026,6 @@ function prevStep() {
 
   currentStep.value--;
 }
-
 </script>
 <script>
 import LawyerHeader from "./lawyer/Header.vue";
@@ -719,7 +1034,7 @@ export default {
   components: {
     LawyerHeader,
   },
- 
+
   data() {
     return {
       selectedOption: "",
@@ -729,10 +1044,14 @@ export default {
       pay: "Yes",
       paySucc: "Yes",
       deadline: "Yes",
-      team: 'Yes',
+      team: "Yes",
+      divItemiseVisible: false,
     };
   },
   methods: {
+    showItemise() {
+      this.divItemiseVisible = true;
+    },
     updateDivContent() {
       // No need to update divContent; we're using v-if to conditionally render divs.
     },
@@ -757,33 +1076,21 @@ export default {
     showDeadline(value) {
       this.deadline = value;
     },
-    goToNextStep() {
-      if (this.$refs.content.innerHTML.trim() === "") {
-        // If the div is empty, trigger a click event on the "Next" button
-        this.$nextTick(() => {
-          const nextButton = this.$el.querySelector("button");
-          if (nextButton) {
-            nextButton.click();
-          }
-        });
-      } else if (this.selectedOption) {
-        // Add your code to navigate to the next step here.
-        console.log("Proceeding to the next step with option: " + this.selectedOption);
-      }
-    },
+   
   },
   name: "DashboardTab",
-};</script>
+};
+</script>
 
-<style>
+<style scoped>
 .stepbtn {
   display: flex;
   justify-content: flex-end;
 }
-.stepbtn .mr{
+.stepbtn .mr {
   margin-right: 10px;
 }
-.stepbtn .btn{
+.btn {
   padding: 5px 25px;
   border-radius: 20px;
 }
