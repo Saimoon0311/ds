@@ -104,7 +104,7 @@
                     >View Proposals</router-link
                   ><button
                     class="btn btn-danger btn-sm w-100 py-2"
-                    onclick="handleCancelJob(event)"
+                    
                   >
                     Cancel
                   </button>

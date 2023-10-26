@@ -17,6 +17,7 @@ import ClientRegister from "@/pages/client/Register.vue";
 import ClientAccount from "@/pages/client/Account.vue";
 import ClientDashboard from "@/pages/client/Dashboard.vue";
 import PostingJob from "@/pages/client/PostingJob.vue";
+import PostingaJob from "@/pages/client/PostingaJob.vue";
 import AreaOfLaw from "@/pages/client/AreaOfLaw.vue";
 import ViewBids from "@/pages/client/ViewBids.vue";
 import ReplyInfoRequest from "@/pages/client/ReplyInfoRequest.vue";
@@ -139,8 +140,12 @@ const routes = [
     component: AreaOfLaw,
   },
   {
-    path: "/posting-job",
+    path: "/postingjob",
     component: PostingJob,
+  },
+  {
+    path: "/posting-job",
+    component: PostingaJob,
   },
   {
     path: "/view-proposals",

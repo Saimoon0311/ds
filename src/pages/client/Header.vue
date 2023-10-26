@@ -35,7 +35,7 @@
                   >Dashboard</router-link
                 >
                 <router-link
-                  to="/area-of-law"
+                  to="/posting-job"
                   class="nav-link fw-bolder menuItem-active-link"
                   id="lawyers"
                   aria-current="page"

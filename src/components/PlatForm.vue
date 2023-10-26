@@ -11,21 +11,21 @@
           The Revolution is Coming. Be Part of the Change.
         </p>
       </div>
-      <div class="d-flex flex-wrap justify-content-center align-items-center">
-        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center">
+      <div class="d-flex flex-wrap justify-content-center align-items-center pb-5">
+        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center ">
           <p class="fw-bold law-hd">I'm looking for a lawyer</p>
           <div class="showhover">
-            <p class="fw-bold">I'm looking for a lawyer</p>
+            <p class="fw-bold">Looking for a lawyer</p>
             <p>Need a lawyer and don't know where to begin?</p>
             <p>
               We take the hassle and uncertainty out of the process of finding a
               lawyer.
             </p>
             <p>Simply make one enquiry and wait for lawyers to come to you.</p>
-            <div class="d-flex align-items-center justify-content-center">
-              <router-link to="/client-login" class="text-dark fs-5 p-2">Sign in</router-link>
-              <p>Or</p>
-              <router-link to="/client-register" class="text-dark fs-5 p-2">Sign up</router-link>
+            <div class="d-flex align-items-center justify-content-center mt-3">
+              <router-link to="/client-login" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</router-link>
+              <!-- <p>Or</p> -->
+              <router-link to="/client-register" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign up</router-link>
             </div>
             <!-- <a href="./need-a-lawyer/index" class="text-black fs-5">Register to be notified when the platform goes live.</a> -->
           </div>
@@ -33,7 +33,7 @@
         <div class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white">
           <p class="fw-bold law-hd">I'm looking for clients</p>
           <div class="showhover">
-            <p class="fw-bold">I'm looking for clients</p>
+            <p class="fw-bold">Looking for clients</p>
 
             <p>
               Professional networking eating into your billable hours and not
@@ -47,10 +47,11 @@
               Simply subscribe for an opportunity to find clients in your
               practice area without leaving your desk.
             </p>
-            <div class="d-flex align-items-center justify-content-center">
-              <router-link to="/lawyer-login" class="text-white fs-5 p-2">Sign in</router-link>
-              <p>Or</p>
-              <router-link to="/lawyer-register" class="text-white fs-5 p-2">Sign up</router-link>
+            <div class="d-flex align-items-center justify-content-center mt-3">
+              <router-link to="/lawyer-login" class="text-white fs-5 p-2 btn btn-light text-black">Sign in</router-link>
+
+              <router-link to="/lawyer-register" class="text-white fs-5 p-2 btn btn-light text-black">Sign
+                up</router-link>
             </div>
           </div>
         </div>
@@ -127,8 +128,8 @@ export default {
     font-size: 12px;
     padding: 50px;
     text-align: center;
-    width: 100%;
-    height: 300px;
+    /* width: 100%;
+    height: 300px; */
     flex-direction: unset !important;
     /* row css */
     --bs-gutter-x: 1.5rem;
@@ -165,8 +166,9 @@ export default {
 .homepage-circles .law-hd {
   visibility: visible;
   opacity: 1;
-  transition: visibility 0s, opacity 0.4s linear;
+  transition: visibility 0s, opacity 0.5s linear;
   position: absolute;
+  font-size: 20px;
 }
 
 .homepage-circles .showhover,
@@ -174,6 +176,19 @@ export default {
   /* display: none;
   transition: ease-in-out 0.5; */
   opacity: 0;
-  transition: visibility 0s, opacity 0.4s linear;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.btn {
+  padding: 4px 20px 5px 20px !important;
+  border-radius: 20px;
+  text-align: center;
+  align-items: center;
+  font-size: 16px !important;
+  margin: 0px 10px;
+}
+
+.text-black {
+  color: #000 !important;
 }
 </style>
