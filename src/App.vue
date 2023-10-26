@@ -5,6 +5,7 @@
 
 <script>
 import LoadingIndicator from '@/components/LoadingIndicator.vue';
+
 export default {
   name: 'App',
   components: {
@@ -20,6 +21,8 @@ export default {
 </script>
 
 <style>
+
+@import "vue-select/dist/vue-select.css";
 
 .forgetp{
     color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));

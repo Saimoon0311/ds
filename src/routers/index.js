@@ -105,6 +105,7 @@ const routes = [
   {
     path: "/lawyer-register",
     component: LawyerRegister,
+    beforeEnter: reverse_guard,
   },
   {
     path: "/lawyer-dashboard",
@@ -151,6 +152,7 @@ const routes = [
   {
     path: "/client-register",
     component: ClientRegister,
+    beforeEnter: reverse_guard,
   },
   {
     path: "/client-account",
@@ -206,13 +208,13 @@ const routes = [
     component: AdminLogin,
   },
 
-  {
-    path: "/",
-    component: HelloWorld,
-    meta: {
-      requiresAuth: true
-    },
-  },
+  // {
+  //   path: "/",
+  //   component: HelloWorld,
+  //   meta: {
+  //     requiresAuth: true
+  //   },
+  // },
 
 
   {
@@ -263,12 +265,14 @@ const routes = [
   {
     path: "/forget-password",
     component: ForgetPassword,
+    beforeEnter: reverse_guard,
   },
 
 
   {
     path: "/reset-password/:email/:token",
     component: ResetPassword,
+    beforeEnter: reverse_guard,
   },
 
   {
@@ -304,8 +308,10 @@ const router = createRouter({
 });
 
 
-const isLoggedIn = async () => {
-  return localStorage.getItem('token')
+const isLoggedIn = () => {
+  const token = localStorage.getItem('token')
+  // console.log('not match ,,, ' , token);
+  return token;
 }
 
 // if(result.status == 200){
@@ -315,6 +321,7 @@ const isLoggedIn = async () => {
 router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isLoggedIn()) {
+      // console.log('not match');
       next({ path: '/' })
     } else {
       try {

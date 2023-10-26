@@ -59,7 +59,7 @@
             </div>
 
             <div class="modal-body">
-              <form action="profile.php" method="post"></form>
+              <!-- <form action="profile.php" method="post"></form> -->
               <div class="form-group">
                 <input
                   type="text"
@@ -67,12 +67,13 @@
                   maxlength="200"
                   class="form-control"
                   id="phone"
-                  value=""
+                  v-model="form.job_title"
                 />
                 <button
-                  type="submit"
+                  type="button"
                   name="job-title-submit"
                   class="btn btn-secondary my-3"
+                  @click="updateProfile('job_title','#Jobtitle')"
                 >
                   Save changes
                 </button>
@@ -294,92 +295,37 @@
             </div>
           
             
+            <!-- :options="['Commercial (business)', 'Consumer', 'Criminal','Employment / workers compensation','Environmental','Family','Human rights / constitutional','Immigration','Insurance','Intellectual property','Liquor licensing','Litigation (civil court cases)','Notary public','Personal injury (compensation)','Property (real estate) / construction','Traffic','Wills and estates']"  -->
+
             <div class="modal-body w-100">
-              <Selectic className="mselect  "  placeholder="Nothing Selected" multiple :options="['Commercial (business)', 'Consumer', 'Criminal','Employment / workers compensation','Environmental','Family','Human rights / constitutional','Immigration','Insurance','Intellectual property','Liquor licensing','Litigation (civil court cases)','Notary public','Personal injury (compensation)','Property (real estate) / construction','Traffic','Wills and estates']" v-model="selection"/>
-              <form
-                action="profile.php"
-                method="post"
+
+              <!-- <MultiSelectPrime 
+              v-model="selectedOptionIds" 
+              :options="options" filter 
+              optionLabel="title" 
+              placeholder="Select Cities"
+              :maxSelectedLabels="3" /> -->
+
+              <!-- <Selectic className="mselect"  placeholder="Nothing Selected" multiple 
+              :options="options"
+              v-model="selectedOptionIds"
+              :option-label="opt => opt.text"
+              :option-id="opt => opt.id"
+              /> -->
+
+              <v-select v-model="selectedOptionIds" :options="options" label="title" multiple></v-select>
+
+              <button @click="saveSelectedFields" class="btn btn-secondary my-3">Save changes</button>
+              <!-- <form
+                @submit="submitForm"
                 id="form-bs-select-1"
               ></form>
-              <!-- <div class="dropdown bootstrap-select show-tick w-100">
-                <select
-                  class="selectpicker w-100"
-                  multiple=""
-                  name="expertise[]"
-                  form="form-bs-select-1"
-                >
-                  <option value="Commercial">Commercial (business)</option>
-                  <option value="Consumer">Consumer</option>
-                  <option value="Criminal">Criminal</option>
-                  <option value="Employment / workers compensation">
-                    Employment / workers compensation
-                  </option>
-                  <option value="Environmental">Environmental</option>
-                  <option value="Family">Family</option>
-                  <option value="Human rights / constitutional">
-                    Human rights / constitutional
-                  </option>
-                  <option value="Immigration">Immigration</option>
-                  <option value="Insurance">Insurance</option>
-                  <option value="Intellectual property">
-                    Intellectual property
-                  </option>
-                  <option value="Liquor licensing">Liquor licensing</option>
-                  <option value="Litigation">
-                    Litigation (civil court cases)
-                  </option>
-                  <option value="Notary public">Notary public</option>
-                  <option value="Personal injury">
-                    Personal injury (compensation)
-                  </option>
-                  <option value="Property / construction">
-                    Property (real estate) / construction
-                  </option>
-                  <option value="Tax">Tax</option>
-                  <option value="Traffic">Traffic</option>
-                  <option value="Wills and estates">
-                    Wills &amp; estates
-                  </option></select
-                ><button
-                  type="button"
-                  tabindex="-1"
-                  class="btn dropdown-toggle bs-placeholder btn-light"
-                  data-bs-toggle="dropdown"
-                  role="combobox"
-                  aria-owns="bs-select-1"
-                  aria-haspopup="listbox"
-                  aria-expanded="false"
-                  title="Nothing selected"
-                >
-                  <div class="filter-option">
-                    <div class="filter-option-inner">
-                      <div class="filter-option-inner-inner">
-                        Nothing selected
-                      </div>
-                    </div>
-                  </div>
-                </button>
-                <div class="dropdown-menu">
-                  <div
-                    class="inner show"
-                    role="listbox"
-                    id="bs-select-1"
-                    tabindex="-1"
-                    aria-multiselectable="true"
-                  >
-                    <ul
-                      class="dropdown-menu inner show"
-                      role="presentation"
-                    ></ul>
-                  </div>
-                </div>
-              </div> -->
               <input
                 type="submit"
                 name="field-submit"
                 class="btn btn-secondary my-3"
                 value="Save changes"
-              />
+              /> -->
             </div>
           </div>
         </div>
@@ -410,76 +356,30 @@
             </div>
 
             <div class="modal-body w-100">
-              <Selectic className="mselect  "  placeholder="Nothing Selected" multiple :options="['New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','Australian Capital Territory','Northern Territory']" v-model="selection"/>
+              <!-- <Selectic className="mselect  "  placeholder="Nothing Selected" multiple :options="['New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','Australian Capital Territory','Northern Territory']" v-model="selection"/> -->
 
-              <form
+              <v-select v-model="selectedOptionIds_locations" :options="options_locations" label="title" multiple></v-select>
+
+              <button @click="saveSelectedLocations" class="btn btn-secondary my-3">Save changes</button>
+
+              <!-- <form
                 action="profile.php"
                 method="post"
                 id="form-bs-select-2"
               ></form>
-              <!-- <div class="dropdown bootstrap-select show-tick w-100">
-                <select
-                  class="selectpicker w-100"
-                  multiple=""
-                  name="location[]"
-                  form="form-bs-select-2"
-                >
-                  <option value="New South Wales">New South Wales</option>
-                  <option value="Victoria">Victoria</option>
-                  <option value="Queensland">Queensland</option>
-                  <option value="Western Australia">Western Australia</option>
-                  <option value="South Australia">South Australia</option>
-                  <option value="Tasmania">Tasmania</option>
-                  <option value="Australian Capital Territory">
-                    Australian Capital Territory
-                  </option>
-                  <option value="Northern Territory">
-                    Northern Territory
-                  </option></select
-                ><button
-                  type="button"
-                  tabindex="-1"
-                  class="btn dropdown-toggle bs-placeholder btn-light"
-                  data-bs-toggle="dropdown"
-                  role="combobox"
-                  aria-owns="bs-select-2"
-                  aria-haspopup="listbox"
-                  aria-expanded="false"
-                  title="Nothing selected"
-                >
-                  <div class="filter-option">
-                    <div class="filter-option-inner">
-                      <div class="filter-option-inner-inner">
-                        Nothing selected
-                      </div>
-                    </div>
-                  </div>
-                </button>
-                <div class="dropdown-menu">
-                  <div
-                    class="inner show"
-                    role="listbox"
-                    id="bs-select-2"
-                    tabindex="-1"
-                    aria-multiselectable="true"
-                  >
-                    <ul
-                      class="dropdown-menu inner show"
-                      role="presentation"
-                    ></ul>
-                  </div>
-                </div>
-              </div> -->
               <input
                 type="submit"
                 name="location-submit"
                 class="btn btn-secondary my-3"
                 value="Save changes"
-              />
+              /> -->
             </div>
           </div>
         </div>
       </div>
+
+      <!-- <MultiSelectPrime v-model="selectedOptionIds" :options="options" filter optionLabel="name" placeholder="Select Cities"
+    :maxSelectedLabels="3" class="w-full md:w-20rem" /> -->
 
       <table class="table table-bordered mt-3 table-striped">
         <tbody>
@@ -487,6 +387,11 @@
           <tr>
             <td class="col-md-3">Email:</td>
             <td>{{ loginUser?.email }}</td>
+            <td>
+
+
+
+            </td>
           </tr>
 
           <!-- First Name -->
@@ -613,6 +518,7 @@
               Areas of Practice:
               <button
                 type="button"
+                @click="setModal('fields')"
                 class="btn btn-secondary btn-sm"
                 data-bs-toggle="modal" data-bs-target="#AreaModal"
                 data-target="#field-modal"
@@ -627,6 +533,22 @@
             <!-- Field Modal ends here -->
 
             <td>
+
+              <!-- <MultiSelectPrime 
+              v-model="selectedOptionIds" 
+              :options="options" filter 
+              optionLabel="title" 
+              placeholder="Select Cities"
+              :maxSelectedLabels="3" /> -->
+
+              <!-- {{ selectedOptionIds }} -->
+
+              <div v-if="selectedOptionIdsShow.length > 0">
+                <span v-for="(item,index) in selectedOptionIdsShow" :key="index">
+                  {{ item.title }}<span v-if="index < selectedOptionIdsShow.length - 1">, </span>
+                </span>
+              </div>
+
               <span class="badge bg-dark mx-1"></span>
             </td>
           </tr>
@@ -636,6 +558,7 @@
             <td class="d-flex align-items-center justify-content-between">
               State/territory:
               <button
+              @click="setModal('locations')"
                 type="button"
                 class="btn btn-secondary btn-sm"
                 data-bs-toggle="modal" data-bs-target="#StateModal"
@@ -651,6 +574,13 @@
             <!-- Location Modal ends here -->
 
             <td>
+
+              <div v-if="selectedOptionIdsShow_locations.length > 0">
+                <span v-for="(item,index) in selectedOptionIdsShow_locations" :key="index">
+                  {{ item.title }}<span v-if="index < selectedOptionIdsShow_locations.length - 1">, </span>
+                </span>
+              </div>
+
               <span class="badge bg-dark mx-1"></span>
             </td>
           </tr>
@@ -665,19 +595,112 @@
 </template>
 <script>
 import LawyerHeader from "./Header.vue";
-import Selectic from 'selectic';
+// import Selectic from 'selectic';
 import api from "@/config/api.js";
+import $ from 'jquery';
+window.$ = window.jQuery = $;
 export default {
+  data() {
+    return {
+      form: {
+        law_firm: null,
+        link: null,
+        phone: null,
+        about: null,
+        job_title: null,
+      },
+      options: [],
+      selectedOptionIds: [],
+      selectedOptionIdsShow: [],
+
+      options_locations: [],
+      selectedOptionIds_locations: [],
+      selectedOptionIdsShow_locations: [],
+    };
+  },
   components: {
     LawyerHeader,
-    Selectic
+    // Selectic
   },
   computed: {
     loginUser() {
       return this.$store.getters.loginUser;
     },
   },
+  mounted() {
+    this.fetchOptions();
+    this.fetchOptions_locations();
+  },
   methods: {
+    setModal($type) {
+      if ($type == "fields") {
+        this.selectedOptionIds = this.selectedOptionIdsShow;
+      } else if ($type == "locations") {
+        this.selectedOptionIds_locations = this.selectedOptionIdsShow_locations;
+      }
+    },
+    // fields
+    async fetchOptions() {
+      try {
+        const response = await api.get('/get-active-fields');
+        console.log('sundak  :::: ', response?.data?.allFields);
+        this.options = response?.data?.allFields;
+        this.selectedOptionIds = response?.data?.myFields ?? [];
+        this.selectedOptionIdsShow = response?.data?.myFields ?? [];
+      } catch (error) {
+        console.error('Error fetching options:', error);
+      }
+    },
+
+    // locations
+    async fetchOptions_locations() {
+      try {
+        const response = await api.get('/get-active-locations');
+        console.log('sundak  :::: ', response?.data?.allLocations);
+        this.options_locations = response?.data?.allLocations;
+        this.selectedOptionIds_locations = response?.data?.myLocations ?? [];
+        this.selectedOptionIdsShow_locations = response?.data?.myLocations ?? [];
+      } catch (error) {
+        console.error('Error fetching options:', error);
+      }
+    },
+
+    // fields
+    saveSelectedFields() {
+      console.log('Selected Option IDs:', this.selectedOptionIds);
+      if (this.selectedOptionIds.length == 0) {
+        return false;
+      }
+      try {
+        api.post('/lawyer/update-fields', { "ids": this.selectedOptionIds }).then(() => {
+          this.$swal("Success", "Fields updated successfully", "success");
+          this.fetchOptions();
+          this.closeModal('#AreaModal');
+        })
+      } catch (error) {
+        this.$swal("Error", "Something went wrong, please try again", "error")
+        // console.error('Error uploading image', error);
+      }
+    },
+
+    // locations
+    saveSelectedLocations() {
+      console.log('Selected Option IDs:', this.selectedOptionIds_locations);
+      if (this.selectedOptionIds_locations.length == 0) {
+        return false;
+      }
+      try {
+        api.post('/lawyer/update-locations', { "ids": this.selectedOptionIds_locations }).then(() => {
+          this.$swal("Success", "Locations updated successfully", "success");
+          this.fetchOptions_locations();
+          this.closeModal('#StateModal');
+        })
+      } catch (error) {
+        this.$swal("Error", "Something went wrong, please try again", "error")
+        // console.error('Error uploading image', error);
+      }
+    },
+
     async uploadImage() {
       const fileInput = this.$refs.fileInput;
       const file = fileInput.files[0];
@@ -687,15 +710,40 @@ export default {
       const formData = new FormData();
       formData.append('image', file);
       try {
-        api.post('/lawyer/upload-image', formData).then(()=>{
-          this.$swal("success","Profile Image has been uploaded successfully","success").then(()=>{
+        api.post('/lawyer/upload-image', formData).then(() => {
+          this.$swal("success", "Profile Image has been uploaded successfully", "success").then(() => {
             fileInput.value = '';
           });
         })
       } catch (error) {
-        this.$swal("Error","Something went wrong, please try again","error")
+        this.$swal("Error", "Something went wrong, please try again", "error")
         // console.error('Error uploading image', error);
       }
+    },
+
+    async updateProfile(keyName,modalId) {
+      if(this.form[keyName] == null || this.form[keyName] == ""){
+        return false;
+      }
+      const formData = {
+        [keyName] : this.form[keyName] 
+      }
+      console.log('jjkk :::: ' , formData);
+      try {
+        api.post('/update-profile', formData).then(() => {
+          this.$swal("success", "Profile updated successfully", "success").then(() => {
+            this.closeModal(modalId);
+          });
+        })
+      } catch (error) {
+        this.$swal("Error", "Something went wrong, please try again", "error")
+        // console.error('Error uploading image', error);
+      }
+    },
+
+
+    closeModal(modalId) {
+      $(modalId).modal('hide');
     },
   },
   name: "ProfileTab",

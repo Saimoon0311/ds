@@ -18,7 +18,7 @@
         <p v-if="!this.replacePaymentMethod">
           Access the Simplawfy platform with a 60 day free trial, then for $39 per
           month. You will not be charged until
-          <span id="trialEndingDate">17-12-2023</span>.
+          <span id="trialEndingDate">{{ trialEndDate }}</span>.
         </p>
        
 
@@ -55,6 +55,16 @@ export default {
   },
   computed: {
     ...mapState(['replacePaymentMethod']),
+
+    trialEndDate() {
+      const currentDate = new Date();
+      currentDate.setMonth(currentDate.getMonth() + 2);
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const year = currentDate.getFullYear();
+      const formattedDate = `${day}-${month}-${year}`;
+      return formattedDate;
+    },
   },
   created() {
     this.initializeStripe();
@@ -90,14 +100,14 @@ export default {
             api.post(url, formData)
               .then(res => {
                 // console.log('successfully login : ', res?.data?.data?.id)
-                if(this.replacePaymentMethod){
-                  this.$swal('Success','Your payment method has been replaced successfully','success').then(() => {
+                if (this.replacePaymentMethod) {
+                  this.$swal('Success', 'Your payment method has been replaced successfully', 'success').then(() => {
                     this.$router.push({ path: '/lawyer-account' });
                   });
                 }
                 if (res?.data?.data?.id !== undefined && res?.data?.data?.id !== null && res?.data?.data?.id !== '') {
                   // this.$store.commit('setToast', "you have been subscribed successfully");
-                  this.$swal('Success','You have been subscribed successfully','success').then(() => {
+                  this.$swal('Success', 'You have been subscribed successfully', 'success').then(() => {
                     this.$router.push({ path: '/lawyer-account' });
                   });
                 }

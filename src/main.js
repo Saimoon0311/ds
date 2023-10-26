@@ -4,6 +4,9 @@ import router from "@/routers";
 import store from "./store";
 import api from "@/config/api.js";
 
+
+import VueSelect  from "vue-select";
+
 import PrimeVue from "primevue/config";
 import "primevue/resources/themes/lara-light-indigo/theme.css";
 // import "primevue/resources/themes/saga-blue/theme.css"; //theme
@@ -150,6 +153,7 @@ app.use(router);
 app.use(store);
 app.use(VueSweetalert2);
 
+app.component("v-select", VueSelect)
 app.component("MultiSelectPrime", MultiSelect);
 app.use(ToastService);
 app.mount("#app");
