@@ -469,8 +469,14 @@ export default {
 </script>
 <style scoped>
 .LNNumberedHeading1 span {
-  font-size: 14pt !important;
-  font-weight: bold;
+  font-weight: bold !important;
+  font-size: 21px !important;
+  color: black;
+}
+
+.accordion-item {
+  border: none !important;
+  border-bottom: 1px solid #d1d1d1 !important;
 }
 
 .accordion-button:focus {
@@ -483,5 +489,11 @@ export default {
 
 .hd-b {
   margin-bottom: 10px;
+}
+
+.accordion-button {
+  padding: 13px 0px !important;
+  font-weight: 400 !important;
+  font-size: 17px;
 }
 </style>

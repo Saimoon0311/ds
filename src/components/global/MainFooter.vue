@@ -40,7 +40,7 @@ export default {
     background: rgb(241, 241, 241);
     text-align: center;
     padding: 4px 0;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
     color: #858585;

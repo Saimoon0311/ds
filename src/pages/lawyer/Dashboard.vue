@@ -59,7 +59,7 @@
             <router-link
               class="btn btn-light btn-sm w-100 my-1"
               to="/proposal"
-              >Proposal</router-link
+              >Submit a proposal</router-link
             ><router-link
               name="decline"
               class="btn btn-danger btn-sm w-100 my-1"
@@ -105,7 +105,7 @@
           <router-link
               class="btn btn-light btn-sm w-100 my-1"
               to="/proposal"
-              >Proposal</router-link
+              >Submit a proposal</router-link
             ><router-link
               name="decline"
               class="btn btn-danger btn-sm w-100 my-1"

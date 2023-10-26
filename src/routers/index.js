@@ -22,7 +22,8 @@ import PlatForm from "@/components/PlatForm.vue";
 import ClientLoginForm from "@/pages/client/Login.vue";
 import ClientRegister from "@/pages/client/Register.vue";
 import ClientAccount from "@/pages/client/Account.vue";
-import PostingJob from "@/pages/client/PostingJob.vue";
+// import PostingJob from "@/pages/client/PostingJob.vue";
+import PostingaJob from "@/pages/client/PostingaJob.vue";
 import AreaOfLaw from "@/pages/client/AreaOfLaw.vue";
 import ViewBids from "@/pages/client/ViewBids.vue";
 import ReplyInfoRequest from "@/pages/client/ReplyInfoRequest.vue";
@@ -164,22 +165,28 @@ const routes = [
     component: AreaOfLaw,
     meta: { requiresAuth: true, lawyerNotAllowed: true },
   },
+  // {
+  //   path: "/postingjob",
+  //   component: PostingJob,
+  //   meta: { requiresAuth: true, lawyerNotAllowed: true },
+  // },
   {
     path: "/posting-job",
-    component: PostingJob,
+    component: PostingaJob,
     meta: { requiresAuth: true, lawyerNotAllowed: true },
   },
-
   // client end
 
 
   {
     path: "/",
     component: HelloWorld,
+    beforeEnter: reverse_guard,
   },
   {
     path: "/platform",
     component: PlatForm,
+    beforeEnter: reverse_guard,
   },
   {
     path: "/proposal",
@@ -238,11 +245,21 @@ const routes = [
     path: "/job",
     component: AdminJobs,
   },
+
   {
     path: "/client",
     component: AdminClients,
   },
 
+  // {
+  //   path: "/postingjob",
+  //   component: PostingJob,
+  // },
+
+  {
+    path: "/posting-job",
+    component: PostingaJob,
+  },
   {
     path: "/view-proposals",
     component: ViewBids,
@@ -322,7 +339,7 @@ router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isLoggedIn()) {
       // console.log('not match');
-      next({ path: '/' })
+      next({ path: '/platform' })
     } else {
       try {
         let result = await api.get('/verify');

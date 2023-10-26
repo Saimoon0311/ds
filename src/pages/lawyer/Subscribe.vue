@@ -1,9 +1,10 @@
 <template lang="">
     <div class="hello">
       <LawyerHeader />
-      <main class="container">
-        <h3 class="mt-3">
-          <button  class="btn btn-secondary btn-sm my-3" 
+      <main class="container d-flex justify-custom">
+        <div class="col-md-6">
+        <h3 class="mt-3 back-st">
+          <button  class="btn btn-secondary btn-sm my-3 " 
           @click="()=>this.$router.go(-1)"><i class="bi bi-arrow-left mr-4"></i> Back</button>
           
           <!-- <router-link
@@ -13,9 +14,9 @@
             ><i class="bi bi-arrow-left"></i> Back</router-link
           > -->
           
-          <span v-if="!this.replacePaymentMethod">Subscribe</span><span v-else>Replace Payment Method</span>
+          <span class="ml-l" v-if="!this.replacePaymentMethod">Subscribe</span><span v-else>Replace Payment Method</span>
         </h3>
-        <p v-if="!this.replacePaymentMethod">
+        <p v-if="!this.replacePaymentMethod " class=" mb-5">
           Access the Simplawfy platform with a 60 day free trial, then for $39 per
           month. You will not be charged until
           <span id="trialEndingDate">{{ trialEndDate }}</span>.
@@ -26,10 +27,11 @@
             <div id="card-element"></div>
             <input type="text" v-model="cardHolderName" placeholder="Card Holder Name" class="form-control mt-3" required
                 name="card-holder-name" id="card-holder-name" />
-            <button type="button" @click="subscribe" class="btn btn-dark mt-3">Add Payment Method</button>
+            <button  type="button" @click="subscribe" class="btn btn-dark mt-4 mb-1">Add Payment Method</button>
         </div>
   
-        <small>Payments are processed through Stripe, Inc.</small>
+        <small >Payments are processed through Stripe, Inc.</small>
+      </div>
       </main>
     </div>
   </template>
@@ -200,4 +202,15 @@ export default {
   background: grey;
   color: white;
 }
+.back-st{
+  display: flex;
+    align-items: center;
+}
+.ml-l{
+  margin-left: 10px;
+}
+.justify-custom{
+  justify-content: center;
+}
+
 </style>
