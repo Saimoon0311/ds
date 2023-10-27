@@ -135,7 +135,10 @@
         </div>
 
         <!-- Change account password -->
-        <h3 class="my-3 mt-5">Change Password</h3>
+        
+        <ChangePasswordForm />
+        
+        <!-- <h3 class="my-3 mt-5">Change Password</h3>
 
         <Form  class="col-md-6 col-sm-12" @submit="changePassword" :validation-schema="schema" v-slot="{errors}">
 
@@ -163,7 +166,7 @@
               Save Changes
             </button>
 
-        </Form>
+        </Form> -->
 
         <!-- <form action="account.php" method="post" class="col-md-6 col-sm-12">
           <div class="form-group">
@@ -210,38 +213,42 @@
 </template>
 <script>
 import LawyerHeader from "./Header.vue";
+import ChangePasswordForm from "@/components/ChangePasswordForm.vue";
 import { mapState } from 'vuex';
-import * as yup from "yup";
-import { Form, Field } from 'vee-validate';
+// import * as yup from "yup";
+// import { Form, Field } from 'vee-validate';
 import api from "@/config/api.js";
 export default {
   components: {
-    LawyerHeader, Form, Field,
+    LawyerHeader, 
+    // Form, 
+    // Field, 
+    ChangePasswordForm
   },
   data() {
-    const schema = yup.object().shape({
-      prev_password: yup
-        .string()
-        .required('Please enter your current password')
-        .min(6, 'Password must be greater then 6 digit')
-        .max(16, 'Password must be less then 16 digit')
-        .matches(
-          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-          'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
-        ),
+    // const schema = yup.object().shape({
+    //   prev_password: yup
+    //     .string()
+    //     .required('Please enter your current password')
+    //     .min(6, 'Password must be greater then 6 digit')
+    //     .max(16, 'Password must be less then 16 digit')
+    //     .matches(
+    //       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    //       'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
+    //     ),
 
-      password: yup
-        .string()
-        .required('Please enter your new password')
-        .min(6, 'Password must be greater then 6 digit')
-        .max(16, 'Password must be less then 16 digit')
-        .matches(
-          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-          'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
-        ),
-    });
+    //   password: yup
+    //     .string()
+    //     .required('Please enter your new password')
+    //     .min(6, 'Password must be greater then 6 digit')
+    //     .max(16, 'Password must be less then 16 digit')
+    //     .matches(
+    //       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    //       'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
+    //     ),
+    // });
     return {
-      schema,
+      // schema,
       receipts: [],
     }
   },
@@ -370,19 +377,19 @@ export default {
       })
     },
 
-    changePassword(formData) {
-      api.post('/change-password', formData)
-        .then(() => {
-          this.$swal('Success', 'Password has been changed successfully', 'success').then(() => {
-            document.getElementById('prev_password').value = "";
-            document.getElementById('password').value = "";
-          });
-        })
-        .catch(error => {
-          this.$swal('Error', error?.response?.data?.error, 'error');
-          console.log("getResults : ", error?.response?.data?.error)
-        });
-    }
+    // changePassword(formData) {
+    //   api.post('/change-password', formData)
+    //     .then(() => {
+    //       this.$swal('Success', 'Password has been changed successfully', 'success').then(() => {
+    //         document.getElementById('prev_password').value = "";
+    //         document.getElementById('password').value = "";
+    //       });
+    //     })
+    //     .catch(error => {
+    //       this.$swal('Error', error?.response?.data?.error, 'error');
+    //       console.log("getResults : ", error?.response?.data?.error)
+    //     });
+    // }
   },
   name: "AccountTab",
 };

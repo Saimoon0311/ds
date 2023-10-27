@@ -106,19 +106,19 @@
             </div>
 
             <div class="modal-body">
-              <form action="profile.php" method="post"></form>
               <div class="form-group">
                 <input
                   type="text"
                   name="lawfirm"
                   class="form-control"
                   id="lawfirm"
-                  value=""
+                  v-model="form.law_firm"
                 />
                 <button
-                  type="submit"
+                  type="button"
                   name="lawfirm-submit"
                   class="btn btn-secondary my-3"
+                  @click="updateProfile('law_firm','#FirmName')"
                 >
                   Save changes
                 </button>
@@ -153,19 +153,19 @@
             </div>
 
             <div class="modal-body">
-              <form action="profile.php" method="post"></form>
               <div class="form-group">
                 <input
                   type="text"
                   name="website"
                   class="form-control"
                   id="website"
-                  value=""
+                  v-model="form.link"
                 />
                 <button
-                  type="submit"
+                  type="button"
                   name="website-submit"
                   class="btn btn-secondary my-3"
+                  @click="updateProfile('link','#WebsiteModal')"
                 >
                   Save changes
                 </button>
@@ -200,7 +200,6 @@
             </div>
 
             <div class="modal-body">
-              <form action="profile.php" method="post"></form>
               <div class="form-group">
                 <input
                   type="tel"
@@ -208,12 +207,13 @@
                   maxlength="10"
                   class="form-control"
                   id="phone"
-                  value="0310000000"
+                  v-model="form.phone"
                 />
                 <button
-                  type="submit"
+                  type="button"
                   name="phone-submit"
                   class="btn btn-secondary my-3"
+                  @click="updateProfile('phone','#PhoneModal')"
                 >
                   Save changes
                 </button>
@@ -255,12 +255,13 @@
                   name="about"
                   class="form-control"
                   id="about"
-                  value=""
+                  v-model="form.about"
                 />
                 <button
-                  type="submit"
+                  type="button"
                   name="about-submit"
                   class="btn btn-secondary my-3"
+                  @click="updateProfile('about','#AboutModal')"
                 >
                   Save changes
                 </button>
@@ -425,7 +426,9 @@
 
             <!-- Modal ends here -->
 
-            <td></td>
+            <td>
+              {{ loginUser?.job_title }}
+            </td>
           </tr>
 
           <!-- LawFirm name -->
@@ -445,7 +448,9 @@
             <!-- Modal -->
 
             <!-- Modal ends here -->
-            <td></td>
+            <td>
+              {{ loginUser?.law_firm }}
+            </td>
           </tr>
 
           <!-- Link to Website -->
@@ -465,7 +470,9 @@
             <!-- Modal -->
 
             <!-- Modal ends here -->
-            <td></td>
+            <td>
+              {{ loginUser?.link }}
+            </td>
           </tr>
 
           <!-- Phone -->
@@ -509,7 +516,9 @@
 
             <!-- Modal ends here -->
 
-            <td></td>
+            <td>
+              {{ limitedAbout }}
+            </td>
           </tr>
 
           <!-- Areas of Practice -->
@@ -626,12 +635,39 @@ export default {
     loginUser() {
       return this.$store.getters.loginUser;
     },
+
+    limitedAbout() {
+      if (this.loginUser && this.loginUser.about) {
+        const words = this.loginUser.about.split(' ');
+        const limit = 10; // Adjust this to the desired word limit
+        if (words.length <= limit) {
+          return this.loginUser.about;
+        }
+        return words.slice(0, limit).join(' ') + '...';
+      }
+      return '';
+    },
+  },
+  created() {
+    this.updateFormProperties();
   },
   mounted() {
     this.fetchOptions();
     this.fetchOptions_locations();
   },
   methods: {
+
+    updateFormProperties() {
+      const userData = this.loginUser;
+      if (userData) {
+        this.form.law_firm = userData.law_firm;
+        this.form.link = userData.link;
+        this.form.phone = userData.phone;
+        this.form.about = userData.about;
+        this.form.job_title = userData.job_title;
+      }
+    },
+
     setModal($type) {
       if ($type == "fields") {
         this.selectedOptionIds = this.selectedOptionIdsShow;
@@ -721,18 +757,19 @@ export default {
       }
     },
 
-    async updateProfile(keyName,modalId) {
-      if(this.form[keyName] == null || this.form[keyName] == ""){
+    async updateProfile(keyName, modalId) {
+      if (this.form[keyName] == null || this.form[keyName] == "") {
         return false;
       }
       const formData = {
-        [keyName] : this.form[keyName] 
+        [keyName]: this.form[keyName]
       }
-      console.log('jjkk :::: ' , formData);
+      console.log('jjkk :::: ', formData);
       try {
-        api.post('/update-profile', formData).then(() => {
+        api.post('/update-profile', formData).then(res => {
+          this.closeModal(modalId);
           this.$swal("success", "Profile updated successfully", "success").then(() => {
-            this.closeModal(modalId);
+            this.setUserInStateAndLocalStorage(res);
           });
         })
       } catch (error) {
@@ -740,7 +777,6 @@ export default {
         // console.error('Error uploading image', error);
       }
     },
-
 
     closeModal(modalId) {
       $(modalId).modal('hide');

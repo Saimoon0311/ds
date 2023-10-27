@@ -61,7 +61,7 @@
 </template>
 <script >
 
-import api from "../../config/api.js";
+// import api from "../../config/api.js";
 import MainHeader from '../../components/global/MainHeader.vue'
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
@@ -98,26 +98,26 @@ export default {
         // MainFooter
     },
     methods: {
-        submitData(formData) {
-            try {
-                formData.type = "client";
-                console.log(formData)
-                api.post('/login', formData)
-                    .then(res => {
-                        console.log('res data : ' , res?.data?.data?.api_token);
-                        localStorage.setItem("token", res?.data?.data?.api_token);
-                        this.$store.commit('SET_AUTHENTICATED', true);
-                        localStorage.setItem("loginUser", res?.data?.data?.email);
-                        this.$store.commit('SET_LOGIN_USER', res?.data?.data?.email);
-                        this.$router.push({ path: '/' });
-                        console.log('successfully login : ', res?.data)
-                    })
-                    .catch(error => console.log("getResults : ", error));
-                console.log(formData);
-            } catch (error) {
-                console.error('API request error:', error);
-            }
-        }
+        // submitData(formData) {
+        //     try {
+        //         formData.type = "client";
+        //         console.log(formData)
+        //         api.post('/login', formData)
+        //             .then(res => {
+        //                 console.log('res data : ' , res?.data?.data?.api_token);
+        //                 localStorage.setItem("token", res?.data?.data?.api_token);
+        //                 this.$store.commit('SET_AUTHENTICATED', true);
+        //                 localStorage.setItem("loginUser", res?.data?.data?.email);
+        //                 this.$store.commit('SET_LOGIN_USER', res?.data?.data?.email);
+        //                 this.$router.push({ path: '/' });
+        //                 console.log('successfully login : ', res?.data)
+        //             })
+        //             .catch(error => console.log("getResults : ", error));
+        //         console.log(formData);
+        //     } catch (error) {
+        //         console.error('API request error:', error);
+        //     }
+        // }
     },
     name: 'LoginForm',
 }

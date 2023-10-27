@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 // landing
-import HelloWorld from "@/components/HelloWorld.vue";
+// import HelloWorld from "@/components/HelloWorld.vue";
 import NeedLawyer from "@/pages/forms/NeedLawyer.vue";
 import FindClient from "@/pages/forms/FindClient.vue";
 import LoginForm from "@/pages/forms/LoginForm.vue";
@@ -55,7 +55,8 @@ import store from '../store';
 function reverse_guard(to, from, next) {
   api.get("/verify")
     .then(() => {
-      router.go(-1);
+      next('/');
+      // router.go -1
     })
     .catch(() => {
       next()
@@ -180,14 +181,15 @@ const routes = [
 
   {
     path: "/",
-    component: HelloWorld,
-    beforeEnter: reverse_guard,
-  },
-  {
-    path: "/platform",
+    // component: HelloWorld,
     component: PlatForm,
     beforeEnter: reverse_guard,
   },
+  // {
+  //   path: "/platform",
+  //   component: PlatForm,
+  //   beforeEnter: reverse_guard,
+  // },
   {
     path: "/proposal",
     component: LawyerBidding,
@@ -339,16 +341,18 @@ router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isLoggedIn()) {
       // console.log('not match');
-      next({ path: '/platform' })
+      next({ path: '/' })
     } else {
       try {
         let result = await api.get('/verify');
         console.log('user all data ::: ', result.data);
         if (to.meta.clientNotAllowed && result.data.data.type != "lawyer") {
-          router.go(-1);
+          next('/client-dashboard');
+          // router.go(-1);
           console.log('client access not allowed');
         } else if (to.meta.lawyerNotAllowed && result.data.data.type != "client") {
-          router.go(-1);
+          next('/lawyer-dashboard');
+          // router.go(-1);
           console.log('lawyer access not allowed');
         } else {
           console.log('cr' , to);

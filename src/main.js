@@ -38,23 +38,34 @@ const app = createApp(App).component("font-awesome-icon", FontAwesomeIcon);
 
 app.mixin({
     methods: {
-        // this function is to store user in state and localstorage after login then redirect to dashboard
-        setUserAndRedirect(res, path) {
+        setUserInStateAndLocalStorage(res){
+            console.log('new func : ' , res?.data?.data?.link);
             const userData = {
                 "first_name": res?.data?.data?.first_name,
                 "last_name": res?.data?.data?.last_name,
                 "email": res?.data?.data?.email,
                 "type": res?.data?.data?.type,
                 "phone": res?.data?.data?.phone,
+                "job_title" : res?.data?.data?.job_title,
+                "law_firm" : res?.data?.data?.law_firm,
+                "link" : res?.data?.data?.link,
+                "about" : res?.data?.data?.about,
             }
+            if (localStorage.getItem('loginUser')) {
+                localStorage.removeItem('loginUser');
+            }
+            localStorage.setItem("loginUser", JSON.stringify(userData));
+            this.$store.commit('SET_LOGIN_USER', userData);
+        },
+
+        // this function is to store user in state and localstorage after login then redirect to dashboard
+        setUserAndRedirect(res, path) {
+            console.log('single a : ' , res?.data?.data?.law_firm);
             if (!localStorage.getItem('token')) {
                 localStorage.setItem("token", res.data?.data?.api_token);
             }
-            if (!localStorage.getItem('loginUser')) {
-                localStorage.setItem("loginUser", JSON.stringify(userData));
-            }
+            this.setUserInStateAndLocalStorage(res);
             this.$store.commit('SET_AUTHENTICATED', true);
-            this.$store.commit('SET_LOGIN_USER', userData);
             this.$router.push({ path: path });
         },
 
@@ -148,6 +159,8 @@ app.mixin({
         }
     }
 });
+
+
 app.use(PrimeVue);
 app.use(router);
 app.use(store);

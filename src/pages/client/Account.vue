@@ -25,19 +25,19 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="account.php" method="post"></form>
             <div class="form-group">
               <input
                 type="text"
                 name="fname"
                 class="form-control"
                 id="fname"
-                v-model="first_name"
+                v-model="form.first_name"
               />
               <button
-                type="submit"
+                type="button"
                 name="fname-submit"
                 class="btn btn-secondary my-3"
+                @click="updateProfile('first_name', '#Fname')"
               >
                 Save changes
               </button>
@@ -69,19 +69,19 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="account.php" method="post"></form>
             <div class="form-group">
               <input
                 type="text"
                 name="lname"
                 class="form-control"
                 id="lname"
-                v-model="last_name"
+                v-model="form.last_name"
               />
               <button
-                type="submit"
+                type="button"
                 name="lname-submit"
                 class="btn btn-secondary my-3"
+                @click="updateProfile('last_name', '#Lname')"
               >
                 Save changes
               </button>
@@ -114,20 +114,20 @@
           </div>
 
           <div class="modal-body">
-            <form action="account.php" method="post"></form>
             <div class="form-group">
               <input
                 type="tel"
                 name="phone"
                 class="form-control"
                 id="phone"
-                v-model="phone"
+                v-model="form.phone"
                 maxlength="10"
               />
               <button
-                type="submit"
+                type="button"
                 name="phone-submit"
                 class="btn btn-secondary my-3"
+                @click="updateProfile('phone', '#Pnum')"
               >
                 Save changes
               </button>
@@ -153,6 +153,7 @@
               class="btn btn-secondary btn-sm"
               data-bs-toggle="modal" data-bs-target="#Fname"
               title="Edit"
+              @click="updateFormProperties"
             >
               <i class="fa fa-pencil"></i>
             </button>
@@ -174,6 +175,7 @@
               class="btn btn-secondary btn-sm"
               data-bs-toggle="modal" data-bs-target="#Lname"
               title="Edit"
+              @click="updateFormProperties"
             >
               <i class="fa fa-pencil"></i>
             </button>
@@ -195,6 +197,7 @@
               class="btn btn-secondary btn-sm"
               data-bs-toggle="modal" data-bs-target="#Pnum"
               title="Edit"
+              @click="updateFormProperties"
             >
               <i class="fa fa-pencil"></i>
             </button>
@@ -210,15 +213,18 @@
     </table>
 
     <!-- Change password -->
-    <div class="text-center">
-      <button
+    <div>
+
+      <ChangePasswordForm />
+      <!-- <button
         type="button"
         class="btn btn-secondary"
         data-bs-toggle="modal" data-bs-target="#Password"
         title="Edit"
+        @click="updateFormProperties(true)"
       >
         Change password <i class="bi bi-pencil-fill"></i>
-      </button>
+      </button> -->
 
       <!-- Modal -->
       <div
@@ -246,7 +252,33 @@
             </div>
 
             <div class="modal-body">
-              <form >
+              <Form  class="col-md-12 col-sm-12" @submit="changePassword" :validation-schema="schema" v-slot="{errors}">
+                  <Field type="password" 
+                  id="prev_password"
+                  :class="['form-control', 'mb-2', { 'is-invalid': errors['prev_password'] }]" 
+                  name="prev_password" 
+                  placeholder="Old password" 
+                  />
+                  <span class="invalid-feedback">{{errors.prev_password}}</span>
+
+                  <Field type="password" 
+                  id="password"
+                  :class="['form-control', { 'is-invalid': errors['password'] }]"
+                  name="password" 
+                  placeholder="New password" 
+                  />
+                  <span class="invalid-feedback">{{errors.password}}</span>
+
+                  <button
+                      type="submit"
+                      name="password-submit"
+                      class="btn btn-secondary my-3"
+                    >
+                      Save Changes
+                    </button>
+                </Form>
+              
+              <!-- <form >
                 <div class="form-group">
                   <input
                     type="password"
@@ -263,14 +295,14 @@
                     placeholder="New password"
                   />
                   <button
-                    type=""
+                    type="button"
                     name="password-submit"
                     class="btn btn-secondary my-3"
                   >
                     Save changes
                   </button>
                 </div>
-              </form>
+              </form> -->
             </div>
           </div>
         </div>
@@ -282,20 +314,114 @@
 </template>
 <script>
 import ClientHeader from "./Header.vue";
-
+import * as yup from "yup";
+import { Form, Field } from 'vee-validate';
+import api from "@/config/api.js";
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+import ChangePasswordForm from "@/components/ChangePasswordForm.vue";
 
 export default {
   name: "ClientAccount",
   components: {
-    ClientHeader,
+    ClientHeader, Form, Field,ChangePasswordForm
+  },
+  data() {
+    const schema = yup.object().shape({
+      prev_password: yup
+        .string()
+        .required('Please enter your current password')
+        .min(6, 'Password must be greater then 6 digit')
+        .max(16, 'Password must be less then 16 digit')
+        .matches(
+          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+          'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
+        ),
+
+      password: yup
+        .string()
+        .required('Please enter your new password')
+        .min(6, 'Password must be greater then 6 digit')
+        .max(16, 'Password must be less then 16 digit')
+        .matches(
+          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+          'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
+        ),
+    });
+    return {
+      schema,
+      form: {
+        first_name: null,
+        last_name: null,
+        phone: null,
+      },
+    }
   },
   computed: {
     loginUser() {
-      // console.log(this.$store.getters.loginUser);
       return this.$store.getters.loginUser;
     },
   },
-};
+  created() {
+    this.updateFormProperties();
+  },
+  methods: {
+    updateFormProperties(notCreated) {
+      const userData = this.loginUser;
+      if (userData) {
+        this.form.first_name = userData.first_name;
+        this.form.last_name = userData.last_name;
+        this.form.phone = userData.phone;
+      }
+      if (notCreated) {
+        document.getElementById('prev_password').value = "";
+        document.getElementById('password').value = "";
+      }
+    },
+    async updateProfile(keyName, modalId) {
+      if (this.form[keyName] == null || this.form[keyName] == "") {
+        return false;
+      }
+      const formData = {
+        [keyName]: this.form[keyName]
+      }
+      console.log('jjkk :::: ', formData);
+      try {
+        api.post('/update-profile', formData).then(res => {
+          this.closeModal(modalId);
+          this.$swal("success", "Profile updated successfully", "success").then(() => {
+            this.setUserInStateAndLocalStorage(res);
+          });
+        })
+      } catch (error) {
+        this.$swal("Error", "Something went wrong, please try again", "error")
+        // console.error('Error uploading image', error);
+      }
+    },
+
+    changePassword(formData) {
+      api.post('/change-password', formData)
+        .then(() => {
+          this.closeModal('#Password');
+          this.$swal('Success', 'Password has been changed successfully', 'success')
+          // .then(() => {
+          //   document.getElementById('prev_password').value = "";
+          //   document.getElementById('password').value = "";
+          // });
+        })
+        .catch(error => {
+          this.$swal('Error', error?.response?.data?.error, 'error');
+          console.log("getResults : ", error?.response?.data?.error)
+        });
+    },
+
+    closeModal(modalId) {
+      $(modalId).modal('hide');
+    },
+
+  }
+}
+
 </script>
 
 <style scoped>
