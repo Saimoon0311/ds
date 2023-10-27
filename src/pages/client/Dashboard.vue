@@ -61,12 +61,13 @@
               >
             </div>
             <div
-              class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
+              class="border rounded bg-light p-3 my-3 container"
               id="containerActive"
             >
+            <div class="row">
               <div
-                class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
-                style="width: 35vw"
+                class="col-md-6 d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
+                
                 id="30"
               >
                 <div class="text-left">
@@ -114,6 +115,7 @@
                   </form>
                 </div>
               </div>
+            </div>
             </div>
           </div>
           <div

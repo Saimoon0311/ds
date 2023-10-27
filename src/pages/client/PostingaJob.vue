@@ -209,6 +209,11 @@ export default {
   padding: 6px 15px;
   margin: 6px !important;
   cursor: pointer;
+  background: rgb(128 128 128);
+}
+
+.bubbles:hover {
+  background: #5c636a;
 }
 
 .footer-ct {
