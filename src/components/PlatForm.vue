@@ -3,7 +3,7 @@
     <MainHeader />
     <div class="d-flex flex-wrap justify-content-center align-items-center flex-column">
       <div class="mb-5 mt-5 text-center">
-        <p>
+        <p class="logo-sub-heading">
           An Australian legal marketplace making law simple by helping you find
           a lawyer or promote your law firm.
         </p>
@@ -66,6 +66,7 @@
 
     </div>
     <MainFooter />
+
   </div>
 </template>
 
@@ -110,54 +111,6 @@ export default {
   margin: 10px;
 }
 
-@media (min-width: 400px) and (max-width: 450px) {
-  .homepage-circles {
-    width: 360px;
-    height: 360px;
-  }
-}
-
-@media (min-width: 451px) and (max-width: 550px) {
-  .homepage-circles {
-    width: 70% !important;
-  }
-}
-
-@media screen and (max-width: 720px) {
-  .homepage-circles {
-    border: 3px solid black;
-    border-radius: 50%;
-    font-size: 12px;
-    padding: 50px;
-    text-align: center;
-    /* width: 100%;
-    height: 300px; */
-    flex-direction: unset !important;
-    /* row css */
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    display: flex;
-    flex-wrap: wrap;
-    width: 350px;
-    height: 350px;
-    line-height: 14px;
-  }
-
-  .homepage-circles a {
-    font-size: 12px !important;
-  }
-
-  main {
-    flex-direction: column;
-  }
-
-  .logo {
-    width: 100%;
-  }
-
-}
-
-
 .homepage-circles:hover .showhover {
   /* display: block; */
   visibility: visible;
@@ -195,5 +148,92 @@ export default {
 
 .mt-two {
   margin-top: 2rem !important;
+}
+
+@media (min-width: 320px) and (max-width: 425px) {
+  .cstm-dropdown {
+    margin-top: -20px;
+    right: 0px;
+  }
+
+  .footer-main span {
+    display: block;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 450px) {
+  .homepage-circles {
+    width: 360px;
+    height: 360px;
+  }
+
+  .cstm-dropdown {
+    margin-top: -20px;
+    right: 0px;
+  }
+}
+
+@media (min-width: 451px) and (max-width: 550px) {
+  /* .homepage-circles {
+    width: 70% !important;
+  } */
+
+  .logo-sub-heading {
+    padding: 0px 20px;
+  }
+
+  .cstm-dropdown {
+    margin-top: -20px;
+    /* right: 0px; */
+  }
+
+}
+
+@media screen and (max-width: 720px) {
+  .homepage-circles {
+    border: 3px solid black;
+    border-radius: 50%;
+    font-size: 16px;
+    padding: 30px;
+    text-align: center;
+    /* width: 100%;
+    height: 300px; */
+    flex-direction: unset !important;
+    /* row css */
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    width: 350px;
+    height: 350px;
+    line-height: 18px;
+  }
+
+  .mt-two {
+    margin-top: 1rem !important;
+  }
+
+  .homepage-circles a {
+    font-size: 14px !important;
+  }
+
+  main {
+    flex-direction: column;
+  }
+
+  .logo {
+    width: 100%;
+  }
+
+  .cstm-dropdown {
+    right: 20px;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .logo-sub-heading {
+    padding: 0px 30px;
+  }
 }
 </style>
