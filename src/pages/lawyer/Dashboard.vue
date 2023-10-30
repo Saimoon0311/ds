@@ -18,39 +18,40 @@
       <div v-else>
 
       <!-- after subscribe -->
-      <div class="border rounded bg-light p-3 d-flex flex-wrap">
+      <div v-if="match_jobs.length == 0" class="border rounded bg-light p-3 d-flex flex-wrap">
         <p class="mx-auto my-0">
           No potential jobs found that match your profile. Click here to amend
           your <router-link to="/lawyer-profile">Profile</router-link>
         </p>
       </div>
       <!-- after profile update -->
-      <div class="border rounded bg-light p-3 d-flex flex-wrap">
+      <div v-else class="border rounded bg-light p-3 d-flex flex-wrap">
         <div
+        v-for="(item,index) in match_jobs" :key="index"
           class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
           style="width: 35vw"
           id="28"
         >
           <div>
-            <p class="badge bg-dark" title="Area">Criminal</p>
+            <p class="badge bg-dark" title="Area">{{ item?.field?.title }}</p>
             &nbsp;
-            <p class="badge bg-dark" title="Location">Victoria</p>
-            <p><b>City/suburb:</b> karachi</p>
-            <p><b>Title:</b> abc 2</p>
+            <p class="badge bg-dark" title="Location">{{ item?.location?.title }}</p>
+            <p><b>City/suburb:</b> {{ item?.city }}</p>
+            <p><b>Title:</b> {{ item?.title }}</p>
             <p
               id="description28"
               style="overflow: hidden; text-overflow: ellipsis; height: 100px"
             >
-              test description
+              {{ item?.description }}
             </p>
-            <details>
+            <!-- <details>
               <summary>More details</summary>
               <div class="bg-dark border rounded p-3 m-1">
                 <p><b>Posted by:</b> junucyme@mailinator.com</p>
                 <p><b> Deadline:</b> 27-12-2023</p>
                 <p><b> Preferred contact time:</b> Flexible</p>
               </div>
-            </details>
+            </details> -->
           </div>
           <div
             class="d-flex flex-column justify-content-center align-items-center "
@@ -60,19 +61,22 @@
               class="btn btn-light btn-sm w-100 my-1"
               to="/proposal"
               >Submit a proposal</router-link
-            ><router-link
+            >
+            
+            <!-- <router-link
               name="decline"
               class="btn btn-danger btn-sm w-100 my-1"
               to=""
-              >Decline</router-link
-            ><router-link
+              >Decline</router-link> -->
+              <button @click="declineJob(item.id)" class="btn btn-danger btn-sm w-100 my-1">Decline</button>
+            <router-link
               class="btn btn-dark btn-sm w-100 my-1"
               to="/request-info"
-              >Request More Info</router-link
+              >Message</router-link
             >
           </div>
         </div>
-        <div
+        <!-- <div
           class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
           style="width: 35vw"
           id="29"
@@ -117,7 +121,7 @@
               >Request More Info</router-link
             >
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -125,9 +129,15 @@
 </template>
 <script>
 import LawyerHeader from "./Header.vue";
+import api from '@/config/api';
 export default {
   components: {
     LawyerHeader,
+  },
+  data(){
+    return {
+      match_jobs: [],
+    }
   },
   computed: {
     userName() {
@@ -141,7 +151,29 @@ export default {
       return this.$store.getters.subscriptionStatus;
     }
   },
-  methods: {},
+  mounted(){
+    this.getJobs();
+  },
+  methods: {
+    async getJobs(){
+      try {
+        const response = await api.get('/lawyer/show-related-jobs');
+        console.log('sundak  :::: ', response?.data?.data);
+        this.match_jobs = response?.data?.data;
+      } catch (error) {
+        console.error('Error fetching options:', error);
+      }
+    },
+    async declineJob(job_id){
+      try {
+        const response = await api.post('/lawyer/decline-job',{"job_id":job_id});
+        console.log('sundak  :::: ', response?.data);
+        // this.match_jobs = response?.data?.data;
+      } catch (error) {
+        console.error('Error fetching options:', error);
+      }
+    }
+  },
   name: "DashboardTab",
 };
 </script>

@@ -50,7 +50,7 @@
             role="tabpanel"
             aria-labelledby="pills-home-tab"
           >
-            <div
+            <div v-if="openJobs.length == 0"
               class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
               id="containerActive"
             >
@@ -59,21 +59,21 @@
                 <router-link to="/posting-job">post a job</router-link></span
               >
             </div>
-            <div
+            <div v-else
               class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
               id="containerActive"
             >
-              <div
+              <div  v-for="(item,index) in openJobs" :key="index"
                 class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
                 style="width: 35vw"
                 id="30"
               >
                 <div class="text-left">
-                  <p class="badge bg-dark" title="Area">Criminal</p>
+                  <p class="badge bg-dark" title="Area">{{ item?.field?.title }}</p>
                   &nbsp;
-                  <p class="badge bg-dark" title="Location">Victoria</p>
-                  <p><b>City/suburb:</b> city</p>
-                  <p><b>Title:</b> test job</p>
+                  <p class="badge bg-dark" title="Location">{{ item?.location?.title }}</p>
+                  <p><b>City/suburb:</b> {{ item?.city }} </p>
+                  <p><b>Title:</b> {{ item?.title }}</p>
                   <p
                     id="description30"
                     style="
@@ -82,16 +82,16 @@
                       height: 100px;
                     "
                   >
-                    lorem ipsum dummy text description
+                    {{ item?.description }}
                   </p>
-                  <details>
+                  <!-- <details>
                     <summary>More details</summary>
                     <div class="bg-dark border rounded p-3 m-1">
                       <p><b>Posted by:</b> client@mailinator.com</p>
                       <p><b> Deadline:</b> 28-10-2023</p>
                       <p><b> Preferred contact time:</b> after 1:00</p>
                     </div>
-                  </details>
+                  </details> -->
                 </div>
                 <div
                   class="d-flex flex-column justify-content-center align-items-center"
@@ -122,27 +122,27 @@
             role="tabpanel"
             aria-labelledby="pills-profile-tab"
           >
-            <div
+            <div v-if="closeJobs.length == 0"
               class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
               id="containerClosed"
             >
               <span class="text-center w-100">No closed jobs found.</span>
             </div>
             <!-- if data exist -->
-            <div
+            <div v-else
               class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
               id="containerClosed"
             >
-              <div
+              <div v-for="(item,index) in closeJobs" :key="index"
                 class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
                 style="width: 35vw"
                 id="30"
               >
                 <div>
-                  <p class="badge bg-dark" title="Area">Criminal</p>
+                  <p class="badge bg-dark" title="Area">{{ item?.field?.title }}</p>
                   &nbsp;
-                  <p class="badge bg-dark" title="Location">Victoria</p>
-                  <p><b>Title:</b> test job</p>
+                  <p class="badge bg-dark" title="Location">{{ item?.location?.title }}</p>
+                  <p><b>Title:</b> {{ item?.title }}</p>
                   <p><b>Lawyer Name:</b> testing client</p>
                   <p><b>Lawyer Email:</b> testing@mailinator.com</p>
                   <p><b>Phone Number:</b> 0310000000</p>
@@ -156,14 +156,14 @@
                   >
                     lorem ipsum dummy text description
                   </p>
-                  <details>
+                  <!-- <details>
                     <summary>More details</summary>
                     <div class="bg-dark border rounded p-3 m-1">
                       <p><b>City/suburb:</b> city</p>
                       <p><b> Deadline:</b> 28-10-2023</p>
                       <p><b> Preferred contact time:</b> after 1:00</p>
                     </div>
-                  </details>
+                  </details> -->
                 </div>
               </div>
             </div>
@@ -175,16 +175,36 @@
 </template>
 <script>
 import ClientHeader from "./Header.vue";
+import api from '@/config/api';
 
 export default {
   name: "ClientDashboard",
   components: {
     ClientHeader,
   },
-    methods:{
+  data(){
+    return {
+      openJobs: [],
+      closeJobs: [],
     }
+  },
+  mounted(){
+    this.getJobs();
+  },
+  methods: {
+    async getJobs() {
+      try {
+        const response = await api.get(`/client/client-jobs`);
+        console.log('sundak  :::: ', response?.data?.openJobs);
+        this.openJobs = response?.data?.openJobs;
+        this.closeJobs = response?.data?.closeJobs;
+      } catch (error) {
+        console.error('Error fetching options:', error);
+      }
+    }
+  }
 };
-</script>
+</script> 
 
 <style scoped>
 ul#pills-tab {

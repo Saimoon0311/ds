@@ -54,20 +54,20 @@ export default {
             schema,
         }
     },
-    methods:{
+    methods: {
         changePassword(formData) {
-      api.post('/change-password', formData)
-        .then(() => {
-          this.$swal('Success', 'Password has been changed successfully', 'success').then(() => {
-            document.getElementById('prev_password').value = "";
-            document.getElementById('password').value = "";
-          });
-        })
-        .catch(error => {
-          this.$swal('Error', error?.response?.data?.error, 'error');
-          console.log("getResults : ", error?.response?.data?.error)
-        });
-    }
+            api.post('/change-password', formData)
+                .then(() => {
+                    this.$swal('Success', 'Password has been changed successfully', 'success').then(() => {
+                        document.getElementById('prev_password').value = "";
+                        document.getElementById('password').value = "";
+                    });
+                })
+                .catch(error => {
+                    this.$swal('Error', error?.response?.data?.error, 'error');
+                    console.log("getResults : ", error?.response?.data?.error)
+                });
+        }
     }
 
 }
