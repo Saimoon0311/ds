@@ -50,7 +50,19 @@
             role="tabpanel"
             aria-labelledby="pills-home-tab"
           >
-            <div v-if="openJobs.length == 0"
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" v-model="searchQuery"  @keyup.enter="search" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <button class="input-group-text btn custom-button" id="basic-addon2" @click="search"><i class="fa fa-search"></i></button>
+            <button class="input-group-text btn custom-button" id="basic-addon2" @click="clearSearch"><i class="fa fa-refresh"></i></button>
+          </div>
+
+          <!-- <div class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
+              id="containerActive"
+               v-if="openJobs.length == 0 && searchQuery != ''">
+            <span class="text-center w-100">No record found!</span>
+          </div> -->
+          <div v-if="openJobs.length == 0 && searchQuery == ''"
               class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
               id="containerActive"
             >
@@ -59,10 +71,20 @@
                 <router-link to="/posting-job">post a job</router-link></span
               >
             </div>
+
+            <div v-else-if="openJobs.length == 0 && searchQuery != ''"
+              class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
+              id="containerActive"
+            >
+            <span class="text-center w-100">No record found!</span>
+            </div>
+
+
             <div v-else
               class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
               id="containerActive"
             >
+
               <div  v-for="(item,index) in openJobs" :key="index"
                 class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
                 style="width: 35vw"
@@ -74,6 +96,7 @@
                   <p class="badge bg-dark" title="Location">{{ item?.location?.title }}</p>
                   <p><b>City/suburb:</b> {{ item?.city }} </p>
                   <p><b>Title:</b> {{ item?.title }}</p>
+                  <p><b>Created:</b> {{ formatCreatedAt(item.created_at) }} </p>
                   <p
                     id="description30"
                     style="
@@ -114,6 +137,9 @@
                 </div>
               </div>
             </div>
+            <div v-if="openJobs.length > 0 && currentPage != lastPage">
+              <button class="btn custom-button" @click="loadMore">Load More</button>
+            </div>
             </div>
           </div>
           <div
@@ -127,7 +153,7 @@
               class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
               id="containerClosed"
             >
-              <span class="text-center w-100">No closed jobs found.</span>
+              <span class="text-center w-100">You haven't accepted any proposals yet.</span>
             </div>
             <!-- if data exist -->
             <div v-else
@@ -172,37 +198,58 @@
         </div>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 <script>
 import ClientHeader from "./Header.vue";
-import api from '@/config/api';
-
 export default {
   name: "ClientDashboard",
   components: {
     ClientHeader,
   },
-  data(){
+  data() {
     return {
-      openJobs: [],
-      closeJobs: [],
+      endpoint: "/client/client-jobs",
+      endpoint_search: "/client/search-client-jobs",
     }
   },
-  mounted(){
-    this.getJobs();
+  async created() {
+    await this.loadMore();
   },
   methods: {
-    async getJobs() {
-      try {
-        const response = await api.get(`/client/client-jobs`);
-        console.log('sundak  :::: ', response?.data?.openJobs);
-        this.openJobs = response?.data?.openJobs;
-        this.closeJobs = response?.data?.closeJobs;
-      } catch (error) {
-        console.error('Error fetching options:', error);
+
+    formatCreatedAt(created_at) {
+      const date = new Date(created_at);
+      const day = date.getDate();
+      const month = date.getMonth() + 1; // Months are zero-based
+      const year = date.getFullYear().toString().slice(-2); // Get the last 2 digits of the year
+      let hours = date.getHours();
+      const minutes = date.getMinutes();
+      const period = hours < 12 ? 'am' : 'pm';
+
+      // Adjust hours to 12-hour format
+      if (hours > 12) {
+        hours -= 12;
       }
-    }
+
+      // Ensure leading zeros for single-digit day, month, hours, and minutes
+      const formattedDay = day < 10 ? '0' + day : day;
+      const formattedMonth = month < 10 ? '0' + month : month;
+      const formattedHours = hours < 10 ? '0' + hours : hours;
+      const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+      return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period}`;
+    },
+    // async getJobs() {
+    //   try {
+    //     const response = await api.get(`/client/client-jobs`);
+    //     console.log('sundak  :::: ', response?.data?.openJobs);
+    //     this.openJobs = response?.data?.openJobs;
+    //     this.closeJobs = response?.data?.closeJobs;
+    //   } catch (error) {
+    //     console.error('Error fetching options:', error);
+    //   }
+    // }
   }
 };
 </script> 
@@ -223,6 +270,11 @@ ul#pills-tab {
 .nav-pills .show>.nav-link {
   color: white;
   background-color: #808080;
+}
+
+.custom-button {
+  color: white !important;
+  background-color: #808080 !important;
 }
 
 .nav-pills .nav-link,
