@@ -57,12 +57,12 @@
             <input name="title" id="title" type="text" class="form-control" required="" />
             <br />
 
-            <label for="job">Tell us in a few words why you need a lawyer. (Please include any important upcoming dates,
+            <label for="job">Tell us Why do you need a lawyer? (Please include any important upcoming dates,
               such as court dates.)<sup class="text-danger">*</sup></label>
             <textarea name="job" id="job" type="textarea" class="form-control" required="" v-model="text"
               @input="checkCharacterLimit" :maxlength="maxCharacters"></textarea>
-            <!-- <div v-if="characterCount >= maxCharacters" class="warning-text">You have reached your character limit.</div> -->
-            <!-- <div class="c-Count">Character Count: {{ characterCount }} / {{ maxCharacters }}</div> -->
+            <div v-if="characterCount >= maxCharacters" class="warning-text">You have reached your character limit.</div>
+            <div class="c-Count">Character Count: {{ characterCount }} / {{ maxCharacters }}</div>
           </div>
         </template>
 
@@ -235,5 +235,10 @@ export default {
   padding-left: 8px;
   position: relative;
   top: -1px;
+}
+
+.warning-text {
+  margin: 10px 0px;
+  color: red;
 }
 </style>

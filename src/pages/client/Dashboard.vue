@@ -57,7 +57,7 @@
             >
               <span class="text-center w-100"
                 >You haven't posted a job. Click here to
-                <router-link to="/posting-job">post a job</router-link></span
+                <router-link to="/posting-job" class="btn btn-dark">post a job</router-link></span
               >
             </div>
             <div
@@ -213,5 +213,10 @@ ul#pills-tab {
 
 .text-left {
   text-align: left;
+}
+
+.btn {
+  padding: 5px 20px;
+  border-radius: 20px;
 }
 </style>
