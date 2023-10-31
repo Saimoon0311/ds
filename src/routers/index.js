@@ -323,7 +323,11 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   // base: process.env.NODE_ENV === 'production' ? '/law-frontend/' : '/',
-  routes
+  routes,
+  scrollBehavior() {
+    // Scroll to the top of the page when navigating to a new route
+    return { top: 0 };
+  },
 });
 
 

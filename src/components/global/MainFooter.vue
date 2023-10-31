@@ -40,14 +40,14 @@ export default {
     background: rgb(241, 241, 241);
     text-align: center;
     padding: 4px 0;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     text-transform: uppercase;
-    color: #858585;
+    color: #a5a5a5;
 }
 
 .footer-main .a {
-    color: #858585;
+    color: #a5a5a5;
     font-size: 20px;
 }
 
@@ -75,7 +75,7 @@ export default {
     /* font-size: 15px; */
     font-weight: 500;
     text-transform: uppercase;
-    color: #858585;
+    color: #a5a5a5;
     text-decoration: none;
 }
 
@@ -96,5 +96,11 @@ export default {
 
 .dropdown-item {
     font-weight: 600;
+}
+
+@media (min-width: 320px) and (max-width: 425px) {
+    .footer-main span {
+        display: block;
+    }
 }
 </style>

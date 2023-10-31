@@ -2,27 +2,27 @@
   <div class="hello">
     <MainHeader />
     <div class="d-flex flex-wrap justify-content-center align-items-center flex-column">
-      <div class="mb-5 text-center">
-        <p>
+      <div class="mb-5 mt-5 text-center">
+        <p class="logo-sub-heading">
           An Australian legal marketplace making law simple by helping you find
           a lawyer or promote your law firm.
         </p>
-        <p class="h5 fw-bold">
+        <!-- <p class="h5 fw-bold">
           The Revolution is Coming. Be Part of the Change.
-        </p>
+        </p> -->
       </div>
       <div class="d-flex flex-wrap justify-content-center align-items-center pb-5">
         <div class="homepage-circles d-flex flex-column align-items-center justify-content-center ">
           <p class="fw-bold law-hd">I'm looking for a lawyer</p>
           <div class="showhover">
-            <p class="fw-bold">Looking for a lawyer</p>
+            <p class="fw-bold mb-3">Looking for a lawyer?</p>
             <p>Need a lawyer and don't know where to begin?</p>
             <p>
               We take the hassle and uncertainty out of the process of finding a
               lawyer.
             </p>
             <p>Simply make one enquiry and wait for lawyers to come to you.</p>
-            <div class="d-flex align-items-center justify-content-center mt-3">
+            <div class="d-flex align-items-center justify-content-center mt-two">
               <router-link to="/client-login" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</router-link>
               <!-- <p>Or</p> -->
               <router-link to="/client-register" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign up</router-link>
@@ -33,7 +33,7 @@
         <div class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white">
           <p class="fw-bold law-hd">I'm looking for clients</p>
           <div class="showhover">
-            <p class="fw-bold">Looking for clients</p>
+            <p class="fw-bold mb-3">Looking for clients?</p>
 
             <p>
               Professional networking eating into your billable hours and not
@@ -47,7 +47,7 @@
               Simply subscribe for an opportunity to find clients in your
               practice area without leaving your desk.
             </p>
-            <div class="d-flex align-items-center justify-content-center mt-3">
+            <div class="d-flex align-items-center justify-content-center mt-two">
               <router-link to="/lawyer-login" class="text-white fs-5 p-2 btn btn-light text-black">Sign in</router-link>
 
               <router-link to="/lawyer-register" class="text-white fs-5 p-2 btn btn-light text-black">Sign
@@ -66,6 +66,7 @@
 
     </div>
     <MainFooter />
+
   </div>
 </template>
 
@@ -107,55 +108,8 @@ export default {
   text-align: center;
   width: 500px;
   height: 500px;
+  margin: 10px;
 }
-
-@media (min-width: 400px) and (max-width: 450px) {
-  .homepage-circles {
-    width: 85% !important;
-  }
-}
-
-@media (min-width: 451px) and (max-width: 550px) {
-  .homepage-circles {
-    width: 70% !important;
-  }
-}
-
-@media screen and (max-width: 720px) {
-  .homepage-circles {
-    border: 3px solid black;
-    border-radius: 50%;
-    font-size: 12px;
-    padding: 50px;
-    text-align: center;
-    /* width: 100%;
-    height: 300px; */
-    flex-direction: unset !important;
-    /* row css */
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: calc(-1 * var(--bs-gutter-y));
-    margin-right: calc(-0.5 * var(--bs-gutter-x));
-    margin-left: calc(-0.5 * var(--bs-gutter-x));
-    line-height: 14px;
-  }
-
-  .homepage-circles a {
-    font-size: 12px !important;
-  }
-
-  main {
-    flex-direction: column;
-  }
-
-  .logo {
-    width: 100%;
-  }
-
-}
-
 
 .homepage-circles:hover .showhover {
   /* display: block; */
@@ -190,5 +144,96 @@ export default {
 
 .text-black {
   color: #000 !important;
+}
+
+.mt-two {
+  margin-top: 2rem !important;
+}
+
+@media (min-width: 320px) and (max-width: 425px) {
+  .cstm-dropdown {
+    margin-top: -20px;
+    right: 0px;
+  }
+
+  .footer-main span {
+    display: block;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 450px) {
+  .homepage-circles {
+    width: 360px;
+    height: 360px;
+  }
+
+  .cstm-dropdown {
+    margin-top: -20px;
+    right: 0px;
+  }
+}
+
+@media (min-width: 451px) and (max-width: 550px) {
+  /* .homepage-circles {
+    width: 70% !important;
+  } */
+
+  .logo-sub-heading {
+    padding: 0px 20px;
+  }
+
+  .cstm-dropdown {
+    margin-top: -20px;
+    /* right: 0px; */
+  }
+
+}
+
+@media screen and (max-width: 720px) {
+  .homepage-circles {
+    border: 3px solid black;
+    border-radius: 50%;
+    font-size: 16px;
+    padding: 30px;
+    text-align: center;
+    /* width: 100%;
+    height: 300px; */
+    flex-direction: unset !important;
+    /* row css */
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    width: 350px;
+    height: 350px;
+    line-height: 18px;
+  }
+
+  .mt-two {
+    margin-top: 1rem !important;
+  }
+
+  .homepage-circles a {
+    font-size: 14px !important;
+  }
+
+  main {
+    flex-direction: column;
+  }
+
+  .logo {
+    width: 100%;
+  }
+
+  .cstm-dropdown {
+    right: 20px;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .logo-sub-heading {
+    padding: 0px 30px;
+  }
 }
 </style>

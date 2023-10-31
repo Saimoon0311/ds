@@ -1,7 +1,7 @@
 <template lang="">
-  <div class="text-center  container-hd" >
+  <div class="text-center  container" >
       <router-link to="/"> 
-      <img src="../../assets/images/logo.jpeg" srcset="../../assets/images/logo.jpeg 450w, ../../assets/images/logo.jpeg 600w, ../../assets/images/logo.jpeg 750w" sizes="(min-width: 820px) 446px, (min-width: 640px) 588px, calc(90vw + 30px)" class="img-fluid" />
+      <img src="../assets/images/logo.jpeg" srcset="../assets/images/logo.jpeg 450w, ../assets/images/logo.jpeg 600w, ../assets/images/logo.jpeg 750w" sizes="(min-width: 820px) 446px, (min-width: 640px) 588px, calc(90vw + 30px)" class="img-fluid" />
     </router-link>
     <div class="dropdown cstm-dropdown">
       <button class="btn btn-secondary dropdown-toggle menu-burger" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -19,16 +19,20 @@
 </template>
 <script>
 export default {
-  name: 'MainHeader'
+  name: 'GeneralHeader'
 }
 </script>
-<style scoped>
+<style >
 .menu-burger:after {
   display: none !important;
 }
 
+.container {
+  position: relative;
+}
+
 .container-hd {
-  max-width: 1040px;
+  /* max-width: 1040px; */
   margin: 0px auto !important;
   display: flex;
   width: 100%;
@@ -40,7 +44,7 @@ export default {
 .cstm-dropdown {
   position: absolute !important;
   right: 0;
-  margin-top: -20px;
+  margin-top: -80px;
 }
 
 .cstm-dropdown button {
