@@ -206,7 +206,7 @@
         ><span lang="EN-US" style="font-family: Montserrat">
           privacy policy, which sets out how your information is used, can be
           found
-          <a target="_blank" href="privacy-policy.html">here</a>
+          <router-link to="/privacy-policy">here</router-link>
           . By using this Website, you consent to the processing described the
           privacy policy and warrant that all data provided by you is
           accurate.<o:p></o:p

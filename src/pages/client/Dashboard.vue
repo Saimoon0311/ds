@@ -68,7 +68,7 @@
             >
               <span class="text-center w-100"
                 >You haven't posted a job. Click here to
-                <router-link to="/posting-job">post a job</router-link></span
+                <router-link to="/posting-job" class="btn btn-dark">post a job</router-link></span
               >
             </div>
 
@@ -94,6 +94,7 @@
                   <p class="badge bg-dark" title="Area">{{ item?.field?.title }}</p>
                   &nbsp;
                   <p class="badge bg-dark" title="Location">{{ item?.location?.title }}</p>
+                  <p><b>Serial No:</b> {{ item?.identity }}</p>
                   <p><b>City/suburb:</b> {{ item?.city }} </p>
                   <p><b>Title:</b> {{ item?.title }}</p>
                   <p><b>Created:</b> {{ formatCreatedAt(item.created_at) }} </p>
@@ -217,29 +218,6 @@ export default {
     await this.loadMore();
   },
   methods: {
-
-    formatCreatedAt(created_at) {
-      const date = new Date(created_at);
-      const day = date.getDate();
-      const month = date.getMonth() + 1; // Months are zero-based
-      const year = date.getFullYear().toString().slice(-2); // Get the last 2 digits of the year
-      let hours = date.getHours();
-      const minutes = date.getMinutes();
-      const period = hours < 12 ? 'am' : 'pm';
-
-      // Adjust hours to 12-hour format
-      if (hours > 12) {
-        hours -= 12;
-      }
-
-      // Ensure leading zeros for single-digit day, month, hours, and minutes
-      const formattedDay = day < 10 ? '0' + day : day;
-      const formattedMonth = month < 10 ? '0' + month : month;
-      const formattedHours = hours < 10 ? '0' + hours : hours;
-      const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
-
-      return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period}`;
-    },
     // async getJobs() {
     //   try {
     //     const response = await api.get(`/client/client-jobs`);
@@ -272,11 +250,6 @@ ul#pills-tab {
   background-color: #808080;
 }
 
-.custom-button {
-  color: white !important;
-  background-color: #808080 !important;
-}
-
 .nav-pills .nav-link,
 .nav-link:focus,
 .nav-link:hover {
@@ -285,5 +258,10 @@ ul#pills-tab {
 
 .text-left {
   text-align: left;
+}
+
+.btn {
+  padding: 5px 20px;
+  border-radius: 20px;
 }
 </style>

@@ -31,4 +31,9 @@ export default {
     border: none;
 }
 
+.custom-button {
+  color: white !important;
+  background-color: #808080 !important;
+}
+
 </style>

@@ -9,8 +9,11 @@
           <div>
             <div data-v-2f14f9de="" class="d-flex flex-wrap justify-content-center mb-5" data-v-376ef8ab="">
 
+              <!-- class="m-2 text-decoration-none badge text-white fs-6 bubbles" -->
               <a v-for="(area,index) in areas" :key="area.id" @click="setArea(index,area.id)"
-                class="m-2 text-decoration-none badge text-white fs-6 bubbles">
+                :class="['m-2', 'text-decoration-none', 'badge', 'text-white' ,'fs-6', 'bubbles', 
+                { 'selected_bubble': selectedAreaIndex === index }]"
+                >
                 {{ area.title }}
               </a>
 
@@ -63,13 +66,12 @@
             <input name="title" id="title" type="text" class="form-control" required="" v-model="title" />
             <br />
 
-            <label for="job" class="mb-2">Tell us in a few words why you need a lawyer. (Please include any important
-              upcoming dates,
+            <label for="job">Tell us Why do you need a lawyer? (Please include any important upcoming dates,
               such as court dates.)<sup class="text-danger">*</sup></label>
             <textarea name="job" id="job" type="textarea" class="form-control" required="" v-model="description"
               @input="checkCharacterLimit" :maxlength="maxCharacters"></textarea>
-            <!-- <div v-if="characterCount >= maxCharacters" class="warning-text">You have reached your character limit.</div> -->
-            <!-- <div class="c-Count">Character Count: {{ characterCount }} / {{ maxCharacters }}</div> -->
+            <div v-if="characterCount >= maxCharacters" class="warning-text">You have reached your character limit.</div>
+            <div class="c-Count">Character Count: {{ characterCount }} / {{ maxCharacters }}</div>
           </div>
         </template>
 
@@ -251,6 +253,10 @@ export default {
   methods: {
 
     nextStep(values) {
+      if(this.currentStep == 0 && !this.selectedArea && !this.selectedAreaIndex)
+      {
+        return false;
+      }
       if (this.currentStep === 4) {
         console.log("Done: ", JSON.stringify(values, null, 2));
         return;
@@ -337,7 +343,7 @@ export default {
     setArea(index,id) {
       this.selectedArea = id;
       this.selectedAreaIndex = index;
-      console.log(index,id);
+      // console.log(index,id);
     },
     setLocation(){
       console.log('abc tt oo : ' , this.selectedLocationIndex);
@@ -373,6 +379,11 @@ export default {
   background: #5c636a;
 }
 
+.selected_bubble {
+  background: #212529 !important;
+  color: rgb(255, 255, 255) !important; 
+}
+
 .footer-ct {
   position: absolute;
   bottom: 0;
@@ -394,9 +405,8 @@ export default {
   top: -1px;
 }
 
-
-
-.bubbles:hover {
-  background: #5c636a;
+.warning-text {
+  margin: 10px 0px;
+  color: red;
 }
 </style>

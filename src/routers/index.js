@@ -54,11 +54,36 @@ import store from '../store';
 
 function reverse_guard(to, from, next) {
   api.get("/verify")
-    .then(() => {
-      next('/');
+    .then(response => {
+      console.log('revers if')
+      // next('/');
       // router.go -1
+
+      const userData = response?.data?.data; // Assuming your API response contains user data, including the role
+
+      if (userData.type === "lawyer") {
+        next('/lawyer-dashboard');
+      } else if (userData.type === "client") {
+        next('/client-dashboard');
+      } else {
+        // Handle other cases or roles as needed
+        next();
+      }
+
     })
     .catch(() => {
+      console.log('revers catch')
+
+      //  const path = window.location.pathname;
+      //   if ((path == "/" || path == "/lawyer-register" || path == "/lawyer-login" || path == "/client-register" ||
+      //       path == "/client-login") && (localStorage.getItem('loginUser') || localStorage.getItem('token'))) {
+      //       localStorage.removeItem('loginUser');
+      //       localStorage.removeItem('token');
+      //   }
+
+      localStorage.removeItem('loginUser');
+      localStorage.removeItem('token');
+
       next()
     });
 }
@@ -253,15 +278,6 @@ const routes = [
     component: AdminClients,
   },
 
-  // {
-  //   path: "/postingjob",
-  //   component: PostingJob,
-  // },
-
-  {
-    path: "/posting-job",
-    component: PostingaJob,
-  },
   {
     path: "/view-proposals",
     component: ViewBids,
@@ -305,6 +321,7 @@ const routes = [
   {
     path: "/faqs",
     component: Faqs,
+    // meta: { requiresAuth: true },
   },
   {
     path: "/contact-us",
@@ -344,10 +361,12 @@ const isLoggedIn = () => {
 router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isLoggedIn()) {
-      // console.log('not match');
+      console.log('not match');
       next({ path: '/' })
     } else {
+      console.log('match else')
       try {
+        console.log('match try')
         let result = await api.get('/verify');
         console.log('user all data ::: ', result.data);
         if (to.meta.clientNotAllowed && result.data.data.type != "lawyer") {

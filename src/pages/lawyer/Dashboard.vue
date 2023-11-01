@@ -18,16 +18,32 @@
       <div v-else>
 
       <!-- after subscribe -->
-      <div v-if="match_jobs.length == 0" class="border rounded bg-light p-3 d-flex flex-wrap">
+      <div v-if="openJobs.length == 0 && searchQuery == ''"
+       class="border rounded bg-light p-3 d-flex flex-wrap">
         <p class="mx-auto my-0">
           No potential jobs found that match your profile. Click here to amend
           your <router-link to="/lawyer-profile">Profile</router-link>
         </p>
       </div>
-      <!-- after profile update -->
-      <div v-else class="border rounded bg-light p-3 d-flex flex-wrap">
+      
+      <div v-else-if="openJobs.length == 0 && searchQuery != ''"
+              class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
+              id="containerActive"
+            >
+            <span class="text-center w-100">No record found!</span>
+            </div>
+
+      <div v-else 
+       class="border rounded bg-light p-3 d-flex flex-wrap">
+
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" v-model="searchQuery"  @keyup.enter="search" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <button class="input-group-text btn custom-button" id="basic-addon2" @click="search"><i class="fa fa-search"></i></button>
+            <button class="input-group-text btn custom-button" id="basic-addon2" @click="clearSearch"><i class="fa fa-refresh"></i></button>
+          </div>
+
         <div
-        v-for="(item,index) in match_jobs" :key="index"
+        v-for="(item,index) in openJobs" :key="index"
           class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
           style="width: 35vw"
           id="28"
@@ -36,8 +52,10 @@
             <p class="badge bg-dark" title="Area">{{ item?.field?.title }}</p>
             &nbsp;
             <p class="badge bg-dark" title="Location">{{ item?.location?.title }}</p>
+            <p><b>Serial No:</b> {{ item?.identity }}</p>
             <p><b>City/suburb:</b> {{ item?.city }}</p>
             <p><b>Title:</b> {{ item?.title }}</p>
+            <p><b>Created:</b> {{ formatCreatedAt(item.created_at) }} </p>
             <p
               id="description28"
               style="overflow: hidden; text-overflow: ellipsis; height: 100px"
@@ -76,6 +94,7 @@
             >
           </div>
         </div>
+
         <!-- <div
           class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
           style="width: 35vw"
@@ -122,7 +141,14 @@
             >
           </div>
         </div> -->
+      
+        <div v-if="openJobs.length > 0 && currentPage != lastPage" class="text-center">
+              <button class="btn custom-button" @click="loadMore">Load More</button>
+            </div>
+
       </div>
+
+      
     </div>
   </div>
   </div>
@@ -134,11 +160,14 @@ export default {
   components: {
     LawyerHeader,
   },
-  data(){
+  data() {
     return {
-      match_jobs: [],
+      openJobs: [],
+      endpoint: "/lawyer/show-related-jobs",
+      endpoint_search: "/lawyer/search-related-jobs",
     }
   },
+
   computed: {
     userName() {
       return `${this.$store.getters?.loginUser?.first_name} ${this.$store.getters?.loginUser?.last_name}`;
@@ -147,28 +176,31 @@ export default {
       return this.$store.getters.adminApprovalStatus;
     },
     subscriptionStatus() {
-      console.log('ss tt uu : ' , this.$store.getters.subscriptionStatus);
+      console.log('ss tt uu : ', this.$store.getters.subscriptionStatus);
       return this.$store.getters.subscriptionStatus;
     }
   },
-  mounted(){
-    this.getJobs();
+  async created() {
+    await this.loadMore();
   },
+  // mounted(){
+  //   this.getJobs();
+  // },
   methods: {
-    async getJobs(){
+    // async getJobs(){
+    //   try {
+    //     const response = await api.get('/lawyer/show-related-jobs');
+    //     console.log('sundak  :::: ', response?.data?.data);
+    //     this.openJobs = response?.data?.data;
+    //   } catch (error) {
+    //     console.error('Error fetching options:', error);
+    //   }
+    // },
+    async declineJob(job_id) {
       try {
-        const response = await api.get('/lawyer/show-related-jobs');
-        console.log('sundak  :::: ', response?.data?.data);
-        this.match_jobs = response?.data?.data;
-      } catch (error) {
-        console.error('Error fetching options:', error);
-      }
-    },
-    async declineJob(job_id){
-      try {
-        const response = await api.post('/lawyer/decline-job',{"job_id":job_id});
+        const response = await api.post('/lawyer/decline-job', { "job_id": job_id });
         console.log('sundak  :::: ', response?.data);
-        // this.match_jobs = response?.data?.data;
+        // this.openJobs = response?.data?.data;
       } catch (error) {
         console.error('Error fetching options:', error);
       }

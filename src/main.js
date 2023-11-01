@@ -48,15 +48,15 @@ app.mixin({
         }
     },
     watch: {
-          searchQuery(newQuery) {
+        searchQuery(newQuery) {
             if (newQuery == "" && !this.clear) {
-              this.openJobs = [];
-              this.currentPage = 0;
-              this.lastPage = 0;
-              this.loadMore();
+                this.openJobs = [];
+                this.currentPage = 0;
+                this.lastPage = 0;
+                this.loadMore();
             }
-          }
-        },
+        }
+    },
 
     methods: {
         setUserInStateAndLocalStorage(res) {
@@ -229,6 +229,34 @@ app.mixin({
 
         // load more pagination and search functions end
 
+
+
+        // date time format function start
+
+        formatCreatedAt(created_at) {
+            const date = new Date(created_at);
+            const day = date.getDate();
+            const month = date.getMonth() + 1; // Months are zero-based
+            const year = date.getFullYear().toString().slice(-2); // Get the last 2 digits of the year
+            let hours = date.getHours();
+            const minutes = date.getMinutes();
+            const period = hours < 12 ? 'am' : 'pm';
+
+            // Adjust hours to 12-hour format
+            if (hours > 12) {
+                hours -= 12;
+            }
+
+            // Ensure leading zeros for single-digit day, month, hours, and minutes
+            const formattedDay = day < 10 ? '0' + day : day;
+            const formattedMonth = month < 10 ? '0' + month : month;
+            const formattedHours = hours < 10 ? '0' + hours : hours;
+            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+            return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period}`;
+        },
+
+        // date time format function end
 
 
     }
