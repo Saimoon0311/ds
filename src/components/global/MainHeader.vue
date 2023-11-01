@@ -1,7 +1,7 @@
 <template lang="">
   <div class="text-center  container-hd" >
       <router-link to="/"> 
-      <img src="../../assets/images/logo.jpeg" srcset="../../assets/images/logo.jpeg 450w, ../../assets/images/logo.jpeg 600w, ../../assets/images/logo.jpeg 750w" sizes="(min-width: 820px) 446px, (min-width: 640px) 588px, calc(90vw + 30px)" class="img-fluid" />
+      <img  src="../../assets/images/logo.jpeg" srcset="../../assets/images/logo.jpeg 450w, ../../assets/images/logo.jpeg 600w, ../../assets/images/logo.jpeg 750w" sizes="(min-width: 820px) 446px, (min-width: 640px) 588px, calc(90vw + 30px)" class="img-fluid main-lg-img" />
     </router-link>
     <div class="dropdown cstm-dropdown">
       <button class="btn btn-secondary dropdown-toggle menu-burger" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -68,10 +68,29 @@ export default {
 
 @media (min-width: 320px) and (max-width: 425px) {
   .cstm-dropdown {
-    margin-top: -20px;
-    right: 10px;
+    position: relative !important;
+    margin-top: -18px;
+    right: -10px;
   }
 
+  .main-lg-img {
+    margin-left: -13px;
+  }
+
+  .terms-check input {
+    float: left;
+  }
+
+  .tac {
+    float: left;
+    width: 80%;
+    margin-top: -4px;
+
+  }
+
+  .tac a {
+    display: inline-block;
+  }
 
 }
 </style>
