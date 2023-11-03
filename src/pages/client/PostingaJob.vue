@@ -225,7 +225,7 @@ export default {
       locations: [],
 
       title: null,
-      description: null,
+      description: "",
       selectedArea: null,
       selectedAreaIndex : null,
       selectedLocationIndex : null,
@@ -235,7 +235,7 @@ export default {
 
       isVisible: false,
       isVisibleContact: false,
-      text: "",
+      // text: "",
       maxCharacters: 2500,
 
     };
@@ -243,7 +243,7 @@ export default {
 
   computed: {
     characterCount() {
-      return this.text.length;
+      return this.description.length;
     },
   },
   mounted() {
@@ -321,7 +321,7 @@ export default {
     },
     checkCharacterLimit() {
       if (this.characterCount > this.maxCharacters) {
-        this.text = this.text.slice(0, this.maxCharacters); // Truncate text to the character limit.
+        this.description = this.description.slice(0, this.maxCharacters); // Truncate text to the character limit.
       }
     },
     async fetchAreas() {

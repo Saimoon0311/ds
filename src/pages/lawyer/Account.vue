@@ -19,7 +19,8 @@
             <tbody>
               <tr>
                 <th>Subscription Status</th>
-                <td>{{ subscriptionData?.subscription_status ?? 'N/A' }}</td>
+                <td v-if="subscriptionData?.subscription_status == 'active'">Subscribed</td>
+                <td v-else>{{ capitalizeFirstLetter(subscriptionData?.subscription_status) }}</td>
               </tr>
               <tr>
                 <th>Start Date</th>
@@ -131,7 +132,8 @@
           >
             Cancel Subscription
           </button>
-
+          <router-link v-else to="/subscribe"  class="btn btn-primary"
+            >Subscribe now</router-link>
         </div>
 
         <!-- Change account password -->

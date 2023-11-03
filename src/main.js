@@ -184,7 +184,7 @@ app.mixin({
 
         async search() {
             if (this.searchQuery == "") return false;
-            const response = await api.get(this.endpoint_search, {
+            const response = await api.get(this.endpoint, {
                 params: { query: this.searchQuery }
             });
             this.currentPage = 1;
@@ -257,6 +257,15 @@ app.mixin({
         },
 
         // date time format function end
+
+
+        capitalizeFirstLetter(status) {
+            if (status) {
+              return status.charAt(0).toUpperCase() + status.slice(1);
+            } else {
+              return 'N/A';
+            }
+          }
 
 
     }

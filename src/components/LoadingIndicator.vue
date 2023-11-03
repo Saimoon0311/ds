@@ -17,6 +17,7 @@
   
   <style scoped>
   .loading-indicator {
+    z-index: 999 !important;
     position: fixed;
     top: 0;
     left: 0;
@@ -29,6 +30,7 @@
   }
   
   .loader {
+    z-index: 9999 !important;
     border: 4px solid #e8c1c1;
     border-top: 4px solid #3498db;
     border-radius: 50%;

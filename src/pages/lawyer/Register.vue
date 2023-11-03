@@ -1,11 +1,12 @@
 <template lang="">
+    <div class="l-register-main">
     <div class="hello container">
         <MainHeader />
         <div class=" pt-4 center-main row justify-content-center">
-        <div class="col-md-7">        
-        <div class="bg-dark text-white text-center m-3 p-3 find-client " style="border-radius: 10px">
-        <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
-            <p class="m-4 fs-3 mx-5 ">Sign up to find clients</p>
+        <div class="col-md-10 col-lg-7">        
+        <div class="bg-dark text-white text-center m-3 p-3 pt-4 find-client" style="border-radius: 10px">
+        <Form @submit="submitData" class="p-2 px-md-5 m-md-3 fc-form" :validation-schema="schema" v-slot="{errors}">
+            <p class=" mb-4 fs-3">Sign up to find clients</p>
             <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                  <!-- Add the style and icon you want using the String format -->
@@ -58,9 +59,9 @@
 
             <div class="d-flex align-items-between justify-content-center mb-4 inline-table terms-check">
                 <Field class="form-check-Field" type="checkbox" id="termsAndConditions" name="tandc" value="true" :class="{'is-invalid' : errors.tandc}" />
-                <label class="form-check-label" for="termsAndConditions">
+                <label class="form-check-label tac" for="termsAndConditions">
                     &nbsp;I have read and agree to the 
-                    <router-link to="/terms-of-use" >terms and conditions.</router-link>
+                    <router-link to="/terms-and-conditions-for-lawyers" >terms and conditions.</router-link>
                 </label>
                 <span class="invalid-feedback">{{errors.tandc}}</span>
             </div>
@@ -77,9 +78,14 @@
 
         
     </div>
+    <div class="footer">
+      <MainFooter />
+    </div>
+</div>
 </template>
 <script>
 import MainHeader from '../../components/global/MainHeader.vue'
+import MainFooter from "../../components/global/MainFooter.vue";
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
@@ -121,7 +127,7 @@ export default {
         MainHeader,
         Form,
         Field,
-        // MainFooter
+        MainFooter
     },
     methods: {
         submitData(formData){
@@ -161,5 +167,55 @@ export default {
     width: 100%;
     text-align: left;
     margin-left: 40px;
+}
+
+.l-register-main {
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+@media (max-width: 1200px) {
+    .find-client {
+        padding-right: 40px !important;
+    }
+
+    .find-client .px-md-5 {
+        padding-right: 0rem !important;
+        padding-left: 0rem !important;
+    }
+
+    .tac {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .find-client .px-md-5 {
+        padding-right: 0rem !important;
+        padding-left: 0rem !important;
+    }
+
+    .tac {
+        font-size: 15px;
+    }
+
+    .l-register-main {
+        padding-bottom: 130px;
+    }
+}
+
+@media only screen and (max-width: 767px) and (min-width: 320px) {
+    .find-client {
+        margin: 0 !important;
+        padding-right: 30px !important;
+    }
 }
 </style>

@@ -211,7 +211,7 @@ export default {
   data() {
     return {
       endpoint: "/client/client-jobs",
-      endpoint_search: "/client/search-client-jobs",
+      // endpoint_search: "/client/search-client-jobs",
     }
   },
   async created() {

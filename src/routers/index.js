@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 // landing
 // import HelloWorld from "@/components/HelloWorld.vue";
 import NeedLawyer from "@/pages/forms/NeedLawyer.vue";
-import FindClient from "@/pages/forms/FindClient.vue";
+// import FindClient from "@/pages/forms/FindClient.vue";
 import LoginForm from "@/pages/forms/LoginForm.vue";
 // admin
 import AdminLogin from "@/pages/admin/Login.vue";
@@ -27,6 +27,7 @@ import PostingaJob from "@/pages/client/PostingaJob.vue";
 import AreaOfLaw from "@/pages/client/AreaOfLaw.vue";
 import ViewBids from "@/pages/client/ViewBids.vue";
 import ReplyInfoRequest from "@/pages/client/ReplyInfoRequest.vue";
+import termsForClient from "@/pages/client/termsAndConditions.vue";
 
 // lawyer
 import LawyerLoginForm from "@/pages/lawyer/Login.vue";
@@ -39,6 +40,9 @@ import LawyerSubscribe from "@/pages/lawyer/Subscribe.vue";
 // import LawyerBidding from "@/pages/lawyer/Proposal.vue";
 import LawyerBidding from "@/pages/lawyer/Proposal.vue";
 import RequestInfo from "@/pages/lawyer/RequestInfo.vue";
+import FindClient from "@/pages/lawyer/Register.vue";
+import termsForLawyer from "@/pages/lawyer/termsAndConditions.vue";
+
 // other
 import privacyPolicy from "@/pages/privacy-policy.vue";
 import termsOfUse from "@/pages/terms-of-use.vue";
@@ -236,6 +240,11 @@ const routes = [
     component: LoginForm,
     beforeEnter: reverse_guard,
   },
+  {
+    path: "/terms-and-conditions-for-lawyers",
+    component: termsForLawyer,
+  },
+
   // admin
   {
     path: "/admin-login",
@@ -286,7 +295,10 @@ const routes = [
     path: "/reply-info-request",
     component: ReplyInfoRequest,
   },
-
+  {
+    path: "/terms-and-conditions-for-clients",
+    component: termsForClient,
+  },
   // other
   {
     path: "/privacy-policy",
