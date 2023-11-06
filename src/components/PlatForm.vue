@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
-    <MainHeader />
+    <GeneralHeader />
+
     <div class="d-flex flex-wrap justify-content-center align-items-center flex-column">
       <div class="mb-5 mt-5 text-center">
         <p class="logo-sub-heading">
@@ -21,7 +22,7 @@
               We take the hassle and uncertainty out of the process of finding a
               lawyer.
             </p>
-            <p>Simply make one enquiry and wait for lawyers to come to you.</p>
+            <p class="mt-2">Simply make one enquiry and wait for lawyers to come to you.</p>
             <div class="d-flex align-items-center justify-content-center mt-two">
               <router-link to="/client-login" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</router-link>
               <!-- <p>Or</p> -->
@@ -43,7 +44,7 @@
               We provide an untapped population of real people and small
               businesses looking for a lawyer.
             </p>
-            <p>
+            <p class="mt-2">
               Simply subscribe for an opportunity to find clients in your
               practice area without leaving your desk.
             </p>
@@ -71,12 +72,13 @@
 </template>
 
 <script>
-import MainHeader from "./global/MainHeader.vue";
+import GeneralHeader from "../pages/GeneralHeader.vue";
 import MainFooter from "./global/MainFooter.vue";
+
 
 export default {
   components: {
-    MainHeader,
+    GeneralHeader,
     MainFooter,
   },
   // name: 'Platform',

@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="text-center  container" >
+  <div class="text-center pt-4 container mobile-layout" >
       <router-link to="/"> 
       <img src="../assets/images/logo.jpeg" srcset="../assets/images/logo.jpeg 450w, ../assets/images/logo.jpeg 600w, ../assets/images/logo.jpeg 750w" sizes="(min-width: 820px) 446px, (min-width: 640px) 588px, calc(90vw + 30px)" class="img-fluid" />
     </router-link>
@@ -56,10 +56,28 @@ export default {
   background-color: gray !important;
 }
 
+.menu-burger {
+  background: #fff !important;
+}
+
+.menu-burger:focus {
+  box-shadow: none;
+}
+
+.menu-burger i {
+  color: #000
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .cstm-dropdown {
     margin-top: -26px;
     right: 20px;
+  }
+
+  .mobile-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -68,14 +86,26 @@ export default {
     margin-top: -32px;
     right: 20px;
   }
+
+  .mobile-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media (min-width: 320px) and (max-width: 425px) {
   .cstm-dropdown {
-    margin-top: -20px;
-    right: 10px;
+    position: relative !important;
+    margin-top: -18px;
+    right: -10px;
   }
 
+  .mobile-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
 }
 </style>

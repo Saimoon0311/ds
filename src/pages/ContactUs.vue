@@ -1,5 +1,6 @@
 <template lang="">
   <section class="ct-main">
+    <GeneralHeader />
     <div class="WordSection1 container pt-4 ">
       <MainHeader />
       <div class=" pt-4 center-main row justify-content-center">
@@ -58,8 +59,10 @@
   </section>
 </template>
 <script>
-import MainHeader from "../components/global/MainHeader.vue";
+// import MainHeader from "../components/global/MainHeader.vue";
+import GeneralHeader from "./GeneralHeader.vue";
 import MainFooter from "../components/global/MainFooter.vue";
+
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 
@@ -88,7 +91,7 @@ export default {
   },
   components: {
     MainFooter,
-    MainHeader,
+    GeneralHeader,
     Form,
     Field
   },

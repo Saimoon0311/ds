@@ -1,6 +1,7 @@
 <template lang="">
-  <section class=" mt-5 ">
-    <div class="WordSection1 container">
+  <section class="  ">
+    <GeneralHeader />
+    <div class="WordSection1 container pt-3">
       <p class="LNDocumentTitleShort" align="center" style="text-align: center">
         <span
           style="
@@ -542,6 +543,8 @@
   </section>
 </template>
 <script>
+
+import GeneralHeader from "../pages/GeneralHeader.vue";
 import MainFooter from "../components/global/MainFooter.vue";
 
 // import { ref } from "vue";
@@ -549,6 +552,7 @@ import MainFooter from "../components/global/MainFooter.vue";
 
 export default {
   components: {
+    GeneralHeader,
     MainFooter
   },
   // data() {

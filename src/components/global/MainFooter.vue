@@ -41,7 +41,7 @@ export default {
     text-align: center;
     padding: 4px 0;
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 600;
     /* text-transform: uppercase; */
     color: #000;
 }
@@ -73,7 +73,7 @@ export default {
 
 .footer-main .link {
     /* font-size: 15px; */
-    font-weight: 500;
+    font-weight: 600;
     /* text-transform: uppercase; */
     color: #000;
     text-decoration: none;
@@ -82,7 +82,7 @@ export default {
 .caret-ico {
     position: absolute;
     top: 1%;
-    background-color: #f1f1f1;
+    background-color: #fff;
     padding: 3px;
 }
 

@@ -1,7 +1,7 @@
 <template lang="">
-  <section class=" mt-4 faq-main">
+  <section class="faq-main">
+    <GeneralHeader  />
     <div class="WordSection1 container">
-    <GeneralHeader />
       <!-- ----------- -->
       <p class="LNDocumentTitleShort mt-5 mb-5" align="center" style="text-align: center">
         <span
