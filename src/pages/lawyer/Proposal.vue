@@ -147,7 +147,7 @@
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button @click="removeRow(index)" class="btn btn-default btn-circle"><i
+                          <td style="width:0px"><button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
                                 class="fa fa-close"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
                           <td>{{ row.costAud }}</td>
@@ -214,7 +214,7 @@
                   </thead>
                   <tbody id="addFeeEarnersRow">
                     <tr v-for="(row, index) in rows2" :key="index">
-                      <td style="width:0px"><button @click="removeRow2(index)" class="btn btn-default btn-circle"><i
+                      <td style="width:0px"><button type="button" @click="removeRow2(index)" class="btn btn-default btn-circle"><i
                             class="fa fa-close"></i></button></td>
                       <td>{{ row.itemDisbursement }}</td>
                       <td>{{ row.costAud }}</td>
@@ -373,7 +373,7 @@
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button @click="removeRow(index)" class="btn btn-default btn-circle"><i
+                          <td style="width:0px"><button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
                                 class="fa fa-close"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
                           <td>{{ row.costAud }}</td>
@@ -502,7 +502,7 @@
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button @click="removeRow(index)" class="btn btn-default btn-circle"><i
+                          <td style="width:0px"><button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
                                 class="fa fa-close"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
                           <td>{{ row.costAud }}</td>
@@ -808,7 +808,7 @@
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button @click="removeRow(index)" class="btn btn-default btn-circle"><i
+                          <td style="width:0px"><button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
                                 class="fa fa-close"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
                           <td>{{ row.costAud }}</td>
@@ -964,7 +964,7 @@
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button @click="removeRow(index)" class="btn btn-default btn-circle"><i
+                          <td style="width:0px"><button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
                                 class="fa fa-close"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
                           <td>{{ row.costAud }}</td>
