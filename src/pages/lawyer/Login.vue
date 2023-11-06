@@ -61,9 +61,9 @@
         </div>
       </div>
     </div>
-    <div class="footer">
-      <MainFooter />
-    </div>
+        <div class="footer">
+        <MainFooter />
+        </div>
   </div>
 </template>
 <script>
@@ -73,48 +73,48 @@ import MainFooter from "../../components/global/MainFooter.vue";
 import { Form, Field } from "vee-validate";
 import * as yup from "yup";
 export default {
-    data() {
-        const schema = yup.object().shape({
-            email: yup
-                .string()
-                .min(3, "Email must be valid")
-                .max(50, "Email must be valid")
-                .required("Please enter your email")
-                .matches(
-                    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                    "Please enter valid email"
-                ),
-            password: yup
-                .string()
-                .required("Please enter your password")
-                .min(6, "Password must be greater then 6 digit")
-                .max(16, "Password must be less then 16 digit")
-                .matches(
-                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                    "Must contain 8 characters, one uppercase, one lowercase, one number and one special case character"
-                ),
-        });
-        return {
-            schema,
-        };
+  data() {
+    const schema = yup.object().shape({
+      email: yup
+        .string()
+        .min(3, "Email must be valid")
+        .max(50, "Email must be valid")
+        .required("Please enter your email")
+        .matches(
+          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+          "Please enter valid email"
+        ),
+      password: yup
+        .string()
+        .required("Please enter your password")
+        .min(6, "Password must be greater then 6 digit")
+        .max(16, "Password must be less then 16 digit")
+        .matches(
+          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+          "Must contain 8 characters, one uppercase, one lowercase, one number and one special case character"
+        ),
+    });
+    return {
+      schema,
+    };
+  },
+  components: {
+    MainHeader,
+    Form,
+    Field,
+    MainFooter,
+  },
+  methods: {
+    submitData() {
+      alert("data has been submitted.");
     },
-    components: {
-        MainHeader,
-        Form,
-        Field,
-        MainFooter,
-    },
-    methods: {
-        submitData() {
-            alert("data has been submitted.");
-        },
-    },
-    name: "LawyerLoginForm",
+  },
+  name: "LawyerLoginForm",
 };
 </script>
 <style scoped>
 .hello {
-    /* min-height: 100vh;
+  /* min-height: 100vh;
     display: grid; */
 }
 
@@ -125,7 +125,7 @@ export default {
     flex-wrap: wrap;
 } */
 .align-baseline {
-    align-items: baseline !important;
+  align-items: baseline !important;
 }
 
 /* .login-main {
@@ -134,55 +134,56 @@ export default {
     margin-top: 50px;
 } */
 .l-register-main {
-    min-height: 100vh;
-    position: relative;
-    padding-bottom: 60px;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .login-row {
-    margin: auto;
-    min-height: 80vh;
+  margin: auto;
+  min-height: 80vh;
 }
 
 .login-col {
-    position: absolute;
-    left: 50%;
-    right: 50%;
-    transform: translate(-50%, -40%);
-    top: 50%;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -40%);
+  top: 50%;
 }
 
 @media (max-width: 1200px) {
-    .find-client {
-        padding-right: 40px !important;
-    }
+  .find-client {
+    padding-right: 40px !important;
+  }
 
-    .find-client .px-md-5 {
-        padding-right: 0rem !important;
-        padding-left: 0rem !important;
-    }
+  .find-client .px-md-5 {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
 }
 
 @media (max-width: 768px) {
-    .find-client .px-md-5 {
-        padding-right: 0rem !important;
-        padding-left: 0rem !important;
-    }
+  .find-client .px-md-5 {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
 
-    .l-register-main {
-        padding-bottom: 130px;
-    }
+  .l-register-main {
+    padding-bottom: 130px;
+  }
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {
-    .find-client {
-        margin: 0 !important;
-        padding-right: 30px !important;
-    }
-}</style>
+  .find-client {
+    margin: 0 !important;
+    padding-right: 30px !important;
+  }
+}
+</style>
