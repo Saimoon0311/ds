@@ -2,8 +2,8 @@
     <div class="footer-main">
         <div>
             
-            © 2023 simplawfy pty ltd. | <router-link class="link" to="/privacy-policy">privacy policy</router-link> | <router-link class="link" to="/terms-of-use">website terms of use</router-link> | <router-link class="link" to="/contact-us">contact</router-link> | <a class="sitemap link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                site map <i class=" caret-ico fa-solid fa-angle-up"></i>
+            © 2023 Simplawfy Pty Ltd. | <router-link class="link" to="/privacy-policy">Privacy Policy</router-link> | <router-link class="link" to="/terms-of-use">Website Terms of Use</router-link> | <router-link class="link" to="/contact-us">Contact</router-link> | <a class="sitemap link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Site Map <i class=" caret-ico fa-solid fa-angle-up"></i>
           </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><router-link class="dropdown-item" to="/about-us">About Us</router-link></li>
@@ -37,17 +37,17 @@ export default {
 
 .footer-main div {
     width: 100%;
-    background: rgb(241, 241, 241);
+    /* background: rgb(241, 241, 241); */
     text-align: center;
     padding: 4px 0;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
-    text-transform: uppercase;
-    color: #a5a5a5;
+    /* text-transform: uppercase; */
+    color: #000;
 }
 
 .footer-main .a {
-    color: #a5a5a5;
+    color: #000;
     font-size: 20px;
 }
 
@@ -74,8 +74,8 @@ export default {
 .footer-main .link {
     /* font-size: 15px; */
     font-weight: 500;
-    text-transform: uppercase;
-    color: #a5a5a5;
+    /* text-transform: uppercase; */
+    color: #000;
     text-decoration: none;
 }
 

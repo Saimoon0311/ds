@@ -104,7 +104,7 @@ export default {
 }
 
 .hello {
-    /* min-height: 100vh;
+  /* min-height: 100vh;
     display: grid; */
 }
 
@@ -115,7 +115,7 @@ export default {
     flex-wrap: wrap;
 } */
 .align-baseline {
-    align-items: baseline !important;
+  align-items: baseline !important;
 }
 
 /* .login-main {
@@ -124,50 +124,50 @@ export default {
     margin-top: 50px;
 } */
 .l-register-main {
-    min-height: 100vh;
-    position: relative;
-    padding-bottom: 60px;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .login-row {
-    margin: auto;
-    min-height: 80vh;
+  margin: auto;
+  min-height: 80vh;
 }
 
 .login-col {
-    position: absolute;
-    left: 50%;
-    right: 50%;
-    transform: translate(-50%, -40%);
-    top: 50%;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -40%);
+  top: 50%;
 }
 
 @media (max-width: 1200px) {
-    .find-client {
-        padding-right: 40px !important;
-    }
+  .find-client {
+    padding-right: 40px !important;
+  }
 
-    .find-client .px-md-5 {
-        padding-right: 0rem !important;
-        padding-left: 0rem !important;
-    }
+  .find-client .px-md-5 {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
 }
 
 @media (max-width: 768px) {
-    .find-client .px-md-5 {
-        padding-right: 0rem !important;
-        padding-left: 0rem !important;
-    }
+  .find-client .px-md-5 {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
 
-    .l-register-main {
-        padding-bottom: 130px;
-    }
+  .l-register-main {
+    padding-bottom: 130px;
+  }
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {
