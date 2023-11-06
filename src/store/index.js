@@ -12,6 +12,7 @@ const store = createStore({
     adminApprovalStatus : null,
     subscriptionData : null,
     replacePaymentMethod : false,
+    jobData : null
   },
   mutations: {
     SET_AUTHENTICATED(state, status) {
@@ -38,6 +39,9 @@ const store = createStore({
     setLoading(state, status) {
       state.isLoading = status;
     },
+    SET_JOB_DATA(state, data) {
+      state.jobData = data;
+    },
   },
   actions: {
     // Your actions go here
@@ -50,6 +54,7 @@ const store = createStore({
     adminApprovalStatus: (state) => state.adminApprovalStatus,
     subscriptionData: (state) => state.subscriptionData,
     replacePaymentMethod: (state) => state.replacePaymentMethod,
+    jobData: (state) => state.jobData,
   },
 });
 

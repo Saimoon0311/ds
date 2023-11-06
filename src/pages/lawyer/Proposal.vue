@@ -7,11 +7,21 @@
         class="d-flex justify-content-between border rounded bg-secondary text-white p-3 text-start col-md-7 m-auto mt-3"
         id="28">
         <div>
-          <p class="badge bg-dark" title="Area">Criminal</p>
+          <p class="badge bg-dark" title="Area">{{ jobData?.field?.title }}</p>
           &nbsp;
-          <p class="badge bg-dark" title="Location">Victoria</p>
-          <p><b>City/suburb:</b> test</p>
-          <p>lorem ipsum dummy text</p>
+          <p class="badge bg-dark" title="Location">{{ jobData?.location?.title }}</p>
+          <!-- <p><b>City/suburb:</b> {{ jobData?.identity }}</p>
+          <p><b>City/suburb:</b> {{ jobData?.city }}</p>
+          <p><b>City/suburb:</b> {{ jobData?.title }}</p>
+          <p></p> -->
+
+          <p><b>Serial No:</b> {{ jobData?.identity }}</p>
+          <p><b>City/suburb:</b> {{ jobData?.city }}</p>
+          <p><b>Title:</b> {{ jobData?.title }}</p>
+          <p><b>Created:</b> {{ formatCreatedAt(jobData?.created_at) }} </p>
+          <p id="description28" style="overflow: hidden; text-overflow: ellipsis; height: 100px">
+            {{ jobData?.description }}
+          </p>
           <div>
             <!-- <p><b>Posted by:</b> test@mailinator.com</p>
             <p>
@@ -51,8 +61,8 @@
                 <label> Daily Rate </label>
                 <div>
                   <span class="position-absolute d-span"> $</span>
-                  <input type="number" id="fixedFeeAmount" v-model="form.daily_rate" name="fixedFeeAmount" class="form-control d-input" min="1"
-                    step=".01" placeholder="" />
+                  <input type="number" id="fixedFeeAmount" v-model="form.daily_rate" name="fixedFeeAmount"
+                    class="form-control d-input" min="1" step=".01" placeholder="" />
                 </div>
               </div>
               <div class="disbursement-fields">
@@ -60,8 +70,8 @@
                   <label> What is the estimated amount for disbursements (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.disbursement_amount" name="fixedFeeAmount" class="form-control d-input" min="1"
-                      step=".01" placeholder="" />
+                    <input type="number" id="fixedFeeAmount" v-model="form.disbursement_amount" name="fixedFeeAmount"
+                      class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                   <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
                   <!-- <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
@@ -147,8 +157,8 @@
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
-                                class="fa fa-close"></i></button></td>
+                          <td style="width:0px"><button type="button" @click="removeRow(index)"
+                              class="btn btn-default btn-circle"><i class="fa fa-close"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
                           <td>{{ row.costAud }}</td>
                           <td>
@@ -167,8 +177,8 @@
                   <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount" class="form-control d-input" min="1"
-                      step=".01" placeholder="" />
+                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
+                      class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                 </div>
 
@@ -214,8 +224,8 @@
                   </thead>
                   <tbody id="addFeeEarnersRow">
                     <tr v-for="(row, index) in rows2" :key="index">
-                      <td style="width:0px"><button type="button" @click="removeRow2(index)" class="btn btn-default btn-circle"><i
-                            class="fa fa-close"></i></button></td>
+                      <td style="width:0px"><button type="button" @click="removeRow2(index)"
+                          class="btn btn-default btn-circle"><i class="fa fa-close"></i></button></td>
                       <td>{{ row.itemDisbursement }}</td>
                       <td>{{ row.costAud }}</td>
                       <td>
@@ -286,8 +296,8 @@
                   <label> What is the estimated amount for disbursements (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.disbursement_amount" name="fixedFeeAmount" class="form-control d-input" min="1"
-                      step=".01" placeholder="" />
+                    <input type="number" id="fixedFeeAmount" v-model="form.disbursement_amount" name="fixedFeeAmount"
+                      class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                   <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
                   <!-- <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
@@ -373,8 +383,8 @@
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
-                                class="fa fa-close"></i></button></td>
+                          <td style="width:0px"><button type="button" @click="removeRow(index)"
+                              class="btn btn-default btn-circle"><i class="fa fa-close"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
                           <td>{{ row.costAud }}</td>
                           <td>
@@ -393,8 +403,8 @@
                   <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount"  v-model="form.law_practice_cost" name="fixedFeeAmount" class="form-control d-input" min="1"
-                      step=".01" placeholder="" />
+                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
+                      class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                 </div>
 
@@ -406,8 +416,8 @@
               <label>Fixed fee amount (in AUD and excluding GST and disbursements):<sup><code>*</code></sup></label>
               <div>
                 <span class="position-absolute d-span"> $</span>
-                <input type="number" id="fixedFeeAmount" v-model="form.fixed_fee_amount" name="fixedFeeAmount" class="form-control d-input" min="1"
-                  step=".01" />
+                <input type="number" id="fixedFeeAmount" v-model="form.fixed_fee_amount" name="fixedFeeAmount"
+                  class="form-control d-input" min="1" step=".01" />
               </div>
               <br />
               <div class="disbursement-fields">
@@ -415,8 +425,8 @@
                   <label> What is the estimated amount for disbursements (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount"  v-model="form.disbursement_amount" name="fixedFeeAmount" class="form-control d-input" min="1"
-                      step=".01" placeholder="" />
+                    <input type="number" id="fixedFeeAmount" v-model="form.disbursement_amount" name="fixedFeeAmount"
+                      class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                   <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
                   <!-- <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
@@ -502,8 +512,8 @@
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
-                                class="fa fa-close"></i></button></td>
+                          <td style="width:0px"><button type="button" @click="removeRow(index)"
+                              class="btn btn-default btn-circle"><i class="fa fa-close"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
                           <td>{{ row.costAud }}</td>
                           <td>
@@ -524,8 +534,8 @@
                   <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount" class="form-control d-input" min="1"
-                      step=".01" placeholder="" />
+                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
+                      class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                 </div>
 
@@ -564,15 +574,15 @@
                 How many fee earners will be working on this matter?
                 <div class="form-check">
                   <label class="form-check-label">
-                    <input type="radio" v-model="form.fee_earners" value="me" name="noOfFeeEarners" class="form-check-input" id="radioNoOfFeeEarnersSingle"
-                      checked="" @click="showElement('Yes')" />
+                    <input type="radio" v-model="form.fee_earners" value="me" name="noOfFeeEarners"
+                      class="form-check-input" id="radioNoOfFeeEarnersSingle" checked="" @click="showElement('Yes')" />
                     Just me
                   </label>
                 </div>
                 <div class="form-check">
                   <label class="form-check-label">
-                    <input type="radio" name="noOfFeeEarners" v-model="form.fee_earners" value="team" class="form-check-input" id="radioNoOfFeeEarnersMultiple"
-                      @click="showElement('No')" />
+                    <input type="radio" name="noOfFeeEarners" v-model="form.fee_earners" value="team"
+                      class="form-check-input" id="radioNoOfFeeEarnersMultiple" @click="showElement('No')" />
                     I'm part of a team
                   </label>
                 </div>
@@ -613,32 +623,35 @@
 
 
                 <fieldset class="border p-2 my-2 bg-light text-center " style="margin: auto">
-        <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
-          Add additional fee earner
-        </legend>
-        <label class="w-100 text-start">
-          Title:<sup><code>*</code></sup>
-          <input v-model="newRow3.title" autocomplete="on" placeholder="Eg: Associate" class="form-control" required />
-        </label>
-        <br />
-        <br />
-        <label class="w-100 text-start">
-          Hourly rate (in AUD excluding GST):<sup><code>*</code></sup>
-          <div>
-            <span class="position-absolute d-span">$</span>
-            <input v-model="newRow3.hourlyRate" min="1" autocomplete="on" type="number" class="form-control d-input" required />
-          </div>
-        </label>
-        <br />
-        <br />
-        <label class="w-100 text-start">
-          Estimated number of hours:<sup><code>*</code></sup>
-          <input v-model="newRow3.estimatedHours" min="1" autocomplete="on" type="number" class="form-control" required />
-        </label>
-        <br />
-        <br />
-        <button type="button" @click="addRow3" class="btn btn-dark">Add</button>
-      </fieldset>
+                  <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
+                    Add additional fee earner
+                  </legend>
+                  <label class="w-100 text-start">
+                    Title:<sup><code>*</code></sup>
+                    <input v-model="newRow3.title" autocomplete="on" placeholder="Eg: Associate" class="form-control"
+                      required />
+                  </label>
+                  <br />
+                  <br />
+                  <label class="w-100 text-start">
+                    Hourly rate (in AUD excluding GST):<sup><code>*</code></sup>
+                    <div>
+                      <span class="position-absolute d-span">$</span>
+                      <input v-model="newRow3.hourlyRate" min="1" autocomplete="on" type="number"
+                        class="form-control d-input" required />
+                    </div>
+                  </label>
+                  <br />
+                  <br />
+                  <label class="w-100 text-start">
+                    Estimated number of hours:<sup><code>*</code></sup>
+                    <input v-model="newRow3.estimatedHours" min="1" autocomplete="on" type="number" class="form-control"
+                      required />
+                  </label>
+                  <br />
+                  <br />
+                  <button type="button" @click="addRow3" class="btn btn-dark">Add</button>
+                </fieldset>
 
                 <!-- <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                   <thead>
@@ -664,26 +677,26 @@
                 </table> -->
 
 
-      <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Hourly rate (in AUD excluding GST)</th>
-            <th>Estimated number of hours</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody id="addFeeEarnersRow">
-          <tr v-for="(row, index) in rows3" :key="index">
-            <td>{{ row.title }}</td>
-            <td>{{ row.hourlyRate }}</td>
-            <td>{{ row.estimatedHours }}</td>
-            <td>
-              <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Hourly rate (in AUD excluding GST)</th>
+                      <th>Estimated number of hours</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody id="addFeeEarnersRow">
+                    <tr v-for="(row, index) in rows3" :key="index">
+                      <td>{{ row.title }}</td>
+                      <td>{{ row.hourlyRate }}</td>
+                      <td>{{ row.estimatedHours }}</td>
+                      <td>
+                        <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
 
 
               </div>
@@ -721,8 +734,8 @@
                   <label> What is the estimated amount for disbursements (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.disbursement_amount" name="fixedFeeAmount" class="form-control d-input" min="1"
-                      step=".01" placeholder="" />
+                    <input type="number" id="fixedFeeAmount" v-model="form.disbursement_amount" name="fixedFeeAmount"
+                      class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                   <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
                   <!-- <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
@@ -808,8 +821,9 @@
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
-                                class="fa fa-close"></i></button></td>
+                          <td style="width:0px"><button type="button" @click="removeRow(index)"
+                              class="btn btn-default btn-circle"><i class="fa fa-close"></i></button>
+                          </td>
                           <td>{{ row.itemDisbursement }}</td>
                           <td>{{ row.costAud }}</td>
                           <td>
@@ -828,8 +842,8 @@
                   <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount" class="form-control d-input" min="1"
-                      step=".01" placeholder="" />
+                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
+                      class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                 </div>
 
@@ -864,21 +878,22 @@
             <!-- If they select ‘Success Fee’ -->
             <div class="form-group" id="success-fee" v-if="selectedOption === 'Success'">
               <label>Uplift percentage (%):<sup><code>*</code></sup></label>
-              <input type="number" v-model="form.uplift_percentage" id="upliftPercentage" name="upliftPercentage" min="1" max="25" step=".01"
-                class="form-control" />
+              <input type="number" v-model="form.uplift_percentage" id="upliftPercentage" name="upliftPercentage" min="1"
+                max="25" step=".01" class="form-control" />
 
               <br />
 
               <label>Summarise terms upon which Success Fee will be charged:</label>
-              <input type="text" id="successFeeTerms"  v-model="form.success_fee_term" name="successFeeTerms" class="form-control" />
+              <input type="text" id="successFeeTerms" v-model="form.success_fee_term" name="successFeeTerms"
+                class="form-control" />
               <br />
               <div class="disbursement-fields">
                 <div class="form-group mt-3">
                   <label> What is the estimated amount for disbursements (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.disbursement_amount" name="fixedFeeAmount" class="form-control d-input" min="1"
-                      step=".01" placeholder="" />
+                    <input type="number" id="fixedFeeAmount" v-model="form.disbursement_amount" name="fixedFeeAmount"
+                      class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                   <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
                   <!-- <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
@@ -964,8 +979,8 @@
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
-                                class="fa fa-close"></i></button></td>
+                          <td style="width:0px"><button type="button" @click="removeRow(index)"
+                              class="btn btn-default btn-circle"><i class="fa fa-close"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
                           <td>{{ row.costAud }}</td>
                           <td>
@@ -986,8 +1001,8 @@
                   <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount" class="form-control d-input" min="1"
-                      step=".01" placeholder="" />
+                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
+                      class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                 </div>
 
@@ -1028,8 +1043,8 @@
             <!-- Additional information -->
             <div class="form-group">
               <label>Tell the potential client what you will do for them:<sup><code>*</code></sup>
-                <textarea  v-model="form.description" id="additionalInfo" name="additionalInfo" class="form-control" rows="4" cols="100%"
-                  required=""></textarea>
+                <textarea v-model="form.description" id="additionalInfo" name="additionalInfo" class="form-control"
+                  rows="4" cols="100%" required=""></textarea>
               </label>
               <br />
             </div>
@@ -1038,14 +1053,15 @@
             <div class="form-group m-2" id="div-deadline-acceptance-radio">
               <label>Can you meet the potential client's deadline?</label>
               <div class="form-check">
-                <input class="form-check-input" v-model="form.meet_deadlines" type="radio" name="deadlineFlexibility" id="deadlineYes" value="yes"
-                  checked="" />
+                <input class="form-check-input" v-model="form.meet_deadlines" type="radio" name="deadlineFlexibility"
+                  id="deadlineYes" value="yes" checked="" />
                 <label class="form-check-label" for="deadlineYes" @click="showDeadline('Yes')">
                   Yes
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="deadlineFlexibility" v-model="form.meet_deadlines" id="deadlineNo" value="no" />
+                <input class="form-check-input" type="radio" name="deadlineFlexibility" v-model="form.meet_deadlines"
+                  id="deadlineNo" value="no" />
                 <label class="form-check-label" for="deadlineNo" @click="showDeadline('No')">
                   No
                 </label>
@@ -1055,8 +1071,8 @@
             <!-- Can't meet deadline explanation box -->
             <div class="form-group" id="div-deadline" v-if="deadline === 'No'">
               <label>Please explain why you can't meet potential client's deadline:<sup><code>*</code></sup>
-                <textarea id="txtarea-deadline" v-model="form.miss_deadline_reason" name="deadline" class="form-control" rows="4" cols="100%"
-                  placeholder="Eg: It's not realistic"></textarea>
+                <textarea id="txtarea-deadline" v-model="form.miss_deadline_reason" name="deadline" class="form-control"
+                  rows="4" cols="100%" placeholder="Eg: It's not realistic"></textarea>
               </label>
             </div>
 
@@ -1352,13 +1368,15 @@
           <div class="my-3">
             <label>Do you require an upfront payment?<sup><code>*</code></sup></label>
             <div class="form-check">
-              <input class="form-check-input"  v-model="form.upfront_payment_status" type="radio" name="upfrontPayment" id="upfrontYes" value="yes" checked="" />
+              <input class="form-check-input" v-model="form.upfront_payment_status" type="radio" name="upfrontPayment"
+                id="upfrontYes" value="yes" checked="" />
               <label class="form-check-label" for="upfrontYes" @click="setPaySucc('Yes')">
                 Yes
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input"  v-model="form.upfront_payment_status" type="radio" name="upfrontPayment" id="upfrontNo" value="no" />
+              <input class="form-check-input" v-model="form.upfront_payment_status" type="radio" name="upfrontPayment"
+                id="upfrontNo" value="no" />
               <label class="form-check-label" for="upfrontNo" @click="setPaySucc('No')">
                 No
               </label>
@@ -1368,8 +1386,8 @@
               <label>How much upfront payment do you require?<sup><code>*</code></sup></label>
               <div>
                 <span class="position-absolute d-span" style="line-height: 36px">$</span>
-                <input id="upfrontAmount" name="upfrontAmount" v-model="form.upfront_payment" type="number" min="1" step=".01"
-                  class="form-control d-input" />
+                <input id="upfrontAmount" name="upfrontAmount" v-model="form.upfront_payment" type="number" min="1"
+                  step=".01" class="form-control d-input" />
               </div>
             </div>
           </div>
@@ -1378,15 +1396,15 @@
           <div class="form-group m-2" id="freeFirstConsultationRadio">
             <label>Do you offer a free or discounted first consultation?</label>
             <div class="form-check">
-              <input class="form-check-input"  v-model="form.consultation" type="radio" name="freeFirstConsultation" id="freeFirstConsultationYes"
-                value="yes" checked="" />
+              <input class="form-check-input" v-model="form.consultation" type="radio" name="freeFirstConsultation"
+                id="freeFirstConsultationYes" value="yes" checked="" />
               <label class="form-check-label" for="freeFirstConsultationYes" @click="setOption('Yes')">
                 Yes
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio"  v-model="form.consultation"  name="freeFirstConsultation" id="freeFirstConsultationNo"
-                value="no" />
+              <input class="form-check-input" type="radio" v-model="form.consultation" name="freeFirstConsultation"
+                id="freeFirstConsultationNo" value="no" />
               <label class="form-check-label" for="freeFirstConsultationNo" @click="setOption('No')">
                 No
               </label>
@@ -1409,8 +1427,8 @@
             <div class="col-auto" id="div-freeFirstConsultationMinutes">
               <label for="">Time limit:<sup><code>*</code></sup></label>
               <div class="input-group mb-2">
-                <input type="number" v-model="form.consultation_time_limit"  class="form-control" name="freeFirstConsultationMinutes"
-                  id="freeFirstConsultationMinutes" placeholder="E.g. 60" />
+                <input type="number" v-model="form.consultation_time_limit" class="form-control"
+                  name="freeFirstConsultationMinutes" id="freeFirstConsultationMinutes" placeholder="E.g. 60" />
                 <div class="input-group-prepend">
                   <div class="input-group-text">minutes</div>
                 </div>
@@ -1534,8 +1552,8 @@
           <!-- Additional information -->
           <div class="form-group">
             <label>Tell the potential client what you will do for them:<sup><code>*</code></sup>
-              <textarea v-model="form.description" id="additionalInfo" name="additionalInfo" class="form-control" rows="4" cols="100%"
-                required=""></textarea>
+              <textarea v-model="form.description" id="additionalInfo" name="additionalInfo" class="form-control" rows="4"
+                cols="100%" required=""></textarea>
             </label>
             <br />
           </div>
@@ -1702,6 +1720,7 @@ import MainFooter from "../../components/global/MainFooter.vue";
 </script>
 <script>
 import LawyerHeader from "./Header.vue";
+import api from '@/config/api';
 
 export default {
   components: {
@@ -1712,25 +1731,25 @@ export default {
   data() {
     return {
 
-      form : {
-        "charge_type":null,
-        "fixed_fee_amount":null,
-        "disbursement_amount":null,
-        "law_practice_cost":null,
-        "fee_earners":null,
-        "daily_rate":null,
-        "uplift_percentage":null,
-        "success_fee_term":null,
-        "pro_bono_description":null,
-        "meet_deadlines":null,
-        "miss_deadline_reason":null,
-        "upfront_payment_status":null,
-        "upfront_payment":null,
-        "consultation":null,
-        "consultation_time_limit":null,
-        "description":null,
-        "lawyer_id":null,
-        "job_id":null,
+      form: {
+        "charge_type": null,
+        "fixed_fee_amount": null,
+        "disbursement_amount": null,
+        "law_practice_cost": null,
+        "fee_earners": null,
+        "daily_rate": null,
+        "uplift_percentage": null,
+        "success_fee_term": null,
+        "pro_bono_description": null,
+        "meet_deadlines": null,
+        "miss_deadline_reason": null,
+        "upfront_payment_status": null,
+        "upfront_payment": null,
+        "consultation": null,
+        "consultation_time_limit": null,
+        "description": null,
+        "lawyer_id": null,
+        "job_id": null,
       },
 
       newRow: {
@@ -1748,7 +1767,7 @@ export default {
         hourlyRate: '',
         estimatedHours: '',
       },
-      rows3 : [], // additional fee earner
+      rows3: [], // additional fee earner
 
       schemas: [],
       currentStep: 0,
@@ -1766,6 +1785,12 @@ export default {
     };
   },
   computed: {
+    jobData() {
+      return this.$store.state.jobData;
+    },
+    loginUser() {
+      return this.$store.state.loginUser;
+    },
     grandTotal() {
       return this.rows.reduce((total, row) => total + parseFloat(row.costAud) || 0, 0);
     },
@@ -1783,7 +1808,48 @@ export default {
     //   return !!document.getElementById('upfrontPayRadio');
     // },
   },
+
+  mounted() {
+    if (this.jobData == null || this.jobData == "") {
+      this.$router.push({ path: '/lawyer-dashboard' });
+    }
+  },
+
+  beforeUnmount() {
+    localStorage.removeItem('jobData');
+    this.$store.commit('SET_JOB_DATA', null);
+  },
+
   methods: {
+
+    async submitStepForm() {
+      // const formData = {
+      //   "title": this.title,
+      //   "description": this.description,
+      //   "field_id": this.selectedArea,
+      //   "location_id": this.locations[this.selectedLocationIndex].id,
+      //   "city": this.city,
+      //   "accessibility_requirements": this.requirementsOption,
+      // }
+      // if (this.requirementsOption == 1) {
+      //   formData.requirements_description = this.requirementsOptionDescription;
+      // }
+      this.form.job_id = this.jobData?.id;
+      this.form.lawyer_id = this.loginUser?.email;
+      this.form.charge_type = this.selectedOption;
+      api.post('/lawyer/create-proposal', this.form)
+        .then(() => {
+          this.$swal('Success', 'Proposal has been submited successfully', 'success').then(res => {
+            console.log('response : ' , res);
+            // this.changePostJobFormToDefault();
+            // this.currentStep = 0;
+          });
+        })
+        .catch(error => {
+          this.$swal('Error', error?.response?.data?.error, 'error');
+          console.log("getResults : ", error?.response?.data?.error)
+        });
+    },
 
     addRow() {
       if (this.newRow.itemDisbursement && this.newRow.costAud) {
@@ -1834,12 +1900,13 @@ export default {
     },
 
 
-    nextStep(values) {
+    nextStep() {
       if (this.currentStep === 2) {
-        console.log(this.form);
+        this.submitStepForm();
+        // console.log(this.form);
         // console.log("Done: ", JSON.stringify(values, null, 1));
-        console.log('test', values);
-        
+        // console.log('test', values);
+
         return;
       }
 

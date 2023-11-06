@@ -86,11 +86,13 @@
                 class="d-flex flex-column justify-content-center align-items-center "
                 style="min-width: 110px"
               >
-                <router-link
+                <!-- <router-link
                   class="btn btn-light btn-sm w-100 my-1"
                   to="/proposal"
                   >Submit a proposal</router-link
-                >
+                > -->
+
+                <button @click="submitProposal(item)" class="btn btn-light btn-sm w-100 my-1">Submit a proposal</button>
                 
                 <!-- <router-link
                   name="decline"
@@ -209,6 +211,12 @@ export default {
     //     console.error('Error fetching options:', error);
     //   }
     // },
+
+    submitProposal(item){
+      this.$store.commit('SET_JOB_DATA',item);
+      localStorage.setItem('jobData',JSON.stringify(item));
+      this.$router.push({ path : '/proposal' });
+    },
     async declineJob(job_id) {
       try {
         const response = await api.post('/lawyer/decline-job', { "job_id": job_id });

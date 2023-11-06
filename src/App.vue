@@ -16,6 +16,10 @@ export default {
       const loginUser = JSON.parse(localStorage.getItem('loginUser'));
       this.$store.commit('SET_LOGIN_USER',loginUser);
     }
+    if(this.$store.getters.jobData == null || this.$store.getters.jobData == ""){
+      const item = JSON.parse(localStorage.getItem('jobData'));
+      this.$store.commit('SET_JOB_DATA',item);
+    }
   }
 }
 </script>
