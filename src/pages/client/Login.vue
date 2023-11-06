@@ -1,8 +1,9 @@
 <template lang="">
+  <div class="l-register-main">
+  <GeneralHeader />
   <div class="hello container">
-      <MainHeader />
       <div class="row justify-content-center login-row">
-      <div class="center-main col-md-7 login-col">
+      <div class="center-main col-md-10 col-lg-7 login-col">
           <div class="bg-dark text-white text-center m-3 p-3" style="border-radius: 10px">
               <p class="m-4 fs-3 ">Login</p>
       <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
@@ -42,9 +43,11 @@
   <div class="footer">
       <MainFooter />
     </div>
+  </div>
 </template>
 <script >
-import MainHeader from '../../components/global/MainHeader.vue'
+// import MainHeader from '../../components/global/MainHeader.vue'
+import GeneralHeader from "../../pages/GeneralHeader.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
@@ -74,7 +77,7 @@ export default {
     }
   },
   components: {
-    MainHeader,
+    GeneralHeader,
     Form,
     Field,
     MainFooter
@@ -123,7 +126,7 @@ export default {
 
 .login-row {
   margin: auto;
-  min-height: 80vh;
+  min-height: 57vh;
 }
 
 .login-col {
@@ -161,5 +164,7 @@ export default {
     margin: 0 !important;
     padding-right: 30px !important;
   }
+
+
 }
 </style>

@@ -1,7 +1,7 @@
 <template lang="">
     <div class="l-register-main">
+        <GeneralHeader />
     <div class="hello container">
-        <MainHeader />
         <div class=" pt-4 center-main row justify-content-center">
         <div class="col-md-10 col-lg-7">        
         <div class="bg-dark text-white text-center m-3 p-3 find-client " style="border-radius: 10px">
@@ -83,8 +83,9 @@
     </div>
 </template>
 <script>
+import GeneralHeader from "../../pages/GeneralHeader.vue";
 
-import MainHeader from '../../components/global/MainHeader.vue'
+// import MainHeader from '../../components/global/MainHeader.vue'
 import MainFooter from "../../components/global/MainFooter.vue";
 
 import { Form, Field } from 'vee-validate';
@@ -125,14 +126,15 @@ export default {
         }
     },
     components: {
-        MainHeader,
+        // MainHeader,
         Form,
         Field,
-        MainFooter
+        MainFooter,
+        GeneralHeader
     },
     methods: {
-        submitData(formData){
-            this.submitSignupForm(formData,'client','client-dashboard');
+        submitData(formData) {
+            this.submitSignupForm(formData, 'client', 'client-dashboard');
         }
     },
     name: 'ClientRegister',

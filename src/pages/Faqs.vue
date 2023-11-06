@@ -81,7 +81,7 @@
                       </h2>
                       <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                          Unfortunately, our platform currently only caters to Australian lawyers. Please [<router-link to="/contact-us">contact us</router-link>] and let us know where you’re located, and we’ll let you know if we have plans to expand our platform to include lawyers in your country.
+                          Unfortunately, our platform currently only caters to Australian lawyers. Please <router-link to="/contact-us">contact us</router-link> and let us know where you’re located, and we’ll let you know if we have plans to expand our platform to include lawyers in your country.
                         </div>
                       </div>
                     </div>
@@ -190,7 +190,7 @@
                       </h2>
                       <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                          If you are unable to contact your lawyer using either their email address or phone number provided to you when you accept their proposal, please [<router-link to="/contact-us">contact us</router-link>] so that we can attempt to follow up with the lawyer.
+                          If you are unable to contact your lawyer using either their email address or phone number provided to you when you accept their proposal, please <router-link to="/contact-us">contact us</router-link> so that we can attempt to follow up with the lawyer.
                         </div>
                       </div>
                     </div>
