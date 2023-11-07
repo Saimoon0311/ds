@@ -5,8 +5,12 @@
         <div class=" pt-4 center-main row justify-content-center">
         <div class="col-md-10 col-lg-7">        
         <div class="bg-dark text-white text-center m-3 p-3 find-client " style="border-radius: 10px">
+        
         <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
             <p class="mb-4 fs-3 ">Sign up to find a lawyer</p>
+            <!-- <div class="mb-4">
+            <router-link to="/lawyer-register">Register as a Lawyer</router-link>
+            </div> -->
             <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                  <!-- Add the style and icon you want using the String format -->

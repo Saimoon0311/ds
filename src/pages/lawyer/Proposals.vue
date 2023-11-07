@@ -65,27 +65,31 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <td colspan="9" class="text-center">
               You have not Proposal on any jobs yet.
             </td>
-          </tr>
-          <tr data-v-7525850d="">
+          </tr> -->
+
+          <tr data-v-7525850d="" v-for="(item,index) in data_paginated" :key="index">
+          
+          <!-- <tr data-v-7525850d=""> -->
             <td data-v-7525850d="">
-              <a data-v-7525850d="" href="jobInfo.php?id=28">abc 2</a>
+              <a data-v-7525850d="" href="jobInfo.php?id=28">{{ item?.job?.title }}</a>
             </td>
-            <td data-v-7525850d="">Hourly rate</td>
-            <td data-v-7525850d="">$10,000.00</td>
-            <td data-v-7525850d="">Yes - $500.00</td>
-            <td data-v-7525850d="">test the potential client</td>
+            <td data-v-7525850d="">{{ item?.charge_type }}</td>
+            <td data-v-7525850d="">{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
+            <td data-v-7525850d="">{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td>
+            <td data-v-7525850d="">{{ item?.description }}</td>
             <!-- <td data-v-7525850d="">Yes</td>
             <td data-v-7525850d="">Yes - $100 for 30 minutes</td> -->
-            <td data-v-7525850d=""><p data-v-7525850d="">Open</p></td>
+            <td data-v-7525850d=""><p data-v-7525850d="">{{ item?.status }}</p></td>
             <td data-v-7525850d="">
               <button
+                v-if="item?.status == 'Open'"
                 data-v-7525850d=""
                 class="btn btn-sm btn-danger"
-                onclick="rescindBid(event)"
+                @click="withdrawProposal(item?.id)"
               >
                 <i data-v-7525850d="" class="bi bi-trash-fill"></i>Withdraw
                 Proposal
@@ -100,19 +104,23 @@
               </form>
             </td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td><a href="jobInfo.php?id=30">test job</a></td>
             <td>Fixed fee</td>
             <td>$100.00</td>
             <td>Yes - $55.00</td>
-            <td>dummy text</td>
+            <td>dummy text</td> -->
             <!-- <td>Yes</td>
             <td>No</td> -->
-            <td><p class="text-success fw-bold">Accepted</p></td>
+            <!-- <td><p class="text-success fw-bold">Accepted</p></td>
             <td class="text-center">-</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
+      <!-- for pagination -->
+      <CustomPagination />
+      <!-- for pagination -->
+
     </main>
     <!-- after data  -->
     <main class="container">
@@ -169,19 +177,47 @@
 </template>
 <script>
 import LawyerHeader from "./Header.vue";
+import CustomPagination from '@/components/CustomPagination';
+import api from '@/config/api';
 export default {
   components: {
     LawyerHeader,
+    CustomPagination
   },
+
   computed: {
     adminApproval() {
       return this.$store.getters.adminApprovalStatus;
     },
     subscriptionStatus() {
       return this.$store.getters.subscriptionStatus;
+    },
+  },
+
+  watch:{
+    // for pagination
+    currentPaginationPage() {
+      console.log('watch run');
+        this.getPaginatedData();
+    },
+    // for pagination
+  },
+  
+  async mounted() {
+    // for pagination
+    this.$store.commit('SET_ENDPOINT_FOR_PAGINATED_DATA','/lawyer/lawyer-proposals');
+    await this.getPaginatedData();
+    // for pagination
+  },
+  methods: {
+    withdrawProposal(id){
+      api.get(`/lawyer/withdraw-proposal/${id}`).then(()=>{
+        this.getPaginatedData();
+      }).catch(error=>{
+        console.log(error)
+      });
     }
   },
-  methods: {},
   name: "BidsTab",
 };
 </script>

@@ -20,6 +20,9 @@ export default {
       const item = JSON.parse(localStorage.getItem('jobData'));
       this.$store.commit('SET_JOB_DATA',item);
     }
+    if(this.$store.getters.jobId == null || this.$store.getters.jobId == ""){
+      this.$store.commit('SET_JOB_ID',localStorage.getItem('jobId'));
+    }
   }
 }
 </script>

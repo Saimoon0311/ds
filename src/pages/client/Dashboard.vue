@@ -121,11 +121,16 @@
                   class="d-flex flex-column justify-content-center align-items-center"
                   style="min-width: 110px"
                 >
-                  <router-link
+                  <!-- <router-link
                     class="btn btn-light btn-sm w-100 py-2 mb-2"
                     to="/view-proposals"
                     >View Proposals</router-link
-                  ><button
+                  > -->
+                  <button 
+                  class="btn btn-light btn-sm w-100 py-2 mb-2"
+                  @click="goToViewProposals(item?.id)"
+                  >View Proposals</button>
+                  <button
                     class="btn btn-danger btn-sm w-100 py-2"
                     
                   >
@@ -217,7 +222,13 @@ export default {
   async created() {
     await this.loadMore();
   },
+   
   methods: {
+    goToViewProposals(id){
+      this.$store.commit('SET_JOB_ID',id);
+      localStorage.setItem('jobId',id);
+      this.$router.push({ 'path' : '/view-proposals'})
+    }
     // async getJobs() {
     //   try {
     //     const response = await api.get(`/client/client-jobs`);

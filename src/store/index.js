@@ -12,9 +12,28 @@ const store = createStore({
     adminApprovalStatus : null,
     subscriptionData : null,
     replacePaymentMethod : false,
-    jobData : null
+    jobData : null,
+    jobId : null,
+    currentPaginationPage : 1,
+    lastPaginationPage : null,
+    paginationEndpoint : null,
   },
   mutations: {
+    SET_ENDPOINT_FOR_PAGINATED_DATA(state,value){
+      state.paginationEndpoint = value;
+    },
+    set_pagination_page(state,num){
+      state.currentPaginationPage = num;
+    },
+    page_increment(state) {
+      state.currentPaginationPage += 1;
+    },
+    page_decrement(state) {
+      state.currentPaginationPage -= 1;
+    },
+    SET_PAGINATION_LAST(state,page){
+      state.lastPaginationPage = page
+    },
     SET_AUTHENTICATED(state, status) {
       state.isAuthenticated = status;
     },
@@ -41,6 +60,9 @@ const store = createStore({
     },
     SET_JOB_DATA(state, data) {
       state.jobData = data;
+    },
+    SET_JOB_ID(state, value) {
+      state.jobId = value;
     },
   },
   actions: {

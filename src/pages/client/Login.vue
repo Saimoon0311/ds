@@ -5,6 +5,7 @@
       <div class="center-main col-md-7 login-col">
           <div class="bg-dark text-white text-center m-3 p-3" style="border-radius: 10px">
               <p class="m-4 fs-3 ">Login</p>
+              <!-- <router-link to="/lawyer-login">Login as a Client</router-link> -->
       <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
           
           <!-- Email -->

@@ -28,6 +28,7 @@
               role="tab"
               aria-controls="pills-home"
               aria-selected="true"
+              @click="setStatus('open')"
             >
               Open
             </button>
@@ -44,6 +45,7 @@
               aria-controls="pills-profile"
               aria-selected="false"
               tabindex="-1"
+              @click="setStatus('accept')"
             >
               Closed
             </button>
@@ -170,8 +172,9 @@
                     No active Proposals are available.
                   </td>
                 </tr>
-                <tr class="text-left">
-                  <td>testing client (crinimal)</td>
+                <tr class="text-left" v-for="(item,index) in data_paginated" :key="index">
+                  <!-- <td>testing client (crinimal)</td> -->
+                  <td>{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</td>
                   <td>Fixed fee</td>
                   <td>$100.00</td>
                   <td>Yes - $55.00</td>
@@ -182,7 +185,7 @@
                     <div class="text-center">
                       <button
                         class="btn btn-light btn-sm border p-1 px-2 mb-1"
-                        onclick="handleAcceptBidAction(event)"
+                        @click="handleAcceptBidAction(item?.id,item?.lawyer?.id,item?.job_id)"
                       >
                         Accept
                       </button>
@@ -196,7 +199,7 @@
                       </form>
                       <button
                         class="btn btn-danger btn-sm p-1 px-2"
-                        onclick="handleRejectBidAction(event)"
+                        @click="handleRejectBidAction(item?.id,item?.lawyer?.id,item?.job_id)"
                       >
                         Reject
                       </button>
@@ -211,6 +214,7 @@
                 </tr>
               </tbody>
             </table>
+
           </div>
           <div
             data-v-511b78bb=""
@@ -330,9 +334,54 @@
                     No closed Proposals are available.
                   </td>
                 </tr>
+                <tr class="text-left" v-for="(item,index) in data_paginated" :key="index">
+                  <!-- <td>testing client (crinimal)</td> -->
+                  <td>{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</td>
+                  <td>Fixed fee</td>
+                  <td>$100.00</td>
+                  <td>Yes - $55.00</td>
+                  <td>dummy text</td>
+                  <!-- <td>Yes</td>
+                  <td>No</td> -->
+                  <!-- <td>
+                    <div class="text-center">
+                      <button
+                        class="btn btn-light btn-sm border p-1 px-2 mb-1"
+                        onclick="handleAcceptBidAction(event)"
+                      >
+                        Accept
+                      </button>
+                      <form method="post" action="backend/acceptBid.php">
+                        <input value="146" class="d-none" name="bidId" />
+                        <input value="30" class="d-none" name="jobId" />
+                        <input value="22" class="d-none" name="lawyerId" />
+                        <button class="d-none" name="accept">
+                          <i class="bi bi-check-lg"></i> Accept
+                        </button>
+                      </form>
+                      <button
+                        class="btn btn-danger btn-sm p-1 px-2"
+                        onclick="handleRejectBidAction(event)"
+                      >
+                        Reject
+                      </button>
+                      <form method="post" action="backend/rejectBid.php">
+                        <input value="146" class="d-none" name="id" />
+                        <button class="d-none" name="reject">
+                          <i class="bi bi-x-lg"></i>Reject
+                        </button>
+                      </form>
+                    </div>
+                  </td> -->
+                </tr>
               </tbody>
             </table>
           </div>
+
+          <!-- for pagination -->
+          <CustomPagination />
+            <!-- for pagination -->
+
         </div>
       </div>
       <!-- request info -->
@@ -387,12 +436,61 @@
 </template>
 <script>
 import ClientHeader from "./Header.vue";
-
+import CustomPagination from '@/components/CustomPagination';
+import api from "@/config/api";
 export default {
   name: "ClientDashboard",
   components: {
     ClientHeader,
+    CustomPagination
   },
+  computed: {
+    jobId() {
+      return this.$store.state.jobId;
+    }
+  },
+  watch: {
+    // for pagination
+    currentPaginationPage() {
+      console.log('watch run');
+      this.getPaginatedData();
+    },
+    // for pagination
+  },
+  beforeUnmount() {
+    localStorage.removeItem('jobId');
+    this.$store.commit('SET_JOB_ID', null);
+  },
+  async mounted() {
+    if (this.jobId == null || this.jobId == "") {
+      this.$router.push({ path: '/client-dashboard' });
+    }
+    this.setStatus('open');
+  },
+
+  methods: {
+    async setStatus(status) {
+      this.$store.commit('set_pagination_page', 1);
+      this.$store.commit('SET_ENDPOINT_FOR_PAGINATED_DATA', `/client/job-proposals/${this.jobId}/${status}`);
+      await this.getPaginatedData();
+    },
+    handleAcceptBidAction(proposal_id, lawyer_id, job_id) {
+      let status = "accept";
+      this.changeStatus({ status, proposal_id, lawyer_id, job_id });
+    },
+    handleRejectBidAction(proposal_id, lawyer_id, job_id) {
+      let status = "reject";
+      this.changeStatus({ status, proposal_id, lawyer_id, job_id });
+    },
+    changeStatus(obj) {
+      api.post('/client/change-proposal-status', obj).then(res => {
+        console.log('response : ', res);
+      }).catch((error) => {
+        console.log('error : ', error);
+      });
+    }
+  },
+
 };
 </script>
 

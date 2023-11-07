@@ -10,6 +10,7 @@
             style="border-radius: 10px"
           >
             <p class="m-4 fs-3">Login</p>
+            <!-- <router-link to="/client-login">Login as a Lawyer</router-link> -->
             <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
           
           <!-- Email -->
