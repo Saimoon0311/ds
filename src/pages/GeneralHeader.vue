@@ -9,8 +9,10 @@
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li><router-link class="dropdown-item" to="/about-us">About Us</router-link></li>
-          <li><router-link class="dropdown-item" to="/faqs">FAQs</router-link></li>
-            <li> <router-link class="dropdown-item" to="/contact-us">Contact Us</router-link></li>
+        
+        <li v-if="loginUser != null && loginUser?.type == 'client' "><router-link class="dropdown-item" to="/client-faqs" >FAQs</router-link></li>
+        <li v-if="loginUser != null && loginUser?.type == 'lawyer' "><router-link class="dropdown-item" to="/lawyer-faqs"  >FAQs</router-link></li>
+        <li> <router-link class="dropdown-item" to="/contact-us">Contact Us</router-link></li>
 
         
       </ul>
@@ -19,8 +21,15 @@
 </template>
 <script>
 export default {
-  name: 'GeneralHeader'
+  name: 'GeneralHeader',
+  computed: {
+    loginUser() {
+      // console.log("asdasd", this.$store.getters.loginUser)
+      return this.$store.getters.loginUser;
+    }
+  }
 }
+
 </script>
 <style >
 .menu-burger:after {
@@ -53,7 +62,7 @@ export default {
 
 .dropdown-item.active,
 .dropdown-item:active {
-  background-color: gray !important;
+  background-color: #000 !important;
 }
 
 .menu-burger {

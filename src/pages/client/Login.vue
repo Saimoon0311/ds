@@ -6,6 +6,18 @@
       <div class="center-main col-md-10 col-lg-7 login-col">
           <div class="bg-dark text-white text-center m-3 p-3" style="border-radius: 10px">
               <p class="m-4 fs-3 ">Login</p>
+              <div>
+                    <div class="im-user">
+                        <input type="radio" id="optionPage1" value="client" v-model="pageOption" @change="changePage" />
+                        <label for="optionPage1">I'm a client</label>
+                    </div>
+                    
+                    <div class="im-user"> 
+                        <input type="radio" id="optionPage2" value="lawyer" v-model="pageOption" @change="changePage" />
+                        <label for="optionPage2">I'm a lawyer</label>
+                    </div>
+                  
+            </div> 
       <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
           
           <!-- Email -->
@@ -24,7 +36,7 @@
               </div>
           </div>
           <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-              <button type="button" class="forgetp" @click="goToForgetPasswordPage('client-login')">Forget Password</button>
+              <button type="button" class="forgetp" @click="goToForgetPasswordPage('client-login')">Forgotten your password?</button>
               <!-- <router-link to="/client-forget-password">Forget Password</router-link> -->
           </div>
           <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
@@ -73,7 +85,9 @@ export default {
         ),
     });
     return {
-      schema
+      schema,
+      pageOption: this.getCurrentPageOption()
+
     }
   },
   components: {
@@ -85,6 +99,28 @@ export default {
   methods: {
     submitData(formData) {
       this.submitLoginForm(formData, 'client', 'client-dashboard');
+    },
+    getCurrentPageOption() {
+      const currentRoute = this.$route.path;
+      console.log('c user', currentRoute);
+      // Compare current route with the routes associated with each option
+      if (currentRoute === '/client-login') {
+        return 'client'; // If current route is '/page1', select 'page1'
+      } else if (currentRoute === '/lawyer-login') {
+        return 'lawyer'; // If current route is '/page2', select 'page2'
+      } else {
+        return null; // Or return null if the current route is not matched
+      }
+    },
+    changePage() {
+      if (this.pageOption === 'client') {
+        this.$router.push('/client-login');
+        console.log('asd', this.pageOption);
+
+      } else if (this.pageOption === 'lawyer') {
+        console.log('asd', this.pageOption);
+        this.$router.push('/lawyer-login');
+      }
     }
   },
   name: 'ClientLoginForm',
@@ -135,6 +171,18 @@ export default {
   right: 50%;
   transform: translate(-50%, -40%);
   top: 50%;
+}
+
+.im-user {
+  display: inline-block;
+  padding: 20px;
+  padding-top: 7px;
+  padding-bottom: 0px;
+}
+
+.im-user label {
+  margin-top: 3px;
+  margin-left: 6px;
 }
 
 @media (max-width: 1200px) {

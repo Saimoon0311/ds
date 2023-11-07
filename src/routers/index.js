@@ -49,7 +49,8 @@ import termsOfUse from "@/pages/terms-of-use.vue";
 import AboutUs from "@/pages/AboutUs.vue";
 import HowSimplawfyWorks from "@/pages/HowSimplawfyWorks.vue";
 import ContactUs from "@/pages/ContactUs.vue";
-import Faqs from "@/pages/Faqs.vue";
+import ClientFaqs from "@/pages/ClientFaqs.vue";
+import LawyerFaqs from "@/pages/LawyerFaqs.vue";
 import NotFound from "@/components/NotFound.vue";
 import WizardForm from "../pages/WizardForm.vue";
 
@@ -323,9 +324,16 @@ const routes = [
     component: HowSimplawfyWorks,
   },
   {
-    path: "/faqs",
-    component: Faqs,
+    path: "/client-faqs",
+    component: ClientFaqs,
     // meta: { requiresAuth: true },
+    meta: { requiresAuth: true, lawyerNotAllowed: true },
+  },
+  {
+    path: "/lawyer-faqs",
+    component: LawyerFaqs,
+    // meta: { requiresAuth: true },
+    meta: { requiresAuth: true, clientNotAllowed: true },
   },
   {
     path: "/contact-us",
@@ -402,7 +410,7 @@ router.beforeEach(async (to, from, next) => {
           if (to?.fullPath == "/lawyer-account") {
             store.commit("SET_SUBSCRIPTION_DATA", result?.data?.subscription);
           }
-          
+
           if (localStorage.getItem("loginUser") === null) {
             const userData = {
               first_name: result?.data?.data?.first_name,

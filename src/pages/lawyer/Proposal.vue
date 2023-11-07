@@ -1670,28 +1670,28 @@ import MainFooter from "../../components/global/MainFooter.vue";
 
 // Each step should have its own validation schema
 // const schemas = [
-  // yup.object({
-  //   name: yup.string().required(),
-  //   email: yup.string().required().email(),
-  // }),
-  // yup.object({
-  //   password: yup.string().required().min(6),
-  //   confirmPassword: yup
-  //     .string()
-  //     .required()
-  //     .min(6)
-  //     .oneOf([yup.ref('password')], 'Passwords must match'),
-  // }),
-  // yup.object({
-  //   address: yup.string().required(),
-  //   postalCode: yup
-  //     .string()
-  //     .required()
-  //     .matches(/^[0-9]+$/, 'Must be numeric'),
-  // }),
-  // yup.object({
-  //   terms: yup.bool().required().equals([true]),
-  // })
+// yup.object({
+//   name: yup.string().required(),
+//   email: yup.string().required().email(),
+// }),
+// yup.object({
+//   password: yup.string().required().min(6),
+//   confirmPassword: yup
+//     .string()
+//     .required()
+//     .min(6)
+//     .oneOf([yup.ref('password')], 'Passwords must match'),
+// }),
+// yup.object({
+//   address: yup.string().required(),
+//   postalCode: yup
+//     .string()
+//     .required()
+//     .matches(/^[0-9]+$/, 'Must be numeric'),
+// }),
+// yup.object({
+//   terms: yup.bool().required().equals([true]),
+// })
 // ];
 
 // const currentSchema = computed(() => {
@@ -1840,7 +1840,7 @@ export default {
       api.post('/lawyer/create-proposal', this.form)
         .then(() => {
           this.$swal('Success', 'Proposal has been submited successfully', 'success').then(res => {
-            console.log('response : ' , res);
+            console.log('response : ', res);
             // this.changePostJobFormToDefault();
             // this.currentStep = 0;
           });
@@ -2009,4 +2009,5 @@ export default {
 
 input[type="radio"]:checked {
   filter: grayscale(100%) contrast(200%);
-}</style>
+}
+</style>

@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="hello">
+  <div class="l-main">
     <LawyerHeader />
     <div class="container">
       <p class="h4 m-3">Welcome, {{ userName }}</p>
@@ -166,14 +166,20 @@
       
       </div>
   </div>
+  <div class="footer">
+      <MainFooter />
+    </div>
   </div>
 </template>
 <script>
 import LawyerHeader from "./Header.vue";
+import MainFooter from "../../components/global/MainFooter.vue";
+
 import api from '@/config/api';
 export default {
   components: {
     LawyerHeader,
+    MainFooter
   },
   data() {
     return {
@@ -212,10 +218,10 @@ export default {
     //   }
     // },
 
-    submitProposal(item){
-      this.$store.commit('SET_JOB_DATA',item);
-      localStorage.setItem('jobData',JSON.stringify(item));
-      this.$router.push({ path : '/proposal' });
+    submitProposal(item) {
+      this.$store.commit('SET_JOB_DATA', item);
+      localStorage.setItem('jobData', JSON.stringify(item));
+      this.$router.push({ path: '/proposal' });
     },
     async declineJob(job_id) {
       try {
@@ -272,5 +278,17 @@ export default {
 .bg-grey:hover {
   background: grey;
   color: white;
+}
+
+.l-main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>

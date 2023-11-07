@@ -1,5 +1,5 @@
 <template lang="">
-  <div>
+  <div class="c-main">
     <ClientHeader />
     <div class="container">
       <p class="h4 m-3">Welcome, test client</p>
@@ -51,11 +51,11 @@
             aria-labelledby="pills-home-tab"
           >
 
-          <div class="input-group mb-3">
+          <!-- <div class="input-group mb-3">
             <input type="text" class="form-control" v-model="searchQuery"  @keyup.enter="search" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
             <button class="input-group-text btn custom-button" id="basic-addon2" @click="search"><i class="fa fa-search"></i></button>
             <button class="input-group-text btn custom-button" id="basic-addon2" @click="clearSearch"><i class="fa fa-refresh"></i></button>
-          </div>
+          </div> -->
 
           <!-- <div class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
               id="containerActive"
@@ -198,15 +198,21 @@
           </div>
         </div>
       </div>
+      <div class="footer">
+      <MainFooter />
+    </div>
     </div>
   <!-- </div> -->
 </template>
 <script>
 import ClientHeader from "./Header.vue";
+import MainFooter from "../../components/global/MainFooter.vue";
+
 export default {
   name: "ClientDashboard",
   components: {
     ClientHeader,
+    MainFooter
   },
   data() {
     return {
@@ -263,5 +269,17 @@ ul#pills-tab {
 .btn {
   padding: 5px 20px;
   border-radius: 20px;
+}
+
+.c-main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>

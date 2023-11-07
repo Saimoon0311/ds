@@ -9,7 +9,8 @@
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li><router-link class="dropdown-item" to="/about-us">About Us</router-link></li>
-        <li><router-link class="dropdown-item" to="/faqs">FAQs</router-link></li>
+        <li><router-link class="dropdown-item" to="/client-faqs">Client FAQs</router-link></li>
+        <li><router-link class="dropdown-item" to="/lawyer-faqs">Lawyer FAQs</router-link></li>
         <li> <router-link class="dropdown-item" to="/contact-us">Contact Us</router-link></li>
       </ul>
     </div>

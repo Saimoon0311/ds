@@ -1,5 +1,5 @@
 <template lang="">
-  <div>
+  <div class="c-main">
   <ClientHeader />
   <div class="container">
 
@@ -310,10 +310,15 @@
       <!-- Modal ends here -->
     </div>
   </div>
+  <div class="footer">
+      <MainFooter />
+    </div>
 </div>
 </template>
 <script>
 import ClientHeader from "./Header.vue";
+import MainFooter from "../../components/global/MainFooter.vue";
+
 import * as yup from "yup";
 import { Form, Field } from 'vee-validate';
 import api from "@/config/api.js";
@@ -324,7 +329,7 @@ import ChangePasswordForm from "@/components/ChangePasswordForm.vue";
 export default {
   name: "ClientAccount",
   components: {
-    ClientHeader, Form, Field,ChangePasswordForm
+    ClientHeader, Form, Field, ChangePasswordForm, MainFooter
   },
   data() {
     const schema = yup.object().shape({
@@ -446,5 +451,17 @@ ul#pills-tab {
 .nav-link:focus,
 .nav-link:hover {
   color: #6d6f73;
+}
+
+.c-main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>

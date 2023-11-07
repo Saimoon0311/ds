@@ -1,8 +1,11 @@
 <template lang="">
-    <div class="hello container">
-        <MainHeader />
-        <div class="row justify-content-center">
-        <div class="center-main col-md-7">
+    <div class="l-main">
+    <div class=" container ">
+        <!-- <MainHeader /> -->
+  <GeneralHeader />
+
+        <div class="row justify-content-center forget-main">
+        <div class="center-main col-md-7 forget-col">
             <div class="bg-dark text-white text-center m-3 p-3" style="border-radius: 10px">
                 <p class="m-4 fs-3 ">Forget Password</p>
         <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
@@ -24,13 +27,21 @@
     </div>
 </div>
 </div>
-        
+
     </div>
+    <div class="footer">
+        <MainFooter />
+        </div>
+</div>
 </template>
 <script >
 
 import api from "../../config/api.js";
-import MainHeader from '../../components/global/MainHeader.vue'
+// import MainHeader from '../../components/global/MainHeader.vue'
+import GeneralHeader from "../../pages/GeneralHeader.vue";
+
+import MainFooter from "../../components/global/MainFooter.vue";
+
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
@@ -48,26 +59,27 @@ export default {
         });
         return {
             schema,
-            backUrl : null,
+            backUrl: null,
         }
     },
     components: {
-        MainHeader,
+        GeneralHeader,
         Form,
         Field,
+        MainFooter
         // MainFooter
     },
-    created(){
+    created() {
         this.getBackURL();
     },
     methods: {
-        getBackURL(){
+        getBackURL() {
             this.backUrl = localStorage.getItem('backUrl');
         },
         submitData(formData) {
             try {
                 console.log(formData)
-                api.post('/send-forget-password-email/',formData)
+                api.post('/send-forget-password-email/', formData)
                     .then(res => {
                         alert('Reset Password link has been sent to your email address');
                         console.log('successfully sent email : ', res?.data)
@@ -90,6 +102,18 @@ export default {
     display: grid;
 }
 
+.forget-main {
+    min-height: 57vh;
+}
+
+.forget-col {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -40%);
+    top: 60%;
+}
+
 /* .center-main {
     display: flex;
     align-items: flex-start;
@@ -105,4 +129,15 @@ export default {
     margin: 0 auto !important;
     margin-top: 50px;
 } */
+.l-main {
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
 </style>

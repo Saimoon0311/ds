@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="hello">
+  <div class="l-pro-main">
     <LawyerHeader />
 
     <div class="container">
@@ -8,7 +8,7 @@
         <p class="h5 m-3 text-center">Your profile has not been approved yet.</p>
       </div>
       <div v-else-if="subscriptionStatus != 'subscribed'">
-          <div class="alert alert-danger text-center m-0 p-2">
+          <div class="alert alert-danger mt-4 text-center m-0 p-2">
           You have not subscribed yet.
           <router-link to="/subscribe" class="btn btn-link ps-0"
             >Subscribe now</router-link
@@ -165,13 +165,19 @@
     </main>
       </div>
   </div>
+  <div class="footer">
+      <MainFooter />
+    </div>
   </div>
 </template>
 <script>
 import LawyerHeader from "./Header.vue";
+import MainFooter from "../../components/global/MainFooter.vue";
+
 export default {
   components: {
     LawyerHeader,
+    MainFooter
   },
   computed: {
     adminApproval() {
@@ -227,5 +233,17 @@ export default {
 .bg-grey:hover {
   background: grey;
   color: white;
+}
+
+.l-pro-main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>

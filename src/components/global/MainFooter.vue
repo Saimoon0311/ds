@@ -8,7 +8,10 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><router-link class="dropdown-item" to="/about-us">About Us</router-link></li>
             <li><router-link class="dropdown-item" to="/how-simplawfy-works">How Simplawfy Works</router-link></li>
-            <li><router-link class="dropdown-item" to="/faqs">FAQs</router-link></li> 
+            <!-- <li><router-link class="dropdown-item" to="/faqs">FAQs</router-link></li>  -->
+
+            <li v-if="loginUser != null && loginUser?.type == 'client' "><router-link class="dropdown-item" to="/client-faqs" >FAQs</router-link></li>
+            <li v-if="loginUser != null && loginUser?.type == 'lawyer' "><router-link class="dropdown-item" to="/lawyer-faqs"  >FAQs</router-link></li>
             <li><router-link class="dropdown-item" to="/contact-us">Contact Us</router-link></li> 
           </ul>
             <span>
@@ -23,7 +26,12 @@
 </template>
 <script>
 export default {
-
+    computed: {
+        loginUser() {
+            // console.log("asdasd", this.$store.getters.loginUser)
+            return this.$store.getters.loginUser;
+        }
+    }
 }
 </script>
 <style scoped>
@@ -44,6 +52,7 @@ export default {
     font-weight: 600;
     /* text-transform: uppercase; */
     color: #000;
+    letter-spacing: 1px;
 }
 
 .footer-main .a {

@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="hello">
+  <div class="l-main">
     <LawyerHeader />
     <div class="container">
 
@@ -211,10 +211,14 @@
         </form> -->
       </div>
     </div>
+    <div class="footer">
+      <MainFooter />
+    </div>
   </div>
 </template>
 <script>
 import LawyerHeader from "./Header.vue";
+import MainFooter from "../../components/global/MainFooter.vue";
 import ChangePasswordForm from "@/components/ChangePasswordForm.vue";
 import { mapState } from 'vuex';
 // import * as yup from "yup";
@@ -222,7 +226,8 @@ import { mapState } from 'vuex';
 import api from "@/config/api.js";
 export default {
   components: {
-    LawyerHeader, 
+    LawyerHeader,
+    MainFooter,
     // Form, 
     // Field, 
     ChangePasswordForm
@@ -438,5 +443,17 @@ export default {
 .bg-grey:hover {
   background: grey;
   color: white;
+}
+
+.l-main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>

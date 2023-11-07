@@ -1,5 +1,6 @@
 <template lang="">
-    <div class="hello container">
+    <div class="l-main">
+    <div class=" container">
         <MainHeader />
         <div class="row justify-content-center">
         <div class="center-main col-md-7">
@@ -26,11 +27,17 @@
 </div>
         
     </div>
+    <div class="footer">
+      <MainFooter />
+    </div>
+</div>
 </template>
 <script >
 
 import api from "../../config/api.js";
 import MainHeader from '../../components/global/MainHeader.vue'
+import MainFooter from "../../components/global/MainFooter.vue";
+
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
@@ -60,7 +67,7 @@ export default {
         submitData(formData) {
             try {
                 console.log(formData)
-                api.post('/send-forget-password-email/',formData)
+                api.post('/send-forget-password-email/', formData)
                     .then(res => {
                         alert('Reset Password link has been sent to your email address');
                         console.log('successfully sent email : ', res?.data)
@@ -98,4 +105,15 @@ export default {
     margin: 0 auto !important;
     margin-top: 50px;
 } */
+.l-main {
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
 </style>

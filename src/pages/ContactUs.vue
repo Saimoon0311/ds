@@ -1,22 +1,38 @@
 <template lang="">
   <section class="ct-main">
     <GeneralHeader />
-    <div class="WordSection1 container pt-4 ">
+    <div class="WordSection1 container  ">
       <MainHeader />
-      <div class=" pt-4 center-main row justify-content-center">
-        <div class="col-md-7">        
+      <div class=" pt-3 center-main row justify-content-center">
+        <div class="col-md-8">        
           <div class="bg-dark text-white text-center m-3 p-3 find-client ct-form" style="border-radius: 10px">
             <Form @submit="submitData" class="p-2 px-md-5 m-md-3 c-form" :validation-schema="schema" v-slot="{errors}">
                 <p class="m-4 fs-3 mx-5 ">Contact Us</p>
+                  <div>
+                    <div class="im-user">
+                      <input type="radio" id="optionYes" value="client" v-model="selectedOption" @change="showText" />
+                      <label for="optionYes">I'm a client</label>
+                    </div>
+                    
+                    <div class="im-user"> 
+                      <input type="radio" id="optionNo" value="lawyer" v-model="selectedOption" @change="showText" />
+                      <label for="optionNo">I'm a lawyer</label>
+                    </div>
+                  
+                  </div>
+                  
+                  
+                    
+                    
                 <div class="d-flex flex-row  mb-4 align-baseline">
-                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <!-- <i class="fas fa-user fa-lg me-3 fa-fw"></i> -->
                     <div class="form-outline flex-fill mb-0">
                         <Field type="text" class="form-control" name="fname" placeholder="Your Name" :class="{'is-invalid' : errors.fname}" />
                         <span class="invalid-feedback">{{errors.fname}}</span>
                     </div>
                 </div>
                 <div class="d-flex flex-row  mb-4 align-baseline">
-                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <!-- <i class="fas fa-envelope fa-lg me-3 fa-fw"></i> -->
                     <!-- Add the style and icon you want using the String format -->
                     <div class="form-outline flex-fill mb-0">
                         <Field type="email"  class="form-control" name="email" placeholder="Email" :class="{'is-invalid' : errors.email}"  /> 
@@ -27,15 +43,63 @@
                 
 
                 <div class="d-flex flex-row  mb-4 align-baseline">
-                    <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+                    <!-- <i class="fas fa-phone fa-lg me-3 fa-fw"></i> -->
                     <div class="form-outline flex-fill mb-0">
                         <Field type="tel" class="form-control" name="number" placeholder="Phone Number" :class="{'is-invalid' : errors.number}" />
                         <span class="invalid-feedback">{{errors.number}}</span>
                     </div>
                 </div>
+
+                <div class="d-flex flex-row  mb-4 align-baseline">
+                    <!-- <i class="fas fa-message fa-lg me-3 fa-fw"></i> -->
+                    <div class="form-outline flex-fill mb-0">
+                      <Field name="field" as="select" class=" select-o " >
+                        <option value="" disabled selected hidden>General Reasons</option>
+                        
+                        <option value="">I have an issue with my account</option>
+                        <option value="">I believe my account has been compromised</option>
+                        <option value="">I have a question not listed in the FAQ</option>
+                        <option value="">I want to provide feedback or a complaint about the Simplawfy platform</option>
+                        <option value="">I need to change my personal details in my profile or account</option>
+                        <option value="">Other</option>
+                      </Field>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row  align-baseline">
+                    <!-- <i class="fas fa-message fa-lg me-3 fa-fw"></i> -->
+                    <div class="form-outline flex-fill mb-0" v-if="selectedOption === 'client'">
+                      <Field name="field" as="select" class=" select-o mb-4" >
+                        <option value="" disabled selected hidden>Client Specific Reasons</option>
+                        
+                        <option value="">I can't contact my lawyer</option>
+                        <option value="">I need a lawyer outside of Australia</option>
+                        <option value="">I haven't received any proposals</option>
+                        <option value="">I need my job reinstated</option>
+                      </Field>
+                    </div>
+                   
+
+                  
+                    <!-- <i class="fas fa-message fa-lg me-3 fa-fw"></i> -->
+                    <div class="form-outline flex-fill mb-0" v-if="selectedOption === 'lawyer'">
+                      <Field name="field" as="select" class=" select-o mb-4" >
+                        <option value="" disabled selected hidden>Lawyer Specific Reasons</option>
+                        
+                        <option value="">I have a subscription or billing issue</option>
+                        <option value="">I have an issue with a review left by a client</option>
+                        <option value="">I am a lawyer outside of Australia</option>
+                        <option value="">My proposal hasn't been accepted or rejected and it's been a while</option>
+                        <option value="">I need to amend my proposal</option>
+                        <option value="">I cannot contact my client</option>
+                        <option value="">My client refuses to sign my costs agreement</option>
+                        <option value="">I am unable to act for my client</option>
+                      </Field>
+                    </div>
+                  </div>
                 
                 <div class="d-flex flex-row  mb-4 align-baseline">
-                    <i class="fas fa-message fa-lg me-3 fa-fw"></i>
+                    <!-- <i class="fas fa-message fa-lg me-3 fa-fw"></i> -->
                     <div class="form-outline flex-fill mb-0 textarea-f">
                       <Field v-slot="{ field}" v-model="comment" name="comment"  >
                         <textarea v-bind="field" name="comment" placeholder="Your Message"/>
@@ -81,13 +145,15 @@ export default {
         ),
     });
     return {
-      schema
+      schema,
+      selectedOption: null
     }
   },
   methods: {
     submitData() {
       alert('data has been submitted.')
-    }
+    },
+
   },
   components: {
     MainFooter,
@@ -134,4 +200,44 @@ export default {
   bottom: 0;
   width: 100%;
 }
+
+.select-o {
+  width: 100%;
+  padding: 0.47rem 0.75rem;
+  border-radius: 0.375rem;
+  /* color: gray */
+}
+
+
+
+select,
+option {
+  color: black;
+
+}
+
+select option:hover {
+  box-shadow: 0 0 10px 100px #000 inset;
+  color: #fff
+}
+
+.im-user {
+  display: inline-block;
+  padding: 20px;
+  padding-top: 7px;
+}
+
+.im-user label {
+  margin-top: 3px;
+  margin-left: 6px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: black
+}
+
+/* .select-o option[value=""][selected][disabled] {
+  color: #bebebe
+} */
 </style>

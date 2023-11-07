@@ -7,6 +7,18 @@
         <div class="bg-dark text-white text-center m-3 p-3 pt-4 find-client" style="border-radius: 10px">
         <Form @submit="submitData" class="p-2 px-md-5 m-md-3 fc-form" :validation-schema="schema" v-slot="{errors}">
             <p class=" mb-4 fs-3">Sign up to find clients</p>
+            <div>
+                    <div class="im-user">
+                        <input type="radio" id="optionPage1" value="client" v-model="pageOption" @change="changePage" />
+                        <label for="optionPage1">I'm a client</label>
+                    </div>
+                    
+                    <div class="im-user"> 
+                        <input type="radio" id="optionPage2" value="lawyer" v-model="pageOption" @change="changePage" />
+                        <label for="optionPage2">I'm a lawyer</label>
+                    </div>
+                  
+            </div>    
             <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                  <!-- Add the style and icon you want using the String format -->
@@ -122,7 +134,8 @@ export default {
                 .oneOf([true], "You must accept the terms and conditions")
         });
         return {
-            schema
+            schema,
+            pageOption: this.getCurrentPageOption()
         }
     },
     components: {
@@ -134,6 +147,28 @@ export default {
     methods: {
         submitData(formData) {
             this.submitSignupForm(formData, 'lawyer', 'lawyer-dashboard');
+        },
+        getCurrentPageOption() {
+            const currentRoute = this.$route.path;
+            console.log('c user', currentRoute);
+            // Compare current route with the routes associated with each option
+            if (currentRoute === '/client-register') {
+                return 'client'; // If current route is '/page1', select 'page1'
+            } else if (currentRoute === '/lawyer-register') {
+                return 'lawyer'; // If current route is '/page2', select 'page2'
+            } else {
+                return null; // Or return null if the current route is not matched
+            }
+        },
+        changePage() {
+            if (this.pageOption === 'client') {
+                this.$router.push('/client-register');
+                console.log('asd', this.pageOption);
+
+            } else if (this.pageOption === 'lawyer') {
+                console.log('asd', this.pageOption);
+                this.$router.push('/lawyer-register');
+            }
         }
     },
     name: 'LawyerRegister',
@@ -181,6 +216,17 @@ export default {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+.im-user {
+    display: inline-block;
+    padding: 20px;
+    padding-top: 7px;
+}
+
+.im-user label {
+    margin-top: 3px;
+    margin-left: 6px;
 }
 
 @media (max-width: 1200px) {

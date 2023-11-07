@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="hello">
+  <div class="l-main">
     <LawyerHeader />
     <div class="container">
       <h3 class="mt-3">Profile</h3>
@@ -600,10 +600,15 @@
         ready
       </p>
     </div>
+    <div class="footer">
+      <MainFooter />
+    </div>
   </div>
 </template>
 <script>
 import LawyerHeader from "./Header.vue";
+import MainFooter from "../../components/global/MainFooter.vue";
+
 // import Selectic from 'selectic';
 import api from "@/config/api.js";
 import $ from 'jquery';
@@ -629,6 +634,7 @@ export default {
   },
   components: {
     LawyerHeader,
+    MainFooter
     // Selectic
   },
   computed: {
@@ -845,5 +851,17 @@ export default {
 
 .selectic .curtain-handler .fa-caret-down {
   display: none !important;
+}
+
+.l-main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>
