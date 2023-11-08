@@ -2,19 +2,20 @@
   <div class="l-pro-main">
     <LawyerHeader />
 
-    <div class="container">
+    <div class="container-fluid">
+      <!-- <div class="container"> -->
 
-      <div v-if="adminApproval != 'approve'">
-        <p class="h5 m-3 text-center">Your profile has not been approved yet.</p>
-      </div>
-      <div v-else-if="subscriptionStatus != 'subscribed'">
+        <div v-if="adminApproval != 'approve'" class> 
+          <p class="h5 m-3 text-center">Your profile has not been approved yet.</p>
+        </div>
+        <div v-else-if="subscriptionStatus != 'subscribed'">
           <div class="alert alert-danger mt-4 text-center m-0 p-2">
           You have not subscribed yet.
-          <router-link to="/subscribe" class="btn btn-link ps-0"
-            >Subscribe now</router-link
-          >
+            <router-link to="/subscribe" class="btn btn-link ps-0">Subscribe now</router-link>
+          </div>
         </div>
-      </div>
+      
+
       <div v-else>
 
       
@@ -22,23 +23,23 @@
 
 
     <!-- after subscribe -->
-    <main class="container">
+    <main class="container-fluid">
       <br />
       <!-- Table 1 Bids -->
       <h4 class=" mt-0">Proposals</h4>
 
-      <table class="table table-bordered table-striped">
+      <table class="table table-bordered table-striped table-responsive">
         <thead>
           <tr>
-            <th class="col-2">Job title</th>
-            <th>Billing method</th>
-            <th>Fee estimate</th>
-            <th>Upfront payment</th>
-            <th>Proposed work</th>
+            <th class="col-2">Job Title</th>
+            <th>Billing Method</th>
+            <th>Fee Estimate</th>
+            <th>Upfront Payment</th>
+            <th>Proposed Work</th>
             <!-- <th>Deadline achievable?</th>
             <th>Free/discounted first consultation?</th> -->
             <th>
-              Proposal status&nbsp;<i
+              Proposal Status&nbsp;<i
                 class="bi bi-question-circle"
                 onmouseover="showBidStatusInfo()"
                 onmouseout="hideBidStatusInfo()"
@@ -117,7 +118,7 @@
     <!-- after data  -->
     <main class="container">
       <!-- Table 2 Request further info -->
-      <h4 class="m-3">Information Requests</h4>
+      <!-- <h4 class="m-3">Information Requests</h4>
       <table class="table table-bordered m-3 table-striped">
         <thead>
           <tr>
@@ -161,7 +162,7 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </main>
       </div>
   </div>
@@ -213,8 +214,8 @@ export default {
 }
 
 .navActive {
-  background: grey;
-  border: 1px solid grey;
+  background: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   color: white;
 }
@@ -226,12 +227,12 @@ export default {
 }
 
 .bg-grey {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 
 .bg-grey:hover {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 

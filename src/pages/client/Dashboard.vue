@@ -63,13 +63,14 @@
             <span class="text-center w-100">No record found!</span>
           </div> -->
           <div v-if="openJobs.length == 0 && searchQuery == ''"
-              class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
+              class="border rounded bg-light p-3 my-3 d-flex flex-wrap "
               id="containerActive"
             >
-              <span class="text-center w-100"
-                >You haven't posted a job. Click here to
-                <router-link to="/posting-job" class="btn btn-dark">post a job</router-link></span
-              >
+            <div class="d-flex justify-content-center align-items-center w-100">
+              <span class="text-center p-2">You haven't posted a job. Click here to</span>
+              <router-link to="/posting-job" class="btn btn-dark">post a job</router-link>
+
+            </div>
             </div>
 
             <div v-else-if="openJobs.length == 0 && searchQuery != ''"
@@ -253,13 +254,13 @@ ul#pills-tab {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
   color: white;
-  background-color: #808080;
+  background-color: #000000;
 }
 
 .nav-pills .nav-link,
 .nav-link:focus,
 .nav-link:hover {
-  color: #6d6f73;
+  color: #000000;
 }
 
 .text-left {
@@ -281,5 +282,14 @@ ul#pills-tab {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+@media only screen and (max-width: 767px) and (min-width: 320px) {
+  .btn {
+    padding: 5px 0px;
+    border-radius: 20px;
+    min-width: 90px;
+    font-size: 14px;
+  }
 }
 </style>

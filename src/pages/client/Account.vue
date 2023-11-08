@@ -36,7 +36,7 @@
               <button
                 type="button"
                 name="fname-submit"
-                class="btn btn-secondary my-3"
+                class="btn btn-dark my-3"
                 @click="updateProfile('first_name', '#Fname')"
               >
                 Save changes
@@ -80,7 +80,7 @@
               <button
                 type="button"
                 name="lname-submit"
-                class="btn btn-secondary my-3"
+                class="btn btn-dark my-3"
                 @click="updateProfile('last_name', '#Lname')"
               >
                 Save changes
@@ -126,7 +126,7 @@
               <button
                 type="button"
                 name="phone-submit"
-                class="btn btn-secondary my-3"
+                class="btn btn-dark my-3"
                 @click="updateProfile('phone', '#Pnum')"
               >
                 Save changes
@@ -136,7 +136,7 @@
         </div>
       </div>
     </div>
-    <table class="table table-bordered m-3 table-striped">
+    <table class="table table-bordered mt-5 mb-3 table-striped">
       <tbody>
         <!-- Email -->
         <tr>
@@ -150,7 +150,7 @@
             First Name
             <button
               type="button"
-              class="btn btn-secondary btn-sm"
+              class="btn btn-dark btn-sm"
               data-bs-toggle="modal" data-bs-target="#Fname"
               title="Edit"
               @click="updateFormProperties"
@@ -172,7 +172,7 @@
             Last Name
             <button
               type="button"
-              class="btn btn-secondary btn-sm"
+              class="btn btn-dark btn-sm"
               data-bs-toggle="modal" data-bs-target="#Lname"
               title="Edit"
               @click="updateFormProperties"
@@ -194,7 +194,7 @@
             Phone Number
             <button
               type="button"
-              class="btn btn-secondary btn-sm"
+              class="btn btn-dark btn-sm"
               data-bs-toggle="modal" data-bs-target="#Pnum"
               title="Edit"
               @click="updateFormProperties"
@@ -272,7 +272,7 @@
                   <button
                       type="submit"
                       name="password-submit"
-                      class="btn btn-secondary my-3"
+                      class="btn btn-dark my-3"
                     >
                       Save Changes
                     </button>
@@ -444,13 +444,13 @@ ul#pills-tab {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
   color: white;
-  background-color: #808080;
+  background-color: #000000;
 }
 
 .nav-pills .nav-link,
 .nav-link:focus,
 .nav-link:hover {
-  color: #6d6f73;
+  color: #000000;
 }
 
 .c-main {

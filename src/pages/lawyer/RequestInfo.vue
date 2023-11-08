@@ -66,8 +66,8 @@ export default {
 }
 
 .navActive {
-  background: grey;
-  border: 1px solid grey;
+  background: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   color: white;
 }
@@ -79,12 +79,12 @@ export default {
 }
 
 .bg-grey {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 
 .bg-grey:hover {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 </style>

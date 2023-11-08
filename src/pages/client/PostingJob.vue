@@ -216,17 +216,17 @@ ul#pills-tab {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
   color: white;
-  background-color: #808080;
+  background-color: #000000;
 }
 
 .nav-pills .nav-link,
 .nav-link:focus,
 .nav-link:hover {
-  color: #6d6f73;
+  color: #000000;
 }
 
 .bubbles {
-  background: rgb(128 128 128);
+  background: rgb(0, 0, 0);
 }
 
 .bubbles:hover {

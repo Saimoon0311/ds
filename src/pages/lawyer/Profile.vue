@@ -26,7 +26,7 @@
             />
             <input
               type="submit"
-              class="btn btn-secondary mt-2"
+              class="btn btn-dark mt-2"
               name="photo-submit"
               value="Upload"
             />
@@ -72,7 +72,7 @@
                 <button
                   type="button"
                   name="job-title-submit"
-                  class="btn btn-secondary my-3"
+                  class="btn btn-dark my-3"
                   @click="updateProfile('job_title','#Jobtitle')"
                 >
                   Save changes
@@ -413,7 +413,7 @@
               Job Title:
               <button
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-target=".edit-job-title-modal"
                 title="Edit"
                 data-bs-toggle="modal" data-bs-target="#Jobtitle"
@@ -437,7 +437,7 @@
               Law Firm Name:
               <button
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#FirmName"
                 data-target=".lawfirm-modal"
                 title="Edit"
@@ -459,7 +459,7 @@
               Link to Website:
               <button
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#WebsiteModal"
                 data-target=".website-modal"
                 title="Edit"
@@ -481,7 +481,7 @@
               Phone:
               <button
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#PhoneModal"
                 data-target=".edit-phone-modal"
                 title="Edit"
@@ -503,7 +503,7 @@
               About Me:
               <button
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#AboutModal"
                 data-target=".bd-example-modal-lg"
                 title="Edit"
@@ -528,7 +528,7 @@
               <button
                 type="button"
                 @click="setModal('fields')"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#AreaModal"
                 data-target="#field-modal"
                 title="Edit"
@@ -569,7 +569,7 @@
               <button
               @click="setModal('locations')"
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#StateModal"
                 data-target="#location-modal"
                 title="Edit"
@@ -815,8 +815,8 @@ export default {
 }
 
 .navActive {
-  background: grey;
-  border: 1px solid grey;
+  background: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   color: white;
 }
@@ -828,12 +828,12 @@ export default {
 }
 
 .bg-grey {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 
 .bg-grey:hover {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 

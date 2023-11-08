@@ -11,7 +11,7 @@
         <p class="h5 m-3 text-center">Your profile has not been approved yet.</p>
       </div>
       <div v-else class="pb-5">
-        <h3 class="my-3">Subscription</h3>
+        <h3 class="my-3 mt-4">Subscription</h3>
 
         <!-- Subscription -->
         <div>
@@ -42,7 +42,7 @@
                   <p>The {{ subscriptionData?.card_brand }} card ending in {{ subscriptionData?.card_last4 }}</p>
                   <p>Expiry: {{ subscriptionData?.card_expiry }}</p>
                   <button
-                    class="btn btn-sm btn-secondary"
+                    class="btn btn-sm btn-dark mb-2"
                     @click="replacePaymentMethod"
                     >Replace Payment Method</button>
                 </td>
@@ -50,8 +50,8 @@
               <tr>
                 <th>Receipts</th>
                 <td>
-                  <table v-if="receipts.length > 0" class="table table-bordered table-striped">
-                    <thead>
+                  <table v-if="receipts.length > 0" class="table table-bordered table-striped mt-3">
+                    <thead class="hd-receipt" >
                       <th>#</th>
                       <th>Receipt ID</th>
                       <th>Amount Paid</th>
@@ -64,7 +64,7 @@
                         <td>{{ receipt?.id }}</td>
                         <td>{{ receipt?.amount_paid }}</td>
                         <td>{{ new Date(receipt?.created * 1000).toLocaleDateString() }}</td>
-                        <td><a class="btn btn-sm btn-secondary" :href="receipt?.invoice_pdf">Download</a></td>
+                        <td><a class="btn btn-sm btn-dark" :href="receipt?.invoice_pdf">Download</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -132,7 +132,7 @@
           >
             Cancel Subscription
           </button>
-          <router-link v-else to="/subscribe"  class="btn btn-primary"
+          <router-link v-else to="/subscribe"  class="btn btn-dark"
             >Subscribe now</router-link>
         </div>
 
@@ -423,8 +423,8 @@ export default {
 }
 
 .navActive {
-  background: grey;
-  border: 1px solid grey;
+  background: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   color: white;
 }
@@ -436,12 +436,12 @@ export default {
 }
 
 .bg-grey {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 
 .bg-grey:hover {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 
@@ -455,5 +455,9 @@ export default {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.hd-receipt th {
+  border: none;
 }
 </style>

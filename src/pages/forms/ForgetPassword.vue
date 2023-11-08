@@ -7,7 +7,7 @@
         <div class="row justify-content-center forget-main">
         <div class="center-main col-md-7 forget-col">
             <div class="bg-dark text-white text-center m-3 p-3" style="border-radius: 10px">
-                <p class="m-4 fs-3 ">Forget Password</p>
+                <p class="m-4 fs-3 ">Please enter the email associated with your Simplawfy account to reset your password.</p>
         <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
             
             <!-- Email -->
@@ -81,11 +81,12 @@ export default {
                 console.log(formData)
                 api.post('/send-forget-password-email/', formData)
                     .then(res => {
-                        alert('Reset Password link has been sent to your email address');
+                        this.$swal("Success", "We have emailed you a temporary password for your Simplawfy account. Login to reset your password.", "success")
                         console.log('successfully sent email : ', res?.data)
                     })
                     .catch(error => {
-                        alert('User not found!');
+                        // alert('User not found!');
+                        this.$swal("Error", "User not found!", "error")
                         console.log("getResults : ", error)
                     });
             } catch (error) {
