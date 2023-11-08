@@ -67,6 +67,10 @@
                 <p><b>City/suburb:</b> {{ item?.city }}</p>
                 <p><b>Title:</b> {{ item?.title }}</p>
                 <p><b>Created:</b> {{ formatCreatedAt(item.created_at) }} </p>
+                <template v-if="item?.assigned_lawyer != null">
+                <p><b>Client Email:</b> {{ item?.assigned_lawyer?.email }}</p>
+                <p><b>Client Phone:</b> {{ item?.assigned_lawyer?.phone }}</p>
+                </template>
                 <p
                   id="description28"
                   style="overflow: hidden; text-overflow: ellipsis; height: 100px"
@@ -83,6 +87,7 @@
                 </details> -->
               </div>
               <div
+                v-if="item?.assigned_lawyer == null || item?.assigned_lawyer == ''"
                 class="d-flex flex-column justify-content-center align-items-center "
                 style="min-width: 110px"
               >
@@ -99,7 +104,7 @@
                   class="btn btn-danger btn-sm w-100 my-1"
                   to=""
                   >Decline</router-link> -->
-                  <button @click="declineJob(item.id)" class="btn btn-danger btn-sm w-100 my-1">Decline</button>
+                  <button @click="declineJob(item.id,index)" class="btn btn-danger btn-sm w-100 my-1">Decline</button>
                 <router-link
                   class="btn btn-dark btn-sm w-100 my-1"
                   to="/request-info"
@@ -212,16 +217,32 @@ export default {
     //   }
     // },
 
-    submitProposal(item){
-      this.$store.commit('SET_JOB_DATA',item);
-      localStorage.setItem('jobData',JSON.stringify(item));
-      this.$router.push({ path : '/proposal' });
+    submitProposal(item) {
+      this.$store.commit('SET_JOB_DATA', item);
+      localStorage.setItem('jobData', JSON.stringify(item));
+      this.$router.push({ path: '/proposal' });
     },
-    async declineJob(job_id) {
+    async declineJob(job_id, index) {
       try {
-        const response = await api.post('/lawyer/decline-job', { "job_id": job_id });
-        console.log('sundak  :::: ', response?.data);
-        // this.openJobs = response?.data?.data;
+        this.$swal({
+          title: 'Are you sure?',
+          text: `Are you sure you want to decline this job, You will not be able to see this anymore.`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: `Yes, Decline`
+        }).then(result => {
+          if (result.isConfirmed) {
+            api.post('/lawyer/decline-job', { "job_id": job_id }).then(() => {
+              this.$swal('Success', `Job has been decline successfully`, 'success').then(async () => {
+                this.fixLoadMoreAfterDeleteRecord(index);
+              })
+            }).catch((error) => {
+              console.log('error : ', error);
+            });
+          }
+        });
       } catch (error) {
         console.error('Error fetching options:', error);
       }

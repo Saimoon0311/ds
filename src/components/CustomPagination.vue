@@ -2,14 +2,17 @@
     <div>
         <ul class="custom-pagination">
             <li @click="previousPage" :class="{ 'disabled': isFirstPage }">
-                Previous
+                <i class="fa fa-less-than"></i>
             </li>
-            <li v-for="page in lastPaginationPage" :key="page" @click="gotoPage(page)"
+            <li v-for="page in lastPaginationPageLoop" :key="page" @click="gotoPage(page)"
                 :class="{ 'active': currentPaginationPage === page }">
                 {{ page }}
             </li>
+            <li v-if="lastPaginationPage > 2">...</li>
+            <li v-if="currentPaginationPage > lastPaginationPageLoop" class="active">
+                {{ currentPaginationPage }}</li>
             <li @click="nextPage" :class="{ 'disabled': isLastPage }">
-                Next
+                <i class="fa fa-greater-than"></i>
             </li>
         </ul>
     </div>
@@ -23,8 +26,14 @@ export default {
         };
     },
     computed: {
+        lastPaginationPageLoop() {
+            let pages = this.$store.state.lastPaginationPage;
+            if(pages > 2) pages = 2
+            return pages;
+        },
         lastPaginationPage() {
-            return this.$store.state.lastPaginationPage;
+            let pages = this.$store.state.lastPaginationPage;
+            return pages;
         },
         currentPaginationPage() {
             return this.$store.state.currentPaginationPage;

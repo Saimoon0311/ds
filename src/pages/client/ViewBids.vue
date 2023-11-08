@@ -167,22 +167,23 @@
               </thead>
 
               <tbody>
-                <tr>
+                <tr v-if="data_paginated == null || data_paginated.length == 0">
                   <td colspan="8" class="text-center">
                     No active Proposals are available.
                   </td>
                 </tr>
-                <tr class="text-left" v-for="(item,index) in data_paginated" :key="index">
+                <tr v-else class="text-left" v-for="(item,index) in data_paginated" :key="index">
                   <!-- <td>testing client (crinimal)</td> -->
                   <td>{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</td>
-                  <td>Fixed fee</td>
-                  <td>$100.00</td>
-                  <td>Yes - $55.00</td>
-                  <td>dummy text</td>
+                  <td>{{ item?.charge_type }}</td>
+                  <td>{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
+                  <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td>
+                  <td>{{ item?.description }}</td>
+
                   <!-- <td>Yes</td>
                   <td>No</td> -->
                   <td>
-                    <div class="text-center">
+                    <div class="text-center" v-if="item?.status == 'Open'">
                       <button
                         class="btn btn-light btn-sm border p-1 px-2 mb-1"
                         @click="handleAcceptBidAction(item?.id,item?.lawyer?.id,item?.job_id)"
@@ -210,6 +211,7 @@
                         </button>
                       </form>
                     </div>
+                    <p v-else>{{ item?.status }}</p>
                   </td>
                 </tr>
               </tbody>
@@ -329,18 +331,21 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr v-if="data_paginated == null || data_paginated.length == 0">
                   <td colspan="7" class="text-center">
                     No closed Proposals are available.
                   </td>
                 </tr>
-                <tr class="text-left" v-for="(item,index) in data_paginated" :key="index">
+                <tr v-else class="text-left" v-for="(item,index) in data_paginated" :key="index">
                   <!-- <td>testing client (crinimal)</td> -->
+                  
                   <td>{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</td>
-                  <td>Fixed fee</td>
-                  <td>$100.00</td>
-                  <td>Yes - $55.00</td>
-                  <td>dummy text</td>
+                  <td>{{ item?.charge_type }}</td>
+                  <td>{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
+                  <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td>
+                  <td>{{ item?.description }}</td>
+
+
                   <!-- <td>Yes</td>
                   <td>No</td> -->
                   <!-- <td>
@@ -379,7 +384,7 @@
           </div>
 
           <!-- for pagination -->
-          <CustomPagination />
+          <CustomPagination  v-if="data_paginated != null && data_paginated.length > 0" />
             <!-- for pagination -->
 
         </div>
@@ -475,18 +480,33 @@ export default {
       await this.getPaginatedData();
     },
     handleAcceptBidAction(proposal_id, lawyer_id, job_id) {
-      let status = "accept";
+      let status = "Accept";
       this.changeStatus({ status, proposal_id, lawyer_id, job_id });
     },
     handleRejectBidAction(proposal_id, lawyer_id, job_id) {
-      let status = "reject";
+      let status = "Reject";
       this.changeStatus({ status, proposal_id, lawyer_id, job_id });
     },
     changeStatus(obj) {
-      api.post('/client/change-proposal-status', obj).then(res => {
-        console.log('response : ', res);
-      }).catch((error) => {
-        console.log('error : ', error);
+      this.$swal({
+        title: 'Are you sure?',
+        text: `Are you sure you want to ${obj.status} this proposal`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: `Yes, ${obj.status}`
+      }).then(result => {
+        if (result.isConfirmed) {
+          api.post('/client/change-proposal-status', obj).then(res => {
+            this.$swal('Success', `Proposal has been ${obj.status}ed successfully`, 'success').then(async () => {
+              await this.getPaginatedData();
+            })
+            console.log('response : ', res);
+          }).catch((error) => {
+            console.log('error : ', error);
+          });
+        }
       });
     }
   },

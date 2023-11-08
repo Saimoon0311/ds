@@ -1849,6 +1849,7 @@ export default {
         .then(() => {
           this.$swal('Success', 'Proposal has been submited successfully', 'success').then(res => {
             console.log('response : ' , res);
+            this.$router.push({ path : '/lawyer-dashboard' });
             // this.changePostJobFormToDefault();
             // this.currentStep = 0;
           });

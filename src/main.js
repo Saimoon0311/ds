@@ -61,7 +61,7 @@ app.mixin({
 
   computed: {
     currentPaginationPage() {
-        console.log('computed run');
+      console.log("computed run");
       return this.$store.state.currentPaginationPage;
     },
     paginationEndpoint() {
@@ -72,7 +72,7 @@ app.mixin({
   methods: {
     // /lawyer/lawyer-proposals
     async getPaginatedData() {
-        console.log('func run');
+      console.log("func run");
       api
         .get(`${this.paginationEndpoint}?page=${this.currentPaginationPage}`)
         .then((res) => {
@@ -235,7 +235,21 @@ app.mixin({
       console.log("pagin : ", response);
       console.log("curr : ", this.currentPage);
       this.lastPage = response?.last_page;
-      this.openJobs = this.openJobs.concat(response?.data);
+      let jobsData = this.openJobs.concat(response?.data);
+      let uniqueObjects = new Map();
+      jobsData.forEach((obj) => {
+        uniqueObjects.set(obj.id, obj);
+      });
+      let uniqueArray = Array.from(uniqueObjects.values());
+      this.openJobs = uniqueArray;
+    },
+
+    async fixLoadMoreAfterDeleteRecord(index) {
+      this.openJobs.splice(index, 1);
+      if (this.currentPage < this.lastPage) {
+        this.currentPage--;
+        await this.loadMore();
+      }
     },
 
     async clearSearch() {
