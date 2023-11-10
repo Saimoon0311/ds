@@ -62,7 +62,7 @@
               <div>
                 <button
                   @click="logout('lawyer-login')"
-                  class="nav-link float-right logOutBtn active"
+                  class="nav-link float-right logOutBtn  fw-bolder"
                   id="clients"
                   aria-current="page"
                   >Logout</button>
@@ -148,8 +148,11 @@ export default {
   background: rgb(0, 0, 0);
   color: white;
 }
-
-@media only screen and (max-width: 767px) and (min-width: 320px) {
+@media only screen and (max-width: 1024px){
+  .cstm-dropdown{
+    margin-top: 0;
+    top: 0;
+  }
   .navbar-nav {
     align-items: baseline;
   }
@@ -168,9 +171,16 @@ export default {
   .router-link-exact-active.menuItem-active-link {
     padding: 7px 10px;
   }
+  .logOutBtn{
+    width: 109px;
+  }
+}
+@media only screen and (max-width: 767px) and (min-width: 320px) {
+
 
   .pb-seven {
     padding-bottom: 200px;
   }
+  
 }
 </style>

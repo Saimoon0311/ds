@@ -45,12 +45,12 @@ export default {
     data() {
         const schema = yup.object().shape({
             email: yup.string()
-                .min(3, 'Email must be valid')
-                .max(50, 'Email must be valid')
-                .required('Please Enter your email')
+                .min(3, 'Please enter valid email.')
+                .max(50, 'Please enter valid email.')
+                .required('Please enter your email.')
                 .matches(
                     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                    'Please enter valid email',
+                    'Please enter valid email.',
                 ),
         });
         return {
@@ -85,30 +85,17 @@ export default {
 
 </script>
 <style scoped>
-.hello {
-    min-height: 100vh;
-    display: grid;
-}
 
-/* .center-main {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-wrap: wrap;
-} */
+
+
 .align-baseline {
     align-items: baseline !important;
 }
 
-/* .login-main {
-    width: 35%;
-    margin: 0 auto !important;
-    margin-top: 50px;
-} */
 .l-main {
     min-height: 100vh;
     position: relative;
-    padding-bottom: 60px;
+    /* padding-bottom: 60px; */
 }
 
 .footer {

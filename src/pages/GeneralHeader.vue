@@ -1,43 +1,72 @@
 <template lang="">
-  <div class="text-center pt-4 container mobile-layout" >
-      <router-link to="/"> 
-      <img src="../assets/images/logo.jpeg" srcset="../assets/images/logo.jpeg 450w, ../assets/images/logo.jpeg 600w, ../assets/images/logo.jpeg 750w" sizes="(min-width: 820px) 446px, (min-width: 640px) 588px, calc(90vw + 30px)" class="img-fluid" />
+  <div class="text-center pt-4 container mobile-layout">
+    <router-link to="/" class="main-logo">
+      <img src="../assets/images/logo.jpeg" class="img-fluid" />
     </router-link>
     <div class="dropdown cstm-dropdown">
-      <button class="btn btn-secondary dropdown-toggle menu-burger" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      <button
+        class="btn btn-secondary dropdown-toggle menu-burger"
+        type="button"
+        id="dropdownMenuButton1"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
         <!-- <i class="fa-solid fa-bars"></i> -->
-        <img src="../assets/images/bar.png" alt="">
-
+        <img src="../assets/images/bar.png" alt="" />
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><router-link class="dropdown-item" to="/about-us">About Us</router-link></li>
-        
-        <li v-if="loginUser != null && loginUser?.type == 'client' "><router-link class="dropdown-item" to="/client-faqs" >FAQs</router-link></li>
-        <li v-if="loginUser != null && loginUser?.type == 'lawyer' "><router-link class="dropdown-item" to="/lawyer-faqs"  >FAQs</router-link></li>
+        <li>
+          <router-link class="dropdown-item" to="/about-us"
+            >About Us</router-link
+          >
+        </li>
 
-        <li v-if="loginUser != null && loginUser?.type == 'client' "><router-link class="dropdown-item" to="/how-simplawfy-works-clients">How Simplawfy Works</router-link></li>
-        <li v-if="loginUser != null && loginUser?.type == 'lawyer' "><router-link class="dropdown-item" to="/how-simplawfy-works-lawyers">How Simplawfy Works</router-link></li>
+        <li v-if="loginUser != null && loginUser?.type == 'client'">
+          <router-link class="dropdown-item" to="/client-faqs"
+            >FAQs</router-link
+          >
+        </li>
+        <li v-if="loginUser != null && loginUser?.type == 'lawyer'">
+          <router-link class="dropdown-item" to="/lawyer-faqs"
+            >FAQs</router-link
+          >
+        </li>
 
-        <li> <router-link class="dropdown-item" to="/contact-us">Contact Us</router-link></li>
+        <li v-if="loginUser != null && loginUser?.type == 'client'">
+          <router-link class="dropdown-item" to="/how-simplawfy-works-clients"
+            >How Simplawfy Works</router-link
+          >
+        </li>
+        <li v-if="loginUser != null && loginUser?.type == 'lawyer'">
+          <router-link class="dropdown-item" to="/how-simplawfy-works-lawyers"
+            >How Simplawfy Works</router-link
+          >
+        </li>
 
-        
+        <li>
+          <router-link class="dropdown-item" to="/contact-us"
+            >Contact Us</router-link
+          >
+        </li>
       </ul>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'GeneralHeader',
+  name: "GeneralHeader",
   computed: {
     loginUser() {
       // console.log("asdasd", this.$store.getters.loginUser)
       return this.$store.getters.loginUser;
-    }
-  }
-}
-
+    },
+  },
+};
 </script>
-<style >
+<style>
+.main-logo img {
+  width: 25%;
+}
 .menu-burger:after {
   display: none !important;
 }
@@ -64,11 +93,11 @@ export default {
 
 .cstm-dropdown button {
   border-radius: 0px;
-  border: none !important
+  border: none !important;
 }
 
 .cstm-dropdown button:focus {
-  box-shadow: none !important
+  box-shadow: none !important;
 }
 
 .cstm-dropdown button img {
@@ -89,7 +118,7 @@ export default {
 }
 
 .menu-burger i {
-  color: #000
+  color: #000;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -103,6 +132,9 @@ export default {
     justify-content: center;
     align-items: center;
   }
+  .main-logo img {
+    width: 60%;
+  }
 }
 
 @media (min-width: 425px) and (max-width: 767px) {
@@ -115,6 +147,12 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .main-logo {
+    text-align: left;
+  }
+  .main-logo img {
+    width: 75%;
   }
 }
 
@@ -130,6 +168,11 @@ export default {
     justify-content: center;
     align-items: center;
   }
-
+  .main-logo {
+    text-align: left;
+  }
+  .main-logo img {
+    width: 80%;
+  }
 }
 </style>
