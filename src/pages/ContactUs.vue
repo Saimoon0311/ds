@@ -50,9 +50,9 @@
                     </div>
                 </div>
 
-                <div class="d-flex flex-row  mb-4 align-baseline">
+                <div class="d-flex flex-row align-baseline">
                     <!-- <i class="fas fa-message fa-lg me-3 fa-fw"></i> -->
-                    <div class="form-outline flex-fill mb-0">
+                    <!-- <div class="form-outline flex-fill mb-0">
                       <Field name="field" as="select" class=" select-o " >
                         <option value="" disabled selected hidden>General Reasons</option>
                         
@@ -63,15 +63,20 @@
                         <option value="">I need to change my personal details in my profile or account</option>
                         <option value="">Other</option>
                       </Field>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="d-flex flex-row  align-baseline">
                     <!-- <i class="fas fa-message fa-lg me-3 fa-fw"></i> -->
                     <div class="form-outline flex-fill mb-0" v-if="selectedOption === 'client'">
                       <Field name="field" as="select" class=" select-o mb-4" >
-                        <option value="" disabled selected hidden>Client Specific Reasons</option>
-                        
+                        <option value="" disabled selected hidden>Why do you need to contact us?</option>
+                        <option value="">I have an issue with my account</option>
+                        <option value="">I believe my account has been compromised</option>
+                        <option value="">I have a question not listed in the FAQ</option>
+                        <option value="">I want to provide feedback or a complaint about the Simplawfy platform</option>
+                        <option value="">I need to change my personal details in my profile or account</option>
+                        <option value="">Other</option>
                         <option value="">I can't contact my lawyer</option>
                         <option value="">I need a lawyer outside of Australia</option>
                         <option value="">I haven't received any proposals</option>
@@ -84,8 +89,12 @@
                     <!-- <i class="fas fa-message fa-lg me-3 fa-fw"></i> -->
                     <div class="form-outline flex-fill mb-0" v-if="selectedOption === 'lawyer'">
                       <Field name="field" as="select" class=" select-o mb-4" >
-                        <option value="" disabled selected hidden>Lawyer Specific Reasons</option>
-                        
+                        <option value="" disabled selected hidden>Why do you need to contact us?</option>
+                        <option value="">I have an issue with my account</option>
+                        <option value="">I believe my account has been compromised</option>
+                        <option value="">I have a question not listed in the FAQ</option>
+                        <option value="">I want to provide feedback or a complaint about the Simplawfy platform</option>
+                        <option value="">I need to change my personal details in my profile or account</option>
                         <option value="">I have a subscription or billing issue</option>
                         <option value="">I have an issue with a review left by a client</option>
                         <option value="">I am a lawyer outside of Australia</option>

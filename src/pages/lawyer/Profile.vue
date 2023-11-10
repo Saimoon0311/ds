@@ -89,8 +89,7 @@
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
-        id="FirmName"
-      >
+        id="FirmName">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
@@ -117,7 +116,7 @@
                 <button
                   type="button"
                   name="lawfirm-submit"
-                  class="btn btn-secondary my-3"
+                  class="btn btn-dark my-3"
                   @click="updateProfile('law_firm','#FirmName')"
                 >
                   Save changes
@@ -164,7 +163,7 @@
                 <button
                   type="button"
                   name="website-submit"
-                  class="btn btn-secondary my-3"
+                  class="btn btn-dark my-3"
                   @click="updateProfile('link','#WebsiteModal')"
                 >
                   Save changes
@@ -212,7 +211,7 @@
                 <button
                   type="button"
                   name="phone-submit"
-                  class="btn btn-secondary my-3"
+                  class="btn btn-dark my-3"
                   @click="updateProfile('phone','#PhoneModal')"
                 >
                   Save changes
@@ -260,7 +259,7 @@
                 <button
                   type="button"
                   name="about-submit"
-                  class="btn btn-secondary my-3"
+                  class="btn btn-dark my-3"
                   @click="updateProfile('about','#AboutModal')"
                 >
                   Save changes
@@ -316,7 +315,7 @@
 
               <v-select v-model="selectedOptionIds" :options="options" label="title" multiple></v-select>
 
-              <button @click="saveSelectedFields" class="btn btn-secondary my-3">Save changes</button>
+              <button @click="saveSelectedFields" class="btn btn-dark my-3">Save changes</button>
               <!-- <form
                 @submit="submitForm"
                 id="form-bs-select-1"
@@ -361,7 +360,7 @@
 
               <v-select v-model="selectedOptionIds_locations" :options="options_locations" label="title" multiple></v-select>
 
-              <button @click="saveSelectedLocations" class="btn btn-secondary my-3">Save changes</button>
+              <button @click="saveSelectedLocations" class="btn btn-dark my-3">Save changes</button>
 
               <!-- <form
                 action="profile.php"

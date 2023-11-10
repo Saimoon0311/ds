@@ -27,8 +27,8 @@
       <br />
       <!-- Table 1 Bids -->
       <h4 class=" mt-0">Proposals</h4>
-
-      <table class="table table-bordered table-striped table-responsive">
+      <div class="table-responsive">
+      <table class="table table-bordered table-striped ">
         <thead>
           <tr>
             <th class="col-2">Job Title</th>
@@ -114,6 +114,7 @@
           </tr>
         </tbody>
       </table>
+    </div>
     </main>
     <!-- after data  -->
     <main class="container">

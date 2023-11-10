@@ -1,4 +1,5 @@
 <template>
+  :
   <LawyerHeader />
   <div class="f-main">
     <div class="container">
@@ -76,7 +77,7 @@
                   <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
                   <!-- <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
                     <fieldset class="border p-2 my-2 bg-light text-center" style="margin: auto">
-                      <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
+                      <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">  
                         Itemise Disbursements
                       </legend>
                       <label class="w-100 text-start">
@@ -128,14 +129,14 @@
                       <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">Itemise Disbursements
                       </legend>
                       <label class="w-100 text-start">
-                        Task:<sup><code>*</code></sup>
-                        <input v-model="newRow.itemDisbursement" placeholder="Eg: Item one" class="form-control"
+                        Item:<sup><code>*</code></sup>
+                        <input v-model="newRow.itemDisbursement" placeholder="Eg: filing fees" class="form-control"
                           required />
                       </label>
                       <br />
                       <br />
                       <label class="w-100 text-start">
-                        Cost (AUD):<sup><code>*</code></sup>
+                        cost: (excluding GST)<sup><code>*</code></sup>
                         <div>
                           <span class="position-absolute d-span" style="line-height: 36px">$</span>
                           <input v-model="newRow.costAud" min="1" type="number" class="form-control d-input" required />
@@ -151,7 +152,7 @@
                         <tr>
                           <th></th>
                           <th>Item Disbursement</th>
-                          <th>Cost (AUD)</th>
+                          <th>Cost</th>
                           <th>Total</th>
                         </tr>
                       </thead>
@@ -173,14 +174,14 @@
                   </div>
                 </div>
 
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                   <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
                     <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
                       class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
-                </div>
+                </div> -->
 
               </div>
             </div>
@@ -196,13 +197,14 @@
                   <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem"> Item by Item for Specific
                     Tasks</legend>
                   <label class="w-100 text-start">
-                    Task:<sup><code>*</code></sup>
-                    <input v-model="newRow2.itemDisbursement" placeholder="Eg: Item one" class="form-control" required />
+                    Item:<sup><code>*</code></sup>
+                    <input v-model="newRow2.itemDisbursement" placeholder="Eg: letter of advice" class="form-control"
+                      required />
                   </label>
                   <br />
                   <br />
                   <label class="w-100 text-start">
-                    Cost (AUD):<sup><code>*</code></sup>
+                    Fee: (excluding GST and disbursements)<sup><code>*</code></sup>
                     <div>
                       <span class="position-absolute d-span" style="line-height: 36px">$</span>
                       <input v-model="newRow2.costAud" min="1" type="number" class="form-control d-input" required />
@@ -217,8 +219,8 @@
                   <thead>
                     <tr>
                       <th></th>
-                      <th>Item Disbursement</th>
-                      <th>Cost (AUD)</th>
+                      <th>Item </th>
+                      <th>Fee (excluding GST)</th>
                       <th>Total</th>
                     </tr>
                   </thead>
@@ -354,14 +356,14 @@
                       <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">Itemise Disbursements
                       </legend>
                       <label class="w-100 text-start">
-                        Task:<sup><code>*</code></sup>
-                        <input v-model="newRow.itemDisbursement" placeholder="Eg: Item one" class="form-control"
+                        Item:<sup><code>*</code></sup>
+                        <input v-model="newRow.itemDisbursement" placeholder="Eg: filing fees" class="form-control"
                           required />
                       </label>
                       <br />
                       <br />
                       <label class="w-100 text-start">
-                        Cost (AUD):<sup><code>*</code></sup>
+                        Cost: (excluding GST)<sup><code>*</code></sup>
                         <div>
                           <span class="position-absolute d-span" style="line-height: 36px">$</span>
                           <input v-model="newRow.costAud" min="1" type="number" class="form-control d-input" required />
@@ -377,7 +379,7 @@
                         <tr>
                           <th></th>
                           <th>Item Disbursement</th>
-                          <th>Cost (AUD)</th>
+                          <th>Cost</th>
                           <th>Total</th>
                         </tr>
                       </thead>
@@ -399,21 +401,21 @@
                   </div>
                 </div>
 
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                   <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
                     <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
                       class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
-                </div>
+                </div> -->
 
               </div>
             </div>
 
             <!-- If they select ‘Fixed fee’ -->
             <div class="form-group" id="fixed-fee" v-if="selectedOption === 'Fixed'">
-              <label>Fixed fee amount (in AUD and excluding GST and disbursements):<sup><code>*</code></sup></label>
+              <label>Fixed fee amount (excluding GST and disbursements):<sup><code>*</code></sup></label>
               <div>
                 <span class="position-absolute d-span"> $</span>
                 <input type="number" id="fixedFeeAmount" v-model="form.fixed_fee_amount" name="fixedFeeAmount"
@@ -483,14 +485,14 @@
                       <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">Itemise Disbursements
                       </legend>
                       <label class="w-100 text-start">
-                        Task:<sup><code>*</code></sup>
-                        <input v-model="newRow.itemDisbursement" placeholder="Eg: Item one" class="form-control"
+                        Item:<sup><code>*</code></sup>
+                        <input v-model="newRow.itemDisbursement" placeholder="Eg: filing fees" class="form-control"
                           required />
                       </label>
                       <br />
                       <br />
                       <label class="w-100 text-start">
-                        Cost (AUD):<sup><code>*</code></sup>
+                        Cost: (excluding GST)<sup><code>*</code></sup>
                         <div>
                           <span class="position-absolute d-span" style="line-height: 36px">$</span>
                           <input v-model="newRow.costAud" min="1" type="number" class="form-control d-input" required />
@@ -506,7 +508,7 @@
                         <tr>
                           <th></th>
                           <th>Item Disbursement</th>
-                          <th>Cost (AUD)</th>
+                          <th>Cost</th>
                           <th>Total</th>
                         </tr>
                       </thead>
@@ -530,14 +532,14 @@
 
                 </div>
 
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                   <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
                     <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
                       class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
-                </div>
+                </div> -->
 
               </div>
 
@@ -624,7 +626,7 @@
 
                 <fieldset class="border p-2 my-2 bg-light text-center " style="margin: auto">
                   <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
-                    Add additional fee earner
+                    Add fee earner
                   </legend>
                   <label class="w-100 text-start">
                     Title:<sup><code>*</code></sup>
@@ -634,7 +636,7 @@
                   <br />
                   <br />
                   <label class="w-100 text-start">
-                    Hourly rate (in AUD excluding GST):<sup><code>*</code></sup>
+                    Hourly rate (excluding GST):<sup><code>*</code></sup>
                     <div>
                       <span class="position-absolute d-span">$</span>
                       <input v-model="newRow3.hourlyRate" min="1" autocomplete="on" type="number"
@@ -681,7 +683,7 @@
                   <thead>
                     <tr>
                       <th>Title</th>
-                      <th>Hourly rate (in AUD excluding GST)</th>
+                      <th>Hourly rate (excluding GST)</th>
                       <th>Estimated number of hours</th>
                       <th>Total</th>
                     </tr>
@@ -792,14 +794,14 @@
                       <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">Itemise Disbursements
                       </legend>
                       <label class="w-100 text-start">
-                        Task:<sup><code>*</code></sup>
-                        <input v-model="newRow.itemDisbursement" placeholder="Eg: Item one" class="form-control"
+                        Item:<sup><code>*</code></sup>
+                        <input v-model="newRow.itemDisbursement" placeholder="Eg: filing fees" class="form-control"
                           required />
                       </label>
                       <br />
                       <br />
                       <label class="w-100 text-start">
-                        Cost (AUD):<sup><code>*</code></sup>
+                        Cost: (excluding GST)<sup><code>*</code></sup>
                         <div>
                           <span class="position-absolute d-span" style="line-height: 36px">$</span>
                           <input v-model="newRow.costAud" min="1" type="number" class="form-control d-input" required />
@@ -815,7 +817,7 @@
                         <tr>
                           <th></th>
                           <th>Item Disbursement</th>
-                          <th>Cost (AUD)</th>
+                          <th>Cost</th>
                           <th>Total</th>
                         </tr>
                       </thead>
@@ -838,14 +840,14 @@
                   </div>
                 </div>
 
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                   <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
                     <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
                       class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
-                </div>
+                </div> -->
 
               </div>
               <!-- <div class="my-3">
@@ -878,14 +880,14 @@
             <!-- If they select ‘Success Fee’ -->
             <div class="form-group" id="success-fee" v-if="selectedOption === 'Success'">
               <label>Uplift percentage (%):<sup><code>*</code></sup></label>
-              <input type="number" v-model="form.uplift_percentage" id="upliftPercentage" name="upliftPercentage" min="1"
-                max="25" step=".01" class="form-control" />
+              <input type="number" v-model="form.uplift_percentage" id="upliftPercentage" name="upliftPercentage"
+                class="form-control" @input="limitNumber" />
 
               <br />
 
-              <label>Summarise terms upon which Success Fee will be charged:</label>
-              <input type="text" id="successFeeTerms" v-model="form.success_fee_term" name="successFeeTerms"
-                class="form-control" />
+              <label>Summarise terms upon which the Success Fee will be charged:</label>
+              <textarea type="text" id="successFeeTerms" v-model="form.success_fee_term" name="successFeeTerms"
+                class="form-control"></textarea>
               <br />
               <div class="disbursement-fields">
                 <div class="form-group mt-3">
@@ -950,14 +952,14 @@
                       <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">Itemise Disbursements
                       </legend>
                       <label class="w-100 text-start">
-                        Task:<sup><code>*</code></sup>
-                        <input v-model="newRow.itemDisbursement" placeholder="Eg: Item one" class="form-control"
+                        Item:<sup><code>*</code></sup>
+                        <input v-model="newRow.itemDisbursement" placeholder="Eg: filing fees" class="form-control"
                           required />
                       </label>
                       <br />
                       <br />
                       <label class="w-100 text-start">
-                        Cost (AUD):<sup><code>*</code></sup>
+                        Cost: (excluding GST)<sup><code>*</code></sup>
                         <div>
                           <span class="position-absolute d-span" style="line-height: 36px">$</span>
                           <input v-model="newRow.costAud" min="1" type="number" class="form-control d-input" required />
@@ -973,7 +975,7 @@
                         <tr>
                           <th></th>
                           <th>Item Disbursement</th>
-                          <th>Cost (AUD)</th>
+                          <th>Cost</th>
                           <th>Total</th>
                         </tr>
                       </thead>
@@ -997,14 +999,14 @@
 
                 </div>
 
-                <div class="form-group mb-3">
+                <!-- <div class="form-group mb-3">
                   <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
                   <div>
                     <span class="position-absolute d-span"> $</span>
                     <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
                       class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
-                </div>
+                </div> -->
 
               </div>
               <!-- <div class="my-3">
@@ -1050,7 +1052,7 @@
             </div>
 
             <!-- Deadline acceptance radio -->
-            <div class="form-group m-2" id="div-deadline-acceptance-radio">
+            <!-- <div class="form-group m-2" id="div-deadline-acceptance-radio">
               <label>Can you meet the potential client's deadline?</label>
               <div class="form-check">
                 <input class="form-check-input" v-model="form.meet_deadlines" type="radio" name="deadlineFlexibility"
@@ -1066,15 +1068,15 @@
                   No
                 </label>
               </div>
-            </div>
+            </div> -->
 
             <!-- Can't meet deadline explanation box -->
-            <div class="form-group" id="div-deadline" v-if="deadline === 'No'">
+            <!-- <div class="form-group" id="div-deadline" v-if="deadline === 'No'">
               <label>Please explain why you can't meet potential client's deadline:<sup><code>*</code></sup>
                 <textarea id="txtarea-deadline" v-model="form.miss_deadline_reason" name="deadline" class="form-control"
                   rows="4" cols="100%" placeholder="Eg: It's not realistic"></textarea>
               </label>
-            </div>
+            </div> -->
 
             <div class="stepbtn hiden mt-3">
               <button v-if="currentStep !== 0" type="button" @click="prevStep" class="btn btn-dark mr">
@@ -1949,6 +1951,16 @@ export default {
       this.deadline = value;
     },
     // decimal logic
+    limitNumber(event) {
+      let value = event.target.value;
+      if (value < 0 && value == null) {
+        this.uplift_percentage = null;
+      } else if (value > 25) {
+        this.form.uplift_percentage = 25;
+      } else {
+        this.form.uplift_percentage = value;
+      }
+    },
 
 
   },
@@ -1969,6 +1981,10 @@ export default {
 .btn {
   padding: 5px 25px;
   border-radius: 20px;
+}
+
+#successFeeTerms {
+  min-height: 120px;
 }
 
 /* #mainForm #upfrontPayRadio .stepbtn {

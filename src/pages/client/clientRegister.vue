@@ -69,6 +69,31 @@
                 </div>
             </div>
 
+            <div class="d-flex flex-row align-items-center mb-4 align-baseline">
+                <i class="fas fa-circle-question fa-lg me-3 fa-fw"></i>
+                <div class="form-outline flex-fill mb-0">
+                      <Field name="field" as="select" class=" select-o " v-model="selectedOption" @change="checkOtherOption" >
+                        <option value="" disabled selected hidden>How did you hear about us?</option>
+                        <option value="">Google</option>
+                        <option value="">LinkedIn</option>
+                        <option value="">Instagram</option>
+                        <option value="">Facebook</option>
+                        <option value="">Colleague/Friend/Family</option>
+                        <option value="">Networking</option>
+                        <option value="">Another Lawyer</option>
+                        <option value="Other">Other</option>
+                       
+                      </Field>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-4 align-baseline" v-if="selectedOption === 'Other'">
+                <i class="fas fa-message fa-lg me-3 fa-fw"></i>
+                <div class="form-outline flex-fill mb-0">
+                    <textarea class="form-control otherTextarea" type="text" v-model="otherText" placeholder="Please specify" ></textarea>
+                </div>
+            </div>    
+
             <div class="d-flex align-items-between justify-content-center mb-4 inline-table terms-check">
                 <Field class="form-check-Field" type="checkbox" id="termsAndConditions" name="tandc" value="true" :class="{'is-invalid' : errors.tandc}" />
                 <label class="form-check-label tac" for="termsAndConditions">
@@ -82,7 +107,9 @@
                 <button class="btn btn-outline-light btn-lg px-5">Sign up</button>
             </div>
 
-            <p>Already have an account?<br> <router-link  to="/client-login">Login</router-link ></p>
+            <p>
+                <!-- Already have an account?<br>  -->
+                <router-link  to="/client-login">Already have an account?</router-link ></p>
         </Form>
     </div>
 </div>
@@ -105,37 +132,39 @@ import * as yup from "yup";
 export default {
     data() {
         const schema = yup.object().shape({
-            first_name: yup.string().required('First name is required.'),
-            last_name: yup.string().required('Last name is required.'),
-            phone: yup.string().required('Phone number is required.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
+            first_name: yup.string().required('Please enter your first name.'),
+            last_name: yup.string().required('Please enter your last name.'),
+            phone: yup.string().required('Please enter your phone number.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
             email: yup.string()
-                .min(3, 'Email must be valid')
-                .max(50, 'Email must be valid')
-                .required('Please enter your email')
+                .min(3, 'Please enter valid email.')
+                .max(50, 'Please enter valid email.')
+                .required('Please enter your email.')
                 .matches(
                     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                    'Please enter valid email',
+                    'Please enter valid email.',
                 ),
             password: yup
                 .string()
-                .required('Please enter your password')
-                .min(6, 'Password must be greater then 6 digit')
-                .max(16, 'Password must be less then 16 digit')
+                .required('Please enter your password.')
+                .min(6, 'Password must be greater then 6 digit.')
+                .max(16, 'Password must be less then 16 digit.')
                 .matches(
                     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                    'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
+                    'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character.',
                 ),
             confirm_password: yup
                 .string()
-                .required('Confirm password is required')
-                .oneOf([yup.ref('password'), null], 'Password must match'),
+                .required('Please re-enter your password.')
+                .oneOf([yup.ref('password'), null], 'Password must match.'),
             tandc: yup.bool() // use bool instead of boolean
-                .required('You must accept the terms and conditions')
-                .oneOf([true], "You must accept the terms and conditions")
+                .required('You must accept the terms and conditions.')
+                .oneOf([true], "You must accept the terms and conditions.")
         });
         return {
             schema,
-            pageOption: this.getCurrentPageOption()
+            pageOption: this.getCurrentPageOption(),
+            selectedOption: '', // Selected option from dropdown
+            otherText: '' // Text input for 'Other' option
         }
     },
     components: {
@@ -170,10 +199,17 @@ export default {
                 console.log('asd', this.pageOption);
                 this.$router.push('/lawyer-register');
             }
-        }
+        },
+        checkOtherOption() {
+            // If 'Other' is selected, clear the otherText field
+            if (this.selectedOption !== 'Other') {
+                this.otherText = '';
+            }
+
+        },
+        name: 'ClientRegister',
     },
-    name: 'ClientRegister',
-}
+}   
 </script>
 <style scoped>
 .hello {
@@ -201,6 +237,21 @@ export default {
     align-items: baseline !important;
 }
 
+.select-o {
+    width: 100%;
+    padding: 0.47rem 0.75rem;
+    border-radius: 0.375rem;
+    /* color: gray */
+}
+
+
+
+select,
+option {
+    color: black;
+
+}
+
 .terms-check {
     width: 100%;
     text-align: left;
@@ -211,6 +262,11 @@ export default {
     min-height: 100vh;
     position: relative;
     padding-bottom: 60px;
+}
+
+.otherTextarea {
+    width: 100%;
+    min-height: 100px;
 }
 
 .footer {

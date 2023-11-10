@@ -3,7 +3,7 @@
   <div class="l-register-main">
   <GeneralHeader />
 
-    <div class="hello container">
+    <div class="hello container pt-4">
       <div class="row justify-content-center login-row">
         <div class="center-main col-md-10 col-lg-7 login-col">
           <div
@@ -11,7 +11,7 @@
             style="border-radius: 10px"
           >
             <p class="m-4 fs-3">Login</p>
-            <div>
+            <!-- <div>
                     <div class="im-user">
                         <input type="radio" id="optionPage1" value="client" v-model="pageOption" @change="changePage" />
                         <label for="optionPage1">I'm a client</label>
@@ -22,7 +22,7 @@
                         <label for="optionPage2">I'm a lawyer</label>
                     </div>
                   
-            </div>  
+            </div>   -->
             <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
           
           <!-- Email -->
@@ -47,9 +47,10 @@
           <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
               <button class="btn btn-outline-light btn-lg px-5">Submit</button>
           </div>
-          <p class="mb-0">Don't have an account?
-      <br>
-      <router-link to="/lawyer-register">Sign Up</router-link>
+          <p class="mb-0">
+            <!-- Don't have an account? -->
+      <!-- <br> -->
+      <router-link to="/lawyer-register">Don't have an account?</router-link>
     </p>
             </Form>
           </div>
@@ -177,13 +178,13 @@ export default {
   min-height: 57vh;
 }
 
-.login-col {
+/* .login-col {
   position: absolute;
   left: 50%;
   right: 50%;
   transform: translate(-50%, -40%);
   top: 50%;
-}
+} */
 
 .im-user {
   display: inline-block;

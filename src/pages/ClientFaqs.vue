@@ -631,7 +631,7 @@ export default {
 
 .accordion-button {
   padding: 13px 10px !important;
-  font-weight: 600 !important;
+  font-weight: 400 !important;
   font-size: 17px;
 }
 

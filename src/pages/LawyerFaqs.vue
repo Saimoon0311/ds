@@ -383,7 +383,6 @@
                             to amend your proposal (for an explanation, see
                             <button
                               class="accordion-button collapsed cstm-accor"
-                              style="font-weight: 600"
                               type="button"
                               data-bs-toggle="collapse"
                               data-bs-target="#collapselsix"
@@ -965,6 +964,7 @@ export default {
         behavior: "smooth",
       });
     },
+
   },
 
 };
@@ -1002,7 +1002,7 @@ export default {
 
 .accordion-button {
   padding: 13px 10px !important;
-  font-weight: 600 !important;
+  font-weight: 400 !important;
   font-size: 17px;
 }
 
@@ -1045,9 +1045,10 @@ export default {
 .cstm-accor {
   width: auto !important;
   display: inline-block;
+  font-size: 15px;
   /* padding-left: 0 !important;
   padding-right: 0 !important; */
-  font-weight: 600 !important;
+  font-weight: 400 !important;
   color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
   text-decoration: underline;
   padding: 0 !important;

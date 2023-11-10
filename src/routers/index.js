@@ -20,7 +20,7 @@ import api from "../config/api.js";
 import PlatForm from "@/components/PlatForm.vue";
 // client
 import ClientLoginForm from "@/pages/client/Login.vue";
-import ClientRegister from "@/pages/client/Register.vue";
+import ClientRegister from "@/pages/client/clientRegister.vue";
 import ClientAccount from "@/pages/client/Account.vue";
 // import PostingJob from "@/pages/client/PostingJob.vue";
 import PostingaJob from "@/pages/client/PostingaJob.vue";
@@ -47,7 +47,8 @@ import termsForLawyer from "@/pages/lawyer/termsAndConditions.vue";
 import privacyPolicy from "@/pages/privacy-policy.vue";
 import termsOfUse from "@/pages/terms-of-use.vue";
 import AboutUs from "@/pages/AboutUs.vue";
-import HowSimplawfyWorks from "@/pages/HowSimplawfyWorks.vue";
+import HowSimplawfyWorks from "@/pages/HowSimplawfyWorksClient.vue";
+import HowSimplawfyWorksLawyer from "@/pages/HowSimplawfyWorksLawyer.vue";
 import ContactUs from "@/pages/ContactUs.vue";
 import ClientFaqs from "@/pages/ClientFaqs.vue";
 import LawyerFaqs from "@/pages/LawyerFaqs.vue";
@@ -320,9 +321,16 @@ const routes = [
     component: AboutUs,
   },
   {
-    path: "/how-simplawfy-works",
+    path: "/how-simplawfy-works-clients",
     component: HowSimplawfyWorks,
+    meta: { requiresAuth: true, lawyerNotAllowed: true },
   },
+  {
+    path: "/how-simplawfy-works-lawyers",
+    component: HowSimplawfyWorksLawyer,
+    meta: { requiresAuth: true, clientNotAllowed: true },
+  },
+
   {
     path: "/client-faqs",
     component: ClientFaqs,

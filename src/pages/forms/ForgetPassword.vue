@@ -7,21 +7,21 @@
         <div class="row justify-content-center forget-main">
         <div class="center-main col-md-7 forget-col">
             <div class="bg-dark text-white text-center m-3 p-3" style="border-radius: 10px">
-                <p class="m-4 fs-3 ">Please enter the email associated with your Simplawfy account to reset your password.</p>
+                <p class="m-4 f-pass-hd f-pass ">Please enter the email associated with your Simplawfy account to reset your password.</p>
         <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
             
             <!-- Email -->
             <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                 <div class="form-outline flex-fill mb-0">
-                    <Field type="email" class="form-control" name="email" placeholder="Email" :class="{'is-invalid' : errors.email}" />
+                    <Field type="email" class="form-control f-pass-hd" name="email" placeholder="Email" :class="{'is-invalid' : errors.email}" />
                     <span class="invalid-feedback">{{errors.email}}</span>
                 </div>
             </div>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                <router-link :to="backUrl" class="btn btn-outline-light btn-lg px-5">Back</router-link>
+                <router-link :to="backUrl" class="btn btn-outline-light btn-lg px-4 f-pass-hd f-btn" >Back</router-link>
                 &nbsp;
-                <button class="btn btn-outline-light btn-lg px-5">Submit</button>
+                <button class="btn btn-outline-light btn-lg px-4 f-pass-hd f-btn">Submit</button>
             </div>
         </Form>
     </div>
@@ -140,5 +140,23 @@ export default {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+.f-pass-hd {
+    font-size: 17px;
+}
+
+.f-btn {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    line-height: 21px;
+    height: 35px;
+}
+
+@media only screen and (max-width: 767px) and (min-width: 320px) {
+    .f-pass {
+        margin: 0 !important;
+        margin-bottom: 10px !important;
+    }
 }
 </style>
