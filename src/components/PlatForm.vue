@@ -289,6 +289,9 @@ export default {
   .cstm-dropdown {
     right: 20px;
   }
+  .showhover{
+      line-height: 20px;
+    }
 
 }
 

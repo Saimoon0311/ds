@@ -4,10 +4,10 @@
     <div class="WordSection1 container  ">
       <MainHeader />
       <div class=" pt-3 center-main row justify-content-center">
-        <div class="col-md-8">        
+        <div class="col-md-10 col-lg-8">        
           <div class="bg-dark text-white text-center m-3 p-3 find-client ct-form" style="border-radius: 10px">
-            <Form @submit="submitData" class="p-2 px-md-5 m-md-3 c-form" :validation-schema="schema" v-slot="{errors}">
-                <p class="m-4 fs-3 mx-5 ">Contact Us</p>
+            <Form @submit="submitData" class="p-2 px-md-5 m-md-3 px-sm-3 c-form" :validation-schema="schema" v-slot="{errors}">
+                <p class="m-4 fs-3 mx-5 title">Contact Us</p>
                   <div>
                     <div class="im-user">
                       <input type="radio" id="optionYes" value="client" v-model="selectedOption" @change="showText" />
@@ -76,11 +76,11 @@
                         <option value="">I have a question not listed in the FAQ</option>
                         <option value="">I want to provide feedback or a complaint about the Simplawfy platform</option>
                         <option value="">I need to change my personal details in my profile or account</option>
-                        <option value="">Other</option>
                         <option value="">I can't contact my lawyer</option>
                         <option value="">I need a lawyer outside of Australia</option>
                         <option value="">I haven't received any proposals</option>
                         <option value="">I need my job reinstated</option>
+                        <option value="">Other</option>
                       </Field>
                     </div>
                    
@@ -103,6 +103,8 @@
                         <option value="">I cannot contact my client</option>
                         <option value="">My client refuses to sign my costs agreement</option>
                         <option value="">I am unable to act for my client</option>
+                        <option value="">Other</option>
+
                       </Field>
                     </div>
                   </div>
@@ -142,15 +144,15 @@ import * as yup from "yup";
 export default {
   data() {
     const schema = yup.object().shape({
-      fname: yup.string().required('Your name is required.'),
-      number: yup.string().required('Phone number is required.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
+      fname: yup.string().required('Please enter your name.'),
+      number: yup.string().required('Please enter your phone number.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
       email: yup.string()
-        .min(3, 'Email must be valid')
-        .max(50, 'Email must be valid')
-        .required('Please enter your email')
+        .min(3, 'Please enter valid email.')
+        .max(50, 'Please enter valid email.')
+        .required('Please enter your email.')
         .matches(
           /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-          'Please enter valid email',
+          'Please enter valid email.',
         ),
     });
     return {
@@ -249,4 +251,24 @@ textarea::placeholder {
 /* .select-o option[value=""][selected][disabled] {
   color: #bebebe
 } */
+@media only screen and (max-width: 767px) and (min-width: 320px) {
+  .WordSection1 .center-main{
+    min-height: 75vh;
+    align-items: center;
+  }
+  .ct-main {
+    padding-bottom: 100px;
+  }
+.im-user{
+  padding: 5px 5px 20px 5px;
+}
+.title{
+  margin: 5px !important;
+}
+.ct-form{
+  margin: 10px !important;
+  padding: 20px 10px !important;
+}
+}
+
 </style>
