@@ -175,7 +175,8 @@ export default {
 
 .login-row {
   margin: auto;
-  min-height: 57vh;
+  min-height: 70vh;
+  align-items: center;
 }
 
 /* .login-col {

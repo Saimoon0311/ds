@@ -4,7 +4,7 @@
   <div class="hello container pt-4">
       <div class="row justify-content-center login-row">
       <div class="center-main col-md-10 col-lg-7 login-col">
-          <div class="bg-dark text-white text-center m-3 p-3" style="border-radius: 10px">
+          <div class="bg-dark text-white text-center m-3 p-3 find-client " style="border-radius: 10px">
               <p class="m-4 fs-3 ">Login</p>
               <!-- <div>
                     <div class="im-user">
@@ -163,7 +163,8 @@ export default {
 
 .login-row {
   margin: auto;
-  min-height: 57vh;
+  min-height: 70vh;
+  align-items: center;
 }
 
 /* .login-col {
