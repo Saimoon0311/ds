@@ -12,8 +12,8 @@
             <li v-if="loginUser != null && loginUser?.type == 'client' "><router-link class="dropdown-item" to="/client-faqs" >FAQs</router-link></li>
             <li v-if="loginUser != null && loginUser?.type == 'lawyer' "><router-link class="dropdown-item" to="/lawyer-faqs"  >FAQs</router-link></li>
             
-            <li v-if="loginUser != null && loginUser?.type == 'client' "><router-link class="dropdown-item" to="/how-simplawfy-works-clients">How Simplawfy Works</router-link></li>
-            <li v-if="loginUser != null && loginUser?.type == 'lawyer' "><router-link class="dropdown-item" to="/how-simplawfy-works-lawyers">How Simplawfy Works</router-link></li>
+            <li><router-link class="dropdown-item" to="/how-simplawfy-works">How Simplawfy Works</router-link></li>
+            <!-- <li><router-link class="dropdown-item" to="/how-simplawfy-works-lawyers">How Simplawfy Works</router-link></li> -->
             <li><router-link class="dropdown-item" to="/contact-us">Contact Us</router-link></li> 
           </ul>
             <span>

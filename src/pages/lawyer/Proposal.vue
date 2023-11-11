@@ -1043,48 +1043,90 @@
           <!-- Upfront payment -->
           <div class="form-group my-2" id="upfrontPayRadio" v-if="selectedOption === 'Pro'" ref="content">
             <!-- Additional information -->
-            <div class="form-group">
+            <div class="disbursement-fields">
+              <div class="form-group mt-3">
+                <label> What is the estimated amount for disbursements (excluding GST)?</label>
+                <div>
+                  <span class="position-absolute d-span"> $</span>
+                  <input type="number" id="fixedFeeAmount" v-model="form.disbursement_amount" name="fixedFeeAmount"
+                    class="form-control d-input" min="1" step=".01" placeholder="" />
+                </div>
+                <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
+
+                <!-- hammad -->
+                <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
+                  <fieldset class="border p-2 my-2 bg-light text-center" style="margin: auto">
+                    <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">Itemise Disbursements
+                    </legend>
+                    <label class="w-100 text-start">
+                      Item:<sup><code>*</code></sup>
+                      <input v-model="newRow.itemDisbursement" placeholder="Eg: filing fees" class="form-control"
+                        required />
+                    </label>
+                    <br />
+                    <br />
+                    <label class="w-100 text-start">
+                      cost: (excluding GST)<sup><code>*</code></sup>
+                      <div>
+                        <span class="position-absolute d-span" style="line-height: 36px">$</span>
+                        <input v-model="newRow.costAud" min="1" type="number" class="form-control d-input" required />
+                      </div>
+                    </label>
+                    <br />
+                    <br />
+                    <button type="button" @click="addRow" class="btn btn-dark">Add</button>
+                  </fieldset>
+
+                  <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Item Disbursement</th>
+                        <th>Cost</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody id="addFeeEarnersRow">
+                      <tr v-for="(row, index) in rows" :key="index">
+                        <td style="width:0px"><button type="button" @click="removeRow(index)"
+                            class="btn btn-default btn-circle"><i class="fa fa-close"></i></button></td>
+                        <td>{{ row.itemDisbursement }}</td>
+                        <td>{{ row.costAud }}</td>
+                        <td>
+                          <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
+                          </p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ grandTotal }}</p>
+                </div>
+              </div>
+
+
+
+            </div>
+
+            <!-- <div class="form-group">
               <label>Tell the potential client what you will do for them:<sup><code>*</code></sup>
                 <textarea v-model="form.description" id="additionalInfo" name="additionalInfo" class="form-control"
                   rows="4" cols="100%" required=""></textarea>
               </label>
               <br />
-            </div>
-
-            <!-- Deadline acceptance radio -->
-            <!-- <div class="form-group m-2" id="div-deadline-acceptance-radio">
-              <label>Can you meet the potential client's deadline?</label>
-              <div class="form-check">
-                <input class="form-check-input" v-model="form.meet_deadlines" type="radio" name="deadlineFlexibility"
-                  id="deadlineYes" value="yes" checked="" />
-                <label class="form-check-label" for="deadlineYes" @click="showDeadline('Yes')">
-                  Yes
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="deadlineFlexibility" v-model="form.meet_deadlines"
-                  id="deadlineNo" value="no" />
-                <label class="form-check-label" for="deadlineNo" @click="showDeadline('No')">
-                  No
-                </label>
-              </div>
             </div> -->
 
-            <!-- Can't meet deadline explanation box -->
-            <!-- <div class="form-group" id="div-deadline" v-if="deadline === 'No'">
-              <label>Please explain why you can't meet potential client's deadline:<sup><code>*</code></sup>
-                <textarea id="txtarea-deadline" v-model="form.miss_deadline_reason" name="deadline" class="form-control"
-                  rows="4" cols="100%" placeholder="Eg: It's not realistic"></textarea>
-              </label>
-            </div> -->
 
             <div class="stepbtn hiden mt-3">
-              <button v-if="currentStep !== 0" type="button" @click="prevStep" class="btn btn-dark mr">
+              <button v-if="currentStep !== 0" type="button" @click="proPrevStep" class="btn btn-dark mr">
                 Previous
               </button>
-
-              <button v-if="currentStep === 0" type="submit" class="btn btn-dark">
-                Finish
+              <button v-if="currentStep !== 1" type="submit" @click="proStep" :disabled="!selectedOption"
+                class="btn btn-dark">
+                Next
+              </button>
+              <button v-if="currentStep === 1" type="submit" class="btn btn-dark">
+                Summary
               </button>
             </div>
 
@@ -1395,7 +1437,7 @@
           </div>
           <!-- discount -->
           <!-- Do you offer a free or discounted first consultation? -->
-          <div class="form-group m-2" id="freeFirstConsultationRadio">
+          <!-- <div class="form-group m-2" id="freeFirstConsultationRadio">
             <label>Do you offer a free or discounted first consultation?</label>
             <div class="form-check">
               <input class="form-check-input" v-model="form.consultation" type="radio" name="freeFirstConsultation"
@@ -1411,10 +1453,10 @@
                 No
               </label>
             </div>
-          </div>
+          </div> -->
 
           <!-- Do you offer a free or discounted first consultation input fields -->
-          <div v-if="option === 'Yes'">
+          <!-- <div v-if="option === 'Yes'">
             <div class="form-group my-3" id="div-freeFirstConsultationFee">
               <label for="freeFirstConsultationFee">Fee:<sup><code>*</code></sup></label>
               <div class="input-group mb-2">
@@ -1436,7 +1478,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- Upfront payment -->
           <!-- <div class="form-group my-2" id="upfrontPayRadio" v-if="selectedOption === 'Pro'" ref="content">
             <div class="form-group">
@@ -1553,7 +1595,7 @@
 
           <!-- Additional information -->
           <div class="form-group">
-            <label>Tell the potential client what you will do for them:<sup><code>*</code></sup>
+            <label class="w-100">Tell the potential client what you will do for them:<sup><code>*</code></sup>
               <textarea v-model="form.description" id="additionalInfo" name="additionalInfo" class="form-control" rows="4"
                 cols="100%" required=""></textarea>
             </label>
@@ -1649,7 +1691,7 @@
             Next
           </button>
           <button v-if="currentStep === 2" class="btn btn-dark">
-            Finish
+            Summary
           </button>
         </div>
 
@@ -1916,12 +1958,34 @@ export default {
     },
 
     prevStep() {
+      // alert('asd', this.selectedOption)
+      if (this.selectedOption == 'Pro') {
+        this.currentStep = 0;
+        return
+      }
       if (this.currentStep <= 0) {
         return;
       }
 
+
       this.currentStep--;
     },
+    proStep() {
+      if (this.currentStep == 0) {
+        this.currentStep = 2;
+      }
+
+    },
+    proPrevStep() {
+      alert('asd', this.currentStep);
+      console.log('asdasd', this.currentStep);
+      if (this.currentStep == 2) {
+        this.currentStep = 0;
+
+      }
+
+    },
+
 
     showItemise() {
       this.divItemiseVisible = !this.divItemiseVisible;

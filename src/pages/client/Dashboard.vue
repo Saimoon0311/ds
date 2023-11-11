@@ -142,6 +142,11 @@
                       ><button class="btn btn-danger btn-sm w-100 ">
                         Cancel
                       </button>
+                      <router-link
+                            class="btn btn-dark btn-sm w-100 my-1"
+                            to="/request-info"
+                            >Message</router-link
+                          >
                       <form method="post" action="index.php" class="d-none">
                         <input class="d-none" name="id" value="30" />
                         <button>Cancel Job</button>
@@ -278,7 +283,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
   color: white;
   background-color: #000000;
 }

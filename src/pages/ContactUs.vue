@@ -42,7 +42,7 @@
 
                 
 
-                <div class="d-flex flex-row  mb-4 align-baseline">
+                <div class="d-flex flex-row align-baseline">
                     <!-- <i class="fas fa-phone fa-lg me-3 fa-fw"></i> -->
                     <div class="form-outline flex-fill mb-0">
                         <Field type="tel" class="form-control" name="number" placeholder="Phone Number" :class="{'is-invalid' : errors.number}" />
@@ -68,50 +68,53 @@
 
                 <div class="d-flex flex-row  align-baseline">
                     <!-- <i class="fas fa-message fa-lg me-3 fa-fw"></i> -->
-                    <div class="form-outline flex-fill mb-0" v-if="selectedOption === 'client'">
-                      <Field name="field" as="select" class=" select-o mb-4" >
+                    <div class="form-outline flex-fill mt-4 mb-0" v-if="selectedOption === 'client'">
+                      <Field name="field" as="select" class=" form-select" :class="{ 'is-invalid': errors.field }">
                         <option value="" disabled selected hidden>Why do you need to contact us?</option>
-                        <option value="">I have an issue with my account</option>
-                        <option value="">I believe my account has been compromised</option>
-                        <option value="">I have a question not listed in the FAQ</option>
-                        <option value="">I want to provide feedback or a complaint about the Simplawfy platform</option>
-                        <option value="">I need to change my personal details in my profile or account</option>
-                        <option value="">I can't contact my lawyer</option>
-                        <option value="">I need a lawyer outside of Australia</option>
-                        <option value="">I haven't received any proposals</option>
-                        <option value="">I need my job reinstated</option>
-                        <option value="">Other</option>
+                        <option value="I have an issue with my account">I have an issue with my account</option>
+                        <option value="I believe my account has been compromised">I believe my account has been compromised</option>
+                        <option value="I have a question not listed in the FAQ">I have a question not listed in the FAQ</option>
+                        <option value="I want to provide feedback or a complaint about the Simplawfy platform">I want to provide feedback or a complaint about the Simplawfy platform</option>
+                        <option value="I need to change my personal details in my profile or account">I need to change my personal details in my profile or account</option>
+                        <option value="I can't contact my lawyer">I can't contact my lawyer</option>
+                        <option value="I need a lawyer outside of Australia">I need a lawyer outside of Australia</option>
+                        <option value="I haven't received any proposals">I haven't received any proposals</option>
+                        <option value="I need my job reinstated">I need my job reinstated</option>
+                        <option value="Other">Other</option>
                       </Field>
+                      <div class="invalid-feedback">{{errors.field}}</div>
                     </div>
                    
 
                   
                     <!-- <i class="fas fa-message fa-lg me-3 fa-fw"></i> -->
-                    <div class="form-outline flex-fill mb-0" v-if="selectedOption === 'lawyer'">
-                      <Field name="field" as="select" class=" select-o mb-4" >
+                    <div class="form-outline flex-fill mt-4 mb-0" v-if="selectedOption === 'lawyer'" >
+                      <Field name="field" as="select" class=" form-select" :class="{ 'is-invalid': errors.field }" placeholder="Why do you need to contact us?" >
                         <option value="" disabled selected hidden>Why do you need to contact us?</option>
-                        <option value="">I have an issue with my account</option>
-                        <option value="">I believe my account has been compromised</option>
-                        <option value="">I have a question not listed in the FAQ</option>
-                        <option value="">I want to provide feedback or a complaint about the Simplawfy platform</option>
-                        <option value="">I need to change my personal details in my profile or account</option>
-                        <option value="">I have a subscription or billing issue</option>
-                        <option value="">I have an issue with a review left by a client</option>
-                        <option value="">I am a lawyer outside of Australia</option>
-                        <option value="">My proposal hasn't been accepted or rejected and it's been a while</option>
-                        <option value="">I need to amend my proposal</option>
-                        <option value="">I cannot contact my client</option>
-                        <option value="">My client refuses to sign my costs agreement</option>
-                        <option value="">I am unable to act for my client</option>
-                        <option value="">Other</option>
+                        <option value="I have an issue with my account">I have an issue with my account</option>
+                        <option value="I believe my account has been compromised">I believe my account has been compromised</option>
+                        <option value="I have a question not listed in the FAQ">I have a question not listed in the FAQ</option>
+                        <option value="I want to provide feedback or a complaint about the Simplawfy platform">I want to provide feedback or a complaint about the Simplawfy platform</option>
+                        <option value="I need to change my personal details in my profile or account">I need to change my personal details in my profile or account</option>
+                        <option value="I have a subscription or billing issue">I have a subscription or billing issue</option>
+                        <option value="I have an issue with a review left by a client">I have an issue with a review left by a client</option>
+                        <option value="I am a lawyer outside of Australia">I am a lawyer outside of Australia</option>
+                        <option value="My proposal hasn't been accepted or rejected and it's been a while">My proposal hasn't been accepted or rejected and it's been a while</option>
+                        <option value="I need to amend my proposal">I need to amend my proposal</option>
+                        <option value="I cannot contact my client">I cannot contact my client</option>
+                        <option value="My client refuses to sign my costs agreement">My client refuses to sign my costs agreement</option>
+                        <option value="I am unable to act for my client">I am unable to act for my client</option>
+                        <option value="Other">Other</option>
 
                       </Field>
+                      <div class="invalid-feedback">{{errors.field}}</div>
+
                     </div>
                   </div>
                 
                 <div class="d-flex flex-row  mb-4 align-baseline">
                     <!-- <i class="fas fa-message fa-lg me-3 fa-fw"></i> -->
-                    <div class="form-outline flex-fill mb-0 textarea-f">
+                    <div class="form-outline flex-fill mb-0 textarea-f mt-4">
                       <Field v-slot="{ field}" v-model="comment" name="comment"  >
                         <textarea v-bind="field" name="comment" placeholder="Your Message"/>
                       </Field>
@@ -154,6 +157,7 @@ export default {
           /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
           'Please enter valid email.',
         ),
+      field: yup.string().required('Please select a reason of contacting.'),
     });
     return {
       schema,
@@ -223,7 +227,7 @@ export default {
 
 select,
 option {
-  color: black;
+  color: black !important;
 
 }
 
@@ -252,23 +256,26 @@ textarea::placeholder {
   color: #bebebe
 } */
 @media only screen and (max-width: 767px) and (min-width: 320px) {
-  .WordSection1 .center-main{
+  .WordSection1 .center-main {
     min-height: 75vh;
     align-items: center;
   }
+
   .ct-main {
     padding-bottom: 100px;
   }
-.im-user{
-  padding: 5px 5px 20px 5px;
-}
-.title{
-  margin: 5px !important;
-}
-.ct-form{
-  margin: 10px !important;
-  padding: 20px 10px !important;
-}
-}
 
+  .im-user {
+    padding: 5px 5px 20px 5px;
+  }
+
+  .title {
+    margin: 5px !important;
+  }
+
+  .ct-form {
+    margin: 10px !important;
+    padding: 20px 10px !important;
+  }
+}
 </style>

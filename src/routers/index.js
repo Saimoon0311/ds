@@ -48,7 +48,7 @@ import privacyPolicy from "@/pages/privacy-policy.vue";
 import termsOfUse from "@/pages/terms-of-use.vue";
 import AboutUs from "@/pages/AboutUs.vue";
 import HowSimplawfyWorks from "@/pages/HowSimplawfyWorksClient.vue";
-import HowSimplawfyWorksLawyer from "@/pages/HowSimplawfyWorksLawyer.vue";
+// import HowSimplawfyWorksLawyer from "@/pages/HowSimplawfyWorksLawyer.vue";
 import ContactUs from "@/pages/ContactUs.vue";
 import ClientFaqs from "@/pages/ClientFaqs.vue";
 import LawyerFaqs from "@/pages/LawyerFaqs.vue";
@@ -321,14 +321,8 @@ const routes = [
     component: AboutUs,
   },
   {
-    path: "/how-simplawfy-works-clients",
+    path: "/how-simplawfy-works",
     component: HowSimplawfyWorks,
-    meta: { requiresAuth: true, lawyerNotAllowed: true },
-  },
-  {
-    path: "/how-simplawfy-works-lawyers",
-    component: HowSimplawfyWorksLawyer,
-    meta: { requiresAuth: true, clientNotAllowed: true },
   },
 
   {

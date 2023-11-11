@@ -91,7 +91,7 @@
             <p class="h3 text-center">Location</p>
             <div class="pb-5">
               <label for="location">Where are you located?<sup class="text-danger">*</sup></label>
-              <select v-model="selectedLocationIndex" name="location" id="location" class="form-select" required="">
+              <select v-model="selectedLocationIndex" name="location" id="location" class="form-select " required="">
                 <option value="" selected disabled>Please select an option</option>
                 <option v-for="(location, index) in locations" :key="location.id" :value="index">{{ location.title }}
                 </option>

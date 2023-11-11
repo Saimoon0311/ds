@@ -1,9 +1,44 @@
 <template lang="">
   <section class="howItWorks">
     <GeneralHeader />
-    
-    <div class="container-fluid pt-5">
-      <h2 class="text-center mt-3 pb-3 mb-5">HOW THE PLATFORM WORKS</h2>
+    <h2 class="text-center mt-5 pb-3 mb-5">HOW THE PLATFORM WORKS</h2>
+    <ul class="nav nav-tabs mb-3 container how-tabs" id="ex1" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link active"
+          id="ex3-tab-1"
+          data-bs-toggle="tab"
+          href="#ex3-tabs-1"
+          role="tab"
+          aria-controls="ex3-tabs-1"
+          aria-selected="true"
+          >Client</a
+        >
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          id="ex3-tab-2"
+          data-bs-toggle="tab"
+          href="#ex3-tabs-2"
+          role="tab"
+          aria-controls="ex3-tabs-2"
+          aria-selected="false"
+          >Lawyer</a
+        >
+      </li>
+      
+    </ul>
+
+<div class="tab-content" id="ex2-content">
+  <div
+    class="tab-pane fade show active"
+    id="ex3-tabs-1"
+    role="tabpanel"
+    aria-labelledby="ex3-tab-1"
+  >
+  <div class="container-fluid pt-5">
+      
       <div class="mainbox">
         <div class="row">
           <div class="col">
@@ -51,6 +86,94 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="tab-pane fade" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2">
+    <div class="container-fluid pt-5">
+
+      <div class="mainbox">
+        <section class="row">
+          <div class="col">
+            <div class="box01">1</div>
+            <div class="subbox">
+              <div class="boxheading">Sign Up</div>
+              <img src="../assets/icons/icon01.jpg" alt="icon" />
+              <p>Make an account and create a profile at: <router-link to="/">makinglawsimple.com.au</router-link></p>
+              
+            </div>
+          </div>
+          <div class="col">
+            <div class="box02">2</div>
+            <div class="subbox">
+              <div class="boxheading">Verification</div>
+              <img src="../assets/icons/icon06.jpg" alt="icon" />
+              <p>
+                We will verify that you are an admitted legal practioner and
+                confirm your eligibility to join our platform as per our
+                <router-link to="/terms-and-conditions-for-lawyers">T&Cs for lawyers.</router-link>
+              </p>
+              <!--  -->
+
+            </div>
+          </div>
+          <div class="col">
+            <div class="box03">3</div>
+            <div class="subbox03">
+              <div class="boxheading">Subscribe</div>
+              <img src="../assets/icons/icon07.jpg" alt="icon" />
+              <p>Get a 60-day free trial and pay $39 per month thereafter.</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="box04">4</div>
+            <div class="subbox03">
+              <div class="boxheading">access</div>
+              <img src="../assets/icons/icon08.jpg" alt="icon" />
+              <p>Log in to view jobs in your location and areas of law.</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="box05">5</div>
+            <div class="subbox03">
+              <div class="boxheading">Submit a proposal*</div>
+              <img src="../assets/icons/icon09.jpg" alt="icon" />
+              <p>
+                Submit your estimate for the jobs you want and based on the way
+                you bill. 
+              </p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="box05">6</div>
+            <div class="subbox03">
+              <div class="boxheading">Find a Client</div>
+              <img src="../assets/icons/icon04.jpg" alt="icon" />
+              <p>
+                If a client wants to work with you, they will accept your
+                proposal. Receive their contact details and continue with the
+                legal matter externally.
+              </p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="box05">7</div>
+            <div class="subbox03">
+              <div class="boxheading">Be rated</div>
+              <img src="../assets/icons/icon05.jpg" alt="icon" />
+              <p>
+                Clients review your service on the platform for future clients
+                to see.
+              </p>
+              
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  
+</div>
+    <!-- ------------ -->
+    
     
 
     <div class="footer">
@@ -81,6 +204,7 @@ export default {
 
 p {
   font-size: 14px;
+  color: #000;
 }
 
 .footer {
@@ -144,6 +268,7 @@ p {
   font-size: 16px;
   text-transform: uppercase;
   text-align: center;
+  color: #000;
   display: block;
 }
 
@@ -164,6 +289,26 @@ p {
 
 .col {
   border-top: 5px solid;
+}
+
+.how-tabs {
+  border: none;
+  text-align: center;
+  justify-content: center;
+}
+
+.how-tabs a.active {
+  border: none;
+  border-bottom: 5px solid #000;
+  color: #000;
+}
+
+.how-tabs a {
+  border: none;
+  border-bottom: 5px solid rgb(218, 218, 218);
+  padding: 8px 60px;
+  font-size: 22px;
+  color: #000;
 }
 
 @media only screen and (max-width: 767px) {

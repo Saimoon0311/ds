@@ -32,16 +32,12 @@
           >
         </li>
 
-        <li v-if="loginUser != null && loginUser?.type == 'client'">
-          <router-link class="dropdown-item" to="/how-simplawfy-works-clients"
+        <li >
+          <router-link class="dropdown-item" to="/how-simplawfy-works"
             >How Simplawfy Works</router-link
           >
         </li>
-        <li v-if="loginUser != null && loginUser?.type == 'lawyer'">
-          <router-link class="dropdown-item" to="/how-simplawfy-works-lawyers"
-            >How Simplawfy Works</router-link
-          >
-        </li>
+        
 
         <li>
           <router-link class="dropdown-item" to="/contact-us"
@@ -67,6 +63,7 @@ export default {
 .main-logo img {
   width: 25%;
 }
+
 .menu-burger:after {
   display: none !important;
 }
@@ -132,6 +129,7 @@ export default {
     justify-content: center;
     align-items: center;
   }
+
   .main-logo img {
     width: 60%;
   }
@@ -148,9 +146,11 @@ export default {
     justify-content: center;
     align-items: center;
   }
+
   .main-logo {
     text-align: left;
   }
+
   .main-logo img {
     width: 75%;
   }
@@ -168,9 +168,11 @@ export default {
     justify-content: center;
     align-items: center;
   }
+
   .main-logo {
     text-align: left;
   }
+
   .main-logo img {
     width: 80%;
   }

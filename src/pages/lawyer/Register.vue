@@ -72,7 +72,7 @@
             <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-circle-question fa-lg me-3 fa-fw"></i>
                 <div class="form-outline flex-fill mb-0">
-                      <Field name="field" as="select" class=" select-o " v-model="selectedOption" @change="checkOtherOption" >
+                      <Field name="field" as="select" class=" form-select " v-model="selectedOption" @change="checkOtherOption" >
                         <option value="" disabled selected hidden>How did you hear about us?</option>
                         <option value="">Google</option>
                         <option value="">LinkedIn</option>

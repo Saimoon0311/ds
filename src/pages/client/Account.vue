@@ -303,11 +303,16 @@
                   </button>
                 </div>
               </form> -->
+              
             </div>
           </div>
         </div>
       </div>
       <!-- Modal ends here -->
+      <h3 class="mt-4">Delete Account</h3>
+        <button @click="deleteAccount" class="btn btn-danger">
+          <i class="bi bi-trash-fill"></i> Delete Account
+        </button>
     </div>
   </div>
   <div class="footer">
@@ -371,6 +376,35 @@ export default {
     this.updateFormProperties();
   },
   methods: {
+    deleteAccount() {
+      let text = "You won't be able to revert this.";
+      let text2 = "Yes, Delete Account";
+
+      this.$swal({
+        title: 'Are you sure?',
+        text: text,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: text2,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          api.get('/delete-account')
+            .then(() => {
+              this.$swal(
+                'Deleted!',
+                'Your Account has been deleted.',
+                'success'
+              ).then(() => {
+                this.logoutProcess('client-login');
+              });
+            }).catch(() => {
+              this.$swal('Error', 'Something went wrong! please retry', 'error');
+            });
+        }
+      })
+    },
     updateFormProperties(notCreated) {
       const userData = this.loginUser;
       if (userData) {
