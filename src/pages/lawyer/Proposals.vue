@@ -2,7 +2,7 @@
   <div class="l-pro-main">
     <LawyerHeader />
 
-    <div class="container-fluid">
+    <div class="container">
       <!-- <div class="container"> -->
 
         <div v-if="adminApproval != 'approve'" class> 
@@ -23,7 +23,7 @@
 
 
     <!-- after subscribe -->
-    <main class="container-fluid">
+    <main class="container">
       <br />
       <!-- Table 1 Bids -->
       <h4 class=" mt-0">Proposals</h4>
@@ -71,29 +71,29 @@
               You have not Proposal on any jobs yet.
             </td>
           </tr>
-          <tr data-v-7525850d="">
-            <td data-v-7525850d="">
-              <a data-v-7525850d="" href="jobInfo.php?id=28">abc 2</a>
+          <tr >
+            <td >
+              <a  href=" " class="btn btn-dark btn-sm w-100 my-1">abc 2</a>
             </td>
-            <td data-v-7525850d="">Hourly rate</td>
-            <td data-v-7525850d="">$10,000.00</td>
-            <td data-v-7525850d="">Yes - $500.00</td>
-            <td data-v-7525850d="">test the potential client</td>
-            <!-- <td data-v-7525850d="">Yes</td>
-            <td data-v-7525850d="">Yes - $100 for 30 minutes</td> -->
-            <td data-v-7525850d=""><p data-v-7525850d="">Open</p></td>
-            <td data-v-7525850d="">
+            <td >Hourly rate</td>
+            <td >$10,000.00</td>
+            <td >Yes - $500.00</td>
+            <td >test the potential client</td>
+            <!-- <td >Yes</td>
+            <td >Yes - $100 for 30 minutes</td> -->
+            <td ><p >Open</p></td>
+            <td >
               <button
-                data-v-7525850d=""
+                
                 class="btn btn-sm btn-danger"
                 onclick="rescindBid(event)"
               >
-                <i data-v-7525850d="" class="bi bi-trash-fill"></i>Withdraw
+                <i  class="bi bi-trash-fill"></i>Withdraw
                 Proposal
               </button>
               <form>
-                <input data-v-7525850d="" class="d-none" name="bidId" /><button
-                  data-v-7525850d=""
+                <input  class="d-none" name="bidId" /><button
+                  
                   class="btn btn-sm btn-danger d-none"
                 >
                   Withdraw Proposal
@@ -102,7 +102,7 @@
             </td>
           </tr>
           <tr>
-            <td><a href="jobInfo.php?id=30">test job</a></td>
+            <td><a href=" " class="btn btn-dark btn-sm w-100 my-1">test job</a></td>
             <td>Fixed fee</td>
             <td>$100.00</td>
             <td>Yes - $55.00</td>
@@ -131,8 +131,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr data-v-7525850d="">
-            <td data-v-7525850d="" colspan="6" class="text-center">
+          <tr >
+            <td  colspan="6" class="text-center">
               You have not requested more information on any jobs yet.
             </td>
           </tr>

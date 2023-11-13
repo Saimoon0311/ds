@@ -226,5 +226,8 @@ export default {
     margin: 0 !important;
     padding-right: 30px !important;
   }
+  .login-row {
+    min-height: 60vh;
+  }
 }
 </style>
