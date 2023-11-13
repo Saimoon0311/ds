@@ -203,7 +203,7 @@ export default {
 }
 
 .showhover {
-  line-height: 30px;
+  line-height: 36px;
 }
 
 @media (min-width: 320px) and (max-width: 425px) {
@@ -289,9 +289,10 @@ export default {
   .cstm-dropdown {
     right: 20px;
   }
-  .showhover{
-      line-height: 20px;
-    }
+
+  .showhover {
+    line-height: 20px;
+  }
 
 }
 

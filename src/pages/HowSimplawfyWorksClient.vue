@@ -1,7 +1,7 @@
 <template lang="">
   <section class="howItWorks">
     <GeneralHeader />
-    <h2 class="text-center mt-5 pb-3 mb-5">HOW THE PLATFORM WORKS</h2>
+    <h2 class="text-center mt-5 pt-3 mb-5">HOW THE PLATFORM WORKS</h2>
     <ul class="nav nav-tabs mb-3 container how-tabs" id="ex1" role="tablist">
       <li class="nav-item" role="presentation">
         <a
@@ -12,7 +12,7 @@
           role="tab"
           aria-controls="ex3-tabs-1"
           aria-selected="true"
-          >Client</a
+          >The Client Experience</a
         >
       </li>
       <li class="nav-item" role="presentation">
@@ -24,7 +24,7 @@
           role="tab"
           aria-controls="ex3-tabs-2"
           aria-selected="false"
-          >Lawyer</a
+          >The Lawyer Experience</a
         >
       </li>
       
@@ -43,17 +43,18 @@
         <div class="row">
           <div class="col">
             <div class="box01">1</div>
-            <div class="subbox">
+            <div class="subbox signup text-center">
               <div class="boxheading">Sign Up</div>
-              <img src="../assets/icons/icon01.jpg" alt="icon" />
-              <p>Create an account at <router-link to="/">makinglawsimple.com.au</router-link></p>
+              <img src="../assets/icons/1.png" alt="icon" />
+              <!-- <p>Create an account at </p> -->
+              <router-link to="/client-register" class="btn btn-dark text-white">Create an account</router-link>
             </div>
           </div>
           <div class="col">
             <div class="box02">2</div>
             <div class="subbox">
               <div class="boxheading">Post a Job</div>
-              <img src="../assets/icons/icon02.jpg" alt="icon" />
+              <img src="../assets/icons/2.png" alt="icon" />
               <p>Submit a detailed description of the legal work you need.</p>
             </div>
           </div>
@@ -61,24 +62,24 @@
             <div class="box03">3</div>
             <div class="subbox03">
               <div class="boxheading">Compare Proposals</div>
-              <img src="../assets/icons/icon03.jpg" alt="icon" />
+              <img src="../assets/icons/3.png" alt="icon" />
              <p>Compare estimates, skills and services provided by lawyers.</p>
             </div>
           </div>
           <div class="col">
             <div class="box04">4</div>
             <div class="subbox03">
-              <div class="boxheading">Choose A lawer</div>
-              <img src="../assets/icons/icon04.jpg" alt="icon" />
+              <div class="boxheading">Choose A lawyer</div>
+              <img src="../assets/icons/4.png" alt="icon" />
               <p>When you are ready, choose a lawyer by accepting their proposal.
-              Receive their contact details nad engage with them externally.</p>
+                Receive their contact details and engage with them externally.</p>
             </div>
           </div>
           <div class="col">
             <div class="box05">5</div>
             <div class="subbox03">
               <div class="boxheading">Rate</div>
-              <img src="../assets/icons/icon05.jpg" alt="icon" />
+              <img src="../assets/icons/5.png" alt="icon" />
              <p>Review the service of your lawyer on the platform for future
               clients to see.</p>
             </div>
@@ -94,10 +95,11 @@
         <section class="row">
           <div class="col">
             <div class="box01">1</div>
-            <div class="subbox">
+            <div class="subbox signup text-center">
               <div class="boxheading">Sign Up</div>
-              <img src="../assets/icons/icon01.jpg" alt="icon" />
-              <p>Make an account and create a profile at: <router-link to="/">makinglawsimple.com.au</router-link></p>
+              <img src="../assets/icons/1.png" alt="icon" />
+              <router-link to="/lawyer-register " class="btn btn-dark text-white mb-2 mt-2 ">Create an account</router-link>
+              <p> and complete your profile.</p>
               
             </div>
           </div>
@@ -105,11 +107,11 @@
             <div class="box02">2</div>
             <div class="subbox">
               <div class="boxheading">Verification</div>
-              <img src="../assets/icons/icon06.jpg" alt="icon" />
+              <img src="../assets/icons/6.png" alt="icon" />
               <p>
-                We will verify that you are an admitted legal practioner and
+                We will verify that you are an admitted legal practitioner and
                 confirm your eligibility to join our platform as per our
-                <router-link to="/terms-and-conditions-for-lawyers">T&Cs for lawyers.</router-link>
+                <router-link to="/terms-and-conditions-for-lawyers " class="tandc">T&Cs for lawyers.</router-link>
               </p>
               <!--  -->
 
@@ -119,23 +121,24 @@
             <div class="box03">3</div>
             <div class="subbox03">
               <div class="boxheading">Subscribe</div>
-              <img src="../assets/icons/icon07.jpg" alt="icon" />
-              <p>Get a 60-day free trial and pay $39 per month thereafter.</p>
+              <img src="../assets/icons/7.png" alt="icon" />
+              <p>Get a 60-day free trial and pay a $39 per month thereafter.</p>
             </div>
           </div>
           <div class="col">
             <div class="box04">4</div>
             <div class="subbox03">
               <div class="boxheading">access</div>
-              <img src="../assets/icons/icon08.jpg" alt="icon" />
-              <p>Log in to view jobs in your location and areas of law.</p>
+              <img src="../assets/icons/8.png" alt="icon" />
+              <p class="text-center no-mar"><router-link to="/lawyer-login" class="btn btn-dark text-white mt-2 ">Log in</router-link></p>
+              <p class="mt-2"> to view jobs in your location and areas of law.</p>
             </div>
           </div>
           <div class="col">
             <div class="box05">5</div>
             <div class="subbox03">
               <div class="boxheading">Submit a proposal*</div>
-              <img src="../assets/icons/icon09.jpg" alt="icon" />
+              <img src="../assets/icons/9.png" alt="icon" />
               <p>
                 Submit your estimate for the jobs you want and based on the way
                 you bill. 
@@ -146,7 +149,7 @@
             <div class="box05">6</div>
             <div class="subbox03">
               <div class="boxheading">Find a Client</div>
-              <img src="../assets/icons/icon04.jpg" alt="icon" />
+              <img src="../assets/icons/4.png" alt="icon" />
               <p>
                 If a client wants to work with you, they will accept your
                 proposal. Receive their contact details and continue with the
@@ -158,19 +161,18 @@
             <div class="box05">7</div>
             <div class="subbox03">
               <div class="boxheading">Be rated</div>
-              <img src="../assets/icons/icon05.jpg" alt="icon" />
+              <img src="../assets/icons/5.png" alt="icon" />
               <p>
                 Clients review your service on the platform for future clients
                 to see.
               </p>
-              
             </div>
           </div>
         </section>
       </div>
     </div>
   </div>
-  
+  <p class="text-center mt-5 pt-5 small-para"> *At no point in time can you revise your proposal or see the proposals of other lawyers. Your proposal remains confidential between you and the potential client.</p>
 </div>
     <!-- ------------ -->
     
@@ -207,10 +209,31 @@ p {
   color: #000;
 }
 
+.small-para {
+  font-size: 13px;
+}
+
+.btn {
+  font-size: 13px;
+  padding: 4px 8px;
+}
+
+.no-mar {
+  margin: 0px;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.signup {
+  width: auto !important;
+}
+
+.col img {
+  width: 60px;
 }
 
 .mainbox {
@@ -256,8 +279,16 @@ p {
   min-height: 60px;
 }
 
-.subbox a {
+/* .subbox a {
   color: #0d6efd;
+} */
+
+.tandc,
+.tandc:hover {
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+
 }
 
 .subbox a:hover {
