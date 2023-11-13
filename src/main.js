@@ -232,8 +232,8 @@ app.mixin({
         url = `${this.endpoint}?page=${this.currentPage}`;
       }
       const response = await this.fetchData(url);
-      console.log("pagin : ", response);
-      console.log("curr : ", this.currentPage);
+      // console.log("pagin : ", response);
+      // console.log("curr : ", this.currentPage);
       this.lastPage = response?.last_page;
       let jobsData = this.openJobs.concat(response?.data);
       let uniqueObjects = new Map();
@@ -293,8 +293,8 @@ app.mixin({
       const formattedMonth = month < 10 ? "0" + month : month;
       const formattedHours = hours < 10 ? "0" + hours : hours;
       const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
-
-      return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period}`;
+      // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period} AEST`;
     },
 
     // date time format function end

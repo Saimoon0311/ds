@@ -37,6 +37,7 @@
             <th>Proposed work</th>
             <!-- <th>Deadline achievable?</th>
             <th>Free/discounted first consultation?</th> -->
+            <th>Created at</th>
             <th>
               Proposal status&nbsp;<i
                 class="bi bi-question-circle"
@@ -65,13 +66,13 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr>
+          <tr v-if="data_paginated == null || data_paginated.length == 0">
             <td colspan="9" class="text-center">
               You have not Proposal on any jobs yet.
             </td>
-          </tr> -->
+          </tr>
 
-          <tr data-v-7525850d="" v-for="(item,index) in data_paginated" :key="index">
+          <tr v-else data-v-7525850d="" v-for="(item,index) in data_paginated" :key="index">
           
           <!-- <tr data-v-7525850d=""> -->
             <td data-v-7525850d="">
@@ -83,6 +84,7 @@
             <td data-v-7525850d="">{{ item?.description }}</td>
             <!-- <td data-v-7525850d="">Yes</td>
             <td data-v-7525850d="">Yes - $100 for 30 minutes</td> -->
+            <td>{{ formatCreatedAt(item?.created_at) }}</td>
             <td data-v-7525850d=""><p data-v-7525850d="">{{ item?.status }}</p></td>
             <td data-v-7525850d="">
               <button
@@ -118,7 +120,7 @@
         </tbody>
       </table>
       <!-- for pagination -->
-      <CustomPagination />
+      <CustomPagination v-if="data_paginated != null && data_paginated.length > 0" />
       <!-- for pagination -->
 
     </main>

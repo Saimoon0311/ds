@@ -160,6 +160,7 @@
                     </dl>
                   </th>
                   <th>Proposed work</th>
+                  <th>Created at</th>
                   <!-- <th>Deadline achievable?</th>
                   <th>Free/discounted first consultation?</th> -->
                   <th>Actions</th>
@@ -179,6 +180,7 @@
                   <td>{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
                   <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td>
                   <td>{{ item?.description }}</td>
+                  <td>{{ formatCreatedAt(item?.created_at) }}</td>
 
                   <!-- <td>Yes</td>
                   <td>No</td> -->
