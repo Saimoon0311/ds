@@ -8,10 +8,9 @@
         <div class="center-main col-md-10 col-lg-7 login-col">
           <div
             class="bg-dark text-white text-center m-3 p-3 find-client"
-            style="border-radius: 10px"
-          >
-            <p class="m-4 fs-3">Login</p>
-            <!-- <div>
+            style="border-radius: 10px">
+            <p class="m-4 fs-3">Login as a Lawyer</p> 
+            <div>
                     <div class="im-user">
                         <input type="radio" id="optionPage1" value="client" v-model="pageOption" @change="changePage" />
                         <label for="optionPage1">I'm a client</label>
@@ -22,7 +21,7 @@
                         <label for="optionPage2">I'm a lawyer</label>
                     </div>
                   
-            </div>   -->
+            </div>  
             <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
           
           <!-- Email -->
@@ -226,6 +225,7 @@ export default {
     margin: 0 !important;
     padding-right: 30px !important;
   }
+
   .login-row {
     min-height: 60vh;
   }

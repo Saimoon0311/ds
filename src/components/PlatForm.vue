@@ -59,7 +59,7 @@
       </div>
 
       <div class="mb-5">
-        <router-link to="" class="text-dark" @click="openSweetAlert">Already have an account?</router-link>
+        <router-link to="" class="btn btn-dark text-light" @click="openSweetAlert">Already have an account?</router-link>
       </div>
       <!-- <div class="mb-3">
           <router-link to="/terms-of-use" class="me-2 text-dark">Terms of use</router-link>
@@ -202,8 +202,9 @@ export default {
   margin-top: 2rem !important;
 }
 
-.showhover {
-  line-height: 36px;
+.showhover p {
+  line-height: 25px;
+  margin-bottom: 17px;
 }
 
 @media (min-width: 320px) and (max-width: 425px) {

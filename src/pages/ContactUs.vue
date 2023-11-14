@@ -16,8 +16,8 @@
               v-slot="{ errors }"
             >
               <p class="m-4 fs-3 mx-5 title">Contact Us</p>
-              <div>
-                <div>
+         
+                <div class="wrapper-user">
                   <span class="im-user">
                     <Field
                       type="radio"
@@ -42,16 +42,15 @@
                       :class="{ 'is-invalid': errors.radio }"
                     />
                     <label for="optionNo">I'm a lawyer</label>
-                    <span class="invalid-feedback">{{ errors.radio }}</span>
-
+                    <span class="invalid-feedback radio-error">{{ errors.radio }}</span>
                   </span>
-                  <span class="d-block text-center mb-3">
+                  <!-- <span class="d-block text-center mb-3">
                     <span class="invalid-feedback">{{ errors.radio }}</span>
-                  </span>
+                  </span> -->
                 </div>
-              </div>
+         
 
-              <div class="d-flex flex-row mb-4 align-baseline">
+              <div class="d-flex flex-row mb-4 align-baseline mt-5">
                 <!-- <i class="fas fa-user fa-lg me-3 fa-fw"></i> -->
                 <div class="form-outline flex-fill mb-0">
                   <Field
@@ -386,6 +385,20 @@ textarea::placeholder {
   color: black;
 }
 
+.wrapper-user {
+  position: relative;
+}
+
+.radio-error {
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* margin: 0 auto; */
+  /* padding-bottom: 20px; */
+  text-align: center;
+  margin-top: 0;
+}
+
 /* .select-o option[value=""][selected][disabled] {
   color: #bebebe
 } */
@@ -411,5 +424,4 @@ textarea::placeholder {
     margin: 10px !important;
     padding: 20px 10px !important;
   }
-}
-</style>
+}</style>

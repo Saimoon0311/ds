@@ -61,7 +61,7 @@ export default {
 </script>
 <style>
 .main-logo img {
-  width: 25%;
+  width: 32%;
 }
 
 .menu-burger:after {
@@ -85,7 +85,7 @@ export default {
 .cstm-dropdown {
   position: absolute !important;
   right: 0;
-  margin-top: -80px;
+  margin-top: -100px;
 }
 
 .cstm-dropdown button {

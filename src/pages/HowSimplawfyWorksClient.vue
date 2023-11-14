@@ -70,7 +70,7 @@
             <div class="box04">4</div>
             <div class="subbox03">
               <div class="boxheading">Choose A lawyer</div>
-              <img src="../assets/icons/4.png" alt="icon" />
+              <img src="../assets/icons/5.png" alt="icon" />
               <p>When you are ready, choose a lawyer by accepting their proposal.
                 Receive their contact details and engage with them externally.</p>
             </div>
@@ -79,7 +79,7 @@
             <div class="box05">5</div>
             <div class="subbox03">
               <div class="boxheading">Rate</div>
-              <img src="../assets/icons/5.png" alt="icon" />
+              <img src="../assets/icons/4.png" alt="icon" />
              <p>Review the service of your lawyer on the platform for future
               clients to see.</p>
             </div>
@@ -98,7 +98,7 @@
             <div class="subbox signup text-center">
               <div class="boxheading">Sign Up</div>
               <img src="../assets/icons/1.png" alt="icon" />
-              <router-link to="/lawyer-register " class="btn btn-dark text-white mb-2 mt-2 ">Create an account</router-link>
+              <router-link to="/lawyer-register" class="btn btn-dark text-white mb-2 mt-2 ">Create an account</router-link>
               <p> and complete your profile.</p>
               
             </div>
@@ -107,11 +107,11 @@
             <div class="box02">2</div>
             <div class="subbox">
               <div class="boxheading">Verification</div>
-              <img src="../assets/icons/6.png" alt="icon" />
+              <img src="../assets/icons/9.png" alt="icon" />
               <p>
                 We will verify that you are an admitted legal practitioner and
                 confirm your eligibility to join our platform as per our
-                <router-link to="/terms-and-conditions-for-lawyers " class="tandc">T&Cs for lawyers.</router-link>
+                <router-link to="/terms-and-conditions-for-lawyers" class="tandc">T&Cs for lawyers.</router-link>
               </p>
               <!--  -->
 
@@ -122,14 +122,14 @@
             <div class="subbox03">
               <div class="boxheading">Subscribe</div>
               <img src="../assets/icons/7.png" alt="icon" />
-              <p>Get a 60-day free trial and pay a $39 per month thereafter.</p>
+              <p>Get a 60-day free trial and pay A$39 per month thereafter.</p>
             </div>
           </div>
           <div class="col">
             <div class="box04">4</div>
             <div class="subbox03">
               <div class="boxheading">access</div>
-              <img src="../assets/icons/8.png" alt="icon" />
+              <img src="../assets/icons/6.png" alt="icon" />
               <p class="text-center no-mar"><router-link to="/lawyer-login" class="btn btn-dark text-white mt-2 ">Log in</router-link></p>
               <p class="mt-2"> to view jobs in your location and areas of law.</p>
             </div>
@@ -138,7 +138,7 @@
             <div class="box05">5</div>
             <div class="subbox03">
               <div class="boxheading">Submit a proposal*</div>
-              <img src="../assets/icons/9.png" alt="icon" />
+              <img src="../assets/icons/8.png" alt="icon" />
               <p>
                 Submit your estimate for the jobs you want and based on the way
                 you bill. 
@@ -149,7 +149,7 @@
             <div class="box05">6</div>
             <div class="subbox03">
               <div class="boxheading">Find a Client</div>
-              <img src="../assets/icons/4.png" alt="icon" />
+              <img src="../assets/icons/5.png" alt="icon" />
               <p>
                 If a client wants to work with you, they will accept your
                 proposal. Receive their contact details and continue with the
@@ -161,7 +161,7 @@
             <div class="box05">7</div>
             <div class="subbox03">
               <div class="boxheading">Be rated</div>
-              <img src="../assets/icons/5.png" alt="icon" />
+              <img src="../assets/icons/4.png" alt="icon" />
               <p>
                 Clients review your service on the platform for future clients
                 to see.
@@ -170,9 +170,10 @@
           </div>
         </section>
       </div>
+  <p class="text-center  pt-3 small-para"> *At no point in time can you revise your proposal or see the proposals of other lawyers. Your proposal remains confidential between you and the potential client.</p>
+
     </div>
   </div>
-  <p class="text-center mt-5 pt-5 small-para"> *At no point in time can you revise your proposal or see the proposals of other lawyers. Your proposal remains confidential between you and the potential client.</p>
 </div>
     <!-- ------------ -->
     
@@ -210,7 +211,7 @@ p {
 }
 
 .small-para {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .btn {
