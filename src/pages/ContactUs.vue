@@ -29,6 +29,7 @@
                       :class="{ 'is-invalid': errors.radio }"
                     />
                     <label for="optionYes">I'm a client</label>
+                    
                   </span>
                   <span class="im-user">
                     <Field
@@ -41,6 +42,8 @@
                       :class="{ 'is-invalid': errors.radio }"
                     />
                     <label for="optionNo">I'm a lawyer</label>
+                    <span class="invalid-feedback">{{ errors.radio }}</span>
+
                   </span>
                   <span class="d-block text-center mb-3">
                     <span class="invalid-feedback">{{ errors.radio }}</span>
@@ -275,7 +278,7 @@ export default {
       fname: yup.string().required("Please enter your name."),
       radio: yup
         .string()
-        .required(`Please select if you're a client or a lawyer.`),
+        .required("Please select if you're a client or a lawyer."),
       number: yup
         .string()
         .required("Please enter your phone number.")
