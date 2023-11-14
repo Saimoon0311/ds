@@ -9,7 +9,7 @@
           <div
             class="bg-dark text-white text-center m-3 p-3 find-client"
             style="border-radius: 10px">
-            <p class="m-4 fs-3">Login as a Lawyer</p> 
+            <p class="m-4 fs-3 log-hd">Login as a Lawyer</p> 
             <div>
                     <div class="im-user">
                         <input type="radio" id="optionPage1" value="client" v-model="pageOption" @change="changePage" />
@@ -227,7 +227,19 @@ export default {
   }
 
   .login-row {
-    min-height: 60vh;
+    min-height: 67vh;
+  }
+
+  .im-user {
+    padding: 9px;
+  }
+
+  .log-hd {
+    margin-bottom: 0px !important;
+  }
+
+  .l-register-main {
+    padding-bottom: 100px;
   }
 }
 </style>

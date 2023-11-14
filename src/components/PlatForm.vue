@@ -221,6 +221,11 @@ export default {
   .footer-main span {
     display: block;
   }
+
+  .showhover p {
+    line-height: 22px;
+    margin-bottom: 10px;
+  }
 }
 
 @media (min-width: 400px) and (max-width: 450px) {

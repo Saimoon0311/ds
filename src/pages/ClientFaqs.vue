@@ -18,7 +18,7 @@
             mso-ansi-language: EN-AU;
             font-weight: bold;
           "
-          >Faq's<o:p></o:p
+          >Faqs<o:p></o:p
         ></span>
       </p>
       <!-- <ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
