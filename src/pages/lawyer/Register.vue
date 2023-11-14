@@ -135,7 +135,7 @@ export default {
     },
     methods: {
         submitData(formData){
-            this.submitSignupForm(formData,'lawyer','lawyer-dashboard');
+            this.submitSignupForm(formData,'lawyer','lawyer-profile');
         }
     },
     name: 'LawyerRegister',

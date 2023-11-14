@@ -105,6 +105,19 @@ app.mixin({
       this.$store.commit("SET_LOGIN_USER", userData);
     },
 
+    sendOtp(email) {
+      console.log('user email : ' , email);
+      api.post("/generate-send-otp", { email }).then(() => {
+        this.$store.commit("SET_OTP_EMAIL", email);
+        localStorage.setItem('otpEmail',email);
+        this.$router.push({ path : '/otp' })
+          // this.setUserAndRedirect(res, dashboardUrl);
+        }).catch((error) => {
+          // alert("Invalid Credentials");
+          console.log("getResults : ", error);
+        });
+    },
+
     // this function is to store user in state and localstorage after login then redirect to dashboard
     setUserAndRedirect(res, path) {
       console.log("single a : ", res?.data?.data?.law_firm);
@@ -149,7 +162,9 @@ app.mixin({
         api
           .post("/signup", formData)
           .then((res) => {
-            this.setUserAndRedirect(res, dashboardUrl);
+            this.sendOtp(res?.data?.data?.email);
+            console.log(dashboardUrl);
+            // this.setUserAndRedirect(res, dashboardUrl);
           })
           .catch((error) => {
             alert("Invalid Credentials");

@@ -68,9 +68,12 @@ export default {
             try {
                 console.log(formData)
                 api.post('/send-forget-password-email/',formData)
-                    .then(res => {
-                        alert('Reset Password link has been sent to your email address');
-                        console.log('successfully sent email : ', res?.data)
+                    .then(() => {
+                        this.$swal('Success', 'Reset Password link has been sent to your email address', 'success').then(() => {
+                            console.log('done');    
+                        });
+                        // alert('Reset Password link has been sent to your email address');
+                        // console.log('successfully sent email : ', res?.data)
                     })
                     .catch(error => {
                         alert('User not found!');

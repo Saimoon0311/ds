@@ -17,8 +17,12 @@ const store = createStore({
     currentPaginationPage : 1,
     lastPaginationPage : null,
     paginationEndpoint : null,
+    otpEmail : null,
   },
   mutations: {
+    SET_OTP_EMAIL(state,value){
+      state.otpEmail = value;
+    },
     SET_ENDPOINT_FOR_PAGINATED_DATA(state,value){
       state.paginationEndpoint = value;
     },
@@ -77,6 +81,7 @@ const store = createStore({
     subscriptionData: (state) => state.subscriptionData,
     replacePaymentMethod: (state) => state.replacePaymentMethod,
     jobData: (state) => state.jobData,
+    otpEmail: (state) => state.otpEmail,
   },
 });
 
