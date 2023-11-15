@@ -76,8 +76,9 @@ export default {
     // MainFooter
   },
   methods: {
-    submitData() {
-      alert("data has been submitted.");
+    submitData(formData) {
+      this.submitLoginForm(formData, 'admin', 'admin-dashboard');
+      // alert("data has been submitted.");
     },
   },
   name: "AdminLogin",
