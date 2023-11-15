@@ -48,7 +48,7 @@
                 <option value="Fixed">Fixed fee</option>
                 <option value="Hourly">Hourly rate</option>
                 <option value="Daily">Daily rate</option>
-                <option value="Item">Item by item for specific task</option>
+                <option value="Item">Item by item for specific tasks</option>
                 <option value="Success">Success fee</option>
                 <option value="Pro">Pro bono</option>
               </select>
@@ -59,7 +59,7 @@
             <!-- If they select ‘Daily Rate’ -->
             <div class="form-group" id="fixed-fee" v-if="selectedOption === 'Daily'">
               <div>
-                <label> Daily Rate </label>
+                <label> Daily Rate (excluding GST): </label>
                 <div>
                   <span class="position-absolute d-span"> $</span>
                   <input type="number" id="fixedFeeAmount" v-model="form.daily_rate" name="fixedFeeAmount"
@@ -105,7 +105,7 @@
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr>
-                          <th>Item Disbursement</th>
+                          <th>Item</th>
                           <th>Cost (AUD)</th>
                           <th>Total</th>
                         </tr>
@@ -136,7 +136,7 @@
                       <br />
                       <br />
                       <label class="w-100 text-start">
-                        cost: (excluding GST)<sup><code>*</code></sup>
+                        Cost (excluding GST):<sup><code>*</code></sup>
                         <div>
                           <span class="position-absolute d-span" style="line-height: 36px">$</span>
                           <input v-model="newRow.costAud" min="1" type="number" class="form-control d-input" required />
@@ -151,7 +151,7 @@
                       <thead>
                         <tr>
                           <th></th>
-                          <th>Item Disbursement</th>
+                          <th>Item</th>
                           <th>Cost</th>
                           <th>Total</th>
                         </tr>
@@ -159,9 +159,9 @@
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
                           <td style="width:0px"><button type="button" @click="removeRow(index)"
-                              class="btn btn-default btn-circle"><i class="fa fa-close"></i></button></td>
+                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>{{ row.costAud }}</td>
+                          <td>$ {{ row.costAud }}</td>
                           <td>
                             <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p>
@@ -204,7 +204,7 @@
                   <br />
                   <br />
                   <label class="w-100 text-start">
-                    Fee: (excluding GST and disbursements)<sup><code>*</code></sup>
+                    Fee: (excluding GST and disbursements):<sup><code>*</code></sup>
                     <div>
                       <span class="position-absolute d-span" style="line-height: 36px">$</span>
                       <input v-model="newRow2.costAud" min="1" type="number" class="form-control d-input" required />
@@ -227,17 +227,17 @@
                   <tbody id="addFeeEarnersRow">
                     <tr v-for="(row, index) in rows2" :key="index">
                       <td style="width:0px"><button type="button" @click="removeRow2(index)"
-                          class="btn btn-default btn-circle"><i class="fa fa-close"></i></button></td>
+                          class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                       <td>{{ row.itemDisbursement }}</td>
-                      <td>{{ row.costAud }}</td>
+                      <td>$ {{ row.costAud }}</td>
                       <td>
-                        <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}</p>
+                        <p class="mb-0 bg-secondary border p-1 rounded text-white ">Total (excluding GST): ${{ row.total }}</p>
                       </td>
                     </tr>
                   </tbody>
                 </table>
 
-                <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ grandTotal2 }}</p>
+                <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ grandTotal2 }}</p> -->
               </div>
 
 
@@ -332,7 +332,7 @@
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr>
-                          <th>Item Disbursement</th>
+                          <th>Item</th>
                           <th>Cost (AUD)</th>
                           <th>Total</th>
                         </tr>
@@ -363,7 +363,7 @@
                       <br />
                       <br />
                       <label class="w-100 text-start">
-                        Cost: (excluding GST)<sup><code>*</code></sup>
+                        Cost (excluding GST):<sup><code>*</code></sup>
                         <div>
                           <span class="position-absolute d-span" style="line-height: 36px">$</span>
                           <input v-model="newRow.costAud" min="1" type="number" class="form-control d-input" required />
@@ -378,7 +378,7 @@
                       <thead>
                         <tr>
                           <th></th>
-                          <th>Item Disbursement</th>
+                          <th>Item</th>
                           <th>Cost</th>
                           <th>Total</th>
                         </tr>
@@ -386,9 +386,9 @@
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
                           <td style="width:0px"><button type="button" @click="removeRow(index)"
-                              class="btn btn-default btn-circle"><i class="fa fa-close"></i></button></td>
+                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>{{ row.costAud }}</td>
+                          <td>$ {{ row.costAud }}</td>
                           <td>
                             <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p>
@@ -461,7 +461,7 @@
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr>
-                          <th>Item Disbursement</th>
+                          <th>Item</th>
                           <th>Cost (AUD)</th>
                           <th>Total</th>
                         </tr>
@@ -492,7 +492,7 @@
                       <br />
                       <br />
                       <label class="w-100 text-start">
-                        Cost: (excluding GST)<sup><code>*</code></sup>
+                        Cost (excluding GST):<sup><code>*</code></sup>
                         <div>
                           <span class="position-absolute d-span" style="line-height: 36px">$</span>
                           <input v-model="newRow.costAud" min="1" type="number" class="form-control d-input" required />
@@ -507,7 +507,7 @@
                       <thead>
                         <tr>
                           <th></th>
-                          <th>Item Disbursement</th>
+                          <th>Item</th>
                           <th>Cost</th>
                           <th>Total</th>
                         </tr>
@@ -515,18 +515,18 @@
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
                           <td style="width:0px"><button type="button" @click="removeRow(index)"
-                              class="btn btn-default btn-circle"><i class="fa fa-close"></i></button></td>
+                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>{{ row.costAud }}</td>
+                          <td>$ {{ row.costAud }}</td>
                           <td>
-                            <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
+                            <p class="mb-0 bg-secondary border p-1 rounded text-white">Total (excluding GST): ${{ row.total }}
                             </p>
                           </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ grandTotal }}</p>
+                    <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total (excluding GST): ${{ grandTotal }}</p>
                   </div>
 
 
@@ -590,7 +590,13 @@
                 </div>
               </div>
 
-              <div class="" id="additionalFeeEarners" v-if="isVisible === 'No'">
+              <div v-if="isVisible === 'No'">
+
+                <button class="btn btn-dark mt-3 mb-3" type="button" @click="showEarner">Add fee earner</button>
+              </div>
+
+
+              <div class="" id="additionalFeeEarners" v-if="divEarnerVisible">
                 <!-- <fieldset class="border p-2 my-2 bg-light text-center " style="margin: auto">
                   <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
                     Add additional fee earner
@@ -691,7 +697,7 @@
                   <tbody id="addFeeEarnersRow">
                     <tr v-for="(row, index) in rows3" :key="index">
                       <td>{{ row.title }}</td>
-                      <td>{{ row.hourlyRate }}</td>
+                      <td>$ {{ row.hourlyRate }}</td>
                       <td>{{ row.estimatedHours }}</td>
                       <td>
                         <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}</p>
@@ -708,7 +714,7 @@
                 <input class="d-none" name="feeEarnersInfo" id="feeEarnersInfo" />
 
                 <div id="hourlyRateIndividual">
-                  <label>Hourly rate (in AUD excluding GST):<sup><code>*</code></sup></label>
+                  <label>Hourly rate (excluding GST):<sup><code>*</code></sup></label>
                   <div>
                     <span class="position-absolute d-span">
                       $</span>
@@ -770,7 +776,7 @@
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr>
-                          <th>Item Disbursement</th>
+                          <th>Item</th>
                           <th>Cost (AUD)</th>
                           <th>Total</th>
                         </tr>
@@ -801,7 +807,7 @@
                       <br />
                       <br />
                       <label class="w-100 text-start">
-                        Cost: (excluding GST)<sup><code>*</code></sup>
+                        Cost (excluding GST):<sup><code>*</code></sup>
                         <div>
                           <span class="position-absolute d-span" style="line-height: 36px">$</span>
                           <input v-model="newRow.costAud" min="1" type="number" class="form-control d-input" required />
@@ -816,7 +822,7 @@
                       <thead>
                         <tr>
                           <th></th>
-                          <th>Item Disbursement</th>
+                          <th>Item</th>
                           <th>Cost</th>
                           <th>Total</th>
                         </tr>
@@ -824,10 +830,10 @@
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
                           <td style="width:0px"><button type="button" @click="removeRow(index)"
-                              class="btn btn-default btn-circle"><i class="fa fa-close"></i></button>
+                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button>
                           </td>
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>{{ row.costAud }}</td>
+                          <td>$ {{ row.costAud }}</td>
                           <td>
                             <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p>
@@ -879,6 +885,12 @@
 
             <!-- If they select ‘Success Fee’ -->
             <div class="form-group" id="success-fee" v-if="selectedOption === 'Success'">
+              <label>Estimated fee amount (excluding GST and disbursements):</label>
+              <input type="number" v-model="form.estimatedFee" id="estimatedFee" name="estimatedFee"
+                class="form-control"  />
+
+              <br />
+
               <label>Uplift percentage (%):<sup><code>*</code></sup></label>
               <input type="number" v-model="form.uplift_percentage" id="upliftPercentage" name="upliftPercentage"
                 class="form-control" @input="limitNumber" />
@@ -928,7 +940,7 @@
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr>
-                          <th>Item Disbursement</th>
+                          <th>Item</th>
                           <th>Cost (AUD)</th>
                           <th>Total</th>
                         </tr>
@@ -959,7 +971,7 @@
                       <br />
                       <br />
                       <label class="w-100 text-start">
-                        Cost: (excluding GST)<sup><code>*</code></sup>
+                        Cost (excluding GST):<sup><code>*</code></sup>
                         <div>
                           <span class="position-absolute d-span" style="line-height: 36px">$</span>
                           <input v-model="newRow.costAud" min="1" type="number" class="form-control d-input" required />
@@ -974,7 +986,7 @@
                       <thead>
                         <tr>
                           <th></th>
-                          <th>Item Disbursement</th>
+                          <th>Item</th>
                           <th>Cost</th>
                           <th>Total</th>
                         </tr>
@@ -982,9 +994,9 @@
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
                           <td style="width:0px"><button type="button" @click="removeRow(index)"
-                              class="btn btn-default btn-circle"><i class="fa fa-close"></i></button></td>
+                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>{{ row.costAud }}</td>
+                          <td>$ {{ row.costAud }}</td>
                           <td>
                             <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p>
@@ -1066,7 +1078,7 @@
                     <br />
                     <br />
                     <label class="w-100 text-start">
-                      cost: (excluding GST)<sup><code>*</code></sup>
+                      Cost (excluding GST):<sup><code>*</code></sup>
                       <div>
                         <span class="position-absolute d-span" style="line-height: 36px">$</span>
                         <input v-model="newRow.costAud" min="1" type="number" class="form-control d-input" required />
@@ -1081,7 +1093,7 @@
                     <thead>
                       <tr>
                         <th></th>
-                        <th>Item Disbursement</th>
+                        <th>Item</th>
                         <th>Cost</th>
                         <th>Total</th>
                       </tr>
@@ -1089,9 +1101,9 @@
                     <tbody id="addFeeEarnersRow">
                       <tr v-for="(row, index) in rows" :key="index">
                         <td style="width:0px"><button type="button" @click="removeRow(index)"
-                            class="btn btn-default btn-circle"><i class="fa fa-close"></i></button></td>
+                            class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                         <td>{{ row.itemDisbursement }}</td>
-                        <td>{{ row.costAud }}</td>
+                        <td>$ {{ row.costAud }}</td>
                         <td>
                           <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                           </p>
@@ -1565,7 +1577,7 @@
               <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                 <thead>
                   <tr>
-                    <th>Item Disbursement</th>
+                    <th>Item</th>
                     <th>Cost (AUD)</th>
                     <th>Total</th>
                   </tr>
@@ -1783,6 +1795,7 @@ export default {
         "fee_earners": null,
         "daily_rate": null,
         "uplift_percentage": null,
+        "estimatedFee":null,
         "success_fee_term": null,
         "pro_bono_description": null,
         "meet_deadlines": null,
@@ -1815,7 +1828,7 @@ export default {
 
       schemas: [],
       currentStep: 0,
-
+      
       selectedOption: "",
       option: "Yes",
       isVisible: "Yes",
@@ -1825,6 +1838,7 @@ export default {
       deadline: "Yes",
       team: "Yes",
       divItemiseVisible: false,
+      divEarnerVisible:false,
       input1: null
     };
   },
@@ -1883,7 +1897,7 @@ export default {
       this.form.charge_type = this.selectedOption;
       api.post('/lawyer/create-proposal', this.form)
         .then(() => {
-          this.$swal('Success', 'Proposal has been submited successfully', 'success').then(res => {
+          this.$swal('', 'Your proposal has been submitted.', 'success').then(res => {
             console.log('response : ', res);
             // this.changePostJobFormToDefault();
             // this.currentStep = 0;
@@ -1990,6 +2004,10 @@ export default {
     showItemise() {
       this.divItemiseVisible = !this.divItemiseVisible;
     },
+    showEarner() {
+      this. divEarnerVisible = !this. divEarnerVisible;
+    },
+   
     updateDivContent() {
       // No need to update divContent; we're using v-if to conditionally render divs.
     },

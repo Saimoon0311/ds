@@ -22,7 +22,7 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <img src="../../assets/images/bar.png" alt="">
+            <img src="../../assets/images/bar.png" alt="" />
 
             <!-- <span class="navbar-toggler-icon"></span> -->
           </button>
@@ -43,7 +43,7 @@
                   aria-current="page"
                   >Proposals</router-link
                 >
-                  
+
                 <router-link
                   to="/lawyer-account"
                   class="nav-link fw-bolder menuItem-active-link"
@@ -52,20 +52,70 @@
                   >Account</router-link
                 >
                 <router-link
+                  to="/client-faqs"
+                  class="nav-link fw-bolder menuItem-active-link"
+                  id="jobs"
+                  aria-current="page"
+                  >FAQs</router-link
+                >
+                <router-link
                   to="/lawyer-profile"
                   class="nav-link fw-bolder menuItem-active-link"
                   id="jobs"
                   aria-current="page"
                   >Profile</router-link
                 >
-              </div>
-              <div>
                 <button
                   @click="logout('lawyer-login')"
-                  class="nav-link float-right logOutBtn  fw-bolder"
+                  class="nav-link float-right logOutBtn fw-bolder"
                   id="clients"
                   aria-current="page"
-                  >Logout</button>
+                >
+                  Logout
+                </button>
+              </div>
+
+              <div class="dropdown cstm-dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle menu-burger"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <!-- <i class="fa-solid fa-bars"></i> -->
+                  <img src="../../assets/images/bar.png" alt="" />
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li>
+                    <router-link class="dropdown-item" to="/about-us"
+                      >About Us</router-link
+                    >
+                  </li>
+
+                  <li v-if="loginUser != null && loginUser?.type == 'client'">
+                    <router-link class="dropdown-item" to="/client-faqs"
+                      >FAQs</router-link
+                    >
+                  </li>
+                  <li v-if="loginUser != null && loginUser?.type == 'lawyer'">
+                    <router-link class="dropdown-item" to="/lawyer-faqs"
+                      >FAQs</router-link
+                    >
+                  </li>
+
+                  <li>
+                    <router-link class="dropdown-item" to="/how-simplawfy-works"
+                      >How Simplawfy Works</router-link
+                    >
+                  </li>
+
+                  <li>
+                    <router-link class="dropdown-item" to="/contact-us"
+                      >Contact Us</router-link
+                    >
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -77,8 +127,7 @@
 <script>
 export default {
   components: {},
-  methods: {
-  },
+  methods: {},
   name: "LawyerHeader",
 };
 </script>
@@ -89,16 +138,15 @@ export default {
   border-radius: 10px;
   color: white;
   padding: 5px 11px;
-
 }
 
 .cstm-dropdown {
   border-radius: 0px;
-  border: none !important
+  border: none !important;
 }
 
 .cstm-dropdown:focus {
-  box-shadow: none !important
+  box-shadow: none !important;
 }
 
 .cstm-dropdown img {
@@ -148,8 +196,8 @@ export default {
   background: rgb(0, 0, 0);
   color: white;
 }
-@media only screen and (max-width: 1024px){
-  .cstm-dropdown{
+@media only screen and (max-width: 1024px) {
+  .cstm-dropdown {
     margin-top: 0;
     top: 0;
   }
@@ -171,16 +219,13 @@ export default {
   .router-link-exact-active.menuItem-active-link {
     padding: 7px 10px;
   }
-  .logOutBtn{
+  .logOutBtn {
     width: 109px;
   }
 }
 @media only screen and (max-width: 767px) and (min-width: 320px) {
-
-
   .pb-seven {
     padding-bottom: 200px;
   }
-  
 }
 </style>

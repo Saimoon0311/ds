@@ -148,23 +148,27 @@
                           <p class="badge bg-dark" title="Location">
                             {{ item?.location?.title }}
                           </p>
-                          <p><b>Serial No:</b> {{ item?.identity }}</p>
-                          <p><b>City/suburb:</b> {{ item?.city }}</p>
-                          <p><b>Title:</b> {{ item?.title }}</p>
                           <p>
-                            <b>Created:</b>
-                            {{ formatCreatedAt(item.created_at) }}
+                            <b>{{ item?.title }}</b>
                           </p>
                           <p
                             id="description28"
                             style="
                               overflow: hidden;
                               text-overflow: ellipsis;
-                              min-height: 100px;
+                              
                             "
                           >
+                          <b>Job description: </b>
                             {{ item?.description }}
                           </p>
+                          <p><b>City/suburb:</b> {{ item?.city }}</p>
+                          <p><b>Job No: </b> <span class="smallFont"> {{ item?.identity }} </span> </p>
+                          <p >
+                            <b>Created: </b>
+                          <span class="smallFont"> {{ formatCreatedAt(item.created_at) }}</span> 
+                          </p>
+
                           <!-- <details>
                   <summary>More details</summary>
                   <div class="bg-dark border rounded p-3 m-1">
@@ -358,7 +362,7 @@
                           <p class="badge bg-dark" title="Location">
                             Lorem ipsim
                           </p>
-                          <p><b>Serial No:</b> 120026</p>
+                          <p><b>Job No:</b> 120026</p>
                           <p><b>City/suburb:</b> Lorem ipsim</p>
                           <p><b>Title:</b> Lorem ipsim</p>
                           <p><b>Created:</b> 10/11/23 11:07pm</p>
@@ -626,6 +630,9 @@ ul#pills-tab {
 .nav-link:focus,
 .nav-link:hover {
   color: #000000;
+}
+.smallFont{
+  font-size: 13px;
 }
 @media only screen and (max-width: 600px) {
   .l-main {
