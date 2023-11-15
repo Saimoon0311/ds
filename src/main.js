@@ -46,6 +46,7 @@ app.mixin({
       lastPage: 0,
 
       data_paginated: [],
+      admin_approval : "pending"
     };
   },
   watch: {
@@ -110,9 +111,12 @@ app.mixin({
       api
         .post("/generate-send-otp", { email })
         .then(() => {
-          this.$store.commit("SET_OTP_EMAIL", email);
-          localStorage.setItem("otpEmail", email);
-          this.$router.push({ path: "/otp" });
+          this.$swal('Success', 'OTP has been send to your email address', 'success').then(() => {
+            this.$store.commit("SET_OTP_EMAIL", email);
+            localStorage.setItem("otpEmail", email);
+            this.$router.push({ path: "/otp" });
+          });
+         
           // this.setUserAndRedirect(res, dashboardUrl);
         })
         .catch((error) => {
@@ -123,7 +127,7 @@ app.mixin({
 
     // this function is to store user in state and localstorage after login then redirect to dashboard
     setUserAndRedirect(res, path) {
-      console.log("single a : ", res?.data?.data?.law_firm);
+      console.log("single a : ", res?.data?.data);
       if (!localStorage.getItem("token")) {
         localStorage.setItem("token", res.data?.data?.api_token);
       }
@@ -260,7 +264,12 @@ app.mixin({
       console.log("curr search : ", this.currentPage);
     },
 
-    async loadMore() {
+    async loadMore(status = null,reset = null) {
+      if(reset){
+        this.currentPage = 0;
+        this.openJobs = [];
+        this.lastPage = null;
+      }
       this.currentPage++;
       let url = null;
       if (this.searchQuery != "") {
@@ -268,6 +277,11 @@ app.mixin({
       } else {
         url = `${this.endpoint}?page=${this.currentPage}`;
       }
+
+      if(this.endpoint == "/admin/all-lawyers"){
+        url = url + `&admin_approval=${status}`;
+      }
+
       const response = await this.fetchData(url);
       // console.log("pagin : ", response);
       // console.log("curr : ", this.currentPage);
@@ -281,11 +295,15 @@ app.mixin({
       this.openJobs = uniqueArray;
     },
 
-    async fixLoadMoreAfterDeleteRecord(index) {
+    async fixLoadMoreAfterDeleteRecord(index,status = null) {
       this.openJobs.splice(index, 1);
       if (this.currentPage < this.lastPage) {
         this.currentPage--;
-        await this.loadMore();
+        if(status){
+          await this.loadMore(status);
+        }else{
+          await this.loadMore();
+        }
       }
     },
 
@@ -296,7 +314,12 @@ app.mixin({
       this.searchQuery = "";
       this.currentPage = 1;
       this.lastPage = 0;
-      const url = `${this.endpoint}?page=${this.currentPage}`;
+      let url = `${this.endpoint}?page=${this.currentPage}`;
+
+      if(this.endpoint == "/admin/all-lawyers"){
+        url = url + `&admin_approval=${this.admin_approval}`;
+      }
+
       const response = await this.fetchData(url);
       this.lastPage = response?.last_page;
       this.openJobs = response?.data;

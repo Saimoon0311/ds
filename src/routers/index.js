@@ -73,6 +73,8 @@ function reverse_guard(to, from, next) {
         next("/lawyer-dashboard");
       } else if (userData.type === "client") {
         next("/client-dashboard");
+      } else if(userData.type === "admin"){
+        next("/admin-dashboard");
       } else {
         // Handle other cases or roles as needed
         next();
@@ -138,37 +140,37 @@ const routes = [
   {
     path: "/lawyer-dashboard",
     component: LawyerDashboard,
-    meta: { requiresAuth: true, clientNotAllowed: true },
+    meta: { requiresAuth: true, clientAndAdminNotAllowed: true },
   },
   {
     path: "/lawyer-proposals",
     component: LawyerBids,
-    meta: { requiresAuth: true, clientNotAllowed: true },
+    meta: { requiresAuth: true, clientAndAdminNotAllowed: true },
   },
   {
     path: "/lawyer-profile",
     component: LawyerProfile,
-    meta: { requiresAuth: true, clientNotAllowed: true },
+    meta: { requiresAuth: true, clientAndAdminNotAllowed: true },
   },
   {
     path: "/lawyer-account",
     component: LawyerAccount,
-    meta: { requiresAuth: true, clientNotAllowed: true },
+    meta: { requiresAuth: true, clientAndAdminNotAllowed: true },
   },
   {
     path: "/plans",
     component: Plans,
-    meta: { requiresAuth: true, clientNotAllowed: true },
+    meta: { requiresAuth: true, clientAndAdminNotAllowed: true },
   },
   {
     path: "/subscribe/:plan",
     component: LawyerSubscribe,
-    meta: { requiresAuth: true, clientNotAllowed: true },
+    meta: { requiresAuth: true, clientAndAdminNotAllowed: true },
   },
   {
     path: "/replace-payment-method",
     component: LawyerSubscribe,
-    meta: { requiresAuth: true, clientNotAllowed: true },
+    meta: { requiresAuth: true, clientAndAdminNotAllowed: true },
   },
 
   // lawyer end
@@ -194,22 +196,22 @@ const routes = [
   {
     path: "/client-account",
     component: ClientAccount,
-    meta: { requiresAuth: true, lawyerNotAllowed: true },
+    meta: { requiresAuth: true, lawyerAndAdminNotAllowed: true },
   },
   {
     path: "/area-of-law",
     component: AreaOfLaw,
-    meta: { requiresAuth: true, lawyerNotAllowed: true },
+    meta: { requiresAuth: true, lawyerAndAdminNotAllowed: true },
   },
   // {
   //   path: "/postingjob",
   //   component: PostingJob,
-  //   meta: { requiresAuth: true, lawyerNotAllowed: true },
+  //   meta: { requiresAuth: true, lawyerAndAdminNotAllowed: true },
   // },
   {
     path: "/posting-job",
     component: PostingaJob,
-    meta: { requiresAuth: true, lawyerNotAllowed: true },
+    meta: { requiresAuth: true, lawyerAndAdminNotAllowed: true },
   },
   // client end
 
@@ -227,7 +229,7 @@ const routes = [
   {
     path: "/proposal",
     component: LawyerBidding,
-    meta: { requiresAuth: true, clientNotAllowed: true },
+    meta: { requiresAuth: true, clientAndAdminNotAllowed: true },
   },
   {
     path: "/request-info",
@@ -255,6 +257,7 @@ const routes = [
   {
     path: "/admin-login",
     component: AdminLogin,
+    beforeEnter: reverse_guard,
   },
 
   // {
@@ -268,12 +271,13 @@ const routes = [
   {
     path: "/admin-dashboard",
     component: AdminLawyer,
+    meta: { requiresAuth: true, clientAndlawyerAndAdminNotAllowed: true }
   },
 
   {
     path: "/client-dashboard",
     component: clientDashboard,
-    meta: { requiresAuth: true, lawyerNotAllowed: true },
+    meta: { requiresAuth: true, lawyerAndAdminNotAllowed: true },
   },
 
   // {
@@ -339,13 +343,13 @@ const routes = [
     path: "/client-faqs",
     component: ClientFaqs,
     // meta: { requiresAuth: true },
-    meta: { requiresAuth: true, lawyerNotAllowed: true },
+    meta: { requiresAuth: true, lawyerAndAdminNotAllowed: true },
   },
   {
     path: "/lawyer-faqs",
     component: LawyerFaqs,
     // meta: { requiresAuth: true },
-    meta: { requiresAuth: true, clientNotAllowed: true },
+    meta: { requiresAuth: true, clientAndAdminNotAllowed: true },
   },
   {
     path: "/contact-us",
@@ -391,16 +395,23 @@ router.beforeEach(async (to, from, next) => {
       try {
         console.log("match try");
         let result = await api.get("/verify");
-        console.log("user all data ::: ", result.data);
-        if (to.meta.clientNotAllowed && result.data.data.type != "lawyer") {
-          next("/client-dashboard");
+        console.log("user all data ::: ", result?.data);
+        if(to.meta.clientAndlawyerAndAdminNotAllowed && result?.data?.data?.type != "admin"){
+          console.log('client and lawyer not allowed');
+          const redirectUrl =  (result?.data?.data?.type == "lawyer") ? "/lawyer-dashboard" : "client-dashboard";
+          next(redirectUrl);
+        }
+        else if (to.meta.clientAndAdminNotAllowed && result.data.data.type != "lawyer") {
+          const redirectUrl =  (result?.data?.data?.type == "client") ? "/client-dashboard" : "/admin-dashboard";
+          next(redirectUrl);
           // router.go(-1);
           console.log("client access not allowed");
         } else if (
-          to.meta.lawyerNotAllowed &&
+          to.meta.lawyerAndAdminNotAllowed &&
           result.data.data.type != "client"
         ) {
-          next("/lawyer-dashboard");
+          const redirectUrl =  (result?.data?.data?.type == "lawyer") ? "/lawyer-dashboard" : "/admin-dashboard";
+          next(redirectUrl);
           // router.go(-1);
           console.log("lawyer access not allowed");
         } else {

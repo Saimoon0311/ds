@@ -50,13 +50,21 @@
                 >
               </div>
               <div class="lg-btn">
-                <router-link
+                <!-- <router-link
                   to="/admin-login"
                   class="nav-link float-right logOutBtn active link"
                   id="clients"
                   aria-current="page"
                   >Logout</router-link
-                >
+                > -->
+
+                <button
+                  @click="logout('admin-login')"
+                  class="nav-link float-right logOutBtn active link"
+                  id="clients"
+                  aria-current="page"
+                  >Logout</button>
+
               </div>
             </div>
           </div>

@@ -22,7 +22,7 @@ export default {
         AdminLawyer,
         AdminHeader,
         MainFooter
-    },
+    },    
     methods: {
 
     },
