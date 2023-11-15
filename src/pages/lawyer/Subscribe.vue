@@ -48,6 +48,7 @@ export default {
   },
   data() {
     return {
+      plan : null,
       cardHolderName: null,
       cardElement: null,
       // paymentMethodId : null,
@@ -69,6 +70,8 @@ export default {
     },
   },
   created() {
+    const urlData = window.location.pathname.split("/");
+    this.plan = urlData[urlData.length - 1];
     this.initializeStripe();
   },
   methods: {
@@ -96,7 +99,8 @@ export default {
             const formData = {
               "email": this.$store.getters?.loginUser?.email,
               "card_holder_name": this.cardHolderName,
-              "payment_method_id": paymentMethod.id
+              "payment_method_id": paymentMethod.id,
+              "plan" : this.plan,
             };
             const url = this.replacePaymentMethod ? "/lawyer/replace-payment-method" : "/lawyer/create-subscription";
             api.post(url, formData)
@@ -144,9 +148,10 @@ export default {
           console.log('sub : ' + this.stripe);
         }
         document.head.appendChild(stripeScript);
-      } else {
-        this.loadStripe();
-      }
+      } 
+      // else {
+      //   this.loadStripe();
+      // }
     },
     //   loadStripe() {
     //     this.stripe = Stripe('pk_test_51NUgYaBknhiYNvPSEv46DkXpdgX4MoovIFoTjRbRFaXJfdj6ZYFVfbcfmjXRIPjFqF8YANCpk3oI64bLr2zkZP3r0073AAlaXc');
@@ -181,8 +186,8 @@ export default {
 }
 
 .navActive {
-  background: grey;
-  border: 1px solid grey;
+  background: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   color: white;
 }
@@ -194,23 +199,25 @@ export default {
 }
 
 .bg-grey {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 
 .bg-grey:hover {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
-.back-st{
+
+.back-st {
   display: flex;
-    align-items: center;
-}
-.ml-l{
-  margin-left: 10px;
-}
-.justify-custom{
-  justify-content: center;
+  align-items: center;
 }
 
+.ml-l {
+  margin-left: 10px;
+}
+
+.justify-custom {
+  justify-content: center;
+}
 </style>

@@ -1,5 +1,6 @@
 <template lang="">
-    <div class="hello container">
+    <div class="l-main">
+    <div class=" container">
         <MainHeader />
         <div class="row justify-content-center">
         <div class="center-main col-md-7">
@@ -26,11 +27,17 @@
 </div>
         
     </div>
+    <div class="footer">
+      <MainFooter />
+    </div>
+</div>
 </template>
 <script >
 
 import api from "../../config/api.js";
 import MainHeader from '../../components/global/MainHeader.vue'
+import MainFooter from "../../components/global/MainFooter.vue";
+
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
@@ -38,12 +45,12 @@ export default {
     data() {
         const schema = yup.object().shape({
             email: yup.string()
-                .min(3, 'Email must be valid')
-                .max(50, 'Email must be valid')
-                .required('Please Enter your email')
+                .min(3, 'Please enter valid email.')
+                .max(50, 'Please enter valid email.')
+                .required('Please enter your email.')
                 .matches(
                     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                    'Please enter valid email',
+                    'Please enter valid email.',
                 ),
         });
         return {
@@ -60,7 +67,7 @@ export default {
         submitData(formData) {
             try {
                 console.log(formData)
-                api.post('/send-forget-password-email/',formData)
+                api.post('/send-forget-password-email/', formData)
                     .then(res => {
                         alert('Reset Password link has been sent to your email address');
                         console.log('successfully sent email : ', res?.data)
@@ -78,24 +85,22 @@ export default {
 
 </script>
 <style scoped>
-.hello {
-    min-height: 100vh;
-    display: grid;
-}
 
-/* .center-main {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-wrap: wrap;
-} */
+
+
 .align-baseline {
     align-items: baseline !important;
 }
 
-/* .login-main {
-    width: 35%;
-    margin: 0 auto !important;
-    margin-top: 50px;
-} */
+.l-main {
+    min-height: 100vh;
+    position: relative;
+    /* padding-bottom: 60px; */
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
 </style>

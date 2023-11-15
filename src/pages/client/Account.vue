@@ -1,5 +1,5 @@
 <template lang="">
-  <div>
+  <div class="c-main">
   <ClientHeader />
   <div class="container">
 
@@ -36,7 +36,7 @@
               <button
                 type="button"
                 name="fname-submit"
-                class="btn btn-secondary my-3"
+                class="btn btn-dark my-3"
                 @click="updateProfile('first_name', '#Fname')"
               >
                 Save changes
@@ -80,7 +80,7 @@
               <button
                 type="button"
                 name="lname-submit"
-                class="btn btn-secondary my-3"
+                class="btn btn-dark my-3"
                 @click="updateProfile('last_name', '#Lname')"
               >
                 Save changes
@@ -126,7 +126,7 @@
               <button
                 type="button"
                 name="phone-submit"
-                class="btn btn-secondary my-3"
+                class="btn btn-dark my-3"
                 @click="updateProfile('phone', '#Pnum')"
               >
                 Save changes
@@ -136,7 +136,7 @@
         </div>
       </div>
     </div>
-    <table class="table table-bordered m-3 table-striped">
+    <table class="table table-bordered mt-5 mb-3 table-striped">
       <tbody>
         <!-- Email -->
         <tr>
@@ -150,7 +150,7 @@
             First Name
             <button
               type="button"
-              class="btn btn-secondary btn-sm"
+              class="btn btn-dark btn-sm"
               data-bs-toggle="modal" data-bs-target="#Fname"
               title="Edit"
               @click="updateFormProperties"
@@ -172,7 +172,7 @@
             Last Name
             <button
               type="button"
-              class="btn btn-secondary btn-sm"
+              class="btn btn-dark btn-sm"
               data-bs-toggle="modal" data-bs-target="#Lname"
               title="Edit"
               @click="updateFormProperties"
@@ -194,7 +194,7 @@
             Phone Number
             <button
               type="button"
-              class="btn btn-secondary btn-sm"
+              class="btn btn-dark btn-sm"
               data-bs-toggle="modal" data-bs-target="#Pnum"
               title="Edit"
               @click="updateFormProperties"
@@ -272,7 +272,7 @@
                   <button
                       type="submit"
                       name="password-submit"
-                      class="btn btn-secondary my-3"
+                      class="btn btn-dark my-3"
                     >
                       Save Changes
                     </button>
@@ -303,17 +303,27 @@
                   </button>
                 </div>
               </form> -->
+              
             </div>
           </div>
         </div>
       </div>
       <!-- Modal ends here -->
+      <h3 class="mt-4">Delete Account</h3>
+        <button @click="deleteAccount" class="btn btn-danger">
+          <i class="bi bi-trash-fill"></i> Delete Account
+        </button>
     </div>
   </div>
+  <div class="footer">
+      <MainFooter />
+    </div>
 </div>
 </template>
 <script>
 import ClientHeader from "./Header.vue";
+import MainFooter from "../../components/global/MainFooter.vue";
+
 import * as yup from "yup";
 import { Form, Field } from 'vee-validate';
 import api from "@/config/api.js";
@@ -324,7 +334,7 @@ import ChangePasswordForm from "@/components/ChangePasswordForm.vue";
 export default {
   name: "ClientAccount",
   components: {
-    ClientHeader, Form, Field,ChangePasswordForm
+    ClientHeader, Form, Field, ChangePasswordForm, MainFooter
   },
   data() {
     const schema = yup.object().shape({
@@ -366,6 +376,35 @@ export default {
     this.updateFormProperties();
   },
   methods: {
+    deleteAccount() {
+      let text = "You won't be able to revert this.";
+      let text2 = "Yes, Delete Account";
+
+      this.$swal({
+        title: 'Are you sure?',
+        text: text,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: text2,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          api.get('/delete-account')
+            .then(() => {
+              this.$swal(
+                'Deleted!',
+                'Your Account has been deleted.',
+                'success'
+              ).then(() => {
+                this.logoutProcess('client-login');
+              });
+            }).catch(() => {
+              this.$swal('Error', 'Something went wrong! please retry', 'error');
+            });
+        }
+      })
+    },
     updateFormProperties(notCreated) {
       const userData = this.loginUser;
       if (userData) {
@@ -439,12 +478,24 @@ ul#pills-tab {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
   color: white;
-  background-color: #808080;
+  background-color: #000000;
 }
 
 .nav-pills .nav-link,
 .nav-link:focus,
 .nav-link:hover {
-  color: #6d6f73;
+  color: #000000;
+}
+
+.c-main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>

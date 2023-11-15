@@ -10,7 +10,7 @@ import AdminLawyer from "@/pages/admin/Lawyers.vue";
 import AdminJobs from "@/pages/admin/Jobs.vue";
 import AdminClients from "@/pages/admin/Clients.vue";
 import clientDashboard from "@/pages/client/Dashboard.vue";
-import SubscriptionComponent from "@/pages/client/Subscription.vue";
+// import SubscriptionComponent from "@/pages/client/Subscription.vue";
 import ForgetPassword from "@/pages/forms/ForgetPassword.vue";
 import ResetPassword from "@/pages/forms/ResetPassword.vue";
 
@@ -20,7 +20,7 @@ import api from "../config/api.js";
 import PlatForm from "@/components/PlatForm.vue";
 // client
 import ClientLoginForm from "@/pages/client/Login.vue";
-import ClientRegister from "@/pages/client/Register.vue";
+import ClientRegister from "@/pages/client/clientRegister.vue";
 import OTP from "@/pages/forms/OTP.vue";
 import ClientAccount from "@/pages/client/Account.vue";
 // import PostingJob from "@/pages/client/PostingJob.vue";
@@ -38,6 +38,7 @@ import LawyerBids from "@/pages/lawyer/Proposals.vue";
 import LawyerProfile from "@/pages/lawyer/Profile.vue";
 import LawyerAccount from "@/pages/lawyer/Account.vue";
 import LawyerSubscribe from "@/pages/lawyer/Subscribe.vue";
+import Plans from "@/pages/lawyer/Plans.vue";
 // import LawyerBidding from "@/pages/lawyer/Proposal.vue";
 import LawyerBidding from "@/pages/lawyer/Proposal.vue";
 import RequestInfo from "@/pages/lawyer/RequestInfo.vue";
@@ -48,9 +49,11 @@ import termsForLawyer from "@/pages/lawyer/termsAndConditions.vue";
 import privacyPolicy from "@/pages/privacy-policy.vue";
 import termsOfUse from "@/pages/terms-of-use.vue";
 import AboutUs from "@/pages/AboutUs.vue";
-import HowSimplawfyWorks from "@/pages/HowSimplawfyWorks.vue";
+import HowSimplawfyWorks from "@/pages/HowSimplawfyWorksClient.vue";
+// import HowSimplawfyWorksLawyer from "@/pages/HowSimplawfyWorksLawyer.vue";
 import ContactUs from "@/pages/ContactUs.vue";
-import Faqs from "@/pages/Faqs.vue";
+import ClientFaqs from "@/pages/ClientFaqs.vue";
+import LawyerFaqs from "@/pages/LawyerFaqs.vue";
 import NotFound from "@/components/NotFound.vue";
 import WizardForm from "../pages/WizardForm.vue";
 
@@ -75,19 +78,17 @@ function reverse_guard(to, from, next) {
         next();
       }
     })
-    .catch(() => {
-      console.log("revers catch");
-
+    .catch((error) => {
+      console.error("An error occurred:", error.response);
+      // console.log("revers catch 123" , error);
       //  const path = window.location.pathname;
       //   if ((path == "/" || path == "/lawyer-register" || path == "/lawyer-login" || path == "/client-register" ||
       //       path == "/client-login") && (localStorage.getItem('loginUser') || localStorage.getItem('token'))) {
       //       localStorage.removeItem('loginUser');
       //       localStorage.removeItem('token');
       //   }
-
       localStorage.removeItem("loginUser");
       localStorage.removeItem("token");
-
       next();
     });
 }
@@ -155,7 +156,12 @@ const routes = [
     meta: { requiresAuth: true, clientNotAllowed: true },
   },
   {
-    path: "/subscribe",
+    path: "/plans",
+    component: Plans,
+    meta: { requiresAuth: true, clientNotAllowed: true },
+  },
+  {
+    path: "/subscribe/:plan",
     component: LawyerSubscribe,
     meta: { requiresAuth: true, clientNotAllowed: true },
   },
@@ -270,11 +276,11 @@ const routes = [
     meta: { requiresAuth: true, lawyerNotAllowed: true },
   },
 
-  {
-    path: "/subscription",
-    component: SubscriptionComponent,
-    meta: { requiresAuth: true },
-  },
+  // {
+  //   path: "/subscription",
+  //   component: SubscriptionComponent,
+  //   meta: { requiresAuth: true },
+  // },
 
   {
     path: "/job",
@@ -328,10 +334,18 @@ const routes = [
     path: "/how-simplawfy-works",
     component: HowSimplawfyWorks,
   },
+
   {
-    path: "/faqs",
-    component: Faqs,
+    path: "/client-faqs",
+    component: ClientFaqs,
     // meta: { requiresAuth: true },
+    meta: { requiresAuth: true, lawyerNotAllowed: true },
+  },
+  {
+    path: "/lawyer-faqs",
+    component: LawyerFaqs,
+    // meta: { requiresAuth: true },
+    meta: { requiresAuth: true, clientNotAllowed: true },
   },
   {
     path: "/contact-us",
@@ -408,7 +422,7 @@ router.beforeEach(async (to, from, next) => {
           if (to?.fullPath == "/lawyer-account") {
             store.commit("SET_SUBSCRIPTION_DATA", result?.data?.subscription);
           }
-          
+
           if (localStorage.getItem("loginUser") === null) {
             const userData = {
               first_name: result?.data?.data?.first_name,

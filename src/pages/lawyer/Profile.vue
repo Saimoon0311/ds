@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="hello">
+  <div class="l-main">
     <LawyerHeader />
     <div class="container">
       <h3 class="mt-3">Profile</h3>
@@ -26,7 +26,7 @@
             />
             <input
               type="submit"
-              class="btn btn-secondary mt-2"
+              class="btn btn-dark mt-2"
               name="photo-submit"
               value="Upload"
             />
@@ -72,7 +72,7 @@
                 <button
                   type="button"
                   name="job-title-submit"
-                  class="btn btn-secondary my-3"
+                  class="btn btn-dark my-3"
                   @click="updateProfile('job_title','#Jobtitle')"
                 >
                   Save changes
@@ -89,8 +89,7 @@
         role="dialog"
         aria-labelledby="mySmallModalLabel"
         aria-hidden="true"
-        id="FirmName"
-      >
+        id="FirmName">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
@@ -117,7 +116,7 @@
                 <button
                   type="button"
                   name="lawfirm-submit"
-                  class="btn btn-secondary my-3"
+                  class="btn btn-dark my-3"
                   @click="updateProfile('law_firm','#FirmName')"
                 >
                   Save changes
@@ -164,7 +163,7 @@
                 <button
                   type="button"
                   name="website-submit"
-                  class="btn btn-secondary my-3"
+                  class="btn btn-dark my-3"
                   @click="updateProfile('link','#WebsiteModal')"
                 >
                   Save changes
@@ -212,7 +211,7 @@
                 <button
                   type="button"
                   name="phone-submit"
-                  class="btn btn-secondary my-3"
+                  class="btn btn-dark my-3"
                   @click="updateProfile('phone','#PhoneModal')"
                 >
                   Save changes
@@ -260,7 +259,7 @@
                 <button
                   type="button"
                   name="about-submit"
-                  class="btn btn-secondary my-3"
+                  class="btn btn-dark my-3"
                   @click="updateProfile('about','#AboutModal')"
                 >
                   Save changes
@@ -316,7 +315,7 @@
 
               <v-select v-model="selectedOptionIds" :options="options" label="title" multiple></v-select>
 
-              <button @click="saveSelectedFields" class="btn btn-secondary my-3">Save changes</button>
+              <button @click="saveSelectedFields" class="btn btn-dark my-3">Save changes</button>
               <!-- <form
                 @submit="submitForm"
                 id="form-bs-select-1"
@@ -361,7 +360,7 @@
 
               <v-select v-model="selectedOptionIds_locations" :options="options_locations" label="title" multiple></v-select>
 
-              <button @click="saveSelectedLocations" class="btn btn-secondary my-3">Save changes</button>
+              <button @click="saveSelectedLocations" class="btn btn-dark my-3">Save changes</button>
 
               <!-- <form
                 action="profile.php"
@@ -413,7 +412,7 @@
               Job Title:
               <button
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-target=".edit-job-title-modal"
                 title="Edit"
                 data-bs-toggle="modal" data-bs-target="#Jobtitle"
@@ -437,7 +436,7 @@
               Law Firm Name:
               <button
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#FirmName"
                 data-target=".lawfirm-modal"
                 title="Edit"
@@ -459,7 +458,7 @@
               Link to Website:
               <button
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#WebsiteModal"
                 data-target=".website-modal"
                 title="Edit"
@@ -481,7 +480,7 @@
               Phone:
               <button
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#PhoneModal"
                 data-target=".edit-phone-modal"
                 title="Edit"
@@ -503,7 +502,7 @@
               About Me:
               <button
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#AboutModal"
                 data-target=".bd-example-modal-lg"
                 title="Edit"
@@ -528,7 +527,7 @@
               <button
                 type="button"
                 @click="setModal('fields')"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#AreaModal"
                 data-target="#field-modal"
                 title="Edit"
@@ -569,7 +568,7 @@
               <button
               @click="setModal('locations')"
                 type="button"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#StateModal"
                 data-target="#location-modal"
                 title="Edit"
@@ -600,10 +599,15 @@
         ready
       </p>
     </div>
+    <div class="footer">
+      <MainFooter />
+    </div>
   </div>
 </template>
 <script>
 import LawyerHeader from "./Header.vue";
+import MainFooter from "../../components/global/MainFooter.vue";
+
 // import Selectic from 'selectic';
 import api from "@/config/api.js";
 import $ from 'jquery';
@@ -629,6 +633,7 @@ export default {
   },
   components: {
     LawyerHeader,
+    MainFooter
     // Selectic
   },
   computed: {
@@ -809,8 +814,8 @@ export default {
 }
 
 .navActive {
-  background: grey;
-  border: 1px solid grey;
+  background: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   color: white;
 }
@@ -822,12 +827,12 @@ export default {
 }
 
 .bg-grey {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 
 .bg-grey:hover {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 
@@ -845,5 +850,17 @@ export default {
 
 .selectic .curtain-handler .fa-caret-down {
   display: none !important;
+}
+
+.l-main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>

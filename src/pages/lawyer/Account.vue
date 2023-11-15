@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="hello">
+  <div class="l-main">
     <LawyerHeader />
     <div class="container">
 
@@ -11,7 +11,7 @@
         <p class="h5 m-3 text-center">Your profile has not been approved yet.</p>
       </div>
       <div v-else class="pb-5">
-        <h3 class="my-3">Subscription</h3>
+        <h3 class="my-3 mt-4">Subscription</h3>
 
         <!-- Subscription -->
         <div>
@@ -42,16 +42,16 @@
                   <p>The {{ subscriptionData?.card_brand }} card ending in {{ subscriptionData?.card_last4 }}</p>
                   <p>Expiry: {{ subscriptionData?.card_expiry }}</p>
                   <button
-                    class="btn btn-sm btn-secondary"
-                    @click="replacePaymentMethod"
+                    class="btn btn-sm btn-dark mb-2"
+                    @click="replacePaymentMethod(subscriptionData?.plan)"
                     >Replace Payment Method</button>
                 </td>
               </tr>
               <tr>
                 <th>Receipts</th>
                 <td>
-                  <table v-if="receipts.length > 0" class="table table-bordered table-striped">
-                    <thead>
+                  <table v-if="receipts.length > 0" class="table table-bordered table-striped mt-3">
+                    <thead class="hd-receipt" >
                       <th>#</th>
                       <th>Receipt ID</th>
                       <th>Amount Paid</th>
@@ -64,7 +64,7 @@
                         <td>{{ receipt?.id }}</td>
                         <td>{{ receipt?.amount_paid }}</td>
                         <td>{{ new Date(receipt?.created * 1000).toLocaleDateString() }}</td>
-                        <td><a class="btn btn-sm btn-secondary" :href="receipt?.invoice_pdf">Download</a></td>
+                        <td><a class="btn btn-sm btn-dark" :href="receipt?.invoice_pdf">Download</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -122,7 +122,7 @@
 
           <div v-if="subscriptionCancelStatus" class="text-center">
             <p>Your subscription will be cancelled from 
-              {{ subscriptionData?.current_period_end }}. You can <button class="forgetp" @click="resubscribe">resubscribe</button> at any time. </p>
+              {{ subscriptionData?.current_period_end }}. You can <button class="forgetp" @click="resubscribe(subscriptionData?.plan)">resubscribe</button> at any time. </p>
           </div>
           <button
             v-else-if="subscriptionStatus == 'subscribed'"      
@@ -132,7 +132,7 @@
           >
             Cancel Subscription
           </button>
-          <router-link v-else to="/subscribe"  class="btn btn-primary"
+          <router-link v-else to="/plans"  class="btn btn-dark"
             >Subscribe now</router-link>
         </div>
 
@@ -211,10 +211,14 @@
         </form> -->
       </div>
     </div>
+    <div class="footer">
+      <MainFooter />
+    </div>
   </div>
 </template>
 <script>
 import LawyerHeader from "./Header.vue";
+import MainFooter from "../../components/global/MainFooter.vue";
 import ChangePasswordForm from "@/components/ChangePasswordForm.vue";
 import { mapState } from 'vuex';
 // import * as yup from "yup";
@@ -222,7 +226,8 @@ import { mapState } from 'vuex';
 import api from "@/config/api.js";
 export default {
   components: {
-    LawyerHeader, 
+    LawyerHeader,
+    MainFooter,
     // Form, 
     // Field, 
     ChangePasswordForm
@@ -289,11 +294,11 @@ export default {
           console.log("getResults : ", error)
         });
     },
-    replacePaymentMethod() {
+    replacePaymentMethod(plan) {
       this.$store.commit('SET_REPLACE_PAYMENT_METHOD', true);
-      this.$router.push({ path: '/subscribe' });
+      this.$router.push({ path: `/subscribe/${plan}` });
     },
-    resubscribe() {
+    resubscribe(plan) {
       this.$swal({
         title: 'Are you sure?',
         text: 'Are you sure you want to resubscribe ?',
@@ -304,7 +309,7 @@ export default {
         confirmButtonText: 'Yes, Resubscribe'
       }).then((result) => {
         if (result.isConfirmed) {
-          api.post('/lawyer/resubscribe')
+          api.get(`/lawyer/resubscribe/${plan}`)
             .then(() => {
               this.$swal(
                 'Success',
@@ -418,8 +423,8 @@ export default {
 }
 
 .navActive {
-  background: grey;
-  border: 1px solid grey;
+  background: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   color: white;
 }
@@ -431,12 +436,28 @@ export default {
 }
 
 .bg-grey {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 
 .bg-grey:hover {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
+}
+
+.l-main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.hd-receipt th {
+  border: none;
 }
 </style>

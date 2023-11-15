@@ -1,5 +1,6 @@
 <template lang="">
   <section class="  ">
+    <GeneralHeader  />
     <div class="WordSection1 container mt-4">
       <p class="LNDocumentTitleShort" align="center" style="text-align: center">
         
@@ -62,11 +63,13 @@
 </template>
 <script>
 import MainFooter from "../components/global/MainFooter.vue";
+import GeneralHeader from "./GeneralHeader.vue";
 
 
 export default {
   components: {
-    MainFooter
+    MainFooter,
+    GeneralHeader
   },
 
   name: "AboutUs",

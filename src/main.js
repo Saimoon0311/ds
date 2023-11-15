@@ -106,13 +106,16 @@ app.mixin({
     },
 
     sendOtp(email) {
-      console.log('user email : ' , email);
-      api.post("/generate-send-otp", { email }).then(() => {
-        this.$store.commit("SET_OTP_EMAIL", email);
-        localStorage.setItem('otpEmail',email);
-        this.$router.push({ path : '/otp' })
+      console.log("user email : ", email);
+      api
+        .post("/generate-send-otp", { email })
+        .then(() => {
+          this.$store.commit("SET_OTP_EMAIL", email);
+          localStorage.setItem("otpEmail", email);
+          this.$router.push({ path: "/otp" });
           // this.setUserAndRedirect(res, dashboardUrl);
-        }).catch((error) => {
+        })
+        .catch((error) => {
           // alert("Invalid Credentials");
           console.log("getResults : ", error);
         });
@@ -156,18 +159,36 @@ app.mixin({
     //     }
     // },
 
-    submitSignupForm(formData, userType, dashboardUrl) {
+    submitSignupForm(formData, userType) {
       try {
         formData.type = userType;
         api
           .post("/signup", formData)
           .then((res) => {
-            this.sendOtp(res?.data?.data?.email);
-            console.log(dashboardUrl);
-            // this.setUserAndRedirect(res, dashboardUrl);
+            if (userType == "lawyer") {
+              this.$swal({
+                // title: 'Thank you for signing up.',
+                text: "Thank you for signing up. Please complete your profile.",
+                icon: "success",
+                // showCancelButton: true,
+                // confirmButtonColor: '#3085d6',
+                // cancelButtonColor: '#d33',
+                confirmButtonText: "Complete Your Profile",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  // this.setUserAndRedirect(res, dashboardUrl);
+                  this.sendOtp(res?.data?.data?.email);
+                }
+              });
+            } else {
+              // this.setUserAndRedirect(res, dashboardUrl);
+              this.sendOtp(res?.data?.data?.email);
+            }
           })
           .catch((error) => {
-            alert("Invalid Credentials");
+            // alert("Invalid Credentials");
+            // error?.response?.data?.error
+            this.$swal('Error', 'Something went wrong, Please try again.', 'error');
             console.log("getResults : ", error);
           });
       } catch (error) {
@@ -189,7 +210,8 @@ app.mixin({
             this.setUserAndRedirect(res, dashboardUrl);
           })
           .catch((error) => {
-            alert("Invalid Credentials");
+            this.$swal('Error', 'Something went wrong, Please try again.', 'error');
+            // alert("Invalid Credentials");
             console.log("getResults : ", error);
           });
         console.log(formData);

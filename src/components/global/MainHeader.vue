@@ -5,11 +5,13 @@
     </router-link>
     <div class="dropdown cstm-dropdown">
       <button class="btn btn-secondary dropdown-toggle menu-burger" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fa-solid fa-bars"></i>
+        <!-- <i class="fa-solid fa-bars"></i> -->
+        <img src="../../assets/images/bar.png" alt="">
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li><router-link class="dropdown-item" to="/about-us">About Us</router-link></li>
-        <li><router-link class="dropdown-item" to="/faqs">FAQs</router-link></li>
+        <li><router-link class="dropdown-item" to="/client-faqs">Client FAQs</router-link></li>
+        <li><router-link class="dropdown-item" to="/lawyer-faqs">Lawyer FAQs</router-link></li>
         <li> <router-link class="dropdown-item" to="/contact-us">Contact Us</router-link></li>
       </ul>
     </div>
@@ -43,6 +45,15 @@ export default {
 
 .cstm-dropdown button {
   border-radius: 0px;
+  border: none !important
+}
+
+.cstm-dropdown button img {
+  width: 50px;
+}
+
+.cstm-dropdown button:focus {
+  box-shadow: none !important
 }
 
 .dropdown-item.active,

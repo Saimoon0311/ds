@@ -14,7 +14,7 @@
             />
           </a>
           <button
-            class="navbar-toggler"
+            class="navbar-toggler cstm-dropdown"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNavAltMarkup"
@@ -22,7 +22,9 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <img src="../../assets/images/bar.png" alt="" />
+
+            <!-- <span class="navbar-toggler-icon"></span> -->
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
@@ -41,7 +43,7 @@
                   aria-current="page"
                   >Proposals</router-link
                 >
-                  
+
                 <router-link
                   to="/lawyer-account"
                   class="nav-link fw-bolder menuItem-active-link"
@@ -50,20 +52,71 @@
                   >Account</router-link
                 >
                 <router-link
+                  to="/client-faqs"
+                  class="nav-link fw-bolder menuItem-active-link"
+                  id="jobs"
+                  aria-current="page"
+                  >FAQs</router-link
+                >
+                <router-link
                   to="/lawyer-profile"
                   class="nav-link fw-bolder menuItem-active-link"
                   id="jobs"
                   aria-current="page"
                   >Profile</router-link
                 >
-              </div>
-              <div>
+                
                 <button
                   @click="logout('lawyer-login')"
-                  class="nav-link float-right logOutBtn active"
+                  class="nav-link float-right logOutBtn fw-bolder"
                   id="clients"
                   aria-current="page"
-                  >Logout</button>
+                >
+                  Logout
+                </button>
+              </div>
+
+              <div class="dropdown cstm-dropdown custom-dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle menu-burger"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <!-- <i class="fa-solid fa-bars"></i> -->
+                  <img src="../../assets/images/bar.png" alt="" />
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li>
+                    <router-link class="dropdown-item" to="/about-us"
+                      >About Us</router-link
+                    >
+                  </li>
+
+                  <li v-if="loginUser != null && loginUser?.type == 'client'">
+                    <router-link class="dropdown-item" to="/client-faqs"
+                      >FAQs</router-link
+                    >
+                  </li>
+                  <li v-if="loginUser != null && loginUser?.type == 'lawyer'">
+                    <router-link class="dropdown-item" to="/lawyer-faqs"
+                      >FAQs</router-link
+                    >
+                  </li>
+
+                  <li>
+                    <router-link class="dropdown-item" to="/how-simplawfy-works"
+                      >How Simplawfy Works</router-link
+                    >
+                  </li>
+
+                  <li>
+                    <router-link class="dropdown-item" to="/contact-us"
+                      >Contact Us</router-link
+                    >
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -75,17 +128,37 @@
 <script>
 export default {
   components: {},
-  methods: {
-  },
+  methods: {},
   name: "LawyerHeader",
 };
 </script>
 <style scoped>
 .router-link-exact-active.menuItem-active-link {
-  background: grey;
-  border: 1px solid grey;
+  background: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   color: white;
+  padding: 5px 11px;
+}
+
+.cstm-dropdown {
+  border-radius: 0px;
+  border: none !important;
+  margin-top: -10px;
+}
+ul.dropdown-menu.show {
+  left: auto;
+  right: 10px;
+  margin-top: 10px;
+}
+
+.cstm-dropdown:focus {
+  box-shadow: none !important;
+}
+
+.cstm-dropdown img {
+  width: 50px;
+  margin-top: 15px;
 }
 
 .navbar-nav {
@@ -109,9 +182,9 @@ export default {
 }
 
 .navActive {
-  background: grey;
-  border: 1px solid grey;
-  border-radius: 10px;
+  background: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 7px;
   color: white;
 }
 
@@ -122,12 +195,54 @@ export default {
 }
 
 .bg-grey {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 
 .bg-grey:hover {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
+}
+@media only screen and (max-width: 1024px) {
+  
+  .cstm-dropdown {
+    margin-top: 0;
+    top: 0;
+  }
+  .navbar-nav {
+    align-items: baseline;
+  }
+
+  .navbar-nav .left-menu {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+ 
+  .navbar-nav .lg-btn {
+    padding: 0px 22px;
+  }
+
+  .router-link-exact-active.menuItem-active-link {
+    padding: 7px 10px;
+  }
+  .logOutBtn {
+    width: 109px;
+    text-align: left;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .custom-dropdown{
+    display: none;
+  }
+}
+@media only screen and (max-width: 767px) and (min-width: 320px) {
+  .pb-seven {
+    padding-bottom: 200px;
+  }
+  .cstm-dropdown img{
+    margin-top: 0;
+  }
 }
 </style>

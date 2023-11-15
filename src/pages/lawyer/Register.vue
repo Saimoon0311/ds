@@ -1,16 +1,25 @@
 <template lang="">
     <div class="l-register-main">
+        <GeneralHeader />
     <div class="hello container">
-        <MainHeader />
         <div class=" pt-4 center-main row justify-content-center">
         <div class="col-md-10 col-lg-7">        
         <div class="bg-dark text-white text-center m-3 p-3 pt-4 find-client" style="border-radius: 10px">
             
         <Form @submit="submitData" class="p-2 px-md-5 m-md-3 fc-form" :validation-schema="schema" v-slot="{errors}">
             <p class=" mb-4 fs-3">Sign up to find clients</p>
-            <!-- <div class="mb-4">
-                <router-link to="/client-register">Register as a Client</router-link>
-            </div> -->
+            <div>
+                    <div class="im-user">
+                        <input type="radio" id="optionPage1" value="client" v-model="pageOption" @change="changePage" />
+                        <label for="optionPage1">I'm a client</label>
+                    </div>
+                    
+                    <div class="im-user"> 
+                        <input type="radio" id="optionPage2" value="lawyer" v-model="pageOption" @change="changePage" />
+                        <label for="optionPage2">I'm a lawyer</label>
+                    </div>
+                  
+            </div>    
             <div class="d-flex flex-row align-items-center mb-4 align-baseline">
                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                  <!-- Add the style and icon you want using the String format -->
@@ -61,6 +70,31 @@
                 </div>
             </div>
 
+            <div class="d-flex flex-row align-items-center mb-4 align-baseline">
+                <i class="fas fa-circle-question fa-lg me-3 fa-fw"></i>
+                <div class="form-outline flex-fill mb-0">
+                      <Field name="field" as="select" class=" form-select " v-model="selectedOption" @change="checkOtherOption" >
+                        <option value="" disabled selected hidden>How did you hear about us?</option>
+                        <option value="Google">Google</option>
+                        <option value="LinkedIn">LinkedIn</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Colleague/Friend/Family">Colleague/Friend/Family</option>
+                        <option value="Networking">Networking</option>
+                        <option value="Another Lawyer">Another Lawyer</option>
+                        <option value="Other">Other</option>
+                       
+                      </Field>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-4 align-baseline" v-if="selectedOption === 'Other'">
+                <i class="fas fa-message fa-lg me-3 fa-fw"></i>
+                <div class="form-outline flex-fill mb-0">
+                    <textarea class="form-control otherTextarea" type="text" v-model="otherText" placeholder="Please specify" ></textarea>
+                </div>
+            </div> 
+
             <div class="d-flex align-items-between justify-content-center mb-4 inline-table terms-check">
                 <Field class="form-check-Field" type="checkbox" id="termsAndConditions" name="tandc" value="true" :class="{'is-invalid' : errors.tandc}" />
                 <label class="form-check-label tac" for="termsAndConditions">
@@ -74,7 +108,9 @@
                 <button class="btn btn-outline-light btn-lg px-5">Sign up</button>
             </div>
 
-            <p>Already have an account?<br> <router-link  to="/lawyer-login">Login</router-link ></p>
+            <p>
+                <!-- Already have an account?<br>  -->
+                <router-link  to="/lawyer-login">Already have an account?</router-link ></p>
         </Form>
     </div>
 </div>
@@ -88,55 +124,93 @@
 </div>
 </template>
 <script>
-import MainHeader from '../../components/global/MainHeader.vue'
+import GeneralHeader from "../../pages/GeneralHeader.vue";
+
+// import MainHeader from '../../components/global/MainHeader.vue'
 import MainFooter from "../../components/global/MainFooter.vue";
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
     data() {
         const schema = yup.object().shape({
-            first_name: yup.string().required('First name is required.'),
-            last_name: yup.string().required('Last name is required.'),
-            phone: yup.string().required('Phone number is required.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
+            first_name: yup.string().required('Please enter your first name.'),
+            last_name: yup.string().required('Please enter your last name.'),
+            phone: yup.string().required('Please enter your phone number.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
             email: yup.string()
-                .min(3, 'Email must be valid')
-                .max(50, 'Email must be valid')
-                .required('Please enter your email')
+                .min(3, 'Please enter valid email.')
+                .max(50, 'Please enter valid email.')
+                .required('Please enter your email.')
                 .matches(
                     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                    'Please enter valid email',
+                    'Please enter valid email.',
                 ),
             password: yup
                 .string()
-                .required('Please enter your password')
-                .min(6, 'Password must be greater then 6 digit')
-                .max(16, 'Password must be less then 16 digit')
+                .required('Please enter your password.')
+                .min(6, 'Password must be greater then 6 digit.')
+                .max(16, 'Password must be less then 16 digit.')
                 .matches(
                     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                    'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
+                    'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character.',
                 ),
             confirm_password: yup
                 .string()
-                .required('Confirm password is required')
-                .oneOf([yup.ref('password'), null], 'Password must match'),
+                .required('Please re-enter your password.')
+                .oneOf([yup.ref('password'), null], 'Password must match.'),
             tandc: yup.bool() // use bool instead of boolean
-                .required('You must accept the terms and conditions')
-                .oneOf([true], "You must accept the terms and conditions")
+                .required('You must accept the terms and conditions.')
+                .oneOf([true], "You must accept the terms and conditions.")
         });
         return {
-            schema
+            schema,
+            pageOption: this.getCurrentPageOption(),
+            selectedOption: '', // Selected option from dropdown
+            otherText: '' // Text input for 'Other' option
         }
     },
     components: {
-        MainHeader,
+        GeneralHeader,
         Form,
         Field,
         MainFooter
     },
     methods: {
-        submitData(formData){
-            this.submitSignupForm(formData,'lawyer','lawyer-profile');
-        }
+        submitData(formData) {
+            console.log(this.selectedOption , " . option")
+            if(this.selectedOption != ""){
+                formData.hear_about_us = this.selectedOption == "other" ? this.otherText : this.selectedOption;
+            }
+            this.submitSignupForm(formData, 'lawyer', 'lawyer-profile');
+        },
+        getCurrentPageOption() {
+            const currentRoute = this.$route.path;
+            console.log('c user', currentRoute);
+            // Compare current route with the routes associated with each option
+            if (currentRoute === '/client-register') {
+                return 'client'; // If current route is '/page1', select 'page1'
+            } else if (currentRoute === '/lawyer-register') {
+                return 'lawyer'; // If current route is '/page2', select 'page2'
+            } else {
+                return null; // Or return null if the current route is not matched
+            }
+        },
+        changePage() {
+            if (this.pageOption === 'client') {
+                this.$router.push('/client-register');
+                console.log('asd', this.pageOption);
+
+            } else if (this.pageOption === 'lawyer') {
+                console.log('asd', this.pageOption);
+                this.$router.push('/lawyer-register');
+            }
+        },
+        checkOtherOption() {
+            // If 'Other' is selected, clear the otherText field
+            if (this.selectedOption !== 'Other') {
+                this.otherText = '';
+            }
+
+        },
     },
     name: 'LawyerRegister',
 }
@@ -159,12 +233,24 @@ export default {
     justify-content: center;
     flex-wrap: wrap;
 } */
+.select-o {
+    width: 100%;
+    padding: 0.47rem 0.75rem;
+    border-radius: 0.375rem;
+    /* color: gray */
+}
+
 .inline-table {
     display: inline-block !important;
 }
 
 .align-baseline {
     align-items: baseline !important;
+}
+
+.otherTextarea {
+    width: 100%;
+    min-height: 100px;
 }
 
 .terms-check {
@@ -183,6 +269,17 @@ export default {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+.im-user {
+    display: inline-block;
+    padding: 20px;
+    padding-top: 7px;
+}
+
+.im-user label {
+    margin-top: 3px;
+    margin-left: 6px;
 }
 
 @media (max-width: 1200px) {

@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
-    <MainHeader />
+    <GeneralHeader />
+
     <div class="d-flex flex-wrap justify-content-center align-items-center flex-column">
       <div class="mb-5 mt-5 text-center">
         <p class="logo-sub-heading">
@@ -56,10 +57,11 @@
           </div>
         </div>
       </div>
+
+      <div class="mb-5">
+        <router-link to="" class="btn btn-dark text-light" @click="openSweetAlert">Already have an account?</router-link>
+      </div>
       <!-- <div class="mb-3">
-          <router-link to="/login" class="text-dark">Already have an account?</router-link>
-        </div>
-        <div class="mb-3">
           <router-link to="/terms-of-use" class="me-2 text-dark">Terms of use</router-link>
           <router-link to="/privacy-policy" class="ms-2 text-dark">Privacy policy</router-link>
         </div> -->
@@ -67,22 +69,72 @@
     </div>
     <MainFooter />
 
+    <!-- ------- -->
+    <div class="modal fade lawfirm-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+      aria-hidden="true" id="FirmName">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+            <button type="button" class="close btn btn-dark" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div class="form-group text-center">
+
+              <div class="d-flex align-items-center justify-content-center my-3 pb-5 pt-5">
+                <router-link to="/client-login" class="close text-dark fs-5 p-2 btn btn-dark text-white">I'm a
+                  Client</router-link>
+                <router-link to="/lawyer-login" class="close text-dark fs-5 p-2 btn btn-dark text-white">I'm a
+                  Lawyer</router-link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ------- -->
+
+
   </div>
 </template>
 
 <script>
-import MainHeader from "./global/MainHeader.vue";
+import GeneralHeader from "../pages/GeneralHeader.vue";
 import MainFooter from "./global/MainFooter.vue";
+
 
 export default {
   components: {
-    MainHeader,
+    GeneralHeader,
     MainFooter,
   },
   // name: 'Platform',
   props: {
     msg: String,
   },
+  methods: {
+    openSweetAlert() {
+      this.$swal({
+        title: 'Login',
+        // text: 'Navigate using SweetAlert buttons',
+        // icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: "I'm a Client",
+        cancelButtonText: "I'm a Lawyer"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Navigate to Page A
+          this.$router.push('/client-login');
+        } else if (result.dismiss === this.$swal.DismissReason.cancel) {
+          // Navigate to Page B
+          this.$router.push('/lawyer-login');
+        }
+      });
+    }
+  }
 };
 </script>
 
@@ -150,14 +202,29 @@ export default {
   margin-top: 2rem !important;
 }
 
+.showhover p {
+  line-height: 25px;
+  margin-bottom: 17px;
+}
+
 @media (min-width: 320px) and (max-width: 425px) {
   .cstm-dropdown {
     margin-top: -20px;
     right: 0px;
   }
 
+  .showhover {
+    line-height: 22px;
+    font-size: 13px;
+  }
+
   .footer-main span {
     display: block;
+  }
+
+  .showhover p {
+    line-height: 22px;
+    margin-bottom: 10px;
   }
 }
 
@@ -227,6 +294,10 @@ export default {
 
   .cstm-dropdown {
     right: 20px;
+  }
+
+  .showhover {
+    line-height: 20px;
   }
 
 }

@@ -392,7 +392,7 @@
         </div>
       </div>
       <!-- request info -->
-      <h4>Information Requests</h4>
+      <!-- <h4>Information Requests</h4>
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -437,7 +437,7 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </div>
   </div>
 </template>
@@ -531,13 +531,13 @@ ul#pills-tab {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
   color: white;
-  background-color: #808080;
+  background-color: #000000;
 }
 
 .nav-pills .nav-link,
 .nav-link:focus,
 .nav-link:hover {
-  color: #6d6f73;
+  color: #000000;
 }
 
 .text-left {

@@ -12,7 +12,7 @@
             placeholder="New password" />
         <span class="invalid-feedback">{{ errors.password }}</span>
 
-        <button type="submit" name="password-submit" class="btn btn-secondary my-3">
+        <button type="submit" name="password-submit" class="btn btn-dark my-3">
             Save Changes
         </button>
 
