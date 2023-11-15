@@ -713,14 +713,13 @@
                     <span class="position-absolute d-span">
                       $</span>
                     <input type="number" id="hourlyRate" v-model="form.fee_earners" name="hourlyRate" min="1" step="0.01"
-                      class="form-control d-input" oninput="updateHourlyRateIndividual()" />
+                      class="form-control d-input" />
                   </div>
 
                   <br />
 
                   <label>Estimated number of hours<sup><code>*</code></sup></label>
-                  <input type="number" id="noOfHours" name="noOfHours" min="1" step="0.01" class="form-control"
-                    oninput="updateHourlyRateIndividual()" />
+                  <input type="number" id="noOfHours" name="noOfHours" min="1" step="0.01" class="form-control" />
 
                   <br />
                 </div>

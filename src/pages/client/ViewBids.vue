@@ -392,7 +392,7 @@
         </div>
       </div>
       <!-- request info -->
-      <h4>Information Requests</h4>
+      <!-- <h4>Information Requests</h4>
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -437,7 +437,7 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </div>
   </div>
 </template>
