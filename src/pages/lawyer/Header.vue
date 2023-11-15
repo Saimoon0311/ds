@@ -66,14 +66,7 @@
                   >Profile</router-link
                 >
                 
-                <button
-                  @click="logout('lawyer-login')"
-                  class="nav-link float-right logOutBtn fw-bolder"
-                  id="clients"
-                  aria-current="page"
-                >
-                  Logout
-                </button>
+                
               </div>
 
               <div class="dropdown cstm-dropdown custom-dropdown">
@@ -115,6 +108,16 @@
                     <router-link class="dropdown-item" to="/contact-us"
                       >Contact Us</router-link
                     >
+                  </li>
+                  <li>
+                    <button
+                  @click="logout('lawyer-login')"
+                  class="dropdown-item"
+                  id="clients"
+                  aria-current="page"
+                >
+                  Logout
+                </button>
                   </li>
                 </ul>
               </div>

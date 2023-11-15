@@ -522,9 +522,9 @@ export default {
     MainFooter
   },
 
-   data() {
+  data() {
     return {
-      pageStatus : "pending",
+      pageStatus: "pending",
       openJobs: [],
       endpoint: "/admin/all-lawyers",
       // endpoint_search: "/lawyer/search-related-jobs",
@@ -547,11 +547,11 @@ export default {
     await this.loadMore(this.pageStatus);
   },
   methods: {
-    async setStatus(status){
+    async setStatus(status) {
       this.pageStatus = status;
-      await this.loadMore(status,true)
+      await this.loadMore(status, true)
     },
-    approve(id,index){
+    approve(id, index) {
       try {
         this.$swal({
           title: "Are you sure?",
@@ -564,14 +564,14 @@ export default {
         }).then((result) => {
           if (result.isConfirmed) {
             api
-              .post("/admin/approve-reject-users", { user_id: id, status : 'approve' })
+              .post("/admin/approve-reject-users", { user_id: id, status: 'approve' })
               .then(() => {
                 this.$swal(
                   "Success",
                   `Lawyer has been approved successfully`,
                   "success"
                 ).then(async () => {
-                  this.fixLoadMoreAfterDeleteRecord(index,this.pageStatus);
+                  this.fixLoadMoreAfterDeleteRecord(index, this.pageStatus);
                 });
               })
               .catch((error) => {
@@ -583,7 +583,7 @@ export default {
         console.error("Error fetching options:", error);
       }
     },
-    reject(id,index){
+    reject(id, index) {
       try {
         this.$swal({
           title: "Are you sure?",
@@ -596,14 +596,14 @@ export default {
         }).then((result) => {
           if (result.isConfirmed) {
             api
-            .post("/admin/approve-reject-users", { user_id: id, status : 'reject' })
+              .post("/admin/approve-reject-users", { user_id: id, status: 'reject' })
               .then(() => {
                 this.$swal(
                   "Success",
                   `Lawyer has been rejected successfully`,
                   "success"
                 ).then(async () => {
-                  this.fixLoadMoreAfterDeleteRecord(index,this.pageStatus);
+                  this.fixLoadMoreAfterDeleteRecord(index, this.pageStatus);
                 });
               })
               .catch((error) => {
@@ -631,7 +631,18 @@ ul#pills-tab {
   width: 230px;
 }
 
-.hello {}
+/* .hello {} */
+.hello {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {

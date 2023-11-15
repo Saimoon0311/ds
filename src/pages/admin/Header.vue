@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="hello">
+  <div class="">
     <header>
       <nav
         class="navbar navbar-expand-lg"

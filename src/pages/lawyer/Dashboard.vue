@@ -471,7 +471,7 @@
             </div> 
           </div>
           <div
-                    v-if="openJobs.length > 0 && currentPage != lastPage"
+                    v-if="openJobs.length > 0 && currentPage != lastPage && adminApproval == 'approve' && subscriptionStatus == 'subscribed'"
                     class="text-center mt-3">
                     <button class="btn custom-button" @click="loadMore">
                       Load More
