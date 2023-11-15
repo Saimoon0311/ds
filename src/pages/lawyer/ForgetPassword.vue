@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                <router-link to="/lawyer-login" class="btn btn-outline-light btn-lg px-5">Back</router-link>
+                <router-link to="/login" class="btn btn-outline-light btn-lg px-5">Back</router-link>
                 &nbsp;
                 <button class="btn btn-outline-light btn-lg px-5">Submit</button>
             </div>

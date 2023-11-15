@@ -719,14 +719,13 @@
                     <span class="position-absolute d-span">
                       $</span>
                     <input type="number" id="hourlyRate" v-model="form.fee_earners" name="hourlyRate" min="1" step="0.01"
-                      class="form-control d-input" oninput="updateHourlyRateIndividual()" />
+                      class="form-control d-input" />
                   </div>
 
                   <br />
 
                   <label>Estimated number of hours<sup><code>*</code></sup></label>
-                  <input type="number" id="noOfHours" name="noOfHours" min="1" step="0.01" class="form-control"
-                    oninput="updateHourlyRateIndividual()" />
+                  <input type="number" id="noOfHours" name="noOfHours" min="1" step="0.01" class="form-control" />
 
                   <br />
                 </div>
@@ -1856,7 +1855,7 @@ export default {
       return this.rows2.reduce((total, row) => total + parseFloat(row.costAud) || 0, 0);
     },
     grandTotal3() {
-      return this.rows3.reduce((total, row) => total + parseFloat(row.costAud) || 0, 0);
+      return this.rows3.reduce((total, row) => total + parseFloat(row.hourlyRate) || 0, 0);
     },
 
     currentSchema() {
@@ -1895,10 +1894,19 @@ export default {
       this.form.job_id = this.jobData?.id;
       this.form.lawyer_id = this.loginUser?.email;
       this.form.charge_type = this.selectedOption;
+
+      console.log('rows 3 : ', this.rows3);
+      this.form.disbursements = this.rows; // Itemise Disbursements
+      this.form.specificTasks = this.rows2; // item by item specific tasks
+      this.form.feeEarners = this.rows3; // additional fee earner
+
+      console.log(this.form);
+
       api.post('/lawyer/create-proposal', this.form)
         .then(() => {
           this.$swal('', 'Your proposal has been submitted.', 'success').then(res => {
             console.log('response : ', res);
+            this.$router.push({ path: '/lawyer-dashboard' });
             // this.changePostJobFormToDefault();
             // this.currentStep = 0;
           });
@@ -1934,13 +1942,14 @@ export default {
       }
     },
     addRow3() {
+      // console.log('clicked');
       if (this.newRow3.title && this.newRow3.hourlyRate && this.newRow3.estimatedHours) {
         this.rows3.push({
           title: this.newRow3.title,
           hourlyRate: this.newRow3.hourlyRate,
           estimatedHours: this.newRow3.estimatedHours,
         });
-        // console.log(this.rows);
+        // console.log(this.rows3);
         this.newRow3.title = '';
         this.newRow3.hourlyRate = '';
         this.newRow3.estimatedHours = '';

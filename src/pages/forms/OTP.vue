@@ -1,0 +1,229 @@
+<template>
+    <div class="l-register-main">
+        <div class="hello container">
+            <MainHeader />
+            <div class=" pt-4 center-main row justify-content-center">
+                <div class="col-md-10 col-lg-7 text-center my-4">
+                    <div class="bg-dark text-white text-center m-3 p-3 pt-4 find-client" style="border-radius: 10px">
+
+
+                        <h2 class="mb-4 text-light">OTP Verification</h2>
+                        <div class="row">
+                            <div v-for="(digit, index) in otpDigits" :key="index" class="col-2">
+                                <input v-model="otpDigits[index]" @input="handleInput(index, $event)"
+                                    @paste="handlePaste(index, $event)" class="form-control text-center" maxlength="1"
+                                    type="text" ref="digitInputs" />
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                            <button @click="verifyOtp" class="btn btn-outline-light btn-lg px-5">Verify OTP</button>
+                        </div>
+
+                        <a href="javascript:;" @click="sendOtpAgain(this.otpEmail)">Resend OTP code.</a>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="footer">
+            <MainFooter />
+        </div>
+    </div>
+
+
+
+
+    <!-- <div class="container mt-5">
+        <h2 class="mb-4">OTP Verification</h2>
+        <div class="row">
+            <div v-for="(digit, index) in otpDigits" :key="index" class="col-2">
+                <input v-model="otpDigits[index]" @input="handleInput(index, $event)" @paste="handlePaste(index, $event)"
+                    class="form-control text-center" maxlength="1" type="text" ref="digitInputs" />
+            </div>
+        </div>
+        <button @click="verifyOtp" class="btn btn-primary mt-3">Verify OTP</button>
+    </div> -->
+</template>
+  
+<script>
+import { nextTick } from 'vue';
+import api from '@/config/api';
+import MainHeader from '../../components/global/MainHeader.vue'
+import MainFooter from "../../components/global/MainFooter.vue";
+export default {
+    components: {
+        MainHeader,
+        MainFooter
+    },
+    data() {
+        return {
+            otpVerified : false,
+            otpDigits: ['', '', '', '', '', ''],
+        };
+    },
+    beforeUnmount(){
+        if(!this.otpVerified){
+           api
+          .get(`/delete-unverified-account/${this.otpEmail}`)
+          .then(() => {
+            console.log('deleted')
+          })
+          .catch((error) => console.log("getResults : ", error));
+        }
+    },
+    computed: {
+        otpEmail() {
+            // const otp = this.$store.state.otpEmail;
+            // if(otp == null || otp == ""){
+            //     if (!localStorage.hasOwnProperty(otpEmail) || localStorage[otpEmail] == null || localStorage[otpEmail] == '') {
+                    
+            //     }
+            // }
+            // if((this.$store.otpEmail == null || this.$store.otpEmail == "") && localStorage.getItem('otpEmail'))
+            return this.$store.state.otpEmail;
+        },
+    },
+    mounted() {
+        // Focus on the first input when the component is mounted
+        nextTick(() => this.$refs.digitInputs[0]?.focus());
+    },
+    methods: {
+        sendOtpAgain(email){
+            this.sendOtp(email);
+            this.otpDigits = ['', '', '', '', '', ''];
+        },
+        handlePaste(index, event) {
+            event.preventDefault();
+            const pastedValue = event.clipboardData.getData('text');
+            for (let i = 0; i < pastedValue.length && index + i < this.otpDigits.length; i++) {
+                this.otpDigits[index + i] = pastedValue.charAt(i);
+            }
+            nextTick(() => this.$refs.digitInputs[index + pastedValue.length]?.focus());
+        },
+        handleInput(index, event) {
+            const inputValue = event.target.value;
+            if (/^\d$/.test(inputValue)) {
+                if (index < 5 && inputValue) {
+                    nextTick(() => this.$refs.digitInputs[index + 1]?.focus());
+                }
+            } else if (index > 0 && !inputValue) {
+                // If a digit is removed, move focus to the previous input
+                nextTick(() => this.$refs.digitInputs[index - 1]?.focus());
+            }
+        },
+        verifyOtp() {
+            const otp = this.otpDigits.join('');
+            if (otp.length > 0) {
+                console.log('Verifying OTP:', otp);
+
+                api.post('/verify-otp', { otp: otp, email: this.otpEmail })
+                    .then(res => {
+                        console.log(res.data);
+                        let dashboardUrl = null;
+                        if (res?.data?.data?.type == "lawyer") {
+                            dashboardUrl = "lawyer-profile";
+                        } else if (res?.data?.data?.type == "client") {
+                            dashboardUrl = "client-dashboard";
+                        }
+                        this.otpVerified = true;
+                        this.setUserAndRedirect(res, dashboardUrl);
+                    })
+                    .catch(() => {
+                        this.$swal('Error', 'Invalid otp or may be expire', 'error');
+                    });
+            }
+        },
+    },
+};
+</script>
+  
+
+
+
+<style scoped>
+.otp-form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.otp-container,
+.email-otp-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.otp-input,
+.email-otp-input {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.otp-input:focus,
+.email-otp-input:focus {
+    border-color: #007bff;
+}
+
+#verificationCode,
+#emailverificationCode {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#verificationCode:focus,
+#emailverificationCode:focus {
+    border-color: #007bff;
+}
+
+.email-otp {
+    margin-top: 25px;
+}
+
+button {
+    margin-top: 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+</style>

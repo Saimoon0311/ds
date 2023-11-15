@@ -28,6 +28,7 @@
               role="tab"
               aria-controls="pills-home"
               aria-selected="true"
+              @click="setStatus('open')"
             >
               Open
             </button>
@@ -44,6 +45,7 @@
               aria-controls="pills-profile"
               aria-selected="false"
               tabindex="-1"
+              @click="setStatus('accept')"
             >
               Closed
             </button>
@@ -158,6 +160,7 @@
                     </dl>
                   </th>
                   <th>Proposed work</th>
+                  <th>Created at</th>
                   <!-- <th>Deadline achievable?</th>
                   <th>Free/discounted first consultation?</th> -->
                   <th>Actions</th>
@@ -165,24 +168,27 @@
               </thead>
 
               <tbody>
-                <tr>
+                <tr v-if="data_paginated == null || data_paginated.length == 0">
                   <td colspan="8" class="text-center">
                     No active Proposals are available.
                   </td>
                 </tr>
-                <tr class="text-left">
-                  <td>testing client (crinimal)</td>
-                  <td>Fixed fee</td>
-                  <td>$100.00</td>
-                  <td>Yes - $55.00</td>
-                  <td>dummy text</td>
+                <tr v-else class="text-left" v-for="(item,index) in data_paginated" :key="index">
+                  <!-- <td>testing client (crinimal)</td> -->
+                  <td>{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</td>
+                  <td>{{ item?.charge_type }}</td>
+                  <td>{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
+                  <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td>
+                  <td>{{ item?.description }}</td>
+                  <td>{{ formatCreatedAt(item?.created_at) }}</td>
+
                   <!-- <td>Yes</td>
                   <td>No</td> -->
                   <td>
-                    <div class="text-center">
+                    <div class="text-center" v-if="item?.status == 'Open'">
                       <button
                         class="btn btn-light btn-sm border p-1 px-2 mb-1"
-                        onclick="handleAcceptBidAction(event)"
+                        @click="handleAcceptBidAction(item?.id,item?.lawyer?.id,item?.job_id)"
                       >
                         Accept
                       </button>
@@ -196,7 +202,7 @@
                       </form>
                       <button
                         class="btn btn-danger btn-sm p-1 px-2"
-                        onclick="handleRejectBidAction(event)"
+                        @click="handleRejectBidAction(item?.id,item?.lawyer?.id,item?.job_id)"
                       >
                         Reject
                       </button>
@@ -207,10 +213,12 @@
                         </button>
                       </form>
                     </div>
+                    <p v-else>{{ item?.status }}</p>
                   </td>
                 </tr>
               </tbody>
             </table>
+
           </div>
           <div
             data-v-511b78bb=""
@@ -325,18 +333,66 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr v-if="data_paginated == null || data_paginated.length == 0">
                   <td colspan="7" class="text-center">
                     No closed Proposals are available.
                   </td>
                 </tr>
+                <tr v-else class="text-left" v-for="(item,index) in data_paginated" :key="index">
+                  <!-- <td>testing client (crinimal)</td> -->
+                  
+                  <td>{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</td>
+                  <td>{{ item?.charge_type }}</td>
+                  <td>{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
+                  <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td>
+                  <td>{{ item?.description }}</td>
+
+
+                  <!-- <td>Yes</td>
+                  <td>No</td> -->
+                  <!-- <td>
+                    <div class="text-center">
+                      <button
+                        class="btn btn-light btn-sm border p-1 px-2 mb-1"
+                        onclick="handleAcceptBidAction(event)"
+                      >
+                        Accept
+                      </button>
+                      <form method="post" action="backend/acceptBid.php">
+                        <input value="146" class="d-none" name="bidId" />
+                        <input value="30" class="d-none" name="jobId" />
+                        <input value="22" class="d-none" name="lawyerId" />
+                        <button class="d-none" name="accept">
+                          <i class="bi bi-check-lg"></i> Accept
+                        </button>
+                      </form>
+                      <button
+                        class="btn btn-danger btn-sm p-1 px-2"
+                        onclick="handleRejectBidAction(event)"
+                      >
+                        Reject
+                      </button>
+                      <form method="post" action="backend/rejectBid.php">
+                        <input value="146" class="d-none" name="id" />
+                        <button class="d-none" name="reject">
+                          <i class="bi bi-x-lg"></i>Reject
+                        </button>
+                      </form>
+                    </div>
+                  </td> -->
+                </tr>
               </tbody>
             </table>
           </div>
+
+          <!-- for pagination -->
+          <CustomPagination  v-if="data_paginated != null && data_paginated.length > 0" />
+            <!-- for pagination -->
+
         </div>
       </div>
       <!-- request info -->
-      <h4>Information Requests</h4>
+      <!-- <h4>Information Requests</h4>
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -381,18 +437,82 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </div>
   </div>
 </template>
 <script>
 import ClientHeader from "./Header.vue";
-
+import CustomPagination from '@/components/CustomPagination';
+import api from "@/config/api";
 export default {
   name: "ClientDashboard",
   components: {
     ClientHeader,
+    CustomPagination
   },
+  computed: {
+    jobId() {
+      return this.$store.state.jobId;
+    }
+  },
+  watch: {
+    // for pagination
+    currentPaginationPage() {
+      console.log('watch run');
+      this.getPaginatedData();
+    },
+    // for pagination
+  },
+  beforeUnmount() {
+    localStorage.removeItem('jobId');
+    this.$store.commit('SET_JOB_ID', null);
+  },
+  async mounted() {
+    if (this.jobId == null || this.jobId == "") {
+      this.$router.push({ path: '/client-dashboard' });
+    }
+    this.setStatus('open');
+  },
+
+  methods: {
+    async setStatus(status) {
+      this.$store.commit('set_pagination_page', 1);
+      this.$store.commit('SET_ENDPOINT_FOR_PAGINATED_DATA', `/client/job-proposals/${this.jobId}/${status}`);
+      await this.getPaginatedData();
+    },
+    handleAcceptBidAction(proposal_id, lawyer_id, job_id) {
+      let status = "Accept";
+      this.changeStatus({ status, proposal_id, lawyer_id, job_id });
+    },
+    handleRejectBidAction(proposal_id, lawyer_id, job_id) {
+      let status = "Reject";
+      this.changeStatus({ status, proposal_id, lawyer_id, job_id });
+    },
+    changeStatus(obj) {
+      this.$swal({
+        title: 'Are you sure?',
+        text: `Are you sure you want to ${obj.status} this proposal`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: `Yes, ${obj.status}`
+      }).then(result => {
+        if (result.isConfirmed) {
+          api.post('/client/change-proposal-status', obj).then(res => {
+            this.$swal('Success', `Proposal has been ${obj.status}ed successfully`, 'success').then(async () => {
+              await this.getPaginatedData();
+            })
+            console.log('response : ', res);
+          }).catch((error) => {
+            console.log('error : ', error);
+          });
+        }
+      });
+    }
+  },
+
 };
 </script>
 

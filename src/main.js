@@ -44,6 +44,8 @@ app.mixin({
       closeJobs: [],
       currentPage: 0,
       lastPage: 0,
+
+      data_paginated: [],
     };
   },
   watch: {
@@ -57,7 +59,32 @@ app.mixin({
     },
   },
 
+  computed: {
+    currentPaginationPage() {
+      console.log("computed run");
+      return this.$store.state.currentPaginationPage;
+    },
+    paginationEndpoint() {
+      return this.$store.state.paginationEndpoint;
+    },
+  },
+
   methods: {
+    // /lawyer/lawyer-proposals
+    async getPaginatedData() {
+      console.log("func run");
+      api
+        .get(`${this.paginationEndpoint}?page=${this.currentPaginationPage}`)
+        .then((res) => {
+          this.data_paginated = res?.data?.data;
+          console.log("last api : ", res?.data?.last_page);
+          this.$store.commit("SET_PAGINATION_LAST", res?.data?.last_page);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
     setUserInStateAndLocalStorage(res) {
       console.log("new func : ", res?.data?.data?.link);
       const userData = {
@@ -76,6 +103,22 @@ app.mixin({
       }
       localStorage.setItem("loginUser", JSON.stringify(userData));
       this.$store.commit("SET_LOGIN_USER", userData);
+    },
+
+    sendOtp(email) {
+      console.log("user email : ", email);
+      api
+        .post("/generate-send-otp", { email })
+        .then(() => {
+          this.$store.commit("SET_OTP_EMAIL", email);
+          localStorage.setItem("otpEmail", email);
+          this.$router.push({ path: "/otp" });
+          // this.setUserAndRedirect(res, dashboardUrl);
+        })
+        .catch((error) => {
+          // alert("Invalid Credentials");
+          console.log("getResults : ", error);
+        });
     },
 
     // this function is to store user in state and localstorage after login then redirect to dashboard
@@ -133,11 +176,13 @@ app.mixin({
                 confirmButtonText: "Complete Your Profile",
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.setUserAndRedirect(res, dashboardUrl);
+                  // this.setUserAndRedirect(res, dashboardUrl);
+                  this.sendOtp(res?.data?.data?.email);
                 }
               });
             } else {
-              this.setUserAndRedirect(res, dashboardUrl);
+              // this.setUserAndRedirect(res, dashboardUrl);
+              this.sendOtp(res?.data?.data?.email);
             }
           })
           .catch((error) => {
@@ -221,11 +266,26 @@ app.mixin({
         url = `${this.endpoint}?page=${this.currentPage}`;
       }
       const response = await this.fetchData(url);
-      console.log("pagin : ", response);
-      console.log("curr : ", this.currentPage);
+      // console.log("pagin : ", response);
+      // console.log("curr : ", this.currentPage);
       this.lastPage = response?.last_page;
-      this.openJobs = this.openJobs.concat(response?.data);
+      let jobsData = this.openJobs.concat(response?.data);
+      let uniqueObjects = new Map();
+      jobsData.forEach((obj) => {
+        uniqueObjects.set(obj.id, obj);
+      });
+      let uniqueArray = Array.from(uniqueObjects.values());
+      this.openJobs = uniqueArray;
     },
+
+    async fixLoadMoreAfterDeleteRecord(index) {
+      this.openJobs.splice(index, 1);
+      if (this.currentPage < this.lastPage) {
+        this.currentPage--;
+        await this.loadMore();
+      }
+    },
+
     async clearSearch() {
       if (this.searchQuery == "") return false;
       this.clear = true;
@@ -267,8 +327,8 @@ app.mixin({
       const formattedMonth = month < 10 ? "0" + month : month;
       const formattedHours = hours < 10 ? "0" + hours : hours;
       const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
-
-      return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period}`;
+      // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period} AEST`;
     },
 
     // date time format function end

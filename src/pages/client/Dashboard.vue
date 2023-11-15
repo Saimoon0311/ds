@@ -130,31 +130,34 @@
                       <p><b> Preferred contact time:</b> after 1:00</p>
                     </div>
                   </details> -->
-                    </div>
-                    <div
-                      class="d-flex flex-column justify-content-center align-items-center"
-                      style="min-width: 110px"
-                    >
-                      <router-link
-                        class="btn btn-light btn-sm w-100  mb-2"
-                        to="/view-proposals"
-                        >View Proposals</router-link
-                      ><button class="btn btn-danger btn-sm w-100 ">
-                        Cancel
-                      </button>
-                      <router-link
-                            class="btn btn-dark btn-sm w-100 my-1"
-                            to="/request-info"
-                            >Message</router-link
-                          >
-                      <form method="post" action="index.php" class="d-none">
-                        <input class="d-none" name="id" value="30" />
-                        <button>Cancel Job</button>
-                      </form>
-                    </div>
-                  </div>
+                </div>
+                <div
+                  class="d-flex flex-column justify-content-center align-items-center"
+                  style="min-width: 110px"
+                >
+                  <!-- <router-link
+                    class="btn btn-light btn-sm w-100 py-2 mb-2"
+                    to="/view-proposals"
+                    >View Proposals</router-link
+                  > -->
+                  <button 
+                  class="btn btn-light btn-sm w-100 py-2 mb-2"
+                  @click="goToViewProposals(item?.id)"
+                  >View Proposals</button>
+                  <button
+                    class="btn btn-danger btn-sm w-100 py-2"
+                    
+                  >
+                    Cancel
+                  </button>
+                  <form method="post" action="index.php" class="d-none">
+                    <input class="d-none" name="id" value="30" />
+                    <button>Cancel Job</button>
+                  </form>
                 </div>
               </div>
+            </div>
+          </div>
             </div>
 
             <div v-if="openJobs.length > 0 && currentPage != lastPage">
@@ -255,7 +258,13 @@ export default {
   async created() {
     await this.loadMore();
   },
+
   methods: {
+    goToViewProposals(id) {
+      this.$store.commit('SET_JOB_ID', id);
+      localStorage.setItem('jobId', id);
+      this.$router.push({ 'path': '/view-proposals' })
+    }
     // async getJobs() {
     //   try {
     //     const response = await api.get(`/client/client-jobs`);
