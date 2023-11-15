@@ -42,129 +42,82 @@
         <div v-else 
         class="border rounded bg-light p-3 d-flex flex-wrap">
 
-        <div class="input-group mb-3">
+            <div class="input-group mb-3">
               <input type="text" class="form-control" v-model="searchQuery"  @keyup.enter="search" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
               <button class="input-group-text btn custom-button" id="basic-addon2" @click="search"><i class="fa fa-search"></i></button>
               <button class="input-group-text btn custom-button" id="basic-addon2" @click="clearSearch"><i class="fa fa-refresh"></i></button>
             </div>
 
-        <span v-if="openJobs.length == 0 && searchQuery != ''"  class="text-center w-100">No record found!</span>
+            <span v-if="openJobs.length == 0 && searchQuery != ''"  class="text-center w-100">No record found!</span>
 
           
-          <template v-else>
+            <template v-else>
 
-            <div
-            v-for="(item,index) in openJobs" :key="index"
-              class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
-              style="width: 35vw"
-              id="28"
-            >
-              <div>
-                <p class="badge bg-dark" title="Area">{{ item?.field?.title }}</p>
-                &nbsp;
-                <p class="badge bg-dark" title="Location">{{ item?.location?.title }}</p>
-                <p><b>Serial No:</b> {{ item?.identity }}</p>
-                <p><b>City/suburb:</b> {{ item?.city }}</p>
-                <p><b>Title:</b> {{ item?.title }}</p>
-                <p><b>Created:</b> {{ formatCreatedAt(item.created_at) }} </p>
-                <template v-if="item?.assigned_lawyer != null">
-                <p><b>Client Email:</b> {{ item?.assigned_lawyer?.email }}</p>
-                <p><b>Client Phone:</b> {{ item?.assigned_lawyer?.phone }}</p>
-                </template>
-                <p
-                  id="description28"
-                  style="overflow: hidden; text-overflow: ellipsis; height: 100px"
-                >
-                  {{ item?.description }}
-                </p>
-                <!-- <details>
-                  <summary>More details</summary>
-                  <div class="bg-dark border rounded p-3 m-1">
-                    <p><b>Posted by:</b> junucyme@mailinator.com</p>
-                    <p><b> Deadline:</b> 27-12-2023</p>
-                    <p><b> Preferred contact time:</b> Flexible</p>
-                  </div>
-                </details> -->
-              </div>
               <div
-                v-if="item?.assigned_lawyer == null || item?.assigned_lawyer == ''"
-                class="d-flex flex-column justify-content-center align-items-center "
-                style="min-width: 110px"
+              v-for="(item,index) in openJobs" :key="index"
+                class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
+                style="width: 35vw"
+                id="28"
               >
-                <!-- <router-link
-                  class="btn btn-light btn-sm w-100 my-1"
-                  to="/proposal"
-                  >Submit a proposal</router-link
-                > -->
-
-                <button @click="submitProposal(item)" class="btn btn-light btn-sm w-100 my-1">Submit a proposal</button>
-                
-                <!-- <router-link
-                  name="decline"
-                  class="btn btn-danger btn-sm w-100 my-1"
-                  to=""
-                  >Decline</router-link> -->
-                  <button @click="declineJob(item.id,index)" class="btn btn-danger btn-sm w-100 my-1">Decline</button>
-                <router-link
-                  class="btn btn-dark btn-sm w-100 my-1"
-                  to="/request-info"
-                  >Message</router-link
-                >
-              </div>
-            </div>
-
-          </template>
-
-          <!-- <div
-            class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
-            style="width: 35vw"
-            id="29"
-          >
-            <div>
-              <p class="badge bg-dark" title="Area">Criminal</p>
-              &nbsp;
-              <p class="badge bg-dark" title="Location">Victoria</p>
-              <p><b>City/suburb:</b> karachi</p>
-              <p><b>Title:</b> test case</p>
-              <p
-                id="description29"
-                style="overflow: hidden; text-overflow: ellipsis; height: 100px"
-              >
-                lorem ipsum dummy text
-              </p>
-              <details>
-                <summary>More details</summary>
-                <div class="bg-dark border rounded p-3 m-1">
-                  <p><b>Posted by:</b> junucyme@mailinator.com</p>
-                  <p><b> Deadline:</b> 23-11-2023</p>
-                  <p><b> Preferred contact time:</b> Flexible</p>
+                <div>
+                  <p class="badge bg-dark" title="Area">{{ item?.field?.title }}</p>
+                  &nbsp;
+                  <p class="badge bg-dark" title="Location">{{ item?.location?.title }}</p>
+                  <p><b>Serial No:</b> {{ item?.identity }}</p>
+                  <p><b>City/suburb:</b> {{ item?.city }}</p>
+                  <p><b>Title:</b> {{ item?.title }}</p>
+                  <p><b>Created:</b> {{ formatCreatedAt(item.created_at) }} </p>
+                  <template v-if="item?.assigned_lawyer != null">
+                  <p><b>Client Email:</b> {{ item?.assigned_lawyer?.email }}</p>
+                  <p><b>Client Phone:</b> {{ item?.assigned_lawyer?.phone }}</p>
+                  </template>
+                  <p
+                    id="description28"
+                    style="overflow: hidden; text-overflow: ellipsis; height: 100px"
+                  >
+                    {{ item?.description }}
+                  </p>
+                  <!-- <details>
+                    <summary>More details</summary>
+                    <div class="bg-dark border rounded p-3 m-1">
+                      <p><b>Posted by:</b> junucyme@mailinator.com</p>
+                      <p><b> Deadline:</b> 27-12-2023</p>
+                      <p><b> Preferred contact time:</b> Flexible</p>
+                    </div>
+                  </details> -->
                 </div>
-              </details>
-            </div>
-            <div
-              class="d-flex flex-column justify-content-center align-items-center"
-              style="min-width: 110px"
-            >
-            <router-link
-                class="btn btn-light btn-sm w-100 my-1"
-                to="/proposal"
-                >Submit a proposal</router-link
-              ><router-link
-                name="decline"
-                class="btn btn-danger btn-sm w-100 my-1"
-                to=""
-                >Decline</router-link
-              ><router-link
-                class="btn btn-dark btn-sm w-100 my-1"
-                to="/request-info"
-                >Request More Info</router-link
-              >
-            </div>
-          </div> -->
+                <div
+                  v-if="item?.assigned_lawyer == null || item?.assigned_lawyer == ''"
+                  class="d-flex flex-column justify-content-center align-items-center "
+                  style="min-width: 110px"
+                >
+                  <!-- <router-link
+                    class="btn btn-light btn-sm w-100 my-1"
+                    to="/proposal"
+                    >Submit a proposal</router-link
+                  > -->
+
+                  <button @click="submitProposal(item)" class="btn btn-light btn-sm w-100 my-1">Submit a proposal</button>
+                  
+                  <!-- <router-link
+                    name="decline"
+                    class="btn btn-danger btn-sm w-100 my-1"
+                    to=""
+                    >Decline</router-link> -->
+                    <button @click="declineJob(item.id,index)" class="btn btn-danger btn-sm w-100 my-1">Decline</button>
+                  <router-link
+                    class="btn btn-dark btn-sm w-100 my-1"
+                    to="/request-info"
+                    >Message</router-link
+                  >
+                </div>
+              </div>
+
+            </template>
         
-          <div v-if="openJobs.length > 0 && currentPage != lastPage" class="text-center">
-            <button class="btn custom-button" @click="loadMore">Load More</button>
-          </div>
+            <div v-if="openJobs.length > 0 && currentPage != lastPage" class="text-center">
+              <button class="btn custom-button" @click="loadMore">Load More</button>
+            </div>
 
         </div>
 
