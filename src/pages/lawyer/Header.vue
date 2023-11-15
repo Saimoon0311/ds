@@ -146,6 +146,7 @@ export default {
   border: none !important;
   margin-top: -10px;
 }
+
 ul.dropdown-menu.show {
   left: auto;
   right: 10px;
@@ -203,45 +204,56 @@ ul.dropdown-menu.show {
   background: rgb(0, 0, 0);
   color: white;
 }
+
+.lg-btn button {
+  color: #000000a6 !important;
+  font-weight: bolder;
+}
+
 @media only screen and (max-width: 1024px) {
-  
+
   .cstm-dropdown {
     margin-top: 0;
     top: 0;
   }
+
   .navbar-nav {
     align-items: baseline;
   }
 
   .navbar-nav .left-menu {
     display: flex;
-    align-items: flex-start;
+    align-items: baseline;
     flex-direction: column;
     flex-wrap: wrap;
   }
- 
+
   .navbar-nav .lg-btn {
-    padding: 0px 22px;
+    /* padding: 0px 22px; */
   }
 
   .router-link-exact-active.menuItem-active-link {
     padding: 7px 10px;
   }
+
   .logOutBtn {
     width: 109px;
     text-align: left;
   }
 }
+
 @media only screen and (max-width: 991px) {
-  .custom-dropdown{
+  .custom-dropdown {
     display: none;
   }
 }
+
 @media only screen and (max-width: 767px) and (min-width: 320px) {
   .pb-seven {
     padding-bottom: 200px;
   }
-  .cstm-dropdown img{
+
+  .cstm-dropdown img {
     margin-top: 0;
   }
 }

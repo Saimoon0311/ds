@@ -208,14 +208,20 @@
         </div>
       </div>
     </div>
+        <div class="footer">
+            <MainFooter />
+        </div>
   </div>
 </template>
 <script>
 import AdminHeader from "./Header.vue";
+import MainFooter from "../../components/global/MainFooter.vue";
+
 
 export default {
   components: {
     AdminHeader,
+    MainFooter
   },
 
   methods: {},
@@ -234,16 +240,18 @@ ul#pills-tab {
   width: 230px;
 }
 
+.hello {}
+
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
   color: white;
-  background-color: #808080;
+  background-color: #000000;
 }
 
 .nav-pills .nav-link,
 .nav-link:focus,
 .nav-link:hover {
-  color: #6d6f73;
+  color: #000000;
 }
 
 .text-left {
@@ -252,5 +260,11 @@ ul#pills-tab {
 
 .button-width {
   width: 10%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>

@@ -1,7 +1,8 @@
 <template lang="">
   <div class="hello">
-    <MainHeader />
-    <div class="pt-4 center-main">
+    <!-- <MainHeader /> -->
+    <GeneralHeader />
+    <div class="pt-4 center-main admin-lg">
       <div
         class="bg-dark text-white text-center m-3 p-3 find-client"
         style="border-radius: 10px"
@@ -36,11 +37,18 @@
         </Form>
       </div>
     </div>
+        <div class="footer">
+            <MainFooter />
+        </div>
   </div>
 </template>
 <script>
-import MainHeader from "../../components/global/MainHeader.vue";
+// import MainHeader from "../../components/global/MainHeader.vue";
+import GeneralHeader from '../GeneralHeader.vue'
+import MainFooter from "../../components/global/MainFooter.vue";
+
 import { Form, Field } from "vee-validate";
+
 import * as yup from "yup";
 export default {
   data() {
@@ -60,7 +68,9 @@ export default {
     };
   },
   components: {
-    MainHeader,
+    // MainHeader,
+    GeneralHeader,
+    MainFooter,
     Form,
     Field,
     // MainFooter
@@ -75,8 +85,9 @@ export default {
 </script>
 <style scoped>
 .hello {
-  min-height: 85vh;
-  display: grid;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
 }
 
 .find-client {
@@ -90,5 +101,16 @@ export default {
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.admin-lg {
+  min-height: 70vh;
+  align-items: center;
 }
 </style>

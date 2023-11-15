@@ -468,7 +468,7 @@
                       </button>
                     </div> -->
               </div>
-            </div>
+            </div> 
           </div>
           <div
                     v-if="openJobs.length > 0 && currentPage != lastPage"
@@ -651,9 +651,11 @@ ul#pills-tab {
 .nav-link:hover {
   color: #000000;
 }
-.smallFont{
+
+.smallFont {
   font-size: 13px;
 }
+
 @media only screen and (max-width: 600px) {
   .l-main {
     padding-bottom: 100px;

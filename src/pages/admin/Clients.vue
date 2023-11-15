@@ -1,44 +1,47 @@
-
 <template lang="">
-    <div class="hello">
-        <AdminHeader />   
+  <div class="hello">
+    <AdminHeader />
 
-        <main class="container my-3">
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td colspan="2" class="text-center">No clients have been signed up yet</td></tr>            </tbody>
-        </table>
+    <main class="container my-3">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="2" class="text-center">
+              No clients have been signed up yet
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </main>
-
-        
-    </div>
-
-
-
+        <div class="footer">
+            <MainFooter />
+        </div>
+  </div>
 </template>
 <script>
-
-import AdminHeader from './Header.vue'
+import AdminHeader from "./Header.vue";
+import MainFooter from "../../components/global/MainFooter.vue";
 
 
 export default {
-
     components: {
-        AdminHeader
+        AdminHeader,
+        MainFooter
     },
-    methods: {
-
-    },
-    name: 'AdminLawyer',
-}
+    methods: {},
+    name: "AdminLawyer",
+};
 </script>
 <style scoped>
-
-
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
 </style>

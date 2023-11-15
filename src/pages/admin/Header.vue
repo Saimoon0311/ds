@@ -49,10 +49,10 @@
                   >Jobs</router-link
                 >
               </div>
-              <div>
+              <div class="lg-btn">
                 <router-link
                   to="/admin-login"
-                  class="nav-link float-right logOutBtn active"
+                  class="nav-link float-right logOutBtn active link"
                   id="clients"
                   aria-current="page"
                   >Logout</router-link
@@ -74,8 +74,8 @@ export default {
 </script>
 <style scoped>
 .router-link-exact-active.menuItem-active-link {
-  background: grey;
-  border: 1px solid grey;
+  background: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   color: white;
 }
@@ -101,8 +101,8 @@ export default {
 }
 
 .navActive {
-  background: grey;
-  border: 1px solid grey;
+  background: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   color: white;
 }
@@ -114,12 +114,44 @@ export default {
 }
 
 .bg-grey {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
 }
 
 .bg-grey:hover {
-  background: grey;
+  background: rgb(0, 0, 0);
   color: white;
+}
+
+.lg-btn button,
+.lg-btn .link {
+
+  color: #000000a6 !important;
+  font-weight: bolder;
+}
+
+@media only screen and (max-width: 767px) and (min-width: 320px) {
+  .navbar-nav {
+    align-items: baseline;
+  }
+
+  .navbar-nav .left-menu {
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .navbar-nav .lg-btn {
+    /* padding: 0px 22px; */
+  }
+
+  .router-link-exact-active.menuItem-active-link {
+    padding: 7px 10px;
+  }
+
+  .pb-seven {
+    padding-bottom: 200px;
+  }
 }
 </style>

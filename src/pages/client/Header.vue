@@ -144,6 +144,11 @@ export default {
   margin-top: 15px;
 }
 
+.lg-btn button {
+  color: #000000a6 !important;
+  font-weight: bolder;
+}
+
 @media only screen and (max-width: 767px) and (min-width: 320px) {
   .navbar-nav {
     align-items: baseline;
@@ -151,13 +156,13 @@ export default {
 
   .navbar-nav .left-menu {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     flex-direction: column;
     flex-wrap: wrap;
   }
 
   .navbar-nav .lg-btn {
-    padding: 0px 22px;
+    /* padding: 0px 22px; */
   }
 
   .router-link-exact-active.menuItem-active-link {
