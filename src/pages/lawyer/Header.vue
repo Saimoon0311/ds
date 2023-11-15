@@ -65,6 +65,7 @@
                   aria-current="page"
                   >Profile</router-link
                 >
+                
                 <button
                   @click="logout('lawyer-login')"
                   class="nav-link float-right logOutBtn fw-bolder"
@@ -75,7 +76,7 @@
                 </button>
               </div>
 
-              <div class="dropdown cstm-dropdown">
+              <div class="dropdown cstm-dropdown custom-dropdown">
                 <button
                   class="btn btn-secondary dropdown-toggle menu-burger"
                   type="button"
@@ -143,6 +144,12 @@ export default {
 .cstm-dropdown {
   border-radius: 0px;
   border: none !important;
+  margin-top: -10px;
+}
+ul.dropdown-menu.show {
+  left: auto;
+  right: 10px;
+  margin-top: 10px;
 }
 
 .cstm-dropdown:focus {
@@ -197,6 +204,7 @@ export default {
   color: white;
 }
 @media only screen and (max-width: 1024px) {
+  
   .cstm-dropdown {
     margin-top: 0;
     top: 0;
@@ -207,11 +215,11 @@ export default {
 
   .navbar-nav .left-menu {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     flex-wrap: wrap;
   }
-
+ 
   .navbar-nav .lg-btn {
     padding: 0px 22px;
   }
@@ -221,11 +229,20 @@ export default {
   }
   .logOutBtn {
     width: 109px;
+    text-align: left;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .custom-dropdown{
+    display: none;
   }
 }
 @media only screen and (max-width: 767px) and (min-width: 320px) {
   .pb-seven {
     padding-bottom: 200px;
+  }
+  .cstm-dropdown img{
+    margin-top: 0;
   }
 }
 </style>
