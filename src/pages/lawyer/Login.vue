@@ -72,16 +72,16 @@ export default {
   data() {
     const schema = yup.object().shape({
       email: yup.string()
-        .min(3, 'Email must be valid')
-        .max(50, 'Email must be valid')
-        .required('Please enter your email')
+        .min(3, 'Email must be valid.')
+        .max(50, 'Email must be valid.')
+        .required('Please enter your email.')
         .matches(
           /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
           'Please enter valid email',
         ),
       password: yup
         .string()
-        .required('Please enter your password')
+        .required('Please enter your password.')
         .min(6, 'Password must be greater then 6 digit')
         .max(16, 'Password must be less then 16 digit')
         .matches(

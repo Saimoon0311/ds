@@ -1,8 +1,10 @@
 <template lang="">
     <div class="hello container">
-        <MainHeader />
-        <div class="row justify-content-center">
-            <div class="center-main col-md-7">
+        <!-- <MainHeader /> -->
+        <GeneralHeader />
+
+        <div class="row justify-content-center reset-main">
+            <div class="center-main col-md-7 reset-p">
                 <div v-if="!tokenExpired" class="bg-dark text-white text-center m-3 p-3" style="border-radius: 10px">
                     <p class="m-4 fs-3 ">Reset Password</p>
                     <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
@@ -34,12 +36,19 @@
                 <h2 v-else class="text-center">Link has been expired, go to <router-link to="/forget-password">forget password</router-link> to send another link via email</h2>
             </div>
         </div>
+        <div class="footer">
+            <MainFooter />
+        </div>
     </div>
 </template>
 <script >
 
 import api from "../../config/api.js";
-import MainHeader from '../../components/global/MainHeader.vue'
+// import MainHeader from '../../components/global/MainHeader.vue'
+import GeneralHeader from "../../pages/GeneralHeader.vue";
+import MainFooter from "../../components/global/MainFooter.vue";
+
+
 import { Form, Field } from 'vee-validate';
 import * as yup from "yup";
 export default {
@@ -47,7 +56,7 @@ export default {
         const schema = yup.object().shape({
             password: yup
                 .string()
-                .required('Please Enter your password')
+                .required('Please enter your password.')
                 .min(6, 'Password must be greater then 6 digit')
                 .max(16, 'Password must be less then 16 digit')
                 .matches(
@@ -56,18 +65,20 @@ export default {
                 ),
             confirm_password: yup
                 .string()
-                .required('Confirm password is required')
+                .required('Confirm password is required.')
                 .oneOf([yup.ref('password'), null], 'Password must match'),
         });
         return {
             email: null,
             token: null,
-            tokenExpired : false,
+            tokenExpired: false,
             schema
         }
     },
     components: {
-        MainHeader,
+        // MainHeader,
+        GeneralHeader,
+        MainFooter,
         Form,
         Field,
         // MainFooter
@@ -78,9 +89,9 @@ export default {
         this.checkToken();
     },
     methods: {
-        checkToken(){
+        checkToken() {
             api.get(`/check-forget-token/${this.token}`)
-            .then(response => {
+                .then(response => {
                     this.tokenExpired = response.data.expired;
                 })
                 .catch(error => {
@@ -112,22 +123,30 @@ export default {
 <style scoped>
 .hello {
     min-height: 100vh;
-    display: grid;
+    position: relative;
+    padding-bottom: 60px;
 }
 
-/* .center-main {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-wrap: wrap;
-} */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 .align-baseline {
     align-items: baseline !important;
 }
 
-/* .login-main {
-    width: 35%;
-    margin: 0 auto !important;
-    margin-top: 50px;
-} */
+.reset-p {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -40%);
+    top: 60%;
+}
+
+.reset-main {
+    min-height: 57vh;
+    position: relative;
+}
 </style>

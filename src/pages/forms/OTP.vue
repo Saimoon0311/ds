@@ -1,12 +1,11 @@
 <template>
     <div class="l-register-main">
         <div class="hello container">
-            <MainHeader />
-            <div class=" pt-4 center-main row justify-content-center">
-                <div class="col-md-10 col-lg-7 text-center my-4">
+            <GeneralHeader />
+
+            <div class="pt-4 center-main row justify-content-center otp-main">
+                <div class="col-md-8 col-lg-5 text-center my-4 otp-inner">
                     <div class="bg-dark text-white text-center m-3 p-3 pt-4 find-client" style="border-radius: 10px">
-
-
                         <h2 class="mb-4 text-light">OTP Verification</h2>
                         <div class="row">
                             <div v-for="(digit, index) in otpDigits" :key="index" class="col-2">
@@ -17,24 +16,21 @@
                         </div>
 
                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                            <button @click="verifyOtp" class="btn btn-outline-light btn-lg px-5">Verify OTP</button>
+                            <button @click="verifyOtp" class="btn btn-outline-light btn-lg mt-4
+                            ">
+                                Verify OTP
+                            </button>
                         </div>
 
                         <a href="javascript:;" @click="sendOtpAgain(this.otpEmail)">Resend OTP code.</a>
-
                     </div>
                 </div>
             </div>
-
-
         </div>
         <div class="footer">
             <MainFooter />
         </div>
     </div>
-
-
-
 
     <!-- <div class="container mt-5">
         <h2 class="mb-4">OTP Verification</h2>
@@ -47,31 +43,32 @@
         <button @click="verifyOtp" class="btn btn-primary mt-3">Verify OTP</button>
     </div> -->
 </template>
-  
+
 <script>
-import { nextTick } from 'vue';
-import api from '@/config/api';
-import MainHeader from '../../components/global/MainHeader.vue'
+import { nextTick } from "vue";
+import api from "@/config/api";
+// import MainHeader from '../../components/global/MainHeader.vue'
+import GeneralHeader from "../../pages/GeneralHeader.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
 export default {
     components: {
-        MainHeader,
-        MainFooter
+        GeneralHeader,
+        MainFooter,
     },
     data() {
         return {
-            otpVerified : false,
-            otpDigits: ['', '', '', '', '', ''],
+            otpVerified: false,
+            otpDigits: ["", "", "", "", "", ""],
         };
     },
-    beforeUnmount(){
-        if(!this.otpVerified){
-           api
-          .get(`/delete-unverified-account/${this.otpEmail}`)
-          .then(() => {
-            console.log('deleted')
-          })
-          .catch((error) => console.log("getResults : ", error));
+    beforeUnmount() {
+        if (!this.otpVerified) {
+            api
+                .get(`/delete-unverified-account/${this.otpEmail}`)
+                .then(() => {
+                    console.log("deleted");
+                })
+                .catch((error) => console.log("getResults : ", error));
         }
     },
     computed: {
@@ -79,7 +76,7 @@ export default {
             // const otp = this.$store.state.otpEmail;
             // if(otp == null || otp == ""){
             //     if (!localStorage.hasOwnProperty(otpEmail) || localStorage[otpEmail] == null || localStorage[otpEmail] == '') {
-                    
+
             //     }
             // }
             // if((this.$store.otpEmail == null || this.$store.otpEmail == "") && localStorage.getItem('otpEmail'))
@@ -91,17 +88,23 @@ export default {
         nextTick(() => this.$refs.digitInputs[0]?.focus());
     },
     methods: {
-        sendOtpAgain(email){
+        sendOtpAgain(email) {
             this.sendOtp(email);
-            this.otpDigits = ['', '', '', '', '', ''];
+            this.otpDigits = ["", "", "", "", "", ""];
         },
         handlePaste(index, event) {
             event.preventDefault();
-            const pastedValue = event.clipboardData.getData('text');
-            for (let i = 0; i < pastedValue.length && index + i < this.otpDigits.length; i++) {
+            const pastedValue = event.clipboardData.getData("text");
+            for (
+                let i = 0;
+                i < pastedValue.length && index + i < this.otpDigits.length;
+                i++
+            ) {
                 this.otpDigits[index + i] = pastedValue.charAt(i);
             }
-            nextTick(() => this.$refs.digitInputs[index + pastedValue.length]?.focus());
+            nextTick(() =>
+                this.$refs.digitInputs[index + pastedValue.length]?.focus()
+            );
         },
         handleInput(index, event) {
             const inputValue = event.target.value;
@@ -115,12 +118,13 @@ export default {
             }
         },
         verifyOtp() {
-            const otp = this.otpDigits.join('');
+            const otp = this.otpDigits.join("");
             if (otp.length > 0) {
-                console.log('Verifying OTP:', otp);
+                console.log("Verifying OTP:", otp);
 
-                api.post('/verify-otp', { otp: otp, email: this.otpEmail })
-                    .then(res => {
+                api
+                    .post("/verify-otp", { otp: otp, email: this.otpEmail })
+                    .then((res) => {
                         console.log(res.data);
                         let dashboardUrl = null;
                         if (res?.data?.data?.type == "lawyer") {
@@ -132,16 +136,13 @@ export default {
                         this.setUserAndRedirect(res, dashboardUrl);
                     })
                     .catch(() => {
-                        this.$swal('Error', 'Invalid otp or may be expire', 'error');
+                        this.$swal("Error", "Invalid otp or may be expire", "error");
                     });
             }
         },
     },
 };
 </script>
-  
-
-
 
 <style scoped>
 .otp-form {
@@ -205,6 +206,7 @@ h2 {
     margin-top: 25px;
 }
 
+/* 
 button {
     margin-top: 15px;
     background-color: #007bff;
@@ -219,11 +221,36 @@ button {
 
 button:hover {
     background-color: #0056b3;
-}
+} */
 
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+.otp-main {
+    min-height: 50vh;
+    position: relative;
+}
+
+.otp-inner {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -40%);
+    top: 60%;
+}
+
+.otp-inner .col-2 {
+    justify-content: center;
+    display: flex;
+}
+
+.form-control {
+    min-height: 70px;
+    width: 100%;
+    font-size: 22px;
+    font-weight: 600;
 }
 </style>
