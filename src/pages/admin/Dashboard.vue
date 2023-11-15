@@ -1,22 +1,27 @@
 <template lang="">
     <div class="hello">
-   <AdminHeader />        
-    <AdminLawyer />
+        <AdminHeader />        
+
+        <AdminLawyer />
+        <div class="footer">
+            <MainFooter />
+        </div>
     </div>
-
-
-
 </template>
 <script>
 
 
-import AdminLawyer from './Lawyers.vue'
+// import GeneralHeader from '../GeneralHeader.vue'
+import MainFooter from "../../components/global/MainFooter.vue";
+
 import AdminHeader from './Header.vue'
+import AdminLawyer from './Lawyers.vue'
 export default {
 
     components: {
         AdminLawyer,
-        AdminHeader
+        AdminHeader,
+        MainFooter
     },
     methods: {
 
@@ -25,8 +30,7 @@ export default {
 }
 </script>
 <style scoped>
-
-.navbar-nav{
+.navbar-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -47,23 +51,31 @@ export default {
 }
 
 .navActive {
-    background: grey;
-    border: 1px solid grey;
+    background: rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 10px;
     color: white;
 }
-.navbar-nav .left-menu{
+
+.navbar-nav .left-menu {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
 }
+
 .bg-grey {
-    background: grey;
+    background: rgb(0, 0, 0);
     color: white;
 }
 
 .bg-grey:hover {
-    background: grey;
+    background: rgb(0, 0, 0);
     color: white;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    color: white;
+    background-color: #000000;
 }
 </style>
