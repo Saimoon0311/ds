@@ -75,15 +75,15 @@
               </div>
             </div>
             <div v-else>
-              <!-- Conditions Documentation :
-        if : openJobs.length == 0 && searchQuery == '' (if no data , no search)
-          No potential jobs found that match your profile. Click here to amend your
-        else
-          show search
-          if : openJobs.length == 0 && searchQuery != '' (if no data come from search result)
-            No record found!
-          else :
-            listing -->
+                    <!-- Conditions Documentation :
+              if : openJobs.length == 0 && searchQuery == '' (if no data , no search)
+                No potential jobs found that match your profile. Click here to amend your
+              else
+                show search
+                if : openJobs.length == 0 && searchQuery != '' (if no data come from search result)
+                  No record found!
+                else :
+                  listing -->
 
               <div
                 v-if="openJobs.length == 0 && searchQuery == ''"
@@ -96,7 +96,7 @@
                 </p>
               </div>
 
-              <div v-else class="border rounded bg-light p-3">
+              <div v-else class="border rounded bg-light p-3 d-flex flex-wrap">
                 <div class="input-group mb-3">
                   <input
                     type="text"
@@ -166,23 +166,23 @@
                             {{ item?.description }}
                           </p>
                           <!-- <details>
-                  <summary>More details</summary>
-                  <div class="bg-dark border rounded p-3 m-1">
-                    <p><b>Posted by:</b> junucyme@mailinator.com</p>
-                    <p><b> Deadline:</b> 27-12-2023</p>
-                    <p><b> Preferred contact time:</b> Flexible</p>
-                  </div>
-                </details> -->
+                            <summary>More details</summary>
+                            <div class="bg-dark border rounded p-3 m-1">
+                              <p><b>Posted by:</b> junucyme@mailinator.com</p>
+                              <p><b> Deadline:</b> 27-12-2023</p>
+                              <p><b> Preferred contact time:</b> Flexible</p>
+                            </div>
+                          </details> -->
                         </div>
                         <div
                           class="d-flex flex-column justify-content-center align-items-center"
                           style="min-width: 110px"
                         >
                           <!-- <router-link
-                  class="btn btn-light btn-sm w-100 my-1"
-                  to="/proposal"
-                  >Submit a proposal</router-link
-                > -->
+                        class="btn btn-light btn-sm w-100 my-1"
+                        to="/proposal"
+                        >Submit a proposal</router-link
+                      > -->
 
                           <button
                             @click="submitProposal(item)"
@@ -192,10 +192,10 @@
                           </button>
 
                           <!-- <router-link
-                  name="decline"
-                  class="btn btn-danger btn-sm w-100 my-1"
-                  to=""
-                  >Decline</router-link> -->
+                            name="decline"
+                            class="btn btn-danger btn-sm w-100 my-1"
+                            to=""
+                            >Decline</router-link> -->
                           <button
                             @click="declineJob(item.id)"
                             class="btn btn-danger btn-sm w-100 my-1"
@@ -214,60 +214,51 @@
                 </template>
 
                 <!-- <div
-            class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
-            style="width: 35vw"
-            id="29"
-          >
-            <div>
-              <p class="badge bg-dark" title="Area">Criminal</p>
-              &nbsp;
-              <p class="badge bg-dark" title="Location">Victoria</p>
-              <p><b>City/suburb:</b> karachi</p>
-              <p><b>Title:</b> test case</p>
-              <p
-                id="description29"
-                style="overflow: hidden; text-overflow: ellipsis; height: 100px"
-              >
-                lorem ipsum dummy text
-              </p>
-              <details>
-                <summary>More details</summary>
-                <div class="bg-dark border rounded p-3 m-1">
-                  <p><b>Posted by:</b> junucyme@mailinator.com</p>
-                  <p><b> Deadline:</b> 23-11-2023</p>
-                  <p><b> Preferred contact time:</b> Flexible</p>
-                </div>
-              </details>
-            </div>
-            <div
-              class="d-flex flex-column justify-content-center align-items-center"
-              style="min-width: 110px"
+              class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
+              style="width: 35vw"
+              id="29"
             >
-            <router-link
-                class="btn btn-light btn-sm w-100 my-1"
-                to="/proposal"
-                >Submit a proposal</router-link
-              ><router-link
-                name="decline"
-                class="btn btn-danger btn-sm w-100 my-1"
-                to=""
-                >Decline</router-link
-              ><router-link
-                class="btn btn-dark btn-sm w-100 my-1"
-                to="/request-info"
-                >Request More Info</router-link
-              >
-            </div>
-          </div> -->
-
-                <div
-                  v-if="openJobs.length > 0 && currentPage != lastPage"
-                  class="text-center"
+              <div>
+                <p class="badge bg-dark" title="Area">Criminal</p>
+                &nbsp;
+                <p class="badge bg-dark" title="Location">Victoria</p>
+                <p><b>City/suburb:</b> karachi</p>
+                <p><b>Title:</b> test case</p>
+                <p
+                  id="description29"
+                  style="overflow: hidden; text-overflow: ellipsis; height: 100px"
                 >
-                  <button class="btn custom-button" @click="loadMore">
-                    Load More
-                  </button>
-                </div>
+                  lorem ipsum dummy text
+                </p>
+                <details>
+                  <summary>More details</summary>
+                  <div class="bg-dark border rounded p-3 m-1">
+                    <p><b>Posted by:</b> junucyme@mailinator.com</p>
+                    <p><b> Deadline:</b> 23-11-2023</p>
+                    <p><b> Preferred contact time:</b> Flexible</p>
+                  </div>
+                </details>
+              </div>
+              <div
+                class="d-flex flex-column justify-content-center align-items-center"
+                style="min-width: 110px"
+              >
+              <router-link
+                  class="btn btn-light btn-sm w-100 my-1"
+                  to="/proposal"
+                  >Submit a proposal</router-link
+                ><router-link
+                  name="decline"
+                  class="btn btn-danger btn-sm w-100 my-1"
+                  to=""
+                  >Decline</router-link
+                ><router-link
+                  class="btn btn-dark btn-sm w-100 my-1"
+                  to="/request-info"
+                  >Request More Info</router-link
+                >
+              </div>
+            </div> -->
               </div>
             </div>
           </div>
@@ -293,14 +284,14 @@
             </div>
             <div v-else>
               <!-- Conditions Documentation :
-        if : openJobs.length == 0 && searchQuery == '' (if no data , no search)
-          No potential jobs found that match your profile. Click here to amend your
-        else
-          show search
-          if : openJobs.length == 0 && searchQuery != '' (if no data come from search result)
-            No record found!
-          else :
-            listing -->
+            if : openJobs.length == 0 && searchQuery == '' (if no data , no search)
+              No potential jobs found that match your profile. Click here to amend your
+            else
+              show search
+              if : openJobs.length == 0 && searchQuery != '' (if no data come from search result)
+                No record found!
+              else :
+                listing -->
 
               <div
                 v-if="openJobs.length == 0 && searchQuery == ''"
@@ -373,23 +364,23 @@
                             Lorem ipsum
                           </p>
                           <!-- <details>
-                  <summary>More details</summary>
-                  <div class="bg-dark border rounded p-3 m-1">
-                    <p><b>Posted by:</b> junucyme@mailinator.com</p>
-                    <p><b> Deadline:</b> 27-12-2023</p>
-                    <p><b> Preferred contact time:</b> Flexible</p>
-                  </div>
-                </details> -->
+                      <summary>More details</summary>
+                      <div class="bg-dark border rounded p-3 m-1">
+                        <p><b>Posted by:</b> junucyme@mailinator.com</p>
+                        <p><b> Deadline:</b> 27-12-2023</p>
+                        <p><b> Preferred contact time:</b> Flexible</p>
+                      </div>
+                    </details> -->
                         </div>
                         <div
                           class="d-flex flex-column justify-content-center align-items-center"
                           style="min-width: 110px"
                         >
                           <!-- <router-link
-                  class="btn btn-light btn-sm w-100 my-1"
-                  to="/proposal"
-                  >Submit a proposal</router-link
-                > -->
+                      class="btn btn-light btn-sm w-100 my-1"
+                      to="/proposal"
+                      >Submit a proposal</router-link
+                    > -->
 
                           <button
                             @click="submitProposal(item)"
@@ -399,10 +390,10 @@
                           </button>
 
                           <!-- <router-link
-                  name="decline"
-                  class="btn btn-danger btn-sm w-100 my-1"
-                  to=""
-                  >Decline</router-link> -->
+                      name="decline"
+                      class="btn btn-danger btn-sm w-100 my-1"
+                      to=""
+                      >Decline</router-link> -->
                           <button
                             @click="declineJob(item.id)"
                             class="btn btn-danger btn-sm w-100 my-1"
@@ -421,60 +412,67 @@
                 </template>
 
                 <!-- <div
-            class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
-            style="width: 35vw"
-            id="29"
-          >
-            <div>
-              <p class="badge bg-dark" title="Area">Criminal</p>
-              &nbsp;
-              <p class="badge bg-dark" title="Location">Victoria</p>
-              <p><b>City/suburb:</b> karachi</p>
-              <p><b>Title:</b> test case</p>
-              <p
-                id="description29"
-                style="overflow: hidden; text-overflow: ellipsis; height: 100px"
+                class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
+                style="width: 35vw"
+                id="29"
               >
-                lorem ipsum dummy text
-              </p>
-              <details>
-                <summary>More details</summary>
-                <div class="bg-dark border rounded p-3 m-1">
-                  <p><b>Posted by:</b> junucyme@mailinator.com</p>
-                  <p><b> Deadline:</b> 23-11-2023</p>
-                  <p><b> Preferred contact time:</b> Flexible</p>
+                <div>
+                  <p class="badge bg-dark" title="Area">Criminal</p>
+                  &nbsp;
+                  <p class="badge bg-dark" title="Location">Victoria</p>
+                  <p><b>City/suburb:</b> karachi</p>
+                  <p><b>Title:</b> test case</p>
+                  <p
+                    id="description29"
+                    style="overflow: hidden; text-overflow: ellipsis; height: 100px"
+                  >
+                    lorem ipsum dummy text
+                  </p>
+                  <details>
+                    <summary>More details</summary>
+                    <div class="bg-dark border rounded p-3 m-1">
+                      <p><b>Posted by:</b> junucyme@mailinator.com</p>
+                      <p><b> Deadline:</b> 23-11-2023</p>
+                      <p><b> Preferred contact time:</b> Flexible</p>
+                    </div>
+                  </details>
                 </div>
-              </details>
-            </div>
-            <div
-              class="d-flex flex-column justify-content-center align-items-center"
-              style="min-width: 110px"
-            >
-            <router-link
-                class="btn btn-light btn-sm w-100 my-1"
-                to="/proposal"
-                >Submit a proposal</router-link
-              ><router-link
-                name="decline"
-                class="btn btn-danger btn-sm w-100 my-1"
-                to=""
-                >Decline</router-link
-              ><router-link
-                class="btn btn-dark btn-sm w-100 my-1"
-                to="/request-info"
-                >Request More Info</router-link
-              >
-            </div>
-          </div> -->
+                <div
+                  class="d-flex flex-column justify-content-center align-items-center"
+                  style="min-width: 110px"
+                >
+                <router-link
+                    class="btn btn-light btn-sm w-100 my-1"
+                    to="/proposal"
+                    >Submit a proposal</router-link
+                  ><router-link
+                    name="decline"
+                    class="btn btn-danger btn-sm w-100 my-1"
+                    to=""
+                    >Decline</router-link
+                  ><router-link
+                    class="btn btn-dark btn-sm w-100 my-1"
+                    to="/request-info"
+                    >Request More Info</router-link
+                  >
+                </div>
+              </div> -->
 
                 <!-- <div class="text-center">
-                  <button class="btn custom-button" @click="loadMore">
-                    Load More
-                  </button>
-                </div> -->
+                      <button class="btn custom-button" @click="loadMore">
+                        Load More
+                      </button>
+                    </div> -->
               </div>
             </div>
           </div>
+          <div
+                    v-if="openJobs.length > 0 && currentPage != lastPage"
+                    class="text-center mt-3">
+                    <button class="btn custom-button" @click="loadMore">
+                      Load More
+                    </button>
+                  </div>
         </div>
       </div>
     </div>
@@ -535,13 +533,34 @@ export default {
       localStorage.setItem("jobData", JSON.stringify(item));
       this.$router.push({ path: "/proposal" });
     },
-    async declineJob(job_id) {
+    async declineJob(job_id, index) {
       try {
-        const response = await api.post("/lawyer/decline-job", {
-          job_id: job_id,
+        this.$swal({
+          title: "Are you sure?",
+          text: `Are you sure you want to decline this job, You will not be able to see this anymore.`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: `Yes, Decline`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            api
+              .post("/lawyer/decline-job", { job_id: job_id })
+              .then(() => {
+                this.$swal(
+                  "Success",
+                  `Job has been decline successfully`,
+                  "success"
+                ).then(async () => {
+                  this.fixLoadMoreAfterDeleteRecord(index);
+                });
+              })
+              .catch((error) => {
+                console.log("error : ", error);
+              });
+          }
         });
-        console.log("sundak  :::: ", response?.data);
-        // this.openJobs = response?.data?.data;
       } catch (error) {
         console.error("Error fetching options:", error);
       }
@@ -605,6 +624,7 @@ export default {
   bottom: 0;
   width: 100%;
 }
+
 ul#pills-tab {
   text-align: center;
   margin: 0 auto;
@@ -617,7 +637,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
   color: white;
   background-color: #000000;
 }
@@ -627,6 +647,7 @@ ul#pills-tab {
 .nav-link:hover {
   color: #000000;
 }
+
 @media only screen and (max-width: 600px) {
   .l-main {
     padding-bottom: 100px;

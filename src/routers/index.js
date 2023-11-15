@@ -21,6 +21,7 @@ import PlatForm from "@/components/PlatForm.vue";
 // client
 import ClientLoginForm from "@/pages/client/Login.vue";
 import ClientRegister from "@/pages/client/clientRegister.vue";
+import OTP from "@/pages/forms/OTP.vue";
 import ClientAccount from "@/pages/client/Account.vue";
 // import PostingJob from "@/pages/client/PostingJob.vue";
 import PostingaJob from "@/pages/client/PostingaJob.vue";
@@ -179,6 +180,11 @@ const routes = [
   {
     path: "/client-register",
     component: ClientRegister,
+    beforeEnter: reverse_guard,
+  },
+  {
+    path: "/otp",
+    component: OTP,
     beforeEnter: reverse_guard,
   },
   {
