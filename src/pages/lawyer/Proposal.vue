@@ -16,7 +16,7 @@
           <p><b>City/suburb:</b> {{ jobData?.title }}</p>
           <p></p> -->
 
-          <p><b>Serial No:</b> {{ jobData?.identity }}</p>
+          <p><b>Job No:</b> {{ jobData?.identity }}</p>
           <p><b>City/suburb:</b> {{ jobData?.city }}</p>
           <p><b>Title:</b> {{ jobData?.title }}</p>
           <p><b>Created:</b> {{ formatCreatedAt(jobData?.created_at) }} </p>
