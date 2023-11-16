@@ -52,7 +52,7 @@
                   >Account</router-link
                 >
                 <router-link
-                  to="/client-faqs"
+                  to="/lawyer-faqs"
                   class="nav-link fw-bolder menuItem-active-link"
                   id="jobs"
                   aria-current="page"
