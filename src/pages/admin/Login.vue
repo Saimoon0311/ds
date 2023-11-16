@@ -2,11 +2,12 @@
   <div class="hello">
     <!-- <MainHeader /> -->
     <GeneralHeader />
-    <div class="pt-4 center-main admin-lg">
+    <div class="pt-4 center-main admin-lg container">
+      <div class="row justify-content-center fp-row">
+      <div class="center-main col-md-10 col-lg-7 login-col">
       <div
         class="bg-dark text-white text-center m-3 p-3 find-client"
-        style="border-radius: 10px"
-      >
+        style="border-radius: 10px">
         <Form
           @submit="submitData"
           class="m-md-3"
@@ -37,6 +38,9 @@
         </Form>
       </div>
     </div>
+  </div>
+
+    </div>
         <div class="footer">
             <MainFooter />
         </div>
@@ -55,12 +59,12 @@ export default {
     const schema = yup.object().shape({
       password: yup
         .string()
-        .required("Please enter your password")
-        .min(6, "Password must be greater then 6 digit")
-        .max(16, "Password must be less then 16 digit")
+        .required("Please enter your password.")
+        .min(6, "Password must be greater then 6 digit.")
+        .max(16, "Password must be less then 16 digit.")
         .matches(
           /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-          "Must contain 8 characters, one uppercase, one lowercase, one number and one special case character"
+          "Must contain 8 characters, one uppercase, one lowercase, one number and one special case character."
         ),
     });
     return {
@@ -92,22 +96,27 @@ export default {
 }
 
 .find-client {
-  width: 35%;
+  /* width: 35%; */
   margin: 0 auto !important;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 
 .center-main {
-  display: flex;
+  /* display: flex;
   align-items: flex-start;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
 }
 
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.fp-row {
+  min-height: 65vh;
+  align-items: center;
 }
 
 .admin-lg {

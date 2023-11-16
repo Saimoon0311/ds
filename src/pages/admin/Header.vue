@@ -14,7 +14,7 @@
             />
           </a>
           <button
-            class="navbar-toggler"
+            class="navbar-toggler cstm-dropdown"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNavAltMarkup"
@@ -22,7 +22,8 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <!-- <span class="navbar-toggler-icon"></span> -->
+            <img src="../../assets/images/bar.png" alt="" />
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
@@ -94,6 +95,20 @@ export default {
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
+}
+
+.cstm-dropdown {
+  border-radius: 0px;
+  border: none !important;
+}
+
+.cstm-dropdown:focus {
+  box-shadow: none !important;
+}
+
+.cstm-dropdown img {
+  width: 50px;
+  margin-top: 15px;
 }
 
 .logo-small {

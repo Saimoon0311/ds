@@ -5,8 +5,8 @@
   <GeneralHeader />
 
         <div class="row justify-content-center forget-main">
-        <div class="center-main col-md-7 forget-col">
-            <div class="bg-dark text-white text-center m-3 p-3" style="border-radius: 10px">
+        <div class="center-main col-md-8 col-lg-7  forget-col">
+            <div class="bg-dark text-white text-center m-3 p-3 fp-main" style="border-radius: 10px">
                 <p class="m-4 f-pass-hd f-pass ">Please enter the email associated with your Simplawfy account to reset your password.</p>
         <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
             
@@ -106,7 +106,7 @@ export default {
 }
 
 .forget-main {
-    min-height: 57vh;
+    min-height: 62vh;
 }
 
 .forget-col {
@@ -160,5 +160,10 @@ export default {
         margin: 0 !important;
         margin-bottom: 10px !important;
     }
+
+    .fp-main {
+        margin: 0 !important;
+    }
+
 }
 </style>
