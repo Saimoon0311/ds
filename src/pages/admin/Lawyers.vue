@@ -393,17 +393,11 @@
                         </details>
                       </td>
 
-                      <!-- <td class="text-end button-width">
+                      <td class="text-end button-width">
                         <div  class="mb-1">
-                          <input
-                            class="d-none"
-                            name="accept_id"
-                            value="23"
-                          /><button @click="approve(item?.id,index)" class="btn btn-dark">
-                            <i class="bi bi-check-lg"></i> Approve
-                          </button>
+                           {{ capitalizeFirstLetter(item?.admin_approval) }}
                         </div>
-                        <div >
+                        <!-- <div >
                           <input
                             class="d-none"
                             name="reject_id"
@@ -415,8 +409,8 @@
                           >
                             <i class="bi bi-x-lg"></i> Reject
                           </button>
-                        </div>
-                      </td> -->
+                        </div> -->
+                      </td>
 
                     </tr>
                   </tbody>
