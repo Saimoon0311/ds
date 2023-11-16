@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="hello">
+    <div class="admin-d">
         <AdminHeader />        
 
         <AdminLawyer />
@@ -22,7 +22,7 @@ export default {
         AdminLawyer,
         AdminHeader,
         MainFooter
-    },    
+    },
     methods: {
 
     },
@@ -77,5 +77,17 @@ export default {
 .nav-pills .show>.nav-link {
     color: white;
     background-color: #000000;
+}
+
+.hello {
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 </style>

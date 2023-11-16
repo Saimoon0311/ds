@@ -257,6 +257,12 @@ export default {
 }
 
 @media screen and (max-width: 720px) {
+  .showhover p[data-v-34f07b43] {
+    line-height: 23px;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+
   .homepage-circles {
     border: 3px solid black;
     border-radius: 50%;
@@ -271,8 +277,8 @@ export default {
     --bs-gutter-y: 0;
     display: flex;
     flex-wrap: wrap;
-    width: 350px;
-    height: 350px;
+    width: 370px;
+    height: 370px;
     line-height: 18px;
   }
 
