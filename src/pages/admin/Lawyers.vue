@@ -66,12 +66,12 @@
               </div>
 
               <div v-else class="border rounded bg-light p-3 d-flex flex-wrap">
-                <!-- <div class="input-group mb-3">
+                <div class="input-group mb-3">
                   <input
                     type="text"
                     class="form-control"
                     v-model="searchQuery"
-                    @keyup.enter="search"
+                    @keyup.enter="search(pageStatus)"
                     placeholder="Search..."
                     aria-label="Recipient's username"
                     aria-describedby="basic-addon2"
@@ -79,18 +79,18 @@
                   <button
                     class="input-group-text btn custom-button"
                     id="basic-addon2"
-                    @click="search"
+                    @click="search(pageStatus)"
                   >
                     <i class="fa fa-search"></i>
                   </button>
                   <button
                     class="input-group-text btn custom-button"
                     id="basic-addon2"
-                    @click="clearSearch"
+                    @click="clearSearch(pageStatus)"
                   >
                     <i class="fa fa-refresh"></i>
                   </button>
-                </div> -->
+                </div>
 
                 <span
                   v-if="openJobs.length == 0 && searchQuery != ''"
@@ -155,14 +155,16 @@
                               <tr>
                                 <td class="fw-bold">Expertise</td>
                                 <td v-if="item?.fields.length > 0">
-                                  <span v-for="(field, fieldIndex) in item?.fields" :key="fieldIndex" >{{ field?.title}}</span>
+                                  <span v-for="(field, fieldIndex) in item?.fields" :key="fieldIndex" >{{ field?.title}} <span v-if="fieldIndex < item?.fields.length - 1">, </span></span>
+                                  
                                 </td>
                                 <td v-else></td>
                               </tr>
                               <tr>
                                 <td class="fw-bold">Location</td>
                                 <td v-if="item?.locations.length > 0">
-                                  <span v-for="(location, locationIndex) in item?.locations" :key="locationIndex" >{{ location?.title}}</span>
+                                  <span v-for="(location, locationIndex) in item?.locations" :key="locationIndex" >{{ location?.title}} <span v-if="locationIndex < item?.locations.length - 1">, </span></span>
+                                  
                                 </td>
                                 <td v-else></td>
                               </tr>
@@ -288,12 +290,12 @@
               </div>
 
               <div v-else class="border rounded bg-light p-3 d-flex flex-wrap">
-                <!-- <div class="input-group mb-3">
+                <div class="input-group mb-3">
                   <input
                     type="text"
                     class="form-control"
                     v-model="searchQuery"
-                    @keyup.enter="search"
+                    @keyup.enter="search(pageStatus)"
                     placeholder="Search..."
                     aria-label="Recipient's username"
                     aria-describedby="basic-addon2"
@@ -301,18 +303,18 @@
                   <button
                     class="input-group-text btn custom-button"
                     id="basic-addon2"
-                    @click="search"
+                    @click="search(pageStatus)"
                   >
                     <i class="fa fa-search"></i>
                   </button>
                   <button
                     class="input-group-text btn custom-button"
                     id="basic-addon2"
-                    @click="clearSearch"
+                    @click="clearSearch(pageStatus)"
                   >
                     <i class="fa fa-refresh"></i>
                   </button>
-                </div> -->
+                </div>
 
                 <span
                   v-if="openJobs.length == 0 && searchQuery != ''"
@@ -377,14 +379,14 @@
                               <tr>
                                 <td class="fw-bold">Expertise</td>
                                 <td v-if="item?.fields.length > 0">
-                                  <span v-for="(field, fieldIndex) in item?.fields" :key="fieldIndex" >{{ field?.title}}</span>
+                                  <span v-for="(field, fieldIndex) in item?.fields" :key="fieldIndex" >{{ field?.title}} <span v-if="fieldIndex < item?.fields.length - 1">, </span></span>
                                 </td>
                                 <td v-else></td>
                               </tr>
                               <tr>
                                 <td class="fw-bold">Location</td>
                                 <td v-if="item?.locations.length > 0">
-                                  <span v-for="(location, locationIndex) in item?.locations" :key="locationIndex" >{{ location?.title}}</span>
+                                  <span v-for="(location, locationIndex) in item?.locations" :key="locationIndex" >{{ location?.title}} <span v-if="locationIndex < item?.locations.length - 1">, </span></span>
                                 </td>
                                 <td v-else></td>
                               </tr>
@@ -486,10 +488,9 @@
               </div>
             </div> 
           </div>
-          <div
-                    v-if="openJobs.length > 0 && currentPage != lastPage"
+          <div v-if="openJobs.length > 0 && currentPage != lastPage"
                     class="text-center mt-3">
-                    <button class="btn custom-button" @click="loadMore(pageStatus)">
+                    <button id="loadMoreButton" class="btn custom-button" @click="loadMore(pageStatus)">
                       Load More
                     </button>
                   </div>
@@ -509,7 +510,6 @@
 import AdminHeader from "./Header.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
 import api from '@/config/api';
-
 export default {
   components: {
     AdminHeader,
@@ -523,6 +523,12 @@ export default {
       endpoint: "/admin/all-lawyers",
       // endpoint_search: "/lawyer/search-related-jobs",
     };
+  },
+
+  watch: {
+    pageStatus(newQuery) {
+      console.log('pageStatus : ', newQuery);
+    },
   },
 
   computed: {
@@ -540,6 +546,30 @@ export default {
   async created() {
     await this.loadMore(this.pageStatus);
   },
+
+  // async mounted() {
+  //   window.addEventListener("scroll", () => {
+  //     console.log('handle scroll: ', this.currentPage);
+  //     console.log('handle 2: ', window.innerHeight + window.scrollY);
+  //     // console.log('handle 3: ', document.body.offsetHeight - scrollThreshold);
+  //     // You can customize the scroll position threshold as needed
+  //     const scrollThreshold = 100;
+  //     // Check if the user has scrolled to the bottom of the page
+  //     if (
+  //       window.innerHeight + window.scrollY >=
+  //       document.body.offsetHeight - scrollThreshold &&
+  //       this.openJobs.length > 0 && this.currentPage != this.lastPage
+  //     ) {
+  //       document.getElementById('loadMoreButton').click();
+  //       console.log('handle 3 : ' , this.currentPage);
+  //     }
+  //   });
+  // },
+  // beforeUnmount() {
+  //   // Remove the scroll event listener when the component is destroyed
+  //   window.removeEventListener("scroll", this.handleScroll(this.pageStatus));
+  // },
+
   methods: {
     async setStatus(status) {
       this.pageStatus = status;

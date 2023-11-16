@@ -55,7 +55,12 @@ app.mixin({
         this.openJobs = [];
         this.currentPage = 0;
         this.lastPage = 0;
-        this.loadMore();
+        let status = this.admin_approval;
+        if(typeof this.pageStatus !== undefined)
+        {
+          status = this.pageStatus;
+        }  
+        this.loadMore(status,true);
       }
     },
   },
@@ -251,10 +256,13 @@ app.mixin({
 
     // loadmore pagination and search functions start
 
-    async search() {
+    async search(status = null) {
       if (this.searchQuery == "") return false;
+      let obj = { query: this.searchQuery };
+      if(status) obj.admin_approval = status;
+      console.log(obj);
       const response = await api.get(this.endpoint, {
-        params: { query: this.searchQuery },
+        params: obj,
       });
       this.currentPage = 1;
       this.lastPage = response?.data?.last_page;
@@ -264,8 +272,18 @@ app.mixin({
       console.log("curr search : ", this.currentPage);
     },
 
+
+    
+
     async loadMore(status = null,reset = null) {
+
+      // if (this.currentPage > this.lastPage) {
+      //   return;
+      // }
+
       if(reset){
+        this.searchQuery = "";
+        this.clear = false;
         this.currentPage = 0;
         this.openJobs = [];
         this.lastPage = null;
@@ -277,10 +295,13 @@ app.mixin({
       } else {
         url = `${this.endpoint}?page=${this.currentPage}`;
       }
+      console.log('url ::: ' , url);
 
       if(this.endpoint == "/admin/all-lawyers"){
         url = url + `&admin_approval=${status}`;
       }
+
+      console.log('url 2 ::: ' , url);
 
       const response = await this.fetchData(url);
       // console.log("pagin : ", response);
@@ -307,17 +328,18 @@ app.mixin({
       }
     },
 
-    async clearSearch() {
+    async clearSearch(status = null) {
       if (this.searchQuery == "") return false;
       this.clear = true;
       this.openJobs = [];
       this.searchQuery = "";
       this.currentPage = 1;
       this.lastPage = 0;
+   
       let url = `${this.endpoint}?page=${this.currentPage}`;
 
-      if(this.endpoint == "/admin/all-lawyers"){
-        url = url + `&admin_approval=${this.admin_approval}`;
+      if(status){
+        url = url + `&admin_approval=${status}`;
       }
 
       const response = await this.fetchData(url);
