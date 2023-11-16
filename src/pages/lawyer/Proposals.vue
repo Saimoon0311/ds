@@ -69,7 +69,7 @@
           <tbody>
             <tr v-if="data_paginated == null || data_paginated.length == 0">
               <td colspan="9" class="text-center">
-                You have not Proposal on any jobs yet.
+                You have not submitted any proposals yet.
               </td>
             </tr>
 

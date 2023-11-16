@@ -2,8 +2,8 @@
   <div class="c-main">
     <ClientHeader />
     <div class="container">
-      <p class="h4 m-3">Welcome, test client</p>
-      <p class="m-3">Here are jobs matching your location and practice area.</p>
+      <p class="h4 m-3">Welcome, {{ userName }}</p>
+      <p class="m-3">Here are all the jobs you have posted.</p>
       <div data-v-511b78bb="" class="container">
         <ul
           data-v-511b78bb=""
@@ -106,58 +106,60 @@
                       <p class="badge bg-dark" title="Location">
                         {{ item?.location?.title }}
                       </p>
-                      <p><b>Serial No:</b> {{ item?.identity }}</p>
-                      <p><b>City/suburb:</b> {{ item?.city }}</p>
-                      <p><b>Title:</b> {{ item?.title }}</p>
                       <p>
-                        <b>Created:</b> {{ formatCreatedAt(item.created_at) }}
+                        <b>{{ item?.title }}</b>
                       </p>
-                      <p
-                        id="description30"
-                        style="
-                          overflow: hidden;
-                          text-overflow: ellipsis;
-                          height: 100px;
-                        "
-                      >
+                      <p id="description28" class="descriptionText">
+                        <b>Job description: </b>
                         {{ item?.description }}
                       </p>
+                      <p><b>City/suburb:</b> {{ item?.city }}</p>
+                      <p>
+                        <b>Job No: </b>
+                        <span class="smallFont"> {{ item?.identity }} </span>
+                      </p>
+                      <p>
+                        <b>Created: </b>
+                        <span class="smallFont">
+                          {{ formatCreatedAt(item.created_at) }}</span
+                        >
+                      </p>
+
                       <!-- <details>
-                    <summary>More details</summary>
-                    <div class="bg-dark border rounded p-3 m-1">
-                      <p><b>Posted by:</b> client@mailinator.com</p>
-                      <p><b> Deadline:</b> 28-10-2023</p>
-                      <p><b> Preferred contact time:</b> after 1:00</p>
+                            <summary>More details</summary>
+                            <div class="bg-dark border rounded p-3 m-1">
+                              <p><b>Posted by:</b> mailto:junucyme@mailinator.com</p>
+                              <p><b> Deadline:</b> 27-12-2023</p>
+                              <p><b> Preferred contact time:</b> Flexible</p>
+                            </div>
+                          </details> -->
                     </div>
-                  </details> -->
-                </div>
-                <div
-                  class="d-flex flex-column justify-content-center align-items-center"
-                  style="min-width: 110px"
-                >
-                  <!-- <router-link
+                    <div
+                      class="d-flex flex-column justify-content-center align-items-center"
+                      style="min-width: 125px"
+                    >
+                      <!-- <router-link
                     class="btn btn-light btn-sm w-100 py-2 mb-2"
                     to="/view-proposals"
                     >View Proposals</router-link
                   > -->
-                  <button 
-                  class="btn btn-light btn-sm w-100 py-2 mb-2"
-                  @click="goToViewProposals(item?.id)"
-                  >View Proposals</button>
-                  <button
-                    class="btn btn-danger btn-sm w-100 py-2"
-                    
-                  >
-                    Cancel
-                  </button>
-                  <form method="post" action="index.php" class="d-none">
-                    <input class="d-none" name="id" value="30" />
-                    <button>Cancel Job</button>
-                  </form>
+                      <button
+                        class="btn btn-light btn-sm w-100 my-1"
+                        @click="goToViewProposals(item?.id)"
+                      >
+                        View Proposals
+                      </button>
+                      <button class="btn btn-danger btn-sm w-100 my-1">
+                        Cancel
+                      </button>
+                      <form method="post" action="index.php" class="d-none">
+                        <input class="d-none" name="id" value="30" />
+                        <button>Cancel Job</button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
             </div>
 
             <div v-if="openJobs.length > 0 && currentPage != lastPage">
@@ -208,14 +210,7 @@
                 <p><b>Lawyer Name:</b> testing client</p>
                 <p><b>Lawyer Email:</b> testing@mailinator.com</p>
                 <p><b>Phone Number:</b> 0310000000</p>
-                <p
-                  id="description30"
-                  style="
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    height: 100px;
-                  "
-                >
+                <p id="description30" class="descriptionText">
                   lorem ipsum dummy text description
                 </p>
                 <!-- <details>
@@ -258,13 +253,17 @@ export default {
   async created() {
     await this.loadMore();
   },
-
+  computed: {
+    userName() {
+      return `${this.$store.getters?.loginUser?.first_name} ${this.$store.getters?.loginUser?.last_name}`;
+    },
+  },
   methods: {
     goToViewProposals(id) {
-      this.$store.commit('SET_JOB_ID', id);
-      localStorage.setItem('jobId', id);
-      this.$router.push({ 'path': '/view-proposals' })
-    }
+      this.$store.commit("SET_JOB_ID", id);
+      localStorage.setItem("jobId", id);
+      this.$router.push({ path: "/view-proposals" });
+    },
     // async getJobs() {
     //   try {
     //     const response = await api.get(`/client/client-jobs`);
@@ -292,7 +291,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
+.nav-pills .show > .nav-link {
   color: white;
   background-color: #000000;
 }
@@ -323,7 +322,29 @@ ul#pills-tab {
   bottom: 0;
   width: 100%;
 }
+.descriptionText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 100px;
+  line-break: anywhere;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+.descriptionText::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 10px;
+}
 
+.descriptionText::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px #0000004d;
+  border-radius: 10px;
+}
+
+.descriptionText::-webkit-scrollbar-thumb {
+  background-color: #969696;
+  /* outline: 1px solid #292929; */
+  border-radius: 10px;
+}
 @media only screen and (max-width: 767px) and (min-width: 320px) {
   /* .btn {
     padding: 5px 0px;

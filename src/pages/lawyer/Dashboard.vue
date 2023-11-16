@@ -96,8 +96,8 @@
                 </p>
               </div>
 
-              <div v-else class="border rounded bg-light p-3 d-flex flex-wrap">
-                <div class="input-group mb-3">
+              <div v-else class="border rounded bg-light px-2 py-3 d-flex flex-wrap align-center justify-content-center">
+                <div class="input-group mb-3 search-field">
                   <input
                     type="text"
                     class="form-control"
@@ -130,7 +130,7 @@
                 >
 
                 <template v-else>
-                  <div class="row">
+                  <div class="row w-100">
                     <div
                       v-for="(item, index) in openJobs"
                       :key="index"
@@ -153,11 +153,7 @@
                           </p>
                           <p
                             id="description28"
-                            style="
-                              overflow: hidden;
-                              text-overflow: ellipsis;
-                              
-                            "
+                            class="descriptionText"
                           >
                           <b>Job description: </b>
                             {{ item?.description }}
@@ -180,7 +176,7 @@
                         </div>
                         <div
                           class="d-flex flex-column justify-content-center align-items-center"
-                          style="min-width: 110px"
+                          style="min-width: 150px"
                         >
                           <!-- <router-link
                         class="btn btn-light btn-sm w-100 my-1"
@@ -286,7 +282,7 @@
                 >
               </div>
             </div>
-            <div v-else>
+            <div v-else class="border rounded bg-light p-3">
               <!-- Conditions Documentation :
             if : openJobs.length == 0 && searchQuery == '' (if no data , no search)
               No potential jobs found that match your profile. Click here to amend your
@@ -299,7 +295,7 @@
 
               <div
                 v-if="openJobs.length == 0 && searchQuery == ''"
-                class="border rounded bg-light p-3 d-flex flex-wrap"
+                class=" d-flex flex-wrap"
               >
                 <p class="mx-auto my-0">
                   No potential jobs found that match your profile. Click here to
@@ -359,11 +355,7 @@
                           <p><b>Created:</b> 10/11/23 11:07pm</p>
                           <p
                             id="description28"
-                            style="
-                              overflow: hidden;
-                              text-overflow: ellipsis;
-                              min-height: 100px;
-                            "
+                            class="descriptionText"
                           >
                             Lorem ipsum
                           </p>
@@ -378,7 +370,7 @@
                         </div>
                         <div
                           class="d-flex flex-column justify-content-center align-items-center"
-                          style="min-width: 110px"
+                          style="min-width: 150px"
                         >
                           <!-- <router-link
                       class="btn btn-light btn-sm w-100 my-1"
@@ -468,15 +460,17 @@
                       </button>
                     </div> -->
               </div>
-            </div> 
-          </div>
-          <div
+
+              <div
                     v-if="openJobs.length > 0 && currentPage != lastPage && adminApproval == 'approve' && subscriptionStatus == 'subscribed'"
                     class="text-center mt-3">
                     <button class="btn custom-button" @click="loadMore">
                       Load More
                     </button>
                   </div>
+            </div> 
+          </div>
+        
         </div>
       </div>
     </div>
@@ -655,7 +649,33 @@ ul#pills-tab {
 .smallFont {
   font-size: 13px;
 }
+.search-field{
+  padding: 0 13px !important;
+}
+.descriptionText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 100px;
+  line-break: anywhere;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-right: 5px;
+}
+.descriptionText::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 10px;
+}
 
+.descriptionText::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px #0000004d;
+  border-radius: 10px;
+}
+
+.descriptionText::-webkit-scrollbar-thumb {
+  background-color: #969696;
+  /* outline: 1px solid #292929; */
+  border-radius: 10px;
+}
 @media only screen and (max-width: 600px) {
   .l-main {
     padding-bottom: 100px;
