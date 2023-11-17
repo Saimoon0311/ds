@@ -16,13 +16,13 @@
           <p><b>City/suburb:</b> {{ jobData?.title }}</p>
           <p></p> -->
 
-          <p><b>Job No:</b> {{ jobData?.identity }}</p>
-          <p><b>City/suburb:</b> {{ jobData?.city }}</p>
-          <p><b>Title:</b> {{ jobData?.title }}</p>
-          <p><b>Created:</b> {{ formatCreatedAt(jobData?.created_at) }} </p>
-          <p id="description28" style="overflow: hidden; text-overflow: ellipsis; height: 100px">
-            {{ jobData?.description }}
+          <p><b>Job No:</b> <span class="smallFont">{{ jobData?.identity }}</span></p>
+          <p><b>{{ jobData?.title }}</b></p>
+          <p id="description28" class="cardProposalDes">
+            <b>Job description:</b> {{ jobData?.description }}
           </p>
+          <p><b>City/suburb:</b> {{ jobData?.city }}</p>
+          <p><b>Created:</b> <span class="smallFont">{{ formatCreatedAt(jobData?.created_at) }}</span> </p>
           <div>
             <!-- <p><b>Posted by:</b> test@mailinator.com</p>
             <p>
@@ -153,7 +153,7 @@
                           <th></th>
                           <th>Item</th>
                           <th>Cost</th>
-                          <th>Total</th>
+                          <th>GST Not Applicable</th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
@@ -161,16 +161,19 @@
                           <td style="width:0px"><button type="button" @click="removeRow(index)"
                               class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ row.costAud }}</td>
+                          <td>${{ row.costAud }}</td>
                           <td>
-                            <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
-                            </p>
+                            <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
+                            </p> -->
+                            <input type="checkbox" name="gst not applicable">
                           </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ grandTotal }}</p>
+                    <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total
+                      (excluding GST): ${{ grandTotal }}
+                    </p>
                   </div>
                 </div>
 
@@ -221,7 +224,7 @@
                       <th></th>
                       <th>Item </th>
                       <th>Fee (excluding GST)</th>
-                      <th>Total</th>
+                      <!-- <th>Total</th> -->
                     </tr>
                   </thead>
                   <tbody id="addFeeEarnersRow">
@@ -230,9 +233,10 @@
                           class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                       <td>{{ row.itemDisbursement }}</td>
                       <td>$ {{ row.costAud }}</td>
-                      <td>
-                        <p class="mb-0 bg-secondary border p-1 rounded text-white ">Total (excluding GST): ${{ row.total }}</p>
-                      </td>
+                      <!-- <td>
+                        <p class="mb-0 bg-secondary border p-1 rounded text-white ">Total (excluding GST): ${{ row.total
+                        }}</p>
+                      </td> -->
                     </tr>
                   </tbody>
                 </table>
@@ -380,7 +384,7 @@
                           <th></th>
                           <th>Item</th>
                           <th>Cost</th>
-                          <th>Total</th>
+                          <th>GST Not Applicable</th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
@@ -388,16 +392,20 @@
                           <td style="width:0px"><button type="button" @click="removeRow(index)"
                               class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ row.costAud }}</td>
+                          <td>${{ row.costAud }}</td>
                           <td>
-                            <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
-                            </p>
+                            <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
+                            </p> -->
+                            <input type="checkbox" name="gst not applicable">
+
                           </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ grandTotal }}</p>
+                    <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total
+                      (excluding GST): ${{ grandTotal }}
+                    </p>
                   </div>
                 </div>
 
@@ -509,7 +517,7 @@
                           <th></th>
                           <th>Item</th>
                           <th>Cost</th>
-                          <th>Total</th>
+                          <th>GST Not Applicable</th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
@@ -517,16 +525,21 @@
                           <td style="width:0px"><button type="button" @click="removeRow(index)"
                               class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ row.costAud }}</td>
+                          <td>${{ row.costAud }}</td>
                           <td>
-                            <p class="mb-0 bg-secondary border p-1 rounded text-white">Total (excluding GST): ${{ row.total }}
-                            </p>
+                            <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white">Total (excluding GST): ${{
+                              row.total }}
+                            </p> -->
+                            <input type="checkbox" name="gst not applicable">
+
                           </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total (excluding GST): ${{ grandTotal }}</p>
+                    <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total
+                      (excluding GST): ${{
+                        grandTotal }}</p>
                   </div>
 
 
@@ -685,7 +698,7 @@
                 </table> -->
 
 
-                <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
+                <table class="table table-bordered mb-3" id="additionalFeeEarnersTable">
                   <thead>
                     <tr>
                       <th>Title</th>
@@ -823,7 +836,7 @@
                           <th></th>
                           <th>Item</th>
                           <th>Cost</th>
-                          <th>Total</th>
+                          <th>GST Not Applicable</th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
@@ -832,16 +845,19 @@
                               class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button>
                           </td>
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ row.costAud }}</td>
+                          <td>${{ row.costAud }}</td>
                           <td>
-                            <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
-                            </p>
+                            <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
+                            </p> -->
+                            <input type="checkbox" name="gst not applicable">
                           </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ grandTotal }}</p>
+                    <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total
+                      (excluding GST): ${{ grandTotal }}
+                    </p>
                   </div>
                 </div>
 
@@ -885,9 +901,11 @@
             <!-- If they select ‘Success Fee’ -->
             <div class="form-group" id="success-fee" v-if="selectedOption === 'Success'">
               <label>Estimated fee amount (excluding GST and disbursements):</label>
-              <input type="number" v-model="form.estimatedFee" id="estimatedFee" name="estimatedFee"
-                class="form-control"  />
-
+              <div>
+                <span class="position-absolute d-span"> $</span>
+                <input type="number" v-model="form.estimatedFee" id="estimatedFee" name="estimatedFee"
+                  class="form-control d-input" />
+              </div>
               <br />
 
               <label>Uplift percentage (%):<sup><code>*</code></sup></label>
@@ -987,7 +1005,7 @@
                           <th></th>
                           <th>Item</th>
                           <th>Cost</th>
-                          <th>Total</th>
+                          <th>GST Not Applicable</th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
@@ -995,16 +1013,19 @@
                           <td style="width:0px"><button type="button" @click="removeRow(index)"
                               class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ row.costAud }}</td>
+                          <td>${{ row.costAud }}</td>
                           <td>
-                            <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
-                            </p>
+                            <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
+                            </p> -->
+                            <input type="checkbox" name="gst not applicable">
                           </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ grandTotal }}</p>
+                    <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total
+                      (excluding GST): ${{ grandTotal }}
+                    </p>
                   </div>
 
 
@@ -1094,7 +1115,7 @@
                         <th></th>
                         <th>Item</th>
                         <th>Cost</th>
-                        <th>Total</th>
+                        <th>GST Not Applicable</th>
                       </tr>
                     </thead>
                     <tbody id="addFeeEarnersRow">
@@ -1102,16 +1123,18 @@
                         <td style="width:0px"><button type="button" @click="removeRow(index)"
                             class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                         <td>{{ row.itemDisbursement }}</td>
-                        <td>$ {{ row.costAud }}</td>
+                        <td>${{ row.costAud }}</td>
                         <td>
-                          <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
-                          </p>
+                          <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
+                          </p> -->
+                          <input type="checkbox" name="gst not applicable">
                         </td>
                       </tr>
                     </tbody>
                   </table>
 
-                  <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ grandTotal }}</p>
+                  <p class="mb-0 bg-dark mt-2 border p-1 rounded text-white text-center btn-itemize-total">Total
+                    (excluding GST): ${{ grandTotal }}</p>
                 </div>
               </div>
 
@@ -1794,7 +1817,7 @@ export default {
         "fee_earners": null,
         "daily_rate": null,
         "uplift_percentage": null,
-        "estimatedFee":null,
+        "estimatedFee": null,
         "success_fee_term": null,
         "pro_bono_description": null,
         "meet_deadlines": null,
@@ -1827,7 +1850,7 @@ export default {
 
       schemas: [],
       currentStep: 0,
-      
+
       selectedOption: "",
       option: "Yes",
       isVisible: "Yes",
@@ -1837,7 +1860,7 @@ export default {
       deadline: "Yes",
       team: "Yes",
       divItemiseVisible: false,
-      divEarnerVisible:false,
+      divEarnerVisible: false,
       input1: null
     };
   },
@@ -2014,9 +2037,9 @@ export default {
       this.divItemiseVisible = !this.divItemiseVisible;
     },
     showEarner() {
-      this. divEarnerVisible = !this. divEarnerVisible;
+      this.divEarnerVisible = !this.divEarnerVisible;
     },
-   
+
     updateDivContent() {
       // No need to update divContent; we're using v-if to conditionally render divs.
     },
@@ -2116,5 +2139,49 @@ export default {
 
 input[type="radio"]:checked {
   filter: grayscale(100%) contrast(200%);
+}
+
+.cardProposalDes {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 100px;
+  line-break: anywhere;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.cardProposalDes::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 10px;
+}
+
+.cardProposalDes::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.cardProposalDes::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  border-radius: 10px;
+}
+
+.smallFont {
+  font-size: 13px;
+}
+
+#addFeeEarnersRow td {
+  line-height: 34px;
+}
+
+/* #addFeeEarnersRow td:last-child {
+  line-height: 22px;
+}
+
+#addFeeEarnersRow td:last-child p {
+  margin-top: 4px;
+} */
+.btn-itemize-total {
+  max-width: 230px;
 }
 </style>
