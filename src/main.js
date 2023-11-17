@@ -105,12 +105,23 @@ app.mixin({
         about: res?.data?.data?.about,
         area_insert: res?.data?.data?.area_insert,
         state_insert: res?.data?.data?.state_insert,
+        consultation_type: res?.data?.data?.consultation_type,
+        consultation_amount: res?.data?.data?.consultation_amount,
+        consultation_time: res?.data?.data?.consultation_time,
       };
       if (localStorage.getItem("loginUser")) {
         localStorage.removeItem("loginUser");
       }
       localStorage.setItem("loginUser", JSON.stringify(userData));
       this.$store.commit("SET_LOGIN_USER", userData);
+    },
+
+    fetchUserData(){
+      api.get('/verify').then(res=>{
+        this.setUserInStateAndLocalStorage(res);
+      }).catch(error=>{ 
+        console.log(error);
+      })
     },
 
     sendOtp(email) {

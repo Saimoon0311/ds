@@ -223,6 +223,108 @@
       </div>
 
       <div
+        class="modal fade edit-consultation-modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="mySmallModalLabel"
+        aria-hidden="true"
+        id="ConsultationModal"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Edit Consultation Details
+              </h5>
+              <button
+                type="button"
+                class="close btn btn-dark"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <!-- <div class="form-group">
+                <input
+                  type="tel"
+                  name="phone"
+                  maxlength="10"
+                  class="form-control"
+                  id="phone"
+                  v-model="form.phone"
+                />
+                <button
+                  type="button"
+                  name="phone-submit"
+                  class="btn btn-dark my-3"
+                  @click="updateProfile('phone','#PhoneModal')"
+                >
+                  Save changes
+                </button>
+              </div> -->
+
+
+          <div class="form-group m-2" id="freeFirstConsultationRadio">
+            <label>Consultation type:</label>
+            <div class="form-check">
+              <input class="form-check-input" v-model="form.consultation_type" type="radio" name="freeFirstConsultation"
+                id="freeFirstConsultationYes" value="free" checked="" />
+              <label class="form-check-label" for="freeFirstConsultationYes" @click="changeConsultationType('free')">
+                Free
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" v-model="form.consultation_type" name="freeFirstConsultation"
+                id="freeFirstConsultationNo" value="discounted" />
+              <label class="form-check-label" for="freeFirstConsultationNo" @click="changeConsultationType('discounted')">
+                Discounted
+              </label>
+            </div>
+          </div>
+
+          <div v-if="form.consultation_type === 'discounted'">
+            <div class="form-group my-3" id="div-freeFirstConsultationFee">
+              <label for="freeFirstConsultationFee">Fee:<sup><code>*</code></sup></label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">$</div>
+                </div>
+                <input type="number" min="1" class="form-control" v-model="form.consultation_amount" name="freeFirstConsultationFee"
+                  id="freeFirstConsultationFee" />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-auto" id="div-freeFirstConsultationMinutes">
+              <label for="">Time limit:<sup><code>*</code></sup></label>
+              <div class="input-group mb-2">
+                <input type="number" v-model="form.consultation_time" class="form-control"
+                  name="freeFirstConsultationMinutes" id="freeFirstConsultationMinutes" placeholder="E.g. 60" />
+                <div class="input-group-prepend">
+                  <div class="input-group-text">minutes</div>
+                </div>
+              </div>
+          </div>
+
+          <button
+                  type="button"
+                  name="phone-submit"
+                  class="btn btn-dark my-3"
+                  @click="updateProfile(['consultation_type','consultation_amount','consultation_time'],'#ConsultationModal')"
+                >
+                  Save changes
+          </button>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
         class="modal fade bd-example-modal-lg"
         tabindex="-1"
         role="dialog"
@@ -520,6 +622,29 @@
             </td>
           </tr>
 
+
+
+          <tr>
+            <td class="d-flex align-items-center justify-content-between">
+              Consultation:
+              <button
+                type="button"
+                class="btn btn-dark btn-sm"
+                data-bs-toggle="modal" data-bs-target="#ConsultationModal"
+                data-target=".edit-consultation-modal"
+                title="Edit"
+              >
+                <i class="fa fa-pencil"></i>
+              </button>
+            </td>
+
+            <!-- Modal -->
+
+            <!-- Modal ends here -->
+
+            <td><b>Type : </b>{{ loginUser?.consultation_type ?? 'Not updated'}}, <b>Time : </b>{{ loginUser?.consultation_time ?? 'Not updated' }}, <b>Fee : </b>{{ loginUser?.consultation_amount ?? 'Not updated' }}</td>
+          </tr>
+
           <!-- Areas of Practice -->
           <tr>
             <td class="d-flex align-items-center justify-content-between">
@@ -623,6 +748,11 @@ export default {
         phone: null,
         about: null,
         job_title: null,
+        consultation_type: "free",
+        consultation_time: null,
+        consultation_amount: null,
+        remote_consultation: null,
+        mobile_friendly: null,
       },
       options: [],
       selectedOptionIds: [],
@@ -663,6 +793,10 @@ export default {
     this.fetchOptions_locations();
   },
   methods: {
+
+    changeConsultationType(value) {
+      this.form.consultation_type = value;
+    },
 
     updateFormProperties() {
       const userData = this.loginUser;
@@ -718,18 +852,15 @@ export default {
         api.post('/lawyer/update-fields', { "ids": this.selectedOptionIds }).then(() => {
           this.$swal("Success", "Fields updated successfully", "success");
           this.fetchOptions();
+          this.fetchUserData();
           this.closeModal('#AreaModal');
-        })
+        }).catch(() => this.$swal("Error", "Something went wrong, please try again", "error"));
       } catch (error) {
         this.$swal("Error", "Something went wrong, please try again", "error")
         // console.error('Error uploading image', error);
       }
     },
 
-
-    // fetchUserData(){
-    //   api.get('/verify')
-    // }
 
     // locations
     saveSelectedLocations() {
@@ -741,8 +872,9 @@ export default {
         api.post('/lawyer/update-locations', { "ids": this.selectedOptionIds_locations }).then(() => {
           this.$swal("Success", "Locations updated successfully", "success");
           this.fetchOptions_locations();
+          this.fetchUserData();
           this.closeModal('#StateModal');
-        })
+        }).catch(() => this.$swal("Error", "Something went wrong, please try again", "error"));
       } catch (error) {
         this.$swal("Error", "Something went wrong, please try again", "error")
         // console.error('Error uploading image', error);
