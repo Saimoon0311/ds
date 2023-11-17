@@ -103,6 +103,8 @@ app.mixin({
         law_firm: res?.data?.data?.law_firm,
         link: res?.data?.data?.link,
         about: res?.data?.data?.about,
+        area_insert: res?.data?.data?.area_insert,
+        state_insert: res?.data?.data?.state_insert,
       };
       if (localStorage.getItem("loginUser")) {
         localStorage.removeItem("loginUser");

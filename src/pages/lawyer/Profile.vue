@@ -525,6 +525,7 @@
             <td class="d-flex align-items-center justify-content-between">
               Areas of Practice:
               <button
+                v-if="!loginUser?.area_insert"
                 type="button"
                 @click="setModal('fields')"
                 class="btn btn-dark btn-sm"
@@ -566,6 +567,7 @@
             <td class="d-flex align-items-center justify-content-between">
               State/territory:
               <button
+              v-if="!loginUser?.state_insert"
               @click="setModal('locations')"
                 type="button"
                 class="btn btn-dark btn-sm"
@@ -723,6 +725,11 @@ export default {
         // console.error('Error uploading image', error);
       }
     },
+
+
+    // fetchUserData(){
+    //   api.get('/verify')
+    // }
 
     // locations
     saveSelectedLocations() {
