@@ -146,7 +146,7 @@
             <input type="radio" id="no" name="requirements" value="0" v-model="requirementsOption" />
             <label for="no" class="req-label"> No</label><br />
             <div v-if="requirementsOption == 1">
-              <label for="job" class="mt-2 mb-2">Please describe your accessibility requirement.</label>
+              <label for="job" class="mt-3 mb-2">Please describe your accessibility requirement.</label>
               <!-- <textarea v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
                 :maxlength="maxCharactersDes" name="accessibility" id="" type="textarea"
                 class="des-text form-control mb-5"
@@ -208,13 +208,22 @@
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="" id="Othertext" v-model="isChecked" />
                   <label class="form-check-label" for="Othertext">
-                    Other (20/30 character limit)
+                    Other
                   </label>
+                </div>
+
+                <div v-if="isChecked" class="mt-2">
+                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
+                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class=" form-control "
+                    placeholder="e.g. physical disability, mental disability" />
+                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                    You have reached your character limit.
+                  </div>
                 </div>
               </div>
 
-              <div class="pb-3">
-                <label for="language" class="pb-1">Speak a language other than English</label>
+              <div class="pb-5 pt-3">
+                <label for="language" class="pb-2">Speak a language other than English</label>
 
                 <select v-model="selectedLanguage" id="language" class="form-select">
                   <option value="">Select a language</option>
@@ -222,22 +231,21 @@
                     {{ language }}
                   </option>
                 </select>
-              </div>
 
-              <div v-if="selectedLanguage === 'Other'" class="mb-2">
-                <label for="otherLanguage">Other language:</label>
-                <input type="text" v-model="otherLanguage" id="otherLanguage" class="form-control"
-                  placeholder="e.g. vietnamese, spanish" />
-              </div>
-
-              <div v-if="isChecked" class="mt-2">
-                <textarea v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
-                  :maxlength="maxCharactersDes" name="accessibility" id="" type="textarea"
-                  class="des-text form-control mb-5" placeholder="e.g. physical disability, mental disability"></textarea>
-                <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
-                  You have reached your character limit.
+                <div v-if="selectedLanguage === 'Other'" class="mt-3">
+                  <!-- <label for="otherLanguage" class="pb-2">Other language:</label> -->
+                  <input type="text" v-model="otherLanguage" id="otherLanguage" class="form-control"
+                    @input="otherLanCharacterLimit" :maxlength="maxCharactersOtherLan"
+                    placeholder="e.g. vietnamese, spanish" />
+                  <div v-if="otherLanCharacter >= maxCharactersOtherLan" class="warning-text">
+                    You have reached your character limit.
+                  </div>
                 </div>
               </div>
+
+
+
+
             </div>
           </template>
 
@@ -255,9 +263,9 @@
               <!-- <p></p> -->
               <h4 class="line-break">{{ description }}</h4>
 
-              <h4><b>Location</b></h4>
+              <h4><b>Location</b>: {{ locations[selectedLocationIndex].title }}, {{ city }}</h4>
               <!-- <h4><b>State/Territory</b></h4> -->
-              <h4>{{ locations[selectedLocationIndex].title }}, {{ city }}</h4>
+              <!-- <h4></h4> -->
               <!-- <h4>City</h4> -->
               <!-- <h4>{{ city }}</h4> -->
               <h4 class="d-inline"><b>Accessibility Requirements: </b></h4>
@@ -399,8 +407,9 @@ export default {
       maxCharacters: 2500,
       maxCharactersCity: 50,
       maxTitleCharacters: 50,
-      maxCharactersDes: 500,
+      maxCharactersDes: 30,
       isChecked: false,
+      maxCharactersOtherLan: 30,
     };
   },
 
@@ -416,6 +425,9 @@ export default {
     },
     characterCountDes() {
       return this.requirementsOptionDescription.length;
+    },
+    otherLanCharacter() {
+      return this.otherLanguage.length;
     },
   },
   mounted() {
@@ -452,7 +464,7 @@ export default {
         (this.selectedAreaIndex = null),
         (this.city = null),
         (this.requirementsOption = 0),
-        (this.requirementsOptionDescription = null);
+        (this.requirementsOptionDescription = "");
     },
     async submitStepForm() {
       const formData = {
@@ -517,6 +529,14 @@ export default {
           this.requirementsOptionDescription.slice(0, this.maxDesCharacters); // Truncate text to the character limit.
       }
     },
+    otherLanCharacterLimit() {
+      if (this.otherLanCharacter > this.maxCharactersOtherLan) {
+        this.otherLanguage =
+          this.otherLanguage.slice(0, this.maxCharactersOtherLan); // Truncate text to the character limit.
+      }
+    },
+
+
 
     async fetchAreas() {
       try {
