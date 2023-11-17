@@ -51,13 +51,7 @@
                   aria-current="page"
                   >Account</router-link
                 >
-                <router-link
-                  to="/lawyer-faqs"
-                  class="nav-link fw-bolder menuItem-active-link"
-                  id="jobs"
-                  aria-current="page"
-                  >FAQs</router-link
-                >
+               
                 <router-link
                   to="/lawyer-profile"
                   class="nav-link fw-bolder menuItem-active-link"
@@ -72,12 +66,8 @@
                     >
                   </li>
 
-                  <li v-if="loginUser != null && loginUser?.type == 'client'">
-                    <router-link class="nav-link fw-bolder menuItem-active-link" to="/client-faqs"
-                      >FAQs</router-link
-                    >
-                  </li>
-                  <li v-if="loginUser != null && loginUser?.type == 'lawyer'">
+                  
+                  <li>
                     <router-link class="nav-link fw-bolder menuItem-active-link" to="/lawyer-faqs"
                       >FAQs</router-link
                     >
@@ -127,12 +117,8 @@
                     >
                   </li>
 
-                  <li v-if="loginUser != null && loginUser?.type == 'client'">
-                    <router-link class="dropdown-item" to="/client-faqs"
-                      >FAQs</router-link
-                    >
-                  </li>
-                  <li v-if="loginUser != null && loginUser?.type == 'lawyer'">
+                  
+                  <li >
                     <router-link class="dropdown-item" to="/lawyer-faqs"
                       >FAQs</router-link
                     >
@@ -252,14 +238,17 @@ ul.dropdown-menu.show {
   color: #000000a6 !important;
   font-weight: bolder;
 }
-.showonmonb{
+
+.showonmonb {
   display: none;
 }
+
 ul.showonmonb {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
+
 @media only screen and (max-width: 1024px) {
 
   .cstm-dropdown {
@@ -296,9 +285,10 @@ ul.showonmonb {
   .custom-dropdown {
     display: none;
   }
-  .showonmonb{
-  display: block;
-}
+
+  .showonmonb {
+    display: block;
+  }
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {

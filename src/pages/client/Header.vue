@@ -45,13 +45,7 @@
                   >Post a Job</router-link
                 >
 
-                <router-link
-                  to="/client-faqs"
-                  class="nav-link fw-bolder menuItem-active-link"
-                  id="jobs"
-                  aria-current="page"
-                  >FAQs</router-link
-                >
+                
                 <router-link
                   to="/client-account"
                   class="nav-link fw-bolder menuItem-active-link"
@@ -59,6 +53,7 @@
                   aria-current="page"
                   >Account</router-link
                 >
+                
                 <ul class="showonmonb" >
                   <li>
                     <router-link class="nav-link fw-bolder menuItem-active-link" to="/about-us"
@@ -66,13 +61,8 @@
                     >
                   </li>
 
-                  <li v-if="loginUser != null && loginUser?.type == 'client'">
+                  <li>
                     <router-link class="nav-link fw-bolder menuItem-active-link" to="/client-faqs"
-                      >FAQs</router-link
-                    >
-                  </li>
-                  <li v-if="loginUser != null && loginUser?.type == 'lawyer'">
-                    <router-link class="nav-link fw-bolder menuItem-active-link" to="/lawyer-faqs"
                       >FAQs</router-link
                     >
                   </li>
@@ -119,16 +109,12 @@
                     >
                   </li>
 
-                  <li v-if="loginUser != null && loginUser?.type == 'client'">
+                  <li >
                     <router-link class="dropdown-item" to="/client-faqs"
                       >FAQs</router-link
                     >
                   </li>
-                  <li v-if="loginUser != null && loginUser?.type == 'lawyer'">
-                    <router-link class="dropdown-item" to="/lawyer-faqs"
-                      >FAQs</router-link
-                    >
-                  </li>
+                  
 
                   <li>
                     <router-link class="dropdown-item" to="/how-simplawfy-works"
@@ -235,68 +221,76 @@ export default {
   width: 50px;
   margin-top: 15px;
 }
+
 ul.dropdown-menu.show {
   left: auto;
   right: 10px;
   margin-top: 10px;
 }
+
 .cstm-dropdown {
   border-radius: 0px;
   border: none !important;
   margin-top: -10px;
 }
+
 .lg-btn button {
   color: #000000a6 !important;
   font-weight: bolder;
 }
-.showonmonb{
+
+.showonmonb {
   display: none;
 }
+
 ul.showonmonb {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
+
 @media only screen and (max-width: 1024px) {
 
-.cstm-dropdown {
-  margin-top: 0;
-  top: 0;
-}
+  .cstm-dropdown {
+    margin-top: 0;
+    top: 0;
+  }
 
-.navbar-nav {
-  align-items: baseline;
-}
+  .navbar-nav {
+    align-items: baseline;
+  }
 
-.navbar-nav .left-menu {
-  display: flex;
-  align-items: baseline;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
+  .navbar-nav .left-menu {
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 
-.navbar-nav .lg-btn {
-  /* padding: 0px 22px; */
-}
+  .navbar-nav .lg-btn {
+    /* padding: 0px 22px; */
+  }
 
-.router-link-exact-active.menuItem-active-link {
-  padding: 7px 10px;
-}
+  .router-link-exact-active.menuItem-active-link {
+    padding: 7px 10px;
+  }
 
-.logOutBtn {
-  width: 109px;
-  text-align: left;
-}
+  .logOutBtn {
+    width: 109px;
+    text-align: left;
+  }
 }
 
 @media only screen and (max-width: 991px) {
-.custom-dropdown {
-  display: none;
+  .custom-dropdown {
+    display: none;
+  }
+
+  .showonmonb {
+    display: block;
+  }
 }
-.showonmonb{
-  display: block;
-}
-}
+
 @media only screen and (max-width: 767px) and (min-width: 320px) {
   .navbar-nav {
     align-items: baseline;
