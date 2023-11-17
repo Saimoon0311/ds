@@ -253,4 +253,14 @@ button:hover {
     font-size: 22px;
     font-weight: 600;
 }
+
+@media only screen and (max-width: 767px) and (min-width: 320px) {
+    .otp-inner .col-2 {
+        padding: 7px;
+    }
+
+    .form-control {
+        min-height: 60px;
+    }
+}
 </style>

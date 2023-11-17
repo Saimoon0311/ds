@@ -280,6 +280,7 @@ export default {
     width: 370px;
     height: 370px;
     line-height: 18px;
+    margin: 10px 0;
   }
 
   .mt-two {
