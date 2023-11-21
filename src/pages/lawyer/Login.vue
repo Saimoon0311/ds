@@ -49,7 +49,7 @@
           <p class="mb-0">
             <!-- Don't have an account? -->
       <!-- <br> -->
-      <router-link to="/lawyer-register">Don't have an account?</router-link>
+      <router-link to="/lawyer-register" class="already btn-light text-dark btn">Don't have an account?</router-link>
     </p>
             </Form>
           </div>
@@ -160,6 +160,19 @@ export default {
     margin: 0 auto !important;
     margin-top: 50px;
 } */
+.already {
+  padding: 4px 20px 5px 20px !important;
+  /* border-radius: 20px; */
+  text-align: center;
+  align-items: center;
+  font-size: 16px !important;
+  margin: 0px 10px;
+}
+
+.forgetp {
+  color: #fff;
+}
+
 .l-register-main {
   min-height: 100vh;
   position: relative;

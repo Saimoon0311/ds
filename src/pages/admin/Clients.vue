@@ -30,18 +30,24 @@ import MainFooter from "../../components/global/MainFooter.vue";
 
 
 export default {
-    components: {
-        AdminHeader,
-        MainFooter
-    },
-    methods: {},
-    name: "AdminLawyer",
+  components: {
+    AdminHeader,
+    MainFooter
+  },
+  methods: {},
+  name: "AdminLawyer",
 };
 </script>
 <style scoped>
+.hello {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+}
+
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>

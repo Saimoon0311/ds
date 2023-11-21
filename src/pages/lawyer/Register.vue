@@ -110,7 +110,7 @@
 
             <p>
                 <!-- Already have an account?<br>  -->
-                <router-link  to="/lawyer-login">Already have an account?</router-link ></p>
+                <router-link  to="/lawyer-login" class="already btn-light text-dark btn">Already have an account?</router-link ></p>
         </Form>
     </div>
 </div>
@@ -176,8 +176,8 @@ export default {
     },
     methods: {
         submitData(formData) {
-            console.log(this.selectedOption , " . option")
-            if(this.selectedOption != ""){
+            console.log(this.selectedOption, " . option")
+            if (this.selectedOption != "") {
                 formData.hear_about_us = this.selectedOption == "other" ? this.otherText : this.selectedOption;
             }
             this.submitSignupForm(formData, 'lawyer', 'lawyer-profile');
@@ -282,6 +282,20 @@ export default {
     margin-left: 6px;
 }
 
+.already {
+    padding: 4px 20px 5px 20px !important;
+    /* border-radius: 20px; */
+    text-align: center;
+    align-items: center;
+    font-size: 16px !important;
+    margin: 0px 10px;
+}
+
+a,
+a:hover {
+    color: #fff
+}
+
 @media (max-width: 1200px) {
     .find-client {
         padding-right: 40px !important;
@@ -318,5 +332,4 @@ export default {
         margin: 0 !important;
         padding-right: 30px !important;
     }
-}
-</style>
+}</style>

@@ -1,10 +1,11 @@
 <template lang="">
-    <div class="hello">
+    <div class="s-main">
       <LawyerHeader />
-      <main class="container d-flex justify-custom">
+      <main class="container ">
+        <div class="row justify-custom">
         <div class="col-md-6">
         <h3 class="mt-3 back-st">
-          <button  class="btn btn-secondary btn-sm my-3 " 
+          <button  class="btn btn-dark btn-sm my-3 " 
           @click="()=>this.$router.go(-1)"><i class="bi bi-arrow-left mr-4"></i> Back</button>
           
           <!-- <router-link
@@ -16,7 +17,7 @@
           
           <span class="ml-l" v-if="!this.replacePaymentMethod">Subscribe</span><span v-else>Replace Payment Method</span>
         </h3>
-        <p v-if="!this.replacePaymentMethod " class=" mb-5">
+        <p v-if="!this.replacePaymentMethod " class=" mb-4">
           Access the Simplawfy platform with a 60 day free trial, then for $39 per
           month. You will not be charged until
           <span id="trialEndingDate">{{ trialEndDate }}</span>.
@@ -25,14 +26,18 @@
 
         <div>
             <div id="card-element"></div>
-            <input type="text" v-model="cardHolderName" placeholder="Card Holder Name" class="form-control mt-3" required
+            <input type="text" v-model="cardHolderName" placeholder="Card Holder Name" class="form-control mt-3 cd-holder" required
                 name="card-holder-name" id="card-holder-name" />
-            <button  type="button" @click="subscribe" class="btn btn-dark mt-4 mb-1">Add Payment Method</button>
+            <button  type="button" @click="subscribe" class="btn btn-dark mt-3 mb-2">Add Payment Method</button>
         </div>
   
         <small >Payments are processed through Stripe, Inc.</small>
       </div>
+    </div>
       </main>
+      <div class="footer">
+        <MainFooter />
+      </div>
     </div>
   </template>
 
@@ -40,15 +45,18 @@
 <script>
 import api from "../../config/api.js";
 import LawyerHeader from "./Header.vue";
+import MainFooter from "../../components/global/MainFooter.vue";
+
 import { mapState } from 'vuex';
 export default {
   name: "SubscriptionComponent",
   components: {
     LawyerHeader,
+    MainFooter
   },
   data() {
     return {
-      plan : null,
+      plan: null,
       cardHolderName: null,
       cardElement: null,
       // paymentMethodId : null,
@@ -100,7 +108,7 @@ export default {
               "email": this.$store.getters?.loginUser?.email,
               "card_holder_name": this.cardHolderName,
               "payment_method_id": paymentMethod.id,
-              "plan" : this.plan,
+              "plan": this.plan,
             };
             const url = this.replacePaymentMethod ? "/lawyer/replace-payment-method" : "/lawyer/create-subscription";
             api.post(url, formData)
@@ -148,7 +156,7 @@ export default {
           console.log('sub : ' + this.stripe);
         }
         document.head.appendChild(stripeScript);
-      } 
+      }
       // else {
       //   this.loadStripe();
       // }
@@ -219,5 +227,35 @@ export default {
 
 .justify-custom {
   justify-content: center;
+}
+
+#card-element {
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  padding: 8px;
+  font-size: 1rem;
+}
+
+.cd-holder {
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.cd-holder::placeholder {
+  /* color: #777777; */
+  opacity: 0.93;
+
+}
+
+.s-main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>

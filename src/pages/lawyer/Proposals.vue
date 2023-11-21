@@ -11,7 +11,7 @@
         <div v-else-if="subscriptionStatus != 'subscribed'">
           <div class="alert alert-danger mt-4 text-center m-0 p-2">
           You have not subscribed yet.
-            <router-link to="/plans" class="btn btn-link ps-0">Subscribe now</router-link>
+            <router-link to="/plans" class="btn btn-dark text-white">Subscribe now</router-link>
           </div>
         </div>
       

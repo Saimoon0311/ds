@@ -14,11 +14,11 @@
             mso-bidi-font-size: 10.5pt;
             font-family: Montserrat;
             mso-fareast-font-family: Calibri;
-            text-transform: uppercase;
+            
             mso-ansi-language: EN-AU;
             font-weight: bold;
           "
-          >Faqs<o:p></o:p
+          >FAQs<o:p></o:p
         ></span>
       </p>
       
@@ -1049,14 +1049,19 @@ export default {
   /* padding-left: 0 !important;
   padding-right: 0 !important; */
   font-weight: 400 !important;
-  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+  color: #000;
   text-decoration: underline;
   padding: 0 !important;
 }
 
 .accordion-button.cstm-accor:not(.collapsed) {
   background-color: transparent;
-  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+  color: #000;
   text-decoration: underline;
+}
+
+a,
+a:hover {
+  color: #000;
 }
 </style>

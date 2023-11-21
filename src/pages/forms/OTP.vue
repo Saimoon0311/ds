@@ -4,8 +4,8 @@
             <GeneralHeader />
 
             <div class="pt-4 center-main row justify-content-center otp-main">
-                <div class="col-md-8 col-lg-5 text-center my-4 otp-inner">
-                    <div class="bg-dark text-white text-center m-3 p-3 pt-4 find-client" style="border-radius: 10px">
+                <div class="col-md-8 col-lg-6 text-center my-4 otp-inner">
+                    <div class="bg-dark text-white text-center m-3 p-4 pt-4 find-client" style="border-radius: 10px">
                         <h2 class="mb-4 text-light">OTP Verification</h2>
                         <div class="row">
                             <div v-for="(digit, index) in otpDigits" :key="index" class="col-2">
@@ -22,7 +22,7 @@
                             </button>
                         </div>
 
-                        <a href="javascript:;" @click="sendOtpAgain(this.otpEmail)">Resend OTP code.</a>
+                        <a href="javascript:;" @click="sendOtpAgain(this.otpEmail)" class="text-white">Resend OTP code.</a>
                     </div>
                 </div>
             </div>

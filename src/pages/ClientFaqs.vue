@@ -14,11 +14,11 @@
             mso-bidi-font-size: 10.5pt;
             font-family: Montserrat;
             mso-fareast-font-family: Calibri;
-            text-transform: uppercase;
+            
             mso-ansi-language: EN-AU;
             font-weight: bold;
           "
-          >Faqs<o:p></o:p
+          >FAQs<o:p></o:p
         ></span>
       </p>
       <!-- <ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">

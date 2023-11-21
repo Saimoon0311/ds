@@ -110,7 +110,7 @@
 
             <p>
                 <!-- Already have an account?<br>  -->
-                <router-link  to="/client-login">Already have an account?</router-link ></p>
+                <router-link  to="/client-login" class="already btn-light text-dark btn">Already have an account?</router-link ></p>
         </Form>
     </div>
 </div>
@@ -177,7 +177,7 @@ export default {
     },
     methods: {
         submitData(formData) {
-            if(this.selectedOption != ""){
+            if (this.selectedOption != "") {
                 formData.hear_about_us = this.selectedOption == "other" ? this.otherText : this.selectedOption;
             }
             this.submitSignupForm(formData, 'client', 'client-dashboard');
@@ -233,6 +233,20 @@ export default {
     justify-content: center;
     flex-wrap: wrap;
 } */
+.already {
+    padding: 4px 20px 5px 20px !important;
+    /* border-radius: 20px; */
+    text-align: center;
+    align-items: center;
+    font-size: 16px !important;
+    margin: 0px 10px;
+}
+
+a,
+a:hover {
+    color: #fff
+}
+
 .inline-table {
     display: inline-block !important;
 }

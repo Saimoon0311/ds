@@ -15,6 +15,21 @@
       </p>
 
       <div data-v-511b78bb="" class="container">
+            <div v-if="adminApproval != 'approve'">
+              <p class="h5 m-3 text-center">
+                Your profile has not been approved yet.
+              </p>
+            </div>
+            <div v-else-if="subscriptionStatus != 'subscribed'">
+              <div class="alert alert-danger text-center m-0 p-2">
+                You have not subscribed yet.
+                <router-link to="/plans" class="btn btn-dark text-white"
+                  >Subscribe now</router-link
+                >
+              </div>
+            </div>
+
+            <div v-else>
         <ul
           data-v-511b78bb=""
           class="nav nav-pills mb-3 bg-light border p-2 py-3 rounded"
@@ -61,20 +76,7 @@
             role="tabpanel"
             aria-labelledby="pills-home-tab"
           >
-            <div v-if="adminApproval != 'approve'">
-              <p class="h5 m-3 text-center">
-                Your profile has not been approved yet.
-              </p>
-            </div>
-            <div v-else-if="subscriptionStatus != 'subscribed'">
-              <div class="alert alert-danger text-center m-0 p-2">
-                You have not subscribed yet.
-                <router-link to="/plans" class="btn btn-link ps-0"
-                  >Subscribe now</router-link
-                >
-              </div>
-            </div>
-            <div v-else>
+            
                     <!-- Conditions Documentation :
               if : openJobs.length == 0 && searchQuery == '' (if no data , no search)
                 No potential jobs found that match your profile. Click here to amend your
@@ -87,12 +89,11 @@
 
               <div
                 v-if="openJobs.length == 0 && searchQuery == ''"
-                class="border rounded bg-light p-3 d-flex flex-wrap"
-              >
+                class="border rounded bg-light p-3 d-flex flex-wrap">
                 <p class="mx-auto my-0">
                   No potential jobs found that match your profile. Click here to
                   amend your
-                  <router-link to="/lawyer-profile">Profile</router-link>
+                  <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
                 </p>
               </div>
 
@@ -300,11 +301,11 @@
                 <p class="mx-auto my-0">
                   No potential jobs found that match your profile. Click here to
                   amend your
-                  <router-link to="/lawyer-profile">Profile</router-link>
+                  <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
                 </p>
               </div>
 
-              <div v-else class="border rounded bg-light p-3">
+              <div v-else class="">
                 <div class="input-group mb-3">
                   <input
                     type="text"
@@ -649,9 +650,11 @@ ul#pills-tab {
 .smallFont {
   font-size: 13px;
 }
-.search-field{
+
+.search-field {
   padding: 0 13px !important;
 }
+
 .descriptionText {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -661,6 +664,7 @@ ul#pills-tab {
   padding-right: 10px;
   margin-right: 5px;
 }
+
 .descriptionText::-webkit-scrollbar {
   width: 6px;
   border-radius: 10px;
@@ -676,6 +680,7 @@ ul#pills-tab {
   /* outline: 1px solid #292929; */
   border-radius: 10px;
 }
+
 @media only screen and (max-width: 600px) {
   .l-main {
     padding-bottom: 100px;
