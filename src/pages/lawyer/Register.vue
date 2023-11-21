@@ -110,7 +110,9 @@
 
             <p>
                 <!-- Already have an account?<br>  -->
-                <router-link  to="/lawyer-login" class="already btn-light text-dark btn">Already have an account?</router-link ></p>
+                <button @click="goToLoginPage('lawyer')" class="already btn-light text-dark btn">Already have an account?</button>
+                <!-- <router-link  to="/lawyer-login">Already have an account?</router-link > -->
+                </p>
         </Form>
     </div>
 </div>
@@ -332,4 +334,5 @@ a:hover {
         margin: 0 !important;
         padding-right: 30px !important;
     }
-}</style>
+}
+</style>

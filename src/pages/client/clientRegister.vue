@@ -110,7 +110,7 @@
 
             <p>
                 <!-- Already have an account?<br>  -->
-                <router-link  to="/client-login" class="already btn-light text-dark btn">Already have an account?</router-link ></p>
+                <router-link  to="/login" class="already btn-light text-dark btn">Already have an account?</router-link ></p>
         </Form>
     </div>
 </div>

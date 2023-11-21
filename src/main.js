@@ -46,7 +46,7 @@ app.mixin({
       lastPage: 0,
 
       data_paginated: [],
-      admin_approval : "pending"
+      admin_approval: "pending",
     };
   },
   watch: {
@@ -56,16 +56,19 @@ app.mixin({
         this.currentPage = 0;
         this.lastPage = 0;
         let status = this.admin_approval;
-        if(typeof this.pageStatus !== undefined)
-        {
+        if (typeof this.pageStatus !== undefined) {
           status = this.pageStatus;
-        }  
-        this.loadMore(status,true);
+        }
+        this.loadMore(status, true);
       }
     },
   },
 
   computed: {
+    loginUserEmail() {
+      return this.$store.getters?.loginUser?.email;
+    },
+
     currentPaginationPage() {
       console.log("computed run");
       return this.$store.state.currentPaginationPage;
@@ -76,6 +79,61 @@ app.mixin({
   },
 
   methods: {
+
+    goToLoginPage(type){
+      this.$store.commit('SET_USER_TYPE',type);
+      localStorage.setItem('userType',type);
+      this.$router.push('/login');
+    },
+
+    async updateProfile(keyName, modalId = null) {
+      let formDataObject = {};
+      if (Array.isArray(keyName)) {
+        keyName.forEach((element) => {
+          if (this.form[element] != null && this.form[element] !== "") {
+            formDataObject[element] = this.form[element];
+          }
+        });
+      } else {
+        if (this.form[keyName] == null || this.form[keyName] === "") {
+          return false;
+        }
+        formDataObject[keyName] = this.form[keyName];
+      }
+      formDataObject["user_id"] = this.form["user_id"];
+      // if(user_id){
+      //   formDataObject[keyName] = user_id;
+      // }
+      console.log("formDataObject:", formDataObject);
+      try {
+        api.post("/update-profile", formDataObject).then((res) => {
+          console.log("chk res : ", res);
+          if (modalId) {
+            this.closeModal(modalId);
+          }
+          this.$swal("success", "Profile updated successfully", "success").then(
+            () => {
+              // for multiple profiles edit from admin panel
+              if (this.loginUserEmail != res?.data?.data?.email) {
+                if (this.openJobs.length > 0) {
+                  const openJobsIndex = this.openJobs.findIndex(
+                    (user) => user.email === res?.data?.data?.email
+                  );
+                  if (openJobsIndex !== -1) {
+                    this.openJobs[openJobsIndex] = res?.data?.data;
+                  }
+                }
+              }else{
+                this.setUserInStateAndLocalStorage(res);
+              }
+            }
+          );
+        });
+      } catch (error) {
+        this.$swal("Error", "Something went wrong, please try again", "error");
+      }
+    },
+
     // /lawyer/lawyer-proposals
     async getPaginatedData() {
       console.log("func run");
@@ -103,7 +161,16 @@ app.mixin({
         law_firm: res?.data?.data?.law_firm,
         link: res?.data?.data?.link,
         about: res?.data?.data?.about,
+        area_insert: res?.data?.data?.area_insert,
+        state_insert: res?.data?.data?.state_insert,
+        consultation_type: res?.data?.data?.consultation_type,
+        consultation_amount: res?.data?.data?.consultation_amount,
+        consultation_time: res?.data?.data?.consultation_time,
+        remote_consultation:
+          res?.data?.data?.remote_consultation == 1 ? true : false,
+        mobile_friendly: res?.data?.data?.mobile_friendly == 1 ? true : false,
       };
+
       if (localStorage.getItem("loginUser")) {
         localStorage.removeItem("loginUser");
       }
@@ -111,17 +178,32 @@ app.mixin({
       this.$store.commit("SET_LOGIN_USER", userData);
     },
 
+    fetchUserData() {
+      api
+        .get("/verify")
+        .then((res) => {
+          this.setUserInStateAndLocalStorage(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
     sendOtp(email) {
       console.log("user email : ", email);
       api
         .post("/generate-send-otp", { email })
         .then(() => {
-          this.$swal('Success', 'OTP has been send to your email address', 'success').then(() => {
+          this.$swal(
+            "Success",
+            "OTP has been send to your email address",
+            "success"
+          ).then(() => {
             this.$store.commit("SET_OTP_EMAIL", email);
             localStorage.setItem("otpEmail", email);
             this.$router.push({ path: "/otp" });
           });
-         
+
           // this.setUserAndRedirect(res, dashboardUrl);
         })
         .catch((error) => {
@@ -174,30 +256,35 @@ app.mixin({
         api
           .post("/signup", formData)
           .then((res) => {
-            if (userType == "lawyer") {
-              this.$swal({
-                // title: 'Thank you for signing up.',
-                text: "Thank you for signing up. Please complete your profile.",
-                icon: "success",
-                // showCancelButton: true,
-                // confirmButtonColor: '#3085d6',
-                // cancelButtonColor: '#d33',
-                confirmButtonText: "Complete Your Profile",
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  // this.setUserAndRedirect(res, dashboardUrl);
-                  this.sendOtp(res?.data?.data?.email);
-                }
-              });
-            } else {
-              // this.setUserAndRedirect(res, dashboardUrl);
-              this.sendOtp(res?.data?.data?.email);
-            }
+            this.sendOtp(res?.data?.data?.email);
+            // if (userType == "lawyer") {
+            //   this.$swal({
+            //     // title: 'Thank you for signing up.',
+            //     text: "Thank you for signing up. Please complete your profile.",
+            //     icon: "success",
+            //     // showCancelButton: true,
+            //     // confirmButtonColor: '#3085d6',
+            //     // cancelButtonColor: '#d33',
+            //     confirmButtonText: "Complete Your Profile",
+            //   }).then((result) => {
+            //     if (result.isConfirmed) {
+            //       // this.setUserAndRedirect(res, dashboardUrl);
+            //       this.sendOtp(res?.data?.data?.email);
+            //     }
+            //   });
+            // } else {
+            //   // this.setUserAndRedirect(res, dashboardUrl);
+            //   this.sendOtp(res?.data?.data?.email);
+            // }
           })
           .catch((error) => {
             // alert("Invalid Credentials");
             // error?.response?.data?.error
-            this.$swal('Error', 'Something went wrong, Please try again.', 'error');
+            this.$swal(
+              "Error",
+              "Something went wrong, Please try again.",
+              "error"
+            );
             console.log("getResults : ", error);
           });
       } catch (error) {
@@ -219,7 +306,11 @@ app.mixin({
             this.setUserAndRedirect(res, dashboardUrl);
           })
           .catch((error) => {
-            this.$swal('Error', 'Something went wrong, Please try again.', 'error');
+            this.$swal(
+              "Error",
+              "Something went wrong, Please try again.",
+              "error"
+            );
             // alert("Invalid Credentials");
             console.log("getResults : ", error);
           });
@@ -229,7 +320,7 @@ app.mixin({
       }
     },
 
-    logoutProcess(redirectUrl) {
+    logoutProcess(redirectUrl,redirection = true) {
       localStorage.removeItem("token");
       this.$store.commit("SET_AUTHENTICATED", false);
       localStorage.removeItem("loginUser");
@@ -238,15 +329,17 @@ app.mixin({
       this.$store.commit("SET_SUB_CANCEL_STATUS", false);
       this.$store.commit("SET_APPROVAL_STATUS", null);
       this.$store.commit("SET_SUBSCRIPTION_DATA", null);
-      this.$router.push({ path: redirectUrl });
+      if(redirection){
+        this.$router.push({ path: redirectUrl });
+      }
     },
 
-    logout(redirectUrl) {
+    logout(redirectUrl,redirection = true) {
       try {
         api
           .get("/logout")
           .then(() => {
-            this.logoutProcess(redirectUrl);
+            this.logoutProcess(redirectUrl,redirection);
           })
           .catch((error) => console.log("getResults : ", error));
       } catch (error) {
@@ -259,7 +352,7 @@ app.mixin({
     async search(status = null) {
       if (this.searchQuery == "") return false;
       let obj = { query: this.searchQuery };
-      if(status) obj.admin_approval = status;
+      if (status) obj.admin_approval = status;
       console.log(obj);
       const response = await api.get(this.endpoint, {
         params: obj,
@@ -272,16 +365,12 @@ app.mixin({
       console.log("curr search : ", this.currentPage);
     },
 
-
-    
-
-    async loadMore(status = null,reset = null) {
-
+    async loadMore(status = null, reset = null) {
       // if (this.currentPage > this.lastPage) {
       //   return;
       // }
 
-      if(reset){
+      if (reset) {
         this.searchQuery = "";
         this.clear = false;
         this.currentPage = 0;
@@ -295,13 +384,13 @@ app.mixin({
       } else {
         url = `${this.endpoint}?page=${this.currentPage}`;
       }
-      console.log('url ::: ' , url);
+      console.log("url ::: ", url);
 
-      if(this.endpoint == "/admin/all-lawyers"){
+      if (this.endpoint == "/admin/all-lawyers") {
         url = url + `&admin_approval=${status}`;
       }
 
-      console.log('url 2 ::: ' , url);
+      console.log("url 2 ::: ", url);
 
       const response = await this.fetchData(url);
       // console.log("pagin : ", response);
@@ -316,13 +405,13 @@ app.mixin({
       this.openJobs = uniqueArray;
     },
 
-    async fixLoadMoreAfterDeleteRecord(index,status = null) {
+    async fixLoadMoreAfterDeleteRecord(index, status = null) {
       this.openJobs.splice(index, 1);
       if (this.currentPage < this.lastPage) {
         this.currentPage--;
-        if(status){
+        if (status) {
           await this.loadMore(status);
-        }else{
+        } else {
           await this.loadMore();
         }
       }
@@ -335,10 +424,10 @@ app.mixin({
       this.searchQuery = "";
       this.currentPage = 1;
       this.lastPage = 0;
-   
+
       let url = `${this.endpoint}?page=${this.currentPage}`;
 
-      if(status){
+      if (status) {
         url = url + `&admin_approval=${status}`;
       }
 

@@ -36,7 +36,7 @@
               </div>
           </div>
           <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-              <button type="button" class="forgetp" @click="goToForgetPasswordPage('client-login')">Forgotten your password?</button>
+              <button type="button" class="forgetp" @click="goToForgetPasswordPage('login')">Forgotten your password?</button>
               <!-- <router-link to="/client-forget-password">Forget Password</router-link> -->
           </div>
           <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">

@@ -24,7 +24,8 @@
             </p>
             <p>Simply make one enquiry and wait for lawyers to come to you.</p>
             <div class="d-flex align-items-center justify-content-center mt-two">
-              <router-link to="/client-login" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</router-link>
+              <button @click="goToLoginPage('client')" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</button> 
+              <!-- <router-link to="/client-login" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</router-link> -->
               <!-- <p>Or</p> -->
               <router-link to="/client-register" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign up</router-link>
             </div>
@@ -49,7 +50,8 @@
               practice area without leaving your desk.
             </p>
             <div class="d-flex align-items-center justify-content-center mt-two">
-              <router-link to="/lawyer-login" class="text-white fs-5 p-2 btn btn-light text-black">Sign in</router-link>
+              <button @click="goToLoginPage('lawyer')" class="ext-white fs-5 p-2 btn btn-light text-black">Sign in</button> 
+              <!-- <router-link to="/lawyer-login" class="text-white fs-5 p-2 btn btn-light text-black">Sign in</router-link> -->
 
               <router-link to="/lawyer-register" class="text-white fs-5 p-2 btn btn-light text-black">Sign
                 up</router-link>
@@ -85,10 +87,14 @@
             <div class="form-group text-center">
 
               <div class="d-flex align-items-center justify-content-center my-3 pb-5 pt-5">
-                <router-link to="/client-login" class="close text-dark fs-5 p-2 btn btn-dark text-white">I'm a
-                  Client</router-link>
-                <router-link to="/lawyer-login" class="close text-dark fs-5 p-2 btn btn-dark text-white">I'm a
-                  Lawyer</router-link>
+                <button @click="goToLoginPage('client')" class="close text-dark fs-5 p-2 btn btn-dark text-white">I'm a
+                  Client</button>
+                <!-- <router-link to="/client-login" class="close text-dark fs-5 p-2 btn btn-dark text-white">I'm a
+                  Client</router-link> -->
+                  <button @click="goToLoginPage('lawyer')" class="close text-dark fs-5 p-2 btn btn-dark text-white">I'm a
+                  Lawyer</button>  
+                <!-- <router-link to="/lawyer-login" class="close text-dark fs-5 p-2 btn btn-dark text-white">I'm a
+                  Lawyer</router-link> -->
               </div>
             </div>
           </div>
@@ -127,10 +133,12 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           // Navigate to Page A
-          this.$router.push('/client-login');
+          // this.$router.push('/client-login');
+          this.goToLoginPage('client');
         } else if (result.dismiss === this.$swal.DismissReason.cancel) {
           // Navigate to Page B
-          this.$router.push('/lawyer-login');
+          // this.$router.push('/lawyer-login');
+          this.goToLoginPage('lawyer');
         }
       });
     }

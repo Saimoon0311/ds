@@ -2,7 +2,7 @@ import { createStore } from 'vuex';
 
 const store = createStore({
   state: {
-    fullName : "Hammad hasan",
+    fullName : "jhon deo",
     isLoading : false,
     type : null,
     isAuthenticated : false,
@@ -18,8 +18,13 @@ const store = createStore({
     lastPaginationPage : null,
     paginationEndpoint : null,
     otpEmail : null,
+
+    userType : null,
   },
   mutations: {
+    SET_USER_TYPE(state,value){
+      state.userType = value;
+    },
     SET_OTP_EMAIL(state,value){
       state.otpEmail = value;
     },
@@ -73,6 +78,7 @@ const store = createStore({
     // Your actions go here
   },
   getters: {
+    userType : (state) => state.userType,
     isAuthenticated: (state) => state.isAuthenticated,
     loginUser: (state) => state.loginUser,
     subscriptionStatus: (state) => state.subscriptionStatus,

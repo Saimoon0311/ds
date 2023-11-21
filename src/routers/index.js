@@ -19,7 +19,7 @@ import api from "../config/api.js";
 // import ClientProfile from "@/pages/client/Profile.vue";
 import PlatForm from "@/components/PlatForm.vue";
 // client
-import ClientLoginForm from "@/pages/client/Login.vue";
+// import ClientLoginForm from "@/pages/client/Login.vue";
 import ClientRegister from "@/pages/client/clientRegister.vue";
 import OTP from "@/pages/forms/OTP.vue";
 import ClientAccount from "@/pages/client/Account.vue";
@@ -126,12 +126,19 @@ function reverse_guard(to, from, next) {
 // }
 
 const routes = [
-  // lawyer start
+
   {
-    path: "/lawyer-login",
+    path: "/login",
     component: LawyerLoginForm,
     beforeEnter: reverse_guard,
   },
+
+  // lawyer start
+  // {
+  //   path: "/lawyer-login",
+  //   component: LawyerLoginForm,
+  //   beforeEnter: reverse_guard,
+  // },
   {
     path: "/lawyer-register",
     component: LawyerRegister,
@@ -178,11 +185,11 @@ const routes = [
   // client start
 
   //clients
-  {
-    path: "/client-login",
-    component: ClientLoginForm,
-    beforeEnter: reverse_guard,
-  },
+  // {
+  //   path: "/client-login",
+  //   component: ClientLoginForm,
+  //   beforeEnter: reverse_guard,
+  // },
   {
     path: "/client-register",
     component: ClientRegister,
@@ -327,7 +334,7 @@ const routes = [
   {
     path: "/reset-password/:email/:token",
     component: ResetPassword,
-    beforeEnter: reverse_guard,
+    // beforeEnter: reverse_guard,
   },
 
   {

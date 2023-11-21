@@ -80,7 +80,7 @@
                   </li>
                   <li>
                     <button
-                      @click="logout('client-login')"
+                      @click="logout('login')"
                       class="nav-link fw-bolder menuItem-active-link"
                       id="clients"
                       aria-current="page"
@@ -129,7 +129,7 @@
                   </li>
                   <li>
                     <button
-                      @click="logout('client-login')"
+                      @click="logout('login')"
                       class="dropdown-item"
                       id="clients"
                       aria-current="page"

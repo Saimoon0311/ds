@@ -26,6 +26,9 @@ export default {
     if(this.$store.getters.otpEmail == null || this.$store.getters.otpEmail == ""){
       this.$store.commit('SET_OTP_EMAIL',localStorage.getItem('otpEmail'));
     }
+    if(this.$store.getters.userType == null || this.$store.getters.userType == ""){
+      this.$store.commit('SET_USER_TYPE',localStorage.getItem('userType'));
+    }
   }
 }
 </script>
