@@ -133,6 +133,18 @@ export default {
                             dashboardUrl = "client-dashboard";
                         }
                         this.otpVerified = true;
+
+                        if (dashboardUrl == "lawyer-profile") {
+                            this.$swal({
+                                text: "Thank you for signing up. Please complete your profile.",
+                                icon: "success",
+                                confirmButtonText: "Complete Your Profile",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.setUserAndRedirect(res, dashboardUrl);
+                                }
+                            });
+                        }
                         this.setUserAndRedirect(res, dashboardUrl);
                     })
                     .catch(() => {

@@ -130,7 +130,12 @@
             <div class="subbox03">
               <div class="boxheading">access</div>
               <img src="../assets/icons/6.png" alt="icon" />
-              <p class="text-center no-mar"><router-link to="/lawyer-login" class="btn btn-dark text-white mt-2 ">Log in</router-link></p>
+              <p class="text-center no-mar">
+                <!-- <router-link to="/lawyer-login" 
+                class="btn btn-dark text-white mt-2 ">Log in</router-link> -->
+                <button @click="goToLoginPage('lawyer')"
+                class="btn btn-dark text-white mt-2 ">Log in</button>
+              </p>
               <p class="mt-2"> to view jobs in your location and areas of law.</p>
             </div>
           </div>

@@ -110,7 +110,9 @@
 
             <p>
                 <!-- Already have an account?<br>  -->
-                <router-link  to="/lawyer-login">Already have an account?</router-link ></p>
+                <button @click="goToLoginPage('lawyer')">Already have an account?</button>
+                <!-- <router-link  to="/lawyer-login">Already have an account?</router-link > -->
+                </p>
         </Form>
     </div>
 </div>

@@ -397,7 +397,7 @@ export default {
                 'Your Account has been deleted.',
                 'success'
               ).then(() => {
-                this.logoutProcess('client-login');
+                this.logoutProcess('login');
               });
             }).catch(() => {
               this.$swal('Error', 'Something went wrong! please retry', 'error');

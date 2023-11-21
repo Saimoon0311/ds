@@ -9,7 +9,7 @@
           <div
             class="bg-dark text-white text-center m-3 p-3 find-client"
             style="border-radius: 10px">
-            <p class="m-4 fs-3 log-hd">Login as a Lawyer</p> 
+            <p class="m-4 fs-3 log-hd">Login as a {{ pageOption }}</p> 
             <div>
                     <div class="im-user">
                         <input type="radio" id="optionPage1" value="client" v-model="pageOption" @change="changePage" />
@@ -40,7 +40,7 @@
               </div>
           </div>
           <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-              <button type="button" @click="goToForgetPasswordPage('lawyer-login')" class="forgetp">Forgotten your password?</button>
+              <button type="button" @click="goToForgetPasswordPage('login')" class="forgetp">Forgotten your password?</button>
               <!-- <router-link to="/lawyer-forget-password">Forget Password</router-link> -->
           </div>
           <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
@@ -91,7 +91,8 @@ export default {
     });
     return {
       schema,
-      pageOption: this.getCurrentPageOption()
+      pageOption: null, 
+      // this.getCurrentPageOption()
 
     }
   },
@@ -101,31 +102,48 @@ export default {
     Field,
     MainFooter
   },
+  computed:{
+    userTypeForLogin(){
+      return this.$store.state.userType;
+    }
+  },
+  mounted(){
+    this.pageOption = this.userTypeForLogin;
+  },
   methods: {
     submitData(formData) {
-      this.submitLoginForm(formData, 'lawyer', 'lawyer-profile');
-    },
-    getCurrentPageOption() {
-      const currentRoute = this.$route.path;
-      console.log('c user', currentRoute);
-      // Compare current route with the routes associated with each option
-      if (currentRoute === '/client-login') {
-        return 'client'; // If current route is '/page1', select 'page1'
-      } else if (currentRoute === '/lawyer-login') {
-        return 'lawyer'; // If current route is '/page2', select 'page2'
-      } else {
-        return null; // Or return null if the current route is not matched
+      let dashboardUrl = null;
+      if(this.userTypeForLogin == "lawyer"){
+        dashboardUrl = "lawyer-profile";
+      }else if(this.userTypeForLogin == "client"){
+        dashboardUrl = "client-dashboard";
       }
+      this.submitLoginForm(formData, this.userTypeForLogin, dashboardUrl);
     },
+    // getCurrentPageOption() {
+    //   const currentRoute = this.$route.path;
+    //   console.log('c user', currentRoute);
+    //   // Compare current route with the routes associated with each option
+    //   if (currentRoute === '/client-login') {
+    //     return 'client'; // If current route is '/page1', select 'page1'
+    //   } else if (currentRoute === '/lawyer-login') {
+    //     return 'lawyer'; // If current route is '/page2', select 'page2'
+    //   } else {
+    //     return null; // Or return null if the current route is not matched
+    //   }
+    // },
     changePage() {
-      if (this.pageOption === 'client') {
-        this.$router.push('/client-login');
-        console.log('asd', this.pageOption);
+      this.$store.commit('SET_USER_TYPE',this.pageOption);
+      localStorage.setItem('userType',this.pageOption);
+      // this.$router.push('/login');
+      // if (this.pageOption === 'client') {
+      //   this.$router.push('/client-login');
+      //   console.log('asd', this.pageOption);
 
-      } else if (this.pageOption === 'lawyer') {
-        console.log('asd', this.pageOption);
-        this.$router.push('/lawyer-login');
-      }
+      // } else if (this.pageOption === 'lawyer') {
+      //   console.log('asd', this.pageOption);
+      //   this.$router.push('/lawyer-login');
+      // }
     }
   },
   name: 'LawyerLoginForm',

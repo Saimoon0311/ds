@@ -489,11 +489,6 @@
           <tr>
             <td class="col-md-3">Email:</td>
             <td>{{ loginUser?.email }}</td>
-            <td>
-
-
-
-            </td>
           </tr>
 
           <!-- First Name -->
@@ -638,12 +633,64 @@
               </button>
             </td>
 
-            <!-- Modal -->
-
-            <!-- Modal ends here -->
-
-            <td><b>Type : </b>{{ loginUser?.consultation_type ?? 'Not updated'}}, <b>Time : </b>{{ loginUser?.consultation_time ?? 'Not updated' }}, <b>Fee : </b>{{ loginUser?.consultation_amount ?? 'Not updated' }}</td>
+            <td>
+              <span v-if="loginUser?.consultation_type">
+                <b>Type : </b>{{ loginUser?.consultation_type }},
+              </span>
+              <span v-if="loginUser?.consultation_time">
+                <b>Time : </b>{{ loginUser?.consultation_time }},
+              </span>
+              <span v-if="loginUser?.consultation_amount">  
+                <b>Fee : </b>{{ loginUser?.consultation_amount }}
+              </span>
+              </td>
           </tr>
+
+
+
+
+          <tr>
+            <td class="d-flex align-items-center justify-content-between">
+              Offer Remote Consultations:
+            </td>
+
+            <td>
+              <div class="form-check" >
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  v-model="form.remote_consultation"
+                  @change="updateProfile('remote_consultation')"
+                  id="remote_consultation"
+                />
+                <p>{{ form.remote_consultation ? 'Yes' : 'No' }}</p>
+              </div>
+            </td>
+          </tr>
+
+
+
+
+          <tr>
+            <td class="d-flex align-items-center justify-content-between">
+              Mobile friendly:
+            </td>
+
+            <td>
+              <div class="form-check" >
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  v-model="form.mobile_friendly"
+                  @change="updateProfile('mobile_friendly')"
+                  id="mobile_friendly"
+                />
+                <p>{{ form.mobile_friendly ? 'Yes' : 'No' }}</p>
+              </div>
+            </td>
+          </tr>
+
+
 
           <!-- Areas of Practice -->
           <tr>
@@ -751,8 +798,8 @@ export default {
         consultation_type: "free",
         consultation_time: null,
         consultation_amount: null,
-        remote_consultation: null,
-        mobile_friendly: null,
+        remote_consultation: false,
+        mobile_friendly: false,
       },
       options: [],
       selectedOptionIds: [],
@@ -793,7 +840,6 @@ export default {
     this.fetchOptions_locations();
   },
   methods: {
-
     changeConsultationType(value) {
       this.form.consultation_type = value;
     },
@@ -806,6 +852,9 @@ export default {
         this.form.phone = userData.phone;
         this.form.about = userData.about;
         this.form.job_title = userData.job_title;
+
+        this.form.remote_consultation = userData.remote_consultation;
+        this.form.mobile_friendly = userData.mobile_friendly;
       }
     },
 
@@ -901,26 +950,68 @@ export default {
       }
     },
 
-    async updateProfile(keyName, modalId) {
-      if (this.form[keyName] == null || this.form[keyName] == "") {
-        return false;
-      }
-      const formData = {
-        [keyName]: this.form[keyName]
-      }
-      console.log('jjkk :::: ', formData);
-      try {
-        api.post('/update-profile', formData).then(res => {
-          this.closeModal(modalId);
-          this.$swal("success", "Profile updated successfully", "success").then(() => {
-            this.setUserInStateAndLocalStorage(res);
-          });
-        })
-      } catch (error) {
-        this.$swal("Error", "Something went wrong, please try again", "error")
-        // console.error('Error uploading image', error);
-      }
-    },
+
+    
+
+
+    // async updateProfile(keyName, modalId = null) {
+    //   let formDataArray = [];
+
+    //   if (Array.isArray(keyName)) {
+    //     keyName.forEach(element => {
+    //       if (this.form[element] != null && this.form[element] !== "") {
+    //         formDataArray.push({
+    //           [element]: this.form[element]
+    //         });
+    //       }
+    //     });
+    //   } else {
+    //     if (this.form[keyName] == null || this.form[keyName] === "") {
+    //       return false;
+    //     }
+    //     formDataArray.push({
+    //       [keyName]: this.form[keyName]
+    //     });
+    //   }
+
+    //   console.log('formDataArray:', formDataArray);
+
+    //   try {
+    //     // Assuming your API expects an array of objects
+    //     api.post('/update-profile', formDataArray).then(res => {
+    //       if(modalId){
+    //         this.closeModal(modalId);
+    //       }
+    //       this.$swal("success", "Profile updated successfully", "success").then(() => {
+    //         this.setUserInStateAndLocalStorage(res);
+    //       });
+    //     });
+    //   } catch (error) {
+    //     this.$swal("Error", "Something went wrong, please try again", "error");
+    //     // console.error('Error uploading image', error);
+    //   }
+    // },
+
+    // async updateProfile(keyName, modalId) {
+    //   if (this.form[keyName] == null || this.form[keyName] == "") {
+    //     return false;
+    //   }
+    //   const formData = {
+    //     [keyName]: this.form[keyName]
+    //   }
+    //   console.log('jjkk :::: ', formData);
+    //   try {
+    //     api.post('/update-profile', formData).then(res => {
+    //       this.closeModal(modalId);
+    //       this.$swal("success", "Profile updated successfully", "success").then(() => {
+    //         this.setUserInStateAndLocalStorage(res);
+    //       });
+    //     })
+    //   } catch (error) {
+    //     this.$swal("Error", "Something went wrong, please try again", "error")
+    //     // console.error('Error uploading image', error);
+    //   }
+    // },
 
     closeModal(modalId) {
       $(modalId).modal('hide');
@@ -932,6 +1023,10 @@ export default {
 </script>
 
 <style scoped>
+
+.form-check-input{
+  border:1px solid gray !important;
+}
 .navbar-nav {
   display: flex;
   align-items: center;

@@ -84,11 +84,15 @@ export default {
         // MainFooter
     },
     created() {
+        this.checkLogin();
         this.email = this.$route.params.email;
         this.token = this.$route.params.token;
         this.checkToken();
     },
     methods: {
+        async checkLogin() {
+            await api.get("/verify").then(() => this.logout('login',false)).catch(error => console.log(error));
+        },
         checkToken() {
             api.get(`/check-forget-token/${this.token}`)
                 .then(response => {
@@ -106,6 +110,8 @@ export default {
                 api.post('/forget-password', formData)
                     .then(res => {
                         this.$swal('Success', 'Password has been changed successfully', 'success').then(() => {
+                            this.$store.commit('SET_USER_TYPE',res?.data?.type);
+                            localStorage.setItem('userType',res?.data?.type);
                             this.$router.push({ path: '/' + res?.data?.redirectUrl });
                         });
                     })

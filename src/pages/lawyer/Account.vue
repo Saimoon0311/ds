@@ -15,9 +15,38 @@
 
         <!-- Subscription -->
         <div>
+          
+          <p>
+            Subscription Status : 
+            <span v-if="subscriptionData?.subscription_status == 'trialing'">
+              <b>60 days free trail</b>
+            </span>
+            <span v-else-if="subscriptionData?.subscription_status == 'active'">
+              <b>Subscribed</b>
+            </span>
+            <span v-else>
+              <b>{{ subscriptionData?.subscription_status }}</b>
+            </span>
+            <br />
+            <span v-if="subscriptionData?.subscription_status == 'active' || subscriptionData?.subscription_status == 'trialing'">
+              Next bill due <b>{{ subscriptionData?.current_period_end }}</b> 
+              <br />
+              <span v-if="subscriptionData?.plan == 'basic'"><b>$39.00/month</b></span> on 
+              {{ subscriptionData?.card_brand }} ----{{ subscriptionData?.card_last4 }} Exp. {{ subscriptionData?.card_expiry }}
+            </span>
+          </p>
+
+          <button
+                    class="btn btn-sm btn-dark mb-2"
+                    @click="replacePaymentMethod(subscriptionData?.plan)"
+                    >Replace Payment Method</button>
+
+
+                    <h3 class="my-3 mt-4">Receipts</h3>
+
           <table class="table table-bordered table-striped">
             <tbody>
-              <tr>
+              <!-- <tr>
                 <th>Subscription Status</th>
                 <td v-if="subscriptionData?.subscription_status == 'active'">Subscribed</td>
                 <td v-else>{{ capitalizeFirstLetter(subscriptionData?.subscription_status) }}</td>
@@ -46,14 +75,14 @@
                     @click="replacePaymentMethod(subscriptionData?.plan)"
                     >Replace Payment Method</button>
                 </td>
-              </tr>
+              </tr> -->
               <tr>
-                <th>Receipts</th>
+                
                 <td>
                   <table v-if="receipts.length > 0" class="table table-bordered table-striped mt-3">
                     <thead class="hd-receipt" >
                       <th>#</th>
-                      <th>Receipt ID</th>
+                      <th>Invoice ID</th>
                       <th>Amount Paid</th>
                       <th>Date of issue</th>
                       <th>Action</th>
@@ -63,12 +92,13 @@
                         <td>{{ ++index }}</td>
                         <td>{{ receipt?.id }}</td>
                         <td>{{ receipt?.amount_paid }}</td>
-                        <td>{{ new Date(receipt?.created * 1000).toLocaleDateString() }}</td>
+                        <!-- <td>{{ new Date(receipt?.created * 1000).toLocaleDateString() }}</td> -->
+                        <td>{{ new Date(receipt?.created * 1000).toLocaleDateString('en-AU', { day: 'numeric', month: 'numeric', year: 'numeric' }) }}</td>
                         <td><a class="btn btn-sm btn-dark" :href="receipt?.invoice_pdf">Download</a></td>
                       </tr>
                     </tbody>
                   </table>
-                  <p v-else>No Receipts Found!</p>
+                  <p v-else>No invoices found.</p>
 
                   <!-- <ul>
                   
@@ -265,6 +295,7 @@ export default {
       return this.$store.getters.adminApprovalStatus;
     },
     subscriptionData() {
+      console.log('sub : ' , this.$store.getters.subscriptionData);
       return this.$store.getters.subscriptionData;
     },
     subscriptionStatus() {
@@ -375,7 +406,7 @@ export default {
                 'Your Account has been deleted.',
                 'success'
               ).then(() => {
-                this.logoutProcess('lawyer-login');
+                this.logoutProcess('login');
               });
             }).catch(() => {
               this.$swal('Error', 'Something went wrong! please retry', 'error');

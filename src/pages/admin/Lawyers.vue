@@ -5,6 +5,16 @@
       
 
       <div class="container">
+
+
+        
+
+      
+
+     
+
+      
+
       <!-- <p class="h4 m-3">Welcome, {{ userName }}</p> -->
       <div data-v-511b78bb="" class="container">
         <ul
@@ -130,7 +140,8 @@
                               </tr>
                               <tr>
                                 <td class="fw-bold">Job Title</td>
-                                <td>{{ item?.job_title }}</td>
+                                <td>{{ item?.job_title }}
+                                </td>
                               </tr>
                               <tr>
                                 <td class="fw-bold">Law Firm Name</td>
@@ -152,6 +163,7 @@
                                 <td class="fw-bold">About</td>
                                 <td>{{ item?.about }}</td>
                               </tr>
+
                               <tr>
                                 <td class="fw-bold">Expertise</td>
                                 <td v-if="item?.fields.length > 0">
@@ -202,73 +214,6 @@
                   </tbody>
                 </table>
 
-                <!-- <template v-else>
-                  <div class="row">
-                    <div
-                      v-for="(item, index) in openJobs"
-                      :key="index"
-                      class="col-md-6"
-                      id="28"
-                    >
-                      <div
-                        class="border rounded bg-secondary d-flex justify-content-between text-white p-3 flex-column flex-lg-row mb-3"
-                      >
-                        <div>
-                          <p class="badge bg-dark" title="Area">
-                            {{ item?.field?.title }}
-                          </p>
-                          &nbsp;
-                          <p class="badge bg-dark" title="Location">
-                            {{ item?.location?.title }}
-                          </p>
-                          <p>
-                            <b>{{ item?.title }}</b>
-                          </p>
-                          <p
-                            id="description28"
-                            style="
-                              overflow: hidden;
-                              text-overflow: ellipsis;
-                              
-                            "
-                          >
-                          <b>Job description: </b>
-                            {{ item?.description }}
-                          </p>
-                          <p><b>City/suburb:</b> {{ item?.city }}</p>
-                          <p><b>Job No: </b> <span class="smallFont"> {{ item?.identity }} </span> </p>
-                          <p >
-                            <b>Created: </b>
-                          <span class="smallFont"> {{ formatCreatedAt(item.created_at) }}</span> 
-                          </p>
-                        </div>
-                        <div
-                          class="d-flex flex-column justify-content-center align-items-center"
-                          style="min-width: 110px"
-                        >
-                          <button
-                            @click="submitProposal(item)"
-                            class="btn btn-light btn-sm w-100 my-1"
-                          >
-                            Submit a proposal
-                          </button>
-
-                          <button
-                            @click="declineJob(item.id)"
-                            class="btn btn-danger btn-sm w-100 my-1"
-                          >
-                            Decline
-                          </button>
-                          <router-link
-                            class="btn btn-dark btn-sm w-100 my-1"
-                            to="/request-info"
-                            >Message</router-link
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </template> -->
               </div>
             </div>
           </div>
@@ -345,27 +290,264 @@
                                 </td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">Email</td>
+                                <td class="fw-bold d-flex align-items-center justify-content-between">Email</td>
                                 <td>{{ item?.email }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">Name</td>
+                                <td class="fw-bold d-flex align-items-center justify-content-between">Name</td>
                                 <td>{{ item?.first_name }} {{ item?.last_name }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">Job Title</td>
+                                <td class="fw-bold d-flex align-items-center justify-content-between">Job Title
+                                  <button
+                                    type="button"
+                                    class="btn btn-dark btn-sm"
+                                    :data-target="`.edit-job-title-modal${index}`"
+                                    title="Edit"
+                                    data-bs-toggle="modal" :data-bs-target="`#Jobtitle${index}`"
+                                    @click="setModalData('job_title',item?.job_title,item?.id)"
+                                    >
+                                    <i class="fa fa-pencil"></i>
+                                  </button>
+
+
+                                  <div
+                                    :class="`modal fade edit-job-title-modal${index}`"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="mySmallModalLabel"
+                                    aria-hidden="true"
+                                    :id="`Jobtitle${index}`"
+                                    >
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Edit Job Title</h5>
+                                          <button
+                                            type="button"
+                                            class="close btn btn-dark"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                          >
+                                            <span aria-hidden="true">×</span>
+                                          </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                          <!-- <form action="profile.php" method="post"></form> -->
+                                          <div class="form-group">
+                                            <input
+                                              type="text"
+                                              name="job-title"
+                                              maxlength="200"
+                                              class="form-control"
+                                              id="phone"
+                                              v-model="form.job_title"
+                                            />
+                                            <button
+                                              type="button"
+                                              name="job-title-submit"
+                                              class="btn btn-dark my-3"
+                                              @click="updateProfile('job_title',`#Jobtitle${index}`)"
+                                            >
+                                              Save changes
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </td>
                                 <td>{{ item?.job_title }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">Law Firm Name</td>
+                                <td class="fw-bold d-flex align-items-center justify-content-between">Law Firm Name
+                                  <button
+                                    type="button"
+                                    class="btn btn-dark btn-sm"
+                                    data-bs-toggle="modal" :data-bs-target="`#FirmName${index}`"
+                                    :data-target="`.lawfirm-modal${index}`"
+                                    title="Edit"
+                                    @click="setModalData('law_firm',item?.law_firm,item?.id)"
+                                  >
+                                    <i class="fa fa-pencil"></i>
+                                  </button>
+
+                                  <div
+                                    :class="`modal fade lawfirm-modal${index}`"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="mySmallModalLabel"
+                                    aria-hidden="true"
+                                    :id="`FirmName${index}`">
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Law Firm Name</h5>
+                                          <button
+                                            type="button"
+                                            class="close btn btn-dark"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                            
+                                          >
+                                            <span aria-hidden="true">×</span>
+                                          </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                          <div class="form-group">
+                                            <input
+                                              type="text"
+                                              name="lawfirm"
+                                              class="form-control"
+                                              id="lawfirm"
+                                              v-model="form.law_firm"
+                                            />
+                                            <button
+                                              type="button"
+                                              name="lawfirm-submit"
+                                              class="btn btn-dark my-3"
+                                              @click="updateProfile('law_firm',`#FirmName${index}`)"
+                                            >
+                                              Save changes
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
                                 <td>{{ item?.law_firm }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">Phone</td>
+                                <td class="fw-bold d-flex align-items-center justify-content-between">Phone
+                                  <button
+                                    type="button"
+                                    class="btn btn-dark btn-sm"
+                                    data-bs-toggle="modal" :data-bs-target="`#PhoneModal${index}`"
+                                    :data-target="`.edit-phone-modal${index}`"
+                                    title="Edit"
+                                    @click="setModalData('phone',item?.phone,item?.id)"
+                                  >
+                                    <i class="fa fa-pencil"></i>
+                                  </button>
+
+                                  <div
+                                    :class="`modal fade edit-phone-modal${index}`"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="mySmallModalLabel"
+                                    aria-hidden="true"
+                                    :id="`PhoneModal${index}`"
+                                  >
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">
+                                            Edit phone number
+                                          </h5>
+                                          <button
+                                            type="button"
+                                            class="close btn btn-dark"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                            
+                                          >
+                                            <span aria-hidden="true">×</span>
+                                          </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                          <div class="form-group">
+                                            <input
+                                              type="tel"
+                                              name="phone"
+                                              maxlength="10"
+                                              class="form-control"
+                                              id="phone"
+                                              v-model="form.phone"
+                                            />
+                                            <button
+                                              type="button"
+                                              name="phone-submit"
+                                              class="btn btn-dark my-3"
+                                              @click="updateProfile('phone',`#PhoneModal${index}`)"
+                                            >
+                                              Save changes
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </td>
                                 <td>{{ item?.phone }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">Website</td>
+                                <td class="fw-bold d-flex align-items-center justify-content-between">Website
+                                  <button
+                                    type="button"
+                                    class="btn btn-dark btn-sm"
+                                    data-bs-toggle="modal" :data-bs-target="`#WebsiteModal${index}`"
+                                    :data-target="`.website-modal${index}`"
+                                    title="Edit"
+                                    @click="setModalData('link',item?.link,item?.id)"
+                                  >
+                                    <i class="fa fa-pencil"></i>
+                                  </button>
+
+                                  <div
+                                    class="modal fade website-modal"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="mySmallModalLabel"
+                                    aria-hidden="true"
+                                    id="WebsiteModal"
+                                  >
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">
+                                            Link to Website
+                                          </h5>
+                                          <button
+                                            type="button"
+                                            class="close btn btn-dark"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                           
+                                          >
+                                            <span aria-hidden="true">×</span>
+                                          </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                          <div class="form-group">
+                                            <input
+                                              type="text"
+                                              name="website"
+                                              class="form-control"
+                                              id="website"
+                                              v-model="form.link"
+                                            />
+                                            <button
+                                              type="button"
+                                              name="website-submit"
+                                              class="btn btn-dark my-3"
+                                              @click="updateProfile('link',`#WebsiteModal${index}`)"
+                                            >
+                                              Save changes
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </td>
                                 <td>
                                   <a :href="item?.link" target="_blank"
                                     >{{ item?.link }}</a
@@ -373,22 +555,345 @@
                                 </td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">About</td>
+                                <td class="fw-bold d-flex align-items-center justify-content-between">About
+                                  <button
+                                    type="button"
+                                    class="btn btn-dark btn-sm"
+                                    data-bs-toggle="modal" :data-bs-target="`#AboutModal${index}`"
+                                    :data-target="`.bd-example-modal-lg${index}`"
+                                    title="Edit"
+                                    @click="setModalData('about',item?.about,item?.id)"
+                                  >
+                                    <i class="fa fa-pencil"></i>
+                                  </button>
+
+                                  <div
+                                    :class="`modal fade bd-example-modal-lg${index}`"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="mySmallModalLabel"
+                                    aria-hidden="true"
+                                    :id="`AboutModal${index}`"
+                                  >
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">
+                                            Tell us a little about yourself
+                                          </h5>
+                                          <button
+                                            type="button"
+                                            class="close btn btn-dark"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                            
+                                          >
+                                            <span aria-hidden="true">×</span>
+                                          </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                          <form action="profile.php" method="post"></form>
+                                          <div class="form-group">
+                                            <input
+                                              type="text"
+                                              name="about"
+                                              class="form-control"
+                                              id="about"
+                                              v-model="form.about"
+                                            />
+                                            <button
+                                              type="button"
+                                              name="about-submit"
+                                              class="btn btn-dark my-3"
+                                              @click="updateProfile('about',`#AboutModal${index}`)"
+                                            >
+                                              Save changes
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
                                 <td>{{ item?.about }}</td>
                               </tr>
+
+
                               <tr>
-                                <td class="fw-bold">Expertise</td>
-                                <td v-if="item?.fields.length > 0">
+                                <td class="d-flex align-items-center justify-content-between">
+                                  Consultation:
+                                  <button
+                                    type="button"
+                                    class="btn btn-dark btn-sm"
+                                    data-bs-toggle="modal" :data-bs-target="`#ConsultationModal${index}`"
+                                    :data-target="`.edit-consultation-modal${index}`"
+                                    title="Edit"
+                                  >
+                                    <i class="fa fa-pencil"></i>
+                                  </button>
+
+                                  <div
+                                    :class="`modal fade edit-consultation-modal${index}`"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="mySmallModalLabel"
+                                    aria-hidden="true"
+                                    :id="`ConsultationModal${index}`"
+                                    >
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">
+                                            Edit Consultation Details
+                                          </h5>
+                                          <button
+                                            type="button"
+                                            class="close btn btn-dark"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                          >
+                                            <span aria-hidden="true">×</span>
+                                          </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                          <div class="form-group m-2" id="freeFirstConsultationRadio">
+                                            <label>Consultation type:</label>
+                                            <div class="form-check">
+                                              <input class="form-check-input" v-model="form.consultation_type" type="radio" name="freeFirstConsultation"
+                                                id="freeFirstConsultationYes" value="free" checked="" />
+                                              <label class="form-check-label" for="freeFirstConsultationYes" @click="changeConsultationType('free')">
+                                                Free
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="radio" v-model="form.consultation_type" name="freeFirstConsultation"
+                                                id="freeFirstConsultationNo" value="discounted" />
+                                              <label class="form-check-label" for="freeFirstConsultationNo" @click="changeConsultationType('discounted')">
+                                                Discounted
+                                              </label>
+                                            </div>
+                                          </div>
+
+                                          <div v-if="form.consultation_type === 'discounted'">
+                                            <div class="form-group my-3" id="div-freeFirstConsultationFee">
+                                              <label for="freeFirstConsultationFee">Fee:<sup><code>*</code></sup></label>
+                                              <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                  <div class="input-group-text">$</div>
+                                                </div>
+                                                <input type="number" min="1" class="form-control" v-model="form.consultation_amount" name="freeFirstConsultationFee"
+                                                  id="freeFirstConsultationFee" />
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          <div class="col-auto" id="div-freeFirstConsultationMinutes">
+                                              <label for="">Time limit:<sup><code>*</code></sup></label>
+                                              <div class="input-group mb-2">
+                                                <input type="number" v-model="form.consultation_time" class="form-control"
+                                                  name="freeFirstConsultationMinutes" id="freeFirstConsultationMinutes" placeholder="E.g. 60" />
+                                                <div class="input-group-prepend">
+                                                  <div class="input-group-text">minutes</div>
+                                                </div>
+                                              </div>
+                                          </div>
+
+                                          <button
+                                                  type="button"
+                                                  name="phone-submit"
+                                                  class="btn btn-dark my-3"
+                                                  @click="updateProfile(['consultation_type','consultation_amount','consultation_time'],`#ConsultationModal${index}`)"
+                                                >
+                                                  Save changes
+                                          </button>
+
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </td>
+
+                                <td>
+                                  <span v-if="loginUser?.consultation_type">
+                                    <b>Type : </b>{{ loginUser?.consultation_type }},
+                                  </span>
+                                  <span v-if="loginUser?.consultation_time">
+                                    <b>Time : </b>{{ loginUser?.consultation_time }},
+                                  </span>
+                                  <span v-if="loginUser?.consultation_amount">  
+                                    <b>Fee : </b>{{ loginUser?.consultation_amount }}
+                                  </span>
+                                  </td>
+                              </tr>
+
+                              <tr>
+                                <td class="d-flex align-items-center justify-content-between">
+                                  Offer Remote Consultations:
+                                </td>
+
+                                <td>
+                                  <div class="form-check" >
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      v-model="form.remote_consultation"
+                                      @change="updateProfile('remote_consultation',null)"
+                                      id="remote_consultation"
+                                    />
+                                    <p>{{ form.remote_consultation ? 'Yes' : 'No' }}</p>
+                                  </div>
+                                </td>
+                              </tr>
+
+
+
+
+                              <tr>
+                                <td class="d-flex align-items-center justify-content-between">
+                                  Mobile friendly:
+                                </td>
+
+                                <td>
+                                  <div class="form-check" >
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      v-model="form.mobile_friendly"
+                                      @change="updateProfile('mobile_friendly',null)"
+                                      id="mobile_friendly"
+                                    />
+                                    <p>{{ form.mobile_friendly ? 'Yes' : 'No' }}</p>
+                                  </div>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td class="fw-bold d-flex align-items-center justify-content-between">Expertise
+                                  <button
+                                    v-if="!loginUser?.area_insert"
+                                    type="button"
+                                    @click="setModal('fields')"
+                                    class="btn btn-dark btn-sm"
+                                    data-bs-toggle="modal" :data-bs-target="`#AreaModal${index}`"
+                                    :data-target="`#field-modal${index}`"
+                                    title="Edit"
+                                    >
+                                    <i class="fa fa-pencil"></i>
+                                  </button>
+
+                                  <div
+                                    :class="`modal fade bd-example-modal-lg${index}`"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="mySmallModalLabel"
+                                    aria-hidden="true"
+                                    :id="`AreaModal${index}`"
+                                  >
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">
+                                            Areas of practice
+                                          </h5>
+                                          <button
+                                            type="button"
+                                            class="close btn btn-dark"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                          >
+                                            <span aria-hidden="true">×</span>
+                                          </button>
+                                        </div>
+                                                  
+                                        <!-- :options="['Commercial (business)', 'Consumer', 'Criminal','Employment / workers compensation','Environmental','Family','Human rights / constitutional','Immigration','Insurance','Intellectual property','Liquor licensing','Litigation (civil court cases)','Notary public','Personal injury (compensation)','Property (real estate) / construction','Traffic','Wills and estates']"  -->
+
+                                        <div class="modal-body w-100">
+
+                                          <v-select v-model="selectedOptionIds" :options="options" label="title" multiple></v-select>
+
+                                          <button @click="saveSelectedFields" class="btn btn-dark my-3">Save changes</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
+                                <!-- <td v-if="item?.fields.length > 0">
                                   <span v-for="(field, fieldIndex) in item?.fields" :key="fieldIndex" >{{ field?.title}} <span v-if="fieldIndex < item?.fields.length - 1">, </span></span>
                                 </td>
-                                <td v-else></td>
+                                <td v-else></td> -->
+
+                                <div v-if="selectedOptionIdsShow.length > 0">
+                                <span v-for="(item,index) in selectedOptionIdsShow" :key="index">
+                                  {{ item.title }}<span v-if="index < selectedOptionIdsShow.length - 1">, </span>
+                                </span>
+                              </div>
                               </tr>
                               <tr>
-                                <td class="fw-bold">Location</td>
-                                <td v-if="item?.locations.length > 0">
-                                  <span v-for="(location, locationIndex) in item?.locations" :key="locationIndex" >{{ location?.title}} <span v-if="locationIndex < item?.locations.length - 1">, </span></span>
+                                <td class="fw-bold d-flex align-items-center justify-content-between">Location
+                                  <button
+                                    v-if="!loginUser?.state_insert"
+                                    @click="setModal('locations')"
+                                      type="button"
+                                      class="btn btn-dark btn-sm"
+                                      data-bs-toggle="modal" :data-bs-target="`#StateModal${index}`"
+                                      :data-target="`#location-modal${index}`"
+                                      title="Edit"
+                                    >
+                                      <i class="fa fa-pencil"></i>
+                                    </button>
+
+                                    <div
+                                      class="modal fade bd-example-modal-lg"
+                                      tabindex="-1"
+                                      role="dialog"
+                                      aria-labelledby="mySmallModalLabel"
+                                      aria-hidden="true"
+                                      :id="`StateModal${index}`"
+                                      >
+                                      <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">
+                                              Select the states/territories you practice in
+                                            </h5>
+                                            <button
+                                              type="button"
+                                              class="close btn btn-dark"
+                                              data-bs-dismiss="modal"
+                                              aria-label="Close"
+                                            >
+                                              <span aria-hidden="true">×</span>
+                                            </button>
+                                          </div>
+
+                                          <div class="modal-body w-100">
+                                            <!-- <Selectic className="mselect  "  placeholder="Nothing Selected" multiple :options="['New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','Australian Capital Territory','Northern Territory']" v-model="selection"/> -->
+
+                                            <v-select v-model="selectedOptionIds_locations" :options="options_locations" label="title" multiple></v-select>
+
+                                            <button @click="saveSelectedLocations" class="btn btn-dark my-3">Save changes</button>
+
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+
                                 </td>
-                                <td v-else></td>
+                                <!-- <td v-if="item?.locations.length > 0">
+                                  <span v-for="(location, locationIndex) in item?.locations" :key="locationIndex" >{{ location?.title}} <span v-if="locationIndex < item?.locations.length - 1">, </span></span>
+                                </td> -->
+                                <!-- <td v-else></td> -->
+                                <td>
+                                  <div v-if="selectedOptionIdsShow_locations.length > 0">
+                                    <span v-for="(item,index) in selectedOptionIdsShow_locations" :key="index">
+                                      {{ item.title }}<span v-if="index < selectedOptionIdsShow_locations.length - 1">, </span>
+                                    </span>
+                                  </div>
+                                </td>
                               </tr>
                             </tbody>
                           </table>
@@ -510,6 +1015,8 @@
 import AdminHeader from "./Header.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
 import api from '@/config/api';
+import $ from 'jquery';
+window.$ = window.jQuery = $;
 export default {
   components: {
     AdminHeader,
@@ -519,9 +1026,32 @@ export default {
   data() {
     return {
       pageStatus: "pending",
-      openJobs: [],
+      // openJobs: [],
       endpoint: "/admin/all-lawyers",
       // endpoint_search: "/lawyer/search-related-jobs",
+
+      form: {
+        law_firm: null,
+        link: null,
+        phone: null,
+        about: null,
+        job_title: null,
+        consultation_type: "free",
+        consultation_time: null,
+        consultation_amount: null,
+        remote_consultation: false,
+        mobile_friendly: false,
+        user_id : null,
+      },
+
+      options: [],
+      selectedOptionIds: [],
+      selectedOptionIdsShow: [],
+
+      options_locations: [],
+      selectedOptionIds_locations: [],
+      selectedOptionIdsShow_locations: [],
+
     };
   },
 
@@ -545,6 +1075,11 @@ export default {
   },
   async created() {
     await this.loadMore(this.pageStatus);
+  },
+
+  mounted() {
+    this.fetchOptions();
+    this.fetchOptions_locations();
   },
 
   // async mounted() {
@@ -571,6 +1106,96 @@ export default {
   // },
 
   methods: {
+
+    setModalData(keyName,value,user_id){
+
+      // if (Array.isArray(keyName)) {
+      //   keyName.forEach(element => {
+      //     if (this.form[element] != null && this.form[element] !== "") {
+      //       form[element] = this.form[element];
+      //     }
+      //   });
+      // } else {
+        this.form[keyName] = value;
+      // }
+      this.form.user_id = user_id;
+        console.log(this.form);
+    },
+
+    setModal($type) {
+      if ($type == "fields") {
+        this.selectedOptionIds = this.selectedOptionIdsShow;
+      } else if ($type == "locations") {
+        this.selectedOptionIds_locations = this.selectedOptionIdsShow_locations;
+      }
+    },
+
+
+    async fetchOptions() {
+      try {
+        const response = await api.get('/get-active-fields');
+        console.log('sundak  :::: ', response?.data?.allFields);
+        this.options = response?.data?.allFields;
+        this.selectedOptionIds = response?.data?.myFields ?? [];
+        this.selectedOptionIdsShow = response?.data?.myFields ?? [];
+      } catch (error) {
+        console.error('Error fetching options:', error);
+      }
+    },
+
+    // locations
+    async fetchOptions_locations() {
+      try {
+        const response = await api.get('/get-active-locations');
+        console.log('sundak  :::: ', response?.data?.allLocations);
+        this.options_locations = response?.data?.allLocations;
+        this.selectedOptionIds_locations = response?.data?.myLocations ?? [];
+        this.selectedOptionIdsShow_locations = response?.data?.myLocations ?? [];
+      } catch (error) {
+        console.error('Error fetching options:', error);
+      }
+    },
+
+    // fields
+    saveSelectedFields() {
+      console.log('Selected Option IDs:', this.selectedOptionIds);
+      if (this.selectedOptionIds.length == 0) {
+        return false;
+      }
+      try {
+        api.post('/admin/update-fields', { "ids": this.selectedOptionIds, "is_admin": true }).then(() => {
+          this.$swal("Success", "Fields updated successfully", "success");
+          this.fetchOptions();
+          this.fetchUserData();
+          this.closeModal('#AreaModal');
+        }).catch(() => this.$swal("Error", "Something went wrong, please try again", "error"));
+      } catch (error) {
+        this.$swal("Error", "Something went wrong, please try again", "error")
+        // console.error('Error uploading image', error);
+      }
+    },
+
+
+    // locations
+    saveSelectedLocations() {
+      console.log('Selected Option IDs:', this.selectedOptionIds_locations);
+      if (this.selectedOptionIds_locations.length == 0) {
+        return false;
+      }
+      try {
+        api.post('/lawyer/update-locations', { "ids": this.selectedOptionIds_locations }).then(() => {
+          this.$swal("Success", "Locations updated successfully", "success");
+          this.fetchOptions_locations();
+          this.fetchUserData();
+          this.closeModal('#StateModal');
+        }).catch(() => this.$swal("Error", "Something went wrong, please try again", "error"));
+      } catch (error) {
+        this.$swal("Error", "Something went wrong, please try again", "error")
+        // console.error('Error uploading image', error);
+      }
+    },
+
+
     async setStatus(status) {
       this.pageStatus = status;
       await this.loadMore(status, true)
@@ -638,7 +1263,12 @@ export default {
       } catch (error) {
         console.error("Error fetching options:", error);
       }
-    }
+    },
+
+    closeModal(modalId) {
+      $(modalId).modal('hide');
+    },
+
   },
   name: "AdminLawyer",
 };
