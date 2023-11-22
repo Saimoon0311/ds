@@ -261,6 +261,10 @@ export default {
     margin-left: 40px;
 }
 
+input[type="checkbox"]:checked {
+    filter: grayscale(100%) contrast(200%);
+}
+
 .l-register-main {
     min-height: 100vh;
     position: relative;

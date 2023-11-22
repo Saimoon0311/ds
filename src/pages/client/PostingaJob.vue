@@ -322,20 +322,20 @@
           </template>
 
           <template v-if="currentStep === 4">
-            <div class="summ">
+            <div class="summ mb-5">
               <p class="h4 text-center mb-3 mt-2">Summary</p>
-              <h4 class="d-inline"><b>Area of Law:</b></h4>
-              <p class="areas text-decoration-none badge text-white fs-6 bubbles">
+              <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
+              <p class="areas text-decoration-none badge text-white fs-6 aofl-gray bubbles">
                 {{ areas[selectedAreaIndex].title }}
               </p>
-              <h4 class="line-break "><b>{{ title }}</b>
+              <h4 class="line-break text-center mt-3 mb-3"><b>{{ title }}</b>
               </h4>
               <!-- <p></p> -->
               <!-- <h4>Description</h4> -->
               <!-- <p></p> -->
-              <h4 class="line-break">{{ description }}</h4>
+              <h4 class="line-break mb-3">{{ description }}</h4>
 
-              <h4><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}</h4>
+              <h4 class="mb-3"><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}</h4>
               <!-- <h4><b>State/Territory</b></h4> -->
               <!-- <h4></h4> -->
               <!-- <h4>City</h4> -->
@@ -562,7 +562,7 @@ export default {
       api
         .post("/client/create-job", formData)
         .then(() => {
-          this.$swal("Success", "Your job has been posted.", "success").then(
+          this.$swal("", "Your job has been posted.", "success").then(
             () => {
               this.changePostJobFormToDefault();
               this.currentStep = 0;
@@ -746,10 +746,19 @@ h4 {
   justify-content: end !important;
 }
 
+.aofl-gray {
+  background-color: gray !important;
+  margin: 8px 0px !important;
+}
+
 .pagination-indicator {
   border: 1px solid #000;
   border-radius: 50px;
   padding: 4px 10px;
   font-size: 14px;
+}
+
+input[type="checkbox"]:checked {
+  filter: grayscale(100%) contrast(200%);
 }
 </style>

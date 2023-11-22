@@ -53,6 +53,14 @@
                   aria-current="page"
                   >Account</router-link
                 >
+
+                <router-link
+                  to="/client-faqs"
+                  class="nav-link fw-bolder menuItem-active-link"
+                  id="lawyers"
+                  aria-current="page"
+                  >FAQs</router-link
+                >
                 
                 <ul class="showonmonb" >
                   <li>
@@ -61,11 +69,11 @@
                     >
                   </li>
 
-                  <li>
+                  <!-- <li>
                     <router-link class="nav-link fw-bolder menuItem-active-link" to="/client-faqs"
                       >FAQs</router-link
                     >
-                  </li>
+                  </li> -->
 
                   <li>
                     <router-link class="nav-link fw-bolder menuItem-active-link" to="/how-simplawfy-works"
@@ -109,11 +117,11 @@
                     >
                   </li>
 
-                  <li >
+                  <!-- <li >
                     <router-link class="dropdown-item" to="/client-faqs"
                       >FAQs</router-link
                     >
-                  </li>
+                  </li> -->
                   
 
                   <li>

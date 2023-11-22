@@ -1,6 +1,8 @@
 <template lang="">
   <section class="faq-main">
-    <GeneralHeader />
+    <!-- <GeneralHeader /> -->
+    <ClientHeader />
+
     <div class="WordSection1 container">
       <!-- ----------- -->
       <p
@@ -588,12 +590,14 @@
 </template>
 <script>
 import MainFooter from "../components/global/MainFooter.vue";
-import GeneralHeader from "./GeneralHeader.vue";
+// import GeneralHeader from "./GeneralHeader.vue";
+import ClientHeader from "../pages/client/Header.vue";
+
 
 export default {
   components: {
     MainFooter,
-    GeneralHeader,
+    ClientHeader,
   },
 
   name: "FaqS",

@@ -3,8 +3,20 @@
     <ClientHeader />
     <div class="container">
       <p class="h4 m-3">Welcome, {{ userName }}</p>
-      <p class="m-3">Here are all the jobs you have posted.</p>
+      <p class="m-3" v-if="openJobs.length > 0">Here are all the jobs you have posted.</p>
       <div data-v-511b78bb="" class="container">
+        <div
+              v-if="openJobs.length == 0 && searchQuery == ''"
+              class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
+              id="containerActive">
+              <div
+                class="d-flex justify-content-center align-items-center w-100">
+                <span class="text-center p-2"
+                  >You haven't posted a job. Click here to</span>
+                <router-link to="/posting-job" class="btn btn-dark">post a job</router-link>
+              </div>
+            </div>
+            <div v-else>
         <ul
           data-v-511b78bb=""
           class="nav nav-pills mb-3 bg-light border p-2 py-3 rounded"
@@ -62,32 +74,15 @@
                v-if="openJobs.length == 0 && searchQuery != ''">
             <span class="text-center w-100">No record found!</span>
           </div> -->
+            
             <div
-              v-if="openJobs.length == 0 && searchQuery == ''"
+              v-if="openJobs.length == 0 && searchQuery != ''"
               class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
-              id="containerActive"
-            >
-              <div
-                class="d-flex justify-content-center align-items-center w-100"
-              >
-                <span class="text-center p-2"
-                  >You haven't posted a job. Click here to</span
-                >
-                <router-link to="/posting-job" class="btn btn-dark"
-                  >post a job</router-link
-                >
-              </div>
-            </div>
-
-            <div
-              v-else-if="openJobs.length == 0 && searchQuery != ''"
-              class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
-              id="containerActive"
-            >
+              id="containerActive">
               <span class="text-center w-100">No record found!</span>
             </div>
 
-            <div v-else>
+            
               <div class="row border rounded bg-light p-3">
                 <div
                   v-for="(item, index) in openJobs"
@@ -291,7 +286,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
   color: white;
   background-color: #000000;
 }
@@ -322,6 +317,7 @@ ul#pills-tab {
   bottom: 0;
   width: 100%;
 }
+
 .descriptionText {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -330,6 +326,7 @@ ul#pills-tab {
   overflow-y: auto;
   padding-right: 10px;
 }
+
 .descriptionText::-webkit-scrollbar {
   width: 6px;
   border-radius: 10px;
@@ -345,6 +342,7 @@ ul#pills-tab {
   /* outline: 1px solid #292929; */
   border-radius: 10px;
 }
+
 @media only screen and (max-width: 767px) and (min-width: 320px) {
   /* .btn {
     padding: 5px 0px;

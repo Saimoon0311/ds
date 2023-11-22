@@ -242,6 +242,10 @@ export default {
     margin: 0px 10px;
 }
 
+input[type="checkbox"]:checked {
+    filter: grayscale(100%) contrast(200%);
+}
+
 a,
 a:hover {
     color: #fff

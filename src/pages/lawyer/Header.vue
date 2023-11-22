@@ -59,17 +59,17 @@
                   aria-current="page"
                   >Profile</router-link
                 >
+                <router-link
+                  to="/lawyer-faqs"
+                  class="nav-link fw-bolder menuItem-active-link"
+                  id="jobs"
+                  aria-current="page"
+                  >FAQs</router-link
+                >
                 <ul class="showonmonb">
                   <li>
                     <router-link class="nav-link fw-bolder menuItem-active-link" to="/about-us"
                       >About Us</router-link
-                    >
-                  </li>
-
-                  
-                  <li>
-                    <router-link class="nav-link fw-bolder menuItem-active-link" to="/lawyer-faqs"
-                      >FAQs</router-link
                     >
                   </li>
 
@@ -114,13 +114,6 @@
                   <li>
                     <router-link class="dropdown-item" to="/about-us"
                       >About Us</router-link
-                    >
-                  </li>
-
-                  
-                  <li >
-                    <router-link class="dropdown-item" to="/lawyer-faqs"
-                      >FAQs</router-link
                     >
                   </li>
 

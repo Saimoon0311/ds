@@ -230,6 +230,10 @@ export default {
   margin-left: 6px;
 }
 
+input[type="checkbox"]:checked {
+  filter: grayscale(100%) contrast(200%);
+}
+
 @media (max-width: 1200px) {
   .find-client {
     padding-right: 40px !important;
