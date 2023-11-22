@@ -11,7 +11,7 @@
             style="border-radius: 10px">
             <p class="m-4 fs-3 log-hd">Login</p> 
             <!-- <p class="m-4 fs-3 log-hd">Login as a {{ pageOption }}</p>  -->
-            <div>
+            <!-- <div>
                     <div class="im-user">
                         <input type="radio" id="optionPage1" value="client" v-model="pageOption" @change="changePage" />
                         <label for="optionPage1">I'm a client</label>
@@ -22,7 +22,7 @@
                         <label for="optionPage2">I'm a lawyer</label>
                     </div>
                   
-            </div>  
+            </div>   -->
             <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
           
           <!-- Email -->
