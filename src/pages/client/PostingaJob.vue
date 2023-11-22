@@ -57,7 +57,21 @@
                 Traffic </a><a data-v-2f14f9de="" class="m-2 text-decoration-none badge text-white fs-6 bubbles">
                 Wills &amp; estates
               </a> -->
-                <a class="m-2 text-decoration-none badge text-black fs-6 bubbles bubbles-other text-white"
+                <a 
+                  @click="setAreaFunc" 
+                  class="m-2 text-decoration-none badge text-black fs-6 bubbles bubbles-other text-white"
+
+                  :class="[
+                  'm-2',
+                  'text-decoration-none',
+                  'badge',
+                  'text-white',
+                  'fs-6',
+                  'bubbles',
+                  'bubbles-other',
+                  { selected_bubble: otherAreaSelected },
+                ]"
+
                   data-v-2f14f9de="">
                   Other (not listed here) / I don't know
                 </a>
@@ -71,7 +85,7 @@
               <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
               <label>Area of Law:</label>
               <p class="text-decoration-none badge text-white fs-6 bubbles">
-                {{ areas[selectedAreaIndex].title }}
+                {{ otherAreaSelected ? "Not mention" : areas[selectedAreaIndex].title }}
               </p>
             </div>
             <div class="mb-5">
@@ -322,20 +336,20 @@
           </template>
 
           <template v-if="currentStep === 4">
-            <div class="summ mb-5">
+            <div class="summ">
               <p class="h4 text-center mb-3 mt-2">Summary</p>
-              <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
-              <p class="areas text-decoration-none badge text-white fs-6 aofl-gray bubbles">
-                {{ areas[selectedAreaIndex].title }}
+              <h4 class="d-inline"><b>Area of Law:</b></h4>
+              <p class="areas text-decoration-none badge text-white fs-6 bubbles">
+                {{ otherAreaSelected ? "Not mention" : areas[selectedAreaIndex].title }}
               </p>
-              <h4 class="line-break text-center mt-3 mb-3"><b>{{ title }}</b>
+              <h4 class="line-break "><b>{{ title }}</b>
               </h4>
               <!-- <p></p> -->
               <!-- <h4>Description</h4> -->
               <!-- <p></p> -->
-              <h4 class="line-break mb-3">{{ description }}</h4>
+              <h4 class="line-break">{{ description }}</h4>
 
-              <h4 class="mb-3"><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}</h4>
+              <h4><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}</h4>
               <!-- <h4><b>State/Territory</b></h4> -->
               <!-- <h4></h4> -->
               <!-- <h4>City</h4> -->
@@ -468,6 +482,9 @@ export default {
       description: "",
       selectedArea: null,
       selectedAreaIndex: null,
+
+      otherAreaSelected : false,
+
       selectedLocationIndex: null,
       city: "",
       requirementsOption: 0,
@@ -515,14 +532,25 @@ export default {
     this.fetchLocations();
   },
   methods: {
+    setAreaFunc(){
+      this.otherAreaSelected = !this.otherAreaSelected;
+      if(this.otherAreaSelected){
+        this.nextStep();
+      }
+    },
     nextStep(values) {
-      if (
-        this.currentStep == 0 &&
-        !this.selectedArea &&
-        !this.selectedAreaIndex
-      ) {
+      if(this.currentStep == 0 && !this.otherAreaSelected && !this.selectedArea && !this.selectedAreaIndex){
         return false;
       }
+      console.log(this.otherAreaSelected , ' : other');
+      // if (
+      //   this.currentStep == 0 &&
+      //   !this.selectedArea &&
+      //   !this.selectedAreaIndex
+      // ) {
+      //   return false;
+      // }
+
       if (this.currentStep === 4) {
         console.log("Done: ", JSON.stringify(values, null, 2));
         return;
@@ -562,10 +590,11 @@ export default {
       api
         .post("/client/create-job", formData)
         .then(() => {
-          this.$swal("", "Your job has been posted.", "success").then(
+          this.$swal("Success", "Your job has been posted.", "success").then(
             () => {
               this.changePostJobFormToDefault();
               this.currentStep = 0;
+              this.$router.push({path : "/client-dashboard" });
             }
           );
         })
@@ -746,19 +775,10 @@ h4 {
   justify-content: end !important;
 }
 
-.aofl-gray {
-  background-color: gray !important;
-  margin: 8px 0px !important;
-}
-
 .pagination-indicator {
   border: 1px solid #000;
   border-radius: 50px;
   padding: 4px 10px;
   font-size: 14px;
-}
-
-input[type="checkbox"]:checked {
-  filter: grayscale(100%) contrast(200%);
 }
 </style>
