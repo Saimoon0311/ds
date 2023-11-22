@@ -6,7 +6,7 @@
             <div class="pt-4 center-main row justify-content-center otp-main">
                 <div class="col-md-8 col-lg-6 text-center my-4 otp-inner">
                     <div class="bg-dark text-white text-center m-3 p-4 pt-4 find-client" style="border-radius: 10px">
-                        <h2 class="mb-4 text-light">OTP Verification</h2>
+                        <h2 class="mb-4 text-light otp-hd">Please enter your verification code.</h2>
                         <div class="row">
                             <div v-for="(digit, index) in otpDigits" :key="index" class="col-2">
                                 <input v-model="otpDigits[index]" @input="handleInput(index, $event)"
@@ -15,14 +15,14 @@
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <div class="d-flex justify-content-center mx-3 mb-2 mb-lg-3">
                             <button @click="verifyOtp" class="btn btn-outline-light btn-lg mt-4
                             ">
-                                Verify OTP
+                                Verify
                             </button>
                         </div>
 
-                        <a href="javascript:;" @click="sendOtpAgain(this.otpEmail)" class="text-white">Resend OTP code.</a>
+                        <a href="javascript:;" @click="sendOtpAgain(this.otpEmail)" class="text-white">Resend</a>
                     </div>
                 </div>
             </div>
@@ -257,6 +257,10 @@ button:hover {
 .otp-inner .col-2 {
     justify-content: center;
     display: flex;
+}
+
+.otp-hd {
+    font-size: 21px;
 }
 
 .form-control {

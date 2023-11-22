@@ -9,7 +9,8 @@
           <div
             class="bg-dark text-white text-center m-3 p-3 find-client"
             style="border-radius: 10px">
-            <p class="m-4 fs-3 log-hd">Login as a {{ pageOption }}</p> 
+            <p class="m-4 fs-3 log-hd">Login</p> 
+            <!-- <p class="m-4 fs-3 log-hd">Login as a {{ pageOption }}</p>  -->
             <div>
                     <div class="im-user">
                         <input type="radio" id="optionPage1" value="client" v-model="pageOption" @change="changePage" />
@@ -86,12 +87,12 @@ export default {
         .max(16, 'Password must be less then 16 digit')
         .matches(
           /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-          'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
+          'Have you forgotten your password?',
         ),
     });
     return {
       schema,
-      pageOption: null, 
+      pageOption: null,
       // this.getCurrentPageOption()
 
     }
@@ -102,20 +103,20 @@ export default {
     Field,
     MainFooter
   },
-  computed:{
-    userTypeForLogin(){
+  computed: {
+    userTypeForLogin() {
       return this.$store.state.userType;
     }
   },
-  mounted(){
+  mounted() {
     this.pageOption = this.userTypeForLogin;
   },
   methods: {
     submitData(formData) {
       let dashboardUrl = null;
-      if(this.userTypeForLogin == "lawyer"){
+      if (this.userTypeForLogin == "lawyer") {
         dashboardUrl = "lawyer-profile";
-      }else if(this.userTypeForLogin == "client"){
+      } else if (this.userTypeForLogin == "client") {
         dashboardUrl = "client-dashboard";
       }
       this.submitLoginForm(formData, this.userTypeForLogin, dashboardUrl);
@@ -133,8 +134,8 @@ export default {
     //   }
     // },
     changePage() {
-      this.$store.commit('SET_USER_TYPE',this.pageOption);
-      localStorage.setItem('userType',this.pageOption);
+      this.$store.commit('SET_USER_TYPE', this.pageOption);
+      localStorage.setItem('userType', this.pageOption);
       // this.$router.push('/login');
       // if (this.pageOption === 'client') {
       //   this.$router.push('/client-login');

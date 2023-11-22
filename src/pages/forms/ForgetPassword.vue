@@ -83,7 +83,7 @@ export default {
                 console.log(formData)
                 api.post('/send-forget-password-email/', formData)
                     .then(res => {
-                        this.$swal("Success", "We have emailed you a link of reset password page on your Simplawfy account.", "success")
+                        this.$swal("", "If the email address provided is associated with a Simplawfy account you will receive a temporary link to reset your password.", "success")
                         console.log('successfully sent email : ', res?.data)
                     })
                     .catch(error => {

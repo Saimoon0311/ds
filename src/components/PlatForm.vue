@@ -24,7 +24,7 @@
             </p>
             <p>Simply make one enquiry and wait for lawyers to come to you.</p>
             <div class="d-flex align-items-center justify-content-center mt-two">
-              <button @click="goToLoginPage('client')" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</button> 
+              <button @click="goToLoginPage('client')" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</button>
               <!-- <router-link to="/client-login" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</router-link> -->
               <!-- <p>Or</p> -->
               <router-link to="/client-register" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign up</router-link>
@@ -50,7 +50,8 @@
               practice area without leaving your desk.
             </p>
             <div class="d-flex align-items-center justify-content-center mt-two">
-              <button @click="goToLoginPage('lawyer')" class="ext-white fs-5 p-2 btn btn-light text-black">Sign in</button> 
+              <button @click="goToLoginPage('lawyer')" class="ext-white fs-5 p-2 btn btn-light text-black">Sign
+                in</button>
               <!-- <router-link to="/lawyer-login" class="text-white fs-5 p-2 btn btn-light text-black">Sign in</router-link> -->
 
               <router-link to="/lawyer-register" class="text-white fs-5 p-2 btn btn-light text-black">Sign
@@ -61,7 +62,7 @@
       </div>
 
       <div class="mb-5">
-        <router-link to="" class="btn btn-dark text-light" @click="openSweetAlert">Already have an account?</router-link>
+        <router-link to="/login" class="btn btn-dark text-light">Already have an account?</router-link>
       </div>
       <!-- <div class="mb-3">
           <router-link to="/terms-of-use" class="me-2 text-dark">Terms of use</router-link>
@@ -72,7 +73,7 @@
     <MainFooter />
 
     <!-- ------- -->
-    <div class="modal fade lawfirm-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    <!-- <div class="modal fade lawfirm-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
       aria-hidden="true" id="FirmName">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -89,18 +90,16 @@
               <div class="d-flex align-items-center justify-content-center my-3 pb-5 pt-5">
                 <button @click="goToLoginPage('client')" class="close text-dark fs-5 p-2 btn btn-dark text-white">I'm a
                   Client</button>
-                <!-- <router-link to="/client-login" class="close text-dark fs-5 p-2 btn btn-dark text-white">I'm a
-                  Client</router-link> -->
+                
                   <button @click="goToLoginPage('lawyer')" class="close text-dark fs-5 p-2 btn btn-dark text-white">I'm a
                   Lawyer</button>  
-                <!-- <router-link to="/lawyer-login" class="close text-dark fs-5 p-2 btn btn-dark text-white">I'm a
-                  Lawyer</router-link> -->
+                
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- ------- -->
 
 

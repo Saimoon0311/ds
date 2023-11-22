@@ -79,11 +79,10 @@ app.mixin({
   },
 
   methods: {
-
-    goToLoginPage(type){
-      this.$store.commit('SET_USER_TYPE',type);
-      localStorage.setItem('userType',type);
-      this.$router.push('/login');
+    goToLoginPage(type) {
+      this.$store.commit("SET_USER_TYPE", type);
+      localStorage.setItem("userType", type);
+      this.$router.push("/login");
     },
 
     async updateProfile(keyName, modalId = null) {
@@ -123,7 +122,7 @@ app.mixin({
                     this.openJobs[openJobsIndex] = res?.data?.data;
                   }
                 }
-              }else{
+              } else {
                 this.setUserInStateAndLocalStorage(res);
               }
             }
@@ -195,8 +194,8 @@ app.mixin({
         .post("/generate-send-otp", { email })
         .then(() => {
           this.$swal(
-            "Success",
-            "OTP has been send to your email address",
+            "",
+            "Please check the email address you provided us for a verification code.",
             "success"
           ).then(() => {
             this.$store.commit("SET_OTP_EMAIL", email);
@@ -320,7 +319,7 @@ app.mixin({
       }
     },
 
-    logoutProcess(redirectUrl,redirection = true) {
+    logoutProcess(redirectUrl, redirection = true) {
       localStorage.removeItem("token");
       this.$store.commit("SET_AUTHENTICATED", false);
       localStorage.removeItem("loginUser");
@@ -329,17 +328,17 @@ app.mixin({
       this.$store.commit("SET_SUB_CANCEL_STATUS", false);
       this.$store.commit("SET_APPROVAL_STATUS", null);
       this.$store.commit("SET_SUBSCRIPTION_DATA", null);
-      if(redirection){
+      if (redirection) {
         this.$router.push({ path: redirectUrl });
       }
     },
 
-    logout(redirectUrl,redirection = true) {
+    logout(redirectUrl, redirection = true) {
       try {
         api
           .get("/logout")
           .then(() => {
-            this.logoutProcess(redirectUrl,redirection);
+            this.logoutProcess(redirectUrl, redirection);
           })
           .catch((error) => console.log("getResults : ", error));
       } catch (error) {

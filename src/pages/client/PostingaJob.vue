@@ -144,7 +144,7 @@
             <input type="radio" id="yes" name="requirements" value="1" v-model="requirementsOption" />
             <label for="yes" class="req-label"> Yes</label><br />
             <input type="radio" id="no" name="requirements" value="0" v-model="requirementsOption" />
-            <label for="no" class="req-label"> No</label><br />
+            <label for="no" class="req-label mb-2"> No</label><br />
             <div v-if="requirementsOption == 1">
               <label for="job" class="mt-3 mb-2">Please describe your accessibility requirement.</label>
               <!-- <textarea v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
@@ -157,52 +157,117 @@
               <div class="c-Count">{{ characterCountDes }} / {{ maxCharactersDes }}</div> -->
               <div class="selectboxes">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="visual" />
+                  <input class="form-check-input" type="checkbox" value="" id="visual" v-model="VisualIsChecked" />
                   <label class="form-check-label" for="visual">
                     Visual Impairment
                   </label>
                 </div>
 
+                <div v-if="VisualIsChecked" class="mt-2 mb-2">
+                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
+                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class=" form-control "
+                    placeholder="" />
+                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                    You have reached your character limit.
+                  </div>
+                </div>
+
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="auditory" />
+                  <input class="form-check-input" type="checkbox" value="" id="auditory" v-model="AuditoryIsChecked" />
                   <label class="form-check-label" for="auditory">
                     Auditory Impairment
                   </label>
                 </div>
 
+                <div v-if="AuditoryIsChecked" class="mt-2 mb-2">
+                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
+                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class=" form-control "
+                    placeholder="" />
+                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                    You have reached your character limit.
+                  </div>
+                </div>
+
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="physical" />
+                  <input class="form-check-input" type="checkbox" value="" id="physical" v-model="MobilityIsChecked" />
                   <label class="form-check-label" for="physical">
                     Mobility/Physical Impairment
                   </label>
                 </div>
 
+                <div v-if="MobilityIsChecked" class="mt-2 mb-2">
+                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
+                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class=" form-control "
+                    placeholder="" />
+                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                    You have reached your character limit.
+                  </div>
+                </div>
+
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="learning" />
+                  <input class="form-check-input" type="checkbox" value="" id="learning" v-model="LearningIsChecked" />
                   <label class="form-check-label" for="learning">
                     Learning Impairment
                   </label>
                 </div>
 
+                <div v-if="LearningIsChecked" class="mt-2 mb-2">
+                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
+                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class=" form-control "
+                    placeholder="" />
+                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                    You have reached your character limit.
+                  </div>
+                </div>
+
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="intellectual" />
+                  <input class="form-check-input" type="checkbox" value="" id="intellectual"
+                    v-model="IntellectualIsChecked" />
                   <label class="form-check-label" for="intellectual">
                     Intellectual Disability
                   </label>
                 </div>
 
+                <div v-if="IntellectualIsChecked" class="mt-2 mb-2">
+                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
+                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class="form-control "
+                    placeholder="" />
+                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                    You have reached your character limit.
+                  </div>
+                </div>
+
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="psychiatric" />
+                  <input class="form-check-input" type="checkbox" value="" id="psychiatric"
+                    v-model="PsychiatricIsChecked" />
                   <label class="form-check-label" for="psychiatric">
                     Psychiatric Disability
                   </label>
                 </div>
 
+                <div v-if="PsychiatricIsChecked" class="mt-2 mb-2">
+                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
+                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class="form-control "
+                    placeholder="" />
+                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                    You have reached your character limit.
+                  </div>
+                </div>
+
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="medical" />
+                  <input class="form-check-input" type="checkbox" value="" id="medical" v-model="MedicalIsChecked" />
                   <label class="form-check-label" for="medical">
                     Medical Disability
                   </label>
+                </div>
+
+                <div v-if="MedicalIsChecked" class="mt-2 mb-2">
+                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
+                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class="form-control "
+                    placeholder="" />
+                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                    You have reached your character limit.
+                  </div>
                 </div>
 
                 <div class="form-check">
@@ -212,31 +277,42 @@
                   </label>
                 </div>
 
-                <div v-if="isChecked" class="mt-2">
+                <!-- <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="language" />
+                  <label class="form-check-label" for="language">
+                    Speak a language other than English
+                  </label>
+                </div> -->
+
+                <div v-if="isChecked" class="mt-2 mb-2">
                   <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
                     :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class=" form-control "
-                    placeholder="e.g. physical disability, mental disability" />
+                    placeholder="" />
                   <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
                     You have reached your character limit.
                   </div>
                 </div>
               </div>
 
-              <div class="pb-5 pt-3">
-                <label for="language" class="pb-2">Speak a language other than English</label>
+              <div class="  form-check">
+                <input class="form-check-input" type="checkbox" value="" id="language" v-model="languageIsChecked" />
+                <label class="form-check-label mb-2" for="language">
+                  Speak a language other than English
+                </label>
 
-                <select v-model="selectedLanguage" id="language" class="form-select">
+              </div>
+              <div class="pb-5">
+                <select v-if="languageIsChecked" v-model="selectedLanguage" id="language" class="form-select">
                   <option value="">Select a language</option>
                   <option v-for="language in languages" :key="language" :value="language">
                     {{ language }}
                   </option>
                 </select>
 
-                <div v-if="selectedLanguage === 'Other'" class="mt-3">
+                <div v-if="selectedLanguage === 'Other' && languageIsChecked" class="mt-3">
                   <!-- <label for="otherLanguage" class="pb-2">Other language:</label> -->
                   <input type="text" v-model="otherLanguage" id="otherLanguage" class="form-control"
-                    @input="otherLanCharacterLimit" :maxlength="maxCharactersOtherLan"
-                    placeholder="e.g. vietnamese, spanish" />
+                    @input="otherLanCharacterLimit" :maxlength="maxCharactersOtherLan" placeholder="" />
                   <div v-if="otherLanCharacter >= maxCharactersOtherLan" class="warning-text">
                     You have reached your character limit.
                   </div>
@@ -259,7 +335,7 @@
               <!-- <p></p> -->
               <h4 class="line-break">{{ description }}</h4>
 
-              <h4><b>Location</b>: {{ locations[selectedLocationIndex].title }}, {{ city }}</h4>
+              <h4><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}</h4>
               <!-- <h4><b>State/Territory</b></h4> -->
               <!-- <h4></h4> -->
               <!-- <h4>City</h4> -->
@@ -292,7 +368,7 @@
           <div class="stepbtn">
             <!-- Pagination Indicator -->
             <span v-if="currentStep !== 4" class="pagination-indicator">
-              {{ currentStep + 1 }}/{{ totalSteps }}
+              {{ currentStep + 1 }} of {{ totalSteps }}
             </span>
 
             <div>
@@ -406,6 +482,14 @@ export default {
       maxCharactersDes: 30,
       isChecked: false,
       maxCharactersOtherLan: 30,
+      languageIsChecked: false,
+      VisualIsChecked: false,
+      AuditoryIsChecked: false,
+      MobilityIsChecked: false,
+      LearningIsChecked: false,
+      IntellectualIsChecked: false,
+      PsychiatricIsChecked: false,
+      MedicalIsChecked: false,
     };
   },
 
@@ -660,5 +744,12 @@ h4 {
 
 .summ+.stepbtn {
   justify-content: end !important;
+}
+
+.pagination-indicator {
+  border: 1px solid #000;
+  border-radius: 50px;
+  padding: 4px 10px;
+  font-size: 14px;
 }
 </style>
