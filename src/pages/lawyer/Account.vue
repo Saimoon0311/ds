@@ -52,7 +52,7 @@
           <h3 class="my-3 mt-4">Receipts</h3>
 
 
-          <form @submit.prevent="searchReceipts">
+          <!-- <form @submit.prevent="searchReceipts">
             <label for="startDate">Start Date:</label>
             <input type="date" v-model="startDate" id="startDate" required>
 
@@ -60,7 +60,7 @@
             <input type="date" v-model="endDate" id="endDate" required>
 
             <button type="submit">Search</button>
-          </form>
+          </form> -->
 
           <table class="table table-bordered table-striped">
             <tbody>
@@ -291,6 +291,8 @@ export default {
     this.getReceipts();
   },
   methods: {
+  
+
     formatReceiptDate(timestamp) {
       // Function to format the receipt date
       return new Date(timestamp * 1000).toLocaleDateString('en-AU', {
@@ -315,10 +317,11 @@ export default {
 
 
     async searchReceipts() {
-      const startTimestamp = new Date(this.startDate).getTime() / 1000;
-      const endTimestamp = new Date(this.endDate).getTime() / 1000;
+      // const startTimestamp = new Date(this.startDate).getTime() / 1000;
+      // const endTimestamp = new Date(this.endDate).getTime() / 1000;
       try {
-        api.get("/lawyer/get-receipts",{ params: { start_date: startTimestamp, end_date: endTimestamp } })
+        api.get("/lawyer/get-receipts",{ params: { start_date: this.startDate, end_date: this.endDate } })
+        // api.get("/lawyer/get-receipts",{ params: { start_date: startTimestamp, end_date: endTimestamp } })
         .then((res) => {
           this.receipts = res?.data?.data;
           console.log(res.data?.data);
