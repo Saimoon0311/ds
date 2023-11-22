@@ -220,6 +220,13 @@ app.mixin({
       }
       this.setUserInStateAndLocalStorage(res);
       this.$store.commit("SET_AUTHENTICATED", true);
+      if(!path){
+        if(res?.data?.data?.type == 'client'){
+          path = "client-dashboard";
+        }else if(res?.data?.data?.type == 'lawyer'){
+          path = "lawyer-profile";
+        }
+      }
       this.$router.push({ path: path });
     },
 
@@ -297,6 +304,7 @@ app.mixin({
       this.$router.push({ path: "/forget-password" });
     },
 
+    
     submitLoginForm(formData, userType, dashboardUrl) {
       try {
         formData.type = userType;
