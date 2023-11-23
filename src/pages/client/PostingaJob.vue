@@ -24,55 +24,17 @@
                   {{ area.title }}
                 </a>
 
-                <!-- <a data-v-2f14f9de="" class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Banking &amp; finance / insolvency </a><a data-v-2f14f9de=""
-                class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Commercial (business) </a><a data-v-2f14f9de=""
-                class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Consumer </a><a data-v-2f14f9de="" class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Criminal </a><a data-v-2f14f9de="" class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Employment / workers compensation </a><a data-v-2f14f9de=""
-                class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Environmental </a><a data-v-2f14f9de="" class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Family </a><a data-v-2f14f9de="" class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Health / disability / aged care </a><a data-v-2f14f9de=""
-                class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Human rights / constitutional </a><a data-v-2f14f9de=""
-                class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Immigration </a><a data-v-2f14f9de="" class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Insurance </a><a data-v-2f14f9de="" class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Intellectual property </a><a data-v-2f14f9de=""
-                class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Liquor licensing / hospitality </a><a data-v-2f14f9de=""
-                class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Litigation (civil court cases) </a><a data-v-2f14f9de=""
-                class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Mediation </a><a data-v-2f14f9de="" class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Notary public </a><a data-v-2f14f9de="" class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Personal injury (compensation) </a><a data-v-2f14f9de=""
-                class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Property (real estate) / construction </a><a data-v-2f14f9de=""
-                class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Tax </a><a data-v-2f14f9de="" class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Traffic </a><a data-v-2f14f9de="" class="m-2 text-decoration-none badge text-white fs-6 bubbles">
-                Wills &amp; estates
-              </a> -->
-                <a 
-                  @click="setAreaFunc" 
-                  class="m-2 text-decoration-none badge text-black fs-6 bubbles bubbles-other text-white"
-
-                  :class="[
-                  'm-2',
-                  'text-decoration-none',
-                  'badge',
-                  'text-white',
-                  'fs-6',
-                  'bubbles',
-                  'bubbles-other',
-                  { selected_bubble: otherAreaSelected },
-                ]"
-
-                  data-v-2f14f9de="">
+                <a @click="setAreaFunc"
+                  class="m-2 text-decoration-none badge text-black fs-6 bubbles bubbles-other text-white" :class="[
+                    'm-2',
+                    'text-decoration-none',
+                    'badge',
+                    'text-white',
+                    'fs-6',
+                    'bubbles',
+                    'bubbles-other',
+                    { selected_bubble: otherAreaSelected },
+                  ]" data-v-2f14f9de="">
                   Other (not listed here) / I don't know
                 </a>
               </div>
@@ -128,16 +90,6 @@
                 </option>
               </select>
 
-              <!-- <option value="Victoria">Victoria</option>
-              <option value="Queensland">Queensland</option>
-              <option value="Western Australia">Western Australia</option>
-              <option value="South Australia">South Australia</option>
-              <option value="Tasmania">Tasmania</option>
-              <option value="Australian Capital Territory">
-                Australian Capital Territory
-              </option>
-              <option value="Northern Territory">Northern Territory</option> -->
-
               <br />
 
               <label for="city">Which city/suburb?<sup class="text-danger">*</sup></label>
@@ -152,23 +104,17 @@
 
           <template v-if="currentStep === 3">
             <p class="h4 text-center">Accessibility Requirements</p>
-            <label for="city" class="mb-3 d-block">Do you have any accessibility requirements, such as a disability
-              or speaking a language other than English?</label>
-
-            <input type="radio" id="yes" name="requirements" value="1" v-model="requirementsOption" />
-            <label for="yes" class="req-label"> Yes</label><br />
-            <input type="radio" id="no" name="requirements" value="0" v-model="requirementsOption" />
-            <label for="no" class="req-label mb-2"> No</label><br />
+            <div class="mb-3">
+              <label for="city" class="mb-3 d-block">Do you have any accessibility requirements, such as a disability
+                or speaking a language other than English?</label>
+              <input type="radio" id="yes" name="requirements" value="1" v-model="requirementsOption" />
+              <label for="yes" class="req-label"> Yes</label><br />
+              <input type="radio" id="no" name="requirements" value="0" v-model="requirementsOption" />
+              <label for="no" class="req-label mb-2"> No</label><br />
+            </div>
             <div v-if="requirementsOption == 1">
               <label for="job" class="mt-3 mb-2">Please describe your accessibility requirement.</label>
-              <!-- <textarea v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
-                :maxlength="maxCharactersDes" name="accessibility" id="" type="textarea"
-                class="des-text form-control mb-5"
-                placeholder="e.g. physical disability, mental disability, language (e.g. Mandarin, Arabic, Vietnamese, Spanish, etc)"></textarea>
-              <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">You have reached your character
-                limit.
-              </div>
-              <div class="c-Count">{{ characterCountDes }} / {{ maxCharactersDes }}</div> -->
+
               <div class="selectboxes">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="" id="visual" v-model="VisualIsChecked" />
@@ -178,10 +124,9 @@
                 </div>
 
                 <div v-if="VisualIsChecked" class="mt-2 mb-2">
-                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
-                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class=" form-control "
-                    placeholder="" />
-                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                  <input v-model="visualOption" @input="checkVCharacterLimit" :maxlength="maxCharactersV"
+                    name="accessibility" id="" type="text" class=" form-control " placeholder="" />
+                  <div v-if="characterCountV >= maxCharactersV" class="warning-text">
                     You have reached your character limit.
                   </div>
                 </div>
@@ -194,10 +139,9 @@
                 </div>
 
                 <div v-if="AuditoryIsChecked" class="mt-2 mb-2">
-                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
-                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class=" form-control "
-                    placeholder="" />
-                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                  <input v-model="auditoryOption" @input="checkAuditoryCharacterLimit" :maxlength="maxCharactersAuditory"
+                    name="accessibility" id="" type="text" class=" form-control " placeholder="" />
+                  <div v-if="characterCountAuditory >= maxCharactersAuditory" class="warning-text">
                     You have reached your character limit.
                   </div>
                 </div>
@@ -210,10 +154,9 @@
                 </div>
 
                 <div v-if="MobilityIsChecked" class="mt-2 mb-2">
-                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
-                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class=" form-control "
-                    placeholder="" />
-                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                  <input v-model="mobilityOption" @input="checkMobilityCharacterLimit" :maxlength="maxCharactersMobility"
+                    name="accessibility" id="" type="text" class=" form-control " placeholder="" />
+                  <div v-if="characterCountMobility >= maxCharactersMobility" class="warning-text">
                     You have reached your character limit.
                   </div>
                 </div>
@@ -226,10 +169,9 @@
                 </div>
 
                 <div v-if="LearningIsChecked" class="mt-2 mb-2">
-                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
-                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class=" form-control "
-                    placeholder="" />
-                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                  <input v-model="learningOption" @input="checkLearningCharacterLimit" :maxlength="maxCharactersLearning"
+                    name="accessibility" id="" type="text" class=" form-control " placeholder="" />
+                  <div v-if="characterCountLearning >= maxCharactersLearning" class="warning-text">
                     You have reached your character limit.
                   </div>
                 </div>
@@ -243,10 +185,10 @@
                 </div>
 
                 <div v-if="IntellectualIsChecked" class="mt-2 mb-2">
-                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
-                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class="form-control "
+                  <input v-model="intellectualOption" @input="checkIntellectualCharacterLimit"
+                    :maxlength="maxCharactersIntellectual" name="accessibility" id="" type="text" class="form-control "
                     placeholder="" />
-                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                  <div v-if="characterCountIntellectual >= maxCharactersIntellectual" class="warning-text">
                     You have reached your character limit.
                   </div>
                 </div>
@@ -260,10 +202,10 @@
                 </div>
 
                 <div v-if="PsychiatricIsChecked" class="mt-2 mb-2">
-                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
-                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class="form-control "
+                  <input v-model="psychiatricOption" @input="checkPsychiatricCharacterLimit"
+                    :maxlength="maxCharactersPsychiatric" name="accessibility" id="" type="text" class="form-control "
                     placeholder="" />
-                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                  <div v-if="characterCountPsychiatric >= maxCharactersPsychiatric" class="warning-text">
                     You have reached your character limit.
                   </div>
                 </div>
@@ -276,10 +218,9 @@
                 </div>
 
                 <div v-if="MedicalIsChecked" class="mt-2 mb-2">
-                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
-                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class="form-control "
-                    placeholder="" />
-                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                  <input v-model="medicalOption" @input="checkMedicalCharacterLimit" :maxlength="maxCharactersMedical"
+                    name="accessibility" id="" type="text" class="form-control " placeholder="" />
+                  <div v-if="characterCountMedical >= maxCharactersMedical" class="warning-text">
                     You have reached your character limit.
                   </div>
                 </div>
@@ -336,20 +277,20 @@
           </template>
 
           <template v-if="currentStep === 4">
-            <div class="summ">
+            <div class="summ mb-3">
               <p class="h4 text-center mb-3 mt-2">Summary</p>
-              <h4 class="d-inline"><b>Area of Law:</b></h4>
-              <p class="areas text-decoration-none badge text-white fs-6 bubbles">
+              <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
+              <p class="areas text-decoration-none badge text-white fs-6 bubbles area-bubble">
                 {{ otherAreaSelected ? "Not mention" : areas[selectedAreaIndex].title }}
               </p>
-              <h4 class="line-break "><b>{{ title }}</b>
+              <h4 class="line-break text-center mt-3 mb-4"><b>{{ title }}</b>
               </h4>
               <!-- <p></p> -->
               <!-- <h4>Description</h4> -->
               <!-- <p></p> -->
-              <h4 class="line-break">{{ description }}</h4>
+              <h4 class="line-break mb-4">{{ description }}</h4>
 
-              <h4><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}</h4>
+              <h4 class="mb-4"><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}</h4>
               <!-- <h4><b>State/Territory</b></h4> -->
               <!-- <h4></h4> -->
               <!-- <h4>City</h4> -->
@@ -483,13 +424,19 @@ export default {
       selectedArea: null,
       selectedAreaIndex: null,
 
-      otherAreaSelected : false,
+      otherAreaSelected: false,
 
       selectedLocationIndex: null,
       city: "",
       requirementsOption: 0,
       requirementsOptionDescription: "",
-
+      visualOption: "",
+      auditoryOption: "",
+      mobilityOption: "",
+      learningOption: "",
+      intellectualOption: "",
+      psychiatricOption: "",
+      medicalOption: "",
       isVisible: false,
       isVisibleContact: false,
       // text: "",
@@ -497,6 +444,13 @@ export default {
       maxCharactersCity: 50,
       maxTitleCharacters: 50,
       maxCharactersDes: 30,
+      maxCharactersV: 30,
+      maxCharactersAuditory: 30,
+      maxCharactersMobility: 30,
+      maxCharactersLearning: 30,
+      maxCharactersIntellectual: 30,
+      maxCharactersPsychiatric: 30,
+      maxCharactersMedical: 30,
       isChecked: false,
       maxCharactersOtherLan: 30,
       languageIsChecked: false,
@@ -526,23 +480,44 @@ export default {
     otherLanCharacter() {
       return this.otherLanguage.length;
     },
+    characterCountV() {
+      return this.visualOption.length;
+    },
+    characterCountAuditory() {
+      return this.auditoryOption.length;
+    },
+    characterCountMobility() {
+      return this.mobilityOption.length;
+    },
+    characterCountLearning() {
+      return this.learningOption.length;
+    },
+    characterCountIntellectual() {
+      return this.intellectualOption.length;
+    },
+    characterCountPsychiatric() {
+      return this.psychiatricOption.length;
+    },
+    characterCountMedical() {
+      return this.medicalOption.length;
+    },
   },
   mounted() {
     this.fetchAreas();
     this.fetchLocations();
   },
   methods: {
-    setAreaFunc(){
+    setAreaFunc() {
       this.otherAreaSelected = !this.otherAreaSelected;
-      if(this.otherAreaSelected){
+      if (this.otherAreaSelected) {
         this.nextStep();
       }
     },
     nextStep(values) {
-      if(this.currentStep == 0 && !this.otherAreaSelected && !this.selectedArea && !this.selectedAreaIndex){
+      if (this.currentStep == 0 && !this.otherAreaSelected && !this.selectedArea && !this.selectedAreaIndex) {
         return false;
       }
-      console.log(this.otherAreaSelected , ' : other');
+      console.log(this.otherAreaSelected, ' : other');
       // if (
       //   this.currentStep == 0 &&
       //   !this.selectedArea &&
@@ -594,7 +569,7 @@ export default {
             () => {
               this.changePostJobFormToDefault();
               this.currentStep = 0;
-              this.$router.push({path : "/client-dashboard" });
+              this.$router.push({ path: "/client-dashboard" });
             }
           );
         })
@@ -644,6 +619,50 @@ export default {
           this.otherLanguage.slice(0, this.maxCharactersOtherLan); // Truncate text to the character limit.
       }
     },
+    checkVCharacterLimit() {
+      if (this.characterCountV > this.maxCharactersV) {
+        this.visualOption =
+          this.visualOption.slice(0, this.maxCharactersV); // Truncate text to the character limit.
+      }
+    },
+    checkAuditoryCharacterLimit() {
+      if (this.characterCountAuditory > this.maxCharactersAuditory) {
+        this.auditoryOption =
+          this.auditoryOption.slice(0, this.maxCharactersAuditory); // Truncate text to the character limit.
+      }
+    },
+    checkMobilityCharacterLimit() {
+      if (this.characterCountMobility > this.maxCharactersMobility) {
+        this.mobilityOption =
+          this.mobilityOption.slice(0, this.maxCharactersMobility); // Truncate text to the character limit.
+      }
+    },
+    checkLearningCharacterLimit() {
+      if (this.characterCountLearning > this.maxCharactersLearning) {
+        this.learningOption =
+          this.learningOption.slice(0, this.maxCharactersLearning); // Truncate text to the character limit.
+      }
+    },
+    checkIntellectualCharacterLimit() {
+      if (this.characterCountIntellectual > this.maxCharactersIntellectual) {
+        this.intellectualOption =
+          this.intellectualOption.slice(0, this.maxCharactersIntellectual); // Truncate text to the character limit.
+      }
+    },
+    checkPsychiatricCharacterLimit() {
+      if (this.characterCountPsychiatric > this.maxCharactersPsychiatric) {
+        this.PsychiatricOption =
+          this.psychiatricOption.slice(0, this.maxCharactersPsychiatric); // Truncate text to the character limit.
+      }
+    },
+    checkMedicalCharacterLimit() {
+      if (this.characterCountMedical > this.maxCharactersMedical) {
+        this.medicalOption =
+          this.medicalOption.slice(0, this.maxCharactersMedical); // Truncate text to the character limit.
+      }
+    },
+
+
 
 
 
@@ -780,5 +799,15 @@ h4 {
   border-radius: 50px;
   padding: 4px 10px;
   font-size: 14px;
+}
+
+input[type="checkbox"]:checked {
+  filter: grayscale(100%) contrast(200%);
+}
+
+.area-bubble {
+  background: gray !important;
+  margin: 8px 0px !important;
+
 }
 </style>

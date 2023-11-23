@@ -61,19 +61,18 @@
             class="tab-pane fade text-center active show"
             id="pills-home"
             role="tabpanel"
-            aria-labelledby="pills-home-tab"
-          >
+            aria-labelledby="pills-home-tab">
             <!-- <div class="input-group mb-3">
             <input type="text" class="form-control" v-model="searchQuery"  @keyup.enter="search" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
             <button class="input-group-text btn custom-button" id="basic-addon2" @click="search"><i class="fa fa-search"></i></button>
             <button class="input-group-text btn custom-button" id="basic-addon2" @click="clearSearch"><i class="fa fa-refresh"></i></button>
-          </div> -->
+            </div> -->
 
             <!-- <div class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
               id="containerActive"
                v-if="openJobs.length == 0 && searchQuery != ''">
             <span class="text-center w-100">No record found!</span>
-          </div> -->
+            </div> -->
             
             <div
               v-if="openJobs.length == 0 && searchQuery != ''"
@@ -157,7 +156,7 @@
               </div>
             </div>
 
-            <div v-if="openJobs.length > 0 && currentPage != lastPage">
+            <div class="mt-3 text-center" v-if="openJobs.length > 0 && currentPage != lastPage">
               <button class="btn custom-button" @click="loadMore">
                 Load More
               </button>
