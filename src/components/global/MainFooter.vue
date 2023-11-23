@@ -114,4 +114,11 @@ export default {
         display: block;
     }
 }
+
+@media (min-width: 500px) and (max-width: 1024px) {
+
+    .footer-main div {
+        padding: 4px 5px;
+    }
+}
 </style>

@@ -263,6 +263,19 @@ export default {
 
 }
 
+@media (min-width: 500px) and (max-width: 1024px) {
+  .homepage-circles {
+
+    width: 460px !important;
+    height: 460px !important;
+    padding: 32px !important;
+  }
+
+  .showhover p {
+    font-size: 16px !important;
+  }
+}
+
 @media screen and (max-width: 720px) {
   .showhover p[data-v-34f07b43] {
     line-height: 23px;
