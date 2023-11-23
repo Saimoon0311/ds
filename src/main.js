@@ -40,6 +40,7 @@ app.mixin({
     return {
       clear: false,
       searchQuery: "",
+      searchQueryNumberPagination : "",
       openJobs: [],
       closeJobs: [],
       currentPage: 0,
@@ -60,6 +61,14 @@ app.mixin({
           status = this.pageStatus;
         }
         this.loadMore(status, true);
+      }
+    },
+
+    searchQueryNumberPagination(newQuery) {
+      if (newQuery == "" && !this.clear) {
+        this.data_paginated = [];
+        this.$store.commit("SET_PAGINATION_LAST", 0);
+        this.getPaginatedData();
       }
     },
   },
@@ -133,7 +142,7 @@ app.mixin({
       }
     },
 
-    // /lawyer/lawyer-proposals
+   // number pagination data
     async getPaginatedData() {
       console.log("func run");
       api
@@ -147,6 +156,27 @@ app.mixin({
           console.log(error);
         });
     },
+
+    //number pagination data search
+    async searchNumberPaginationData(status = null) {
+      if (this.searchQueryNumberPagination == "") return false;
+      let obj = { query: this.searchQueryNumberPagination };
+      if (status) obj.admin_approval = status;
+      console.log(obj);
+      const response = await api.get(this.paginationEndpoint, {
+        params: obj,
+      });
+      // this.currentPage = 1;
+      this.$store.commit("SET_PAGINATION_LAST", response?.data?.last_page);
+      this.data_paginated = response?.data?.data;
+      // console.log(response?.data);
+      // console.log("last page : ", this.lastPage);
+      // console.log("curr search : ", this.currentPage);
+    },
+
+
+    
+
 
     setUserInStateAndLocalStorage(res) {
       console.log("new func : ", res?.data?.data?.link);

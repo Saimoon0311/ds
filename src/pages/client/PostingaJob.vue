@@ -295,10 +295,62 @@
               <!-- <h4></h4> -->
               <!-- <h4>City</h4> -->
               <!-- <h4>{{ city }}</h4> -->
+              <span v-if="requirementsOption">
               <h4 class="d-inline"><b>Accessibility Requirements: </b></h4>
-              <h4 class="d-inline line-break">
-                {{ requirementsOption ? requirementsOptionDescription : "No" }}
-              </h4>
+             
+
+              <div v-if="VisualIsChecked">
+                <p><b>Visual Impairment : </b> {{ visualOption  }}</p>
+              </div>
+
+              <div v-if="AuditoryIsChecked">
+                <!-- <b><p>Auditory Impairment : </p></b>
+                <p>{{ auditoryOption }}</p> -->
+                <p><b>Auditory Impairment : </b> {{ auditoryOption  }}</p>
+                
+              </div>
+
+              <div v-if="MobilityIsChecked">
+                <!-- <b><p>Mobility/Physical Impairment : </p></b>
+                <p>{{ mobilityOption }}</p> -->
+                <p><b>Mobility/Physical Impairment : </b> {{ mobilityOption }}</p>
+              </div>
+
+              <div v-if="LearningIsChecked">
+                <!-- <b><p>Learning Impairment : </p></b>
+                <p>{{ learningOption }}</p> -->
+                <p><b>Learning Impairment : </b> {{ learningOption }}</p>
+              </div>
+
+              <div v-if="IntellectualIsChecked">
+                <!-- <b><p>Intellectual Disability : </p></b>
+                <p>{{ intellectualOption }}</p> -->
+                <p><b>Intellectual Disability : </b> {{ intellectualOption }}</p>
+              </div>
+
+              <div v-if="PsychiatricIsChecked">
+                <!-- <b><p>Psychiatric Disability : </p></b>
+                <p>{{ psychiatricOption }}</p> -->
+                <p><b>Psychiatric Disability : </b> {{ psychiatricOption }}</p>
+              </div>
+
+              <div v-if="MedicalIsChecked">
+                <!-- <b><p>Medical Disability : </p></b>
+                <p>{{ medicalOption }}</p> -->
+                <p><b>Medical Disability : </b> {{ medicalOption }}</p>
+              </div>
+
+              <div v-if="isChecked">
+                <p><b>Other : </b> {{ requirementsOptionDescription }}</p>
+              </div>
+
+              <div v-if="languageIsChecked">
+                <!-- <b><p>Language : </p></b>
+                <p>{{ selectedLanguage }}</p> -->
+                <p><b>Language : </b> {{ selectedLanguage == 'Other' ? otherLanguage : selectedLanguage }}</p>
+              </div>
+
+              </span>
             </div>
             <!-- <span v-if="requirementsOption">
               <h4>Accessibility Requirements Details</h4>
@@ -556,11 +608,22 @@ export default {
         field_id: this.selectedArea,
         location_id: this.locations[this.selectedLocationIndex].id,
         city: this.city,
-        accessibility_requirements: this.requirementsOption,
+        accessibility_requirements : this.requirementsOption,
+        visual_impairment: this.visualOption,
+        auditory_impairment: this.auditoryOption,
+        mobility_impairment: this.mobilityOption,
+        learning_impairment: this.learningOption,
+        intellectual_disability: this.intellectualOption,
+        psychiatric_disability: this.psychiatricOption,
+        medical_disability: this.medicalOption,
+        other: this.requirementsOptionDescription,
+        language: this.selectedLanguage == 'Other' ? this.otherLanguage : this.selectedLanguage
+
+        // accessibility_requirements: this.requirementsOption,
       };
-      if (this.requirementsOption == 1) {
-        formData.requirements_description = this.requirementsOptionDescription;
-      }
+      // if (this.requirementsOption == 1) {
+      //   formData.requirements_description = this.requirementsOptionDescription;
+      // }
 
       api
         .post("/client/create-job", formData)

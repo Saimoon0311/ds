@@ -775,7 +775,7 @@
                                   <button
                                     v-if="!loginUser?.area_insert"
                                     type="button"
-                                    @click="setModal('fields')"
+                                    @click="setModal('fields',item?.id)"
                                     class="btn btn-dark btn-sm"
                                     data-bs-toggle="modal" :data-bs-target="`#AreaModal${index}`"
                                     :data-target="`#field-modal${index}`"
@@ -814,7 +814,7 @@
 
                                           <v-select v-model="selectedOptionIds" :options="options" label="title" multiple></v-select>
 
-                                          <button @click="saveSelectedFields" class="btn btn-dark my-3">Save changes</button>
+                                          <button @click="saveSelectedFields(item?.id,index)" class="btn btn-dark my-3">Save changes</button>
                                         </div>
                                       </div>
                                     </div>
@@ -825,17 +825,21 @@
                                 </td>
                                 <td v-else></td> -->
 
-                                <div v-if="selectedOptionIdsShow.length > 0">
-                                <span v-for="(item,index) in selectedOptionIdsShow" :key="index">
-                                  {{ item.title }}<span v-if="index < selectedOptionIdsShow.length - 1">, </span>
-                                </span>
-                              </div>
+                                <td>
+                                  <div v-if="item?.fields.length > 0">
+                                    <span v-for="(field, fieldIndex) in item?.fields" :key="fieldIndex">
+                                      {{ field.title }}<span v-if="fieldIndex < item?.fields.length - 1">, </span>
+                                    </span>
+                                  </div>
+                                </td>
+
+                                
                               </tr>
                               <tr>
                                 <td class="fw-bold d-flex align-items-center justify-content-between">Location
                                   <button
                                     v-if="!loginUser?.state_insert"
-                                    @click="setModal('locations')"
+                                    @click="setModal('locations',item?.id)"
                                       type="button"
                                       class="btn btn-dark btn-sm"
                                       data-bs-toggle="modal" :data-bs-target="`#StateModal${index}`"
@@ -874,7 +878,7 @@
 
                                             <v-select v-model="selectedOptionIds_locations" :options="options_locations" label="title" multiple></v-select>
 
-                                            <button @click="saveSelectedLocations" class="btn btn-dark my-3">Save changes</button>
+                                            <button @click="saveSelectedLocations(item?.id,index)" class="btn btn-dark my-3">Save changes</button>
 
                                           </div>
                                         </div>
@@ -888,9 +892,9 @@
                                 </td> -->
                                 <!-- <td v-else></td> -->
                                 <td>
-                                  <div v-if="selectedOptionIdsShow_locations.length > 0">
-                                    <span v-for="(item,index) in selectedOptionIdsShow_locations" :key="index">
-                                      {{ item.title }}<span v-if="index < selectedOptionIdsShow_locations.length - 1">, </span>
+                                  <div v-if="item?.locations.length > 0">
+                                    <span v-for="(location, locationIndex) in item?.locations" :key="locationIndex">
+                                      {{ location.title }}<span v-if="locationIndex < item?.locations.length - 1">, </span>
                                     </span>
                                   </div>
                                 </td>
@@ -1041,7 +1045,7 @@ export default {
         consultation_amount: null,
         remote_consultation: false,
         mobile_friendly: false,
-        user_id : null,
+        user_id: null,
       },
 
       options: [],
@@ -1077,10 +1081,10 @@ export default {
     await this.loadMore(this.pageStatus);
   },
 
-  mounted() {
-    this.fetchOptions();
-    this.fetchOptions_locations();
-  },
+  // mounted() {
+  //   this.fetchOptions();
+  //   this.fetchOptions_locations();
+  // },
 
   // async mounted() {
   //   window.addEventListener("scroll", () => {
@@ -1107,7 +1111,7 @@ export default {
 
   methods: {
 
-    setModalData(keyName,value,user_id){
+    setModalData(keyName, value, user_id) {
 
       // if (Array.isArray(keyName)) {
       //   keyName.forEach(element => {
@@ -1116,16 +1120,20 @@ export default {
       //     }
       //   });
       // } else {
-        this.form[keyName] = value;
+      this.form[keyName] = value;
       // }
       this.form.user_id = user_id;
-        console.log(this.form);
+      console.log(this.form);
     },
 
-    setModal($type) {
-      if ($type == "fields") {
+    setModal(type,user_id) {
+      this.form.user_id = user_id;
+      if (type == "fields") {
+        this.fetchOptions();
         this.selectedOptionIds = this.selectedOptionIdsShow;
-      } else if ($type == "locations") {
+        console.log('idssss ::::: ', this.selectedOptionIdsShow);
+      } else if (type == "locations") {
+          this.fetchOptions_locations();
         this.selectedOptionIds_locations = this.selectedOptionIdsShow_locations;
       }
     },
@@ -1133,8 +1141,8 @@ export default {
 
     async fetchOptions() {
       try {
-        const response = await api.get('/get-active-fields');
-        console.log('sundak  :::: ', response?.data?.allFields);
+        const response = await api.get(`/get-active-fields?user_id=${this.form.user_id}`);
+        console.log('sundak  :::: ',this.form.user_id  , response?.data?.myFields);
         this.options = response?.data?.allFields;
         this.selectedOptionIds = response?.data?.myFields ?? [];
         this.selectedOptionIdsShow = response?.data?.myFields ?? [];
@@ -1146,8 +1154,8 @@ export default {
     // locations
     async fetchOptions_locations() {
       try {
-        const response = await api.get('/get-active-locations');
-        console.log('sundak  :::: ', response?.data?.allLocations);
+        const response = await api.get(`/get-active-locations?user_id=${this.form.user_id}`);
+        console.log('sundak  :::: ', response?.data);
         this.options_locations = response?.data?.allLocations;
         this.selectedOptionIds_locations = response?.data?.myLocations ?? [];
         this.selectedOptionIdsShow_locations = response?.data?.myLocations ?? [];
@@ -1157,17 +1165,28 @@ export default {
     },
 
     // fields
-    saveSelectedFields() {
+    saveSelectedFields(user_id,index) {
       console.log('Selected Option IDs:', this.selectedOptionIds);
       if (this.selectedOptionIds.length == 0) {
         return false;
       }
       try {
-        api.post('/admin/update-fields', { "ids": this.selectedOptionIds, "is_admin": true }).then(() => {
+        api.post('/admin/update-fields', { "user_id": user_id , "ids": this.selectedOptionIds, "is_admin": true }).then((res) => {
           this.$swal("Success", "Fields updated successfully", "success");
-          this.fetchOptions();
-          this.fetchUserData();
-          this.closeModal('#AreaModal');
+          this.closeModal(`#AreaModal${index}`);
+                if (this.openJobs.length > 0) {
+                  const openJobsIndex = this.openJobs.findIndex(
+                    (user) => user.email === res?.data?.data?.email
+                  );
+                  if (openJobsIndex !== -1) {
+                    this.openJobs[openJobsIndex].fields = [...this.selectedOptionIds];
+                  }
+                }
+
+          //       this.fetchOptions();
+          // this.fetchUserData();
+
+
         }).catch(() => this.$swal("Error", "Something went wrong, please try again", "error"));
       } catch (error) {
         this.$swal("Error", "Something went wrong, please try again", "error")
@@ -1177,17 +1196,29 @@ export default {
 
 
     // locations
-    saveSelectedLocations() {
+    saveSelectedLocations(user_id,index) {
       console.log('Selected Option IDs:', this.selectedOptionIds_locations);
       if (this.selectedOptionIds_locations.length == 0) {
         return false;
       }
       try {
-        api.post('/lawyer/update-locations', { "ids": this.selectedOptionIds_locations }).then(() => {
+        api.post('/admin/update-locations', { "user_id": user_id , "ids": this.selectedOptionIds_locations, "is_admin": true }).then((res) => {
           this.$swal("Success", "Locations updated successfully", "success");
-          this.fetchOptions_locations();
-          this.fetchUserData();
-          this.closeModal('#StateModal');
+          // this.fetchOptions_locations();
+          // this.fetchUserData();
+          this.closeModal(`#StateModal${index}`);
+              console.log('loc ::::: ' , this.openJobs);
+                if (this.openJobs.length > 0) {
+                  console.log('index ::::: ' , this.openJobs);
+                  console.log('index ::::: ' , res);
+                  const openJobsIndex = this.openJobs.findIndex(
+                    (user) => user.email === res?.data?.data?.email
+                  );
+                  if (openJobsIndex !== -1) {
+                    this.openJobs[openJobsIndex].locations = [...this.selectedOptionIds_locations];
+                  }
+                }
+
         }).catch(() => this.$swal("Error", "Something went wrong, please try again", "error"));
       } catch (error) {
         this.$swal("Error", "Something went wrong, please try again", "error")
