@@ -13,28 +13,28 @@
               <div data-v-2f14f9de="" class="d-flex flex-wrap justify-content-center mb-5" data-v-376ef8ab="">
                 <!-- class="m-2 text-decoration-none badge text-white fs-6 bubbles" -->
                 <a v-for="(area, index) in areas" :key="area.id" @click="setArea(index, area.id), nextStep()" :class="[
-                  'm-2',
-                  'text-decoration-none',
-                  'badge',
-                  'text-white',
-                  'fs-6',
-                  'bubbles',
-                  { selected_bubble: selectedAreaIndex === index },
-                ]">
+                                  'm-2',
+                                  'text-decoration-none',
+                                  'badge',
+                                  'text-white',
+                                  'fs-6',
+                                  'bubbles',
+                                  { selected_bubble: selectedAreaIndex === index },
+                                ]">
                   {{ area.title }}
                 </a>
 
                 <a @click="setAreaFunc"
                   class="m-2 text-decoration-none badge text-black fs-6 bubbles bubbles-other text-white" :class="[
-                    'm-2',
-                    'text-decoration-none',
-                    'badge',
-                    'text-white',
-                    'fs-6',
-                    'bubbles',
-                    'bubbles-other',
-                    { selected_bubble: otherAreaSelected },
-                  ]" data-v-2f14f9de="">
+                                      'm-2',
+                                      'text-decoration-none',
+                                      'badge',
+                                      'text-white',
+                                      'fs-6',
+                                      'bubbles',
+                                      'bubbles-other',
+                                      { selected_bubble: otherAreaSelected },
+                                    ]" data-v-2f14f9de="">
                   Other (not listed here) / I don't know
                 </a>
               </div>
@@ -254,8 +254,8 @@
                 <label class="form-check-label mb-2" for="language">
                   Speak a language other than English
                 </label>
-
               </div>
+
               <div class="pb-5">
                 <select v-if="languageIsChecked" v-model="selectedLanguage" id="language" class="form-select">
                   <option value="">Select a language</option>

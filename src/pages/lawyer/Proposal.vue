@@ -16,13 +16,14 @@
           <p><b>City/suburb:</b> {{ jobData?.title }}</p>
           <p></p> -->
 
-          <p><b>Job No:</b> <span class="smallFont">{{ jobData?.identity }}</span></p>
           <p><b>{{ jobData?.title }}</b></p>
           <p id="description28" class="cardProposalDes">
-            <b>Job description:</b> {{ jobData?.description }}
+            {{ jobData?.description }}
           </p>
-          <p><b>City/suburb:</b> {{ jobData?.city }}</p>
-          <p><b>Created:</b> <span class="smallFont">{{ formatCreatedAt(jobData?.created_at) }}</span> </p>
+          <!-- <p><b>City/suburb:</b> </p> -->
+          <p><b class="smallFont">Posted by:</b> <span class="smallFont">Jess ({{ jobData?.city }}) at 10.30pm on
+              19/11/23.</span> </p>
+          <p><b class="smallFont">Job No:</b> <span class="smallFont">{{ jobData?.identity }}</span></p>
           <div>
             <!-- <p><b>Posted by:</b> test@mailinator.com</p>
             <p>
@@ -49,6 +50,7 @@
                 <option value="Hourly">Hourly rate</option>
                 <option value="Daily">Daily rate</option>
                 <option value="Item">Item by item for specific tasks</option>
+                <option value="Retainer">Retainer</option>
                 <option value="Success">Success fee</option>
                 <option value="Pro">Pro bono</option>
               </select>
@@ -59,7 +61,7 @@
             <!-- If they select ‘Daily Rate’ -->
             <div class="form-group" id="fixed-fee" v-if="selectedOption === 'Daily'">
               <div>
-                <label> Daily Rate (excluding GST): </label>
+                <label> Daily rate (excluding GST): </label>
                 <div>
                   <span class="position-absolute d-span"> $</span>
                   <input type="number" id="fixedFeeAmount" v-model="form.daily_rate" name="fixedFeeAmount"
@@ -143,6 +145,12 @@
                         </div>
                       </label>
                       <br />
+                      <div class="form-check text-start mt-3">
+                        <input class="form-check-input" type="checkbox" value="" id="GST" />
+                        <label class="form-check-label" for="GST">
+                          GST Not Applicable
+                        </label>
+                      </div>
                       <br />
                       <button type="button" @click="addRow" class="btn btn-dark">Add</button>
                     </fieldset>
@@ -150,22 +158,180 @@
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr>
-                          <th></th>
+                          <!-- <th></th> -->
                           <th>Item</th>
                           <th>Cost</th>
-                          <th>GST Not Applicable</th>
+                          <th></th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button type="button" @click="removeRow(index)"
-                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
+
                           <td>{{ row.itemDisbursement }}</td>
                           <td>${{ row.costAud }}</td>
-                          <td>
+                          <td class="text-center">
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
-                            <input type="checkbox" name="gst not applicable">
+                            <!-- <input type="checkbox" name="gst not applicable"> -->
+                            <i class="fa fa-check"></i>
+                          </td>
+                          <td style="width:0px">
+                            <button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
+                                class="fa fa-trash"></i></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total
+                      (excluding GST): ${{ grandTotal }}
+                    </p>
+                  </div>
+                </div>
+
+                <!-- <div class="form-group mb-3">
+                  <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
+                  <div>
+                    <span class="position-absolute d-span"> $</span>
+                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
+                      class="form-control d-input" min="1" step=".01" placeholder="" />
+                  </div>
+                </div> -->
+
+              </div>
+            </div>
+
+            <!-- If they select ‘Retainer’ -->
+            <div class="form-group" id="fixed-fee" v-if="selectedOption === 'Retainer'">
+              <div>
+                <label>Retainer fee (excluding GST): </label>
+                <div>
+                  <span class="position-absolute d-span"> $</span>
+                  <input type="number" id="fixedFeeAmount" v-model="form.daily_rate" name="fixedFeeAmount"
+                    class="form-control d-input" min="1" step=".01" placeholder="" />
+                </div>
+              </div>
+              <div class="disbursement-fields">
+                <div class="form-group mt-3">
+                  <label> Retainer period: </label>
+                  <div class="mb-3">
+                    <input type="text" id="fixedFeeAmount" name="fixedFeeAmount" class="form-control"
+                      placeholder="Eg: monthly" />
+                  </div>
+                  <label> Time/other limitations: </label>
+                  <div class="mb-3">
+                    <input type="text" id="fixedFeeAmount" name="fixedFeeAmount" class="form-control"
+                      placeholder="Eg: up to 20 hours" />
+                  </div>
+                  <label> Termination notice period: </label>
+                  <div class="mb-3">
+                    <input type="text" id="fixedFeeAmount" name="fixedFeeAmount" class="form-control"
+                      placeholder="Eg: 2 weeks" />
+                  </div>
+                  <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
+                  <!-- <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
+                    <fieldset class="border p-2 my-2 bg-light text-center" style="margin: auto">
+                      <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">  
+                        Itemise Disbursements
+                      </legend>
+                      <label class="w-100 text-start">
+                        Task:<sup><code>*</code></sup>
+                        <input id="feeEarnerTitle" autocomplete="on" placeholder="Eg: Item one " class="form-control"
+                          required />
+                      </label>
+                      <br />
+                      <br />
+                      <label class="w-100 text-start">
+                        Cost (AUD):<sup><code>*</code></sup>
+                        <div>
+                          <span class="position-absolute d-span" style="line-height: 36px">
+                            $</span>
+                          <input id="feeEarnerHourlyRate" min="1" autocomplete="on" type="number"
+                            class="form-control d-input" required />
+                        </div>
+                      </label>
+                      <br />
+
+                      <br />
+                      <button type="button" class="btn btn-dark ">Add</button>
+                    </fieldset>
+
+                    <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
+                      <thead>
+                        <tr>
+                          <th>Item</th>
+                          <th>Cost (AUD)</th>
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody id="addFeeEarnersRow">
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td>
+                            <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: $<span
+                                id="finalHourlyRateMultiple">0</span></p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div> -->
+
+                  <!-- hammad -->
+                  <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
+                    <fieldset class="border p-2 my-2 bg-light text-center" style="margin: auto">
+                      <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">Itemise Disbursements
+                      </legend>
+                      <label class="w-100 text-start">
+                        Item:<sup><code>*</code></sup>
+                        <input v-model="newRow.itemDisbursement" placeholder="Eg: filing fees" class="form-control"
+                          required />
+                      </label>
+                      <br />
+                      <br />
+                      <label class="w-100 text-start">
+                        Cost (excluding GST):<sup><code>*</code></sup>
+                        <div>
+                          <span class="position-absolute d-span" style="line-height: 36px">$</span>
+                          <input v-model="newRow.costAud" min="1" type="number" class="form-control d-input" required />
+                        </div>
+                      </label>
+                      <br />
+                      <div class="form-check text-start mt-3">
+                        <input class="form-check-input" type="checkbox" value="" id="GST" />
+                        <label class="form-check-label" for="GST">
+                          GST Not Applicable
+                        </label>
+                      </div>
+                      <br />
+                      <button type="button" @click="addRow" class="btn btn-dark">Add</button>
+                    </fieldset>
+
+                    <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
+                      <thead>
+                        <tr>
+                          <!-- <th></th> -->
+                          <th>Item</th>
+                          <th>Cost</th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody id="addFeeEarnersRow">
+                        <tr v-for="(row, index) in rows" :key="index">
+
+                          <td>{{ row.itemDisbursement }}</td>
+                          <td>${{ row.costAud }}</td>
+                          <td class="text-center">
+                            <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
+                            </p> -->
+                            <!-- <input type="checkbox" name="gst not applicable"> -->
+                            <i class="fa fa-check"></i>
+                          </td>
+                          <td style="width:0px">
+                            <button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
+                                class="fa fa-trash"></i></button>
                           </td>
                         </tr>
                       </tbody>
@@ -207,7 +373,7 @@
                   <br />
                   <br />
                   <label class="w-100 text-start">
-                    Fee: (excluding GST and disbursements):<sup><code>*</code></sup>
+                    Fee (excluding GST and disbursements):<sup><code>*</code></sup>
                     <div>
                       <span class="position-absolute d-span" style="line-height: 36px">$</span>
                       <input v-model="newRow2.costAud" min="1" type="number" class="form-control d-input" required />
@@ -374,6 +540,12 @@
                         </div>
                       </label>
                       <br />
+                      <div class="form-check text-start mt-3">
+                        <input class="form-check-input" type="checkbox" value="" id="GST" />
+                        <label class="form-check-label" for="GST">
+                          GST Not Applicable
+                        </label>
+                      </div>
                       <br />
                       <button type="button" @click="addRow" class="btn btn-dark">Add</button>
                     </fieldset>
@@ -381,24 +553,26 @@
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr>
-                          <th></th>
+                          <!-- <th></th> -->
                           <th>Item</th>
                           <th>Cost</th>
-                          <th>GST Not Applicable</th>
+                          <th></th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button type="button" @click="removeRow(index)"
-                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
+
                           <td>{{ row.itemDisbursement }}</td>
                           <td>${{ row.costAud }}</td>
-                          <td>
+                          <td class="text-center">
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
-                            <input type="checkbox" name="gst not applicable">
-
+                            <!-- <input type="checkbox" name="gst not applicable"> -->
+                            <i class="fa fa-check"></i>
                           </td>
+                          <td style="width:0px"><button type="button" @click="removeRow(index)"
+                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                         </tr>
                       </tbody>
                     </table>
@@ -507,6 +681,12 @@
                         </div>
                       </label>
                       <br />
+                      <div class="form-check text-start mt-3">
+                        <input class="form-check-input" type="checkbox" value="" id="GST" />
+                        <label class="form-check-label" for="GST">
+                          GST Not Applicable
+                        </label>
+                      </div>
                       <br />
                       <button type="button" @click="addRow" class="btn btn-dark">Add</button>
                     </fieldset>
@@ -514,25 +694,27 @@
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr>
-                          <th></th>
+                          <!-- <th></th> -->
                           <th>Item</th>
                           <th>Cost</th>
-                          <th>GST Not Applicable</th>
+                          <th></th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button type="button" @click="removeRow(index)"
-                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
+
                           <td>{{ row.itemDisbursement }}</td>
                           <td>${{ row.costAud }}</td>
-                          <td>
+                          <td class="text-center">
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white">Total (excluding GST): ${{
                               row.total }}
                             </p> -->
-                            <input type="checkbox" name="gst not applicable">
-
+                            <!-- <input type="checkbox" name="gst not applicable"> -->
+                            <i class="fa fa-check"></i>
                           </td>
+                          <td style="width:0px"><button type="button" @click="removeRow(index)"
+                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                         </tr>
                       </tbody>
                     </table>
@@ -701,23 +883,31 @@
                 <table class="table table-bordered mb-3" id="additionalFeeEarnersTable">
                   <thead>
                     <tr>
+                      <!-- <th></th> -->
                       <th>Title</th>
                       <th>Hourly rate (excluding GST)</th>
                       <th>Estimated number of hours</th>
-                      <th>Total</th>
+                      <th></th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody id="addFeeEarnersRow">
                     <tr v-for="(row, index) in rows3" :key="index">
+
                       <td>{{ row.title }}</td>
                       <td>$ {{ row.hourlyRate }}</td>
                       <td>{{ row.estimatedHours }}</td>
                       <td>
-                        <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}</p>
+                        <button type="button" class="btn btn-default btn-circle"><i class="fa fa-edit"></i></button>
+                      </td>
+                      <td style="width:0px"><button type="button" class="btn btn-default btn-circle"><i
+                            class="fa fa-trash"></i></button>
                       </td>
                     </tr>
                   </tbody>
                 </table>
+                <p class="mb-2 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total: $
+                </p>
 
 
               </div>
@@ -826,6 +1016,12 @@
                         </div>
                       </label>
                       <br />
+                      <div class="form-check text-start mt-3">
+                        <input class="form-check-input" type="checkbox" value="" id="GST" />
+                        <label class="form-check-label" for="GST">
+                          GST Not Applicable
+                        </label>
+                      </div>
                       <br />
                       <button type="button" @click="addRow" class="btn btn-dark">Add</button>
                     </fieldset>
@@ -833,23 +1029,26 @@
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr>
-                          <th></th>
+                          <!-- <th></th> -->
                           <th>Item</th>
                           <th>Cost</th>
-                          <th>GST Not Applicable</th>
+                          <th></th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button type="button" @click="removeRow(index)"
-                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button>
-                          </td>
+
                           <td>{{ row.itemDisbursement }}</td>
                           <td>${{ row.costAud }}</td>
-                          <td>
+                          <td class="text-center">
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
-                            <input type="checkbox" name="gst not applicable">
+                            <!-- <input type="checkbox" name="gst not applicable"> -->
+                            <i class="fa fa-check"></i>
+                          </td>
+                          <td style="width:0px"><button type="button" @click="removeRow(index)"
+                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button>
                           </td>
                         </tr>
                       </tbody>
@@ -995,6 +1194,12 @@
                         </div>
                       </label>
                       <br />
+                      <div class="form-check text-start mt-3">
+                        <input class="form-check-input" type="checkbox" value="" id="GST" />
+                        <label class="form-check-label" for="GST">
+                          GST Not Applicable
+                        </label>
+                      </div>
                       <br />
                       <button type="button" @click="addRow" class="btn btn-dark">Add</button>
                     </fieldset>
@@ -1002,23 +1207,26 @@
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr>
-                          <th></th>
+                          <!-- <th></th> -->
                           <th>Item</th>
                           <th>Cost</th>
-                          <th>GST Not Applicable</th>
+                          <th></th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
                         <tr v-for="(row, index) in rows" :key="index">
-                          <td style="width:0px"><button type="button" @click="removeRow(index)"
-                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
+
                           <td>{{ row.itemDisbursement }}</td>
                           <td>${{ row.costAud }}</td>
-                          <td>
+                          <td class="text-center">
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
-                            <input type="checkbox" name="gst not applicable">
+                            <!-- <input type="checkbox" name="gst not applicable"> -->
+                            <i class="fa fa-check"></i>
                           </td>
+                          <td style="width:0px"><button type="button" @click="removeRow(index)"
+                              class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                         </tr>
                       </tbody>
                     </table>
@@ -1105,6 +1313,12 @@
                       </div>
                     </label>
                     <br />
+                    <div class="form-check text-start mt-3">
+                      <input class="form-check-input" type="checkbox" value="" id="GST" />
+                      <label class="form-check-label" for="GST">
+                        GST Not Applicable
+                      </label>
+                    </div>
                     <br />
                     <button type="button" @click="addRow" class="btn btn-dark">Add</button>
                   </fieldset>
@@ -1112,23 +1326,26 @@
                   <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                     <thead>
                       <tr>
-                        <th></th>
+                        <!-- <th></th> -->
                         <th>Item</th>
                         <th>Cost</th>
-                        <th>GST Not Applicable</th>
+                        <th></th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody id="addFeeEarnersRow">
                       <tr v-for="(row, index) in rows" :key="index">
-                        <td style="width:0px"><button type="button" @click="removeRow(index)"
-                            class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
+
                         <td>{{ row.itemDisbursement }}</td>
                         <td>${{ row.costAud }}</td>
-                        <td>
+                        <td class="text-center">
                           <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                           </p> -->
-                          <input type="checkbox" name="gst not applicable">
+                          <!-- <input type="checkbox" name="gst not applicable"> -->
+                          <i class="fa fa-check"></i>
                         </td>
+                        <td style="width:0px"><button type="button" @click="removeRow(index)"
+                            class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -1445,17 +1662,17 @@
           </div> -->
           <div class="my-3">
             <label>Do you require an upfront payment?<sup><code>*</code></sup></label>
-            <div class="form-check">
+            <div class="form-check ">
               <input class="form-check-input" v-model="form.upfront_payment_status" type="radio" name="upfrontPayment"
                 id="upfrontYes" value="yes" checked="" />
-              <label class="form-check-label" for="upfrontYes" @click="setPaySucc('Yes')">
+              <label class="form-check-label upfrontlab" for="upfrontYes" @click="setPaySucc('Yes')">
                 Yes
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" v-model="form.upfront_payment_status" type="radio" name="upfrontPayment"
                 id="upfrontNo" value="no" />
-              <label class="form-check-label" for="upfrontNo" @click="setPaySucc('No')">
+              <label class="form-check-label upfrontlab" for="upfrontNo" @click="setPaySucc('No')">
                 No
               </label>
             </div>
@@ -1718,15 +1935,20 @@
       </template> -->
 
         <div class="stepbtn mt-3">
-          <button v-if="currentStep !== 0" type="button" @click="prevStep" class="btn btn-dark mr">
-            Previous
-          </button>
-          <button v-if="currentStep !== 2" type="submit" :disabled="!selectedOption" class="btn btn-dark">
-            Next
-          </button>
-          <button v-if="currentStep === 2" class="btn btn-dark">
-            Summary
-          </button>
+          <span v-if="currentStep !== 4" class="pagination-indicator">
+            {{ currentStep + 1 }} of {{ totalSteps }}
+          </span>
+          <div>
+            <button v-if="currentStep !== 0" type="button" @click="prevStep" class="btn btn-dark mr">
+              Previous
+            </button>
+            <button v-if="currentStep !== 2" type="submit" :disabled="!selectedOption" class="btn btn-dark">
+              Next
+            </button>
+            <button v-if="currentStep === 2" class="btn btn-dark">
+              Summary
+            </button>
+          </div>
         </div>
 
         <pre>{{ values }}</pre>
@@ -1850,6 +2072,7 @@ export default {
 
       schemas: [],
       currentStep: 0,
+      totalSteps: 3,
 
       selectedOption: "",
       option: "Yes",
@@ -2085,7 +2308,8 @@ export default {
 <style scoped>
 .stepbtn {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .stepbtn .mr {
@@ -2144,7 +2368,7 @@ input[type="radio"]:checked {
 .cardProposalDes {
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 100px;
+  max-height: 145px;
   line-break: anywhere;
   overflow-y: auto;
   padding-right: 10px;
@@ -2183,5 +2407,20 @@ input[type="radio"]:checked {
 } */
 .btn-itemize-total {
   max-width: 230px;
+}
+
+.pagination-indicator {
+  border: 1px solid #000;
+  border-radius: 50px;
+  padding: 4px 10px;
+  font-size: 14px;
+}
+
+.upfrontlab {
+  width: 80px;
+  text-align: center;
+  margin-left: -25px;
+  z-index: 9;
+  position: relative;
 }
 </style>
