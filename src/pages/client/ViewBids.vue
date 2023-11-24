@@ -28,7 +28,7 @@
               role="tab"
               aria-controls="pills-home"
               aria-selected="true"
-              @click="setStatus('open')"
+              @click="setStatus('Open')"
             >
               Open
             </button>
@@ -45,7 +45,7 @@
               aria-controls="pills-profile"
               aria-selected="false"
               tabindex="-1"
-              @click="setStatus('accept')"
+              @click="setStatus('Accept')"
             >
               Closed
             </button>
@@ -472,7 +472,7 @@ export default {
     if (this.jobId == null || this.jobId == "") {
       this.$router.push({ path: '/client-dashboard' });
     }
-    this.setStatus('open');
+    this.setStatus('Open');
   },
 
   methods: {

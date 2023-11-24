@@ -882,7 +882,7 @@ export default {
     async fetchOptions_locations() {
       try {
         const response = await api.get('/get-active-locations');
-        console.log('sundak  :::: ', response?.data?.allLocations);
+        console.log('sundak  :::: ', response?.data);
         this.options_locations = response?.data?.allLocations;
         this.selectedOptionIds_locations = response?.data?.myLocations ?? [];
         this.selectedOptionIdsShow_locations = response?.data?.myLocations ?? [];

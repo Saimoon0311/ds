@@ -40,6 +40,7 @@ app.mixin({
     return {
       clear: false,
       searchQuery: "",
+      searchQueryNumberPagination : "",
       openJobs: [],
       closeJobs: [],
       currentPage: 0,
@@ -60,6 +61,14 @@ app.mixin({
           status = this.pageStatus;
         }
         this.loadMore(status, true);
+      }
+    },
+
+    searchQueryNumberPagination(newQuery) {
+      if (newQuery == "" && !this.clear) {
+        this.data_paginated = [];
+        this.$store.commit("SET_PAGINATION_LAST", 0);
+        this.getPaginatedData();
       }
     },
   },
@@ -133,7 +142,7 @@ app.mixin({
       }
     },
 
-    // /lawyer/lawyer-proposals
+   // number pagination data
     async getPaginatedData() {
       console.log("func run");
       api
@@ -147,6 +156,27 @@ app.mixin({
           console.log(error);
         });
     },
+
+    //number pagination data search
+    async searchNumberPaginationData(status = null) {
+      if (this.searchQueryNumberPagination == "") return false;
+      let obj = { query: this.searchQueryNumberPagination };
+      if (status) obj.admin_approval = status;
+      console.log(obj);
+      const response = await api.get(this.paginationEndpoint, {
+        params: obj,
+      });
+      // this.currentPage = 1;
+      this.$store.commit("SET_PAGINATION_LAST", response?.data?.last_page);
+      this.data_paginated = response?.data?.data;
+      // console.log(response?.data);
+      // console.log("last page : ", this.lastPage);
+      // console.log("curr search : ", this.currentPage);
+    },
+
+
+    
+
 
     setUserInStateAndLocalStorage(res) {
       console.log("new func : ", res?.data?.data?.link);
@@ -357,9 +387,10 @@ app.mixin({
     // loadmore pagination and search functions start
 
     async search(status = null) {
+      console.log(status);
       if (this.searchQuery == "") return false;
       let obj = { query: this.searchQuery };
-      if (status) obj.admin_approval = status;
+      // if (status) obj.admin_approval = status;
       console.log(obj);
       const response = await api.get(this.endpoint, {
         params: obj,
@@ -373,6 +404,7 @@ app.mixin({
     },
 
     async loadMore(status = null, reset = null) {
+      console.log(status);
       // if (this.currentPage > this.lastPage) {
       //   return;
       // }
@@ -393,9 +425,9 @@ app.mixin({
       }
       console.log("url ::: ", url);
 
-      if (this.endpoint == "/admin/all-lawyers") {
-        url = url + `&admin_approval=${status}`;
-      }
+      // if (this.endpoint == "/admin/all-lawyers") {
+      //   url = url + `&admin_approval=${status}`;
+      // }
 
       console.log("url 2 ::: ", url);
 
@@ -425,6 +457,7 @@ app.mixin({
     },
 
     async clearSearch(status = null) {
+      console.log(status);
       if (this.searchQuery == "") return false;
       this.clear = true;
       this.openJobs = [];
@@ -434,9 +467,9 @@ app.mixin({
 
       let url = `${this.endpoint}?page=${this.currentPage}`;
 
-      if (status) {
-        url = url + `&admin_approval=${status}`;
-      }
+      // if (status) {
+      //   url = url + `&admin_approval=${status}`;
+      // }
 
       const response = await this.fetchData(url);
       this.lastPage = response?.last_page;
