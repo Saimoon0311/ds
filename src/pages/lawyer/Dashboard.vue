@@ -47,6 +47,7 @@
               role="tab"
               aria-controls="pills-home"
               aria-selected="true"
+              @click="changeTab('open')"
             >
               Open
             </button>
@@ -63,19 +64,59 @@
               aria-controls="pills-profile"
               aria-selected="false"
               tabindex="-1"
+              @click="changeTab('pending')"
+            >
+              Pending
+            </button>
+          </li>
+          <li data-v-511b78bb="" class="nav-item" role="presentation">
+            <button
+              data-v-511b78bb=""
+              class="nav-link"
+              id="pills-profile-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-profile"
+              type="button"
+              role="tab"
+              aria-controls="pills-profile"
+              aria-selected="false"
+              tabindex="-1"
+              @click="changeTab('close')"
             >
               Closed
             </button>
           </li>
+          <li data-v-511b78bb="" class="nav-item" role="presentation">
+            <button
+              data-v-511b78bb=""
+              class="nav-link"
+              id="pills-profile-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-profile"
+              type="button"
+              role="tab"
+              aria-controls="pills-profile"
+              aria-selected="false"
+              tabindex="-1"
+              @click="changeTab('reject')"
+            >
+              Reject
+            </button>
+          </li>
         </ul>
-        <div data-v-511b78bb="" class="tab-content" id="pills-tabContent">
-          <div
+
+
+        <!-- <div
             data-v-511b78bb=""
             class="tab-pane fade active show"
             id="pills-home"
             role="tabpanel"
             aria-labelledby="pills-home-tab"
-          >
+          > -->
+
+
+        <div>
+          <div>
             
                     <!-- Conditions Documentation :
               if : openJobs.length == 0 && searchQuery == '' (if no data , no search)
@@ -88,12 +129,20 @@
                   listing -->
 
               <div
-                v-if="openJobs.length == 0 && searchQuery == ''"
+                v-if="openJobs.length == 0 && searchQuery == '' && tab == 'open'"
                 class="border rounded bg-light p-3 d-flex flex-wrap">
                 <p class="mx-auto my-0">
                   No potential jobs found that match your profile. Click here to
                   amend your
                   <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
+                </p>
+              </div>
+
+              <div
+                v-if="openJobs.length == 0 && searchQuery == '' && tab != 'open'"
+                class="border rounded bg-light p-3 d-flex flex-wrap">
+                <p class="mx-auto my-0">
+                 No job found!
                 </p>
               </div>
 
@@ -176,15 +225,11 @@
                           </details> -->
                         </div>
                         <div
+                          v-if="tab != 'close'"
                           class="d-flex flex-column justify-content-center align-items-center"
                           style="min-width: 150px"
                         >
-                          <!-- <router-link
-                        class="btn btn-light btn-sm w-100 my-1"
-                        to="/proposal"
-                        >Submit a proposal</router-link
-                      > -->
-
+                      
                           <button
                             @click="submitProposal(item)"
                             class="btn btn-light btn-sm w-100 my-1"
@@ -192,11 +237,6 @@
                             Submit a proposal
                           </button>
 
-                          <!-- <router-link
-                            name="decline"
-                            class="btn btn-danger btn-sm w-100 my-1"
-                            to=""
-                            >Decline</router-link> -->
                           <button
                             @click="declineJob(item.id)"
                             class="btn btn-danger btn-sm w-100 my-1"
@@ -261,206 +301,6 @@
               </div>
             </div> -->
               </div>
-            </div>
-          </div>
-          <div
-            data-v-511b78bb=""
-            class="tab-pane fade"
-            id="pills-profile"
-            role="tabpanel"
-            aria-labelledby="pills-profile-tab"
-          >
-            <div v-if="adminApproval != 'approve'">
-              <p class="h5 m-3 text-center">
-                Your profile has not been approved yet.
-              </p>
-            </div>
-            <div v-else-if="subscriptionStatus != 'subscribed'">
-              <div class="alert alert-danger text-center m-0 p-2">
-                You have not subscribed yet.
-                <router-link to="/plans" class="btn btn-link ps-0"
-                  >Subscribe now</router-link
-                >
-              </div>
-            </div>
-            <div v-else class="border rounded bg-light p-3">
-              <!-- Conditions Documentation :
-            if : openJobs.length == 0 && searchQuery == '' (if no data , no search)
-              No potential jobs found that match your profile. Click here to amend your
-            else
-              show search
-              if : openJobs.length == 0 && searchQuery != '' (if no data come from search result)
-                No record found!
-              else :
-                listing -->
-
-              <div
-                v-if="openJobs.length == 0 && searchQuery == ''"
-                class=" d-flex flex-wrap"
-              >
-                <p class="mx-auto my-0">
-                  No potential jobs found that match your profile. Click here to
-                  amend your
-                  <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
-                </p>
-              </div>
-
-              <div v-else class="">
-                <div class="input-group mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="searchQuery"
-                    @keyup.enter="search"
-                    placeholder="Search..."
-                    aria-label="Recipient's username"
-                    aria-describedby="basic-addon2"
-                  />
-                  <button
-                    class="input-group-text btn custom-button"
-                    id="basic-addon2"
-                    @click="search"
-                  >
-                    <i class="fa fa-search"></i>
-                  </button>
-                  <button
-                    class="input-group-text btn custom-button"
-                    id="basic-addon2"
-                    @click="clearSearch"
-                  >
-                    <i class="fa fa-refresh"></i>
-                  </button>
-                </div>
-
-                <span
-                  v-if="openJobs.length == 0 && searchQuery != ''"
-                  class="text-center w-100"
-                  >No record found!</span
-                >
-
-                <template v-else>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div
-                        class="border rounded bg-secondary d-flex justify-content-between text-white p-3 flex-column flex-lg-row mb-3"
-                      >
-                        <div>
-                          <p class="badge bg-dark" title="Area">Lorem ipsim</p>
-                          &nbsp;
-                          <p class="badge bg-dark" title="Location">
-                            Lorem ipsim
-                          </p>
-                          <p><b>Job No:</b> 120026</p>
-                          <p><b>City/suburb:</b> Lorem ipsim</p>
-                          <p><b>Title:</b> Lorem ipsim</p>
-                          <p><b>Created:</b> 10/11/23 11:07pm</p>
-                          <p
-                            id="description28"
-                            class="descriptionText"
-                          >
-                            Lorem ipsum
-                          </p>
-                          <!-- <details>
-                      <summary>More details</summary>
-                      <div class="bg-dark border rounded p-3 m-1">
-                        <p><b>Posted by:</b> mailto:junucyme@mailinator.com</p>
-                        <p><b> Deadline:</b> 27-12-2023</p>
-                        <p><b> Preferred contact time:</b> Flexible</p>
-                      </div>
-                    </details> -->
-                        </div>
-                        <div
-                          class="d-flex flex-column justify-content-center align-items-center"
-                          style="min-width: 150px"
-                        >
-                          <!-- <router-link
-                      class="btn btn-light btn-sm w-100 my-1"
-                      to="/proposal"
-                      >Submit a proposal</router-link
-                    > -->
-
-                          <button
-                            @click="submitProposal(item)"
-                            class="btn btn-light btn-sm w-100 my-1"
-                          >
-                            Submit a proposal
-                          </button>
-
-                          <!-- <router-link
-                      name="decline"
-                      class="btn btn-danger btn-sm w-100 my-1"
-                      to=""
-                      >Decline</router-link> -->
-                          <button
-                            @click="declineJob(item.id)"
-                            class="btn btn-danger btn-sm w-100 my-1"
-                          >
-                            Decline
-                          </button>
-                          <router-link
-                            class="btn btn-dark btn-sm w-100 my-1"
-                            to="/request-info"
-                            >Message</router-link
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </template>
-
-                <!-- <div
-                class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
-                style="width: 35vw"
-                id="29"
-              >
-                <div>
-                  <p class="badge bg-dark" title="Area">Criminal</p>
-                  &nbsp;
-                  <p class="badge bg-dark" title="Location">Victoria</p>
-                  <p><b>City/suburb:</b> karachi</p>
-                  <p><b>Title:</b> test case</p>
-                  <p
-                    id="description29"
-                    style="overflow: hidden; text-overflow: ellipsis; height: 100px"
-                  >
-                    lorem ipsum dummy text
-                  </p>
-                  <details>
-                    <summary>More details</summary>
-                    <div class="bg-dark border rounded p-3 m-1">
-                      <p><b>Posted by:</b> mailto:junucyme@mailinator.com</p>
-                      <p><b> Deadline:</b> 23-11-2023</p>
-                      <p><b> Preferred contact time:</b> Flexible</p>
-                    </div>
-                  </details>
-                </div>
-                <div
-                  class="d-flex flex-column justify-content-center align-items-center"
-                  style="min-width: 110px"
-                >
-                <router-link
-                    class="btn btn-light btn-sm w-100 my-1"
-                    to="/proposal"
-                    >Submit a proposal</router-link
-                  ><router-link
-                    name="decline"
-                    class="btn btn-danger btn-sm w-100 my-1"
-                    to=""
-                    >Decline</router-link
-                  ><router-link
-                    class="btn btn-dark btn-sm w-100 my-1"
-                    to="/request-info"
-                    >Request More Info</router-link
-                  >
-                </div>
-              </div> -->
-
-                <!-- <div class="text-center">
-                      <button class="btn custom-button" @click="loadMore">
-                        Load More
-                      </button>
-                    </div> -->
-              </div>
 
               <div
                     v-if="openJobs.length > 0 && currentPage != lastPage && adminApproval == 'approve' && subscriptionStatus == 'subscribed'"
@@ -469,8 +309,10 @@
                       Load More
                     </button>
                   </div>
-            </div> 
+
+            </div>
           </div>
+         
         
         </div>
       </div>
@@ -493,7 +335,8 @@ export default {
   data() {
     return {
       openJobs: [],
-      endpoint: "/lawyer/show-related-jobs",
+      endpoint: "/lawyer/show-open-related-jobs",
+      tab : 'open',
       // endpoint_search: "/lawyer/search-related-jobs",
     };
   },
@@ -517,6 +360,25 @@ export default {
   //   this.getJobs();
   // },
   methods: {
+
+    async changeTab(status) {
+      if (status == "open") {
+        this.endpoint = '/lawyer/show-open-related-jobs';
+        await this.loadMore(null,true);
+        // this.getData(this.endpoint);
+      } else if (status == "pending") {
+        this.endpoint = '/lawyer/show-pending-jobs';
+        await this.loadMore(null,true);
+      } else if (status == "close") {
+        this.endpoint = '/lawyer/show-approve-jobs';
+        await this.loadMore(null,true);
+      } else if (status == "reject") {
+        this.endpoint = '/lawyer/show-reject-jobs';
+        await this.loadMore(null,true);
+      }
+      this.tab = status;
+    },
+
     // async getJobs(){
     //   try {
     //     const response = await api.get('/lawyer/show-related-jobs');
@@ -569,6 +431,12 @@ export default {
 };
 </script>
 <style scoped>
+
+ul#pills-tab[data-v-511b78bb] {
+  width: 400px !important;
+}
+
+
 .navbar-nav {
   display: flex;
   align-items: center;

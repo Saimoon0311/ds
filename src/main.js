@@ -387,9 +387,10 @@ app.mixin({
     // loadmore pagination and search functions start
 
     async search(status = null) {
+      console.log(status);
       if (this.searchQuery == "") return false;
       let obj = { query: this.searchQuery };
-      if (status) obj.admin_approval = status;
+      // if (status) obj.admin_approval = status;
       console.log(obj);
       const response = await api.get(this.endpoint, {
         params: obj,
@@ -403,6 +404,7 @@ app.mixin({
     },
 
     async loadMore(status = null, reset = null) {
+      console.log(status);
       // if (this.currentPage > this.lastPage) {
       //   return;
       // }
@@ -423,9 +425,9 @@ app.mixin({
       }
       console.log("url ::: ", url);
 
-      if (this.endpoint == "/admin/all-lawyers") {
-        url = url + `&admin_approval=${status}`;
-      }
+      // if (this.endpoint == "/admin/all-lawyers") {
+      //   url = url + `&admin_approval=${status}`;
+      // }
 
       console.log("url 2 ::: ", url);
 
@@ -455,6 +457,7 @@ app.mixin({
     },
 
     async clearSearch(status = null) {
+      console.log(status);
       if (this.searchQuery == "") return false;
       this.clear = true;
       this.openJobs = [];
@@ -464,9 +467,9 @@ app.mixin({
 
       let url = `${this.endpoint}?page=${this.currentPage}`;
 
-      if (status) {
-        url = url + `&admin_approval=${status}`;
-      }
+      // if (status) {
+      //   url = url + `&admin_approval=${status}`;
+      // }
 
       const response = await this.fetchData(url);
       this.lastPage = response?.last_page;

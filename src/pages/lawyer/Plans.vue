@@ -20,7 +20,7 @@
         <div class="card-body">
           <h2 class="text-center">$39.00/month</h2>
           <ul>
-            <li>60 days free trial</li>
+            <li>60 Day Free Trial</li>
             <li>Cancel any time</li>
           </ul>
         </div>
