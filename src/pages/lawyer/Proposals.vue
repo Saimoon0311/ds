@@ -73,11 +73,11 @@
               </td>
             </tr>
 
-            <tr v-else data-v-7525850d="" v-for="(item,index) in data_paginated" :key="index">
+            <tr v-else class="pr-pad" data-v-7525850d="" v-for="(item,index) in data_paginated" :key="index">
             
             <!-- <tr data-v-7525850d=""> -->
               <td data-v-7525850d="">
-                <a data-v-7525850d="" href="jobInfo.php?id=28">{{ item?.job?.title }}</a>
+                <a class="btn btn-dark text-light">{{ item?.job?.title }}</a>
               </td>
               <td data-v-7525850d="">{{ item?.charge_type }}</td>
               <td data-v-7525850d="">{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
@@ -284,5 +284,13 @@ export default {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.pr-pad td {
+  padding-top: 17px;
+}
+
+.pr-pad td a {
+  line-height: 12px;
 }
 </style>

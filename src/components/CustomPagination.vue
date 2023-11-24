@@ -28,7 +28,7 @@ export default {
     computed: {
         lastPaginationPageLoop() {
             let pages = this.$store.state.lastPaginationPage;
-            if(pages > 2) pages = 2
+            if (pages > 2) pages = 2
             return pages;
         },
         lastPaginationPage() {
@@ -73,13 +73,14 @@ export default {
 
 .custom-pagination li {
     cursor: pointer;
-    padding: 10px;
+    padding: 5px 12px;
     border: 1px solid #ccc;
     margin: 0 2px;
+    border-radius: 5px;
 }
 
 .custom-pagination li.active {
-    background-color: #007BFF;
+    background-color: #000;
     color: #fff;
 }
 
