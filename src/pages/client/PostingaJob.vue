@@ -12,29 +12,29 @@
             <div>
               <div data-v-2f14f9de="" class="d-flex flex-wrap justify-content-center mb-5" data-v-376ef8ab="">
                 <!-- class="m-2 text-decoration-none badge text-white fs-6 bubbles" -->
-                <a v-for="(area, index) in areas" :key="area.id" @click="setArea(index, area.id), nextStep()" :class="[
-                                  'm-2',
-                                  'text-decoration-none',
-                                  'badge',
-                                  'text-white',
-                                  'fs-6',
-                                  'bubbles',
-                                  { selected_bubble: selectedAreaIndex === index },
-                                ]">
+                <a v-for="(area, index) in areas" :key="area.id" @click="setArea(index, area.id)" :class="[
+                  'm-2',
+                  'text-decoration-none',
+                  'badge',
+                  'text-white',
+                  'fs-6',
+                  'bubbles',
+                  { selected_bubble: selectedAreaIndex === index },
+                ]">
                   {{ area.title }}
                 </a>
 
                 <a @click="setAreaFunc"
                   class="m-2 text-decoration-none badge text-black fs-6 bubbles bubbles-other text-white" :class="[
-                                      'm-2',
-                                      'text-decoration-none',
-                                      'badge',
-                                      'text-white',
-                                      'fs-6',
-                                      'bubbles',
-                                      'bubbles-other',
-                                      { selected_bubble: otherAreaSelected },
-                                    ]" data-v-2f14f9de="">
+                    'm-2',
+                    'text-decoration-none',
+                    'badge',
+                    'text-white',
+                    'fs-6',
+                    'bubbles',
+                    'bubbles-other',
+                    { selected_bubble: otherAreaSelected },
+                  ]" data-v-2f14f9de="">
                   Other (not listed here) / I don't know
                 </a>
               </div>
@@ -296,59 +296,59 @@
               <!-- <h4>City</h4> -->
               <!-- <h4>{{ city }}</h4> -->
               <span v-if="requirementsOption">
-              <h4 class="d-inline"><b>Accessibility Requirements: </b></h4>
-             
+                <h4 class="d-inline"><b>Accessibility Requirements: </b></h4>
 
-              <div v-if="VisualIsChecked">
-                <p><b>Visual Impairment : </b> {{ visualOption  }}</p>
-              </div>
 
-              <div v-if="AuditoryIsChecked">
-                <!-- <b><p>Auditory Impairment : </p></b>
+                <div v-if="VisualIsChecked">
+                  <p><b>Visual Impairment : </b> {{ visualOption }}</p>
+                </div>
+
+                <div v-if="AuditoryIsChecked">
+                  <!-- <b><p>Auditory Impairment : </p></b>
                 <p>{{ auditoryOption }}</p> -->
-                <p><b>Auditory Impairment : </b> {{ auditoryOption  }}</p>
-                
-              </div>
+                  <p><b>Auditory Impairment : </b> {{ auditoryOption }}</p>
 
-              <div v-if="MobilityIsChecked">
-                <!-- <b><p>Mobility/Physical Impairment : </p></b>
+                </div>
+
+                <div v-if="MobilityIsChecked">
+                  <!-- <b><p>Mobility/Physical Impairment : </p></b>
                 <p>{{ mobilityOption }}</p> -->
-                <p><b>Mobility/Physical Impairment : </b> {{ mobilityOption }}</p>
-              </div>
+                  <p><b>Mobility/Physical Impairment : </b> {{ mobilityOption }}</p>
+                </div>
 
-              <div v-if="LearningIsChecked">
-                <!-- <b><p>Learning Impairment : </p></b>
+                <div v-if="LearningIsChecked">
+                  <!-- <b><p>Learning Impairment : </p></b>
                 <p>{{ learningOption }}</p> -->
-                <p><b>Learning Impairment : </b> {{ learningOption }}</p>
-              </div>
+                  <p><b>Learning Impairment : </b> {{ learningOption }}</p>
+                </div>
 
-              <div v-if="IntellectualIsChecked">
-                <!-- <b><p>Intellectual Disability : </p></b>
+                <div v-if="IntellectualIsChecked">
+                  <!-- <b><p>Intellectual Disability : </p></b>
                 <p>{{ intellectualOption }}</p> -->
-                <p><b>Intellectual Disability : </b> {{ intellectualOption }}</p>
-              </div>
+                  <p><b>Intellectual Disability : </b> {{ intellectualOption }}</p>
+                </div>
 
-              <div v-if="PsychiatricIsChecked">
-                <!-- <b><p>Psychiatric Disability : </p></b>
+                <div v-if="PsychiatricIsChecked">
+                  <!-- <b><p>Psychiatric Disability : </p></b>
                 <p>{{ psychiatricOption }}</p> -->
-                <p><b>Psychiatric Disability : </b> {{ psychiatricOption }}</p>
-              </div>
+                  <p><b>Psychiatric Disability : </b> {{ psychiatricOption }}</p>
+                </div>
 
-              <div v-if="MedicalIsChecked">
-                <!-- <b><p>Medical Disability : </p></b>
+                <div v-if="MedicalIsChecked">
+                  <!-- <b><p>Medical Disability : </p></b>
                 <p>{{ medicalOption }}</p> -->
-                <p><b>Medical Disability : </b> {{ medicalOption }}</p>
-              </div>
+                  <p><b>Medical Disability : </b> {{ medicalOption }}</p>
+                </div>
 
-              <div v-if="isChecked">
-                <p><b>Other : </b> {{ requirementsOptionDescription }}</p>
-              </div>
+                <div v-if="isChecked">
+                  <p><b>Other : </b> {{ requirementsOptionDescription }}</p>
+                </div>
 
-              <div v-if="languageIsChecked">
-                <!-- <b><p>Language : </p></b>
+                <div v-if="languageIsChecked">
+                  <!-- <b><p>Language : </p></b>
                 <p>{{ selectedLanguage }}</p> -->
-                <p><b>Language : </b> {{ selectedLanguage == 'Other' ? otherLanguage : selectedLanguage }}</p>
-              </div>
+                  <p><b>Language : </b> {{ selectedLanguage == 'Other' ? otherLanguage : selectedLanguage }}</p>
+                </div>
 
               </span>
             </div>
@@ -608,7 +608,7 @@ export default {
         field_id: this.selectedArea,
         location_id: this.locations[this.selectedLocationIndex].id,
         city: this.city,
-        accessibility_requirements : this.requirementsOption,
+        accessibility_requirements: this.requirementsOption,
         visual_impairment: this.visualOption,
         auditory_impairment: this.auditoryOption,
         mobility_impairment: this.mobilityOption,

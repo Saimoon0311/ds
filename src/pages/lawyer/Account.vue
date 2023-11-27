@@ -291,7 +291,7 @@ export default {
     this.getReceipts();
   },
   methods: {
-  
+
 
     formatReceiptDate(timestamp) {
       // Function to format the receipt date
@@ -320,15 +320,15 @@ export default {
       // const startTimestamp = new Date(this.startDate).getTime() / 1000;
       // const endTimestamp = new Date(this.endDate).getTime() / 1000;
       try {
-        api.get("/lawyer/get-receipts",{ params: { start_date: this.startDate, end_date: this.endDate } })
-        // api.get("/lawyer/get-receipts",{ params: { start_date: startTimestamp, end_date: endTimestamp } })
-        .then((res) => {
-          this.receipts = res?.data?.data;
-          console.log(res.data?.data);
-        })
-        .catch((error) => {
-          console.log("getResults : ", error);
-        });
+        api.get("/lawyer/get-receipts", { params: { start_date: this.startDate, end_date: this.endDate } })
+          // api.get("/lawyer/get-receipts",{ params: { start_date: startTimestamp, end_date: endTimestamp } })
+          .then((res) => {
+            this.receipts = res?.data?.data;
+            console.log(res.data?.data);
+          })
+          .catch((error) => {
+            console.log("getResults : ", error);
+          });
       } catch (error) {
         console.error('Error fetching receipts', error);
       }
@@ -518,5 +518,9 @@ export default {
 
 .hd-receipt th {
   border: none;
+}
+
+.forgetp {
+  color: #000
 }
 </style>
