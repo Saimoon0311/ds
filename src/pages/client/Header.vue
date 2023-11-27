@@ -169,7 +169,7 @@ export default {
   background: rgb(0, 0, 0);
   border: 1px solid rgb(0, 0, 0);
   border-radius: 7px;
-  color: white;
+  color: white !important;
   padding: 5px 11px;
 }
 
@@ -205,7 +205,12 @@ export default {
   align-items: center;
   flex-wrap: wrap;
 }
-
+.navbar-nav .left-menu a.nav-link:hover{
+  color: #000000a6;
+}
+.navbar-nav .left-menu a.nav-link {
+  color: black ;
+}
 .bg-grey {
   background: rgb(0, 0, 0);
   color: white;
