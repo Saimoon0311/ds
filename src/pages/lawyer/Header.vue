@@ -36,14 +36,20 @@
                   aria-current="page"
                   >Dashboard</router-link
                 >
-                <router-link
+                <!-- <router-link
                   to="/lawyer-proposals"
                   class="nav-link fw-bolder menuItem-active-link"
                   id="lawyers"
                   aria-current="page"
                   >Proposals</router-link
+                > -->
+                <router-link
+                  to="/lawyer-profile"
+                  class="nav-link fw-bolder menuItem-active-link"
+                  id="jobs"
+                  aria-current="page"
+                  >Profile</router-link
                 >
-
                 <router-link
                   to="/lawyer-account"
                   class="nav-link fw-bolder menuItem-active-link"
@@ -58,13 +64,7 @@
                   aria-current="page"
                   >FAQs</router-link
                 >
-                <router-link
-                  to="/lawyer-profile"
-                  class="nav-link fw-bolder menuItem-active-link"
-                  id="jobs"
-                  aria-current="page"
-                  >Profile</router-link
-                >
+                
                 
                 <ul class="showonmonb">
                   <li>

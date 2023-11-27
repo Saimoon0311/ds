@@ -231,22 +231,34 @@
                         >
                       
                           <button
-                            @click="submitProposal(item)"
+                            @click="submitProposal(item)" v-if="tab != 'pending'" 
                             class="btn btn-light btn-sm w-100 my-1"
                           >
                             Submit a proposal
                           </button>
-
+                          
+                          <button
+                          @click="submitProposal(item)" 
+                          v-if="tab === 'pending'"  
+                          class="btn btn-light btn-sm w-100 my-1"
+                          >
+                          View proposal
+                          </button>
                           <button
                             @click="declineJob(item.id)"
                             class="btn btn-danger btn-sm w-100 my-1"
                           >
                             Decline
                           </button>
-                          <router-link
+                          <router-link v-if="tab != 'pending'"
                             class="btn btn-dark btn-sm w-100 my-1"
                             to="/request-info"
                             >Message</router-link
+                          >
+                          <router-link v-if="tab === 'pending'"  
+                            class="btn btn-dark btn-sm w-100 my-1"
+                            to="/request-info"
+                            >View Messages</router-link
                           >
                         </div>
                       </div>
@@ -336,7 +348,7 @@ export default {
     return {
       openJobs: [],
       endpoint: "/lawyer/show-open-related-jobs",
-      tab : 'open',
+      tab: 'open',
       // endpoint_search: "/lawyer/search-related-jobs",
     };
   },
@@ -364,17 +376,17 @@ export default {
     async changeTab(status) {
       if (status == "open") {
         this.endpoint = '/lawyer/show-open-related-jobs';
-        await this.loadMore(null,true);
+        await this.loadMore(null, true);
         // this.getData(this.endpoint);
       } else if (status == "pending") {
         this.endpoint = '/lawyer/show-pending-jobs';
-        await this.loadMore(null,true);
+        await this.loadMore(null, true);
       } else if (status == "close") {
         this.endpoint = '/lawyer/show-approve-jobs';
-        await this.loadMore(null,true);
+        await this.loadMore(null, true);
       } else if (status == "reject") {
         this.endpoint = '/lawyer/show-reject-jobs';
-        await this.loadMore(null,true);
+        await this.loadMore(null, true);
       }
       this.tab = status;
     },
@@ -431,7 +443,6 @@ export default {
 };
 </script>
 <style scoped>
-
 ul#pills-tab[data-v-511b78bb] {
   width: 400px !important;
 }
