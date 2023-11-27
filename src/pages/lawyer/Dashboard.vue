@@ -86,7 +86,7 @@
               Closed
             </button>
           </li>
-          <li data-v-511b78bb="" class="nav-item" role="presentation">
+          <!-- <li data-v-511b78bb="" class="nav-item" role="presentation">
             <button
               data-v-511b78bb=""
               class="nav-link"
@@ -102,7 +102,7 @@
             >
               Reject
             </button>
-          </li>
+          </li> -->
         </ul>
 
 
@@ -225,7 +225,7 @@
                           </details> -->
                         </div>
                         <div
-                          v-if="tab != 'close'"
+                          v-if="item.status != 'close'"
                           class="d-flex flex-column justify-content-center align-items-center"
                           style="min-width: 150px"
                         >
@@ -238,6 +238,7 @@
                           </button>
 
                           <button
+                            v-if="tab != 'close'"
                             @click="declineJob(item.id)"
                             class="btn btn-danger btn-sm w-100 my-1"
                           >
@@ -248,6 +249,13 @@
                             to="/request-info"
                             >Message</router-link
                           >
+                        </div>
+                        <div
+                          v-else
+                          class="d-flex flex-column justify-content-center align-items-center"
+                          style="min-width: 150px"
+                        >
+                        <h3>Closed</h3>
                         </div>
                       </div>
                     </div>
@@ -372,10 +380,11 @@ export default {
       } else if (status == "close") {
         this.endpoint = '/lawyer/show-approve-jobs';
         await this.loadMore(null,true);
-      } else if (status == "reject") {
-        this.endpoint = '/lawyer/show-reject-jobs';
-        await this.loadMore(null,true);
-      }
+      } 
+      // else if (status == "reject") {
+      //   this.endpoint = '/lawyer/show-reject-jobs';
+      //   await this.loadMore(null,true);
+      // }
       this.tab = status;
     },
 
