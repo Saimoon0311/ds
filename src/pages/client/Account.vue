@@ -399,8 +399,8 @@ export default {
               ).then(() => {
                 this.logoutProcess('login');
               });
-            }).catch(() => {
-              this.$swal('Error', 'Something went wrong! please retry', 'error');
+            }).catch((error) => {
+              this.$swal('Error', error?.response?.data?.error, 'error');
             });
         }
       })
@@ -433,7 +433,7 @@ export default {
           });
         })
       } catch (error) {
-        this.$swal("Error", "Something went wrong, please try again", "error")
+        this.$swal("Error", error?.response?.data?.error, "error")
         // console.error('Error uploading image', error);
       }
     },

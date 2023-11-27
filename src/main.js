@@ -138,7 +138,7 @@ app.mixin({
           );
         });
       } catch (error) {
-        this.$swal("Error", "Something went wrong, please try again", "error");
+        this.$swal("Error", error?.response?.data?.error, "error");
       }
     },
 
@@ -318,7 +318,7 @@ app.mixin({
             // error?.response?.data?.error
             this.$swal(
               "Error",
-              "Something went wrong, Please try again.",
+              error?.response?.data?.error,
               "error"
             );
             console.log("getResults : ", error);
@@ -345,7 +345,7 @@ app.mixin({
           .catch((error) => {
             this.$swal(
               "Error",
-              "Something went wrong, Please try again.",
+              error?.response?.data?.error,
               "error"
             );
             // alert("Invalid Credentials");
@@ -390,6 +390,9 @@ app.mixin({
       console.log(status);
       if (this.searchQuery == "") return false;
       let obj = { query: this.searchQuery };
+      if (this.endpoint == "/admin/all-lawyers") {
+        obj.admin_approval = status;
+      }
       // if (status) obj.admin_approval = status;
       console.log(obj);
       const response = await api.get(this.endpoint, {
@@ -425,9 +428,9 @@ app.mixin({
       }
       console.log("url ::: ", url);
 
-      // if (this.endpoint == "/admin/all-lawyers") {
-      //   url = url + `&admin_approval=${status}`;
-      // }
+      if (this.endpoint == "/admin/all-lawyers") {
+        url = url + `&admin_approval=${status}`;
+      }
 
       console.log("url 2 ::: ", url);
 
@@ -470,6 +473,10 @@ app.mixin({
       // if (status) {
       //   url = url + `&admin_approval=${status}`;
       // }
+      if (this.endpoint == "/admin/all-lawyers") {
+        url = url + `&admin_approval=${status}`;
+      }
+
 
       const response = await this.fetchData(url);
       this.lastPage = response?.last_page;
