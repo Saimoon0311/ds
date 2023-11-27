@@ -159,7 +159,7 @@ export default {
   background: rgb(0, 0, 0);
   border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
-  color: white;
+  color: white !important;
   padding: 5px 11px;
 }
 
@@ -208,13 +208,19 @@ ul.dropdown-menu.show {
   background: rgb(0, 0, 0);
   border: 1px solid rgb(0, 0, 0);
   border-radius: 7px;
-  color: white;
+  color: white !important;
 }
 
 .navbar-nav .left-menu {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+}
+.navbar-nav .left-menu a.nav-link:hover{
+  color: #000000a6;
+}
+.navbar-nav .left-menu a.nav-link {
+  color: black ;
 }
 
 .bg-grey {
