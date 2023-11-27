@@ -361,10 +361,10 @@ export default {
                 this.$store.commit("SET_SUB_CANCEL_STATUS", false);
               });
             })
-            .catch(() => {
+            .catch((error) => {
               this.$swal(
                 "Error",
-                "Something went wrong! please retry",
+                error?.response?.data?.error,
                 "error"
               );
             });
@@ -393,10 +393,10 @@ export default {
                 this.$store.commit("SET_SUB_CANCEL_STATUS", true);
               });
             })
-            .catch(() => {
+            .catch((error) => {
               this.$swal(
                 "Error",
-                "Something went wrong! please retry",
+                error?.response?.data?.error,
                 "error"
               );
             });
@@ -432,10 +432,10 @@ export default {
                 this.logoutProcess("login");
               });
             })
-            .catch(() => {
+            .catch((error) => {
               this.$swal(
                 "Error",
-                "Something went wrong! please retry",
+                error?.response?.data?.error,
                 "error"
               );
             });

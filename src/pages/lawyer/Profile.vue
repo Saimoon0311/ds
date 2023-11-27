@@ -903,9 +903,9 @@ export default {
           this.fetchOptions();
           this.fetchUserData();
           this.closeModal('#AreaModal');
-        }).catch(() => this.$swal("Error", "Something went wrong, please try again", "error"));
+        }).catch((error) => this.$swal("Error", error?.response?.data?.error, "error"));
       } catch (error) {
-        this.$swal("Error", "Something went wrong, please try again", "error")
+        this.$swal("Error", error?.response?.data?.error, "error")
         // console.error('Error uploading image', error);
       }
     },
@@ -923,9 +923,9 @@ export default {
           this.fetchOptions_locations();
           this.fetchUserData();
           this.closeModal('#StateModal');
-        }).catch(() => this.$swal("Error", "Something went wrong, please try again", "error"));
+        }).catch((error) => this.$swal("Error", error?.response?.data?.error, "error"));
       } catch (error) {
-        this.$swal("Error", "Something went wrong, please try again", "error")
+        this.$swal("Error", error?.response?.data?.error, "error")
         // console.error('Error uploading image', error);
       }
     },
@@ -945,7 +945,7 @@ export default {
           });
         })
       } catch (error) {
-        this.$swal("Error", "Something went wrong, please try again", "error")
+        this.$swal("Error", error?.response?.data?.error, "error")
         // console.error('Error uploading image', error);
       }
     },

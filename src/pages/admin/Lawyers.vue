@@ -1187,9 +1187,9 @@ export default {
           // this.fetchUserData();
 
 
-        }).catch(() => this.$swal("Error", "Something went wrong, please try again", "error"));
+        }).catch((error) => this.$swal("Error", error?.response?.data?.error, "error"));
       } catch (error) {
-        this.$swal("Error", "Something went wrong, please try again", "error")
+        this.$swal("Error", error?.response?.data?.error, "error")
         // console.error('Error uploading image', error);
       }
     },
@@ -1219,9 +1219,9 @@ export default {
                   }
                 }
 
-        }).catch(() => this.$swal("Error", "Something went wrong, please try again", "error"));
+        }).catch((error) => this.$swal("Error", error?.response?.data?.error, "error"));
       } catch (error) {
-        this.$swal("Error", "Something went wrong, please try again", "error")
+        this.$swal("Error", error?.response?.data?.error, "error")
         // console.error('Error uploading image', error);
       }
     },
