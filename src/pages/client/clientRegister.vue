@@ -99,7 +99,7 @@
                 <Field class="form-check-Field" type="checkbox" id="termsAndConditions" name="tandc" value="true" :class="{'is-invalid' : errors.tandc}" />
                 <label class="form-check-label tac" for="termsAndConditions">
                     &nbsp;I have read and agree to the 
-                    <router-link to="/terms-and-conditions-for-clients" >terms and conditions.</router-link>
+                    <router-link to="/terms-and-conditions-for-clients" target="_blank" >terms and conditions.</router-link>
                 </label>
                 <span class="invalid-feedback">{{errors.tandc}}</span>
             </div>

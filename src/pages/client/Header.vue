@@ -205,12 +205,15 @@ export default {
   align-items: center;
   flex-wrap: wrap;
 }
-.navbar-nav .left-menu a.nav-link:hover{
-  color: #000000a6;
+
+.navbar-nav .left-menu a.nav-link:hover {
+  color: #606060;
 }
+
 .navbar-nav .left-menu a.nav-link {
-  color: black ;
+  color: black;
 }
+
 .bg-grey {
   background: rgb(0, 0, 0);
   color: white;
@@ -327,5 +330,4 @@ ul.showonmonb {
   .pb-seven {
     padding-bottom: 200px;
   }
-}
-</style>
+}</style>

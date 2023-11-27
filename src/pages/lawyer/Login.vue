@@ -40,7 +40,7 @@
                   <span class="invalid-feedback">{{errors.password}}</span>
               </div>
           </div>
-          <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+          <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-3">
               <button type="button" @click="goToForgetPasswordPage('login')" class="forgetp">Forgotten your password?</button>
               <!-- <router-link to="/lawyer-forget-password">Forget Password</router-link> -->
           </div>
@@ -83,8 +83,8 @@ export default {
       password: yup
         .string()
         .required('Please enter your password.')
-        .min(6, 'Password must be greater then 6 digit')
-        .max(16, 'Password must be less then 16 digit')
+        .min(6, 'Have you forgotten your password?')
+        .max(16, 'Have you forgotten your password?')
         .matches(
           /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
           'Have you forgotten your password?',
@@ -157,6 +157,7 @@ export default {
   text-decoration: underline;
   background: no-repeat;
   border: none;
+  font-size: 14px;
 }
 
 .hello {

@@ -663,7 +663,7 @@
                   @change="updateProfile('remote_consultation')"
                   id="remote_consultation"
                 />
-                <p>{{ form.remote_consultation ? 'Yes' : 'No' }}</p>
+                <label for="remote_consultation">{{ form.remote_consultation ? 'Yes' : 'No' }}</label>
               </div>
             </td>
           </tr>
@@ -685,7 +685,7 @@
                   @change="updateProfile('mobile_friendly')"
                   id="mobile_friendly"
                 />
-                <p>{{ form.mobile_friendly ? 'Yes' : 'No' }}</p>
+                <label for="mobile_friendly">{{ form.mobile_friendly ? 'Yes' : 'No' }}</label>
               </div>
             </td>
           </tr>
@@ -951,7 +951,7 @@ export default {
     },
 
 
-    
+
 
 
     // async updateProfile(keyName, modalId = null) {
@@ -1023,10 +1023,10 @@ export default {
 </script>
 
 <style scoped>
-
-.form-check-input{
-  border:1px solid gray !important;
+.form-check-input {
+  border: 1px solid gray !important;
 }
+
 .navbar-nav {
   display: flex;
   align-items: center;
