@@ -45,9 +45,9 @@
             <p class="h4 text-center mb-3 mt-3">Job Description</p>
             <div class="mb-3">
               <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
-              <label>Area of Law:</label>
-              <p class="text-decoration-none badge text-white fs-6 bubbles">
-                {{ otherAreaSelected ? "Not mention" : areas[selectedAreaIndex].title }}
+              <label>Area of Law:&nbsp; </label>
+              <p class="text-decoration-none badge text-white fs-6 bubbles area-bubble">
+                {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
               </p>
             </div>
             <div class="mb-5">
@@ -281,16 +281,17 @@
               <p class="h4 text-center mb-3 mt-2">Summary</p>
               <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
               <p class="areas text-decoration-none badge text-white fs-6 bubbles area-bubble">
-                {{ otherAreaSelected ? "Not mention" : areas[selectedAreaIndex].title }}
+                {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
               </p>
-              <h4 class="line-break text-center mt-3 mb-4"><b>{{ title }}</b>
+              <h4 class=" text-center mt-3 mb-2"><b>{{ title }}</b>
               </h4>
               <!-- <p></p> -->
               <!-- <h4>Description</h4> -->
               <!-- <p></p> -->
               <h4 class="line-break mb-4">{{ description }}</h4>
 
-              <h4 class="mb-4"><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}</h4>
+              <h4 class="mb-4 text-capitalize"><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}
+              </h4>
               <!-- <h4><b>State/Territory</b></h4> -->
               <!-- <h4></h4> -->
               <!-- <h4>City</h4> -->
@@ -860,8 +861,8 @@ h4 {
 .pagination-indicator {
   border: 1px solid #000;
   border-radius: 50px;
-  padding: 4px 10px;
-  font-size: 14px;
+  padding: 2px 8px;
+  font-size: 13px;
 }
 
 input[type="checkbox"]:checked {
@@ -869,8 +870,10 @@ input[type="checkbox"]:checked {
 }
 
 .area-bubble {
-  background: gray !important;
+  /* background: gray !important; */
   margin: 8px 0px !important;
+  font-size: 15px !important;
+  padding: 6px 7px;
 
 }
 </style>
