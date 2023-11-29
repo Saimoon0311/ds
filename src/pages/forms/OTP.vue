@@ -11,7 +11,7 @@
                             <div v-for="(digit, index) in otpDigits" :key="index" class="col-2">
                                 <input v-model="otpDigits[index]" @input="handleInput(index, $event)"
                                     @paste="handlePaste(index, $event)" class="form-control text-center" maxlength="1"
-                                    type="text" ref="digitInputs" />
+                                    type="number" ref="digitInputs" />
                             </div>
                         </div>
 

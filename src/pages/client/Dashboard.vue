@@ -321,7 +321,7 @@ ul#pills-tab {
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 100px;
-  line-break: anywhere;
+  /* line-break: anywhere; */
   overflow-y: auto;
   padding-right: 10px;
 }
