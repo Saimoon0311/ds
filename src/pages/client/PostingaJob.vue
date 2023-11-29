@@ -113,7 +113,7 @@
               <label for="no" class="req-label mb-2"> No</label><br />
             </div>
             <div v-if="requirementsOption == 1">
-              <label for="job" class="mt-3 mb-2">Please describe your accessibility requirement.</label>
+              <label for="job" class=" mb-2">Please describe your accessibility requirement.</label>
 
               <div class="selectboxes">
                 <div class="form-check">
@@ -280,78 +280,94 @@
             <div class="summ mb-3">
               <p class="h4 text-center mb-3 mt-2">Summary</p>
               <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
-              <p class="areas text-decoration-none badge text-white fs-6 bubbles area-bubble">
-                {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
-              </p>
-              <h4 class=" text-center mt-3 mb-2"><b>{{ title }}</b>
-              </h4>
-              <!-- <p></p> -->
-              <!-- <h4>Description</h4> -->
-              <!-- <p></p> -->
-              <h4 class="line-break mb-4">{{ description }}</h4>
+              <div class="sum-top mb-3">
+                <p class="areas text-decoration-none badge text-white fs-6 bubbles area-bubble">
+                  {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
+                </p>
+                <h4 class=" text-center title-font text-white mt-1 mb-2"><b>{{ title }}</b>
+                </h4>
+                <h4 class="text-white descriptionText">{{ description }}</h4>
+              </div>
 
-              <h4 class="mb-4 text-capitalize"><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}
+              <h4 class="mb-3 text-capitalize"><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}
               </h4>
               <!-- <h4><b>State/Territory</b></h4> -->
               <!-- <h4></h4> -->
               <!-- <h4>City</h4> -->
               <!-- <h4>{{ city }}</h4> -->
-              <span v-if="requirementsOption">
+              <!-- <span v-if="requirementsOption">
                 <h4 class="d-inline"><b>Accessibility Requirements: </b></h4>
+              </span> -->
+              <div v-if="requirementsOption" class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                      data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                      aria-controls="panelsStayOpen-collapseOne">
+                      <b>Accessibility Requirements </b>
+                    </button>
+                  </h2>
+                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show "
+                    aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                      <div v-if="VisualIsChecked">
+                        <p><i class="fa fa-check"></i><b> Visual Impairment : </b> {{ visualOption }}</p>
+                      </div>
 
-
-                <div v-if="VisualIsChecked">
-                  <p><b>Visual Impairment : </b> {{ visualOption }}</p>
-                </div>
-
-                <div v-if="AuditoryIsChecked">
-                  <!-- <b><p>Auditory Impairment : </p></b>
+                      <div v-if="AuditoryIsChecked">
+                        <!-- <b><p>Auditory Impairment : </p></b>
                 <p>{{ auditoryOption }}</p> -->
-                  <p><b>Auditory Impairment : </b> {{ auditoryOption }}</p>
+                        <p><i class="fa fa-check"></i><b> Auditory Impairment : </b> {{ auditoryOption }}</p>
 
-                </div>
+                      </div>
 
-                <div v-if="MobilityIsChecked">
-                  <!-- <b><p>Mobility/Physical Impairment : </p></b>
+                      <div v-if="MobilityIsChecked">
+                        <!-- <b><p>Mobility/Physical Impairment : </p></b>
                 <p>{{ mobilityOption }}</p> -->
-                  <p><b>Mobility/Physical Impairment : </b> {{ mobilityOption }}</p>
-                </div>
+                        <p><i class="fa fa-check"></i><b> Mobility/Physical Impairment : </b> {{ mobilityOption }}</p>
+                      </div>
 
-                <div v-if="LearningIsChecked">
-                  <!-- <b><p>Learning Impairment : </p></b>
+                      <div v-if="LearningIsChecked">
+                        <!-- <b><p>Learning Impairment : </p></b>
                 <p>{{ learningOption }}</p> -->
-                  <p><b>Learning Impairment : </b> {{ learningOption }}</p>
-                </div>
+                        <p><i class="fa fa-check"></i><b> Learning Impairment : </b> {{ learningOption }}</p>
+                      </div>
 
-                <div v-if="IntellectualIsChecked">
-                  <!-- <b><p>Intellectual Disability : </p></b>
+                      <div v-if="IntellectualIsChecked">
+                        <!-- <b><p>Intellectual Disability : </p></b>
                 <p>{{ intellectualOption }}</p> -->
-                  <p><b>Intellectual Disability : </b> {{ intellectualOption }}</p>
-                </div>
+                        <p><i class="fa fa-check"></i><b> Intellectual Disability : </b> {{ intellectualOption }}</p>
+                      </div>
 
-                <div v-if="PsychiatricIsChecked">
-                  <!-- <b><p>Psychiatric Disability : </p></b>
+                      <div v-if="PsychiatricIsChecked">
+                        <!-- <b><p>Psychiatric Disability : </p></b>
                 <p>{{ psychiatricOption }}</p> -->
-                  <p><b>Psychiatric Disability : </b> {{ psychiatricOption }}</p>
-                </div>
+                        <p><i class="fa fa-check"></i><b> Psychiatric Disability : </b> {{ psychiatricOption }}</p>
+                      </div>
 
-                <div v-if="MedicalIsChecked">
-                  <!-- <b><p>Medical Disability : </p></b>
+                      <div v-if="MedicalIsChecked">
+                        <!-- <b><p>Medical Disability : </p></b>
                 <p>{{ medicalOption }}</p> -->
-                  <p><b>Medical Disability : </b> {{ medicalOption }}</p>
-                </div>
+                        <p><i class="fa fa-check"></i><b> Medical Disability : </b> {{ medicalOption }}</p>
+                      </div>
 
-                <div v-if="isChecked">
-                  <p><b>Other : </b> {{ requirementsOptionDescription }}</p>
-                </div>
+                      <div v-if="isChecked">
+                        <p><i class="fa fa-check"></i><b> Other : </b> {{ requirementsOptionDescription }}</p>
+                      </div>
 
-                <div v-if="languageIsChecked">
-                  <!-- <b><p>Language : </p></b>
+                      <div v-if="languageIsChecked">
+                        <!-- <b><p>Language : </p></b>
                 <p>{{ selectedLanguage }}</p> -->
-                  <p><b>Language : </b> {{ selectedLanguage == 'Other' ? otherLanguage : selectedLanguage }}</p>
+                        <p><i class="fa fa-check"></i><b> Language : </b> {{ selectedLanguage == 'Other' ? otherLanguage :
+                          selectedLanguage }}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-              </span>
+
+              </div>
+              <!-- ---- -->
             </div>
             <!-- <span v-if="requirementsOption">
               <h4>Accessibility Requirements Details</h4>
@@ -874,6 +890,81 @@ input[type="checkbox"]:checked {
   margin: 8px 0px !important;
   font-size: 15px !important;
   padding: 6px 7px;
+}
 
+.sum-top {
+  background-color: #6c757d;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.title-font {
+  font-size: 17px;
+}
+
+.descriptionText::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 10px;
+}
+
+.descriptionText::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px #0000004d;
+  border-radius: 10px;
+}
+
+.descriptionText::-webkit-scrollbar-thumb {
+  background-color: #969696;
+  /* outline: 1px solid #292929; */
+  border-radius: 10px;
+}
+
+.descriptionText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 100px;
+  /* line-break: anywhere; */
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+#accordionPanelsStayOpenExample {
+  min-width: 30%;
+  display: inline-block;
+}
+
+#accordionPanelsStayOpenExample h2 button {
+  background-color: transparent;
+  box-shadow: none;
+  padding-bottom: 0px;
+  padding-top: 27px;
+
+}
+
+#accordionPanelsStayOpenExample h2 button:focus {
+  box-shadow: none;
+}
+
+#accordionPanelsStayOpenExample h2 button b {
+  font-size: 19px;
+  padding-right: 30px;
+}
+
+#accordionPanelsStayOpenExample .accordion-body {
+  font-size: 15px;
+}
+
+#accordionPanelsStayOpenExample .accordion-body p {
+  margin-bottom: 10px !important;
+}
+
+#accordionPanelsStayOpenExample .accordion-body p i {
+  border: 1px solid #000;
+  padding: 5.2px 6px;
+  border-radius: 50px;
+  font-size: 13px;
+}
+
+#accordionPanelsStayOpenExample .accordion-button.collapsed {
+  padding-bottom: 25px;
 }
 </style>
