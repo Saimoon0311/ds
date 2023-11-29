@@ -215,73 +215,21 @@
                           </p>
                           <p>
                             <button
+                              :disabled="!item?.requirements"
                               type="button"
                               class="btn btn-dark btn-sm"
-                              data-target=".edit-job-title-modal"
+                              :data-target="`.edit-job-title-modal${index}`"
                               title="Edit"
-                              data-bs-toggle="modal"
+                              :data-bs-toggle="`modal${index}`"
                               data-bs-target="#Accessibility"
+                              @click="openRequirementsModal(item?.requirements)"
                             >
                             Accessibility Requirements
                             </button>
                           </p>
 
                           <!-- modal -->
-                          <div
-                            class="modal fade edit-job-title-modal"
-                            tabindex="-1"
-                            role="dialog"
-                            aria-labelledby="mySmallModalLabel"
-                            aria-hidden="true"
-                            id="Accessibility"
-                          >
-                            <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5
-                                    class="modal-title text-dark fw-bold"
-                                    id="exampleModalLabel"
-                                  >
-                                  Accessibility Requirements:
-                                  </h5>
-                                  <button
-                                    type="button"
-                                    class="close btn btn-dark"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                  >
-                                    <span aria-hidden="true">×</span>
-                                  </button>
-                                </div>
-
-                                <div class="modal-body">
-                                  <!-- <form action="profile.php" method="post"></form> -->
-                                  <div class="table-wrap">
-                                    <div class="wrapper">
-                                      <h6>Visual Impairment:</h6>
-                                      <p>Blind</p>
-                                    </div>
-
-                                    <div class="wrapper">
-                                      <h6>Auditory Impairment:</h6>
-                                      <p>Deaf</p>
-                                    </div>
-
-                                    <div class="wrapper">
-                                      <h6>Psychiatric Disability:</h6>
-                                      <p>Depression</p>
-                                    </div>
-
-                                    <div class="wrapper">
-                                      <h6>Language:</h6>
-                                      <p>Macedonian</p>
-                                    </div>
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                      
 
                           <!-- <p><b>City/suburb:</b> {{ item?.city }}</p> -->
                           <span class="spacer">
@@ -468,6 +416,86 @@ export default {
   //   this.getJobs();
   // },
   methods: {
+
+    openRequirementsModal(data) {
+
+      let newData = {};
+
+if (data && typeof data === 'object') {
+  for (const key in data) {
+    if (Object.prototype.hasOwnProperty.call(data, key)) {
+      const value = data[key];
+      if (value !== null && key != 'id' && key != 'job_id' && key != 'user_id' && key != 'created_at' && key != 'updated_at') {
+        newData[key] = value;
+      }
+    }
+  }
+}
+
+
+      // Construct HTML dynamically for key-value pairs
+
+      // let data2 = Object.fromEntries(data);
+      // console.log('v : ' , data2);
+      // data.filter((value) => {
+      //   console.log('filter : ', value);
+      //   return value !== null;
+      // });
+
+      // const filteredData = Object.fromEntries(
+      //   Object.entries(data).filter(([value]) => value !== null)
+      // );
+
+      const htmlContent = Object.entries(newData)
+        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b>${key}:</b></h6><p>${value}</p></div>`)
+        .join('');
+
+      // Use dynamic HTML inside SweetAlert2 modal
+      this.$swal.fire({
+        title: 'Accessibility Requirements',
+        html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+          container: 'my-swal-container', // You can define your custom class for styling
+        },
+      });
+
+
+      // Use SweetAlert2 to create a modal
+      // this.$swal.fire({
+      //   title: 'Accessibility Requirements',
+      //   html: `
+      //     <div class="table-wrap" style="text-align:left !important;">
+      //       <div class="wrapper">
+      //         <h6><b>Visual Impairment:</b></h6>
+      //         <p>Blind</p>
+      //       </div>
+
+      //       <div class="wrapper">
+      //         <h6>Auditory Impairment:</h6>
+      //         <p>Deaf</p>
+      //       </div>
+
+      //       <div class="wrapper">
+      //         <h6>Psychiatric Disability:</h6>
+      //         <p>Depression</p>
+      //       </div>
+
+      //       <div class="wrapper">
+      //         <h6>Language:</h6>
+      //         <p>Macedonian</p>
+      //       </div>
+      //     </div>`,
+      //   showCloseButton: true,
+      //   showConfirmButton: false,
+      //   customClass: {
+      //     container: 'my-swal-container', // You can define your custom class for styling
+      //   },
+      // });
+    },
+
+
     async changeTab(status) {
       if (status == "open") {
         this.endpoint = "/lawyer/show-open-related-jobs";
