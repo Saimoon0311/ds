@@ -1,5 +1,5 @@
 <template>
-  :
+  
   <LawyerHeader />
   <div class="f-main">
     <div class="container">
@@ -157,36 +157,52 @@
 
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
-                        <tr>
+                        <tr class="border">
                           <!-- <th></th> -->
                           <th>Item</th>
                           <th>Cost</th>
-                          <th></th>
+                          <!-- <th></th> -->
                           <th></th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
-                        <tr v-for="(row, index) in rows" :key="index">
+                        <tr v-for="(row, index) in rows" :key="index" class="border">
 
                           <td>{{ row.itemDisbursement }}</td>
                           <td>${{ row.costAud }}</td>
-                          <td class="text-center">
+                          <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
                             <!-- <input type="checkbox" name="gst not applicable"> -->
-                            <i class="fa fa-check"></i>
-                          </td>
+                            <!-- <i class="fa fa-check"></i>
+                          </td> -->
                           <td style="width:0px">
                             <button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
                                 class="fa fa-trash"></i></button>
                           </td>
                         </tr>
+
+                        <tr >
+          <td class="p-1"></td>
+                      </tr>
+                      <tr class="bg-dark text-white border-0 ">
+                         <td class="bg-transparent text-white  p-0 px-2 b-round-start">Total (excluding GST):</td>
+                         <td class="bg-transparent text-white p-0 px-2">${{ grandTotal }}</td>
+                         <td class="bg-transparent p-0 b-round-end"></td>
+                        
+                        </tr>
+                        <tr class="border-0 p-0">
+                          <td class="gstStyle p-0">
+                            *GST Not Applicable
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
 
-                    <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total
-                      (excluding GST): ${{ grandTotal }}
-                    </p>
+                  
+                    <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
+                      <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
+                    </p> -->
                   </div>
                 </div>
 
@@ -310,36 +326,51 @@
 
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
-                        <tr>
+                        <tr class="border">
                           <!-- <th></th> -->
                           <th>Item</th>
                           <th>Cost</th>
-                          <th></th>
+                          <!-- <th></th> -->
                           <th></th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
-                        <tr v-for="(row, index) in rows" :key="index">
+                        <tr v-for="(row, index) in rows" :key="index" class="border">
 
                           <td>{{ row.itemDisbursement }}</td>
                           <td>${{ row.costAud }}</td>
-                          <td class="text-center">
+                          <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
                             <!-- <input type="checkbox" name="gst not applicable"> -->
-                            <i class="fa fa-check"></i>
-                          </td>
+                            <!-- <i class="fa fa-check"></i>
+                          </td> -->
                           <td style="width:0px">
                             <button type="button" @click="removeRow(index)" class="btn btn-default btn-circle"><i
                                 class="fa fa-trash"></i></button>
                           </td>
                         </tr>
+                        <tr >
+          <td class="p-1"></td>
+                      </tr>
+                      <tr class="bg-dark text-white border-0 ">
+                         <td class="bg-transparent text-white  p-0 px-2 b-round-start">Total (excluding GST):</td>
+                         <td class="bg-transparent text-white p-0 px-2">${{ grandTotal }}</td>
+                         <td class="bg-transparent p-0 b-round-end"></td>
+                        
+                        </tr>
+                        <tr class="border-0 p-0">
+                          <td class="gstStyle p-0">
+                            *GST Not Applicable
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
-
-                    <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total
-                      (excluding GST): ${{ grandTotal }}
-                    </p>
+                 
+                    
+                    <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
+                      <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
+                    </p> -->
                   </div>
                 </div>
 
@@ -386,24 +417,39 @@
 
                 <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                   <thead>
-                    <tr>
-                      <th></th>
+                    <tr class="border">
                       <th>Item </th>
                       <th>Fee (excluding GST)</th>
+                      <th></th>
                       <!-- <th>Total</th> -->
                     </tr>
                   </thead>
                   <tbody id="addFeeEarnersRow">
-                    <tr v-for="(row, index) in rows2" :key="index">
-                      <td style="width:0px"><button type="button" @click="removeRow2(index)"
-                          class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
+                    <tr v-for="(row, index) in rows2" :key="index" class="border">
+                     
                       <td>{{ row.itemDisbursement }}</td>
                       <td>$ {{ row.costAud }}</td>
+                      <td style="width:0px"><button type="button" @click="removeRow2(index)"
+                          class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                       <!-- <td>
                         <p class="mb-0 bg-secondary border p-1 rounded text-white ">Total (excluding GST): ${{ row.total
                         }}</p>
                       </td> -->
                     </tr>
+                    <tr >
+                        <td class="p-1"></td>
+                      </tr>
+                      <tr class="bg-dark text-white border-0 ">
+                         <td class="bg-transparent text-white  p-0 px-2 b-round-start">Total (excluding GST):</td>
+                         <td class="bg-transparent text-white p-0 px-2">${{ grandTotal }}</td>
+                         <td class="bg-transparent p-0 b-round-end"></td>
+                        
+                        </tr>
+                        <tr class="border-0 p-0">
+                          <td class="gstStyle p-0">
+                            *GST Not Applicable
+                          </td>
+                        </tr>
                   </tbody>
                 </table>
 
@@ -552,34 +598,51 @@
 
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
-                        <tr>
+                        <tr class="border">
                           <!-- <th></th> -->
                           <th>Item</th>
                           <th>Cost</th>
-                          <th></th>
+                          <!-- <th></th> -->
                           <th></th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
-                        <tr v-for="(row, index) in rows" :key="index">
+                        <tr v-for="(row, index) in rows" :key="index" class="border">
 
                           <td>{{ row.itemDisbursement }}</td>
                           <td>${{ row.costAud }}</td>
-                          <td class="text-center">
+                          <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
                             <!-- <input type="checkbox" name="gst not applicable"> -->
-                            <i class="fa fa-check"></i>
-                          </td>
+                            <!-- <i class="fa fa-check"></i>
+                          </td> -->
                           <td style="width:0px"><button type="button" @click="removeRow(index)"
                               class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
+                        </tr>
+
+                        <tr >
+                        <td class="p-1"></td>
+                      </tr>
+                      <tr class="bg-dark text-white border-0 ">
+                         <td class="bg-transparent text-white  p-0 px-2 b-round-start">Total (excluding GST):</td>
+                         <td class="bg-transparent text-white p-0 px-2">${{ grandTotal }}</td>
+                         <td class="bg-transparent p-0 b-round-end"></td>
+                        
+                        </tr>
+                        <tr class="border-0 p-0">
+                          <td class="gstStyle p-0">
+                            *GST Not Applicable
+                          </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total
-                      (excluding GST): ${{ grandTotal }}
-                    </p>
+                  
+                    <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
+                      <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
+
+                    </p> -->
                   </div>
                 </div>
 
@@ -693,35 +756,53 @@
 
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
-                        <tr>
+                        <tr class="border">
                           <!-- <th></th> -->
                           <th>Item</th>
                           <th>Cost</th>
-                          <th></th>
+                          <!-- <th></th> -->
                           <th></th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
-                        <tr v-for="(row, index) in rows" :key="index">
+                        <tr v-for="(row, index) in rows" :key="index" class="border">
 
                           <td>{{ row.itemDisbursement }}</td>
                           <td>${{ row.costAud }}</td>
-                          <td class="text-center">
+                          <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white">Total (excluding GST): ${{
                               row.total }}
                             </p> -->
                             <!-- <input type="checkbox" name="gst not applicable"> -->
-                            <i class="fa fa-check"></i>
-                          </td>
+                            <!-- <i class="fa fa-check"></i>
+                          </td> -->
                           <td style="width:0px"><button type="button" @click="removeRow(index)"
                               class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
+                        </tr>
+                        <tr >
+                        <td class="p-1"></td>
+                      </tr>
+                      <tr class="bg-dark text-white border-0 ">
+                         <td class="bg-transparent text-white  p-0 px-2 b-round-start">Total (excluding GST):</td>
+                         <td class="bg-transparent text-white p-0 px-2">${{ grandTotal }}</td>
+                         <td class="bg-transparent p-0 b-round-end"></td>
+                        
+                        </tr>
+                        <tr class="border-0 p-0">
+                          <td class="gstStyle p-0">
+                            *GST Not Applicable
+                          </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total
-                      (excluding GST): ${{
-                        grandTotal }}</p>
+                  
+
+                    <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
+                      <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
+
+
+                    </p> -->
                   </div>
 
 
@@ -882,32 +963,52 @@
 
                 <table class="table table-bordered mb-3" id="additionalFeeEarnersTable">
                   <thead>
-                    <tr>
+                    <tr class="border">
                       <!-- <th></th> -->
                       <th>Title</th>
-                      <th>Hourly rate (excluding GST)</th>
-                      <th>Estimated number of hours</th>
-                      <th></th>
+                      <th>Hourly rate</th>
+                      <th>Hours</th>
+                      <th>SubTotal</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody id="addFeeEarnersRow">
-                    <tr v-for="(row, index) in rows3" :key="index">
+                    <tr v-for="(row, index) in rows3" :key="index" class="border">
 
                       <td>{{ row.title }}</td>
                       <td>$ {{ row.hourlyRate }}</td>
                       <td>{{ row.estimatedHours }}</td>
                       <td>
-                        <button type="button" class="btn btn-default btn-circle"><i class="fa fa-edit"></i></button>
+                        {{ row.hourlyRate * row.estimatedHours }}
                       </td>
                       <td style="width:0px"><button type="button" class="btn btn-default btn-circle"><i
                             class="fa fa-trash"></i></button>
                       </td>
                     </tr>
+                    <tr >
+                        <td class="p-1"></td>
+                      </tr>
+                      <tr class="bg-dark text-white border-0 ">
+                         <td class="bg-transparent text-white  p-0 px-2 b-round-start">Total (excluding GST):</td>
+                         <td class="bg-transparent p-0"></td>
+                         <td class="bg-transparent p-0"></td>
+                         <td class="bg-transparent text-white p-0 px-2">${{ grandTotal }}</td>
+                         <td class="bg-transparent p-0 b-round-end"></td>
+                        
+                        </tr>
+                        <tr class="border-0 p-0">
+                          <td class="gstStyle p-0">
+                            *GST Not Applicable
+                          </td>
+                        </tr>
+                    
+                   
                   </tbody>
                 </table>
-                <p class="mb-2 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total: $
-                </p>
+
+               
+                <!-- <p class="mb-2 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total (excluding GST): $
+                </p> -->
 
 
               </div>
@@ -1028,35 +1129,52 @@
 
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
-                        <tr>
+                        <tr class="border">
                           <!-- <th></th> -->
                           <th>Item</th>
                           <th>Cost</th>
-                          <th></th>
+                          <!-- <th></th> -->
                           <th></th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
-                        <tr v-for="(row, index) in rows" :key="index">
+                        <tr v-for="(row, index) in rows" :key="index" class="border">
 
                           <td>{{ row.itemDisbursement }}</td>
                           <td>${{ row.costAud }}</td>
-                          <td class="text-center">
+                          <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
                             <!-- <input type="checkbox" name="gst not applicable"> -->
-                            <i class="fa fa-check"></i>
-                          </td>
+                            <!-- <i class="fa fa-check"></i>
+                          </td> -->
                           <td style="width:0px"><button type="button" @click="removeRow(index)"
                               class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button>
+                          </td>
+                        </tr>
+                        <tr >
+                        <td class="p-1"></td>
+                      </tr>
+                      <tr class="bg-dark text-white border-0 ">
+                         <td class="bg-transparent text-white  p-0 px-2 b-round-start">Total (excluding GST):</td>
+                         <td class="bg-transparent text-white p-0 px-2">${{ grandTotal }}</td>
+                         <td class="bg-transparent p-0 b-round-end"></td>
+                        
+                        </tr>
+                        <tr class="border-0 p-0">
+                          <td class="gstStyle p-0">
+                            *GST Not Applicable
                           </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total
-                      (excluding GST): ${{ grandTotal }}
-                    </p>
+
+                
+                    <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
+                      <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
+
+                    </p> -->
                   </div>
                 </div>
 
@@ -1206,34 +1324,52 @@
 
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
-                        <tr>
+                        <tr class="border">
                           <!-- <th></th> -->
                           <th>Item</th>
                           <th>Cost</th>
-                          <th></th>
+                          <!-- <th></th> -->
                           <th></th>
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
-                        <tr v-for="(row, index) in rows" :key="index">
+                        <tr v-for="(row, index) in rows" :key="index" class="border">
 
                           <td>{{ row.itemDisbursement }}</td>
                           <td>${{ row.costAud }}</td>
-                          <td class="text-center">
+                          <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
                             <!-- <input type="checkbox" name="gst not applicable"> -->
-                            <i class="fa fa-check"></i>
-                          </td>
+                            <!-- <i class="fa fa-check"></i>
+                          </td> -->
                           <td style="width:0px"><button type="button" @click="removeRow(index)"
                               class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
+                        </tr>
+                        <tr >
+                        <td class="p-1"></td>
+                      </tr>
+                      <tr class="bg-dark text-white border-0 ">
+                         <td class="bg-transparent text-white  p-0 px-2 b-round-start">Total (excluding GST):</td>
+                         <td class="bg-transparent text-white p-0 px-2">${{ grandTotal }}</td>
+                         <td class="bg-transparent p-0 b-round-end"></td>
+                        
+                        </tr>
+                        <tr class="border-0 p-0">
+                          <td class="gstStyle p-0">
+                            *GST Not Applicable
+                          </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total
-                      (excluding GST): ${{ grandTotal }}
-                    </p>
+
+                    
+
+                    <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
+                      <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
+
+                    </p> -->
                   </div>
 
 
@@ -1325,33 +1461,64 @@
 
                   <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                     <thead>
-                      <tr>
+                      <tr class="border">
                         <!-- <th></th> -->
                         <th>Item</th>
                         <th>Cost</th>
-                        <th></th>
+                        <!-- <th></th> -->
                         <th></th>
                       </tr>
                     </thead>
-                    <tbody id="addFeeEarnersRow">
-                      <tr v-for="(row, index) in rows" :key="index">
+                    <tbody id="addFeeEarnersRow"> 
+                      <tr v-for="(row, index) in rows" :key="index" class="border">
 
                         <td>{{ row.itemDisbursement }}</td>
                         <td>${{ row.costAud }}</td>
-                        <td class="text-center">
+                        <!-- <td class="text-center"> -->
                           <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                           </p> -->
                           <!-- <input type="checkbox" name="gst not applicable"> -->
-                          <i class="fa fa-check"></i>
-                        </td>
+                          <!-- <i class="fa fa-check"></i>
+                        </td> -->
                         <td style="width:0px"><button type="button" @click="removeRow(index)"
                             class="btn btn-default btn-circle"><i class="fa fa-trash"></i></button></td>
                       </tr>
+                      <tr >
+                        <td class="p-1"></td>
+                      </tr>
+                      <tr class="bg-dark text-white border-0 ">
+                         <td class="bg-transparent text-white  p-0 px-2 b-round-start">Total (excluding GST):</td>
+                         <td class="bg-transparent text-white p-0 px-2">${{ grandTotal }}</td>
+                         <td class="bg-transparent p-0 b-round-end"></td>
+                        
+                        </tr>
+                        <tr class="border-0 p-0">
+                          <td class="gstStyle p-0">
+                            *GST Not Applicable
+                          </td>
+                        </tr>
                     </tbody>
                   </table>
 
-                  <p class="mb-0 bg-dark mt-2 border p-1 rounded text-white text-center btn-itemize-total">Total
-                    (excluding GST): ${{ grandTotal }}</p>
+
+                  <!-- <table class="table mt-2 border-0" id="additionalFeeEarnersTable">
+                      <tbody>
+                        <tr>
+                         <td class="bg-dark text-white w-33 b-round-start">Total (excluding GST):</td>
+                         <td class="bg-dark text-white w-66 b-round-end">${{ grandTotal }}</td>
+                        
+                        </tr>
+                        <tr>
+                          <td class="gstStyle">
+                            *GST Not Applicable
+                          </td>
+                        </tr>
+                      </tbody>
+                      </table> -->
+
+                  <!-- <p class="mb-0 bg-dark mt-2 border p-1 rounded text-white text-center btn-itemize-total">
+                    <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
+                  </p> -->
                 </div>
               </div>
 
@@ -2305,7 +2472,14 @@ export default {
 };
 </script>
 
+
 <style scoped>
+.b-round-start{
+  border-radius: 5px 0 0 5px;
+}
+.b-round-end{
+  border-radius:  0 5px 5px 0 ;
+}
 .stepbtn {
   display: flex;
   justify-content: space-between;
@@ -2406,7 +2580,14 @@ input[type="radio"]:checked {
   margin-top: 4px;
 } */
 .btn-itemize-total {
-  max-width: 230px;
+  /* max-width: max-content;
+    min-width: 300px; */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
 }
 
 .pagination-indicator {
@@ -2422,5 +2603,15 @@ input[type="radio"]:checked {
   margin-left: -25px;
   z-index: 9;
   position: relative;
+}
+/* table {
+    border: 1px solid #dee2e6;
+}*/
+th , td{
+  border: 0;
+} 
+.gstStyle{
+  font-size: 12px;
+  color: #000000;
 }
 </style>

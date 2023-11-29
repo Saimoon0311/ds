@@ -33,7 +33,7 @@
                         </p> -->
                     </Form>
                 </div>
-                <h2 v-else class="text-center">Link has been expired, go to <router-link to="/forget-password">forget password</router-link> to send another link via email</h2>
+                <h2 v-else class="text-center">This temporary link has expired. <router-link to="/forget-password" class="btn btn-dark text-white">Reset your password</router-link> </h2>
             </div>
         </div>
         <div class="footer">
@@ -91,7 +91,7 @@ export default {
     },
     methods: {
         async checkLogin() {
-            await api.get("/verify").then(() => this.logout('login',false)).catch(error => console.log(error));
+            await api.get("/verify").then(() => this.logout('login', false)).catch(error => console.log(error));
         },
         checkToken() {
             api.get(`/check-forget-token/${this.token}`)
@@ -109,9 +109,9 @@ export default {
                 formData.token = this.token;
                 api.post('/forget-password', formData)
                     .then(res => {
-                        this.$swal('', 'Password has been changed successfully', 'success').then(() => {
-                            this.$store.commit('SET_USER_TYPE',res?.data?.type);
-                            localStorage.setItem('userType',res?.data?.type);
+                        this.$swal('', 'Your password has now been changed.', 'success').then(() => {
+                            this.$store.commit('SET_USER_TYPE', res?.data?.type);
+                            localStorage.setItem('userType', res?.data?.type);
                             this.$router.push({ path: '/' + res?.data?.redirectUrl });
                         });
                     })
@@ -154,5 +154,9 @@ export default {
 .reset-main {
     min-height: 57vh;
     position: relative;
+}
+
+.linkc {
+    color: #000
 }
 </style>
