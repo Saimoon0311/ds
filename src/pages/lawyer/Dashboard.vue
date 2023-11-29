@@ -188,7 +188,7 @@
                       id="28"
                     >
                       <div
-                        class="border rounded bg-secondary d-flex justify-content-between text-white p-3 flex-column flex-lg-row mb-3"
+                        class="border rounded bg-secondary d-flex justify-content-between text-white p-3 flex-column mb-3"
                       >
                         <div>
                           <p class="badge bg-dark" title="Area">
@@ -198,22 +198,26 @@
                           <p class="badge bg-dark" title="Location">
                             {{ item?.location?.title }}
                           </p>
-                          <p>
+                          <p class="text-center">
                             <b>{{ item?.title }}</b>
                           </p>
                           <p
                             id="description28"
                             class="descriptionText"
                           >
-                          <b>Job description: </b>
+                          <!-- <b>Job description: </b> -->
                             {{ item?.description }}
                           </p>
-                          <p><b>City/suburb:</b> {{ item?.city }}</p>
-                          <p><b>Job No: </b> <span class="smallFont"> {{ item?.identity }} </span> </p>
-                          <p >
-                            <b>Created: </b>
-                          <span class="smallFont"> {{ formatCreatedAt(item.created_at) }}</span> 
-                          </p>
+
+                          <!-- <p><b>City/suburb:</b> {{ item?.city }}</p> -->
+                          <span class="spacer">
+
+                            <p class="smallFont">
+                              Posted by Username {{ item?.city }} on
+                              {{ formatCreatedAt(item.created_at) }} 
+                            </p>
+                            <p span class="smallFont">Job No:  {{ item?.identity }}  </p>
+                          </span>
 
                           <!-- <details>
                             <summary>More details</summary>
@@ -226,13 +230,13 @@
                         </div>
                         <div
                           v-if="item.status != 'close'"
-                          class="d-flex flex-column justify-content-center align-items-center"
+                          class="d-flex flex-row justify-content-evenly align-items-center"
                           style="min-width: 150px"
                         >
                       
                           <button
                             @click="submitProposal(item)" v-if="tab != 'pending'" 
-                            class="btn btn-light btn-sm w-100 my-1"
+                            class="btn btn-light btn-sm card-btn my-1"
                           >
                             Submit a proposal
                           </button>
@@ -240,24 +244,24 @@
                           <button
                           @click="submitProposal(item)" 
                           v-if="tab === 'pending'"  
-                          class="btn btn-light btn-sm w-100 my-1"
+                          class="btn btn-light btn-sm card-btn  my-1"
                           >
                           View proposal
                           </button>
                           <button
                             v-if="tab != 'close'"
                             @click="declineJob(item.id)"
-                            class="btn btn-danger btn-sm w-100 my-1"
+                            class="btn btn-danger btn-sm card-btn my-1"
                           >
                             Decline
                           </button>
                           <router-link v-if="tab != 'pending'"
-                            class="btn btn-dark btn-sm w-100 my-1"
+                            class="btn btn-dark btn-sm card-btn my-1"
                             to="/request-info"
                             >Message</router-link
                           >
                           <router-link v-if="tab === 'pending'"  
-                            class="btn btn-dark btn-sm w-100 my-1"
+                            class="btn btn-dark btn-sm card-btn my-1"
                             to="/request-info"
                             >View Messages</router-link
                           >
@@ -536,7 +540,8 @@ ul#pills-tab {
 }
 
 .smallFont {
-  font-size: 13px;
+  font-size: 12px;
+  margin: 0 0 5px 0 ;
 }
 
 .search-field {
@@ -551,6 +556,7 @@ ul#pills-tab {
   overflow-y: auto;
   padding-right: 10px;
   margin-right: 5px;
+ 
 }
 
 .descriptionText::-webkit-scrollbar {
@@ -568,7 +574,16 @@ ul#pills-tab {
   /* outline: 1px solid #292929; */
   border-radius: 10px;
 }
-
+.card-btn {
+    width: 30%;
+}
+p.badge {
+    font-size: 14px;
+}
+.spacer{
+  margin: 20px 0;
+  display: block;
+}
 @media only screen and (max-width: 600px) {
   .l-main {
     padding-bottom: 100px;
