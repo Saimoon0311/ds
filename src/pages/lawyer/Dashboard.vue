@@ -15,78 +15,78 @@
       </p>
 
       <div data-v-511b78bb="" class="container">
-            <div v-if="adminApproval != 'approve'">
-              <p class="h5 m-3 text-center">
-                Your profile has not been approved yet.
-              </p>
-            </div>
-            <div v-else-if="subscriptionStatus != 'subscribed'">
-              <div class="alert alert-danger text-center m-0 p-2">
-                You have not subscribed yet.
-                <router-link to="/plans" class="btn btn-dark text-white"
-                  >Subscribe now</router-link
-                >
-              </div>
-            </div>
+        <div v-if="adminApproval != 'approve'">
+          <p class="h5 m-3 text-center">
+            Your profile has not been approved yet.
+          </p>
+        </div>
+        <div v-else-if="subscriptionStatus != 'subscribed'">
+          <div class="alert alert-danger text-center m-0 p-2">
+            You have not subscribed yet.
+            <router-link to="/plans" class="btn btn-dark text-white"
+              >Subscribe now</router-link
+            >
+          </div>
+        </div>
 
-            <div v-else>
-        <ul
-          data-v-511b78bb=""
-          class="nav nav-pills mb-3 bg-light border p-2 py-3 rounded"
-          id="pills-tab"
-          role="tablist"
-        >
-          <li data-v-511b78bb="" class="nav-item" role="presentation">
-            <button
-              data-v-511b78bb=""
-              class="nav-link active"
-              id="pills-home-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#pills-home"
-              type="button"
-              role="tab"
-              aria-controls="pills-home"
-              aria-selected="true"
-              @click="changeTab('open')"
-            >
-              Open
-            </button>
-          </li>
-          <li data-v-511b78bb="" class="nav-item" role="presentation">
-            <button
-              data-v-511b78bb=""
-              class="nav-link"
-              id="pills-profile-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#pills-profile"
-              type="button"
-              role="tab"
-              aria-controls="pills-profile"
-              aria-selected="false"
-              tabindex="-1"
-              @click="changeTab('pending')"
-            >
-              Pending
-            </button>
-          </li>
-          <li data-v-511b78bb="" class="nav-item" role="presentation">
-            <button
-              data-v-511b78bb=""
-              class="nav-link"
-              id="pills-profile-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#pills-profile"
-              type="button"
-              role="tab"
-              aria-controls="pills-profile"
-              aria-selected="false"
-              tabindex="-1"
-              @click="changeTab('close')"
-            >
-              Closed
-            </button>
-          </li>
-          <!-- <li data-v-511b78bb="" class="nav-item" role="presentation">
+        <div v-else>
+          <ul
+            data-v-511b78bb=""
+            class="nav nav-pills mb-3 bg-light border p-2 py-3 rounded"
+            id="pills-tab"
+            role="tablist"
+          >
+            <li data-v-511b78bb="" class="nav-item" role="presentation">
+              <button
+                data-v-511b78bb=""
+                class="nav-link active"
+                id="pills-home-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-home"
+                type="button"
+                role="tab"
+                aria-controls="pills-home"
+                aria-selected="true"
+                @click="changeTab('open')"
+              >
+                Open
+              </button>
+            </li>
+            <li data-v-511b78bb="" class="nav-item" role="presentation">
+              <button
+                data-v-511b78bb=""
+                class="nav-link"
+                id="pills-profile-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-profile"
+                type="button"
+                role="tab"
+                aria-controls="pills-profile"
+                aria-selected="false"
+                tabindex="-1"
+                @click="changeTab('pending')"
+              >
+                Pending
+              </button>
+            </li>
+            <li data-v-511b78bb="" class="nav-item" role="presentation">
+              <button
+                data-v-511b78bb=""
+                class="nav-link"
+                id="pills-profile-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-profile"
+                type="button"
+                role="tab"
+                aria-controls="pills-profile"
+                aria-selected="false"
+                tabindex="-1"
+                @click="changeTab('close')"
+              >
+                Closed
+              </button>
+            </li>
+            <!-- <li data-v-511b78bb="" class="nav-item" role="presentation">
             <button
               data-v-511b78bb=""
               class="nav-link"
@@ -103,10 +103,9 @@
               Reject
             </button>
           </li> -->
-        </ul>
+          </ul>
 
-
-        <!-- <div
+          <!-- <div
             data-v-511b78bb=""
             class="tab-pane fade active show"
             id="pills-home"
@@ -114,11 +113,9 @@
             aria-labelledby="pills-home-tab"
           > -->
 
-
-        <div>
           <div>
-            
-                    <!-- Conditions Documentation :
+            <div>
+              <!-- Conditions Documentation :
               if : openJobs.length == 0 && searchQuery == '' (if no data , no search)
                 No potential jobs found that match your profile. Click here to amend your
               else
@@ -129,24 +126,35 @@
                   listing -->
 
               <div
-                v-if="openJobs.length == 0 && searchQuery == '' && tab == 'open'"
-                class="border rounded bg-light p-3 d-flex flex-wrap">
+                v-if="
+                  openJobs.length == 0 && searchQuery == '' && tab == 'open'
+                "
+                class="border rounded bg-light p-3 d-flex flex-wrap"
+              >
                 <p class="mx-auto my-0">
                   No potential jobs found that match your profile. Click here to
                   amend your
-                  <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
+                  <router-link
+                    to="/lawyer-profile"
+                    class="btn btn-dark text-white"
+                    >Profile</router-link
+                  >
                 </p>
               </div>
 
               <div
-                v-if="openJobs.length == 0 && searchQuery == '' && tab != 'open'"
-                class="border rounded bg-light p-3 d-flex flex-wrap">
-                <p class="mx-auto my-0">
-                 No job found!
-                </p>
+                v-if="
+                  openJobs.length == 0 && searchQuery == '' && tab != 'open'
+                "
+                class="border rounded bg-light p-3 d-flex flex-wrap"
+              >
+                <p class="mx-auto my-0">No job found!</p>
               </div>
 
-              <div v-else class="border rounded bg-light px-2 py-3 d-flex flex-wrap align-center justify-content-center">
+              <div
+                v-else
+                class="border rounded bg-light px-2 py-3 d-flex flex-wrap align-center justify-content-center"
+              >
                 <div class="input-group mb-3 search-field">
                   <input
                     type="text"
@@ -198,25 +206,96 @@
                           <p class="badge bg-dark" title="Location">
                             {{ item?.location?.title }}
                           </p>
-                          <p class="text-center">
+                          <p class="text-center mt-3 mb-2">
                             <b>{{ item?.title }}</b>
                           </p>
-                          <p
-                            id="description28"
-                            class="descriptionText"
-                          >
-                          <!-- <b>Job description: </b> -->
+                          <p id="description28" class="descriptionText">
+                            <!-- <b>Job description: </b> -->
                             {{ item?.description }}
                           </p>
+                          <p>
+                            <button
+                              type="button"
+                              class="btn btn-dark btn-sm"
+                              data-target=".edit-job-title-modal"
+                              title="Edit"
+                              data-bs-toggle="modal"
+                              data-bs-target="#Accessibility"
+                            >
+                            Accessibility Requirements
+                            </button>
+                          </p>
+
+                          <!-- modal -->
+                          <div
+                            class="modal fade edit-job-title-modal"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="mySmallModalLabel"
+                            aria-hidden="true"
+                            id="Accessibility"
+                          >
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5
+                                    class="modal-title text-dark fw-bold"
+                                    id="exampleModalLabel"
+                                  >
+                                  Accessibility Requirements:
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="close btn btn-dark"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                  >
+                                    <span aria-hidden="true">×</span>
+                                  </button>
+                                </div>
+
+                                <div class="modal-body">
+                                  <!-- <form action="profile.php" method="post"></form> -->
+                                  <div class="table-wrap">
+                                    <div class="wrapper">
+                                      <h6>Visual Impairment:</h6>
+                                      <p>Blind</p>
+                                    </div>
+
+                                    <div class="wrapper">
+                                      <h6>Auditory Impairment:</h6>
+                                      <p>Deaf</p>
+                                    </div>
+
+                                    <div class="wrapper">
+                                      <h6>Psychiatric Disability:</h6>
+                                      <p>Depression</p>
+                                    </div>
+
+                                    <div class="wrapper">
+                                      <h6>Language:</h6>
+                                      <p>Macedonian</p>
+                                    </div>
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
 
                           <!-- <p><b>City/suburb:</b> {{ item?.city }}</p> -->
                           <span class="spacer">
-
                             <p class="smallFont">
-                              Posted by Username {{ item?.city }} on
-                              {{ formatCreatedAt(item.created_at) }} 
+                              Posted by Username
+                              <span class="text-capitalize"
+                                >({{ item?.city }})</span
+                              >
+                              on
+                              {{ formatCreatedAt(item.created_at) }}
                             </p>
-                            <p span class="smallFont">Job No:  {{ item?.identity }}  </p>
+                            <p span class="smallFont">
+                              Job No: {{ item?.identity }}
+                            </p>
                           </span>
 
                           <!-- <details>
@@ -233,35 +312,37 @@
                           class="d-flex flex-row justify-content-evenly align-items-center"
                           style="min-width: 150px"
                         >
-                      
                           <button
-                            @click="submitProposal(item)" v-if="tab != 'pending'" 
-                            class="btn btn-light btn-sm card-btn my-1"
+                            @click="submitProposal(item)"
+                            v-if="tab != 'pending'"
+                            class="btn btn-light btn-sm card-btn my-1 mx-1"
                           >
                             Submit a proposal
                           </button>
-                          
+
                           <button
-                          @click="submitProposal(item)" 
-                          v-if="tab === 'pending'"  
-                          class="btn btn-light btn-sm card-btn  my-1"
+                            @click="submitProposal(item)"
+                            v-if="tab === 'pending'"
+                            class="btn btn-light btn-sm card-btn my-1 mx-1"
                           >
-                          View proposal
+                            View proposal
                           </button>
                           <button
                             v-if="tab != 'close'"
                             @click="declineJob(item.id)"
-                            class="btn btn-danger btn-sm card-btn my-1"
+                            class="btn btn-danger btn-sm card-btn my-1 mx-1"
                           >
                             Decline
                           </button>
-                          <router-link v-if="tab != 'pending'"
-                            class="btn btn-dark btn-sm card-btn my-1"
+                          <router-link
+                            v-if="tab != 'pending'"
+                            class="btn btn-dark btn-sm card-btn my-1 mx-1"
                             to="/request-info"
                             >Message</router-link
                           >
-                          <router-link v-if="tab === 'pending'"  
-                            class="btn btn-dark btn-sm card-btn my-1"
+                          <router-link
+                            v-if="tab === 'pending'"
+                            class="btn btn-dark btn-sm card-btn my-1 mx-1"
                             to="/request-info"
                             >View Messages</router-link
                           >
@@ -271,7 +352,7 @@
                           class="d-flex flex-column justify-content-center align-items-center"
                           style="min-width: 150px"
                         >
-                        <h3>Closed</h3>
+                          <h3>Closed</h3>
                         </div>
                       </div>
                     </div>
@@ -327,17 +408,20 @@
               </div>
 
               <div
-                    v-if="openJobs.length > 0 && currentPage != lastPage && adminApproval == 'approve' && subscriptionStatus == 'subscribed'"
-                    class="text-center mt-3">
-                    <button class="btn custom-button" @click="loadMore">
-                      Load More
-                    </button>
-                  </div>
-
+                v-if="
+                  openJobs.length > 0 &&
+                  currentPage != lastPage &&
+                  adminApproval == 'approve' &&
+                  subscriptionStatus == 'subscribed'
+                "
+                class="text-center mt-3"
+              >
+                <button class="btn custom-button" @click="loadMore">
+                  Load More
+                </button>
+              </div>
             </div>
           </div>
-         
-        
         </div>
       </div>
     </div>
@@ -360,7 +444,7 @@ export default {
     return {
       openJobs: [],
       endpoint: "/lawyer/show-open-related-jobs",
-      tab: 'open',
+      tab: "open",
       // endpoint_search: "/lawyer/search-related-jobs",
     };
   },
@@ -384,17 +468,16 @@ export default {
   //   this.getJobs();
   // },
   methods: {
-
     async changeTab(status) {
       if (status == "open") {
-        this.endpoint = '/lawyer/show-open-related-jobs';
+        this.endpoint = "/lawyer/show-open-related-jobs";
         await this.loadMore(null, true);
         // this.getData(this.endpoint);
       } else if (status == "pending") {
-        this.endpoint = '/lawyer/show-pending-jobs';
+        this.endpoint = "/lawyer/show-pending-jobs";
         await this.loadMore(null, true);
       } else if (status == "close") {
-        this.endpoint = '/lawyer/show-approve-jobs';
+        this.endpoint = "/lawyer/show-approve-jobs";
         await this.loadMore(null, true);
       }
       // else if (status == "reject") {
@@ -459,7 +542,6 @@ export default {
 ul#pills-tab[data-v-511b78bb] {
   width: 400px !important;
 }
-
 
 .navbar-nav {
   display: flex;
@@ -528,7 +610,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
+.nav-pills .show > .nav-link {
   color: white;
   background-color: #000000;
 }
@@ -541,7 +623,7 @@ ul#pills-tab {
 
 .smallFont {
   font-size: 12px;
-  margin: 0 0 5px 0 ;
+  margin: 0 0 5px 0;
 }
 
 .search-field {
@@ -551,12 +633,11 @@ ul#pills-tab {
 .descriptionText {
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 100px;
-  line-break: anywhere;
+  max-height: 145px;
+  /* line-break: anywhere; */
   overflow-y: auto;
   padding-right: 10px;
   margin-right: 5px;
- 
 }
 
 .descriptionText::-webkit-scrollbar {
@@ -575,15 +656,35 @@ ul#pills-tab {
   border-radius: 10px;
 }
 .card-btn {
-    width: 30%;
+  width: 30%;
 }
 p.badge {
-    font-size: 14px;
+  font-size: 14px;
 }
-.spacer{
-  margin: 20px 0;
+.spacer {
+  margin: 30px 0;
   display: block;
 }
+.table-wrap * {
+    color: black;
+}
+.table-wrap .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 5px 0;
+}
+.table-wrap .wrapper p , .table-wrap .wrapper h6 {
+  margin: 0;
+}
+.table-wrap .wrapper p {
+  margin-left: 10px;  
+}
+.table-wrap .wrapper h6{
+  font-weight:600;
+}
+
+
 @media only screen and (max-width: 600px) {
   .l-main {
     padding-bottom: 100px;
