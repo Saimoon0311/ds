@@ -109,7 +109,7 @@ export default {
                 formData.token = this.token;
                 api.post('/forget-password', formData)
                     .then(res => {
-                        this.$swal('Success', 'Password has been changed successfully', 'success').then(() => {
+                        this.$swal('', 'Password has been changed successfully', 'success').then(() => {
                             this.$store.commit('SET_USER_TYPE',res?.data?.type);
                             localStorage.setItem('userType',res?.data?.type);
                             this.$router.push({ path: '/' + res?.data?.redirectUrl });

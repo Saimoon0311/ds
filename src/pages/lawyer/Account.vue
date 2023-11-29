@@ -354,7 +354,7 @@ export default {
             .get(`/lawyer/resubscribe/${plan}`)
             .then(() => {
               this.$swal(
-                "Success",
+                "",
                 "You have been resubscribed successfully",
                 "success"
               ).then(() => {
@@ -363,7 +363,7 @@ export default {
             })
             .catch((error) => {
               this.$swal(
-                "Error",
+                "",
                 error?.response?.data?.error,
                 "error"
               );
@@ -395,7 +395,7 @@ export default {
             })
             .catch((error) => {
               this.$swal(
-                "Error",
+                "",
                 error?.response?.data?.error,
                 "error"
               );
@@ -434,7 +434,7 @@ export default {
             })
             .catch((error) => {
               this.$swal(
-                "Error",
+                "",
                 error?.response?.data?.error,
                 "error"
               );

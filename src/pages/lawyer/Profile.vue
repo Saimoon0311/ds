@@ -899,13 +899,13 @@ export default {
       }
       try {
         api.post('/lawyer/update-fields', { "ids": this.selectedOptionIds }).then(() => {
-          this.$swal("Success", "Fields updated successfully", "success");
+          this.$swal("", "Fields updated successfully", "success");
           this.fetchOptions();
           this.fetchUserData();
           this.closeModal('#AreaModal');
-        }).catch((error) => this.$swal("Error", error?.response?.data?.error, "error"));
+        }).catch((error) => this.$swal("", error?.response?.data?.error, "error"));
       } catch (error) {
-        this.$swal("Error", error?.response?.data?.error, "error")
+        this.$swal("", error?.response?.data?.error, "error")
         // console.error('Error uploading image', error);
       }
     },
@@ -919,13 +919,13 @@ export default {
       }
       try {
         api.post('/lawyer/update-locations', { "ids": this.selectedOptionIds_locations }).then(() => {
-          this.$swal("Success", "Locations updated successfully", "success");
+          this.$swal("", "Locations updated successfully", "success");
           this.fetchOptions_locations();
           this.fetchUserData();
           this.closeModal('#StateModal');
-        }).catch((error) => this.$swal("Error", error?.response?.data?.error, "error"));
+        }).catch((error) => this.$swal("", error?.response?.data?.error, "error"));
       } catch (error) {
-        this.$swal("Error", error?.response?.data?.error, "error")
+        this.$swal("", error?.response?.data?.error, "error")
         // console.error('Error uploading image', error);
       }
     },
@@ -940,12 +940,12 @@ export default {
       formData.append('image', file);
       try {
         api.post('/lawyer/upload-image', formData).then(() => {
-          this.$swal("success", "Profile Image has been uploaded successfully", "success").then(() => {
+          this.$swal("", "Profile Image has been uploaded successfully", "success").then(() => {
             fileInput.value = '';
           });
         })
       } catch (error) {
-        this.$swal("Error", error?.response?.data?.error, "error")
+        this.$swal("", error?.response?.data?.error, "error")
         // console.error('Error uploading image', error);
       }
     },

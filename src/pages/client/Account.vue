@@ -400,7 +400,7 @@ export default {
                 this.logoutProcess('login');
               });
             }).catch((error) => {
-              this.$swal('Error', error?.response?.data?.error, 'error');
+              this.$swal('', error?.response?.data?.error, 'error');
             });
         }
       })
@@ -428,12 +428,12 @@ export default {
       try {
         api.post('/update-profile', formData).then(res => {
           this.closeModal(modalId);
-          this.$swal("success", "Profile updated successfully", "success").then(() => {
+          this.$swal("", "Profile updated successfully", "success").then(() => {
             this.setUserInStateAndLocalStorage(res);
           });
         })
       } catch (error) {
-        this.$swal("Error", error?.response?.data?.error, "error")
+        this.$swal("", error?.response?.data?.error, "error")
         // console.error('Error uploading image', error);
       }
     },
@@ -442,14 +442,14 @@ export default {
       api.post('/change-password', formData)
         .then(() => {
           this.closeModal('#Password');
-          this.$swal('Success', 'Password has been changed successfully', 'success')
+          this.$swal('', 'Password has been changed successfully', 'success')
           // .then(() => {
           //   document.getElementById('prev_password').value = "";
           //   document.getElementById('password').value = "";
           // });
         })
         .catch(error => {
-          this.$swal('Error', error?.response?.data?.error, 'error');
+          this.$swal('', error?.response?.data?.error, 'error');
           console.log("getResults : ", error?.response?.data?.error)
         });
     },

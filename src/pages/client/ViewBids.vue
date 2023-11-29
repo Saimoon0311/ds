@@ -501,7 +501,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           api.post('/client/change-proposal-status', obj).then(res => {
-            this.$swal('Success', `Proposal has been ${obj.status}ed successfully`, 'success').then(async () => {
+            this.$swal('', `Proposal has been ${obj.status}ed successfully`, 'success').then(async () => {
               await this.getPaginatedData();
             })
             console.log('response : ', res);

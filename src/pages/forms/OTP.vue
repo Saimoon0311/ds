@@ -148,7 +148,7 @@ export default {
                         this.setUserAndRedirect(res, dashboardUrl);
                     })
                     .catch(() => {
-                        this.$swal("Error", "Invalid otp or may be expire", "error");
+                        this.$swal("", "Invalid otp or may be expire", "error");
                     });
             }
         },

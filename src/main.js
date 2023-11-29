@@ -119,7 +119,7 @@ app.mixin({
           if (modalId) {
             this.closeModal(modalId);
           }
-          this.$swal("success", "Profile updated successfully", "success").then(
+          this.$swal("success", "Profile updated successfully", "").then(
             () => {
               // for multiple profiles edit from admin panel
               if (this.loginUserEmail != res?.data?.data?.email) {
@@ -138,7 +138,7 @@ app.mixin({
           );
         });
       } catch (error) {
-        this.$swal("Error", error?.response?.data?.error, "error");
+        this.$swal("", error?.response?.data?.error, "error");
       }
     },
 
@@ -236,6 +236,12 @@ app.mixin({
           // this.setUserAndRedirect(res, dashboardUrl);
         })
         .catch((error) => {
+          this.$swal(
+            "",
+            error?.response?.data?.error,
+            "error"
+          );
+
           // alert("Invalid Credentials");
           console.log("getResults : ", error);
         });
@@ -316,9 +322,16 @@ app.mixin({
           .catch((error) => {
             // alert("Invalid Credentials");
             // error?.response?.data?.error
+
+            if (error?.response?.data?.errors.length > 0) {
+              error = error?.response?.data?.errors[0];
+            } else {
+              error = error?.response?.data?.error;
+            }
+
             this.$swal(
-              "Error",
-              error?.response?.data?.error,
+              "",
+              error,
               "error"
             );
             console.log("getResults : ", error);
@@ -344,7 +357,7 @@ app.mixin({
           })
           .catch((error) => {
             this.$swal(
-              "Error",
+              "",
               error?.response?.data?.error,
               "error"
             );
@@ -407,7 +420,7 @@ app.mixin({
     },
 
     async loadMore(status = null, reset = null) {
-      console.log(status);
+      console.log(status , 'l1');
       // if (this.currentPage > this.lastPage) {
       //   return;
       // }

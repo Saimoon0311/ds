@@ -246,7 +246,7 @@
                           </button>
                           <button
                             v-if="tab != 'close'"
-                            @click="declineJob(item.id)"
+                            @click="declineJob(item.id,index)"
                             class="btn btn-danger btn-sm w-100 my-1"
                           >
                             Decline
@@ -431,7 +431,7 @@ export default {
               .post("/lawyer/decline-job", { job_id: job_id })
               .then(() => {
                 this.$swal(
-                  "Success",
+                  "",
                   `Job has been decline successfully`,
                   "success"
                 ).then(async () => {
