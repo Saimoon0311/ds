@@ -235,7 +235,7 @@
                             aria-hidden="true"
                             id="Accessibility"
                           >
-                            <div class="modal-dialog modal-lg">
+                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                 <div class="modal-header">
                                   <h5
@@ -610,7 +610,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
   color: white;
   background-color: #000000;
 }
@@ -655,33 +655,42 @@ ul#pills-tab {
   /* outline: 1px solid #292929; */
   border-radius: 10px;
 }
+
 .card-btn {
   width: 30%;
 }
+
 p.badge {
   font-size: 14px;
 }
+
 .spacer {
-  margin: 30px 0;
+  margin: 25px 0;
   display: block;
 }
+
 .table-wrap * {
-    color: black;
+  color: black;
 }
+
 .table-wrap .wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin: 5px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 5px 0;
 }
-.table-wrap .wrapper p , .table-wrap .wrapper h6 {
+
+.table-wrap .wrapper p,
+.table-wrap .wrapper h6 {
   margin: 0;
 }
+
 .table-wrap .wrapper p {
-  margin-left: 10px;  
+  margin-left: 10px;
 }
-.table-wrap .wrapper h6{
-  font-weight:600;
+
+.table-wrap .wrapper h6 {
+  font-weight: 600;
 }
 
 
