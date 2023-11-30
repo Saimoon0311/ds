@@ -215,14 +215,14 @@
                           </p>
                           <p>
                             <button
-                              :disabled="!item?.requirements"
+                              :disabled="!item?.requirement"
                               type="button"
                               class="btn btn-dark btn-sm"
                               :data-target="`.edit-job-title-modal${index}`"
                               title="Edit"
                               :data-bs-toggle="`modal${index}`"
                               data-bs-target="#Accessibility"
-                              @click="openRequirementsModal(item?.requirements)"
+                              @click="openRequirementsModal(item?.requirement)"
                             >
                             Accessibility Requirements
                             </button>

@@ -386,13 +386,15 @@ app.mixin({
             this.setUserAndRedirect(res, dashboardUrl);
           })
           .catch((error) => {
-            this.$swal("", error?.response?.data?.error, "error");
+            // this.$swal("", error?.response?.data?.error, "error");
+            this.$swal("", "Incorrect email or password.", "error");
             // alert("Invalid Credentials");
             console.log("getResults : ", error);
           });
         console.log(formData);
       } catch (error) {
-        this.showBackendErrors(error);
+        this.$swal("", "Incorrect email or password.", "error");
+        // this.showBackendErrors(error);
         // console.error("API request error:", error);
       }
     },
