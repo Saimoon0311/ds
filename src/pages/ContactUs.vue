@@ -228,6 +228,9 @@
                     <option value="I am unable to act for my client">
                       I am unable to act for my client
                     </option>
+                    <option value="Report Inappropriate Job">
+                      Report Inappropriate Job
+                    </option>
                     <option value="Other">Other</option>
                   </Field>
                   <div class="invalid-feedback">{{ errors.field }}</div>
@@ -424,4 +427,5 @@ textarea::placeholder {
     margin: 10px !important;
     padding: 20px 10px !important;
   }
-}</style>
+}
+</style>
