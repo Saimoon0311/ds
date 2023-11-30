@@ -64,7 +64,8 @@ input[type="radio"]:checked {
     background-color: #000 !important;
 }
 .swal2-confirm:focus,
-swal2-styled:focus{
+swal2-styled:focus,
+.swal2-close:focus{
   box-shadow: none !important;
 }
 /* Chrome, Safari, Edge, Opera */
@@ -79,6 +80,13 @@ input[type=number] {
 }
 input[type="checkbox"]:checked {
   filter: grayscale(100%) contrast(200%);
+}
+.my-swal-container .swal2-close:focus {
+  box-shadow: none !important;
+}
+
+.my-swal-container .swal2-title {
+  font-size: 25px;
 }
   </style>
   <body>

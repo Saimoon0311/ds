@@ -421,16 +421,16 @@ export default {
 
       let newData = {};
 
-if (data && typeof data === 'object') {
-  for (const key in data) {
-    if (Object.prototype.hasOwnProperty.call(data, key)) {
-      const value = data[key];
-      if (value !== null && key != 'id' && key != 'job_id' && key != 'user_id' && key != 'created_at' && key != 'updated_at') {
-        newData[key] = value;
+      if (data && typeof data === 'object') {
+        for (const key in data) {
+          if (Object.prototype.hasOwnProperty.call(data, key)) {
+            const value = data[key];
+            if (value !== null && key != 'id' && key != 'job_id' && key != 'user_id' && key != 'created_at' && key != 'updated_at') {
+              newData[key] = value;
+            }
+          }
+        }
       }
-    }
-  }
-}
 
 
       // Construct HTML dynamically for key-value pairs
@@ -447,7 +447,7 @@ if (data && typeof data === 'object') {
       // );
 
       const htmlContent = Object.entries(newData)
-        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b>${key}:</b></h6><p>${value}</p></div>`)
+        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b>${key}: </b><span>${value}</span></h6></div>`)
         .join('');
 
       // Use dynamic HTML inside SweetAlert2 modal
@@ -721,6 +721,13 @@ p.badge {
   font-weight: 600;
 }
 
+.my-swal-container .swal2-close:focus {
+  box-shadow: none !important;
+}
+
+.my-swal-container .swal2-title {
+  font-size: 25px;
+}
 
 @media only screen and (max-width: 600px) {
   .l-main {
