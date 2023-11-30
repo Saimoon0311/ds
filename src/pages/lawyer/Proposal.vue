@@ -68,6 +68,16 @@
                     class="form-control d-input" min="1" step=".01" placeholder="" />
                 </div>
               </div>
+
+              <div class="form-group mt-3">
+                <label> Estimated number of days: </label>
+                <div>
+                  <!-- <span class="position-absolute d-span"> $</span> -->
+                  <input type="number" id="fixedFeeAmount" v-model="form.daily_rate" name="fixedFeeAmount"
+                    class="form-control d-input" min="1" step=".01" placeholder="" />
+                </div>
+              </div>
+
               <div class="disbursement-fields">
                 <div class="form-group mt-3">
                   <label> What is the estimated amount for disbursements (excluding GST)?</label>
