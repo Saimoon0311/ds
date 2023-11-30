@@ -138,7 +138,7 @@
                           </details> -->
                     </div>
                     <div
-                      class="d-flex flex-row justify-content-center align-items-center"
+                      class="d-flex flex-lg-row justify-content-center align-items-center flex-sm-column"
                       style="min-width: 125px"
                     >
                       <!-- <router-link
@@ -366,6 +366,17 @@ p.badge {
 .smallFont {
   font-size: 12px;
   margin: 0 0 5px 0 ;
+}
+@media only screen and (max-width: 1400px) and (min-width: 992px)  {
+  .card-btn{
+  width: 33%;
+  font-size: 11px;
+}
+}
+@media only screen and (max-width: 992px) {
+  .card-btn{
+  width: 100%;
+}
 }
 @media only screen and (max-width: 767px) and (min-width: 320px) {
   /* .btn {
