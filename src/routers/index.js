@@ -23,6 +23,9 @@ import PlatForm from "@/components/PlatForm.vue";
 import ClientRegister from "@/pages/client/clientRegister.vue";
 import OTP from "@/pages/forms/OTP.vue";
 import ClientAccount from "@/pages/client/Account.vue";
+
+import AdminAccount from "@/pages/admin/Account.vue";
+
 // import PostingJob from "@/pages/client/PostingJob.vue";
 import PostingaJob from "@/pages/client/PostingaJob.vue";
 import AreaOfLaw from "@/pages/client/AreaOfLaw.vue";
@@ -276,9 +279,15 @@ const routes = [
   // },
 
   {
+    path: "/admin-account",
+    component: AdminAccount,
+    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true },
+  },
+
+  {
     path: "/admin-dashboard",
     component: AdminLawyer,
-    meta: { requiresAuth: true, clientAndlawyerAndAdminNotAllowed: true }
+    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true }
   },
 
   {
@@ -296,11 +305,13 @@ const routes = [
   {
     path: "/job",
     component: AdminJobs,
+    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true }
   },
 
   {
     path: "/client",
     component: AdminClients,
+    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true }
   },
 
   {
@@ -403,7 +414,7 @@ router.beforeEach(async (to, from, next) => {
         console.log("match try");
         let result = await api.get("/verify");
         console.log("user all data ::: ", result?.data);
-        if(to.meta.clientAndlawyerAndAdminNotAllowed && result?.data?.data?.type != "admin"){
+        if(to.meta.clientAndlawyerNotAllowed && result?.data?.data?.type != "admin"){
           console.log('client and lawyer not allowed');
           const redirectUrl =  (result?.data?.data?.type == "lawyer") ? "/lawyer-dashboard" : "client-dashboard";
           next(redirectUrl);

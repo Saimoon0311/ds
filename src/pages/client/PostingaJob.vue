@@ -577,10 +577,12 @@ export default {
   },
   methods: {
     setAreaFunc() {
+      this.selectedArea = null;
+      this.selectedAreaIndex = null;
       this.otherAreaSelected = !this.otherAreaSelected;
-      if (this.otherAreaSelected) {
-        this.nextStep();
-      }
+      // if (this.otherAreaSelected) {
+      //   this.nextStep();
+      // }
     },
     nextStep(values) {
       if (this.currentStep == 0 && !this.otherAreaSelected && !this.selectedArea && !this.selectedAreaIndex) {
@@ -645,7 +647,7 @@ export default {
       api
         .post("/client/create-job", formData)
         .then(() => {
-          this.$swal("Success", "Your job has been posted.", "success").then(
+          this.$swal("", "Your job has been posted.", "success").then(
             () => {
               this.changePostJobFormToDefault();
               this.currentStep = 0;
@@ -654,7 +656,7 @@ export default {
           );
         })
         .catch((error) => {
-          this.$swal("Error", error?.response?.data?.error, "error");
+          this.$swal("", error?.response?.data?.error, "error");
           console.log("getResults : ", error?.response?.data?.error);
         });
 
@@ -763,8 +765,9 @@ export default {
       }
     },
     setArea(index, id) {
-      this.selectedArea = id;
-      this.selectedAreaIndex = index;
+      this.otherAreaSelected = false;
+        this.selectedArea = id;
+        this.selectedAreaIndex = index;
       // console.log(index,id);
     },
     setLocation() {

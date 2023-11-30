@@ -184,7 +184,7 @@
           <tbody>
             <tr v-if="data_paginated == null || data_paginated.length == 0">
               <td colspan="9" class="text-center">
-                You have not submitted any proposals yet.
+                No Record Found!
               </td>
             </tr>
 
@@ -208,7 +208,7 @@
               <td>{{ formatCreatedAt(item?.created_at) }}</td>
               <!-- <td data-v-7525850d=""><p data-v-7525850d="">{{ item?.status }}</p></td>
                 -->
-              <td data-v-7525850d="">
+              <!-- <td data-v-7525850d="">
                 <button
                   v-if="item?.status == 'Open'"
                   data-v-7525850d=""
@@ -226,7 +226,17 @@
                     Withdraw Proposal
                   </button>
                 </form>
-              </td> 
+              </td>  -->
+              <td>
+                <button
+                  data-v-7525850d=""
+                  class="btn btn-sm btn-danger"
+                  style="background-color: black !important"
+                  @click="deleteJob(item?.id)"
+                >
+                  <i  class="fa fa-trash"></i>
+                </button>
+              </td>
             </tr>
             <!-- <tr>
               <td><a href="jobInfo.php?id=30">test job</a></td>
@@ -393,6 +403,36 @@ export default {
         this.getData('/admin/show-no-field-jobs');
       }
       
+    },
+
+
+
+    deleteJob(id){
+      console.log(id);
+      this.$swal({
+        title: 'Are you sure?',
+        text: "You want to delete this job ?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Delete',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          api.delete(`/admin/delete-job/${id}`)
+            .then(() => {
+              this.$swal(
+                'Deleted!',
+                'Job has been deleted.',
+                'success'
+              ).then(() => {
+                this.getPaginatedData();
+              });
+            }).catch((error) => {
+              this.$swal('', error?.response?.data?.error, 'error');
+            });
+        }
+      })
     }
   },
   name: "AdminLawyer",

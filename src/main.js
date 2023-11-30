@@ -40,7 +40,7 @@ app.mixin({
     return {
       clear: false,
       searchQuery: "",
-      searchQueryNumberPagination : "",
+      searchQueryNumberPagination: "",
       openJobs: [],
       closeJobs: [],
       currentPage: 0,
@@ -119,30 +119,28 @@ app.mixin({
           if (modalId) {
             this.closeModal(modalId);
           }
-          this.$swal("success", "Profile updated successfully", "success").then(
-            () => {
-              // for multiple profiles edit from admin panel
-              if (this.loginUserEmail != res?.data?.data?.email) {
-                if (this.openJobs.length > 0) {
-                  const openJobsIndex = this.openJobs.findIndex(
-                    (user) => user.email === res?.data?.data?.email
-                  );
-                  if (openJobsIndex !== -1) {
-                    this.openJobs[openJobsIndex] = res?.data?.data;
-                  }
+          this.$swal("success", "Profile updated successfully", "").then(() => {
+            // for multiple profiles edit from admin panel
+            if (this.loginUserEmail != res?.data?.data?.email) {
+              if (this.openJobs.length > 0) {
+                const openJobsIndex = this.openJobs.findIndex(
+                  (user) => user.email === res?.data?.data?.email
+                );
+                if (openJobsIndex !== -1) {
+                  this.openJobs[openJobsIndex] = res?.data?.data;
                 }
-              } else {
-                this.setUserInStateAndLocalStorage(res);
               }
+            } else {
+              this.setUserInStateAndLocalStorage(res);
             }
-          );
+          });
         });
       } catch (error) {
-        this.$swal("Error", error?.response?.data?.error, "error");
+        this.$swal("", error?.response?.data?.error, "error");
       }
     },
 
-   // number pagination data
+    // number pagination data
     async getPaginatedData() {
       console.log("func run");
       api
@@ -173,10 +171,6 @@ app.mixin({
       // console.log("last page : ", this.lastPage);
       // console.log("curr search : ", this.currentPage);
     },
-
-
-    
-
 
     setUserInStateAndLocalStorage(res) {
       console.log("new func : ", res?.data?.data?.link);
@@ -236,6 +230,8 @@ app.mixin({
           // this.setUserAndRedirect(res, dashboardUrl);
         })
         .catch((error) => {
+          this.$swal("", error?.response?.data?.error, "error");
+
           // alert("Invalid Credentials");
           console.log("getResults : ", error);
         });
@@ -249,11 +245,20 @@ app.mixin({
       }
       this.setUserInStateAndLocalStorage(res);
       this.$store.commit("SET_AUTHENTICATED", true);
-      if(!path){
-        if(res?.data?.data?.type == 'client'){
+      if (!path) {
+        if (res?.data?.data?.type == "client") {
           path = "client-dashboard";
-        }else if(res?.data?.data?.type == 'lawyer'){
-          path = "lawyer-profile";
+        } else if (res?.data?.data?.type == "lawyer") {
+          console.log("len of fields : ", res?.data?.data?.fields.length);
+          console.log("len of locations : ", res?.data?.data?.locations.length);
+          if (
+            res?.data?.data?.fields.length > 0 &&
+            res?.data?.data?.locations.length > 0
+          ) {
+            path = "lawyer-dashboard";
+          } else {
+            path = "lawyer-profile";
+          }
         }
       }
       this.$router.push({ path: path });
@@ -314,18 +319,57 @@ app.mixin({
             // }
           })
           .catch((error) => {
-            // alert("Invalid Credentials");
-            // error?.response?.data?.error
-            this.$swal(
-              "Error",
-              error?.response?.data?.error,
-              "error"
-            );
-            console.log("getResults : ", error);
+            // console.log('my : ' , error?.response.data?.errors.email);
+            // if(typeof error?.response.data?.errors.email[0] != undefined){
+            //   error = error?.response.data?.errors.email[0]
+            // }else{
+            //   error = error?.response?.data?.error;
+            // }
+            // this.$swal(
+            //   "",
+            //   error,
+            //   "error"
+            // );
+            // console.log("getResults : ", error);
+
+            this.showBackendErrors(error);
           });
       } catch (error) {
         console.error("API request error:", error);
       }
+    },
+
+    showBackendErrors(error) {
+      // console.log("my : ", error?.response.data?.errors.email);
+
+      let errorMessages = [];
+
+      if (error?.response.data?.errors) {
+        // Iterate through the errors and collect them in an array
+        for (const key in error.response.data.errors) {
+          if (
+            Object.prototype.hasOwnProperty.call(
+              error.response.data.errors,
+              key
+            )
+          ) {
+            const errorArray = error.response.data.errors[key];
+            errorMessages = errorMessages.concat(errorArray);
+          }
+        }
+      } else {
+        // If there are no specific field errors, use a general error message
+        errorMessages.push(
+          error?.response?.data?.error || "An unknown error occurred."
+        );
+      }
+
+      // Display the error messages
+      this.$swal({
+        title: "Error",
+        text: errorMessages.join("\n"), // Display each error on a new line
+        icon: "error",
+      });
     },
 
     goToForgetPasswordPage(url) {
@@ -333,7 +377,6 @@ app.mixin({
       this.$router.push({ path: "/forget-password" });
     },
 
-    
     submitLoginForm(formData, userType, dashboardUrl) {
       try {
         formData.type = userType;
@@ -343,17 +386,14 @@ app.mixin({
             this.setUserAndRedirect(res, dashboardUrl);
           })
           .catch((error) => {
-            this.$swal(
-              "Error",
-              error?.response?.data?.error,
-              "error"
-            );
+            this.$swal("", error?.response?.data?.error, "error");
             // alert("Invalid Credentials");
             console.log("getResults : ", error);
           });
         console.log(formData);
       } catch (error) {
-        console.error("API request error:", error);
+        this.showBackendErrors(error);
+        // console.error("API request error:", error);
       }
     },
 
@@ -407,7 +447,7 @@ app.mixin({
     },
 
     async loadMore(status = null, reset = null) {
-      console.log(status);
+      console.log(status, "l1");
       // if (this.currentPage > this.lastPage) {
       //   return;
       // }
@@ -476,7 +516,6 @@ app.mixin({
       if (this.endpoint == "/admin/all-lawyers") {
         url = url + `&admin_approval=${status}`;
       }
-
 
       const response = await this.fetchData(url);
       this.lastPage = response?.last_page;

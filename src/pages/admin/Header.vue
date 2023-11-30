@@ -49,6 +49,13 @@
                   aria-current="page"
                   >Jobs</router-link
                 >
+                <router-link
+                  to="/admin-account"
+                  class="nav-link fw-bolder menuItem-active-link"
+                  id="account"
+                  aria-current="page"
+                  >Account</router-link
+                >
               </div>
               <div class="lg-btn">
                 <!-- <router-link

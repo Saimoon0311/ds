@@ -36,7 +36,7 @@
               aria-selected="true"
               @click="setStatus('pending')"
             >
-              Open
+              Pending
             </button>
           </li>
           <li data-v-511b78bb="" class="nav-item" role="presentation">
@@ -53,7 +53,7 @@
               tabindex="-1"
               @click="setStatus('reject')"
             >
-              Closed
+              Approved or Reject
             </button>
           </li>
         </ul>
@@ -186,28 +186,26 @@
                       </td>
 
                       <td class="text-end button-width">
-                        <div  class="mb-1">
-                          <input
-                            class="d-none"
-                            name="accept_id"
-                            value="23"
-                          /><button @click="approve(item?.id,index)" class="btn btn-dark">
+                        <div class="row">
+                          <div class="col-lg-6">
+                          <button @click="approve(item?.id,index)" class="btn btn-dark btn-sm">
                             <i class="bi bi-check-lg"></i> Approve
                           </button>
-                        </div>
-                        <div >
-                          <input
-                            class="d-none"
-                            name="reject_id"
-                            value="23"
-                          /><button
+                      
+                          </div>
+                          <div class="col-lg-6">
+                          <button
                           @click="reject(item?.id,index)"
-                            class="btn btn-light"
+                            class="btn btn-light btn-sm"
                             style="border: 1px solid black"
                           >
                             <i class="bi bi-x-lg"></i> Reject
                           </button>
+                      
+                          </div>
                         </div>
+                        
+                        
                       </td>
 
                     </tr>
@@ -906,7 +904,7 @@
 
                       <td class="text-end button-width">
                         <div  class="mb-1">
-                           {{ capitalizeFirstLetter(item?.admin_approval) }}
+                           {{ capitalizeFirstLetter(item?.admin_approval) }}<span v-if="item?.admin_approval == 'approve'">d</span>
                         </div>
                         <!-- <div >
                           <input
@@ -1126,14 +1124,14 @@ export default {
       console.log(this.form);
     },
 
-    setModal(type,user_id) {
+    setModal(type, user_id) {
       this.form.user_id = user_id;
       if (type == "fields") {
         this.fetchOptions();
         this.selectedOptionIds = this.selectedOptionIdsShow;
         console.log('idssss ::::: ', this.selectedOptionIdsShow);
       } else if (type == "locations") {
-          this.fetchOptions_locations();
+        this.fetchOptions_locations();
         this.selectedOptionIds_locations = this.selectedOptionIdsShow_locations;
       }
     },
@@ -1142,7 +1140,7 @@ export default {
     async fetchOptions() {
       try {
         const response = await api.get(`/get-active-fields?user_id=${this.form.user_id}`);
-        console.log('sundak  :::: ',this.form.user_id  , response?.data?.myFields);
+        console.log('sundak  :::: ', this.form.user_id, response?.data?.myFields);
         this.options = response?.data?.allFields;
         this.selectedOptionIds = response?.data?.myFields ?? [];
         this.selectedOptionIdsShow = response?.data?.myFields ?? [];
@@ -1165,63 +1163,63 @@ export default {
     },
 
     // fields
-    saveSelectedFields(user_id,index) {
+    saveSelectedFields(user_id, index) {
       console.log('Selected Option IDs:', this.selectedOptionIds);
       if (this.selectedOptionIds.length == 0) {
         return false;
       }
       try {
-        api.post('/admin/update-fields', { "user_id": user_id , "ids": this.selectedOptionIds, "is_admin": true }).then((res) => {
-          this.$swal("Success", "Fields updated successfully", "success");
+        api.post('/admin/update-fields', { "user_id": user_id, "ids": this.selectedOptionIds, "is_admin": true }).then((res) => {
+          this.$swal("", "Fields updated successfully", "success");
           this.closeModal(`#AreaModal${index}`);
-                if (this.openJobs.length > 0) {
-                  const openJobsIndex = this.openJobs.findIndex(
-                    (user) => user.email === res?.data?.data?.email
-                  );
-                  if (openJobsIndex !== -1) {
-                    this.openJobs[openJobsIndex].fields = [...this.selectedOptionIds];
-                  }
-                }
+          if (this.openJobs.length > 0) {
+            const openJobsIndex = this.openJobs.findIndex(
+              (user) => user.email === res?.data?.data?.email
+            );
+            if (openJobsIndex !== -1) {
+              this.openJobs[openJobsIndex].fields = [...this.selectedOptionIds];
+            }
+          }
 
           //       this.fetchOptions();
           // this.fetchUserData();
 
 
-        }).catch((error) => this.$swal("Error", error?.response?.data?.error, "error"));
+        }).catch((error) => this.$swal("", error?.response?.data?.error, "error"));
       } catch (error) {
-        this.$swal("Error", error?.response?.data?.error, "error")
+        this.$swal("", error?.response?.data?.error, "error")
         // console.error('Error uploading image', error);
       }
     },
 
 
     // locations
-    saveSelectedLocations(user_id,index) {
+    saveSelectedLocations(user_id, index) {
       console.log('Selected Option IDs:', this.selectedOptionIds_locations);
       if (this.selectedOptionIds_locations.length == 0) {
         return false;
       }
       try {
-        api.post('/admin/update-locations', { "user_id": user_id , "ids": this.selectedOptionIds_locations, "is_admin": true }).then((res) => {
-          this.$swal("Success", "Locations updated successfully", "success");
+        api.post('/admin/update-locations', { "user_id": user_id, "ids": this.selectedOptionIds_locations, "is_admin": true }).then((res) => {
+          this.$swal("", "Locations updated successfully", "success");
           // this.fetchOptions_locations();
           // this.fetchUserData();
           this.closeModal(`#StateModal${index}`);
-              console.log('loc ::::: ' , this.openJobs);
-                if (this.openJobs.length > 0) {
-                  console.log('index ::::: ' , this.openJobs);
-                  console.log('index ::::: ' , res);
-                  const openJobsIndex = this.openJobs.findIndex(
-                    (user) => user.email === res?.data?.data?.email
-                  );
-                  if (openJobsIndex !== -1) {
-                    this.openJobs[openJobsIndex].locations = [...this.selectedOptionIds_locations];
-                  }
-                }
+          console.log('loc ::::: ', this.openJobs);
+          if (this.openJobs.length > 0) {
+            console.log('index ::::: ', this.openJobs);
+            console.log('index ::::: ', res);
+            const openJobsIndex = this.openJobs.findIndex(
+              (user) => user.email === res?.data?.data?.email
+            );
+            if (openJobsIndex !== -1) {
+              this.openJobs[openJobsIndex].locations = [...this.selectedOptionIds_locations];
+            }
+          }
 
-        }).catch((error) => this.$swal("Error", error?.response?.data?.error, "error"));
+        }).catch((error) => this.$swal("", error?.response?.data?.error, "error"));
       } catch (error) {
-        this.$swal("Error", error?.response?.data?.error, "error")
+        this.$swal("", error?.response?.data?.error, "error")
         // console.error('Error uploading image', error);
       }
     },
@@ -1247,8 +1245,8 @@ export default {
               .post("/admin/approve-reject-users", { user_id: id, status: 'approve' })
               .then(() => {
                 this.$swal(
-                  "Success",
-                  `Lawyer has been approved successfully`,
+                  "",
+                  `This lawyer is now approved.`,
                   "success"
                 ).then(async () => {
                   this.fixLoadMoreAfterDeleteRecord(index, this.pageStatus);
@@ -1279,7 +1277,7 @@ export default {
               .post("/admin/approve-reject-users", { user_id: id, status: 'reject' })
               .then(() => {
                 this.$swal(
-                  "Success",
+                  "",
                   `Lawyer has been rejected successfully`,
                   "success"
                 ).then(async () => {
@@ -1313,7 +1311,7 @@ ul#pills-tab {
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  width: 230px;
+  width: 330px;
 }
 
 /* .hello {} */
@@ -1346,7 +1344,7 @@ ul#pills-tab {
 }
 
 .button-width {
-  width: 10%;
+  width: 12%;
 }
 
 .footer {

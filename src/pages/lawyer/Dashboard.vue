@@ -215,73 +215,21 @@
                           </p>
                           <p>
                             <button
+                              :disabled="!item?.requirements"
                               type="button"
                               class="btn btn-dark btn-sm"
-                              data-target=".edit-job-title-modal"
+                              :data-target="`.edit-job-title-modal${index}`"
                               title="Edit"
-                              data-bs-toggle="modal"
+                              :data-bs-toggle="`modal${index}`"
                               data-bs-target="#Accessibility"
+                              @click="openRequirementsModal(item?.requirements)"
                             >
                             Accessibility Requirements
                             </button>
                           </p>
 
                           <!-- modal -->
-                          <div
-                            class="modal fade edit-job-title-modal"
-                            tabindex="-1"
-                            role="dialog"
-                            aria-labelledby="mySmallModalLabel"
-                            aria-hidden="true"
-                            id="Accessibility"
-                          >
-                            <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5
-                                    class="modal-title text-dark fw-bold"
-                                    id="exampleModalLabel"
-                                  >
-                                  Accessibility Requirements:
-                                  </h5>
-                                  <button
-                                    type="button"
-                                    class="close btn btn-dark"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                  >
-                                    <span aria-hidden="true">×</span>
-                                  </button>
-                                </div>
-
-                                <div class="modal-body">
-                                  <!-- <form action="profile.php" method="post"></form> -->
-                                  <div class="table-wrap">
-                                    <div class="wrapper">
-                                      <h6>Visual Impairment:</h6>
-                                      <p>Blind</p>
-                                    </div>
-
-                                    <div class="wrapper">
-                                      <h6>Auditory Impairment:</h6>
-                                      <p>Deaf</p>
-                                    </div>
-
-                                    <div class="wrapper">
-                                      <h6>Psychiatric Disability:</h6>
-                                      <p>Depression</p>
-                                    </div>
-
-                                    <div class="wrapper">
-                                      <h6>Language:</h6>
-                                      <p>Macedonian</p>
-                                    </div>
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                      
 
                           <!-- <p><b>City/suburb:</b> {{ item?.city }}</p> -->
                           <span class="spacer">
@@ -329,7 +277,7 @@
                           </button>
                           <button
                             v-if="tab != 'close'"
-                            @click="declineJob(item.id)"
+                            @click="declineJob(item.id,index)"
                             class="btn btn-danger btn-sm card-btn my-1 mx-1"
                           >
                             Decline
@@ -468,6 +416,86 @@ export default {
   //   this.getJobs();
   // },
   methods: {
+
+    openRequirementsModal(data) {
+
+      let newData = {};
+
+if (data && typeof data === 'object') {
+  for (const key in data) {
+    if (Object.prototype.hasOwnProperty.call(data, key)) {
+      const value = data[key];
+      if (value !== null && key != 'id' && key != 'job_id' && key != 'user_id' && key != 'created_at' && key != 'updated_at') {
+        newData[key] = value;
+      }
+    }
+  }
+}
+
+
+      // Construct HTML dynamically for key-value pairs
+
+      // let data2 = Object.fromEntries(data);
+      // console.log('v : ' , data2);
+      // data.filter((value) => {
+      //   console.log('filter : ', value);
+      //   return value !== null;
+      // });
+
+      // const filteredData = Object.fromEntries(
+      //   Object.entries(data).filter(([value]) => value !== null)
+      // );
+
+      const htmlContent = Object.entries(newData)
+        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b>${key}:</b></h6><p>${value}</p></div>`)
+        .join('');
+
+      // Use dynamic HTML inside SweetAlert2 modal
+      this.$swal.fire({
+        title: 'Accessibility Requirements',
+        html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+          container: 'my-swal-container', // You can define your custom class for styling
+        },
+      });
+
+
+      // Use SweetAlert2 to create a modal
+      // this.$swal.fire({
+      //   title: 'Accessibility Requirements',
+      //   html: `
+      //     <div class="table-wrap" style="text-align:left !important;">
+      //       <div class="wrapper">
+      //         <h6><b>Visual Impairment:</b></h6>
+      //         <p>Blind</p>
+      //       </div>
+
+      //       <div class="wrapper">
+      //         <h6>Auditory Impairment:</h6>
+      //         <p>Deaf</p>
+      //       </div>
+
+      //       <div class="wrapper">
+      //         <h6>Psychiatric Disability:</h6>
+      //         <p>Depression</p>
+      //       </div>
+
+      //       <div class="wrapper">
+      //         <h6>Language:</h6>
+      //         <p>Macedonian</p>
+      //       </div>
+      //     </div>`,
+      //   showCloseButton: true,
+      //   showConfirmButton: false,
+      //   customClass: {
+      //     container: 'my-swal-container', // You can define your custom class for styling
+      //   },
+      // });
+    },
+
+
     async changeTab(status) {
       if (status == "open") {
         this.endpoint = "/lawyer/show-open-related-jobs";
@@ -518,7 +546,7 @@ export default {
               .post("/lawyer/decline-job", { job_id: job_id })
               .then(() => {
                 this.$swal(
-                  "Success",
+                  "",
                   `Job has been decline successfully`,
                   "success"
                 ).then(async () => {
@@ -610,7 +638,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
   color: white;
   background-color: #000000;
 }
@@ -655,33 +683,42 @@ ul#pills-tab {
   /* outline: 1px solid #292929; */
   border-radius: 10px;
 }
+
 .card-btn {
   width: 30%;
 }
+
 p.badge {
   font-size: 14px;
 }
+
 .spacer {
-  margin: 30px 0;
+  margin: 25px 0;
   display: block;
 }
+
 .table-wrap * {
-    color: black;
+  color: black;
 }
+
 .table-wrap .wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin: 5px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 5px 0;
 }
-.table-wrap .wrapper p , .table-wrap .wrapper h6 {
+
+.table-wrap .wrapper p,
+.table-wrap .wrapper h6 {
   margin: 0;
 }
+
 .table-wrap .wrapper p {
-  margin-left: 10px;  
+  margin-left: 10px;
 }
-.table-wrap .wrapper h6{
-  font-weight:600;
+
+.table-wrap .wrapper h6 {
+  font-weight: 600;
 }
 
 
