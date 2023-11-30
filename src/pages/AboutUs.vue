@@ -1,6 +1,14 @@
 <template lang="">
   <section class="  ">
-    <GeneralHeader  />
+    <div v-if="loginUserData && loginUserData.type == 'client'">
+      <ClientHeader />
+    </div>
+    <div v-else-if="loginUserData && loginUserData.type == 'lawyer'">
+        <LawyerHeader />
+    </div>
+    <div v-else>
+      <GeneralHeader  />
+    </div>
     <div class="WordSection1 container mt-4">
       <p class="LNDocumentTitleShort" align="center" style="text-align: center">
         
@@ -64,15 +72,27 @@
 <script>
 import MainFooter from "../components/global/MainFooter.vue";
 import GeneralHeader from "./GeneralHeader.vue";
+import ClientHeader from "../pages/client/Header.vue";
+import LawyerHeader from "../pages/lawyer/Header.vue";
 
 
 export default {
   components: {
     MainFooter,
-    GeneralHeader
+    GeneralHeader,
+    ClientHeader,
+    LawyerHeader
+
   },
 
   name: "AboutUs",
+
+  computed: {
+    loginUserData() {
+      return this.$store.getters?.loginUser;
+    }
+  },
+
 };
 </script>
 <style scoped>
