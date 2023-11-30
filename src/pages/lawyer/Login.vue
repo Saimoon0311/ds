@@ -113,13 +113,14 @@ export default {
   },
   methods: {
     submitData(formData) {
-      let dashboardUrl = null;
-      if (this.userTypeForLogin == "lawyer") {
-        dashboardUrl = "lawyer-profile";
-      } else if (this.userTypeForLogin == "client") {
-        dashboardUrl = "client-dashboard";
-      }
-      this.submitLoginForm(formData, this.userTypeForLogin, dashboardUrl);
+      console.log('sbumt');
+      // let dashboardUrl = null;
+      // if (this.userTypeForLogin == "lawyer") {
+      //   dashboardUrl = "lawyer-profile";
+      // } else if (this.userTypeForLogin == "client") {
+      //   dashboardUrl = "client-dashboard";
+      // }
+      this.submitLoginForm(formData, this.userTypeForLogin);
     },
     // getCurrentPageOption() {
     //   const currentRoute = this.$route.path;
