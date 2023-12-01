@@ -253,7 +253,8 @@ app.mixin({
           console.log("len of locations : ", res?.data?.data?.locations.length);
           if (
             res?.data?.data?.fields.length > 0 &&
-            res?.data?.data?.locations.length > 0
+            res?.data?.data?.locations.length > 0 && 
+            res?.data?.data?.admin_approval == 'approve'
           ) {
             path = "lawyer-dashboard";
           } else {

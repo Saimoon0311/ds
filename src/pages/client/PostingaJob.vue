@@ -311,54 +311,54 @@
                     aria-labelledby="panelsStayOpen-headingOne">
                     <div class="accordion-body">
                       <div v-if="VisualIsChecked">
-                        <p><i class="fa fa-check"></i><b> Visual Impairment : </b> {{ visualOption }}</p>
+                        <p><i class="fa fa-check"></i><b> Visual Impairment: </b> {{ visualOption }}</p>
                       </div>
 
                       <div v-if="AuditoryIsChecked">
                         <!-- <b><p>Auditory Impairment : </p></b>
                 <p>{{ auditoryOption }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Auditory Impairment : </b> {{ auditoryOption }}</p>
+                        <p><i class="fa fa-check"></i><b> Auditory Impairment: </b> {{ auditoryOption }}</p>
 
                       </div>
 
                       <div v-if="MobilityIsChecked">
                         <!-- <b><p>Mobility/Physical Impairment : </p></b>
                 <p>{{ mobilityOption }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Mobility/Physical Impairment : </b> {{ mobilityOption }}</p>
+                        <p><i class="fa fa-check"></i><b> Mobility/Physical Impairment: </b> {{ mobilityOption }}</p>
                       </div>
 
                       <div v-if="LearningIsChecked">
                         <!-- <b><p>Learning Impairment : </p></b>
                 <p>{{ learningOption }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Learning Impairment : </b> {{ learningOption }}</p>
+                        <p><i class="fa fa-check"></i><b> Learning Impairment: </b> {{ learningOption }}</p>
                       </div>
 
                       <div v-if="IntellectualIsChecked">
                         <!-- <b><p>Intellectual Disability : </p></b>
                 <p>{{ intellectualOption }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Intellectual Disability : </b> {{ intellectualOption }}</p>
+                        <p><i class="fa fa-check"></i><b> Intellectual Disability: </b> {{ intellectualOption }}</p>
                       </div>
 
                       <div v-if="PsychiatricIsChecked">
                         <!-- <b><p>Psychiatric Disability : </p></b>
                 <p>{{ psychiatricOption }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Psychiatric Disability : </b> {{ psychiatricOption }}</p>
+                        <p><i class="fa fa-check"></i><b> Psychiatric Disability: </b> {{ psychiatricOption }}</p>
                       </div>
 
                       <div v-if="MedicalIsChecked">
                         <!-- <b><p>Medical Disability : </p></b>
                 <p>{{ medicalOption }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Medical Disability : </b> {{ medicalOption }}</p>
+                        <p><i class="fa fa-check"></i><b> Medical Disability: </b> {{ medicalOption }}</p>
                       </div>
 
                       <div v-if="isChecked">
-                        <p><i class="fa fa-check"></i><b> Other : </b> {{ requirementsOptionDescription }}</p>
+                        <p><i class="fa fa-check"></i><b> Other: </b> {{ requirementsOptionDescription }}</p>
                       </div>
 
                       <div v-if="languageIsChecked">
                         <!-- <b><p>Language : </p></b>
                 <p>{{ selectedLanguage }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Language : </b> {{ selectedLanguage == 'Other' ? otherLanguage :
+                        <p><i class="fa fa-check"></i><b> Language: </b> {{ selectedLanguage == 'Other' ? otherLanguage :
                           selectedLanguage }}</p>
                       </div>
                     </div>
