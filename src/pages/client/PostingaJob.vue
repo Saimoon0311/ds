@@ -13,28 +13,28 @@
               <div data-v-2f14f9de="" class="d-flex flex-wrap justify-content-center mb-5" data-v-376ef8ab="">
                 <!-- class="m-2 text-decoration-none badge text-white fs-6 bubbles" -->
                 <a v-for="(area, index) in areas" :key="area.id" @click="setArea(index, area.id)" :class="[
-                  'm-2',
-                  'text-decoration-none',
-                  'badge',
-                  'text-white',
-                  'fs-6',
-                  'bubbles',
-                  { selected_bubble: selectedAreaIndex === index },
-                ]">
+                                  'm-2',
+                                  'text-decoration-none',
+                                  'badge',
+                                  'text-white',
+                                  'fs-6',
+                                  'bubbles',
+                                  { selected_bubble: selectedAreaIndex === index },
+                                ]">
                   {{ area.title }}
                 </a>
 
                 <a @click="setAreaFunc"
                   class="m-2 text-decoration-none badge text-black fs-6 bubbles bubbles-other text-white" :class="[
-                    'm-2',
-                    'text-decoration-none',
-                    'badge',
-                    'text-white',
-                    'fs-6',
-                    'bubbles',
-                    'bubbles-other',
-                    { selected_bubble: otherAreaSelected },
-                  ]" data-v-2f14f9de="">
+                                      'm-2',
+                                      'text-decoration-none',
+                                      'badge',
+                                      'text-white',
+                                      'fs-6',
+                                      'bubbles',
+                                      'bubbles-other',
+                                      { selected_bubble: otherAreaSelected },
+                                    ]" data-v-2f14f9de="">
                   Other (not listed here) / I don't know
                 </a>
               </div>
@@ -766,8 +766,8 @@ export default {
     },
     setArea(index, id) {
       this.otherAreaSelected = false;
-        this.selectedArea = id;
-        this.selectedAreaIndex = index;
+      this.selectedArea = id;
+      this.selectedAreaIndex = index;
       // console.log(index,id);
     },
     setLocation() {
@@ -950,6 +950,7 @@ input[type="checkbox"]:checked {
 #accordionPanelsStayOpenExample h2 button b {
   font-size: 19px;
   padding-right: 30px;
+  color: #000;
 }
 
 #accordionPanelsStayOpenExample .accordion-body {

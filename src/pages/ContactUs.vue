@@ -1,6 +1,14 @@
 <template lang="">
   <section class="ct-main">
-    <GeneralHeader />
+    <div v-if="loginUserData && loginUserData.type == 'client'">
+      <ClientHeader />
+    </div>
+    <div v-else-if="loginUserData && loginUserData.type == 'lawyer'">
+        <LawyerHeader />
+    </div>
+    <div v-else>
+      <GeneralHeader  />
+    </div>
     <div class="WordSection1 container">
       <MainHeader />
       <div class="pt-3 center-main row justify-content-center">
@@ -228,8 +236,8 @@
                     <option value="I am unable to act for my client">
                       I am unable to act for my client
                     </option>
-                    <option value="Report Inappropriate Job">
-                      Report Inappropriate Job
+                    <option value="I want to report an inappropriate Job">
+                      I want to report an inappropriate Job
                     </option>
                     <option value="Other">Other</option>
                   </Field>
@@ -270,6 +278,8 @@
 // import MainHeader from "../components/global/MainHeader.vue";
 import GeneralHeader from "./GeneralHeader.vue";
 import MainFooter from "../components/global/MainFooter.vue";
+import ClientHeader from "../pages/client/Header.vue";
+import LawyerHeader from "../pages/lawyer/Header.vue";
 
 import { Form, Field } from "vee-validate";
 import * as yup from "yup";
@@ -304,16 +314,26 @@ export default {
       selectedOption: null,
     };
   },
+  computed: {
+    loginUserData() {
+      // console.log('dhuurr', this.$store.getters?.loginUser)
+      return this.$store.getters?.loginUser;
+    }
+  },
   methods: {
     submitData() {
       alert("data has been submitted.");
     },
+
   },
   components: {
     MainFooter,
     GeneralHeader,
     Form,
     Field,
+    ClientHeader,
+    LawyerHeader
+
   },
 
   name: "ContactUs",
