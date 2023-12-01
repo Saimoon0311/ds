@@ -217,7 +217,7 @@
                             <button
                               :disabled="!item?.requirement"
                               type="button"
-                              class="btn btn-dark btn-sm"
+                              class="btn btn-dark btn-sm custom-pad"
                               :data-target="`.edit-job-title-modal${index}`"
                               title="Edit"
                               :data-bs-toggle="`modal${index}`"
@@ -257,7 +257,7 @@
                         </div>
                         <div
                           v-if="item.status != 'close'"
-                          class="d-flex flex-lg-row justify-content-evenly align-items-center flex-sm-column"
+                          class="d-flex flex-lg-row justify-content-evenly align-items-center flex-sm-column flex-wrap"
                           style="min-width: 150px"
                         >
                           <button
@@ -567,7 +567,7 @@ export default {
 };
 </script>
 <style scoped>
-ul#pills-tab[data-v-511b78bb] {
+ul#pills-tab {
   width: 400px !important;
 }
 
@@ -743,5 +743,20 @@ p.badge {
   .l-main {
     padding-bottom: 100px;
   }
+  ul#pills-tab{
+    width: 290px !important;
+  }
+  .nav-pills .nav-link {
+    font-size: 12px;
+}
+}
+@media only screen and (max-width: 340px) {
+p.badge {
+    font-size: 12px;
+}
+.custom-pad{
+  padding: 5px;
+  font-size: 13px;
+}
 }
 </style>
