@@ -192,7 +192,7 @@
                           <tr v-for="(row, index) in rows" :key="index" class="border">
 
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>${{ row.costAud }}</td>
+                            <td>$ {{ row.costAud }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -210,7 +210,7 @@
                           </tr>
                           <tr class="bg-dark text-white border-0 ">
                             <td class="bg-transparent text-white  p-0 px-2 b-round-start">Total (excluding GST):</td>
-                            <td class="bg-transparent text-white p-0 px-2">${{ grandTotal }}</td>
+                            <td class="bg-transparent text-white p-0 px-2">$ {{ grandTotal }}</td>
                             <td class="bg-transparent p-0 b-round-end"></td>
 
                           </tr>
@@ -368,7 +368,7 @@
                           <tr v-for="(row, index) in rows" :key="index" class="border">
 
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>${{ row.costAud }}</td>
+                            <td>$ {{ row.costAud }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -385,7 +385,7 @@
                           </tr>
                           <tr class="bg-dark text-white border-0 ">
                             <td class="bg-transparent text-white  p-0 px-2 b-round-start">Total (excluding GST):</td>
-                            <td class="bg-transparent text-white p-0 px-2">${{ grandTotal }}</td>
+                            <td class="bg-transparent text-white p-0 px-2">$ {{ grandTotal }}</td>
                             <td class="bg-transparent p-0 b-round-end"></td>
 
                           </tr>
