@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="container f-pt">
+    <div class="container f-pt mx-auto">
       <Form @submit="nextStep" :validation-schema="currentSchema" keep-values id="mainForm"
         class="text-start border rounded p-3 d-inline-block m-3 col-md-7 m-auto flex-wrap flex-column d-flex mt-3">
         <template v-if="currentStep === 0">
@@ -164,7 +164,7 @@
                       <br />
                       <button type="button" @click="addRow" class="btn btn-dark">Add</button>
                     </fieldset>
-
+                    <div class="table-responsive">
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr class="border">
@@ -208,6 +208,7 @@
                         </tr>
                       </tbody>
                     </table>
+                    </div>
 
                   
                     <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
@@ -333,7 +334,7 @@
                       <br />
                       <button type="button" @click="addRow" class="btn btn-dark">Add</button>
                     </fieldset>
-
+                    <div class="table-responsive">
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr class="border">
@@ -376,6 +377,7 @@
                         </tr>
                       </tbody>
                     </table>
+                    </div>
                  
                     
                     <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
@@ -424,7 +426,7 @@
                   <br />
                   <button type="button" @click="addRow2" class="btn btn-dark">Add</button>
                 </fieldset>
-
+                <!-- <div class="table-responsive"> -->
                 <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                   <thead>
                     <tr class="border">
@@ -462,6 +464,7 @@
                         </tr>
                   </tbody>
                 </table>
+                <!-- </div> -->
 
                 <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ grandTotal2 }}</p> -->
               </div>
@@ -605,7 +608,7 @@
                       <br />
                       <button type="button" @click="addRow" class="btn btn-dark">Add</button>
                     </fieldset>
-
+                    <div class="table-responsive">
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr class="border">
@@ -647,6 +650,7 @@
                         </tr>
                       </tbody>
                     </table>
+                    </div>
 
                   
                     <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
@@ -763,7 +767,7 @@
                       <br />
                       <button type="button" @click="addRow" class="btn btn-dark">Add</button>
                     </fieldset>
-
+                    <div class="table-responsive">
                     <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
                       <thead>
                         <tr class="border">
@@ -805,6 +809,7 @@
                         </tr>
                       </tbody>
                     </table>
+                    </div>
 
                   
 
@@ -970,10 +975,10 @@
                   </tbody>
                 </table> -->
 
-
-                <table class="table table-bordered mb-3" id="additionalFeeEarnersTable">
+                <div class="table-responsive">
+                <table class="table table-bordered mb-3 " id="additionalFeeEarnersTable">
                   <thead>
-                    <tr class="border">
+                    <tr class="border table-top">
                       <!-- <th></th> -->
                       <th>Title</th>
                       <th>Hourly rate</th>
@@ -983,7 +988,7 @@
                     </tr>
                   </thead>
                   <tbody id="addFeeEarnersRow">
-                    <tr v-for="(row, index) in rows3" :key="index" class="border">
+                    <tr v-for="(row, index) in rows3" :key="index" class="border extra-class table-mid">
 
                       <td>{{ row.title }}</td>
                       <td>$ {{ row.hourlyRate }}</td>
@@ -991,14 +996,19 @@
                       <td>
                         {{ row.hourlyRate * row.estimatedHours }}
                       </td>
-                      <td style="width:0px"><button type="button" class="btn btn-default btn-circle"><i
+                     
+                      <td >
+                        <button type="button" class="btn btn-default btn-circle p-1"><i
+                            class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-default btn-circle p-1"><i
                             class="fa fa-trash"></i></button>
+                            
                       </td>
                     </tr>
                     <tr >
                         <td class="p-1"></td>
                       </tr>
-                      <tr class="bg-dark text-white border-0 ">
+                      <tr class="bg-dark text-white border-0 extra-class extra-class1">
                          <td class="bg-transparent text-white  p-0 px-2 b-round-start">Total (excluding GST):</td>
                          <td class="bg-transparent p-0"></td>
                          <td class="bg-transparent p-0"></td>
@@ -1016,7 +1026,7 @@
                   </tbody>
                 </table>
 
-               
+               </div>
                 <!-- <p class="mb-2 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total (excluding GST): $
                 </p> -->
 
@@ -2624,4 +2634,37 @@ th , td{
   font-size: 12px;
   color: #000000;
 }
+/* @media only screen and (max-width: 385px) {} */
+  /* .extra-class{
+  width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+} */
+.extra-class1{
+  border-radius: 5px;
+
+}
+/* @media only screen and (max-width: 600px) {
+  .extra-class th , .extra-class td , .extra-class td i{
+  font-size: 13px;
+}
+ .extra-class{
+  width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.table-responsive .table , .table-responsive .table th , .table-responsive .table td{
+  width:1%;
+    white-space: nowrap;
+}
+}
+@media only screen and (max-width: 400px) {
+.table-responsive .table , .table-responsive .table th , .table-responsive .table td{
+  width:1%;
+    white-space: nowrap;
+}
+} */
+
 </style>
