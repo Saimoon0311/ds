@@ -2,12 +2,12 @@
   <div>
     <ClientHeader />
     <div class="container">
-      <div class="container" data-v-376ef8ab="">
+      <div class="container" >
         <div
           class="d-flex flex-wrap justify-content-center border mt-5 rounded p-3"
-          data-v-376ef8ab=""
+          
         >
-          <h4 class="w-100 text-center" data-v-376ef8ab="">
+          <h4 class="w-100 text-center" >
             Which area of law do you need assistance in?
           </h4>
           <router-link
@@ -116,7 +116,7 @@
           >
             Wills &amp; estates
           </router-link>
-          <div class="w-100 text-center" data-v-376ef8ab="">
+          <div class="w-100 text-center" >
             <router-link
               class="m-2 text-decoration-none badge text-white fs-6 bubbles"
               to="/posting-job"

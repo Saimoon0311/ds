@@ -10,7 +10,7 @@
               Which area of law do you need assistance in?
             </p>
             <div>
-              <div data-v-2f14f9de="" class="d-flex flex-wrap justify-content-center mb-5" data-v-376ef8ab="">
+              <div  class="d-flex flex-wrap justify-content-center mb-5" >
                 <!-- class="m-2 text-decoration-none badge text-white fs-6 bubbles" -->
                 <a v-for="(area, index) in areas" :key="area.id" @click="setArea(index, area.id)" :class="[
                   'm-2',
@@ -34,7 +34,7 @@
                     'bubbles',
                     'bubbles-other',
                     { selected_bubble: otherAreaSelected },
-                  ]" data-v-2f14f9de="">
+                  ]" >
                   Other (not listed here) / I don't know
                 </a>
               </div>

@@ -674,11 +674,14 @@
 
             <!-- If they select ‘Fixed fee’ -->
             <div class="form-group" id="fixed-fee" v-if="selectedOption === 'Fixed'">
-              <label>Fixed fee amount (excluding GST and disbursements):<sup><code>*</code></sup></label>
               <div>
-                <span class="position-absolute d-span"> $</span>
-                <input type="number" id="fixedFeeAmount" v-model="form.fixed_fee_amount" name="fixedFeeAmount"
+
+                <label>Fixed fee amount (excluding GST and disbursements):<sup><code>*</code></sup></label>
+                <div>
+                  <span class="position-absolute d-span"> $</span>
+                  <input type="number" id="fixedFeeAmount" v-model="form.fixed_fee_amount" name="fixedFeeAmount"
                   class="form-control d-input" min="1" step=".01" />
+                </div>
               </div>
               <br />
               <div class="disbursement-fields">
@@ -2643,7 +2646,6 @@ th , td{
 } */
 .extra-class1{
   border-radius: 5px;
-
 }
 /* @media only screen and (max-width: 600px) {
   .extra-class th , .extra-class td , .extra-class td i{
@@ -2655,7 +2657,7 @@ th , td{
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.table-responsive .table , .table-responsive .table th , .table-responsive .table td{
+ .table-responsive .table th , .table-responsive .table td{
   width:1%;
     white-space: nowrap;
 }

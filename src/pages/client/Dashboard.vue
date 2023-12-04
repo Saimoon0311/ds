@@ -6,7 +6,7 @@
       <p class="m-3" v-if="openJobs.length > 0">
         Here are all the jobs you have posted.
       </p>
-      <div data-v-511b78bb="" class="container">
+      <div  class="container">
         <div
           v-if="openJobs.length == 0 && searchQuery == ''"
           class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
@@ -23,14 +23,14 @@
         </div>
         <div v-else>
           <ul
-            data-v-511b78bb=""
+            
             class="nav nav-pills mb-3 bg-light border p-2 py-3 rounded"
             id="pills-tab"
             role="tablist"
           >
-            <li data-v-511b78bb="" class="nav-item" role="presentation">
+            <li  class="nav-item" role="presentation">
               <button
-                data-v-511b78bb=""
+                
                 class="nav-link active"
                 id="pills-home-tab"
                 data-bs-toggle="pill"
@@ -43,9 +43,9 @@
                 Open
               </button>
             </li>
-            <li data-v-511b78bb="" class="nav-item" role="presentation">
+            <li  class="nav-item" role="presentation">
               <button
-                data-v-511b78bb=""
+                
                 class="nav-link"
                 id="pills-profile-tab"
                 data-bs-toggle="pill"
@@ -60,9 +60,9 @@
               </button>
             </li>
           </ul>
-          <div data-v-511b78bb="" class="tab-content" id="pills-tabContent">
+          <div  class="tab-content" id="pills-tabContent">
             <div
-              data-v-511b78bb=""
+              
               class="tab-pane fade text-center active show"
               id="pills-home"
               role="tabpanel"
@@ -176,7 +176,7 @@
           </div>
         </div>
         <div
-          data-v-511b78bb=""
+          
           class="tab-pane fade"
           id="pills-profile"
           role="tabpanel"

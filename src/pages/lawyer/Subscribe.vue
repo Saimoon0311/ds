@@ -115,13 +115,13 @@ export default {
               .then(res => {
                 // console.log('successfully login : ', res?.data?.data?.id)
                 if (this.replacePaymentMethod) {
-                  this.$swal('', 'Your payment method has been replaced successfully', 'success').then(() => {
+                  this.$swal('', 'Your payment method has been replaced successfully.', 'success').then(() => {
                     this.$router.push({ path: '/lawyer-account' });
                   });
                 }
                 if (res?.data?.data?.id !== undefined && res?.data?.data?.id !== null && res?.data?.data?.id !== '') {
                   // this.$store.commit('setToast', "you have been subscribed successfully");
-                  this.$swal('', 'You have been subscribed successfully', 'success').then(() => {
+                  this.$swal(`<span class="toastitle">Welcome to the Simplawfy community!</span>`, `<span class="toastpara">You are now subscribed and have access to our platform.</span>`, 'success').then(() => {
                     this.$router.push({ path: '/lawyer-account' });
                   });
                 }
@@ -258,4 +258,5 @@ export default {
   bottom: 0;
   width: 100%;
 }
+
 </style>

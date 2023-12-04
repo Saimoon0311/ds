@@ -73,24 +73,24 @@
               </td>
             </tr>
 
-            <tr v-else class="pr-pad" data-v-7525850d="" v-for="(item,index) in data_paginated" :key="index">
+            <tr v-else class="pr-pad"  v-for="(item,index) in data_paginated" :key="index">
             
-            <!-- <tr data-v-7525850d=""> -->
-              <td data-v-7525850d="">
+            <!-- <tr > -->
+              <td >
                 <a class="btn btn-dark text-light">{{ item?.job?.title }}</a>
               </td>
-              <td data-v-7525850d="">{{ item?.charge_type }}</td>
-              <td data-v-7525850d="">{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
-              <td data-v-7525850d="">{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td>
-              <td data-v-7525850d="">{{ item?.description }}</td>
-              <!-- <td data-v-7525850d="">Yes</td>
-              <td data-v-7525850d="">Yes - $100 for 30 minutes</td> -->
+              <td >{{ item?.charge_type }}</td>
+              <td >{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
+              <td >{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td>
+              <td >{{ item?.description }}</td>
+              <!-- <td >Yes</td>
+              <td >Yes - $100 for 30 minutes</td> -->
               <td>{{ formatCreatedAt(item?.created_at) }}</td>
-              <td data-v-7525850d=""><p data-v-7525850d="">{{ item?.status }}</p></td>
-              <td data-v-7525850d="">
+              <td ><p >{{ item?.status }}</p></td>
+              <td >
                 <button
                   v-if="item?.status == 'Open'"
-                  data-v-7525850d=""
+                  
                   class="btn btn-sm btn-danger"
                   @click="withdrawProposal(item?.id)"
                 >
