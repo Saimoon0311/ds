@@ -1,6 +1,14 @@
 <template lang="">
   <section class="howItWorks">
-    <GeneralHeader />
+    <div v-if="loginUserData && loginUserData.type == 'client'">
+      <ClientHeader />
+    </div>
+    <div v-else-if="loginUserData && loginUserData.type == 'lawyer'">
+        <LawyerHeader />
+    </div>
+    <div v-else>
+      <GeneralHeader  />
+    </div>
     <h2 class="text-center mt-5 pt-3 mb-5">HOW THE PLATFORM WORKS</h2>
     <ul class="nav nav-tabs mb-3 container how-tabs" id="ex1" role="tablist">
       <li class="nav-item" role="presentation">
@@ -111,7 +119,7 @@
               <p>
                 We will verify that you are an admitted legal practitioner and
                 confirm your eligibility to join our platform as per our
-                <router-link to="/terms-and-conditions-for-lawyers" class="tandc">T&Cs for lawyers.</router-link>
+                <router-link to="/terms-and-conditions-for-lawyers" class="tandc" target="_blank">T&Cs for lawyers.</router-link>
               </p>
               <!--  -->
 
@@ -192,12 +200,21 @@
 <script>
 import GeneralHeader from "../pages/GeneralHeader.vue";
 import MainFooter from "../components/global/MainFooter.vue";
-
+import ClientHeader from "../pages/client/Header.vue";
+import LawyerHeader from "../pages/lawyer/Header.vue";
 
 export default {
   components: {
     GeneralHeader,
-    MainFooter
+    MainFooter,
+    ClientHeader,
+    LawyerHeader
+  },
+  computed: {
+    loginUserData() {
+      console.log('dhuurr', this.$store.getters?.loginUser)
+      return this.$store.getters?.loginUser;
+    }
   },
 
   name: "HowSimplawfyWorks",

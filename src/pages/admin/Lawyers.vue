@@ -905,6 +905,7 @@
                       <td class="text-end button-width">
                         <div  class="mb-1">
                            {{ capitalizeFirstLetter(item?.admin_approval) }}<span v-if="item?.admin_approval == 'approve'">d</span>
+                           <span v-if="item?.admin_approval == 'reject'">ed</span> at {{ formatCreatedAt(item.approved_timestamp) }}
                         </div>
                         <!-- <div >
                           <input
@@ -1261,37 +1262,130 @@ export default {
         console.error("Error fetching options:", error);
       }
     },
+
+
     reject(id, index) {
+
+      console.log(id,index);
+
+
+      this.$swal.fire({
+    title: 'Type reason here:',
+    input: 'text',
+    inputAttributes: {
+      autocapitalize: 'off',
+    },
+    showCancelButton: true,
+    confirmButtonText: 'Submit',
+    showLoaderOnConfirm: true,
+    preConfirm: async (inputValue) => {
       try {
-        this.$swal({
-          title: "Are you sure?",
-          text: `Are you sure you want to reject this lawyer ?`,
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: `Yes, Reject`,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            api
-              .post("/admin/approve-reject-users", { user_id: id, status: 'reject' })
-              .then(() => {
-                this.$swal(
+        // Call your API here
+        const response = await api.post("/admin/approve-reject-users", {
+          user_id: id,
+          status: 'reject',
+          reason: inputValue,
+        });
+
+        // Handle the API response as needed
+        console.log('API Response:', response.data);
+
+        // Return the input value if needed
+        return inputValue;
+      } catch (error) {
+        // Handle API errors
+        console.error('API Error:', error);
+
+        // Show an error message in SweetAlert2
+        this.$swal.showValidationMessage('API Error');
+      }
+    },
+    allowOutsideClick: () => !this.$swal.isLoading(),
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+      if (result.isConfirmed) {
+          this.$swal(
                   "",
                   `Lawyer has been rejected successfully`,
                   "success"
                 ).then(async () => {
                   this.fixLoadMoreAfterDeleteRecord(index, this.pageStatus);
                 });
-              })
-              .catch((error) => {
-                console.log("error : ", error);
-              });
-          }
-        });
-      } catch (error) {
-        console.error("Error fetching options:", error);
-      }
+        }
+
+      // Do something with the input value
+      // Swal.fire(`You entered: ${result.value}`);
+    }
+  });
+
+      // this.$swal.fire({
+      //   title: 'Type reason here:',
+      //   input: 'text',
+      //   inputAttributes: {
+      //     autocapitalize: 'off',
+      //   },
+      //   showCancelButton: true,
+      //   confirmButtonText: 'Submit',
+      //   showLoaderOnConfirm: true,
+      //   preConfirm: (inputValue) => {
+      //     // Process the input value (validate, submit, etc.)
+      //     return new Promise((resolve) => {
+      //       // Simulate an asynchronous operation (e.g., API call)
+      //       setTimeout(() => {
+      //         if (inputValue) {
+      //           resolve(inputValue);
+      //         } else {
+      //           this.$swal.showValidationMessage('Please enter something');
+      //         }
+      //       }, 1000);
+      //     });
+      //   },
+      //   allowOutsideClick: () => !this.$swal.isLoading(),
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
+      //     this.$swal(
+      //             "",
+      //             `Lawyer has been rejected successfully`,
+      //             "success"
+      //           ).then(async () => {
+      //             this.fixLoadMoreAfterDeleteRecord(index, this.pageStatus);
+      //           });
+      //   }
+      // });
+
+
+
+      // try {
+      //   this.$swal({
+      //     title: "Are you sure?",
+      //     text: `Are you sure you want to reject this lawyer ?`,
+      //     icon: "warning",
+      //     showCancelButton: true,
+      //     confirmButtonColor: "#3085d6",
+      //     cancelButtonColor: "#d33",
+      //     confirmButtonText: `Yes, Reject`,
+      //   }).then((result) => {
+      //     if (result.isConfirmed) {
+      //       api
+      //         .post("/admin/approve-reject-users", { user_id: id, status: 'reject' })
+      //         .then(() => {
+      //           this.$swal(
+      //             "",
+      //             `Lawyer has been rejected successfully`,
+      //             "success"
+      //           ).then(async () => {
+      //             this.fixLoadMoreAfterDeleteRecord(index, this.pageStatus);
+      //           });
+      //         })
+      //         .catch((error) => {
+      //           console.log("error : ", error);
+      //         });
+      //     }
+      //   });
+      // } catch (error) {
+      //   console.error("Error fetching options:", error);
+      // }
     },
 
     closeModal(modalId) {

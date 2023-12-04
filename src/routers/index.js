@@ -471,8 +471,10 @@ router.beforeEach(async (to, from, next) => {
           next();
         }
       } catch (e) {
+        localStorage.removeItem("loginUser");
+        localStorage.removeItem("token");
         console.log("error from before : ", e);
-        // next({ path: '/' })
+        next({ path: '/' })
       }
     }
   } else {

@@ -674,14 +674,11 @@
 
             <!-- If they select ‘Fixed fee’ -->
             <div class="form-group" id="fixed-fee" v-if="selectedOption === 'Fixed'">
+              <label>Fixed fee amount (excluding GST and disbursements):<sup><code>*</code></sup></label>
               <div>
-
-                <label>Fixed fee amount (excluding GST and disbursements):<sup><code>*</code></sup></label>
-                <div>
-                  <span class="position-absolute d-span"> $</span>
-                  <input type="number" id="fixedFeeAmount" v-model="form.fixed_fee_amount" name="fixedFeeAmount"
+                <span class="position-absolute d-span"> $</span>
+                <input type="number" id="fixedFeeAmount" v-model="form.fixed_fee_amount" name="fixedFeeAmount"
                   class="form-control d-input" min="1" step=".01" />
-                </div>
               </div>
               <br />
               <div class="disbursement-fields">
