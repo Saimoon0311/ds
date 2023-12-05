@@ -354,8 +354,8 @@ export default {
             .get(`/lawyer/resubscribe/${plan}`)
             .then(() => {
               this.$swal(
-                `<span class="sadtoast">Welcome back!</span>`,
-                "You are now resubscribed.",
+                "",
+                "You have been resubscribed successfully",
                 "success"
               ).then(() => {
                 this.$store.commit("SET_SUB_CANCEL_STATUS", false);
@@ -386,8 +386,8 @@ export default {
             .get("/lawyer/cancel-subscription")
             .then(() => {
               this.$swal(
-                `<span class="sadtoas">We're sad you're leaving us.</span>`,
-                `Your subscription will be cancelled from ${this.subscriptionData?.current_period_end} You can resubscribe at any time.`,
+                "Cancelled!",
+                `Your Subscription will be cancelled from ${this.subscriptionData?.current_period_end} You can resubscribe at any time.`,
                 "success"
               ).then(() => {
                 this.$store.commit("SET_SUB_CANCEL_STATUS", true);

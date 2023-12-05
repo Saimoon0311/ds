@@ -5,14 +5,14 @@
     <main class="container my-3">
 
       <!-- <ul
-          
+          data-v-511b78bb=""
           class="nav nav-pills mb-3 bg-light border p-2 py-3 rounded"
           id="pills-tab"
           role="tablist"
         >
-          <li  class="nav-item" role="presentation">
+          <li data-v-511b78bb="" class="nav-item" role="presentation">
             <button
-              
+              data-v-511b78bb=""
               class="nav-link active"
               id="pills-home-tab"
               data-bs-toggle="pill"
@@ -26,9 +26,9 @@
               Open
             </button>
           </li>
-          <li  class="nav-item" role="presentation">
+          <li data-v-511b78bb="" class="nav-item" role="presentation">
             <button
-              
+              data-v-511b78bb=""
               class="nav-link"
               id="pills-profile-tab"
               data-bs-toggle="pill"
@@ -47,9 +47,9 @@
 
 
 
-        <div  class="tab-content" id="pills-tabContent">
+        <div data-v-511b78bb="" class="tab-content" id="pills-tabContent">
           <div
-            
+            data-v-511b78bb=""
             class="tab-pane fade active show"
             id="pills-home"
             role="tabpanel"
@@ -192,7 +192,7 @@
             </div>
           </div>
           <div
-            
+            data-v-511b78bb=""
             class="tab-pane fade"
             id="pills-profile"
             role="tabpanel"

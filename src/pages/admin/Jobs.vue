@@ -22,14 +22,14 @@
 
 
       <ul
-          
+          data-v-511b78bb=""
           class="nav nav-pills mb-3 bg-light border p-2 py-3 rounded"
           id="pills-tab"
           role="tablist"
         >
-          <li  class="nav-item" role="presentation">
+          <li data-v-511b78bb="" class="nav-item" role="presentation">
             <button
-              
+              data-v-511b78bb=""
               class="nav-link active"
               id="pills-home-tab"
               data-bs-toggle="pill"
@@ -43,9 +43,9 @@
               Open
             </button>
           </li>
-          <li  class="nav-item" role="presentation">
+          <li data-v-511b78bb="" class="nav-item" role="presentation">
             <button
-              
+              data-v-511b78bb=""
               class="nav-link"
               id="pills-profile-tab"
               data-bs-toggle="pill"
@@ -60,9 +60,9 @@
               Pending
             </button>
           </li>
-          <li  class="nav-item" role="presentation">
+          <li data-v-511b78bb="" class="nav-item" role="presentation">
             <button
-              
+              data-v-511b78bb=""
               class="nav-link"
               id="pills-profile-tab"
               data-bs-toggle="pill"
@@ -77,9 +77,9 @@
               Approved
             </button>
           </li>
-          <li  class="nav-item" role="presentation">
+          <li data-v-511b78bb="" class="nav-item" role="presentation">
             <button
-              
+              data-v-511b78bb=""
               class="nav-link"
               id="pills-profile-tab"
               data-bs-toggle="pill"
@@ -95,9 +95,9 @@
             </button>
           </li>
 
-          <li  class="nav-item" role="presentation">
+          <li data-v-511b78bb="" class="nav-item" role="presentation">
             <button
-              
+              data-v-511b78bb=""
               class="nav-link"
               id="pills-profile-tab"
               data-bs-toggle="pill"
@@ -188,30 +188,30 @@
               </td>
             </tr>
 
-            <tr v-else  v-for="(item,index) in data_paginated" :key="index">
+            <tr v-else data-v-7525850d="" v-for="(item,index) in data_paginated" :key="index">
             
-            <!-- <tr > -->
-              <td >{{ item?.identity }}</td>
-              <td >
-                <!-- <a  href="jobInfo.php?id=28"> -->
+            <!-- <tr data-v-7525850d=""> -->
+              <td data-v-7525850d="">{{ item?.identity }}</td>
+              <td data-v-7525850d="">
+                <!-- <a data-v-7525850d="" href="jobInfo.php?id=28"> -->
                   {{ item?.title }}
                 <!-- </a> -->
               </td>
-              <td >{{ item?.field?.title }}</td>
-              <td >{{ item?.location?.title }}</td>
-              <td >{{ item?.city }}</td>
+              <td data-v-7525850d="">{{ item?.field?.title }}</td>
+              <td data-v-7525850d="">{{ item?.location?.title }}</td>
+              <td data-v-7525850d="">{{ item?.city }}</td>
 
-              <!-- <td >{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td> -->
-              <!-- <td >{{ item?.description }}</td> -->
-              <!-- <td >Yes</td>
-              <td >Yes - $100 for 30 minutes</td> -->
+              <!-- <td data-v-7525850d="">{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td> -->
+              <!-- <td data-v-7525850d="">{{ item?.description }}</td> -->
+              <!-- <td data-v-7525850d="">Yes</td>
+              <td data-v-7525850d="">Yes - $100 for 30 minutes</td> -->
               <td>{{ formatCreatedAt(item?.created_at) }}</td>
-              <!-- <td ><p >{{ item?.status }}</p></td>
+              <!-- <td data-v-7525850d=""><p data-v-7525850d="">{{ item?.status }}</p></td>
                 -->
-              <!-- <td >
+              <!-- <td data-v-7525850d="">
                 <button
                   v-if="item?.status == 'Open'"
-                  
+                  data-v-7525850d=""
                   class="btn btn-sm btn-danger"
                   @click="withdrawProposal(item?.id)"
                 >
@@ -229,7 +229,7 @@
               </td>  -->
               <td>
                 <button
-                  
+                  data-v-7525850d=""
                   class="btn btn-sm btn-danger"
                   style="background-color: black !important"
                   @click="deleteJob(item?.id)"
@@ -440,7 +440,7 @@ export default {
 </script>
 <style scoped>
 
-ul#pills-tab {
+ul#pills-tab[data-v-511b78bb] {
   width: 600px !important;
 }
 .navbar-nav {
