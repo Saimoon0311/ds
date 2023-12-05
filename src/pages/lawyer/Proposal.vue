@@ -100,53 +100,7 @@
                       class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                   <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
-                  <!-- <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
-                    <fieldset class="border p-2 my-2 bg-light text-center" style="margin: auto">
-                      <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">  
-                        Itemise Disbursements
-                      </legend>
-                      <label class="w-100 text-start">
-                        Task:<sup><code>*</code></sup>
-                        <input id="feeEarnerTitle" autocomplete="on" placeholder="Eg: Item one " class="form-control"
-                          required />
-                      </label>
-                      <br />
-                      <br />
-                      <label class="w-100 text-start">
-                        Cost (AUD):<sup><code>*</code></sup>
-                        <div>
-                          <span class="position-absolute d-span" style="line-height: 36px">
-                            $</span>
-                          <input id="feeEarnerHourlyRate" min="1" autocomplete="on" type="number"
-                            class="form-control d-input" required />
-                        </div>
-                      </label>
-                      <br />
-
-                      <br />
-                      <button type="button" class="btn btn-dark ">Add</button>
-                    </fieldset>
-
-                    <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
-                      <thead>
-                        <tr>
-                          <th>Item</th>
-                          <th>Cost (AUD)</th>
-                          <th>Total</th>
-                        </tr>
-                      </thead>
-                      <tbody id="addFeeEarnersRow">
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td>
-                            <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: $<span
-                                id="finalHourlyRateMultiple">0</span></p>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div> -->
+                
 
                   <!-- hammad -->
                   <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
@@ -224,20 +178,10 @@
                     </div>
 
 
-                    <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
-                      <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
-                    </p> -->
                   </div>
                 </div>
 
-                <!-- <div class="form-group mb-3">
-                  <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
-                  <div>
-                    <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
-                      class="form-control d-input" min="1" step=".01" placeholder="" />
-                  </div>
-                </div> -->
+             
 
               </div>
             </div>
@@ -276,53 +220,7 @@
                       class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                   <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
-                  <!-- <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
-                    <fieldset class="border p-2 my-2 bg-light text-center" style="margin: auto">
-                      <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">  
-                        Itemise Disbursements
-                      </legend>
-                      <label class="w-100 text-start">
-                        Task:<sup><code>*</code></sup>
-                        <input id="feeEarnerTitle" autocomplete="on" placeholder="Eg: Item one " class="form-control"
-                          required />
-                      </label>
-                      <br />
-                      <br />
-                      <label class="w-100 text-start">
-                        Cost (AUD):<sup><code>*</code></sup>
-                        <div>
-                          <span class="position-absolute d-span" style="line-height: 36px">
-                            $</span>
-                          <input id="feeEarnerHourlyRate" min="1" autocomplete="on" type="number"
-                            class="form-control d-input" required />
-                        </div>
-                      </label>
-                      <br />
-
-                      <br />
-                      <button type="button" class="btn btn-dark ">Add</button>
-                    </fieldset>
-
-                    <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
-                      <thead>
-                        <tr>
-                          <th>Item</th>
-                          <th>Cost (AUD)</th>
-                          <th>Total</th>
-                        </tr>
-                      </thead>
-                      <tbody id="addFeeEarnersRow">
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td>
-                            <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: $<span
-                                id="finalHourlyRateMultiple">0</span></p>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div> -->
+                 
 
                   <!-- hammad -->
                   <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
@@ -399,20 +297,11 @@
                     </div>
 
 
-                    <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
-                      <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
-                    </p> -->
+                  
                   </div>
                 </div>
 
-                <!-- <div class="form-group mb-3">
-                  <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
-                  <div>
-                    <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
-                      class="form-control d-input" min="1" step=".01" placeholder="" />
-                  </div>
-                </div> -->
+                
 
               </div>
             </div>
@@ -485,62 +374,10 @@
                 </table>
                 <!-- </div> -->
 
-                <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ grandTotal2 }}</p> -->
               </div>
 
 
 
-              <!-- <div class="" id="additionalFeeEarners">
-                <fieldset class="border p-2 my-2  bg-light text-center" style="margin: auto">
-                  <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
-                    Item by Item for Specific Tasks
-                  </legend>
-                  <label class="w-100 text-start">
-                    Task:<sup><code>*</code></sup>
-                    <input id="feeEarnerTitle" autocomplete="on" placeholder="Eg: Task one " class="form-control"
-                      required />
-                  </label>
-                  <br />
-                  <br />
-                  <label class="w-100 text-start">
-                    Cost (AUD):<sup><code>*</code></sup>
-                    <div>
-                      <span class="position-absolute d-span">
-                        $</span>
-                      <input id="feeEarnerHourlyRate" min="1" autocomplete="on" type="number" class="form-control d-input"
-                        required />
-                    </div>
-                  </label>
-                  <br />
-
-                  <br />
-                  <button type="button" class="btn btn-dark">Add</button>
-                </fieldset>
-
-                <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
-                  <thead>
-                    <tr>
-                      <th>Task</th>
-                      <th>Cost (AUD)</th>
-
-                      <th>Total</th>
-
-                    </tr>
-                  </thead>
-                  <tbody id="addFeeEarnersRow">
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td>
-                        <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: $<span
-                            id="finalHourlyRateMultiple">0</span></p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
-
-              </div> -->
               <div class="disbursement-fields">
                 <div class="form-group mt-3">
                   <label> What is the estimated amount for disbursements (excluding GST)?</label>
@@ -550,53 +387,7 @@
                       class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                   <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
-                  <!-- <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
-                    <fieldset class="border p-2 my-2 bg-light text-center" style="margin: auto">
-                      <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
-                        Itemise Disbursements
-                      </legend>
-                      <label class="w-100 text-start">
-                        Task:<sup><code>*</code></sup>
-                        <input id="feeEarnerTitle" autocomplete="on" placeholder="Eg: Item one " class="form-control"
-                          required />
-                      </label>
-                      <br />
-                      <br />
-                      <label class="w-100 text-start">
-                        Cost (AUD):<sup><code>*</code></sup>
-                        <div>
-                          <span class="position-absolute d-span" style="line-height: 36px">
-                            $</span>
-                          <input id="feeEarnerHourlyRate" min="1" autocomplete="on" type="number"
-                            class="form-control d-input" required />
-                        </div>
-                      </label>
-                      <br />
-
-                      <br />
-                      <button type="button" class="btn btn-dark ">Add</button>
-                    </fieldset>
-
-                    <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
-                      <thead>
-                        <tr>
-                          <th>Item</th>
-                          <th>Cost (AUD)</th>
-                          <th>Total</th>
-                        </tr>
-                      </thead>
-                      <tbody id="addFeeEarnersRow">
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td>
-                            <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: $<span
-                                id="finalHourlyRateMultiple">0</span></p>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div> -->
+                 
 
                   <!-- hammad -->
                   <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
@@ -672,21 +463,10 @@
                     </div>
 
 
-                    <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
-                      <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
-
-                    </p> -->
                   </div>
                 </div>
 
-                <!-- <div class="form-group mb-3">
-                  <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
-                  <div>
-                    <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
-                      class="form-control d-input" min="1" step=".01" placeholder="" />
-                  </div>
-                </div> -->
+            
 
               </div>
             </div>
@@ -709,53 +489,7 @@
                       class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                   <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
-                  <!-- <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
-                    <fieldset class="border p-2 my-2 bg-light text-center" style="margin: auto">
-                      <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
-                        Itemise Disbursements
-                      </legend>
-                      <label class="w-100 text-start">
-                        Task:<sup><code>*</code></sup>
-                        <input id="feeEarnerTitle" autocomplete="on" placeholder="Eg: Item one " class="form-control"
-                          required />
-                      </label>
-                      <br />
-                      <br />
-                      <label class="w-100 text-start">
-                        Cost (AUD):<sup><code>*</code></sup>
-                        <div>
-                          <span class="position-absolute d-span" style="line-height: 36px">
-                            $</span>
-                          <input id="feeEarnerHourlyRate" min="1" autocomplete="on" type="number"
-                            class="form-control d-input" required />
-                        </div>
-                      </label>
-                      <br />
-
-                      <br />
-                      <button type="button" class="btn btn-dark ">Add</button>
-                    </fieldset>
-
-                    <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
-                      <thead>
-                        <tr>
-                          <th>Item</th>
-                          <th>Cost (AUD)</th>
-                          <th>Total</th>
-                        </tr>
-                      </thead>
-                      <tbody id="addFeeEarnersRow">
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td>
-                            <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: $<span
-                                id="finalHourlyRateMultiple">0</span></p>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div> -->
+                 
 
                   <!-- hammad -->
                   <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
@@ -832,52 +566,16 @@
 
 
 
-                    <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
-                      <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
-
-
-                    </p> -->
-                  </div>
+                 </div>
 
 
                 </div>
 
-                <!-- <div class="form-group mb-3">
-                  <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
-                  <div>
-                    <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
-                      class="form-control d-input" min="1" step=".01" placeholder="" />
-                  </div>
-                </div> -->
+          
 
               </div>
 
-              <!-- <div class="my-3">
-                <label>Do you require an upfront payment?<sup><code>*</code></sup></label>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="upfrontPayment" id="upfrontYes" value="yes"
-                    checked="" />
-                  <label class="form-check-label" for="upfrontYes" @click="setPayment('Yes')">
-                    Yes
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="upfrontPayment" id="upfrontNo" value="no" />
-                  <label class="form-check-label" for="upfrontNo" @click="setPayment('No')">
-                    No
-                  </label>
-                </div>
-
-                <div class="my-3" id="upfrontPayAmount" v-if="payment === 'Yes'">
-                  <label>How much upfront payment do you require?<sup><code>*</code></sup></label>
-                  <div>
-                    <span class="position-absolute d-span">$</span>
-                    <input id="upfrontAmount" name="upfrontAmount" type="number" min="1" step=".01"
-                      class="form-control d-input" />
-                  </div>
-                </div>
-              </div> -->
+             
             </div>
 
             <!-- If they select ‘Hourly rate’ -->
@@ -903,41 +601,8 @@
               <div v-if="isVisible === 'No'">
 
                 <button class="btn btn-dark mt-3 mb-3" type="button" @click="showEarner">Add fee earner</button>
-              </div>
-
-
-              <div class="" id="additionalFeeEarners" v-if="divEarnerVisible">
-                <!-- <fieldset class="border p-2 my-2 bg-light text-center " style="margin: auto">
-                  <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
-                    Add additional fee earner
-                  </legend>
-                  <label class="w-100 text-start">
-                    Title:<sup><code>*</code></sup>
-                    <input id="feeEarnerTitle" autocomplete="on" placeholder="Eg: Associate" class="form-control"
-                      required />
-                  </label>
-                  <br />
-                  <br />
-                  <label class="w-100 text-start">
-                    Hourly rate (in AUD excluding GST):<sup><code>*</code></sup>
-                    <div>
-                      <span class="position-absolute d-span">
-                        $</span>
-                      <input id="feeEarnerHourlyRate" min="1" autocomplete="on" type="number" class="form-control d-input"
-                        required />
-                    </div>
-                  </label>
-                  <br />
-                  <br />
-                  <label class="w-100 text-start">
-                    Estimated number of hours:<sup><code>*</code></sup>
-                    <input id="feeEarnerEstimatedHours" min="1" autocomplete="on" type="number" class="form-control"
-                      required />
-                  </label>
-                  <br />
-                  <br />
-                  <button type="button" class="btn btn-dark">Add</button>
-                </fieldset> -->
+                <div class="" id="additionalFeeEarners" v-if="divEarnerVisible">
+               
 
 
                 <fieldset class="border p-2 my-2 bg-light text-center " style="margin: auto">
@@ -971,28 +636,7 @@
                   <button type="button" @click="addRow3" class="btn btn-dark">Add</button>
                 </fieldset>
 
-                <!-- <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
-                  <thead>
-                    <tr>
-                      <th>Title</th>
-                      <th>Hourly rate (in AUD excluding GST)</th>
-                      <th>Estimated number of hours</th>
-                      <th>Total</th>
-
-                    </tr>
-                  </thead>
-                  <tbody id="addFeeEarnersRow">
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>
-                        <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: $<span
-                            id="finalHourlyRateMultiple">0</span></p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table> -->
+              
 
                 <div class="table-responsive">
                   <table class="table table-bordered mb-3 " id="additionalFeeEarnersTable">
@@ -1045,11 +689,13 @@
                   </table>
 
                 </div>
-                <!-- <p class="mb-2 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">Total (excluding GST): $
-                </p> -->
-
+                
 
               </div>
+              </div>
+
+
+           
 
               <div v-if="isVisible === 'Yes'">
                 <!-- Invisible filed for posting additional fee earners info -->
@@ -1087,53 +733,7 @@
                       class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                   <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
-                  <!-- <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
-                    <fieldset class="border p-2 my-2 bg-light text-center" style="margin: auto">
-                      <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
-                        Itemise Disbursements
-                      </legend>
-                      <label class="w-100 text-start">
-                        Task:<sup><code>*</code></sup>
-                        <input id="feeEarnerTitle" autocomplete="on" placeholder="Eg: Item one " class="form-control"
-                          required />
-                      </label>
-                      <br />
-                      <br />
-                      <label class="w-100 text-start">
-                        Cost (AUD):<sup><code>*</code></sup>
-                        <div>
-                          <span class="position-absolute d-span" style="line-height: 36px">
-                            $</span>
-                          <input id="feeEarnerHourlyRate" min="1" autocomplete="on" type="number"
-                            class="form-control d-input" required />
-                        </div>
-                      </label>
-                      <br />
-
-                      <br />
-                      <button type="button" class="btn btn-dark ">Add</button>
-                    </fieldset>
-
-                    <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
-                      <thead>
-                        <tr>
-                          <th>Item</th>
-                          <th>Cost (AUD)</th>
-                          <th>Total</th>
-                        </tr>
-                      </thead>
-                      <tbody id="addFeeEarnersRow">
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td>
-                            <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: $<span
-                                id="finalHourlyRateMultiple">0</span></p>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div> -->
+               
 
                   <!-- hammad -->
                   <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
@@ -1209,48 +809,14 @@
 
 
 
-                    <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
-                      <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
-
-                    </p> -->
+                   
                   </div>
                 </div>
 
-                <!-- <div class="form-group mb-3">
-                  <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
-                  <div>
-                    <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
-                      class="form-control d-input" min="1" step=".01" placeholder="" />
-                  </div>
-                </div> -->
+               
 
               </div>
-              <!-- <div class="my-3">
-                <label>Do you require an upfront payment?<sup><code>*</code></sup></label>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="upfrontPayment" id="upfrontYes" value="yes"
-                    checked="" />
-                  <label class="form-check-label" for="upfrontYes" @click="setPay('Yes')">
-                    Yes
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="upfrontPayment" id="upfrontNo" value="no" />
-                  <label class="form-check-label" for="upfrontNo" @click="setPay('No')">
-                    No
-                  </label>
-                </div>
-
-                <div class="my-3" id="upfrontPayAmount" v-if="pay === 'Yes'">
-                  <label>How much upfront payment do you require?<sup><code>*</code></sup></label>
-                  <div>
-                    <span class="position-absolute d-span">$</span>
-                    <input id="upfrontAmount" name="upfrontAmount" type="number" min="1" step=".01"
-                      class="form-control d-input" />
-                  </div>
-                </div>
-              </div> -->
+             
             </div>
 
             <!-- If they select ‘Success Fee’ -->
@@ -1282,53 +848,7 @@
                       class="form-control d-input" min="1" step=".01" placeholder="" />
                   </div>
                   <button class="btn btn-dark mt-3 mb-3" type="button" @click="showItemise">Itemise Disbursements</button>
-                  <!-- <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
-                    <fieldset class="border p-2 my-2 bg-light text-center" style="margin: auto">
-                      <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
-                        Itemise Disbursements
-                      </legend>
-                      <label class="w-100 text-start">
-                        Task:<sup><code>*</code></sup>
-                        <input id="feeEarnerTitle" autocomplete="on" placeholder="Eg: Item one " class="form-control"
-                          required />
-                      </label>
-                      <br />
-                      <br />
-                      <label class="w-100 text-start">
-                        Cost (AUD):<sup><code>*</code></sup>
-                        <div>
-                          <span class="position-absolute d-span" style="line-height: 36px">
-                            $</span>
-                          <input id="feeEarnerHourlyRate" min="1" autocomplete="on" type="number"
-                            class="form-control d-input" required />
-                        </div>
-                      </label>
-                      <br />
-
-                      <br />
-                      <button type="button" class="btn btn-dark ">Add</button>
-                    </fieldset>
-
-                    <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
-                      <thead>
-                        <tr>
-                          <th>Item</th>
-                          <th>Cost (AUD)</th>
-                          <th>Total</th>
-                        </tr>
-                      </thead>
-                      <tbody id="addFeeEarnersRow">
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td>
-                            <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: $<span
-                                id="finalHourlyRateMultiple">0</span></p>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div> -->
+                 
 
                   <!-- hammad -->
                   <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
@@ -1402,52 +922,14 @@
                     </table>
 
 
-
-
-                    <!-- <p class="mb-0 mt-2 bg-dark border p-1 rounded text-white text-center btn-itemize-total">
-                      <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
-
-                    </p> -->
                   </div>
 
 
                 </div>
 
-                <!-- <div class="form-group mb-3">
-                  <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
-                  <div>
-                    <span class="position-absolute d-span"> $</span>
-                    <input type="number" id="fixedFeeAmount" v-model="form.law_practice_cost" name="fixedFeeAmount"
-                      class="form-control d-input" min="1" step=".01" placeholder="" />
-                  </div>
-                </div> -->
 
               </div>
-              <!-- <div class="my-3">
-                <label>Do you require an upfront payment?<sup><code>*</code></sup></label>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="upfrontPayment" id="upfrontYes" value="yes"
-                    checked="" />
-                  <label class="form-check-label" for="upfrontYes" @click="setPaySucc('Yes')">
-                    Yes
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="upfrontPayment" id="upfrontNo" value="no" />
-                  <label class="form-check-label" for="upfrontNo" @click="setPaySucc('No')">
-                    No
-                  </label>
-                </div>
-
-                <div class="my-3" id="upfrontPayAmount" v-if="paySucc === 'Yes'">
-                  <label>How much upfront payment do you require?<sup><code>*</code></sup></label>
-                  <div>
-                    <span class="position-absolute d-span" style="line-height: 36px">$</span>
-                    <input id="upfrontAmount" name="upfrontAmount" type="number" min="1" step=".01"
-                      class="form-control d-input" />
-                  </div>
-                </div>
-              </div> -->
+             
             </div>
 
 
@@ -1539,24 +1021,7 @@
                   </table>
 
 
-                  <!-- <table class="table mt-2 border-0" id="additionalFeeEarnersTable">
-                      <tbody>
-                        <tr>
-                         <td class="bg-dark text-white w-33 b-round-start">Total (excluding GST):</td>
-                         <td class="bg-dark text-white w-66 b-round-end">${{ grandTotal }}</td>
-                        
-                        </tr>
-                        <tr>
-                          <td class="gstStyle">
-                            *GST Not Applicable
-                          </td>
-                        </tr>
-                      </tbody>
-                      </table> -->
-
-                  <!-- <p class="mb-0 bg-dark mt-2 border p-1 rounded text-white text-center btn-itemize-total">
-                    <span>Total (excluding GST):</span><span>${{ grandTotal }}</span>
-                  </p> -->
+              
                 </div>
               </div>
 
@@ -1564,13 +1029,7 @@
 
             </div>
 
-            <!-- <div class="form-group">
-              <label>Tell the potential client what you will do for them:<sup><code>*</code></sup>
-                <textarea v-model="form.description" id="additionalInfo" name="additionalInfo" class="form-control"
-                  rows="4" cols="100%" required=""></textarea>
-              </label>
-              <br />
-            </div> -->
+          
 
 
             <div class="stepbtn hiden mt-3">
@@ -1594,280 +1053,7 @@
         </template>
 
         <template v-if="currentStep === 1">
-          <!-- If they select ‘Daily Rate’ -->
-          <!-- <div class="form-group" id="fixed-fee" v-if="selectedOption === 'Daily'">
-            <div>
-              <label> Daily Rate </label>
-              <input type="number" id="fixedFeeAmount" name="fixedFeeAmount" class="form-control" min="1" step=".01"
-                placeholder="($AUD) 0.00" />
-            </div>
-          </div> -->
-
-          <!-- If they select item by item -->
-          <!-- <div class="form-group" id="fixed-fee" v-if="selectedOption === 'Item'">
-            <div class="" id="additionalFeeEarners">
-              <fieldset class="border p-2 my-2  bg-light text-center" style="margin: auto">
-                <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
-                  Item by Item for Specific Tasks
-                </legend>
-                <label class="w-100 text-start">
-                  Task:<sup><code>*</code></sup>
-                  <input id="feeEarnerTitle" autocomplete="on" placeholder="Eg: Task one " class="form-control"
-                    required />
-                </label>
-                <br />
-                <br />
-                <label class="w-100 text-start">
-                  Cost (AUD):<sup><code>*</code></sup>
-                  <div>
-                    <span class="position-absolute d-span">
-                      $</span>
-                    <input id="feeEarnerHourlyRate" min="1" autocomplete="on" type="number" class="form-control d-input"
-                      required />
-                  </div>
-                </label>
-                <br />
-
-                <br />
-                <button class="btn btn-dark">Add</button>
-              </fieldset>
-
-              <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
-                <thead>
-                  <tr>
-                    <th>Task</th>
-                    <th>Cost (AUD)</th>
-
-                    <th>Total</th>
-
-                  </tr>
-                </thead>
-                <tbody id="addFeeEarnersRow">
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: $<span
-                          id="finalHourlyRateMultiple">0</span></p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-
-            </div>
-          </div> -->
-
-          <!-- If they select ‘Fixed fee’ -->
-          <!-- <div class="form-group" id="fixed-fee" v-if="selectedOption === 'Fixed'">
-            <label>Fixed fee amount (in AUD and excluding GST and disbursements):<sup><code>*</code></sup></label>
-            <div>
-              <span class="position-absolute d-span"> $</span>
-              <input type="number" id="fixedFeeAmount" name="fixedFeeAmount" class="form-control d-input" min="1"
-                step=".01" />
-            </div>
-            <br />
-
-            <div class="my-3">
-              <label>Do you require an upfront payment?<sup><code>*</code></sup></label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="upfrontPayment" id="upfrontYes" value="yes"
-                  checked="" />
-                <label class="form-check-label" for="upfrontYes" @click="setPayment('Yes')">
-                  Yes
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="upfrontPayment" id="upfrontNo" value="no" />
-                <label class="form-check-label" for="upfrontNo" @click="setPayment('No')">
-                  No
-                </label>
-              </div>
-
-              <div class="my-3" id="upfrontPayAmount" v-if="payment === 'Yes'">
-                <label>How much upfront payment do you require?<sup><code>*</code></sup></label>
-                <div>
-                  <span class="position-absolute d-span">$</span>
-                  <input id="upfrontAmount" name="upfrontAmount" type="number" min="1" step=".01"
-                    class="form-control d-input" />
-                </div>
-              </div>
-            </div>
-          </div> -->
-
-          <!-- If they select ‘Hourly rate’ -->
-          <!-- <div class="form-group" id="hourly-rate" v-if="selectedOption === 'Hourly'">
-            <div class="form-group mb-3" id="addAdditionalFeeEarnersRadio">
-              How many fee earners will be working on this matter?
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="radio" name="noOfFeeEarners" class="form-check-input" id="radioNoOfFeeEarnersSingle"
-                    checked="" @click="showElement('Yes')" />
-                  Just me
-                </label>
-              </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="radio" name="noOfFeeEarners" class="form-check-input" id="radioNoOfFeeEarnersMultiple"
-                    @click="showElement('No')" />
-                  I'm part of a team
-                </label>
-              </div>
-            </div> -->
-
-          <!-- <div class="" id="additionalFeeEarners" v-if="isVisible === 'No'">
-              <fieldset class="border p-2 my-2 bg-light text-center " style="margin: auto">
-                <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
-                  Add additional fee earner
-                </legend>
-                <label class="w-100 text-start">
-                  Title:<sup><code>*</code></sup>
-                  <input id="feeEarnerTitle" autocomplete="on" placeholder="Eg: Associate" class="form-control"
-                    required />
-                </label>
-                <br />
-                <br />
-                <label class="w-100 text-start">
-                  Hourly rate (in AUD excluding GST):<sup><code>*</code></sup>
-                  <div>
-                    <span class="position-absolute d-span">
-                      $</span>
-                    <input id="feeEarnerHourlyRate" min="1" autocomplete="on" type="number" class="form-control d-input"
-                      required />
-                  </div>
-                </label>
-                <br />
-                <br />
-                <label class="w-100 text-start">
-                  Estimated number of hours:<sup><code>*</code></sup>
-                  <input id="feeEarnerEstimatedHours" min="1" autocomplete="on" type="number" class="form-control"
-                    required />
-                </label>
-                <br />
-                <br />
-                <button class="btn btn-dark">Add</button>
-              </fieldset>
-
-              <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
-                <thead>
-                  <tr>
-                    <th>Title</th>
-                    <th>Hourly rate (in AUD excluding GST)</th>
-                    <th>Estimated number of hours</th>
-                    <th>Total</th>
-
-                  </tr>
-                </thead>
-                <tbody id="addFeeEarnersRow">
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: $<span
-                          id="finalHourlyRateMultiple">0</span></p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-
-            </div> -->
-
-          <!-- <div v-if="isVisible === 'Yes'">
-              Invisible filed for posting additional fee earners info
-                <input class="d-none" name="feeEarnersInfo" id="feeEarnersInfo" />
-
-                <div id="hourlyRateIndividual">
-                  <label>Hourly rate (in AUD excluding GST):<sup><code>*</code></sup></label>
-                  <div>
-                    <span class="position-absolute d-span">
-                      $</span>
-                    <input type="number" id="hourlyRate" name="hourlyRate" min="1" step="0.01" class="form-control d-input"
-                      oninput="updateHourlyRateIndividual()" />
-                  </div>
-
-                  <br />
-
-                  <label>Estimated number of hours<sup><code>*</code></sup></label>
-                  <input type="number" id="noOfHours" name="noOfHours" min="1" step="0.01" class="form-control"
-                    oninput="updateHourlyRateIndividual()" />
-
-                  <br />
-                </div>
-
-                input field to capture final hourly rate value during form submit
-                <p id="finalHourlyRateText">
-                  Total: $<input id="finalHourlyRateValue" name="finalHourlyRateValue" type="number" readonly=""
-                    class="border-0 text-dark bg-white" />
-                </p>
-            </div> -->
-
-          <!-- <div class="my-3">
-                <label>Do you require an upfront payment?<sup><code>*</code></sup></label>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="upfrontPayment" id="upfrontYes" value="yes"
-                    checked="" />
-                  <label class="form-check-label" for="upfrontYes" @click="setPay('Yes')">
-                    Yes
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="upfrontPayment" id="upfrontNo" value="no" />
-                  <label class="form-check-label" for="upfrontNo" @click="setPay('No')">
-                    No
-                  </label>
-                </div>
-
-                <div class="my-3" id="upfrontPayAmount" v-if="pay === 'Yes'">
-                  <label>How much upfront payment do you require?<sup><code>*</code></sup></label>
-                  <div>
-                    <span class="position-absolute d-span">$</span>
-                    <input id="upfrontAmount" name="upfrontAmount" type="number" min="1" step=".01"
-                      class="form-control d-input" />
-                  </div>
-                </div>
-              </div> -->
-          <!-- </div> -->
-
-          <!-- If they select ‘Success Fee’ -->
-          <!-- <div class="form-group" id="success-fee" v-if="selectedOption === 'Success'">
-            <label>Uplift percentage (%):<sup><code>*</code></sup></label>
-            <input type="number" id="upliftPercentage" name="upliftPercentage" min="1" max="25" step=".01"
-              class="form-control" />
-
-            <br />
-
-            <label>Summarise terms upon which Success Fee will be charged:</label>
-            <input type="text" id="successFeeTerms" name="successFeeTerms" class="form-control" />
-            <br />
-
-            <div class="my-3">
-              <label>Do you require an upfront payment?<sup><code>*</code></sup></label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="upfrontPayment" id="upfrontYes" value="yes"
-                  checked="" />
-                <label class="form-check-label" for="upfrontYes" @click="setPaySucc('Yes')">
-                  Yes
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="upfrontPayment" id="upfrontNo" value="no" />
-                <label class="form-check-label" for="upfrontNo" @click="setPaySucc('No')">
-                  No
-                </label>
-              </div>
-
-              <div class="my-3" id="upfrontPayAmount" v-if="paySucc === 'Yes'">
-                <label>How much upfront payment do you require?<sup><code>*</code></sup></label>
-                <div>
-                  <span class="position-absolute d-span" style="line-height: 36px">$</span>
-                  <input id="upfrontAmount" name="upfrontAmount" type="number" min="1" step=".01"
-                    class="form-control d-input" />
-                </div>
-              </div>
-            </div>
-          </div> -->
+       
           <div class="my-3">
             <label>Do you require an upfront payment?<sup><code>*</code></sup></label>
             <div class="form-check ">
@@ -1894,161 +1080,12 @@
               </div>
             </div>
           </div>
-          <!-- discount -->
-          <!-- Do you offer a free or discounted first consultation? -->
-          <!-- <div class="form-group m-2" id="freeFirstConsultationRadio">
-            <label>Do you offer a free or discounted first consultation?</label>
-            <div class="form-check">
-              <input class="form-check-input" v-model="form.consultation" type="radio" name="freeFirstConsultation"
-                id="freeFirstConsultationYes" value="yes" checked="" />
-              <label class="form-check-label" for="freeFirstConsultationYes" @click="setOption('Yes')">
-                Yes
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" v-model="form.consultation" name="freeFirstConsultation"
-                id="freeFirstConsultationNo" value="no" />
-              <label class="form-check-label" for="freeFirstConsultationNo" @click="setOption('No')">
-                No
-              </label>
-            </div>
-          </div> -->
-
-          <!-- Do you offer a free or discounted first consultation input fields -->
-          <!-- <div v-if="option === 'Yes'">
-            <div class="form-group my-3" id="div-freeFirstConsultationFee">
-              <label for="freeFirstConsultationFee">Fee:<sup><code>*</code></sup></label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">$</div>
-                </div>
-                <input type="number" min="1" class="form-control" name="freeFirstConsultationFee"
-                  id="freeFirstConsultationFee" />
-              </div>
-            </div>
-
-            <div class="col-auto" id="div-freeFirstConsultationMinutes">
-              <label for="">Time limit:<sup><code>*</code></sup></label>
-              <div class="input-group mb-2">
-                <input type="number" v-model="form.consultation_time_limit" class="form-control"
-                  name="freeFirstConsultationMinutes" id="freeFirstConsultationMinutes" placeholder="E.g. 60" />
-                <div class="input-group-prepend">
-                  <div class="input-group-text">minutes</div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-          <!-- Upfront payment -->
-          <!-- <div class="form-group my-2" id="upfrontPayRadio" v-if="selectedOption === 'Pro'" ref="content">
-            <div class="form-group">
-              <label>Tell the potential client what you will do for them:<sup><code>*</code></sup>
-                <textarea id="additionalInfo" name="additionalInfo" class="form-control" rows="4" cols="100%"
-                  required=""></textarea>
-              </label>
-              <br />
-            </div>
-
-            <div class="form-group m-2" id="div-deadline-acceptance-radio">
-              <label>Can you meet the potential client's deadline?</label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="deadlineFlexibility" id="deadlineYes" value="yes"
-                  checked="" />
-                <label class="form-check-label" for="deadlineYes" @click="showDeadline('Yes')">
-                  Yes
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="deadlineFlexibility" id="deadlineNo" value="no" />
-                <label class="form-check-label" for="deadlineNo" @click="showDeadline('No')">
-                  No
-                </label>
-              </div>
-            </div>
-
-            <div class="form-group" id="div-deadline" v-if="deadline === 'No'">
-              <label>Please explain why you can't meet potential client's deadline:<sup><code>*</code></sup>
-                <textarea id="txtarea-deadline" name="deadline" class="form-control" rows="4" cols="100%"
-                  placeholder="Eg: It's not realistic"></textarea>
-              </label>
-            </div>
-
-            <div class="stepbtn hiden mt-3">
-              <button v-if="currentStep !== 0" type="button" @click="prevStep" class="btn btn-dark mr">
-                Previous
-              </button>
-
-              <button v-if="currentStep === 1" type="button" class="btn btn-dark">
-                Finish
-              </button>
-            </div>
-
-
-          </div> -->
+      
 
         </template>
 
         <template v-if="currentStep === 2">
-          <!-- <div class="disbursement-fields">  
-          <div class="form-group">
-            <label> What is the estimated amount for disbursements (excluding GST)?</label>
-            <input type="number" id="fixedFeeAmount" name="fixedFeeAmount" class="form-control" min="1" step=".01"
-              placeholder="($AUD) 0.00" />
-            <button class="btn btn-dark mt-3 mb-3" @click="showItemise">Itemise Disbursements</button>
-            <div class="mb-3" id="additionalFeeEarners" v-if="divItemiseVisible">
-              <fieldset class="border p-2 my-2 bg-light text-center" style="margin: auto">
-                <legend class="w-auto" style="float: none; padding: inherit; font-size: 1rem">
-                  Itemise Disbursements
-                </legend>
-                <label class="w-100 text-start">
-                  Task:<sup><code>*</code></sup>
-                  <input id="feeEarnerTitle" autocomplete="on" placeholder="Eg: Item one " class="form-control"
-                    required />
-                </label>
-                <br />
-                <br />
-                <label class="w-100 text-start">
-                  Cost (AUD):<sup><code>*</code></sup>
-                  <div>
-                    <span class="position-absolute d-span" style="line-height: 36px">
-                      $</span>
-                    <input id="feeEarnerHourlyRate" min="1" autocomplete="on" type="number" class="form-control d-input"
-                      required />
-                  </div>
-                </label>
-                <br />
-
-                <br />
-                <button class="btn btn-dark ">Add</button>
-              </fieldset>
-
-              <table class="table table-bordered mb-0" id="additionalFeeEarnersTable">
-                <thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>Cost (AUD)</th>
-                    <th>Total</th>
-                  </tr>
-                </thead>
-                <tbody id="addFeeEarnersRow">
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: $<span id="finalHourlyRateMultiple">0</span></p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="form-group mb-3">
-            <label>What is the estimated total cost of barrister or other law practice (excluding GST)?</label>
-            <input type="number" id="fixedFeeAmount" name="fixedFeeAmount" class="form-control" min="1" step=".01"
-              placeholder="($AUD) 0.00" />
-          </div>
-
-        </div>   -->
+      
 
 
 
@@ -2061,81 +1098,7 @@
             <br />
           </div>
 
-          <!-- Deadline acceptance radio -->
-          <!-- <div class="form-group m-2" id="div-deadline-acceptance-radio">
-            <label>Can you meet the potential client's deadline?</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="deadlineFlexibility" id="deadlineYes" value="yes"
-                checked="" />
-              <label class="form-check-label" for="deadlineYes" @click="showDeadline('Yes')">
-                Yes
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="deadlineFlexibility" id="deadlineNo" value="no" />
-              <label class="form-check-label" for="deadlineNo" @click="showDeadline('No')">
-                No
-              </label>
-            </div>
-          </div> -->
-
-          <!-- Can't meet deadline explanation box -->
-          <!-- <div class="form-group" id="div-deadline" v-if="deadline === 'No'">
-            <label>Please explain why you can't meet potential client's deadline:<sup><code>*</code></sup>
-              <textarea id="txtarea-deadline" name="deadline" class="form-control" rows="4" cols="100%"
-                placeholder="Eg: It's not realistic"></textarea>
-            </label>
-          </div> -->
-
-          <!-- Do you offer a free or discounted first consultation? -->
-          <!-- <div class="form-group m-2" id="freeFirstConsultationRadio">
-            <label>Do you offer a free or discounted first consultation?</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="freeFirstConsultation" id="freeFirstConsultationYes"
-                value="yes" checked="" />
-              <label class="form-check-label" for="freeFirstConsultationYes" @click="setOption('Yes')">
-                Yes
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="freeFirstConsultation" id="freeFirstConsultationNo"
-                value="no" />
-              <label class="form-check-label" for="freeFirstConsultationNo" @click="setOption('No')">
-                No
-              </label>
-            </div>
-          </div> -->
-
-          <!-- Do you offer a free or discounted first consultation input fields -->
-          <!-- <div v-if="option === 'Yes'">
-            <div class="form-group my-3" id="div-freeFirstConsultationFee">
-              <label for="freeFirstConsultationFee">Fee:<sup><code>*</code></sup></label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">$</div>
-                </div>
-                <input type="number" min="1" class="form-control" name="freeFirstConsultationFee"
-                  id="freeFirstConsultationFee" />
-              </div>
-            </div> -->
-
-          <!-- <div class="col-auto" id="div-freeFirstConsultationMinutes">
-              <label for="">Time limit:<sup><code>*</code></sup></label>
-              <div class="input-group mb-2">
-                <input type="number" class="form-control" name="freeFirstConsultationMinutes"
-                  id="freeFirstConsultationMinutes" placeholder="E.g. 60" />
-                <div class="input-group-prepend">
-                  <div class="input-group-text">minutes</div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-
-
-          <!-- Submit button -->
-          <!-- <div class="text-center">
-          <input class="btn btn-dark mt-2" type="submit" name="formSubmit" />
-        </div> -->
+      
         </template>
 
         <!-- <template v-if="currentStep === 3">
@@ -2176,62 +1139,9 @@
 </template>
 <script setup>
 import { Form } from "vee-validate";
-// import * as yup from 'yup';
-// import { computed } from "vue";
+
 import MainFooter from "../../components/global/MainFooter.vue";
 
-
-// const currentStep = ref(0);
-
-// Each step should have its own validation schema
-// const schemas = [
-// yup.object({
-//   name: yup.string().required(),
-//   email: yup.string().required().email(),
-// }),
-// yup.object({
-//   password: yup.string().required().min(6),
-//   confirmPassword: yup
-//     .string()
-//     .required()
-//     .min(6)
-//     .oneOf([yup.ref('password')], 'Passwords must match'),
-// }),
-// yup.object({
-//   address: yup.string().required(),
-//   postalCode: yup
-//     .string()
-//     .required()
-//     .matches(/^[0-9]+$/, 'Must be numeric'),
-// }),
-// yup.object({
-//   terms: yup.bool().required().equals([true]),
-// })
-// ];
-
-// const currentSchema = computed(() => {
-//   return schemas[this.currentStep];
-
-// });
-
-// function nextStep(values) {
-//   if (currentStep.value === 2) {
-//     console.log("Done: ", JSON.stringify(values, null, 1));
-//     // console.log('test', currentStep.value);
-
-//     return;
-//   }
-
-//   currentStep.value++;
-// }
-
-// function prevStep() {
-//   if (currentStep.value <= 0) {
-//     return;
-//   }
-
-//   currentStep.value--;
-// }
 </script>
 <script>
 import LawyerHeader from "./Header.vue";
@@ -2559,37 +1469,6 @@ export default {
       });
 
 
-      // Use SweetAlert2 to create a modal
-      // this.$swal.fire({
-      //   title: 'Accessibility Requirements',
-      //   html: `
-      //     <div class="table-wrap" style="text-align:left !important;">
-      //       <div class="wrapper">
-      //         <h6><b>Visual Impairment:</b></h6>
-      //         <p>Blind</p>
-      //       </div>
-
-      //       <div class="wrapper">
-      //         <h6>Auditory Impairment:</h6>
-      //         <p>Deaf</p>
-      //       </div>
-
-      //       <div class="wrapper">
-      //         <h6>Psychiatric Disability:</h6>
-      //         <p>Depression</p>
-      //       </div>
-
-      //       <div class="wrapper">
-      //         <h6>Language:</h6>
-      //         <p>Macedonian</p>
-      //       </div>
-      //     </div>`,
-      //   showCloseButton: true,
-      //   showConfirmButton: false,
-      //   customClass: {
-      //     container: 'my-swal-container', // You can define your custom class for styling
-      //   },
-      // });
     },
 
   },
