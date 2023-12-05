@@ -109,7 +109,7 @@
                 or speaking a language other than English?</label>
               <input type="radio" id="yes" name="requirements" value="1" v-model="requirementsOption" />
               <label for="yes" class="req-label"> Yes</label><br />
-              <input type="radio" id="no" name="requirements" value="0" v-model="requirementsOption" />
+              <input type="radio" id="no" name="requirements" value="0" v-model="requirementsOption" @change="changeRequirementStatus" />
               <label for="no" class="req-label mb-2"> No</label><br />
             </div>
             <div v-if="requirementsOption == 1">
@@ -576,6 +576,20 @@ export default {
     this.fetchLocations();
   },
   methods: {
+    changeRequirementStatus(){
+      if(this.requirementsOption = 0){
+        this.visualOption = "";
+        this.auditoryOption = "";
+        this.mobilityOption = "";
+        this.learningOption = "";
+        this.intellectualOption = "";
+        this.psychiatricOption = "";
+        this.medicalOption = "";
+        this.requirementsOptionDescription = "";
+        this.otherLanguage = "";
+        this.selectedLanguage = "";
+      };
+    },
     setAreaFunc() {
       this.selectedArea = null;
       this.selectedAreaIndex = null;
