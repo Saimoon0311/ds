@@ -15,7 +15,7 @@
     <div class="col-md-4">
       <div class="card subscription-card mb-3">
         <div class="card-header">
-          <h3 class="text-center">Basic Plan</h3>
+          <h3 class="text-center">Connect Plan</h3>
         </div>
         <div class="card-body">
           <h2 class="text-center">$39.00/month</h2>
