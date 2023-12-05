@@ -277,7 +277,7 @@ export default {
 }
 
 @media screen and (max-width: 720px) {
-  .showhover p {
+  .showhover p[data-v-34f07b43] {
     line-height: 23px;
     margin-bottom: 8px;
     font-size: 13px;

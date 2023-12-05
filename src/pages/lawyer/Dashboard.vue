@@ -14,7 +14,7 @@
         Here are jobs matching your location and practice area.
       </p>
 
-      <div  class="container">
+      <div data-v-511b78bb="" class="container">
         <div v-if="adminApproval != 'approve'">
           <p class="h5 m-3 text-center">
             Your profile has not been approved yet.
@@ -31,14 +31,14 @@
 
         <div v-else>
           <ul
-            
+            data-v-511b78bb=""
             class="nav nav-pills mb-3 bg-light border p-2 py-3 rounded"
             id="pills-tab"
             role="tablist"
           >
-            <li  class="nav-item" role="presentation">
+            <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
-                
+                data-v-511b78bb=""
                 class="nav-link active"
                 id="pills-home-tab"
                 data-bs-toggle="pill"
@@ -52,9 +52,9 @@
                 Open
               </button>
             </li>
-            <li  class="nav-item" role="presentation">
+            <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
-                
+                data-v-511b78bb=""
                 class="nav-link"
                 id="pills-profile-tab"
                 data-bs-toggle="pill"
@@ -69,9 +69,9 @@
                 Pending
               </button>
             </li>
-            <li  class="nav-item" role="presentation">
+            <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
-                
+                data-v-511b78bb=""
                 class="nav-link"
                 id="pills-profile-tab"
                 data-bs-toggle="pill"
@@ -86,9 +86,9 @@
                 Closed
               </button>
             </li>
-            <!-- <li  class="nav-item" role="presentation">
+            <!-- <li data-v-511b78bb="" class="nav-item" role="presentation">
             <button
-              
+              data-v-511b78bb=""
               class="nav-link"
               id="pills-profile-tab"
               data-bs-toggle="pill"
@@ -106,7 +106,7 @@
           </ul>
 
           <!-- <div
-            
+            data-v-511b78bb=""
             class="tab-pane fade active show"
             id="pills-home"
             role="tabpanel"
@@ -257,7 +257,7 @@
                         </div>
                         <div
                           v-if="item.status != 'close'"
-                          class="d-flex flex-lg-row justify-content-center align-items-center flex-sm-column flex-wrap"
+                          class="d-flex flex-lg-row justify-content-evenly align-items-center flex-sm-column flex-wrap"
                           style="min-width: 150px"
                         >
                           <button
@@ -280,7 +280,7 @@
                             @click="declineJob(item.id,index)"
                             class="btn btn-danger btn-sm card-btn my-1 mx-1"
                           >
-                          Withdraw Proposal
+                            Decline
                           </button>
                           <router-link
                             v-if="tab != 'pending'"
@@ -288,12 +288,12 @@
                             to="/request-info"
                             >Message</router-link
                           >
-                          <!-- <router-link
+                          <router-link
                             v-if="tab === 'pending'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
                             to="/request-info"
                             >View Messages</router-link
-                          > -->
+                          >
                         </div>
                         <div
                           v-else
