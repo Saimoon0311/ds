@@ -165,8 +165,8 @@ export default {
   padding: 50px;
   font-size: 16px;
   text-align: center;
-  width: 500px;
-  height: 500px;
+  width: 490px;
+  height: 490px;
   margin: 10px;
 }
 
