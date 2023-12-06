@@ -175,7 +175,7 @@
                 </tr>
                 <tr v-else class="text-left" v-for="(item,index) in data_paginated" :key="index">
                   <!-- <td>testing client (crinimal)</td> -->
-                  <td> <span class="btn-dark btn">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</span></td>
+                  <td class="text-center"> <span class="btn-dark btn">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</span></td>
                   <td>{{ item?.charge_type }}</td>
                   <td>{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
                   <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td>
