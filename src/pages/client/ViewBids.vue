@@ -3,7 +3,7 @@
     <ClientHeader />
     <div class="container">
       <router-link
-        class="btn btn-secondary btn-sm my-3"
+        class="btn btn-dark btn-sm my-3"
         title="back"
         to="/client-dashboard"
         ><i class="bi bi-arrow-left"></i> Back</router-link
@@ -175,7 +175,7 @@
                 </tr>
                 <tr v-else class="text-left" v-for="(item,index) in data_paginated" :key="index">
                   <!-- <td>testing client (crinimal)</td> -->
-                  <td>{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</td>
+                  <td> <span class="btn-dark">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</span></td>
                   <td>{{ item?.charge_type }}</td>
                   <td>{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
                   <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td>
@@ -212,6 +212,11 @@
                           <i class="bi bi-x-lg"></i>Reject
                         </button>
                       </form>
+                      <button
+                        class="btn btn-secondary btn-sm p-1 px-2"
+                      >
+                        Message
+                      </button>
                     </div>
                     <p v-else>{{ item?.status }}</p>
                   </td>

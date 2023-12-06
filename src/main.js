@@ -172,7 +172,7 @@ app.mixin({
       // console.log("curr search : ", this.currentPage);
     },
 
-    setUserInStateAndLocalStorage(res) {
+    setUserInStateAndLocalStorage(res,removeFromLocalStorage = true) {
       console.log("new func : ", res?.data?.data?.link);
       const userData = {
         first_name: res?.data?.data?.first_name,
@@ -192,9 +192,11 @@ app.mixin({
         remote_consultation:
           res?.data?.data?.remote_consultation == 1 ? true : false,
         mobile_friendly: res?.data?.data?.mobile_friendly == 1 ? true : false,
+        fields : res?.data?.data?.fields,
+        locations : res?.data?.data?.locations,
       };
 
-      if (localStorage.getItem("loginUser")) {
+      if (localStorage.getItem("loginUser") && removeFromLocalStorage) {
         localStorage.removeItem("loginUser");
       }
       localStorage.setItem("loginUser", JSON.stringify(userData));

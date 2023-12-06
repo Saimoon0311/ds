@@ -2,22 +2,25 @@
   <div class="l-main">
     <LawyerHeader />
     <div class="container">
-      <p class="h4 m-3">Welcome, {{ userName }}</p>
-      <p
-        v-if="
-          openJobs.length > 0 &&
-          adminApproval == 'approve' &&
-          subscriptionStatus == 'subscribed'
-        "
-        class="m-3"
-      >
-        Here are jobs matching your location and practice area.
-      </p>
+      <!-- <p class="h4 m-3">Welcome, {{ userName }}</p> -->
+      <span  v-if="openJobs.length > 0 && adminApproval == 'approve' && subscriptionStatus == 'subscribed'">
+        <p class="h4 m-3">Welcome, {{ userName }}</p>
+        <p class="m-3">
+          Here are jobs matching your location and practice area.
+        </p>
+      </span>
 
       <div data-v-511b78bb="" class="container">
+
         <div v-if="adminApproval != 'approve'">
           <p class="h5 m-3 text-center">
             Your profile has not been approved yet.
+          </p>
+        </div>
+        <!-- <div v-else-if="openJobs.length == 0 && searchQuery == '' && tab == 'open'" class="border rounded bg-light p-3 d-flex flex-wrap"> -->
+        <div v-else-if="!userFields && !userLocations" class="border rounded bg-light p-3 d-flex flex-wrap">
+          <p class="mx-auto my-0">Your profile is not completed . Click here to complete your
+            <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
           </p>
         </div>
         <div v-else-if="subscriptionStatus != 'subscribed'">
@@ -125,7 +128,7 @@
                 else :
                   listing -->
 
-              <div
+              <!-- <div
                 v-if="
                   openJobs.length == 0 && searchQuery == '' && tab == 'open'
                 "
@@ -140,21 +143,17 @@
                     >Profile</router-link
                   >
                 </p>
-              </div>
+              </div> -->
 
-              <div
-                v-if="
-                  openJobs.length == 0 && searchQuery == '' && tab != 'open'
-                "
-                class="border rounded bg-light p-3 d-flex flex-wrap"
-              >
+              <!-- <div v-if="openJobs.length == 0 && searchQuery == '' && tab != 'open'" class="border rounded bg-light p-3 d-flex flex-wrap"> -->
+              <div v-if="openJobs.length == 0 && searchQuery == ''" class="border rounded bg-light p-3 d-flex flex-wrap">
                 <p class="mx-auto my-0">No job found!</p>
+                <button  class="btn btn-danger btn-sm my-1 mx-1 d-none"> Clear All Rejected Proposals </button>
               </div>
 
               <div
                 v-else
-                class="border rounded bg-light px-2 py-3 d-flex flex-wrap align-center justify-content-center"
-              >
+                class="border rounded bg-light px-2 py-3 d-flex flex-wrap align-center justify-content-center">
                 <div class="input-group mb-3 search-field">
                   <input
                     type="text"
@@ -398,6 +397,13 @@ export default {
   },
 
   computed: {
+    userFields() {
+      console.log('user : ' , this.$store.getters?.loginUser);
+      return `${this.$store.getters?.loginUser?.fields}`;
+    },
+    userLocations() {
+      return `${this.$store.getters?.loginUser?.locations}`;
+    },
     userName() {
       return `${this.$store.getters?.loginUser?.first_name} ${this.$store.getters?.loginUser?.last_name}`;
     },
@@ -417,8 +423,9 @@ export default {
   // },
   methods: {
 
-  
+
     async changeTab(status) {
+      this.tab = status;
       if (status == "open") {
         this.endpoint = "/lawyer/show-open-related-jobs";
         await this.loadMore(null, true);
@@ -434,7 +441,7 @@ export default {
       //   this.endpoint = '/lawyer/show-reject-jobs';
       //   await this.loadMore(null,true);
       // }
-      this.tab = status;
+      
     },
 
     // async getJobs(){
@@ -650,35 +657,43 @@ p.badge {
 .my-swal-container .swal2-title {
   font-size: 25px;
 }
-@media only screen and (max-width: 1400px) and (min-width: 992px)  {
-  .card-btn{
-  width: 33%;
-  font-size: 11px;
+
+@media only screen and (max-width: 1400px) and (min-width: 992px) {
+  .card-btn {
+    width: 30%;
+    font-size: 11px;
+    padding: 5px;
+  }
 }
-}
+
 @media only screen and (max-width: 992px) {
-  .card-btn{
-  width: 100%;
+  .card-btn {
+    width: 100%;
+  }
 }
-}
+
 @media only screen and (max-width: 600px) {
   .l-main {
     padding-bottom: 100px;
   }
-  ul#pills-tab{
+
+  ul#pills-tab {
     width: 290px !important;
   }
+
   .nav-pills .nav-link {
     font-size: 12px;
+  }
 }
-}
+
 @media only screen and (max-width: 340px) {
-p.badge {
+  p.badge {
     font-size: 12px;
-}
-.custom-pad{
-  padding: 5px;
-  font-size: 13px;
-}
+  }
+
+  .custom-pad {
+    padding: 5px;
+    font-size: 13px;
+  }
 }
 </style>
