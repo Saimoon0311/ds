@@ -265,6 +265,42 @@ app.mixin({
       this.$router.push({ path: path });
     },
 
+
+
+    openRequirementsModal(data) {
+
+      let newData = {};
+
+      if (data && typeof data === 'object') {
+        for (const key in data) {
+          if (Object.prototype.hasOwnProperty.call(data, key)) {
+            const value = data[key];
+            if (value !== null && key != 'id' && key != 'job_id' && key != 'user_id' && key != 'created_at' && key != 'updated_at') {
+              let objKey = key;
+              objKey = objKey.replace(/_/g, " ");
+              newData[objKey] = value;
+            }
+          }
+        }
+      }
+
+      const htmlContent = Object.entries(newData)
+        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b>${key}: </b><span>${value}</span></h6></div>`)
+        .join('');
+
+      // Use dynamic HTML inside SweetAlert2 modal
+      this.$swal.fire({
+        title: 'Accessibility Requirements',
+        html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+          container: 'my-swal-container', // You can define your custom class for styling
+        },
+      });
+    },
+    
+
     // check subscription status of login user
     // checkSubscriptionAndAdminApproval() {
     //     try {

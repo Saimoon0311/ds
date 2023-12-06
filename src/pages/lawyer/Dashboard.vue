@@ -224,7 +224,7 @@
                               data-bs-target="#Accessibility"
                               @click="openRequirementsModal(item?.requirement)"
                             >
-                            Accessibility Requirements
+                            Accessibility Requirements{{ (!item?.requirement) ? ', (N/A)' : ''}}
                             </button>
                           </p>
 
@@ -417,85 +417,7 @@ export default {
   // },
   methods: {
 
-    openRequirementsModal(data) {
-
-      let newData = {};
-
-      if (data && typeof data === 'object') {
-        for (const key in data) {
-          if (Object.prototype.hasOwnProperty.call(data, key)) {
-            const value = data[key];
-            if (value !== null && key != 'id' && key != 'job_id' && key != 'user_id' && key != 'created_at' && key != 'updated_at') {
-              newData[key] = value;
-            }
-          }
-        }
-      }
-
-
-      // Construct HTML dynamically for key-value pairs
-
-      // let data2 = Object.fromEntries(data);
-      // console.log('v : ' , data2);
-      // data.filter((value) => {
-      //   console.log('filter : ', value);
-      //   return value !== null;
-      // });
-
-      // const filteredData = Object.fromEntries(
-      //   Object.entries(data).filter(([value]) => value !== null)
-      // );
-
-      const htmlContent = Object.entries(newData)
-        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b>${key}: </b><span>${value}</span></h6></div>`)
-        .join('');
-
-      // Use dynamic HTML inside SweetAlert2 modal
-      this.$swal.fire({
-        title: 'Accessibility Requirements',
-        html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
-        showCloseButton: true,
-        showConfirmButton: false,
-        customClass: {
-          container: 'my-swal-container', // You can define your custom class for styling
-        },
-      });
-
-
-      // Use SweetAlert2 to create a modal
-      // this.$swal.fire({
-      //   title: 'Accessibility Requirements',
-      //   html: `
-      //     <div class="table-wrap" style="text-align:left !important;">
-      //       <div class="wrapper">
-      //         <h6><b>Visual Impairment:</b></h6>
-      //         <p>Blind</p>
-      //       </div>
-
-      //       <div class="wrapper">
-      //         <h6>Auditory Impairment:</h6>
-      //         <p>Deaf</p>
-      //       </div>
-
-      //       <div class="wrapper">
-      //         <h6>Psychiatric Disability:</h6>
-      //         <p>Depression</p>
-      //       </div>
-
-      //       <div class="wrapper">
-      //         <h6>Language:</h6>
-      //         <p>Macedonian</p>
-      //       </div>
-      //     </div>`,
-      //   showCloseButton: true,
-      //   showConfirmButton: false,
-      //   customClass: {
-      //     container: 'my-swal-container', // You can define your custom class for styling
-      //   },
-      // });
-    },
-
-
+  
     async changeTab(status) {
       if (status == "open") {
         this.endpoint = "/lawyer/show-open-related-jobs";

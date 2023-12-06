@@ -13,28 +13,28 @@
               <div data-v-2f14f9de="" class="d-flex flex-wrap justify-content-center mb-5" data-v-376ef8ab="">
                 <!-- class="m-2 text-decoration-none badge text-white fs-6 bubbles" -->
                 <a v-for="(area, index) in areas" :key="area.id" @click="setArea(index, area.id)" :class="[
-                                  'm-2',
-                                  'text-decoration-none',
-                                  'badge',
-                                  'text-white',
-                                  'fs-6',
-                                  'bubbles',
-                                  { selected_bubble: selectedAreaIndex === index },
-                                ]">
+                  'm-2',
+                  'text-decoration-none',
+                  'badge',
+                  'text-white',
+                  'fs-6',
+                  'bubbles',
+                  { selected_bubble: selectedAreaIndex === index },
+                ]">
                   {{ area.title }}
                 </a>
 
                 <a @click="setAreaFunc"
                   class="m-2 text-decoration-none badge text-black fs-6 bubbles bubbles-other text-white" :class="[
-                                      'm-2',
-                                      'text-decoration-none',
-                                      'badge',
-                                      'text-white',
-                                      'fs-6',
-                                      'bubbles',
-                                      'bubbles-other',
-                                      { selected_bubble: otherAreaSelected },
-                                    ]" data-v-2f14f9de="">
+                    'm-2',
+                    'text-decoration-none',
+                    'badge',
+                    'text-white',
+                    'fs-6',
+                    'bubbles',
+                    'bubbles-other',
+                    { selected_bubble: otherAreaSelected },
+                  ]" data-v-2f14f9de="">
                   Other (not listed here) / I don't know
                 </a>
               </div>
@@ -109,7 +109,8 @@
                 or speaking a language other than English?</label>
               <input type="radio" id="yes" name="requirements" value="1" v-model="requirementsOption" />
               <label for="yes" class="req-label"> Yes</label><br />
-              <input type="radio" id="no" name="requirements" value="0" v-model="requirementsOption" @change="changeRequirementStatus" />
+              <input type="radio" id="no" name="requirements" value="0" v-model="requirementsOption"
+                @change="changeRequirementStatus" />
               <label for="no" class="req-label mb-2"> No</label><br />
             </div>
             <div v-if="requirementsOption == 1">
@@ -117,7 +118,8 @@
 
               <div class="selectboxes">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="visual" v-model="VisualIsChecked" />
+                  <input class="form-check-input" type="checkbox" value="" id="visual" v-model="VisualIsChecked"
+                    @change="resetVisual" />
                   <label class="form-check-label" for="visual">
                     Visual Impairment
                   </label>
@@ -132,7 +134,8 @@
                 </div>
 
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="auditory" v-model="AuditoryIsChecked" />
+                  <input class="form-check-input" type="checkbox" value="" id="auditory" v-model="AuditoryIsChecked"
+                    @change="resetAuditory" />
                   <label class="form-check-label" for="auditory">
                     Auditory Impairment
                   </label>
@@ -147,7 +150,8 @@
                 </div>
 
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="physical" v-model="MobilityIsChecked" />
+                  <input class="form-check-input" type="checkbox" value="" id="physical" v-model="MobilityIsChecked"
+                    @change="resetMobility" />
                   <label class="form-check-label" for="physical">
                     Mobility/Physical Impairment
                   </label>
@@ -162,7 +166,7 @@
                 </div>
 
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="learning" v-model="LearningIsChecked" />
+                  <input class="form-check-input" type="checkbox" value="" id="learning" v-model="LearningIsChecked"  @change="resetLearning" />
                   <label class="form-check-label" for="learning">
                     Learning Impairment
                   </label>
@@ -178,7 +182,7 @@
 
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="" id="intellectual"
-                    v-model="IntellectualIsChecked" />
+                    v-model="IntellectualIsChecked" @change="resetIntell" />
                   <label class="form-check-label" for="intellectual">
                     Intellectual Disability
                   </label>
@@ -195,7 +199,7 @@
 
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="" id="psychiatric"
-                    v-model="PsychiatricIsChecked" />
+                    v-model="PsychiatricIsChecked" @change="resetPsych" />
                   <label class="form-check-label" for="psychiatric">
                     Psychiatric Disability
                   </label>
@@ -211,7 +215,7 @@
                 </div>
 
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="medical" v-model="MedicalIsChecked" />
+                  <input class="form-check-input" type="checkbox" value="" id="medical" v-model="MedicalIsChecked" @change="resetMedical"/>
                   <label class="form-check-label" for="medical">
                     Medical Disability
                   </label>
@@ -226,7 +230,7 @@
                 </div>
 
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="Othertext" v-model="isChecked" />
+                  <input class="form-check-input" type="checkbox" value="" id="Othertext" v-model="isChecked" @change="resetOther" />
                   <label class="form-check-label" for="Othertext">
                     Other
                   </label>
@@ -250,7 +254,7 @@
               </div>
 
               <div class="  form-check">
-                <input class="form-check-input" type="checkbox" value="" id="language" v-model="languageIsChecked" />
+                <input class="form-check-input" type="checkbox" value="" id="language" v-model="languageIsChecked" @change="resetLang" />
                 <label class="form-check-label mb-2" for="language">
                   Speak a language other than English
                 </label>
@@ -298,7 +302,16 @@
               <!-- <span v-if="requirementsOption">
                 <h4 class="d-inline"><b>Accessibility Requirements: </b></h4>
               </span> -->
-              <div v-if="requirementsOption" class="accordion" id="accordionPanelsStayOpenExample">
+              <div v-if='this.visualOption != "" ||
+                this.auditoryOption != "" ||
+                this.mobilityOption != "" ||
+                this.learningOption != "" ||
+                this.intellectualOption != "" ||
+                this.psychiatricOption != "" ||
+                this.medicalOption != "" ||
+                this.requirementsOptionDescription != "" ||
+                this.otherLanguage != "" ||
+                this.selectedLanguage != ""' class="accordion" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                     <button class="accordion-button " type="button" data-bs-toggle="collapse"
@@ -576,8 +589,56 @@ export default {
     this.fetchLocations();
   },
   methods: {
-    changeRequirementStatus(){
-      if(this.requirementsOption = 0){
+    resetVisual() {
+      if (!this.VisualIsChecked) {
+        this.visualOption = "";
+      }
+    },
+    resetAuditory() {
+      if (!this.AuditoryIsChecked) {
+        this.auditoryOption = "";
+      }
+    },
+    resetMobility() {
+      if (!this.MobilityIsChecked) {
+        this.mobilityOption = "";
+      }
+    },
+    resetLearning() {
+      if (!this.LearningIsChecked) {
+        this.learningOption = "";
+      }
+    },
+    resetIntell() {
+      if (!this.IntellectualIsChecked) {
+        this.intellectualOption = "";
+      }
+    },
+    resetPsych() {
+      if (!this.PsychiatricIsChecked) {
+        this.psychiatricOption = "";
+      }
+    },
+    resetMedical() {
+      if (!this.MedicalIsChecked) {
+        this.medicalOption = "";
+      }
+    },
+    resetOther() {
+      if (!this.isChecked) {
+        this.requirementsOptionDescription = "";
+      }
+    },
+    resetLang() {
+      if (!this.languageIsChecked) {
+        this.selectedLanguage = "";
+        this.otherLanguage = "";
+      }
+    },
+
+
+    changeRequirementStatus() {
+      if (this.requirementsOption == 0) {
         this.visualOption = "";
         this.auditoryOption = "";
         this.mobilityOption = "";
@@ -588,8 +649,20 @@ export default {
         this.requirementsOptionDescription = "";
         this.otherLanguage = "";
         this.selectedLanguage = "";
-      };
+
+        this.isChecked = false;
+        this.languageIsChecked = false;
+        this.VisualIsChecked = false;
+        this.AuditoryIsChecked = false;
+        this.MobilityIsChecked = false;
+        this.LearningIsChecked = false;
+        this.IntellectualIsChecked = false;
+        this.PsychiatricIsChecked = false;
+        this.MedicalIsChecked = false;
+
+      }
     },
+
     setAreaFunc() {
       this.selectedArea = null;
       this.selectedAreaIndex = null;
