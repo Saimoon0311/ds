@@ -149,6 +149,7 @@
                 class="border rounded bg-light p-3 d-flex flex-wrap"
               >
                 <p class="mx-auto my-0">No job found!</p>
+                <button  class="btn btn-danger btn-sm my-1 mx-1 d-none"> Clear All Rejected Proposals </button>
               </div>
 
               <div
@@ -730,8 +731,9 @@ p.badge {
 }
 @media only screen and (max-width: 1400px) and (min-width: 992px)  {
   .card-btn{
-  width: 33%;
+  width: 30%;
   font-size: 11px;
+  padding: 5px;
 }
 }
 @media only screen and (max-width: 992px) {

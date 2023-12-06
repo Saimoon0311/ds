@@ -67,7 +67,6 @@
         keep-values
         id="mainForm"
         class="text-start border rounded p-3 d-inline-block m-3 col-md-7 m-auto flex-wrap flex-column d-flex mt-3"
-        v-slot="{errors}"
       >
         <template v-if="currentStep === 0">
           <div class="form-group mb-4">
@@ -298,6 +297,37 @@
                   </div>
                 </div>
               </div>
+              <div class="stepbtn mt-3">
+                <span v-if="selectedOption == 'Pro'">
+                  <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
+                </span>
+                <span v-else>
+                  <span v-if="currentStep !== 4" class="pagination-indicator">
+                    {{ currentStep + 1 }} of {{ totalSteps }}
+                  </span>
+                </span>
+                <div>
+                  <button
+                    v-if="currentStep !== 0"
+                    type="button"
+                    @click="prevStep"
+                    class="btn btn-dark mr"
+                  >
+                    Previous
+                  </button>
+                  <button
+                    v-if="currentStep !== 2"
+                    type="submit"
+                    :disabled="!selectedOption"
+                    class="btn btn-dark"
+                  >
+                    Next
+                  </button>
+                  <button v-if="currentStep === 2" class="btn btn-dark">
+                    Summary
+                  </button>
+                </div>
+              </div>
             </div>
 
             <!-- If they select ‘Retainer’ -->
@@ -505,6 +535,37 @@
                   </div>
                 </div>
               </div>
+              <div class="stepbtn mt-3">
+                <span v-if="selectedOption == 'Pro'">
+                  <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
+                </span>
+                <span v-else>
+                  <span v-if="currentStep !== 4" class="pagination-indicator">
+                    {{ currentStep + 1 }} of {{ totalSteps }}
+                  </span>
+                </span>
+                <div>
+                  <button
+                    v-if="currentStep !== 0"
+                    type="button"
+                    @click="prevStep"
+                    class="btn btn-dark mr"
+                  >
+                    Previous
+                  </button>
+                  <button
+                    v-if="currentStep !== 2"
+                    type="submit"
+                    :disabled="!selectedOption"
+                    class="btn btn-dark"
+                  >
+                    Next
+                  </button>
+                  <button v-if="currentStep === 2" class="btn btn-dark">
+                    Summary
+                  </button>
+                </div>
+              </div>
             </div>
 
             <!-- If they select item by item -->
@@ -533,6 +594,8 @@
                       required
                     />
                   </label>
+              <span class="invalid-feedback">Please enter item</span>
+
                   <br />
                   <br />
                   <label class="w-100 text-start">
@@ -554,6 +617,8 @@
                       />
                     </div>
                   </label>
+              <span class="invalid-feedback">Please enter fee</span>
+
                   <br />
                   <br />
                   <button type="button" @click="addRow2" class="btn btn-dark">
@@ -773,6 +838,37 @@
                   </div>
                 </div>
               </div>
+              <div class="stepbtn mt-3">
+                <span v-if="selectedOption == 'Pro'">
+                  <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
+                </span>
+                <span v-else>
+                  <span v-if="currentStep !== 4" class="pagination-indicator">
+                    {{ currentStep + 1 }} of {{ totalSteps }}
+                  </span>
+                </span>
+                <div>
+                  <button
+                    v-if="currentStep !== 0"
+                    type="button"
+                    @click="prevStep"
+                    class="btn btn-dark mr"
+                  >
+                    Previous
+                  </button>
+                  <button
+                    v-if="currentStep !== 2"
+                    type="submit"
+                    :disabled="!selectedOption"
+                    class="btn btn-dark"
+                  >
+                    Next
+                  </button>
+                  <button v-if="currentStep === 2" class="btn btn-dark">
+                    Summary
+                  </button>
+                </div>
+              </div>
             </div>
 
             <!-- If they select ‘Fixed fee’ -->
@@ -796,12 +892,13 @@
                   class="form-control d-input"
                   min="1"
                   step=".01"
-                  :class="{'is-invalid' : errors.fixedFeeAmount}"
                 />
               </div>
-              <span class="invalid-feedback">{{errors.fixedFeeAmount}}</span>
+              <span class="invalid-feedback">Please enter amount</span>
+              <!-- <span v-if="currentStep === 2 && !form.fixed_fee_amount" class="invalid-feedback">Please enter amount</span> -->
 
-              
+
+
               <br />
               <div class="disbursement-fields">
                 <div class="form-group mt-3">
@@ -853,7 +950,6 @@
                           placeholder="Eg: filing fees"
                           class="form-control"
                           required
-                          
                         />
                       </label>
 
@@ -873,7 +969,6 @@
                             type="number"
                             class="form-control d-input"
                             required
-                            
                           />
                         </div>
                       </label>
@@ -959,6 +1054,38 @@
                       </table>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="stepbtn mt-3">
+                <span v-if="selectedOption == 'Pro'">
+                  <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
+                </span>
+                <span v-else>
+                  <span v-if="currentStep !== 4" class="pagination-indicator">
+                    {{ currentStep + 1 }} of {{ totalSteps }}
+                  </span>
+                </span>
+                <div>
+                  <button
+                    v-if="currentStep !== 0"
+                    type="button"
+                    @click="prevStep"
+                    class="btn btn-dark mr"
+                  >
+                    Previous
+                  </button>
+                  <button
+                    v-if="currentStep !== 2"
+                    type="submit"
+                    :disabled="!selectedOption"
+                    class="btn btn-dark"
+                    @click="nextStep"
+                  >
+                    Next
+                  </button>
+                  <button v-if="currentStep === 2" class="btn btn-dark">
+                    Summary
+                  </button>
                 </div>
               </div>
             </div>
@@ -1161,6 +1288,8 @@
                       class="form-control d-input"
                     />
                   </div>
+              <span class="invalid-feedback">Please enter hourly rate</span>
+
 
                   <br />
 
@@ -1175,6 +1304,8 @@
                     step="0.01"
                     class="form-control"
                   />
+              <span class="invalid-feedback">Please enter estimated number of hours</span>
+
 
                   <br />
                 </div>
@@ -1342,6 +1473,37 @@
                   </div>
                 </div>
               </div>
+              <div class="stepbtn mt-3">
+                <span v-if="selectedOption == 'Pro'">
+                  <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
+                </span>
+                <span v-else>
+                  <span v-if="currentStep !== 4" class="pagination-indicator">
+                    {{ currentStep + 1 }} of {{ totalSteps }}
+                  </span>
+                </span>
+                <div>
+                  <button
+                    v-if="currentStep !== 0"
+                    type="button"
+                    @click="prevStep"
+                    class="btn btn-dark mr"
+                  >
+                    Previous
+                  </button>
+                  <button
+                    v-if="currentStep !== 2"
+                    type="submit"
+                    :disabled="!selectedOption"
+                    class="btn btn-dark"
+                  >
+                    Next
+                  </button>
+                  <button v-if="currentStep === 2" class="btn btn-dark">
+                    Summary
+                  </button>
+                </div>
+              </div>
             </div>
 
             <!-- If they select ‘Success Fee’ -->
@@ -1374,6 +1536,7 @@
                 class="form-control"
                 @input="limitNumber"
               />
+              <span class="invalid-feedback">Please enter uplift percentage</span>
 
               <br />
 
@@ -1539,6 +1702,37 @@
                       </tbody>
                     </table>
                   </div>
+                </div>
+              </div>
+              <div class="stepbtn mt-3">
+                <span v-if="selectedOption == 'Pro'">
+                  <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
+                </span>
+                <span v-else>
+                  <span v-if="currentStep !== 4" class="pagination-indicator">
+                    {{ currentStep + 1 }} of {{ totalSteps }}
+                  </span>
+                </span>
+                <div>
+                  <button
+                    v-if="currentStep !== 0"
+                    type="button"
+                    @click="prevStep"
+                    class="btn btn-dark mr"
+                  >
+                    Previous
+                  </button>
+                  <button
+                    v-if="currentStep !== 2"
+                    type="submit"
+                    :disabled="!selectedOption"
+                    class="btn btn-dark"
+                  >
+                    Next
+                  </button>
+                  <button v-if="currentStep === 2" class="btn btn-dark">
+                    Summary
+                  </button>
                 </div>
               </div>
             </div>
@@ -1796,6 +1990,37 @@
               </div>
             </div>
           </div>
+          <div class="stepbtn mt-3">
+            <span v-if="selectedOption == 'Pro'">
+              <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
+            </span>
+            <span v-else>
+              <span v-if="currentStep !== 4" class="pagination-indicator">
+                {{ currentStep + 1 }} of {{ totalSteps }}
+              </span>
+            </span>
+            <div>
+              <button
+                v-if="currentStep !== 0"
+                type="button"
+                @click="prevStep"
+                class="btn btn-dark mr"
+              >
+                Previous
+              </button>
+              <button
+                v-if="currentStep !== 2"
+                type="submit"
+                :disabled="!selectedOption"
+                class="btn btn-dark"
+              >
+                Next
+              </button>
+              <button v-if="currentStep === 2" class="btn btn-dark">
+                Summary
+              </button>
+            </div>
+          </div>
         </template>
 
         <template v-if="currentStep === 2">
@@ -1817,43 +2042,42 @@
             </label>
             <br />
           </div>
+          <div class="stepbtn mt-3">
+            <span v-if="selectedOption == 'Pro'">
+              <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
+            </span>
+            <span v-else>
+              <span v-if="currentStep !== 4" class="pagination-indicator">
+                {{ currentStep + 1 }} of {{ totalSteps }}
+              </span>
+            </span>
+            <div>
+              <button
+                v-if="currentStep !== 0"
+                type="button"
+                @click="prevStep"
+                class="btn btn-dark mr"
+              >
+                Previous
+              </button>
+              <button
+                v-if="currentStep !== 2"
+                type="submit"
+                :disabled="!selectedOption"
+                class="btn btn-dark"
+              >
+                Next
+              </button>
+              <button v-if="currentStep === 2" class="btn btn-dark">
+                Summary
+              </button>
+            </div>
+          </div>
         </template>
 
         <!-- <template v-if="currentStep === 3">
         <p>4</p>
       </template> -->
-
-        <div class="stepbtn mt-3">
-          <span v-if="selectedOption == 'Pro'">
-            <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
-          </span>
-          <span v-else>
-            <span v-if="currentStep !== 4" class="pagination-indicator">
-              {{ currentStep + 1 }} of {{ totalSteps }}
-            </span>
-          </span>
-          <div>
-            <button
-              v-if="currentStep !== 0"
-              type="button"
-              @click="prevStep"
-              class="btn btn-dark mr"
-            >
-              Previous
-            </button>
-            <button
-              v-if="currentStep !== 2"
-              type="submit"
-              :disabled="!selectedOption"
-              class="btn btn-dark"
-            >
-              Next
-            </button>
-            <button v-if="currentStep === 2" class="btn btn-dark">
-              Summary
-            </button>
-          </div>
-        </div>
 
         <pre>{{ values }}</pre>
       </Form>
@@ -1864,31 +2088,28 @@
   </div>
 </template>
 <script setup>
-
 import MainFooter from "../../components/global/MainFooter.vue";
 </script>
 <script>
 import LawyerHeader from "./Header.vue";
 import api from "@/config/api";
-import { Form, Field } from 'vee-validate';
+import { Form, Field } from "vee-validate";
 import * as yup from "yup";
 
 export default {
- 
-
   data() {
     const schema = {
-      'Fixed': yup.object().shape({
-        fixedFeeAmount: yup.number().required('Please enter amount'),
-        fixed_cost: yup.number().required('Please enter amount'),
+      Fixed: yup.object().shape({
+        fixedFeeAmount: yup.number().required("Please enter amount"),
+        fixed_cost: yup.number().required("Please enter amount"),
       }),
-      'Hourly': yup.object().shape({}),
-      'Daily': yup.object().shape({}),
-      'Item': yup.object().shape({}),
-      'Retainer': yup.object().shape({}),
-      'Success': yup.object().shape({}),
-      'Pro': yup.object().shape({}),
-     };
+      Hourly: yup.object().shape({}),
+      Daily: yup.object().shape({}),
+      Item: yup.object().shape({}),
+      Retainer: yup.object().shape({}),
+      Success: yup.object().shape({}),
+      Pro: yup.object().shape({}),
+    };
     return {
       form: {
         charge_type: null,
@@ -1945,6 +2166,7 @@ export default {
       divEarnerVisible: false,
       input1: null,
       schema,
+      formSubmitted: false,
     };
   },
   computed: {
@@ -1984,7 +2206,7 @@ export default {
     LawyerHeader,
     MainFooter,
     Form,
-    Field
+    Field,
   },
   mounted() {
     if (this.jobData == null || this.jobData == "") {
@@ -2098,17 +2320,23 @@ export default {
     },
 
     nextStep() {
-      if (this.currentStep === 2) {
-        this.submitStepForm();
-        // console.log(this.form);
-        // console.log("Done: ", JSON.stringify(values, null, 1));
-        // console.log('test', values);
+  // Validate the form data before moving to the next step
+  if (this.currentStep === 2 && !this.$refs.form.validate()) {
+    // Display errors or handle validation failure as needed
+    return;
+  }
 
-        return;
-      }
+  if (this.currentStep === 2) {
+    // If validation passes, submit the form
+    this.submitStepForm();
 
-      this.currentStep++;
-    },
+    // Optionally, reset the form
+    this.$refs.form.resetForm();
+  }
+
+  // Move to the next step
+  this.currentStep++;
+},
 
     prevStep() {
       // alert('asd', this.selectedOption)
