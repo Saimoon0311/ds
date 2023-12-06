@@ -134,7 +134,7 @@
                   <input
                     type="number"
                     id="fixedFeeAmount"
-                    v-model="form.daily_rate"
+                    v-model="form.days"
                     name="fixedFeeAmount"
                     class="form-control d-input"
                     min="1"
@@ -220,7 +220,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
+                          v-model="newRow.gst_not_applicable"
+                          :value="true"
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
@@ -257,7 +258,7 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}</td>
+                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -310,10 +311,11 @@
                 <label>Retainer fee (excluding GST): </label>
                 <div>
                   <span class="position-absolute d-span"> $</span>
+                  <!-- daily rate already used -->
                   <input
                     type="number"
                     id="fixedFeeAmount"
-                    v-model="form.daily_rate"
+                    v-model="form.retainer_fee"
                     name="fixedFeeAmount"
                     class="form-control d-input"
                     min="1"
@@ -328,6 +330,7 @@
                   <div class="mb-3">
                     <input
                       type="text"
+                      v-model="form.retainer_period"
                       id="fixedFeeAmount"
                       name="fixedFeeAmount"
                       class="form-control"
@@ -339,6 +342,7 @@
                     <input
                       type="text"
                       id="fixedFeeAmount"
+                      v-model="form.retainer_limitation"
                       name="fixedFeeAmount"
                       class="form-control"
                       placeholder="Eg: up to 20 hours"
@@ -348,6 +352,7 @@
                   <div class="mb-3">
                     <input
                       type="text"
+                      v-model="form.notice_period"
                       id="fixedFeeAmount"
                       name="fixedFeeAmount"
                       class="form-control"
@@ -428,7 +433,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
+                          v-model="newRow.gst_not_applicable"
+                          :value="true"
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
@@ -465,7 +471,7 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}</td>
+                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -695,7 +701,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
+                          v-model="newRow.gst_not_applicable"
+                          :value="true"
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
@@ -732,7 +739,7 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}</td>
+                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -883,7 +890,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
+                          v-model="newRow.gst_not_applicable"
+                          :value="true"
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
@@ -920,7 +928,7 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}</td>
+                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white">Total (excluding GST): ${{
                               row.total }}
@@ -1155,7 +1163,7 @@
                     <input
                       type="number"
                       id="hourlyRate"
-                      v-model="form.fee_earners"
+                      v-model="form.hourly_rate"
                       name="hourlyRate"
                       min="1"
                       step="0.01"
@@ -1172,6 +1180,7 @@
                     type="number"
                     id="noOfHours"
                     name="noOfHours"
+                    v-model="form.hours"
                     min="1"
                     step="0.01"
                     class="form-control"
@@ -1181,7 +1190,7 @@
                 </div>
 
                 <!-- input field to capture final hourly rate value during form submit -->
-                <p id="finalHourlyRateText">
+                <!-- <p id="finalHourlyRateText">
                   Total: $<input
                     id="finalHourlyRateValue"
                     name="finalHourlyRateValue"
@@ -1189,7 +1198,7 @@
                     readonly=""
                     class="border-0 text-dark bg-white"
                   />
-                </p>
+                </p> -->
               </div>
               <div class="disbursement-fields">
                 <div class="form-group mt-3">
@@ -1267,7 +1276,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
+                          v-model="newRow.gst_not_applicable"
+                          :value="true"
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
@@ -1304,7 +1314,7 @@
                           class="border"
                         >
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ row.costAud }}</td>
+                          <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                           <!-- <td class="text-center"> -->
                           <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -1356,9 +1366,9 @@
                 <span class="position-absolute d-span"> $</span>
                 <input
                   type="number"
-                  v-model="form.estimatedFee"
-                  id="estimatedFee"
-                  name="estimatedFee"
+                  v-model="form.estimated_fee"
+                  id="estimated_fee"
+                  name="estimated_fee"
                   class="form-control d-input"
                 />
               </div>
@@ -1466,7 +1476,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
+                          v-model="newRow.gst_not_applicable"
+                          :value="true"
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
@@ -1503,7 +1514,7 @@
                           class="border"
                         >
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ row.costAud }}</td>
+                          <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                           <!-- <td class="text-center"> -->
                           <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -1629,7 +1640,7 @@
                       <input
                         class="form-check-input"
                         type="checkbox"
-                        value=""
+                        v-model="newRow.gst_not_applicable"
                         id="GST"
                       />
                       <label class="form-check-label" for="GST">
@@ -1662,7 +1673,7 @@
                         class="border"
                       >
                         <td>{{ row.itemDisbursement }}</td>
-                        <td>$ {{ row.costAud }}</td>
+                        <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                         <!-- <td class="text-center"> -->
                         <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                           </p> -->
@@ -1892,19 +1903,26 @@ export default {
      };
     return {
       form: {
+        hours : null,
+        hourly_rate : null,
+        retainer_period: null,
+        retainer_limitation: null,
+        notice_period : null,
+        retainer_fee : null,
+        days : null,
         charge_type: null,
         fixed_fee_amount: null,
         disbursement_amount: null,
         law_practice_cost: null,
-        fee_earners: null,
+        fee_earners: "me",
         daily_rate: null,
         uplift_percentage: null,
-        estimatedFee: null,
+        estimated_fee: null,
         success_fee_term: null,
         pro_bono_description: null,
         meet_deadlines: null,
         miss_deadline_reason: null,
-        upfront_payment_status: null,
+        upfront_payment_status: "yes",
         upfront_payment: null,
         consultation: null,
         consultation_time_limit: null,
@@ -1916,6 +1934,7 @@ export default {
       newRow: {
         itemDisbursement: "",
         costAud: "",
+        gst_not_applicable : false,
       },
       rows: [], // Itemise Disbursements
       newRow2: {
@@ -2074,11 +2093,13 @@ export default {
         this.rows.push({
           itemDisbursement: this.newRow.itemDisbursement,
           costAud: this.newRow.costAud,
+          gst_not_applicable: this.newRow.gst_not_applicable,
           total: this.newRow.costAud,
         });
         // console.log(this.rows);
         this.newRow.itemDisbursement = "";
         this.newRow.costAud = "";
+        this.newRow.gst_not_applicable = "";
       }
     },
     addRow2() {
