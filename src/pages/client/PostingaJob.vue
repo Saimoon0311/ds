@@ -1026,7 +1026,7 @@ input[type="checkbox"]:checked {
   background-color: transparent;
   box-shadow: none;
   padding-bottom: 0px;
-  padding-top: 27px;
+  padding-top: 12px;
 
 }
 
@@ -1035,13 +1035,13 @@ input[type="checkbox"]:checked {
 }
 
 #accordionPanelsStayOpenExample h2 button b {
-  font-size: 19px;
+  font-size: 16px;
   padding-right: 30px;
   color: #000;
 }
 
 #accordionPanelsStayOpenExample .accordion-body {
-  font-size: 15px;
+  font-size: 14px;
 }
 
 #accordionPanelsStayOpenExample .accordion-body p {
@@ -1056,6 +1056,6 @@ input[type="checkbox"]:checked {
 }
 
 #accordionPanelsStayOpenExample .accordion-button.collapsed {
-  padding-bottom: 25px;
+  padding-bottom: 12px;
 }
 </style>

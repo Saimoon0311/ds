@@ -253,8 +253,12 @@
                       v-bind="field"
                       name="comment"
                       placeholder="Your Message"
+                    :class="{ 'is-invalid': errors.comment }"
+
                     />
                   </Field>
+                  <span class="invalid-feedback">{{ errors.comment }}</span>
+                  
                 </div>
               </div>
 
@@ -288,6 +292,7 @@ export default {
   data() {
     const schema = yup.object().shape({
       fname: yup.string().required("Please enter your name."),
+      comment: yup.string().required("Please enter your comment."),
       radio: yup
         .string()
         .required("Please select if you're a client or a lawyer."),

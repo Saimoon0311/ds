@@ -19,9 +19,12 @@
         </div>
         <div class="card-body">
           <h2 class="text-center">$39.00/month</h2>
-          <ul>
-            <li>60 Day Free Trial</li>
-            <li>Cancel any time</li>
+          <ul class="dotRem">
+            <li><i class="fa fa-check"></i> 60 Day Free Trial</li>
+            <li><i class="fa fa-check"></i> 1 User</li>
+            <li><i class="fa fa-check"></i> Platform Access </li>
+            <li><i class="fa fa-check"></i> Profile</li>
+            <li><i class="fa fa-check"></i> Unlimited Proposals</li>
           </ul>
         </div>
         <div class="card-footer text-center">
@@ -181,6 +184,19 @@ export default {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+ul.dotRem {
+    padding-left: 15px;
+    list-style: none;
+}
+ul.dotRem li{
+  margin-bottom: 10px;
+}
+ul.dotRem li i {
+  border: 1px solid #000;
+    padding: 5.2px 6px;
+    border-radius: 50px;
+    font-size: 13px;
 }
 </style>
   

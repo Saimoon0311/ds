@@ -121,7 +121,7 @@ export default {
                 }
                 if (res?.data?.data?.id !== undefined && res?.data?.data?.id !== null && res?.data?.data?.id !== '') {
                   // this.$store.commit('setToast', "you have been subscribed successfully");
-                  this.$swal(`class="toastitle"Welcome to the Simplawfy community!</span>`, 'You are now subscribed and have access to our platform.', 'success').then(() => {
+                  this.$swal(`<span class="toastitle">Welcome to the Simplawfy community!</span>`, 'You are now subscribed and have access to our platform.', 'success').then(() => {
                     this.$router.push({ path: '/lawyer-account' });
                   });
                 }
