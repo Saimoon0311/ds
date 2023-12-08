@@ -1968,6 +1968,18 @@ export default {
     };
   },
   computed: {
+
+    // fixedFeeAmountValue() {
+    //   // if (!isNaN(this.form?.fixed_fee_amount)) {
+    //     this.form.fixed_fee_amount = parseFloat(this.form?.fixed_fee_amount).toFixed(2); 
+        
+    //     // console.log(parseFloat(this.form?.fixed_fee_amount).toFixed(2));
+    //     // return parseFloat(this.form?.fixed_fee_amount).toFixed(2);
+    //   // } else {
+    //     // return 'Invalid Input';
+    //   // }
+    // },
+
     // formValues() {
     //     return {
     //       ...this.form,
@@ -2011,6 +2023,7 @@ export default {
     Form,
     Field
   },
+
   mounted() {
     if (this.jobData == null || this.jobData == "") {
       this.$router.push({ path: "/lawyer-dashboard" });
