@@ -195,16 +195,36 @@
                       id="28"
                     >
                       <div
-                        class="border rounded bg-secondary d-flex justify-content-between text-white p-3 flex-column mb-3"
+                        class="border rounded bg-secondary d-flex justify-content-between text-white p-3 flex-column mb-3 class"
                       >
                         <div>
-                          <p class="badge bg-dark" title="Area">
+                          <div class="d-flex align-items-center justify-content-between flex-wrap">
+                              <div>
+                                <p class="badge bg-dark" title="Area">
                             {{ item?.field?.title }}
-                          </p>
+                          </p>            
+
                           &nbsp;
                           <p class="badge bg-dark" title="Location">
                             {{ item?.location?.title }}
                           </p>
+                          </div>
+                              
+                          <div v-if="tab == 'pending' || tab == 'close'">
+                            <p class="badge bg-dark" v-if="tab == 'pending'">
+                              Submitted
+                            </p>
+                            <p v-else-if="item?.proposals != null && item?.proposals.length > 0" class="badge bg-dark">
+                              <span v-if="item?.proposals[0].status == 'Accept' || item?.proposals[0].status == 'accept'">Accepted</span>
+                              <span v-if="item?.proposals[0].status == 'Reject' || item?.proposals[0].status == 'reject'">Rejected</span>
+                            </p>
+                          </div>
+                          
+                          
+                        </div>
+                         
+                          
+                          
                           <p class="text-center mt-3 mb-2">
                             <b>{{ item?.title }}</b>
                           </p>
@@ -274,13 +294,16 @@
                           >
                             View proposal
                           </button>
-                          <button
-                            v-if="tab != 'close'"
-                            @click="declineJob(item.id,index)"
-                            class="btn btn-danger btn-sm card-btn my-1 mx-1"
-                          >
+                          
+                          <button v-if="tab == 'open'" @click="declineJob(item.id,index)" class="btn btn-danger btn-sm card-btn my-1 mx-1">
                             Decline
                           </button>
+
+                          <button v-if="tab == 'pending'" @click="withDrawJob(item.id,index)" class="btn btn-danger btn-sm card-btn my-1 mx-1">
+                            Withdraw
+                          </button>
+
+
                           <router-link
                             v-if="tab != 'pending'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
@@ -398,7 +421,7 @@ export default {
 
   computed: {
     userFields() {
-      console.log('user : ' , this.$store.getters?.loginUser);
+      console.log('user : ', this.$store.getters?.loginUser);
       return `${this.$store.getters?.loginUser?.fields}`;
     },
     userLocations() {
@@ -441,7 +464,7 @@ export default {
       //   this.endpoint = '/lawyer/show-reject-jobs';
       //   await this.loadMore(null,true);
       // }
-      
+
     },
 
     // async getJobs(){
@@ -477,6 +500,40 @@ export default {
                 this.$swal(
                   "",
                   `Job has been decline successfully`,
+                  "success"
+                ).then(async () => {
+                  this.fixLoadMoreAfterDeleteRecord(index);
+                });
+              })
+              .catch((error) => {
+                console.log("error : ", error);
+              });
+          }
+        });
+      } catch (error) {
+        console.error("Error fetching options:", error);
+      }
+    },
+
+
+    async withDrawJob(job_id, index) {
+      try {
+        this.$swal({
+          title: "Are you sure?",
+          text: `Are you sure you want to withdraw from your proposal on this job, You will not be able to see this anymore.`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: `Yes, Withdraw`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            api
+              .post("/lawyer/withdraw-proposal-by-job", { job_id: job_id })
+              .then(() => {
+                this.$swal(
+                  "",
+                  `Proposal has been withdraw successfully`,
                   "success"
                 ).then(async () => {
                   this.fixLoadMoreAfterDeleteRecord(index);

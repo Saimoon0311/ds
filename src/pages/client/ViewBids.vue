@@ -206,16 +206,13 @@
                       >
                         Reject
                       </button>
-                      <form method="post" action="backend/rejectBid.php">
-                        <input value="146" class="d-none" name="id" />
-                        <button class="d-none" name="reject">
-                          <i class="bi bi-x-lg"></i>Reject
-                        </button>
-                      </form>
                       <button
                         class="btn btn-secondary btn-sm p-1 px-2 w-100"
                       >
                         Message
+                      </button>
+                      <button @click="openProposalDetailsModal(item)" class="btn btn-info btn-sm p-1 px-2 w-100">
+                        View
                       </button>
                     </div>
                     <p v-else>{{ item?.status }}</p>
