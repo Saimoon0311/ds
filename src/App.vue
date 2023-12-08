@@ -48,4 +48,10 @@ export default {
   background-color: #000000 !important;
   z-index: 1 !important;
 }
+
+.dynamicTable th,.dynamicTable td{
+  font-size: 1rem;
+}
+
+
 </style>

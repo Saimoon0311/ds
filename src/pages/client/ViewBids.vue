@@ -175,7 +175,7 @@
                 </tr>
                 <tr v-else class="text-left" v-for="(item,index) in data_paginated" :key="index">
                   <!-- <td>testing client (crinimal)</td> -->
-                  <td class="text-center"> <span class="btn-dark btn">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</span></td>
+                  <td class="text-center"> <button @click="openLawyerDetailsModal(item?.lawyer)" class="btn-dark btn">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</button></td>
                   <td>{{ item?.charge_type }}</td>
                   <td>{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
                   <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td>
@@ -187,7 +187,7 @@
                   <td>
                     <div class="text-center" v-if="item?.status == 'Open'">
                       <button
-                        class="btn btn-light btn-sm border p-1 px-2 mb-1 w-100"
+                        class="btn btn-dark text-white btn-sm border p-1 px-2 mb-1 w-100"
                         @click="handleAcceptBidAction(item?.id,item?.lawyer?.id,item?.job_id)"
                       >
                         Accept
@@ -211,7 +211,7 @@
                       >
                         Message
                       </button>
-                      <button @click="openProposalDetailsModal(item)" class="btn btn-info btn-sm p-1 px-2 w-100">
+                      <button @click="openProposalDetailsModal(item)" class="btn btn-dark text-white mt-1 btn-sm p-1 px-2 w-100">
                         View
                       </button>
                     </div>

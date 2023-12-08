@@ -281,7 +281,7 @@
                         >
                           <button
                             @click="submitProposal(item)"
-                            v-if="tab != 'pending'"
+                            v-if="tab == 'open'"
                             class="btn btn-light btn-sm card-btn my-1 mx-1"
                           >
                             Submit a proposal
@@ -305,7 +305,7 @@
 
 
                           <router-link
-                            v-if="tab != 'pending'"
+                            v-if="tab == 'open'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
                             to="/request-info"
                             >Message</router-link
@@ -529,7 +529,7 @@ export default {
         }).then((result) => {
           if (result.isConfirmed) {
             api
-              .post("/lawyer/withdraw-proposal-by-job", { job_id: job_id })
+              .get(`/lawyer/withdraw-proposal-by-job/${job_id}`)
               .then(() => {
                 this.$swal(
                   "",

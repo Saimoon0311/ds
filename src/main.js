@@ -300,22 +300,19 @@ app.mixin({
     },
 
 
-
-    openProposalDetailsModal(data) {
-      console.log('proposal details : ' , data);
+    openLawyerDetailsModal(data) {
       let newData = {};
       if (data && typeof data === 'object') {
         for (const key in data) {
           if (Object.prototype.hasOwnProperty.call(data, key)) {
             const value = data[key];
-            if (value !== null && key != 'id' && key != 'lawyer_id' && key != 'job_id' && key != 'user_id' && key != 'created_at' && key != 'updated_at') {
+            if (value !== null && value != 0 && key != 'id' && 
+            key != 'admin_approval' && key != 'otp_verified' 
+            && key != 'is_subscribed_first' && key != 'followup_email_status_two'
+            && key != 'created_at' && key != 'updated_at') {
               let objKey = key;
               objKey = objKey.replace(/_/g, " ");
-              if(objKey == "lawyer" && value != null){
-                newData["lawyer email"] = value?.email;
-              }else{
-                newData[objKey] = value;
-              }
+              newData[objKey] = value;
             }
           }
         }
@@ -326,7 +323,7 @@ app.mixin({
 
       // Use dynamic HTML inside SweetAlert2 modal
       this.$swal.fire({
-        title: 'Proposal Details',
+        title: 'Lawyer Details',
         html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
         showCloseButton: true,
         showConfirmButton: false,
@@ -334,6 +331,215 @@ app.mixin({
           container: 'my-swal-container', // You can define your custom class for styling
         },
       });
+    },
+
+
+
+    // openProposalDetailsModal(data) {
+    //   console.log('proposal details : ' , data);
+    //   let newData = {};
+    //   let specificTasks = [];
+    //   let disbursements = [];
+    //   let feeEarners = [];
+    //   if (data && typeof data === 'object') {
+    //     for (const key in data) {
+    //       if (Object.prototype.hasOwnProperty.call(data, key)) {
+    //         const value = data[key];
+    //         if (value !== null 
+    //           && key != 'id' 
+    //           && key != 'lawyer_id' 
+    //           && key != 'job_id' 
+    //           && key != 'user_id' 
+    //           && key != 'created_at' 
+    //           && key != 'updated_at'
+    //           ) {
+    //             let objKey = key;
+    //             objKey = objKey.replace(/_/g, " ");
+    //             if(key == 'specific_tasks'){
+    //               specificTasks = [...value];
+    //             }
+    //             else if(key == 'disbursements'){
+    //               disbursements = [...value];
+    //             }
+    //             else if(key == 'fee_earners'){
+    //               feeEarners = [...value];
+    //             }
+    //             else{
+    //               if(objKey == "lawyer" && value != null){
+    //                 newData["lawyer email"] = value?.email;
+    //               }else{
+    //                 newData[objKey] = value;
+    //               }
+    //             }
+    //         }
+    //       }
+    //     }
+    //   }
+
+    //   console.log(specificTasks);
+    //   console.log(disbursements);
+    //   console.log(feeEarners);
+      
+    //   const htmlContent = Object.entries(newData)
+    //     .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b>${key}: </b><span>${value}</span></h6></div>`)
+    //     .join('');
+
+    //   // Use dynamic HTML inside SweetAlert2 modal
+    //   this.$swal.fire({
+    //     title: 'Proposal Details',
+    //     html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
+    //     showCloseButton: true,
+    //     showConfirmButton: false,
+    //     customClass: {
+    //       container: 'my-swal-container', // You can define your custom class for styling
+    //     },
+    //   });
+    // },
+
+
+
+    openProposalDetailsModal(data) {
+      console.log('proposal details:', data);
+      let newData = {};
+      let specificTasks = [];
+      let disbursements = [];
+      let feeEarners = [];
+    
+      if (data && typeof data === 'object') {
+        for (const key in data) {
+          if (Object.prototype.hasOwnProperty.call(data, key)) {
+            const value = data[key];
+            if (
+              value !== null &&
+              key != 'id' &&
+              key != 'lawyer_id' &&
+              key != 'job_id' &&
+              key != 'user_id' &&
+              key != 'created_at' &&
+              key != 'updated_at'
+            ) {
+              let objKey = key;
+              objKey = objKey.replace(/_/g, ' ');
+    
+              if (key == 'specific_tasks') {
+                specificTasks = [...value];
+              } else if (key == 'disbursements') {
+                disbursements = [...value];
+              } else if (key == 'fee_earners') {
+                feeEarners = [...value];
+              } 
+              else{
+                              if(objKey == "lawyer" && value != null){
+                                newData["lawyer email"] = value?.email;
+                              }else{
+                                newData[objKey] = value;
+                              }
+                            }
+            }
+          }
+        }
+      }
+  
+      const mainHtmlContent = Object.entries(newData)
+        .map(
+          ([key, value]) =>
+            `<div class="wrapper" v-if="value != null"><h6><b>${key}:</b> <span>${value}</span></h6></div>`
+        )
+        .join('');
+    
+        let specificTasksTable = "<span></span>";
+        let disbursementsTable = "<span></span>";
+        let feeEarnersTable = "<span></span>";
+        if(specificTasks.length > 0){
+          specificTasksTable = this.createTableHtml('Specific Tasks', specificTasks);
+        }
+        if(disbursements.length > 0){
+          disbursementsTable = this.createTableHtml('Disbursements', disbursements); 
+        }
+        if(feeEarners.length > 0){
+          feeEarnersTable = this.createTableHtmlFeeEarners('Fee Earners', feeEarners); 
+        }
+    
+      const swalHtmlContent = `
+        <div class="table-wrap" style="text-align: left !important;">${mainHtmlContent}</div>
+        ${specificTasksTable}
+        ${disbursementsTable}
+        ${feeEarnersTable}
+      `;
+    
+      // Use dynamic HTML inside SweetAlert2 modal
+      this.$swal.fire({
+        title: 'Proposal Details',
+        html: swalHtmlContent,
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+          container: 'my-swal-container', // You can define your custom class for styling
+        },
+      });
+    },
+    
+    createTableHtml(title, dataArray) {
+      const tableContent = dataArray
+        .map(
+          (item, index) => `
+            <tr>
+              <td>${index + 1}</td>
+              <td>${item.task}</td> 
+              <td>$${item.cost}</td>
+            </tr>
+          `
+        )
+        .join('');
+    
+      return `
+        <div class="table-title"><h5 style="text-align:left !important">${title} : </h5></div>
+        <table class='table table-bordered dynamicTable'>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Task</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableContent}
+          </tbody>
+        </table>
+      `;
+    },
+
+
+    createTableHtmlFeeEarners(title, dataArray) {
+      const tableContent = dataArray
+        .map(
+          (item, index) => `
+            <tr>
+              <td>${index + 1}</td>
+              <td>${item.title}</td> <!-- Replace with actual properties -->
+              <td>$${item.hourly_rate}</td>
+              <td>${item.hours}</td>
+            </tr>
+          `
+        )
+        .join('');
+    
+      return `
+        <div class="table-title"><h5 style="text-align:left !important">${title} : </h5></div>
+        <table class='table table-bordered dynamicTable'>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Hourly Rate</th>
+              <th>Hours</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableContent}
+          </tbody>
+        </table>
+      `;
     },
 
     
