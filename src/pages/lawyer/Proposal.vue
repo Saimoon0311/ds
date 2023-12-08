@@ -62,12 +62,11 @@
     </div>
     <div class="container f-pt mx-auto">
       <Form
-        @submit="nextStep"
+        @submit.prevent="nextStep"
         :validation-schema="currentSchema"
         keep-values
         id="mainForm"
         class="text-start border rounded p-3 d-inline-block m-3 col-md-7 m-auto flex-wrap flex-column d-flex mt-3"
-        v-slot="{errors}"
       >
         <template v-if="currentStep === 0">
           <div class="form-group mb-4">
@@ -795,7 +794,7 @@
               >
               <div>
                 <span class="position-absolute d-span"> $</span>
-                <Field
+                <input
                   type="number"
                   id="fixedFeeAmount"
                   v-model="form.fixed_fee_amount"
@@ -803,10 +802,11 @@
                   class="form-control d-input"
                   min="1"
                   step=".01"
-                  :class="{'is-invalid' : errors.fixedFeeAmount}"
+                  required="required"
+           
                 />
               </div>
-              <span class="invalid-feedback">{{errors.fixedFeeAmount}}</span>
+              <!-- <span class="invalid-feedback">{{errors.fixedFeeAmount}}</span> -->
 
               
               <br />
@@ -1019,6 +1019,7 @@
                 >
                   Add fee earner
                 </button>
+                <div class="form-group">
                 <div class="" id="additionalFeeEarners" v-if="divEarnerVisible">
                   <fieldset
                     class="border p-2 my-2 bg-light text-center"
@@ -1052,7 +1053,7 @@
                           autocomplete="on"
                           type="number"
                           class="form-control d-input"
-                          required
+                          
                         />
                       </div>
                     </label>
@@ -1076,9 +1077,11 @@
                     </button>
                   </fieldset>
 
-                  <div class="table-responsive">
+                <div class="table-responsive">
+
+                
                     <table
-                      class="table table-bordered mb-3"
+                      class="table table-bordered mb-3 hourlycost"
                       id="additionalFeeEarnersTable"
                     >
                       <thead>
@@ -1139,9 +1142,11 @@
                           <td class="gstStyle p-0">*GST Not Applicable</td>
                         </tr>
                       </tbody>
+                     
                     </table>
                   </div>
                 </div>
+              </div>
               </div>
 
               <div v-if="isVisible === 'Yes'">
@@ -1168,6 +1173,8 @@
                       min="1"
                       step="0.01"
                       class="form-control d-input"
+                  required
+
                     />
                   </div>
 
@@ -1184,6 +1191,8 @@
                     min="1"
                     step="0.01"
                     class="form-control"
+                  required
+
                   />
 
                   <br />
@@ -1384,6 +1393,7 @@
                 name="upliftPercentage"
                 class="form-control"
                 @input="limitNumber"
+                required
               />
 
               <br />
@@ -1804,6 +1814,7 @@
                   min="1"
                   step=".01"
                   class="form-control d-input"
+                  required
                 />
               </div>
             </div>
@@ -1824,7 +1835,7 @@
                 class="form-control"
                 rows="4"
                 cols="100%"
-                required=""
+                required
               ></textarea>
             </label>
             <br />
@@ -1882,25 +1893,13 @@ import MainFooter from "../../components/global/MainFooter.vue";
 <script>
 import LawyerHeader from "./Header.vue";
 import api from "@/config/api";
-import { Form, Field } from 'vee-validate';
-import * as yup from "yup";
+
 
 export default {
  
 
   data() {
-    const schema = {
-      'Fixed': yup.object().shape({
-        fixedFeeAmount: yup.number().required('Please enter amount'),
-        fixed_cost: yup.number().required('Please enter amount'),
-      }),
-      'Hourly': yup.object().shape({}),
-      'Daily': yup.object().shape({}),
-      'Item': yup.object().shape({}),
-      'Retainer': yup.object().shape({}),
-      'Success': yup.object().shape({}),
-      'Pro': yup.object().shape({}),
-     };
+ 
     return {
       form: {
         hours : null,
@@ -1964,7 +1963,7 @@ export default {
       divItemiseVisible: false,
       divEarnerVisible: false,
       input1: null,
-      schema,
+      
     };
   },
   computed: {
@@ -2020,8 +2019,7 @@ export default {
   components: {
     LawyerHeader,
     MainFooter,
-    Form,
-    Field
+   
   },
 
   mounted() {
@@ -2037,7 +2035,7 @@ export default {
 
   methods: {
     handleOptionChange() {
-      this.currentSchema = this.schema[this.selectedOption];
+      this.currentSchema = this.selectedOption;
       console.log("schema", this.currentSchema);
       // console.log('schema', this.selectedOption);
     },
@@ -2437,4 +2435,9 @@ td {
     white-space: nowrap;
 }
 } */
+
+.hourlycost thead,.hourlycost tbody tr {
+  display:table;
+  width: 100%;
+}
 </style>

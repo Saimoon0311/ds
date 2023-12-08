@@ -132,7 +132,7 @@
                 v-if="
                   openJobs.length == 0 && searchQuery == '' && tab == 'open'
                 "
-                class="border rounded bg-light p-3 d-flex flex-wrap"
+                class="border rounded bg-light p-3 d-flex flex-wrap mb-2"
               >
                 <p class="mx-auto my-0">
                   No potential jobs found that match your profile. Click here to
