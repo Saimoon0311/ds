@@ -192,7 +192,6 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          required
                         />
                       </label>
                       <br />
@@ -210,7 +209,7 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            required
+                            
                           />
                         </div>
                       </label>
@@ -405,7 +404,7 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          required
+                          
                         />
                       </label>
                       <br />
@@ -423,7 +422,7 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            required
+                            
                           />
                         </div>
                       </label>
@@ -535,7 +534,7 @@
                       v-model="newRow2.itemDisbursement"
                       placeholder="Eg: letter of advice"
                       class="form-control"
-                      required
+                      
                     />
                   </label>
                   <br />
@@ -555,7 +554,7 @@
                         min="1"
                         type="number"
                         class="form-control d-input"
-                        required
+                        
                       />
                     </div>
                   </label>
@@ -673,7 +672,7 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          required
+                          
                         />
                       </label>
                       <br />
@@ -691,7 +690,7 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            required
+                            
                           />
                         </div>
                       </label>
@@ -859,7 +858,7 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          required
+                          
                           
                         />
                       </label>
@@ -879,7 +878,7 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            required
+                            
                             
                           />
                         </div>
@@ -1038,7 +1037,7 @@
                         autocomplete="on"
                         placeholder="Eg: Associate"
                         class="form-control"
-                        required
+                        
                       />
                     </label>
                     <br />
@@ -1067,7 +1066,7 @@
                         autocomplete="on"
                         type="number"
                         class="form-control"
-                        required
+                        
                       />
                     </label>
                     <br />
@@ -1258,7 +1257,6 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          required
                         />
                       </label>
                       <br />
@@ -1276,7 +1274,6 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            required
                           />
                         </div>
                       </label>
@@ -1459,7 +1456,6 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          required
                         />
                       </label>
                       <br />
@@ -1477,7 +1473,6 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            required
                           />
                         </div>
                       </label>
@@ -1623,7 +1618,6 @@
                         v-model="newRow.itemDisbursement"
                         placeholder="Eg: filing fees"
                         class="form-control"
-                        required
                       />
                     </label>
                     <br />
@@ -2087,7 +2081,7 @@ export default {
           this.$swal("", "Your proposal has been submitted.", "success").then(
             (res) => {
               console.log("response : ", res);
-              // this.$router.push({ path: "/lawyer-dashboard" });
+              this.$router.push({ path: "/lawyer-dashboard" });
               // this.changePostJobFormToDefault();
               // this.currentStep = 0;
             }
