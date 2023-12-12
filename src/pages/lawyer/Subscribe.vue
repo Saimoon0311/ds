@@ -4,7 +4,8 @@
       <main class="container ">
         <div class="row justify-custom">
         <div class="col-md-6">
-        <h3 class="mt-3 back-st">
+        <!-- <h3 class="mt-3 back-st"> -->
+        <h3 class="mt-3">
           <button  class="btn btn-dark btn-sm my-3 " 
           @click="()=>this.$router.go(-1)"><i class="bi bi-arrow-left mr-4"></i> Back</button>
           
@@ -15,7 +16,7 @@
             ><i class="bi bi-arrow-left"></i> Back</router-link
           > -->
           
-          <span class="ml-l" v-if="!this.replacePaymentMethod">Subscribe</span><span v-else>Replace Payment Method</span>
+          <span class="d-block" v-if="!this.replacePaymentMethod">Subscribe</span><span class="d-block" v-else>Replace Payment Method</span>
         </h3>
         <p v-if="!this.replacePaymentMethod " class=" mb-4">
           Access the Simplawfy platform with a 60 day free trial, then for $39 per

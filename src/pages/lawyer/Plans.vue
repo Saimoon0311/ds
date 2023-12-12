@@ -2,7 +2,6 @@
     <div class="l-main">
       <LawyerHeader />
       <div class="container">
-        <h3 class="mt-3">Subscription Plans</h3>
   
         <!-- Photo -->
         <!-- <div class="d-flex">
@@ -11,11 +10,13 @@
           </div>
         </div> -->
 
-  <div class="row py-4">
+  <div class="row py-4 justify-content-center">
     <div class="col-md-4">
+      <h3 class="mt-3 text-center mb-3">Subscription Plans</h3>
+
       <div class="card subscription-card mb-3">
         <div class="card-header">
-          <h3 class="text-center">Connect Plan</h3>
+          <h3 class="text-center">Connect</h3>
         </div>
         <div class="card-body">
           <h2 class="text-center">$39.00/month</h2>
@@ -33,7 +34,7 @@
       </div>
     </div>
 
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <div class="card subscription-card mb-3">
         <div class="card-header">
           <h3 class="text-center">Pro Plan</h3>
@@ -67,7 +68,7 @@
           <button @click="goToSubscribePage()" class="btn btn-dark text-light" disabled>Subscribe</button>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
 

@@ -332,6 +332,11 @@ export default {
           console.log("resp dataaaaaaa : ", res?.data?.data);
           this.receipts = res?.data?.data;
           console.log(res.data?.data);
+          if(res?.data?.clearOldSubscription){
+            this.$store.commit('SET_SUB_STATUS',null);
+            this.$store.commit('SET_SUB_CANCEL_STATUS',false);
+            this.$store.commit('SET_SUBSCRIPTION_DATA',null);
+          }
         })
         .catch((error) => {
           console.log("getResults : ", error);
@@ -366,7 +371,7 @@ export default {
     resubscribe(plan) {
       this.$swal({
         title: "Are you sure?",
-        text: "Are you sure you want to resubscribe ?",
+        text: "Are you sure you want to resubscribe?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -398,7 +403,7 @@ export default {
     handleCancelSubscription() {
       this.$swal({
         title: "Are you sure?",
-        text: `Are you sure you want to cancel your subscription? You will not be able to access the Simplawfy platform or have any of your proposal accepted from ${this.subscriptionData?.current_period_end} unless you resubscribe.`,
+        text: `Are you sure you want to cancel your subscription? You will not be able to access the Simplawfy platform or have any of your proposal accepted after ${this.subscriptionData?.current_period_end} unless you resubscribe.`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -410,7 +415,7 @@ export default {
             .get("/lawyer/cancel-subscription")
             .then(() => {
               this.$swal(
-                `<span class="sadtoast">We're sad you're leaving us.</span>`,
+                `<span class="sadtoast">You have cancelled your subscription.</span>`,
                 `Your subscription will be cancelled from ${this.subscriptionData?.current_period_end} You can resubscribe at any time.`,
                 "success"
               ).then(() => {

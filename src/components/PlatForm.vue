@@ -13,9 +13,9 @@
         </p> -->
       </div>
       <div class="d-flex flex-wrap justify-content-center align-items-center pb-5">
-        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center ">
-          <p class="fw-bold law-hd">I'm looking for a lawyer</p>
-          <div class="showhover">
+        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center " @click="toggleDiv1" @touchend.prevent="toggleDiv1">
+          <p class="fw-bold law-hd" v-if="headShow1">I'm looking for a lawyer</p>
+          <div class="showhover" v-if="showDiv1">
             <p class="fw-bold mb-3">Looking for a lawyer?</p>
             <p>Need a lawyer and don't know where to begin?</p>
             <p>
@@ -32,9 +32,9 @@
             <!-- <a href="./need-a-lawyer/index" class="text-black fs-5">Register to be notified when the platform goes live.</a> -->
           </div>
         </div>
-        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white">
-          <p class="fw-bold law-hd">I'm looking for clients</p>
-          <div class="showhover">
+        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white" @click="toggleDiv2" @touchend.prevent="toggleDiv2">
+          <p class="fw-bold law-hd" v-if="headShow2">I'm looking for clients</p>
+          <div class="showhover" v-if="showDiv2">
             <p class="fw-bold mb-3">Looking for clients?</p>
 
             <p>
@@ -112,6 +112,14 @@ import MainFooter from "./global/MainFooter.vue";
 
 
 export default {
+  data() {
+    return {
+      showDiv1: false,
+      showDiv2: false,
+      headShow1 : true,
+      headShow2 : true,
+    };
+  },
   components: {
     GeneralHeader,
     MainFooter,
@@ -140,7 +148,16 @@ export default {
           this.goToLoginPage('lawyer');
         }
       });
-    }
+    },
+    toggleDiv1() {
+      this.showDiv1 = !this.showDiv1;
+      this.headShow1 = !this.headShow1;
+    },
+    toggleDiv2() {
+      this.showDiv2 = !this.showDiv2;
+      this.headShow2 = !this.headShow2;
+    
+    },
   }
 };
 </script>
@@ -213,8 +230,25 @@ export default {
   line-height: 25px;
   margin-bottom: 17px;
 }
+@media (max-width: 960px) {
+  .homepage-circles .showhover {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+}
 
 @media (min-width: 320px) and (max-width: 425px) {
+  /* .homepage-circles:hover .showhover {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+} */
+.homepage-circles .showhover {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
   .cstm-dropdown {
     margin-top: -20px;
     right: 0px;
@@ -267,7 +301,7 @@ export default {
 }
 
 @media screen and (max-width: 720px) {
-  .showhover p[data-v-34f07b43] {
+  .showhover p {
     line-height: 23px;
     margin-bottom: 8px;
     font-size: 13px;
@@ -297,7 +331,7 @@ export default {
     margin-top: 1rem !important;
   }
 
-  .homepage-circles a {
+  .homepage-circles a , .homepage-circles .btn {
     font-size: 14px !important;
   }
 

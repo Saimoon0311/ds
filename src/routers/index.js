@@ -435,13 +435,21 @@ router.beforeEach(async (to, from, next) => {
         } else {
           console.log("cr", to);
           console.log("cr 2", from);
+          
           if (result?.data?.subscription != null) {
             store.commit("SET_SUB_STATUS", "subscribed");
             store.commit(
               "SET_SUB_CANCEL_STATUS",
               result?.data?.subscription.is_cancel
             );
+            // const current_date = new Date();
+            // const current_period_end = new Date(result?.data?.subscription?.current_period_end);
+            // if(result?.data?.subscription.is_cancel && current_period_end >= current_date){
+            //   store.commit("SET_SUB_STATUS", null);
+            //   store.commit("SET_SUB_CANCEL_STATUS",false);
+            // }            
           }
+
           if (result?.data?.data?.admin_approval == "approve") {
             store.commit(
               "SET_APPROVAL_STATUS",

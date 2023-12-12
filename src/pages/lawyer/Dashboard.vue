@@ -2,13 +2,26 @@
   <div class="l-main">
     <LawyerHeader />
     <div class="container">
-      <!-- <p class="h4 m-3">Welcome, {{ userName }}</p> -->
-      <span  v-if="openJobs.length > 0 && adminApproval == 'approve' && subscriptionStatus == 'subscribed'">
-        <p class="h4 m-3">Welcome, {{ userName }}</p>
-        <p class="m-3">
-          Here are jobs matching your location and practice area.
+      <p class="h4 m-3">Welcome, {{ userName }}</p>
+      <p
+        v-if="
+          openJobs.length > 0 &&
+          adminApproval == 'approve' &&
+          subscriptionStatus == 'subscribed' &&
+           tab == 'open' 
+        "
+        class="m-3"
+      >
+      Here are jobs matching your location and practice area.
+      </p>
+      <p v-if="tab == 'pending'" class="m-3">
+
+        Here are jobs that you have submitted a proposal for. The client is yet to choose a lawyer.
+      </p>
+      <p v-if="tab == 'close'" class="m-3">
+
+        Here are jobs that you have submitted a proposal for. The client has chosen a lawyer.
         </p>
-      </span>
 
       <div data-v-511b78bb="" class="container">
 
@@ -145,11 +158,27 @@
                 </p>
               </div> -->
 
-              <!-- <div v-if="openJobs.length == 0 && searchQuery == '' && tab != 'open'" class="border rounded bg-light p-3 d-flex flex-wrap"> -->
-              <div v-if="openJobs.length == 0 && searchQuery == ''" class="border rounded bg-light p-3 d-flex flex-wrap">
-                <p class="mx-auto my-0">No job found!</p>
+              <div
+                v-if="
+                  openJobs.length == 0 && searchQuery == '' && tab != 'open' &&  tab != 'close'
+                "
+                class="border rounded bg-light p-3 d-flex flex-wrap mb-2"
+              >
+                <p class="mx-auto my-0">You have no pending jobs.</p>
                 <button  class="btn btn-danger btn-sm my-1 mx-1 d-none"> Clear All Rejected Proposals </button>
               </div>
+
+
+              <div
+                v-if="
+                   tab == 'close'
+                "
+                class="border rounded bg-light p-3 d-flex flex-wrap"
+              >
+                <p class="mx-auto my-0">You have no accepted proposals yet.</p>
+                <!-- <button  class="btn btn-danger btn-sm my-1 mx-1 d-none"> Clear All Rejected Proposals </button> -->
+              </div>
+              
 
               <div
                 v-else
