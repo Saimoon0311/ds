@@ -17,7 +17,7 @@
               >You haven't posted a job. Click here to</span
             >
             <router-link to="/posting-job" class="btn btn-dark"
-              >post a job</router-link
+              >Post a Job</router-link
             >
           </div>
         </div>
@@ -150,10 +150,13 @@
                         class="btn btn-light btn-sm card-btn my-1 mx-1"
                         @click="goToViewProposals(item?.id)"
                       >
-                        View Proposals
+                        View Proposal
+                      </button>
+                      <button class="btn btn-dark btn-sm card-btn my-1 mx-1">
+                        View Messages
                       </button>
                       <button class="btn btn-danger btn-sm card-btn my-1 mx-1">
-                        Cancel
+                        View Lawyer's Details
                       </button>
                       <form method="post" action="index.php" class="d-none">
                         <input class="d-none" name="id" value="30" />
@@ -367,10 +370,16 @@ p.badge {
   font-size: 12px;
   margin: 0 0 5px 0 ;
 }
+
 @media only screen and (max-width: 1400px) and (min-width: 992px)  {
   .card-btn{
   width: 33%;
   font-size: 11px;
+}
+}
+@media only screen and (max-width: 1200px) and (min-width: 992px)  {
+  .card-btn{
+  font-size: 10px;
 }
 }
 @media only screen and (max-width: 992px) {
