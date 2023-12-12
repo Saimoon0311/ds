@@ -284,7 +284,7 @@ app.mixin({
         }
       }
       const htmlContent = Object.entries(newData)
-        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b>${key}: </b><span>${value}</span></h6></div>`)
+        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div><br />`)
         .join('');
 
       // Use dynamic HTML inside SweetAlert2 modal
@@ -307,7 +307,7 @@ app.mixin({
           if (Object.prototype.hasOwnProperty.call(data, key)) {
             const value = data[key];
             if (value !== null && value != 0 && key != 'id' && 
-            key != 'admin_approval' && key != 'otp_verified' 
+            key != 'admin_approval' && key != 'otp_verified' && key != "area_insert" && key != "state_insert"
             && key != 'is_subscribed_first' && key != 'followup_email_status_two'
             && key != 'created_at' && key != 'updated_at') {
               let objKey = key;
@@ -318,7 +318,7 @@ app.mixin({
         }
       }
       const htmlContent = Object.entries(newData)
-        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b>${key}: </b><span>${value}</span></h6></div>`)
+        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`)
         .join('');
 
       // Use dynamic HTML inside SweetAlert2 modal
@@ -443,7 +443,7 @@ app.mixin({
       const mainHtmlContent = Object.entries(newData)
         .map(
           ([key, value]) =>
-            `<div class="wrapper" v-if="value != null"><h6><b>${key}:</b> <span>${value}</span></h6></div>`
+            `<div class="wrapper" v-if="value != null"><h6"><b style="text-transform: capitalize;">${key}:</b> <span>${value}</span></h6></div><br />`
         )
         .join('');
     
@@ -833,7 +833,8 @@ app.mixin({
       const formattedHours = hours < 10 ? "0" + hours : hours;
       const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
       // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period} AEST`;
+      return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period}`;
+      // return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period} AEST`;
     },
 
     // date time format function end

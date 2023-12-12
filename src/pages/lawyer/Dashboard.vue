@@ -170,8 +170,8 @@
 
 
               <div
-                v-if="
-                   tab == 'close'
+                v-else-if="
+                    openJobs.length == 0 && searchQuery == '' && tab == 'close'
                 "
                 class="border rounded bg-light p-3 d-flex flex-wrap"
               >
@@ -267,7 +267,6 @@
                               type="button"
                               class="btn btn-dark btn-sm custom-pad"
                               :data-target="`.edit-job-title-modal${index}`"
-                              title="Edit"
                               :data-bs-toggle="`modal${index}`"
                               data-bs-target="#Accessibility"
                               @click="openRequirementsModal(item?.requirement)"
@@ -282,7 +281,7 @@
                           <!-- <p><b>City/suburb:</b> {{ item?.city }}</p> -->
                           <span class="spacer">
                             <p class="smallFont">
-                              Posted by Username
+                              Posted by {{ item?.owner?.first_name }} {{ item?.owner?.last_name }}
                               <span class="text-capitalize"
                                 >({{ item?.city }})</span
                               >
@@ -317,7 +316,7 @@
                           </button>
 
                           <button
-                            @click="submitProposal(item)"
+                            @click="openProposalDetailsModal(item.proposal)"
                             v-if="tab === 'pending'"
                             class="btn btn-light btn-sm card-btn my-1 mx-1"
                           >

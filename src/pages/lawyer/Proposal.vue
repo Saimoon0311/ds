@@ -42,9 +42,9 @@
           </button>
           <span class="spacer">
             <p class="smallFont">
-              Posted by Username
+              Posted by {{ jobData?.owner?.first_name }} {{ jobData?.owner?.last_name }}
               <span class="text-capitalize">({{ jobData?.city }})</span>
-              at 10.30pm on 19/11/23.
+              on {{ formatCreatedAt(jobData?.created_at) }}
             </p>
             <p span class="smallFont">Job No: {{ jobData?.identity }}</p>
           </span>
@@ -1979,6 +1979,7 @@ export default {
     //     }
     // },
     jobData() {
+      console.log('job data : ' , this.$store.state.jobData);
       return this.$store.state.jobData;
     },
     loginUser() {
