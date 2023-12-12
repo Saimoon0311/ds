@@ -374,7 +374,7 @@ export default {
     handleCancelSubscription() {
       this.$swal({
         title: "Are you sure?",
-        text: `Are you sure you want to cancel your subscription? You will not be able to access the Simplawfy platform or have any of your proposal accepted after ${this.subscriptionData?.current_period_end} unless you resubscribe.`,
+        text: `Are you sure you want to cancel your subscription? You will not be able to access the Simplawfy platform or have any of your proposals accepted after ${this.subscriptionData?.current_period_end} unless you resubscribe.`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

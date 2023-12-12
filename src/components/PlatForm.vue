@@ -3,7 +3,7 @@
     <GeneralHeader />
 
     <div class="d-flex flex-wrap justify-content-center align-items-center flex-column">
-      <div class="mb-5 mt-5 text-center">
+      <div class="mb-5 mt-5 text-center ">
         <p class="logo-sub-heading">
           An Australian legal marketplace making law simple by helping you find
           a lawyer or promote your law firm.
@@ -13,7 +13,7 @@
         </p> -->
       </div>
       <div class="d-flex flex-wrap justify-content-center align-items-center pb-5">
-        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center " @click="toggleDiv1" @touchend.prevent="toggleDiv1">
+        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center " v-if="isMobile" @click="toggleDiv1" @touchend.prevent="toggleDiv1">
           <p class="fw-bold law-hd" v-if="headShow1">I'm looking for a lawyer</p>
           <div class="showhover" v-if="showDiv1">
             <p class="fw-bold mb-3">Looking for a lawyer?</p>
@@ -32,9 +32,58 @@
             <!-- <a href="./need-a-lawyer/index" class="text-black fs-5">Register to be notified when the platform goes live.</a> -->
           </div>
         </div>
-        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white" @click="toggleDiv2" @touchend.prevent="toggleDiv2">
+        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white" v-if="isMobile" @click="toggleDiv2" @touchend.prevent="toggleDiv2">
           <p class="fw-bold law-hd" v-if="headShow2">I'm looking for clients</p>
           <div class="showhover" v-if="showDiv2">
+            <p class="fw-bold mb-3">Looking for clients?</p>
+
+            <p>
+              Professional networking eating into your billable hours and not
+              producing results?
+            </p>
+            <p>
+              We provide an untapped population of real people and small
+              businesses looking for a lawyer.
+            </p>
+            <p>
+              Simply subscribe for an opportunity to find clients in your
+              practice area without leaving your desk.
+            </p>
+            <div class="d-flex align-items-center justify-content-center mt-two">
+              <button @click="goToLoginPage('lawyer')" class="ext-white fs-5 p-2 btn btn-light text-black">Sign
+                in</button>
+              <!-- <router-link to="/lawyer-login" class="text-white fs-5 p-2 btn btn-light text-black">Sign in</router-link> -->
+
+              <router-link to="/lawyer-register" class="text-white fs-5 p-2 btn btn-light text-black">Sign
+                up</router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-wrap justify-content-center align-items-center pb-5 hide-mob">
+        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center " >
+          <p class="fw-bold law-hd" >I'm looking for a lawyer</p>
+          <div class="showhover" >
+            <p class="fw-bold mb-3">Looking for a lawyer?</p>
+            <p>Need a lawyer and don't know where to begin?</p>
+            <p>
+              We take the hassle and uncertainty out of the process of finding a
+              lawyer.
+            </p>
+            <p>Simply make one enquiry and wait for lawyers to come to you.</p>
+            <div class="d-flex align-items-center justify-content-center mt-two">
+              <button @click="goToLoginPage('client')" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</button>
+              <!-- <router-link to="/client-login" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</router-link> -->
+              <!-- <p>Or</p> -->
+              <router-link to="/client-register" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign up</router-link>
+            </div>
+            <!-- <a href="./need-a-lawyer/index" class="text-black fs-5">Register to be notified when the platform goes live.</a> -->
+          </div>
+        </div>
+        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white" >
+          <p class="fw-bold law-hd" >I'm looking for clients</p>
+          <div class="showhover" >
             <p class="fw-bold mb-3">Looking for clients?</p>
 
             <p>
@@ -118,6 +167,7 @@ export default {
       showDiv2: false,
       headShow1 : true,
       headShow2 : true,
+      isMobile: window.innerWidth < 460,
     };
   },
   components: {
@@ -127,6 +177,14 @@ export default {
   // name: 'Platform',
   props: {
     msg: String,
+  },
+  created() {
+    // Add event listener to update isMobile when the window is resized
+    window.addEventListener('resize', this.updateIsMobile);
+  },
+  unmounted() {
+    // Remove event listener to avoid memory leaks
+    window.removeEventListener('resize', this.updateIsMobile);
   },
   methods: {
     openSweetAlert() {
@@ -158,7 +216,12 @@ export default {
       this.headShow2 = !this.headShow2;
     
     },
-  }
+    updateIsMobile() {
+      this.isMobile = window.innerWidth < 961;
+    },
+  },
+ 
+
 };
 </script>
 
@@ -230,12 +293,29 @@ export default {
   line-height: 25px;
   margin-bottom: 17px;
 }
+.show-mob{
+  display: none;
+}
+/* @media (max-width: 961px) {
+  .hide-mob{
+  display: none !important;
+}
+} */
 @media (max-width: 960px) {
+  .hide-mob{
+  display: none !important;
+}
   .homepage-circles .showhover {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
+
+.show-mob{
+  display: block;
+}
+
+
 }
 
 @media (min-width: 320px) and (max-width: 425px) {
@@ -299,7 +379,14 @@ export default {
     font-size: 16px !important;
   }
 }
+@media (min-width: 1024px) and (max-width:1036px) {
+  .homepage-circles {
 
+width: 440px !important;
+height: 440px !important;
+padding: 30px !important;
+}
+}
 @media screen and (max-width: 720px) {
   .showhover p {
     line-height: 23px;
@@ -367,10 +454,9 @@ export default {
   .homepage-circles {
     width: 310px;
     height: 310px;
-  }
-
-  
+  }  
 }
+
 @media screen and (max-width: 768px) {
   .logo-sub-heading {
     padding: 0px 30px;
