@@ -1866,7 +1866,7 @@
             >
               Next
             </button>
-            <button v-if="currentStep === 2" class="btn btn-dark">
+            <button type="button" v-if="currentStep === 2" class="btn btn-dark">
               Summary
             </button>
           </div>
