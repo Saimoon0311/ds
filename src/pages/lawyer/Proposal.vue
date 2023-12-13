@@ -1713,7 +1713,7 @@
             </div>
 
             <div class="stepbtn hiden mt-3">
-              <span class="pagination-indicator"> {{ 1 }} of {{ 2 }} </span>
+              <span class="pagination-indicator"> {{ 1 }} of {{ 3 }} </span>
               <button
                 v-if="currentStep !== 0"
                 type="button"
@@ -1831,16 +1831,16 @@
           </div>
         </template>
 
-        <!-- <template v-if="currentStep === 3">
+        <template v-if="currentStep === 3">
         <p>4</p>
-      </template> -->
+      </template>
 
         <div class="stepbtn mt-3">
           <span v-if="selectedOption == 'Pro'">
-            <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
+            <span class="pagination-indicator"> {{ 3 }} of {{ 3 }} </span>
           </span>
           <span v-else>
-            <span v-if="currentStep !== 4" class="pagination-indicator">
+            <span v-if="currentStep !== 5" class="pagination-indicator">
               {{ currentStep + 1 }} of {{ totalSteps }}
             </span>
           </span>
@@ -1854,14 +1854,14 @@
               Previous
             </button>
             <button
-              v-if="currentStep !== 2"
+              v-if="currentStep !== 3"
               type="submit"
               :disabled="!selectedOption"
               class="btn btn-dark"
             >
               Next
             </button>
-            <button v-if="currentStep === 2" class="btn btn-dark">
+            <button v-if="currentStep === 3" class="btn btn-dark">
               Summary
             </button>
           </div>
@@ -1931,7 +1931,7 @@ export default {
 
       schemas: [],
       currentStep: 0,
-      totalSteps: 3,
+      totalSteps: 4,
 
       selectedOption: "",
       option: "Yes",
@@ -2097,7 +2097,7 @@ export default {
     },
 
     nextStep() {
-      if (this.currentStep === 2) {
+      if (this.currentStep === 3) {
         this.submitStepForm();
         // console.log(this.form);
         // console.log("Done: ", JSON.stringify(values, null, 1));
