@@ -55,20 +55,20 @@
 
       <div class="row">
 
-        <h1 class="mainHeading">Chats</h1>
+        <h2 class="mainHeading">Chats</h2>
         <!-- Client View: Select Lawyer -->
 
         <div v-if="userFirst.type === 'client' && lawyer_data.length > 0"
           :class="{ 'col-md-3': userFirst.type === 'client' }">
-          <h2>Select Lawyer to Chat</h2>
+          <h4>Select Lawyer to Chat</h4>
           <ul class="lawyer-list">
-            <li @click="startChatForClient(data, index)" v-for="(data, index) in lawyer_data" :key="data.id">
+            <li @click="startChatForClient(data, index)" v-for="(data, index) in lawyer_data" :key="data.id" class="bg-light">
               <span class="lawyer-name">
                 {{ data?.lawyer?.first_name }} {{ data?.lawyer?.last_name }}
               </span>
               <span v-if="data?.client_seen == 0 ||
                 data?.client_seen == false ||
-                data?.client_seen == null" class="badge bg-success mx-4">New Message</span>
+                data?.client_seen == null" class="badge bg-dark mx-1">New Message</span>
               <span v-else></span>
             </li>
           </ul>
@@ -78,7 +78,7 @@
         <div
           v-if="this.userFirst?.type == 'client' && this.lawyerSelected && chatStatus && jobId && userFirst && userSecond"
           :class="{ 'col-md-9': userFirst.type === 'client', 'chatbox': true }">
-          <div class="text-right my-4">
+          <div class="text-end mb-3">
             <span
               v-if="userFirst.type === 'client' && chatStatus && jobId && userFirst && userSecond && messages.length > 0"
               class="close-button">
@@ -87,19 +87,21 @@
           </div>
           <div v-if="messages.length > 0" class="chat-messages">
             <div v-for="message in messages" :key="message.id" class="message">
-              <div :class="{ 'own-message': message.sender_email !== loginUserEmail }">
+              <div :class="{ 'own-message ': message.sender_email !== loginUserEmail ,  'against-msg': message.sender_email == loginUserEmail }">
+                <div class="text">
                 <small class="lawyer-name">{{ message.sender_name }}:</small> <small>{{
                   humanReadableDate(message?.timestamp) }}</small>
                 <div>
                   <strong>{{ message.text }}</strong>
                 </div>
               </div>
+              </div>
             </div>
           </div>
 
           <div class="chat-input">
             <input v-model="newMessage" placeholder="Type your message..." />
-            <button @click="sendMessage">Send</button>
+            <button @click="sendMessage" class="bg-dark text-white">Send</button>
           </div>
         </div>
         <!-- client chat box end -->
@@ -107,16 +109,19 @@
 
         <!-- lawyer chat box -->
         <span v-if="this.userFirst?.type == 'lawyer'">
-          <div v-if="chatStatus && jobId && userFirst && userSecond" class="chatbox">
+          <div class="row lawyer">          
+          <div v-if="chatStatus && jobId && userFirst && userSecond" class="chatbox col-md-7 m-auto">
             <div class="text-right my-4">
             </div>
             <div v-if="messages.length > 0" class="chat-messages">
               <div v-for="message in messages" :key="message.id" class="message">
-                <div :class="{ 'own-message': message.sender_email !== loginUserEmail }">
+                <div :class="{ 'own-message': message.sender_email !== loginUserEmail ,  'against-msg': message.sender_email == loginUserEmail }">
+                  <div class="text">
                   <small class="lawyer-name">{{ message.sender_name }}:</small> <small>{{
                     humanReadableDate(message?.timestamp) }}</small>
                   <div>
                     <strong>{{ message.text }}</strong>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -124,9 +129,10 @@
 
             <div class="chat-input">
               <input v-model="newMessage" placeholder="Type your message..." />
-              <button @click="sendMessage">Send</button>
+              <button @click="sendMessage" class="bg-dark text-white">Send</button>
             </div>
           </div>
+        </div>
         </span>
         <!-- lawyer chat box end -->
 
@@ -334,14 +340,14 @@ export default {
 
 <style scoped>
 .chatbox {
-  padding: 20px 20px;
+  padding: 15px;
   border: 1px solid rgb(220, 212, 212);
   border-radius: 10px;
 }
 
 .mainHeading {
   text-align: center;
-  text-decoration: underline;
+
 }
 
 /* Add your custom styles here */
@@ -357,6 +363,9 @@ export default {
   border: 1px solid #ddd;
   border-radius: 5px;
   transition: background-color 0.3s;
+  display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .lawyer-list li:hover {
@@ -374,8 +383,8 @@ export default {
 .own-message {
   /* color: brown !important; */
 
-  text-align: right;
-  margin-left: 10px;
+  /* text-align: right;
+  margin-left: 10px; */
 
 }
 
@@ -390,6 +399,7 @@ export default {
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  background: #dddddd45;
 }
 
 .chat-input button {
@@ -407,5 +417,79 @@ export default {
 
 .lawyer-name {
   text-transform: capitalize;
+}
+.chat-messages .message{
+  width: 100%;
+}
+.chat-messages .message .own-message{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+.lawyer .chat-messages .message .own-message{
+  justify-content: start;
+
+}
+.lawyer .chat-messages .message .against-msg{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+}
+.lawyer .chat-messages .message .against-msg.text{
+  background: #ddd !important;
+  color: black !important;
+  text-align: start !important;
+}
+.chat-messages .message .against-msg {
+    display: flex;
+    justify-content: flex-end;
+  flex-wrap: wrap;
+
+}
+.lawyer .chat-messages .message   .own-message.text{
+  background: black !important;
+  color: white !important;
+  text-align: end !important;
+
+}
+.chat-messages .message .own-message .text{
+    width: fit-content;
+    padding: 10px;
+    background: #ddd ;
+    color: black;
+    border-radius: 5px;
+    text-align: end;
+}
+.chat-messages .message .against-msg .text{
+    width: fit-content;
+    padding: 10px;
+   
+    border-radius: 5px;
+    background: black ;
+    color: white;
+}
+.small, small {
+    font-size: .75rem;
+}
+.chat-messages {
+    min-height: 400px;
+    overflow-y: scroll;
+    height: 400px;
+    padding-right: 10px;
+}
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
+  border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: rgba(217, 217, 217, 1);
+  /* outline: 1px solid #292929; */
+  border-radius: 10px;
 }
 </style>
