@@ -1,6 +1,6 @@
 <template>
   <div
-    class="border rounded d-flex justify-content-between text-white flex-column mb-3 col-md-7 m-auto bg-col"
+    class="border rounded d-flex justify-content-between text-white flex-column mb-3 col-md-7 m-auto bg-col p-0"
     id="28"
   >
     <div class="">
@@ -83,7 +83,7 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   height: 100px;
-  /* line-break: anywhere; */
+  line-break: anywhere;
   overflow-y: auto;
   padding-right: 10px;
   margin-right: 5px;
