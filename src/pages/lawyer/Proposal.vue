@@ -609,7 +609,7 @@
                         Total (excluding GST):
                       </td>
                       <td class="bg-transparent text-white p-0 px-2">
-                        $ {{ grandTotal }}
+                        $ {{ grandTotal2 }}
                       </td>
                       <td class="bg-transparent p-0 b-round-end"></td>
                     </tr>
@@ -1071,7 +1071,10 @@
                     </label>
                     <br />
                     <br />
-                    <button type="button" @click="addRow3" class="btn btn-dark">
+                    <button v-if="editRow != null" type="button" @click="updateRow3" class="btn btn-dark">
+                      Update
+                    </button>
+                    <button v-else type="button" @click="addRow3" class="btn btn-dark">
                       Add
                     </button>
                   </fieldset>
@@ -1108,12 +1111,14 @@
                             <button
                               type="button"
                               class="btn btn-default btn-circle p-1"
-                            >
+                              @click="editRow3(index)"
+                              >
                               <i class="fa fa-edit"></i>
                             </button>
                             <button
                               type="button"
                               class="btn btn-default btn-circle p-1"
+                              @click="removeRow3(index)"
                             >
                               <i class="fa fa-trash"></i>
                             </button>
@@ -1133,7 +1138,7 @@
                           <td class="bg-transparent p-0"></td>
                           <td class="bg-transparent p-0"></td>
                           <td class="bg-transparent text-white p-0 px-2">
-                            $ {{ grandTotal }}
+                            $ {{ grandTotal3 }}
                           </td>
                           <td class="bg-transparent p-0 b-round-end"></td>
                         </tr>
@@ -1718,7 +1723,7 @@
             </div>
 
             <div class="stepbtn hiden mt-3">
-              <span class="pagination-indicator"> {{ 1 }} of {{ 2 }} </span>
+              <span class="pagination-indicator"> {{ 1 }} of {{ 3 }} </span>
               <button
                 v-if="currentStep !== 0"
                 type="button"
@@ -1836,16 +1841,222 @@
           </div>
         </template>
 
-        <!-- <template v-if="currentStep === 3">
-        <p>4</p>
-      </template> -->
+        <template v-if="currentStep === 3">
+          <div class="summ mb-3">
+              <p class="h4 text-center mb-3 mt-2">Summary</p>
+
+
+                      <div v-if="form.hours">
+                        <p><i class="fa fa-check"></i><b> Hours : </b> {{ form.hours }}</p>
+                      </div>
+
+                      <div v-if="form.hourly_rate">
+                        <p><i class="fa fa-check"></i><b> Hourly Rate : </b> {{ form.hourly_rate }}</p>
+                      </div>
+
+                      <div v-if="form.retainer_period">
+                        <p><i class="fa fa-check"></i><b> Retainer Period : </b> {{ form.retainer_period }}</p>
+                      </div>
+
+                      <div v-if="form.retainer_limitation">
+                        <p><i class="fa fa-check"></i><b> Retainer Limitation : </b> {{ form.retainer_limitation }}</p>
+                      </div>
+
+                      <div v-if="form.notice_period">
+                        <p><i class="fa fa-check"></i><b> Notice Period : </b> {{ form.notice_period }}</p>
+                      </div>
+
+                      <div v-if="form.retainer_fee">
+                        <p><i class="fa fa-check"></i><b> Retainer Fee : </b> {{ form.retainer_fee }}</p>
+                      </div>
+
+                      <div v-if="form.days">
+                        <p><i class="fa fa-check"></i><b> Days : </b> {{ form.days }}</p>
+                      </div>
+
+                      <div v-if="form.charge_type">
+                        <p><i class="fa fa-check"></i><b> Charge Type : </b> {{ form.charge_type }}</p>
+                      </div>
+
+                      <div v-if="form.fixed_fee_amount">
+                        <p><i class="fa fa-check"></i><b> Fixed Fee Amount : </b> {{ form.fixed_fee_amount }}</p>
+                      </div>
+
+                      <div v-if="form.disbursement_amount">
+                        <p><i class="fa fa-check"></i><b> Disbursement Amount : </b> {{ form.disbursement_amount }}</p>
+                      </div>
+
+                      <div v-if="form.law_practice_cost">
+                        <p><i class="fa fa-check"></i><b> Law Practice Cost : </b> {{ form.law_practice_cost }}</p>
+                      </div>
+
+                      <div v-if="form.fee_earners">
+                        <p><i class="fa fa-check"></i><b> Fee Earners : </b> {{ form.fee_earners }}</p>
+                      </div>
+
+                      <div v-if="form.daily_rate">
+                        <p><i class="fa fa-check"></i><b> Daily Rate : </b> {{ form.daily_rate }}</p>
+                      </div>
+
+                      <div v-if="form.uplift_percentage">
+                        <p><i class="fa fa-check"></i><b>  Uplift Percentage : </b> {{ form.uplift_percentage }}</p>
+                      </div>
+
+                      <div v-if="form.estimated_fee">
+                        <p><i class="fa fa-check"></i><b> Estimated Fee : </b> {{ form.estimated_fee }}</p>
+                      </div>
+
+                      <div v-if="form.success_fee_term">
+                        <p><i class="fa fa-check"></i><b> Success Fee Term : </b> {{ form.success_fee_term }}</p>
+                      </div>
+
+                      <div v-if="form.pro_bono_description">
+                        <p><i class="fa fa-check"></i><b> Pro Bono Description : </b> {{ form.pro_bono_description }}</p>
+                      </div>
+
+                      <div v-if="form.meet_deadlines">
+                        <p><i class="fa fa-check"></i><b> Meet Deadlines : </b> {{ form.meet_deadlines }}</p>
+                      </div>
+
+                      <div v-if="form.miss_deadline_reason">
+                        <p><i class="fa fa-check"></i><b> Miss Deadline Reason : </b> {{ form.miss_deadline_reason }}</p>
+                      </div>
+
+                      <div v-if="form.upfront_payment_status">
+                        <p><i class="fa fa-check"></i><b> Upfront Payment Status : </b> {{ form.upfront_payment_status }}</p>
+                      </div>
+
+                      <div v-if="form.upfront_payment">
+                        <p><i class="fa fa-check"></i><b> Upfront Payment : </b> {{ form.upfront_payment }}</p>
+                      </div>
+
+                      <div v-if="form.consultation">
+                        <p><i class="fa fa-check"></i><b> Consultation : </b> {{ form.consultation }}</p>
+                      </div>
+
+                      <div v-if="form.consultation_time_limit">
+                        <p><i class="fa fa-check"></i><b> Consultation Time Limit : </b> {{ form.consultation_time_limit }}</p>
+                      </div>
+
+                      <div v-if="form.description">
+                        <p><i class="fa fa-check"></i><b> Description : </b> {{ form.description }}</p>
+                      </div>
+
+
+                      <div v-html="summaryHtml">
+                      </div>
+
+
+              <!-- hours : null,
+        hourly_rate : null,
+        retainer_period: null,
+        retainer_limitation: null,
+        notice_period : null,
+        retainer_fee : null,
+        days : null,
+        charge_type: null,
+        fixed_fee_amount: null,
+        disbursement_amount: null,
+        law_practice_cost: null,
+        fee_earners: "me",
+        daily_rate: null,
+        uplift_percentage: null,
+        estimated_fee: null,
+        success_fee_term: null,
+        pro_bono_description: null,
+        meet_deadlines: null,
+        miss_deadline_reason: null,
+        upfront_payment_status: "yes",
+        upfront_payment: null,
+        consultation: null,
+        consultation_time_limit: null,
+        description: null,
+        lawyer_id: null,
+        job_id: null, -->
+
+
+              <!-- <div class="sum-top mb-3">
+                <p class="areas text-decoration-none badge text-white fs-6 bubbles area-bubble">
+                  {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
+                </p>
+                <h4 class=" text-center title-font text-white mt-1 mb-2"><b>{{ title }}</b>
+                </h4>
+                <h4 class="text-white descriptionText">{{ description }}</h4>
+              </div> -->
+
+              <!-- <h4 class="mb-3 text-capitalize"><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}
+              </h4> -->
+              <!-- <div v-if='this.visualOption != "" ||
+                this.auditoryOption != "" ||
+                this.mobilityOption != "" ||
+                this.learningOption != "" ||
+                this.intellectualOption != "" ||
+                this.psychiatricOption != "" ||
+                this.medicalOption != "" ||
+                this.requirementsOptionDescription != "" ||
+                this.otherLanguage != "" ||
+                this.selectedLanguage != ""' class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                      data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                      aria-controls="panelsStayOpen-collapseOne">
+                      <b>Accessibility Requirements </b>
+                    </button>
+                  </h2>
+                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show "
+                    aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                      <div v-if="VisualIsChecked">
+                        <p><i class="fa fa-check"></i><b> Visual Impairment: </b> {{ visualOption }}</p>
+                      </div>
+
+                      <div v-if="AuditoryIsChecked">
+                        <p><i class="fa fa-check"></i><b> Auditory Impairment: </b> {{ auditoryOption }}</p>
+
+                      </div>
+
+                      <div v-if="MobilityIsChecked">
+                        <p><i class="fa fa-check"></i><b> Mobility/Physical Impairment: </b> {{ mobilityOption }}</p>
+                      </div>
+
+                      <div v-if="LearningIsChecked">
+                        <p><i class="fa fa-check"></i><b> Learning Impairment: </b> {{ learningOption }}</p>
+                      </div>
+
+                      <div v-if="IntellectualIsChecked">
+                        <p><i class="fa fa-check"></i><b> Intellectual Disability: </b> {{ intellectualOption }}</p>
+                      </div>
+
+                      <div v-if="PsychiatricIsChecked">
+                        <p><i class="fa fa-check"></i><b> Psychiatric Disability: </b> {{ psychiatricOption }}</p>
+                      </div>
+
+                      <div v-if="MedicalIsChecked">
+                        <p><i class="fa fa-check"></i><b> Medical Disability: </b> {{ medicalOption }}</p>
+                      </div>
+
+                      <div v-if="isChecked">
+                        <p><i class="fa fa-check"></i><b> Other: </b> {{ requirementsOptionDescription }}</p>
+                      </div>
+
+                      <div v-if="languageIsChecked">
+                        <p><i class="fa fa-check"></i><b> Language: </b> {{ selectedLanguage == 'Other' ? otherLanguage :
+                          selectedLanguage }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+      </template>
 
         <div class="stepbtn mt-3">
           <span v-if="selectedOption == 'Pro'">
-            <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
+            <span class="pagination-indicator"> {{ 3 }} of {{ 3 }} </span>
           </span>
           <span v-else>
-            <span v-if="currentStep !== 4" class="pagination-indicator">
+            <span v-if="currentStep !== 5" class="pagination-indicator">
               {{ currentStep + 1 }} of {{ totalSteps }}
             </span>
           </span>
@@ -1859,16 +2070,16 @@
               Previous
             </button>
             <button
-              v-if="currentStep !== 2"
               type="submit"
               :disabled="!selectedOption"
               class="btn btn-dark"
             >
-              Next
+              {{ buttonText }}
             </button>
-            <button type="button" v-if="currentStep === 2" class="btn btn-dark">
+            <!-- v-if="currentStep !== 3" -->
+            <!-- <button v-if="currentStep === 3" class="btn btn-dark">
               Summary
-            </button>
+            </button> -->
           </div>
         </div>
 
@@ -1895,6 +2106,8 @@ export default {
   data() {
  
     return {
+      editRow : null,
+      summaryHtml : null,
       form: {
         hours : null,
         hourly_rate : null,
@@ -1944,7 +2157,7 @@ export default {
 
       schemas: [],
       currentStep: 0,
-      totalSteps: 3,
+      totalSteps: 4,
 
       selectedOption: "",
       option: "Yes",
@@ -1961,6 +2174,19 @@ export default {
     };
   },
   computed: {
+
+    buttonText() {
+      if (this.currentStep === 0 || this.currentStep === 1) {
+        return 'Next';
+      } else if (this.currentStep === 2) {
+        return 'Summary';
+      } else if (this.currentStep === 3) {
+        return 'Submit';
+      } else {
+        // Add a default value if needed
+        return 'Unknown';
+      }
+    },
 
     // fixedFeeAmountValue() {
     //   // if (!isNaN(this.form?.fixed_fee_amount)) {
@@ -1985,21 +2211,27 @@ export default {
     loginUser() {
       return this.$store.state.loginUser;
     },
+
+    // disbursment
     grandTotal() {
       return this.rows.reduce(
         (total, row) => total + parseFloat(row.costAud) || 0,
         0
       );
     },
+
+    // item by item specific tasks
     grandTotal2() {
       return this.rows2.reduce(
         (total, row) => total + parseFloat(row.costAud) || 0,
         0
       );
     },
+
+    // additional fee earner
     grandTotal3() {
       return this.rows3.reduce(
-        (total, row) => total + parseFloat(row.hourlyRate) || 0,
+        (total, row) => total + parseFloat(row.hourlyRate * row.estimatedHours) || 0,
         0
       );
     },
@@ -2029,6 +2261,10 @@ export default {
   },
 
   methods: {
+    openSummaryTab(){
+      this.summaryHtml = this.openProposalDetailsModal({'specific_tasks' : this.rows2 , 'disbursements' : this.rows , 'fee_earners' : this.rows3},true)
+    },
+
     handleOptionChange() {
       this.currentSchema = this.selectedOption;
       console.log("schema", this.currentSchema);
@@ -2149,14 +2385,47 @@ export default {
       this.rows3.splice(index, 1);
     },
 
+    editRow3(index){
+      console.log(index);
+      this.editRow = index;
+      console.log('row s 3 : ' , this.rows3[index]);
+      this.newRow3.title = this.rows3[index].title;
+      this.newRow3.hourlyRate = this.rows3[index].hourlyRate;
+      this.newRow3.estimatedHours = this.rows3[index].estimatedHours;
+    },
+
+    updateRow3(){
+      if (
+        this.newRow3.title &&
+        this.newRow3.hourlyRate &&
+        this.newRow3.estimatedHours
+      ) {
+        const obj = {
+          title: this.newRow3.title,
+          hourlyRate: this.newRow3.hourlyRate,
+          estimatedHours: this.newRow3.estimatedHours,
+        }
+        this.rows3[this.editRow] = obj;
+        this.newRow3.title = "";
+        this.newRow3.hourlyRate = "";
+        this.newRow3.estimatedHours = "";
+        this.editRow = null;
+      }
+
+    },
+
     nextStep() {
-      if (this.currentStep === 2) {
+      if (this.currentStep === 3) {
         this.submitStepForm();
         // console.log(this.form);
         // console.log("Done: ", JSON.stringify(values, null, 1));
         // console.log('test', values);
 
         return;
+      }
+
+      if(this.currentStep == 2){
+        this.openSummaryTab();
       }
 
       this.currentStep++;

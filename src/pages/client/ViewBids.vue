@@ -63,7 +63,7 @@
               <thead>
                 <tr>
                   <th>Lawyer</th>
-                  <th>
+                  <!-- <th>
                     Billing method
                     <i
                       class="bi bi-question-circle"
@@ -113,7 +113,7 @@
                         You will not have to pay any legal costs.
                       </dd>
                     </dl>
-                  </th>
+                  </th> -->
                   <th>
                     Fee estimate
                     <i
@@ -140,7 +140,7 @@
                       </dd>
                     </dl>
                   </th>
-                  <th>
+                  <!-- <th>
                     Upfront payment
                     <i
                       class="bi bi-question-circle"
@@ -158,9 +158,9 @@
                         towards the legal costs.
                       </dd>
                     </dl>
-                  </th>
+                  </th> -->
                   <th>Proposed work</th>
-                  <th>Created at</th>
+                  <!-- <th>Created at</th> -->
                   <!-- <th>Deadline achievable?</th>
                   <th>Free/discounted first consultation?</th> -->
                   <th>Actions</th>
@@ -176,11 +176,11 @@
                 <tr v-else class="text-left" v-for="(item,index) in data_paginated" :key="index">
                   <!-- <td>testing client (crinimal)</td> -->
                   <td class="text-center"> <button @click="openLawyerDetailsModal(item?.lawyer)" class="btn-dark btn">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</button></td>
-                  <td>{{ item?.charge_type }}</td>
+                  <!-- <td>{{ item?.charge_type }}</td> -->
                   <td>{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
-                  <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td>
+                  <!-- <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td> -->
                   <td>{{ item?.description }}</td>
-                  <td>{{ formatCreatedAt(item?.created_at) }}</td>
+                  <!-- <td>{{ formatCreatedAt(item?.created_at) }}</td> -->
 
                   <!-- <td>Yes</td>
                   <td>No</td> -->

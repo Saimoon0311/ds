@@ -30,7 +30,7 @@
           >
             <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
-                data-v-511b78bb=""
+              data-v-511b78bb=""
                 class="nav-link active"
                 id="pills-home-tab"
                 data-bs-toggle="pill"
@@ -39,13 +39,14 @@
                 role="tab"
                 aria-controls="pills-home"
                 aria-selected="true"
+                @click="changeTab('open')"
               >
                 Open
               </button>
             </li>
             <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
-                data-v-511b78bb=""
+              data-v-511b78bb=""
                 class="nav-link"
                 id="pills-profile-tab"
                 data-bs-toggle="pill"
@@ -55,6 +56,7 @@
                 aria-controls="pills-profile"
                 aria-selected="false"
                 tabindex="-1"
+                @click="changeTab('close')"
               >
                 Closed
               </button>
@@ -116,10 +118,11 @@
                       <!-- <p><b>City/suburb:</b> {{ item?.city }}</p> -->
                       <span class="spacer">
                         <p class="smallFont">
-                          Posted by Username
+                          Posted 
+                          <!-- by Username
                           <span class="text-capitalize"
                             >({{ item?.city }})</span
-                          >
+                          > -->
                           on
                           {{ formatCreatedAt(item.created_at) }}
                         </p>
@@ -152,7 +155,7 @@
                       >
                         View Proposal
                       </button>
-                      <button class="btn btn-dark btn-sm card-btn my-1 mx-1">
+                      <button class="btn btn-dark btn-sm card-btn my-1 mx-1" @click="goToMessagePage(item)">
                         View Messages
                       </button>
                       <button class="btn btn-danger btn-sm card-btn my-1 mx-1">
@@ -178,62 +181,7 @@
             </div>
           </div>
         </div>
-        <div
-          data-v-511b78bb=""
-          class="tab-pane fade"
-          id="pills-profile"
-          role="tabpanel"
-          aria-labelledby="pills-profile-tab"
-        >
-          <div
-            v-if="closeJobs.length == 0"
-            class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
-            id="containerClosed"
-          >
-            <span class="text-center w-100"
-              >You haven't accepted any proposals yet.</span
-            >
-          </div>
-          <!-- if data exist -->
-          <div
-            v-else
-            class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
-            id="containerClosed"
-          >
-            <div
-              v-for="(item, index) in closeJobs"
-              :key="index"
-              class="d-flex justify-content-between border rounded bg-secondary text-white m-3 p-3"
-              style="width: 35vw"
-              id="30"
-            >
-              <div>
-                <p class="badge bg-dark" title="Area">
-                  {{ item?.field?.title }}
-                </p>
-                &nbsp;
-                <p class="badge bg-dark" title="Location">
-                  {{ item?.location?.title }}
-                </p>
-                <p><b>Title:</b> {{ item?.title }}</p>
-                <p><b>Lawyer Name:</b> testing client</p>
-                <p><b>Lawyer Email:</b> testing@mailinator.com</p>
-                <p><b>Phone Number:</b> 0310000000</p>
-                <p id="description30" class="descriptionText">
-                  lorem ipsum dummy text description
-                </p>
-                <!-- <details>
-                    <summary>More details</summary>
-                    <div class="bg-dark border rounded p-3 m-1">
-                      <p><b>City/suburb:</b> city</p>
-                      <p><b> Deadline:</b> 28-10-2023</p>
-                      <p><b> Preferred contact time:</b> after 1:00</p>
-                    </div>
-                  </details> -->
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
     <div class="footer">
@@ -255,6 +203,7 @@ export default {
   data() {
     return {
       endpoint: "/client/client-jobs",
+      tab: "open",
       // endpoint_search: "/client/search-client-jobs",
     };
   },
@@ -268,7 +217,34 @@ export default {
     },
   },
   methods: {
+
+    goToMessagePage(item){
+      // this.$store.commit('SET_USERTOCHAT',item?.owner);
+      this.$store.commit('SET_JOBIDTOCHAT',item?.id);
+      
+      // if(!item?.lawyer_chat){
+      //   this.$store.commit('SET_CHATSTATUS','new');
+      // }else{
+      //   this.$store.commit('SET_CHATSTATUS','old');
+      // }
+      // localStorage.setItem('userEmailToChat',userEmail);
+      this.$router.push({ path : "/chat" });
+    },
+
+    async changeTab(status) {
+      this.tab = status;
+      if (status == "open") {
+        this.endpoint = "/client/client-jobs";
+      } else if (status == "close") {
+        this.endpoint = "/client/client-close-jobs";
+      }
+      await this.loadMore(null, true);
+    },
+
     goToViewProposals(id) {
+      this.$store.commit('SET_LOADMOREPREVDATA',{'currentPage' : this.currentPage, 'lastPage' : this.lastPage, 'openJobs' : this.openJobs});
+      console.log('curr : ' , this.currentPage)
+      console.log('last : ' , this.lastPage)
       this.$store.commit("SET_JOB_ID", id);
       localStorage.setItem("jobId", id);
       this.$router.push({ path: "/view-proposals" });

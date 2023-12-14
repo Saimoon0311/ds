@@ -332,11 +332,11 @@
                           </button>
 
 
-                          <router-link
+                          <button
                             v-if="tab == 'open'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
-                            to="/request-info"
-                            >Message</router-link
+                            @click="goToMessagePage(item)"
+                            >Message</button
                           >
                           <router-link
                             v-if="tab === 'pending'"
@@ -474,6 +474,22 @@ export default {
   // },
   methods: {
 
+    goToMessagePage(item){
+      this.$store.commit('SET_USERTOCHAT',item?.owner);
+      this.$store.commit('SET_JOBIDTOCHAT',item?.id);
+      if(!item?.lawyer_chat){
+        this.$store.commit('SET_CHATSTATUS','new');
+      }else{
+        this.$store.commit('SET_CHATSTATUS','old');
+      }
+
+      if(item?.lawyer_chat?.client_reply){
+        this.$store.commit('SET_LAWYER_ELIGIBLE_STATUS',true);
+      }
+
+      // localStorage.setItem('userEmailToChat',userEmail);
+      this.$router.push({ path : "/chat" });
+    },
 
     async changeTab(status) {
       this.tab = status;

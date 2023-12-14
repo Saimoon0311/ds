@@ -4,6 +4,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import NeedLawyer from "@/pages/forms/NeedLawyer.vue";
 // import FindClient from "@/pages/forms/FindClient.vue";
 import LoginForm from "@/pages/forms/LoginForm.vue";
+
+
+import UserChats from "@/pages/UserChats.vue";
+
 // admin
 import AdminLogin from "@/pages/admin/Login.vue";
 import AdminLawyer from "@/pages/admin/Lawyers.vue";
@@ -142,6 +146,15 @@ const routes = [
   //   component: LawyerLoginForm,
   //   beforeEnter: reverse_guard,
   // },
+
+
+  {
+    path: "/chat",
+    component: UserChats,
+    meta: { requiresAuth: true },
+  },
+
+
   {
     path: "/lawyer-register",
     component: LawyerRegister,
