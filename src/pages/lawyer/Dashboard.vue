@@ -238,15 +238,7 @@
                             {{ item?.location?.title }}
                           </p>
                           &nbsp;
-                            <div v-if="tab == 'pending' || tab == 'close'">
-                            <p class="badge bg-dark" v-if="tab == 'pending'">
-                              Submitted
-                            </p>
-                            <p v-else-if="item?.proposals != null && item?.proposals.length > 0" class="badge bg-dark">
-                              <span v-if="item?.proposals[0].status == 'Accept' || item?.proposals[0].status == 'accept'">Accepted</span>
-                              <span v-if="item?.proposals[0].status == 'Reject' || item?.proposals[0].status == 'reject'">Rejected</span>
-                            </p>
-                          </div>
+                          
                         </div>
                         <div>
                           <p span class="smallFont">
@@ -259,7 +251,15 @@
                           <p class="text-left  text-black title">
                           {{ item?.title }}
                           </p>
-                          <p >View Detail</p>                        
+                          <div v-if="tab == 'pending' || tab == 'close'">
+                            <p class="badge border text-black" v-if="tab == 'pending'">
+                              Submitted
+                            </p>
+                            <p v-else-if="item?.proposals != null && item?.proposals.length > 0" class="badge border text-black">
+                              <span v-if="item?.proposals[0].status == 'Accept' || item?.proposals[0].status == 'accept'">Accepted</span>
+                              <span v-if="item?.proposals[0].status == 'Reject' || item?.proposals[0].status == 'reject'">Rejected</span>
+                            </p>
+                          </div>                       
                         </div>
                         <div  id="description" class="descriptionText text-black ">
                             {{ item?.description }}
@@ -267,6 +267,17 @@
                         <div class="widthcn">
 
                           <span class="spacer">
+                            <button
+                              :disabled="!item?.requirement"
+                              type="button"
+                              class="btn btn-dark btn-sm custom-pad"
+                              :data-target="`.edit-job-title-modal${index}`"
+                              :data-bs-toggle="`modal${index}`"
+                              data-bs-target="#Accessibility"
+                              @click="openRequirementsModal(item?.requirement)"
+                            >
+                            Accessibility Requirements{{ (!item?.requirement) ? ', (N/A)' : ''}}
+                          </button>
                             <p class="smallFont text-black smallFont1">
                               Posted by:
                               <span class="text-capitalize"
@@ -279,17 +290,7 @@
                             
                           </span>
                         </div>
-                        <button
-                              :disabled="!item?.requirement"
-                              type="button"
-                              class="btn btn-dark btn-sm custom-pad"
-                              :data-target="`.edit-job-title-modal${index}`"
-                              :data-bs-toggle="`modal${index}`"
-                              data-bs-target="#Accessibility"
-                              @click="openRequirementsModal(item?.requirement)"
-                            >
-                            Accessibility Requirements{{ (!item?.requirement) ? ', (N/A)' : ''}}
-                            </button>
+                       
                       </div>
 
                           <!-- modal -->
@@ -315,7 +316,7 @@
                           <button
                             @click="submitProposal(item)"
                             v-if="tab == 'open'"
-                            class="btn btn-light btn-sm card-btn my-1 mx-1"
+                            class="btn btn-light btn-sm card-btn my-1 mx-1 border"
                           >
                             Submit a proposal
                           </button>
@@ -758,6 +759,9 @@ p.badge {
     display: block;
     border-top: 1px solid black;
     padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .table-wrap * {
@@ -806,11 +810,27 @@ p.badge {
 
 @media only screen and (max-width: 992px) {
   .card-btn {
-    width: 100%;
+    width: 95%;
+  }
+  .smallFont{
+    margin: 5px;
+    font-size: 14px;
   }
 }
-
+@media only screen and (max-width: 767px) {
+.spacer{
+  display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+}
 @media only screen and (max-width: 600px) {
+  p.badge{
+    margin-bottom: 10px;
+  }
   .l-main {
     padding-bottom: 100px;
   }
