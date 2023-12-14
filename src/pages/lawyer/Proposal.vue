@@ -2653,4 +2653,14 @@ td {
   display:table;
   width: 100%;
 }
+@media only screen and (max-width: 992px) {
+  form#mainForm {
+    width: 70%;
+}
+}
+@media only screen and (max-width: 767px) {
+  form#mainForm {
+    width: unset;
+}
+}
 </style>

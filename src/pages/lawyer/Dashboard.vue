@@ -8,32 +8,37 @@
           openJobs.length > 0 &&
           adminApproval == 'approve' &&
           subscriptionStatus == 'subscribed' &&
-           tab == 'open' 
+          tab == 'open'
         "
         class="m-3"
       >
-      Here are jobs matching your location and practice area.
+        Here are jobs matching your location and practice area.
       </p>
       <p v-if="tab == 'pending'" class="m-3">
-
-        Here are jobs that you have submitted a proposal for. The client is yet to choose a lawyer.
+        Here are jobs that you have submitted a proposal for. The client is yet
+        to choose a lawyer.
       </p>
       <p v-if="tab == 'close'" class="m-3">
-
-        Here are jobs that you have submitted a proposal for. The client has chosen a lawyer.
-        </p>
+        Here are jobs that you have submitted a proposal for. The client has
+        chosen a lawyer.
+      </p>
 
       <div data-v-511b78bb="" class="container">
-
         <div v-if="adminApproval != 'approve'">
           <p class="h5 m-3 text-center">
             Your profile has not been approved yet.
           </p>
         </div>
         <!-- <div v-else-if="openJobs.length == 0 && searchQuery == '' && tab == 'open'" class="border rounded bg-light p-3 d-flex flex-wrap"> -->
-        <div v-else-if="!userFields && !userLocations" class="border rounded bg-light p-3 d-flex flex-wrap">
-          <p class="mx-auto my-0">Your profile is not completed . Click here to complete your
-            <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
+        <div
+          v-else-if="!userFields && !userLocations"
+          class="border rounded bg-light p-3 d-flex flex-wrap"
+        >
+          <p class="mx-auto my-0">
+            Your profile is not completed . Click here to complete your
+            <router-link to="/lawyer-profile" class="btn btn-dark text-white"
+              >Profile</router-link
+            >
           </p>
         </div>
         <div v-else-if="subscriptionStatus != 'subscribed'">
@@ -160,29 +165,33 @@
 
               <div
                 v-if="
-                  openJobs.length == 0 && searchQuery == '' && tab != 'open' &&  tab != 'close'
+                  openJobs.length == 0 &&
+                  searchQuery == '' &&
+                  tab != 'open' &&
+                  tab != 'close'
                 "
                 class="border rounded bg-light p-3 d-flex flex-wrap mb-2"
               >
                 <p class="mx-auto my-0">You have no pending jobs.</p>
-                <button  class="btn btn-danger btn-sm my-1 mx-1 d-none"> Clear All Rejected Proposals </button>
+                <button class="btn btn-danger btn-sm my-1 mx-1 d-none">
+                  Clear All Rejected Proposals
+                </button>
               </div>
-
 
               <div
                 v-else-if="
-                    openJobs.length == 0 && searchQuery == '' && tab == 'close'
+                  openJobs.length == 0 && searchQuery == '' && tab == 'close'
                 "
                 class="border rounded bg-light p-3 d-flex flex-wrap"
               >
                 <p class="mx-auto my-0">You have no accepted proposals yet.</p>
                 <!-- <button  class="btn btn-danger btn-sm my-1 mx-1 d-none"> Clear All Rejected Proposals </button> -->
               </div>
-              
 
               <div
                 v-else
-                class="border rounded bg-light px-2 py-3 d-flex flex-wrap align-center justify-content-center">
+                class="border rounded bg-light px-2 py-3 d-flex flex-wrap align-center justify-content-center"
+              >
                 <div class="input-group mb-3 search-field">
                   <input
                     type="text"
@@ -227,77 +236,102 @@
                         class="border rounded d-flex justify-content-between text-white flex-column mb-3 pb-3"
                       >
                         <div>
-                      <div class="p-3 card-top">
-                        <div>
-                          <p class="badge" title="Area">
-                            {{ item?.field?.title }}
-                          </p>            
+                          <div class="p-3 card-top">
+                            <div>
+                              <p class="badge" title="Area">
+                                {{ item?.field?.title }}
+                              </p>
 
-                          &nbsp;
-                          <p class="badge" title="Location">
-                            {{ item?.location?.title }}
-                          </p>
-                          &nbsp;
-                          
-                        </div>
-                        <div>
-                          <p span class="smallFont">
-                            Job No: <b>{{ item?.identity }}</b>
-                          </p>
-                        </div>
-                      </div>
-                      <div class="p-3">
-                        <div class="card-body d-flex align-items-start justify-content-between ">
-                          <p class="text-left  text-black title">
-                          {{ item?.title }}
-                          </p>
-                          <div v-if="tab == 'pending' || tab == 'close'">
-                            <p class="badge border text-black" v-if="tab == 'pending'">
-                              Submitted
-                            </p>
-                            <p v-else-if="item?.proposals != null && item?.proposals.length > 0" class="badge border text-black">
-                              <span v-if="item?.proposals[0].status == 'Accept' || item?.proposals[0].status == 'accept'">Accepted</span>
-                              <span v-if="item?.proposals[0].status == 'Reject' || item?.proposals[0].status == 'reject'">Rejected</span>
-                            </p>
-                          </div>                       
-                        </div>
-                        <div  id="description" class="descriptionText text-black ">
-                            {{ item?.description }}
-                        </div>
-                        <div class="widthcn">
-
-                          <span class="spacer">
-                            <button
-                              :disabled="!item?.requirement"
-                              type="button"
-                              class="btn btn-dark btn-sm custom-pad"
-                              :data-target="`.edit-job-title-modal${index}`"
-                              :data-bs-toggle="`modal${index}`"
-                              data-bs-target="#Accessibility"
-                              @click="openRequirementsModal(item?.requirement)"
+                              &nbsp;
+                              <p class="badge" title="Location">
+                                {{ item?.location?.title }}
+                              </p>
+                              &nbsp;
+                            </div>
+                            <div>
+                              <p span class="smallFont">
+                                Job No: <b>{{ item?.identity }}</b>
+                              </p>
+                            </div>
+                          </div>
+                          <div class="p-3">
+                            <div
+                              class="card-body d-flex align-items-start justify-content-between"
                             >
-                            Accessibility Requirements{{ (!item?.requirement) ? ', (N/A)' : ''}}
-                          </button>
-                            <p class="smallFont text-black smallFont1">
-                              Posted by:
-                              <span class="text-capitalize"
-                              > {{ item?.owner?.first_name }} {{ item?.owner?.last_name }} ({{ item?.city }})
-                              on
-                              {{ formatCreatedAt(item.created_at) }}
-                              </span
-                              >
-                            </p>
-                            
-                          </span>
-                        </div>
-                       
-                      </div>
+                              <p class="text-left text-black title">
+                                {{ item?.title }}
+                              </p>
+                              <div v-if="tab == 'pending' || tab == 'close'">
+                                <p
+                                  class="badge border text-black tag"
+                                  v-if="tab == 'pending'"
+                                >
+                                  Submitted
+                                </p>
+                                <p
+                                  v-else-if="
+                                    item?.proposals != null &&
+                                    item?.proposals.length > 0
+                                  "
+                                  class="badge border text-black tag"
+                                >
+                                  <span
+                                    v-if="
+                                      item?.proposals[0].status == 'Accept' ||
+                                      item?.proposals[0].status == 'accept'
+                                    "
+                                    >Accepted</span
+                                  >
+                                  <span
+                                    v-if="
+                                      item?.proposals[0].status == 'Reject' ||
+                                      item?.proposals[0].status == 'reject'
+                                    "
+                                    >Rejected</span
+                                  >
+                                </p>
+                              </div>
+                            </div>
+                            <div
+                              id="description"
+                              class="descriptionText text-black"
+                            >
+                              {{ item?.description }}
+                            </div>
+                            <div class="widthcn">
+                              <span class="spacer">
+                                <button
+                                  :disabled="!item?.requirement"
+                                  type="button"
+                                  class="btn btn-dark btn-sm custom-pad"
+                                  :data-target="`.edit-job-title-modal${index}`"
+                                  :data-bs-toggle="`modal${index}`"
+                                  data-bs-target="#Accessibility"
+                                  @click="
+                                    openRequirementsModal(item?.requirement)
+                                  "
+                                >
+                                  Accessibility Requirements{{
+                                    !item?.requirement ? ", (N/A)" : ""
+                                  }}
+                                </button>
+                                <p class="smallFont text-black smallFont1">
+                                  Posted by:
+                                  <span class="text-capitalize">
+                                    {{ item?.owner?.first_name }}
+                                    {{ item?.owner?.last_name }} ({{
+                                      item?.city
+                                    }}) on
+                                    {{ formatCreatedAt(item.created_at) }}
+                                  </span>
+                                </p>
+                              </span>
+                            </div>
+                          </div>
 
                           <!-- modal -->
-                      
 
                           <!-- <p><b>City/suburb:</b> {{ item?.city }}</p> -->
-                      
 
                           <!-- <details>
                             <summary>More details</summary>
@@ -328,22 +362,30 @@
                           >
                             View proposal
                           </button>
-                          
-                          <button v-if="tab == 'open'" @click="declineJob(item.id,index)" class="btn btn-danger btn-sm card-btn my-1 mx-1">
+
+                          <button
+                            v-if="tab == 'open'"
+                            @click="declineJob(item.id, index)"
+                            class="btn btn-danger btn-sm card-btn my-1 mx-1"
+                          >
                             Decline
                           </button>
 
-                          <button v-if="tab == 'pending'" @click="withDrawJob(item.id,index)" class="btn btn-danger btn-sm card-btn my-1 mx-1">
+                          <button
+                            v-if="tab == 'pending'"
+                            @click="withDrawJob(item.id, index)"
+                            class="btn btn-danger btn-sm card-btn my-1 mx-1"
+                          >
                             Withdraw
                           </button>
-
 
                           <button
                             v-if="tab == 'open'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
                             @click="goToMessagePage(item)"
-                            >Message</button
                           >
+                            Message
+                          </button>
                           <router-link
                             v-if="tab === 'pending'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
@@ -455,7 +497,7 @@ export default {
 
   computed: {
     userFields() {
-      console.log('user : ', this.$store.getters?.loginUser);
+      console.log("user : ", this.$store.getters?.loginUser);
       return `${this.$store.getters?.loginUser?.fields}`;
     },
     userLocations() {
@@ -479,16 +521,15 @@ export default {
   //   this.getJobs();
   // },
   methods: {
-
-    goToMessagePage(item){
+    goToMessagePage(item) {
       this.saveJobInfo(item);
       this.saveLoadMoreData();
-      this.$store.commit('SET_USERTOCHAT',item?.owner);
-      this.$store.commit('SET_JOBIDTOCHAT',item?.id);
-      if(!item?.lawyer_chat){
-        this.$store.commit('SET_CHATSTATUS','new');
-      }else{
-        this.$store.commit('SET_CHATSTATUS','old');
+      this.$store.commit("SET_USERTOCHAT", item?.owner);
+      this.$store.commit("SET_JOBIDTOCHAT", item?.id);
+      if (!item?.lawyer_chat) {
+        this.$store.commit("SET_CHATSTATUS", "new");
+      } else {
+        this.$store.commit("SET_CHATSTATUS", "old");
       }
 
       // if(item?.lawyer_chat?.client_reply){
@@ -496,7 +537,7 @@ export default {
       // }
 
       // localStorage.setItem('userEmailToChat',userEmail);
-      this.$router.push({ path : "/chat" });
+      this.$router.push({ path: "/chat" });
     },
 
     async changeTab(status) {
@@ -516,7 +557,6 @@ export default {
       //   this.endpoint = '/lawyer/show-reject-jobs';
       //   await this.loadMore(null,true);
       // }
-
     },
 
     // async getJobs(){
@@ -567,7 +607,6 @@ export default {
       }
     },
 
-
     async withDrawJob(job_id, index) {
       try {
         this.$swal({
@@ -609,7 +648,12 @@ export default {
 ul#pills-tab {
   width: 400px !important;
 }
-
+p.tag {
+  border-radius: 100px;
+  padding: 5px 10px !important;
+  border-color: gray !important;
+  font-size: 12px;
+}
 .navbar-nav {
   display: flex;
   align-items: center;
@@ -677,7 +721,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
+.nav-pills .show > .nav-link {
   color: white;
   background-color: #000000;
 }
@@ -692,7 +736,7 @@ ul#pills-tab {
   font-size: 16px;
   margin: 0;
 }
-.smallFont1 span{
+.smallFont1 span {
   font-weight: 600;
 }
 .smallFont1 {
@@ -734,10 +778,10 @@ ul#pills-tab {
 .card-btn {
   width: 30%;
   height: 45px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 p.badge {
@@ -758,12 +802,12 @@ p.badge {
 }
 .spacer {
   margin: 20px 0;
-    display: block;
-    border-top: 1px solid black;
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: block;
+  border-top: 1px solid black;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .table-wrap * {
@@ -797,40 +841,40 @@ p.badge {
 .my-swal-container .swal2-title {
   font-size: 25px;
 }
-.title{
+.title {
   font-size: 20px;
   font-weight: 600;
   text-transform: capitalize;
 }
-@media only screen and (max-width: 1400px) and (min-width: 992px)  {
-  .card-btn{
-  width: 30%;
-  font-size: 11px;
-  padding: 5px;
-}
+@media only screen and (max-width: 1400px) and (min-width: 992px) {
+  .card-btn {
+    width: 30%;
+    font-size: 11px;
+    padding: 5px;
+  }
 }
 
 @media only screen and (max-width: 992px) {
   .card-btn {
     width: 95%;
   }
-  .smallFont{
+  .smallFont {
     margin: 5px;
     font-size: 14px;
   }
 }
 @media only screen and (max-width: 767px) {
-.spacer{
-  display: flex;
+  .spacer {
+    display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: column;
     align-content: flex-start;
     flex-wrap: wrap;
-}
+  }
 }
 @media only screen and (max-width: 600px) {
-  p.badge{
+  p.badge {
     margin-bottom: 10px;
   }
   .l-main {
