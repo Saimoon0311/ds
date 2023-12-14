@@ -9,139 +9,154 @@
           Your profile has not been approved yet.
         </p>
       </div>
+
+
       <div v-else class="py-5">
-        <div v-if="subscriptionData != null" >
-          <h3 class="my-3 mt-4">Subscription</h3>
-          <p>
-            Subscription Status :
-            <span v-if="subscriptionData?.subscription_status == 'trialing'">
-              <b>60 days free trail</b>
-            </span>
-            <span v-else-if="subscriptionData?.subscription_status == 'active'">
-              <b>Subscribed</b>
-            </span>
-            <span v-else>
-              <b>{{ subscriptionData?.subscription_status }}</b>
-            </span>
-            <br />
-            <span
-              v-if="
-                subscriptionData?.subscription_status == 'active' ||
-                subscriptionData?.subscription_status == 'trialing'
-              "
-            >
-              Next bill due <b>{{ subscriptionData?.current_period_end }}</b>
-              <br />
-              <span v-if="subscriptionData?.plan == 'basic'"
-                ><b>$39.00/month</b></span
-              >
-              on {{ subscriptionData?.card_brand }} ----{{
-                subscriptionData?.card_last4
-              }}
-              Exp. {{ subscriptionData?.card_expiry }}
-            </span>
+        <!-- <div v-if="!userFields && !userLocations" class="border rounded bg-light p-3 d-flex flex-wrap">
+          <p class="mx-auto my-0">Your profile is not completed . Click here to complete your
+            <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
           </p>
-
-          <button
-            class="btn btn-sm btn-dark mb-2"
-            @click="replacePaymentMethod(subscriptionData?.plan)"
-          >
-            Replace Payment Method
-          </button>
-
-          <h3 class="my-3 mt-4">Receipts</h3>
-
-
-          <!-- <form @submit.prevent="searchReceipts">
-            <label for="startDate">Start Date:</label>
-            <input type="date" v-model="startDate" id="startDate" required>
-
-            <label for="endDate">End Date:</label>
-            <input type="date" v-model="endDate" id="endDate" required>
-
-            <button type="submit">Search</button>
-          </form> -->
-
-          <table class="table table-bordered table-striped">
-            <tbody>
-              <tr>
-                <td>
-                  <table
-                    v-if="receipts.length > 0"
-                    class="table table-bordered table-striped mt-3"
-                  >
-                    <thead class="hd-receipt">
-                      <th>#</th>
-                      <th>Invoice ID</th>
-                      <th>Amount Paid</th>
-                      <th>Date of issue</th>
-                      <th>Action</th>
-                    </thead>
-                    <tbody>
-                      <tr
-                        v-for="(receipt, index) in receipts"
-                        :key="receipt.id"
-                      >
-                        <td>{{ ++index }}</td>
-                        <td>{{ receipt?.id }}</td>
-                        <td>{{ receipt?.amount_paid }}</td>
-                        <!-- <td>{{ new Date(receipt?.created * 1000).toLocaleDateString() }}</td> -->
-                        <td>
-                          {{
-                            new Date(
-                              receipt?.created * 1000
-                            ).toLocaleDateString("en-AU", {
-                              day: "numeric",
-                              month: "numeric",
-                              year: "numeric",
-                            })
-                          }}
-                        </td>
-                        <td>
-                          <a
-                            class="btn btn-sm btn-dark"
-                            :href="receipt?.invoice_pdf"
-                            >Download</a
-                          >
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <p v-else>No invoices found.</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div>
-          <div v-if="subscriptionCancelStatus" class="text-center">
-            <p>
-              Your subscription will be cancelled from
-              {{ subscriptionData?.current_period_end }}. You can
-              <button
-                class="forgetp"
-                @click="resubscribe(subscriptionData?.plan)"
-              >
-                resubscribe
-              </button>
-              at any time.
-            </p>
-          </div>
-          <button
-            v-else-if="subscriptionStatus == 'subscribed'"
-            class="btn btn-danger"
-            id="cancel-subscription"
-            @click="handleCancelSubscription"
-          >
-            Cancel Subscription
-          </button>
-          <span v-else>
-            You have not subscribed yet. 
-          <router-link to="/plans" class="btn btn-dark"
-            >Subscribe now</router-link
-          >
+        </div> -->
+        <div v-if="!userFields && !userLocations" >
+          <span>Your profile is not completed . Click here to complete your
+              <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
           </span>
         </div>
+
+
+        <span v-else>
+          <div v-if="subscriptionData != null" >
+            <h3 class="my-3 mt-4">Subscription</h3>
+            <p>
+              Subscription Status :
+              <span v-if="subscriptionData?.subscription_status == 'trialing'">
+                <b>60 days free trail</b>
+              </span>
+              <span v-else-if="subscriptionData?.subscription_status == 'active'">
+                <b>Subscribed</b>
+              </span>
+              <span v-else>
+                <b>{{ subscriptionData?.subscription_status }}</b>
+              </span>
+              <br />
+              <span
+                v-if="
+                  subscriptionData?.subscription_status == 'active' ||
+                  subscriptionData?.subscription_status == 'trialing'
+                "
+              >
+                Next bill due <b>{{ subscriptionData?.current_period_end }}</b>
+                <br />
+                <span v-if="subscriptionData?.plan == 'basic'"
+                  ><b>$39.00/month</b></span
+                >
+                on {{ subscriptionData?.card_brand }} ----{{
+                  subscriptionData?.card_last4
+                }}
+                Exp. {{ subscriptionData?.card_expiry }}
+              </span>
+            </p>
+
+            <button
+              class="btn btn-sm btn-dark mb-2"
+              @click="replacePaymentMethod(subscriptionData?.plan)"
+            >
+              Replace Payment Method
+            </button>
+
+            <h3 class="my-3 mt-4">Receipts</h3>
+
+
+            <!-- <form @submit.prevent="searchReceipts">
+              <label for="startDate">Start Date:</label>
+              <input type="date" v-model="startDate" id="startDate" required>
+
+              <label for="endDate">End Date:</label>
+              <input type="date" v-model="endDate" id="endDate" required>
+
+              <button type="submit">Search</button>
+            </form> -->
+
+            <table class="table table-bordered table-striped">
+              <tbody>
+                <tr>
+                  <td>
+                    <table
+                      v-if="receipts.length > 0"
+                      class="table table-bordered table-striped mt-3"
+                    >
+                      <thead class="hd-receipt">
+                        <th>#</th>
+                        <th>Invoice ID</th>
+                        <th>Amount Paid</th>
+                        <th>Date of issue</th>
+                        <th>Action</th>
+                      </thead>
+                      <tbody>
+                        <tr
+                          v-for="(receipt, index) in receipts"
+                          :key="receipt.id"
+                        >
+                          <td>{{ ++index }}</td>
+                          <td>{{ receipt?.id }}</td>
+                          <td>{{ receipt?.amount_paid }}</td>
+                          <!-- <td>{{ new Date(receipt?.created * 1000).toLocaleDateString() }}</td> -->
+                          <td>
+                            {{
+                              new Date(
+                                receipt?.created * 1000
+                              ).toLocaleDateString("en-AU", {
+                                day: "numeric",
+                                month: "numeric",
+                                year: "numeric",
+                              })
+                            }}
+                          </td>
+                          <td>
+                            <a
+                              class="btn btn-sm btn-dark"
+                              :href="receipt?.invoice_pdf"
+                              >Download</a
+                            >
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p v-else>No invoices found.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <div v-if="subscriptionCancelStatus" class="text-center">
+              <p>
+                Your subscription will be cancelled from
+                {{ subscriptionData?.current_period_end }}. You can
+                <button
+                  class="forgetp"
+                  @click="resubscribe(subscriptionData?.plan)"
+                >
+                  resubscribe
+                </button>
+                at any time.
+              </p>
+            </div>
+            <button v-else-if="subscriptionStatus == 'subscribed'"
+              class="btn btn-danger"
+              id="cancel-subscription"
+              @click="handleCancelSubscription"
+            >
+              Cancel Subscription
+            </button>
+            <span v-else>
+              You have not subscribed yet. 
+              <router-link to="/plans" class="btn btn-dark"
+                >Subscribe now</router-link
+              >
+            </span>
+          </div>
+        </span>
 
         <!-- Change account password -->
 
@@ -285,6 +300,15 @@ export default {
       console.log("ss tt uu 2: ", this.$store.getters.subscriptionCancelStatus);
       return this.$store.getters.subscriptionCancelStatus;
     },
+
+    userFields() {
+      console.log('user : ', this.$store.getters?.loginUser);
+      return `${this.$store.getters?.loginUser?.fields}`;
+    },
+    userLocations() {
+      return `${this.$store.getters?.loginUser?.locations}`;
+    },
+
   },
   created() {
     this.$store.commit("SET_REPLACE_PAYMENT_METHOD", false);
@@ -308,6 +332,11 @@ export default {
           console.log("resp dataaaaaaa : ", res?.data?.data);
           this.receipts = res?.data?.data;
           console.log(res.data?.data);
+          if(res?.data?.clearOldSubscription){
+            this.$store.commit('SET_SUB_STATUS',null);
+            this.$store.commit('SET_SUB_CANCEL_STATUS',false);
+            this.$store.commit('SET_SUBSCRIPTION_DATA',null);
+          }
         })
         .catch((error) => {
           console.log("getResults : ", error);

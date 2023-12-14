@@ -42,9 +42,9 @@
           </button>
           <span class="spacer">
             <p class="smallFont">
-              Posted by Username
+              Posted by {{ jobData?.owner?.first_name }} {{ jobData?.owner?.last_name }}
               <span class="text-capitalize">({{ jobData?.city }})</span>
-              at 10.30pm on 19/11/23.
+              on {{ formatCreatedAt(jobData?.created_at) }}
             </p>
             <p span class="smallFont">Job No: {{ jobData?.identity }}</p>
           </span>
@@ -133,7 +133,7 @@
                   <input
                     type="number"
                     id="fixedFeeAmount"
-                    v-model="form.daily_rate"
+                    v-model="form.days"
                     name="fixedFeeAmount"
                     class="form-control d-input"
                     min="1"
@@ -192,7 +192,6 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          required
                         />
                       </label>
                       <br />
@@ -210,7 +209,7 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            required
+                            
                           />
                         </div>
                       </label>
@@ -219,7 +218,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
+                          v-model="newRow.gst_not_applicable"
+                          :value="true"
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
@@ -256,7 +256,7 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}</td>
+                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -309,10 +309,11 @@
                 <label>Retainer fee (excluding GST): </label>
                 <div>
                   <span class="position-absolute d-span"> $</span>
+                  <!-- daily rate already used -->
                   <input
                     type="number"
                     id="fixedFeeAmount"
-                    v-model="form.daily_rate"
+                    v-model="form.retainer_fee"
                     name="fixedFeeAmount"
                     class="form-control d-input"
                     min="1"
@@ -327,6 +328,7 @@
                   <div class="mb-3">
                     <input
                       type="text"
+                      v-model="form.retainer_period"
                       id="fixedFeeAmount"
                       name="fixedFeeAmount"
                       class="form-control"
@@ -338,6 +340,7 @@
                     <input
                       type="text"
                       id="fixedFeeAmount"
+                      v-model="form.retainer_limitation"
                       name="fixedFeeAmount"
                       class="form-control"
                       placeholder="Eg: up to 20 hours"
@@ -347,6 +350,7 @@
                   <div class="mb-3">
                     <input
                       type="text"
+                      v-model="form.notice_period"
                       id="fixedFeeAmount"
                       name="fixedFeeAmount"
                       class="form-control"
@@ -400,7 +404,7 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          required
+                          
                         />
                       </label>
                       <br />
@@ -418,7 +422,7 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            required
+                            
                           />
                         </div>
                       </label>
@@ -427,7 +431,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
+                          v-model="newRow.gst_not_applicable"
+                          :value="true"
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
@@ -464,7 +469,7 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}</td>
+                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -529,7 +534,7 @@
                       v-model="newRow2.itemDisbursement"
                       placeholder="Eg: letter of advice"
                       class="form-control"
-                      required
+                      
                     />
                   </label>
                   <br />
@@ -549,7 +554,7 @@
                         min="1"
                         type="number"
                         class="form-control d-input"
-                        required
+                        
                       />
                     </div>
                   </label>
@@ -604,7 +609,7 @@
                         Total (excluding GST):
                       </td>
                       <td class="bg-transparent text-white p-0 px-2">
-                        $ {{ grandTotal }}
+                        $ {{ grandTotal2 }}
                       </td>
                       <td class="bg-transparent p-0 b-round-end"></td>
                     </tr>
@@ -667,7 +672,7 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          required
+                          
                         />
                       </label>
                       <br />
@@ -685,7 +690,7 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            required
+                            
                           />
                         </div>
                       </label>
@@ -694,7 +699,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
+                          v-model="newRow.gst_not_applicable"
+                          :value="true"
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
@@ -731,7 +737,7 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}</td>
+                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -852,7 +858,7 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          required
+                          
                           
                         />
                       </label>
@@ -872,7 +878,7 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            required
+                            
                             
                           />
                         </div>
@@ -883,7 +889,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
+                          v-model="newRow.gst_not_applicable"
+                          :value="true"
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
@@ -920,7 +927,7 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}</td>
+                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white">Total (excluding GST): ${{
                               row.total }}
@@ -1030,7 +1037,7 @@
                         autocomplete="on"
                         placeholder="Eg: Associate"
                         class="form-control"
-                        required
+                        
                       />
                     </label>
                     <br />
@@ -1059,12 +1066,15 @@
                         autocomplete="on"
                         type="number"
                         class="form-control"
-                        required
+                        
                       />
                     </label>
                     <br />
                     <br />
-                    <button type="button" @click="addRow3" class="btn btn-dark">
+                    <button v-if="editRow != null" type="button" @click="updateRow3" class="btn btn-dark">
+                      Update
+                    </button>
+                    <button v-else type="button" @click="addRow3" class="btn btn-dark">
                       Add
                     </button>
                   </fieldset>
@@ -1101,12 +1111,14 @@
                             <button
                               type="button"
                               class="btn btn-default btn-circle p-1"
-                            >
+                              @click="editRow3(index)"
+                              >
                               <i class="fa fa-edit"></i>
                             </button>
                             <button
                               type="button"
                               class="btn btn-default btn-circle p-1"
+                              @click="removeRow3(index)"
                             >
                               <i class="fa fa-trash"></i>
                             </button>
@@ -1126,7 +1138,7 @@
                           <td class="bg-transparent p-0"></td>
                           <td class="bg-transparent p-0"></td>
                           <td class="bg-transparent text-white p-0 px-2">
-                            $ {{ grandTotal }}
+                            $ {{ grandTotal3 }}
                           </td>
                           <td class="bg-transparent p-0 b-round-end"></td>
                         </tr>
@@ -1160,7 +1172,7 @@
                     <input
                       type="number"
                       id="hourlyRate"
-                      v-model="form.fee_earners"
+                      v-model="form.hourly_rate"
                       name="hourlyRate"
                       min="1"
                       step="0.01"
@@ -1179,6 +1191,7 @@
                     type="number"
                     id="noOfHours"
                     name="noOfHours"
+                    v-model="form.hours"
                     min="1"
                     step="0.01"
                     class="form-control"
@@ -1190,7 +1203,7 @@
                 </div>
 
                 <!-- input field to capture final hourly rate value during form submit -->
-                <p id="finalHourlyRateText">
+                <!-- <p id="finalHourlyRateText">
                   Total: $<input
                     id="finalHourlyRateValue"
                     name="finalHourlyRateValue"
@@ -1198,7 +1211,7 @@
                     readonly=""
                     class="border-0 text-dark bg-white"
                   />
-                </p>
+                </p> -->
               </div>
               <div class="disbursement-fields">
                 <div class="form-group mt-3">
@@ -1249,7 +1262,6 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          required
                         />
                       </label>
                       <br />
@@ -1267,7 +1279,6 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            required
                           />
                         </div>
                       </label>
@@ -1276,7 +1287,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
+                          v-model="newRow.gst_not_applicable"
+                          :value="true"
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
@@ -1313,7 +1325,7 @@
                           class="border"
                         >
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ row.costAud }}</td>
+                          <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                           <!-- <td class="text-center"> -->
                           <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -1365,9 +1377,9 @@
                 <span class="position-absolute d-span"> $</span>
                 <input
                   type="number"
-                  v-model="form.estimatedFee"
-                  id="estimatedFee"
-                  name="estimatedFee"
+                  v-model="form.estimated_fee"
+                  id="estimated_fee"
+                  name="estimated_fee"
                   class="form-control d-input"
                 />
               </div>
@@ -1449,7 +1461,6 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          required
                         />
                       </label>
                       <br />
@@ -1467,7 +1478,6 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            required
                           />
                         </div>
                       </label>
@@ -1476,7 +1486,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
+                          v-model="newRow.gst_not_applicable"
+                          :value="true"
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
@@ -1513,7 +1524,7 @@
                           class="border"
                         >
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ row.costAud }}</td>
+                          <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                           <!-- <td class="text-center"> -->
                           <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -1612,7 +1623,6 @@
                         v-model="newRow.itemDisbursement"
                         placeholder="Eg: filing fees"
                         class="form-control"
-                        required
                       />
                     </label>
                     <br />
@@ -1639,7 +1649,7 @@
                       <input
                         class="form-check-input"
                         type="checkbox"
-                        value=""
+                        v-model="newRow.gst_not_applicable"
                         id="GST"
                       />
                       <label class="form-check-label" for="GST">
@@ -1672,7 +1682,7 @@
                         class="border"
                       >
                         <td>{{ row.itemDisbursement }}</td>
-                        <td>$ {{ row.costAud }}</td>
+                        <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                         <!-- <td class="text-center"> -->
                         <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                           </p> -->
@@ -1832,7 +1842,213 @@
         </template>
 
         <template v-if="currentStep === 3">
-        <p>4</p>
+          <div class="summ mb-3">
+              <p class="h4 text-center mb-3 mt-2">Summary</p>
+
+
+                      <div v-if="form.hours">
+                        <p><i class="fa fa-check"></i><b> Hours : </b> {{ form.hours }}</p>
+                      </div>
+
+                      <div v-if="form.hourly_rate">
+                        <p><i class="fa fa-check"></i><b> Hourly Rate : </b> {{ form.hourly_rate }}</p>
+                      </div>
+
+                      <div v-if="form.retainer_period">
+                        <p><i class="fa fa-check"></i><b> Retainer Period : </b> {{ form.retainer_period }}</p>
+                      </div>
+
+                      <div v-if="form.retainer_limitation">
+                        <p><i class="fa fa-check"></i><b> Retainer Limitation : </b> {{ form.retainer_limitation }}</p>
+                      </div>
+
+                      <div v-if="form.notice_period">
+                        <p><i class="fa fa-check"></i><b> Notice Period : </b> {{ form.notice_period }}</p>
+                      </div>
+
+                      <div v-if="form.retainer_fee">
+                        <p><i class="fa fa-check"></i><b> Retainer Fee : </b> {{ form.retainer_fee }}</p>
+                      </div>
+
+                      <div v-if="form.days">
+                        <p><i class="fa fa-check"></i><b> Days : </b> {{ form.days }}</p>
+                      </div>
+
+                      <div v-if="form.charge_type">
+                        <p><i class="fa fa-check"></i><b> Charge Type : </b> {{ form.charge_type }}</p>
+                      </div>
+
+                      <div v-if="form.fixed_fee_amount">
+                        <p><i class="fa fa-check"></i><b> Fixed Fee Amount : </b> {{ form.fixed_fee_amount }}</p>
+                      </div>
+
+                      <div v-if="form.disbursement_amount">
+                        <p><i class="fa fa-check"></i><b> Disbursement Amount : </b> {{ form.disbursement_amount }}</p>
+                      </div>
+
+                      <div v-if="form.law_practice_cost">
+                        <p><i class="fa fa-check"></i><b> Law Practice Cost : </b> {{ form.law_practice_cost }}</p>
+                      </div>
+
+                      <div v-if="form.fee_earners">
+                        <p><i class="fa fa-check"></i><b> Fee Earners : </b> {{ form.fee_earners }}</p>
+                      </div>
+
+                      <div v-if="form.daily_rate">
+                        <p><i class="fa fa-check"></i><b> Daily Rate : </b> {{ form.daily_rate }}</p>
+                      </div>
+
+                      <div v-if="form.uplift_percentage">
+                        <p><i class="fa fa-check"></i><b>  Uplift Percentage : </b> {{ form.uplift_percentage }}</p>
+                      </div>
+
+                      <div v-if="form.estimated_fee">
+                        <p><i class="fa fa-check"></i><b> Estimated Fee : </b> {{ form.estimated_fee }}</p>
+                      </div>
+
+                      <div v-if="form.success_fee_term">
+                        <p><i class="fa fa-check"></i><b> Success Fee Term : </b> {{ form.success_fee_term }}</p>
+                      </div>
+
+                      <div v-if="form.pro_bono_description">
+                        <p><i class="fa fa-check"></i><b> Pro Bono Description : </b> {{ form.pro_bono_description }}</p>
+                      </div>
+
+                      <div v-if="form.meet_deadlines">
+                        <p><i class="fa fa-check"></i><b> Meet Deadlines : </b> {{ form.meet_deadlines }}</p>
+                      </div>
+
+                      <div v-if="form.miss_deadline_reason">
+                        <p><i class="fa fa-check"></i><b> Miss Deadline Reason : </b> {{ form.miss_deadline_reason }}</p>
+                      </div>
+
+                      <div v-if="form.upfront_payment_status">
+                        <p><i class="fa fa-check"></i><b> Upfront Payment Status : </b> {{ form.upfront_payment_status }}</p>
+                      </div>
+
+                      <div v-if="form.upfront_payment">
+                        <p><i class="fa fa-check"></i><b> Upfront Payment : </b> {{ form.upfront_payment }}</p>
+                      </div>
+
+                      <div v-if="form.consultation">
+                        <p><i class="fa fa-check"></i><b> Consultation : </b> {{ form.consultation }}</p>
+                      </div>
+
+                      <div v-if="form.consultation_time_limit">
+                        <p><i class="fa fa-check"></i><b> Consultation Time Limit : </b> {{ form.consultation_time_limit }}</p>
+                      </div>
+
+                      <div v-if="form.description">
+                        <p><i class="fa fa-check"></i><b> Description : </b> {{ form.description }}</p>
+                      </div>
+
+
+                      <div v-html="summaryHtml">
+                      </div>
+
+
+              <!-- hours : null,
+        hourly_rate : null,
+        retainer_period: null,
+        retainer_limitation: null,
+        notice_period : null,
+        retainer_fee : null,
+        days : null,
+        charge_type: null,
+        fixed_fee_amount: null,
+        disbursement_amount: null,
+        law_practice_cost: null,
+        fee_earners: "me",
+        daily_rate: null,
+        uplift_percentage: null,
+        estimated_fee: null,
+        success_fee_term: null,
+        pro_bono_description: null,
+        meet_deadlines: null,
+        miss_deadline_reason: null,
+        upfront_payment_status: "yes",
+        upfront_payment: null,
+        consultation: null,
+        consultation_time_limit: null,
+        description: null,
+        lawyer_id: null,
+        job_id: null, -->
+
+
+              <!-- <div class="sum-top mb-3">
+                <p class="areas text-decoration-none badge text-white fs-6 bubbles area-bubble">
+                  {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
+                </p>
+                <h4 class=" text-center title-font text-white mt-1 mb-2"><b>{{ title }}</b>
+                </h4>
+                <h4 class="text-white descriptionText">{{ description }}</h4>
+              </div> -->
+
+              <!-- <h4 class="mb-3 text-capitalize"><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}
+              </h4> -->
+              <!-- <div v-if='this.visualOption != "" ||
+                this.auditoryOption != "" ||
+                this.mobilityOption != "" ||
+                this.learningOption != "" ||
+                this.intellectualOption != "" ||
+                this.psychiatricOption != "" ||
+                this.medicalOption != "" ||
+                this.requirementsOptionDescription != "" ||
+                this.otherLanguage != "" ||
+                this.selectedLanguage != ""' class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                      data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                      aria-controls="panelsStayOpen-collapseOne">
+                      <b>Accessibility Requirements </b>
+                    </button>
+                  </h2>
+                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show "
+                    aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                      <div v-if="VisualIsChecked">
+                        <p><i class="fa fa-check"></i><b> Visual Impairment: </b> {{ visualOption }}</p>
+                      </div>
+
+                      <div v-if="AuditoryIsChecked">
+                        <p><i class="fa fa-check"></i><b> Auditory Impairment: </b> {{ auditoryOption }}</p>
+
+                      </div>
+
+                      <div v-if="MobilityIsChecked">
+                        <p><i class="fa fa-check"></i><b> Mobility/Physical Impairment: </b> {{ mobilityOption }}</p>
+                      </div>
+
+                      <div v-if="LearningIsChecked">
+                        <p><i class="fa fa-check"></i><b> Learning Impairment: </b> {{ learningOption }}</p>
+                      </div>
+
+                      <div v-if="IntellectualIsChecked">
+                        <p><i class="fa fa-check"></i><b> Intellectual Disability: </b> {{ intellectualOption }}</p>
+                      </div>
+
+                      <div v-if="PsychiatricIsChecked">
+                        <p><i class="fa fa-check"></i><b> Psychiatric Disability: </b> {{ psychiatricOption }}</p>
+                      </div>
+
+                      <div v-if="MedicalIsChecked">
+                        <p><i class="fa fa-check"></i><b> Medical Disability: </b> {{ medicalOption }}</p>
+                      </div>
+
+                      <div v-if="isChecked">
+                        <p><i class="fa fa-check"></i><b> Other: </b> {{ requirementsOptionDescription }}</p>
+                      </div>
+
+                      <div v-if="languageIsChecked">
+                        <p><i class="fa fa-check"></i><b> Language: </b> {{ selectedLanguage == 'Other' ? otherLanguage :
+                          selectedLanguage }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
       </template>
 
         <div class="stepbtn mt-3">
@@ -1854,16 +2070,16 @@
               Previous
             </button>
             <button
-              v-if="currentStep !== 3"
               type="submit"
               :disabled="!selectedOption"
               class="btn btn-dark"
             >
-              Next
+              {{ buttonText }}
             </button>
-            <button v-if="currentStep === 3" class="btn btn-dark">
+            <!-- v-if="currentStep !== 3" -->
+            <!-- <button v-if="currentStep === 3" class="btn btn-dark">
               Summary
-            </button>
+            </button> -->
           </div>
         </div>
 
@@ -1890,20 +2106,29 @@ export default {
   data() {
  
     return {
+      editRow : null,
+      summaryHtml : null,
       form: {
+        hours : null,
+        hourly_rate : null,
+        retainer_period: null,
+        retainer_limitation: null,
+        notice_period : null,
+        retainer_fee : null,
+        days : null,
         charge_type: null,
         fixed_fee_amount: null,
         disbursement_amount: null,
         law_practice_cost: null,
-        fee_earners: null,
+        fee_earners: "me",
         daily_rate: null,
         uplift_percentage: null,
-        estimatedFee: null,
+        estimated_fee: null,
         success_fee_term: null,
         pro_bono_description: null,
         meet_deadlines: null,
         miss_deadline_reason: null,
-        upfront_payment_status: null,
+        upfront_payment_status: "yes",
         upfront_payment: null,
         consultation: null,
         consultation_time_limit: null,
@@ -1915,6 +2140,7 @@ export default {
       newRow: {
         itemDisbursement: "",
         costAud: "",
+        gst_not_applicable : false,
       },
       rows: [], // Itemise Disbursements
       newRow2: {
@@ -1948,27 +2174,64 @@ export default {
     };
   },
   computed: {
+
+    buttonText() {
+      if (this.currentStep === 0 || this.currentStep === 1) {
+        return 'Next';
+      } else if (this.currentStep === 2) {
+        return 'Summary';
+      } else if (this.currentStep === 3) {
+        return 'Submit';
+      } else {
+        // Add a default value if needed
+        return 'Unknown';
+      }
+    },
+
+    // fixedFeeAmountValue() {
+    //   // if (!isNaN(this.form?.fixed_fee_amount)) {
+    //     this.form.fixed_fee_amount = parseFloat(this.form?.fixed_fee_amount).toFixed(2); 
+        
+    //     // console.log(parseFloat(this.form?.fixed_fee_amount).toFixed(2));
+    //     // return parseFloat(this.form?.fixed_fee_amount).toFixed(2);
+    //   // } else {
+    //     // return 'Invalid Input';
+    //   // }
+    // },
+
+    // formValues() {
+    //     return {
+    //       ...this.form,
+    //     }
+    // },
     jobData() {
+      console.log('job data : ' , this.$store.state.jobData);
       return this.$store.state.jobData;
     },
     loginUser() {
       return this.$store.state.loginUser;
     },
+
+    // disbursment
     grandTotal() {
       return this.rows.reduce(
         (total, row) => total + parseFloat(row.costAud) || 0,
         0
       );
     },
+
+    // item by item specific tasks
     grandTotal2() {
       return this.rows2.reduce(
         (total, row) => total + parseFloat(row.costAud) || 0,
         0
       );
     },
+
+    // additional fee earner
     grandTotal3() {
       return this.rows3.reduce(
-        (total, row) => total + parseFloat(row.hourlyRate) || 0,
+        (total, row) => total + parseFloat(row.hourlyRate * row.estimatedHours) || 0,
         0
       );
     },
@@ -1985,6 +2248,7 @@ export default {
     MainFooter,
    
   },
+
   mounted() {
     if (this.jobData == null || this.jobData == "") {
       this.$router.push({ path: "/lawyer-dashboard" });
@@ -1997,12 +2261,30 @@ export default {
   },
 
   methods: {
+    openSummaryTab(){
+      this.summaryHtml = this.openProposalDetailsModal({'specific_tasks' : this.rows2 , 'disbursements' : this.rows , 'fee_earners' : this.rows3},true)
+    },
+
     handleOptionChange() {
       this.currentSchema = this.selectedOption;
       console.log("schema", this.currentSchema);
       // console.log('schema', this.selectedOption);
     },
     async submitStepForm() {
+      console.log('form data : ' , this.form);
+      console.log(api);
+
+
+      // charge_type
+      // fixed_fee_amount
+      // disbursement_amount
+      // disbursements (array of object)
+      // upfront_payment
+      // description
+
+
+
+
       // const formData = {
       //   "title": this.title,
       //   "description": this.description,
@@ -2014,6 +2296,11 @@ export default {
       // if (this.requirementsOption == 1) {
       //   formData.requirements_description = this.requirementsOptionDescription;
       // }
+
+
+
+
+
       this.form.job_id = this.jobData?.id;
       this.form.lawyer_id = this.loginUser?.email;
       this.form.charge_type = this.selectedOption;
@@ -2023,7 +2310,7 @@ export default {
       this.form.specificTasks = this.rows2; // item by item specific tasks
       this.form.feeEarners = this.rows3; // additional fee earner
 
-      console.log(this.form);
+      // console.log(this.formValues);
 
       api
         .post("/lawyer/create-proposal", this.form)
@@ -2048,11 +2335,13 @@ export default {
         this.rows.push({
           itemDisbursement: this.newRow.itemDisbursement,
           costAud: this.newRow.costAud,
+          gst_not_applicable: this.newRow.gst_not_applicable,
           total: this.newRow.costAud,
         });
         // console.log(this.rows);
         this.newRow.itemDisbursement = "";
         this.newRow.costAud = "";
+        this.newRow.gst_not_applicable = "";
       }
     },
     addRow2() {
@@ -2096,6 +2385,35 @@ export default {
       this.rows3.splice(index, 1);
     },
 
+    editRow3(index){
+      console.log(index);
+      this.editRow = index;
+      console.log('row s 3 : ' , this.rows3[index]);
+      this.newRow3.title = this.rows3[index].title;
+      this.newRow3.hourlyRate = this.rows3[index].hourlyRate;
+      this.newRow3.estimatedHours = this.rows3[index].estimatedHours;
+    },
+
+    updateRow3(){
+      if (
+        this.newRow3.title &&
+        this.newRow3.hourlyRate &&
+        this.newRow3.estimatedHours
+      ) {
+        const obj = {
+          title: this.newRow3.title,
+          hourlyRate: this.newRow3.hourlyRate,
+          estimatedHours: this.newRow3.estimatedHours,
+        }
+        this.rows3[this.editRow] = obj;
+        this.newRow3.title = "";
+        this.newRow3.hourlyRate = "";
+        this.newRow3.estimatedHours = "";
+        this.editRow = null;
+      }
+
+    },
+
     nextStep() {
       if (this.currentStep === 3) {
         this.submitStepForm();
@@ -2104,6 +2422,10 @@ export default {
         // console.log('test', values);
 
         return;
+      }
+
+      if(this.currentStep == 2){
+        this.openSummaryTab();
       }
 
       this.currentStep++;
@@ -2177,58 +2499,6 @@ export default {
       }
     },
 
-    openRequirementsModal(data) {
-      let newData = {};
-
-      if (data && typeof data === "object") {
-        for (const key in data) {
-          if (Object.prototype.hasOwnProperty.call(data, key)) {
-            const value = data[key];
-            if (
-              value !== null &&
-              key != "id" &&
-              key != "job_id" &&
-              key != "user_id" &&
-              key != "created_at" &&
-              key != "updated_at"
-            ) {
-              newData[key] = value;
-            }
-          }
-        }
-      }
-
-      // Construct HTML dynamically for key-value pairs
-
-      // let data2 = Object.fromEntries(data);
-      // console.log('v : ' , data2);
-      // data.filter((value) => {
-      //   console.log('filter : ', value);
-      //   return value !== null;
-      // });
-
-      // const filteredData = Object.fromEntries(
-      //   Object.entries(data).filter(([value]) => value !== null)
-      // );
-
-      const htmlContent = Object.entries(newData)
-        .map(
-          ([key, value]) =>
-            `<div class="wrapper" v-if="value != null"><h6><b>${key}: </b><span>${value}</span></h6></div>`
-        )
-        .join("");
-
-      // Use dynamic HTML inside SweetAlert2 modal
-      this.$swal.fire({
-        title: "Accessibility Requirements",
-        html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
-        showCloseButton: true,
-        showConfirmButton: false,
-        customClass: {
-          container: "my-swal-container", // You can define your custom class for styling
-        },
-      });
-    },
   },
   name: "DashboardTab",
 };

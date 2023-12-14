@@ -63,7 +63,7 @@
               <thead>
                 <tr>
                   <th>Lawyer</th>
-                  <th>
+                  <!-- <th>
                     Billing method
                     <i
                       class="bi bi-question-circle"
@@ -113,7 +113,7 @@
                         You will not have to pay any legal costs.
                       </dd>
                     </dl>
-                  </th>
+                  </th> -->
                   <th>
                     Fee estimate
                     <i
@@ -140,7 +140,7 @@
                       </dd>
                     </dl>
                   </th>
-                  <th>
+                  <!-- <th>
                     Upfront payment
                     <i
                       class="bi bi-question-circle"
@@ -158,9 +158,9 @@
                         towards the legal costs.
                       </dd>
                     </dl>
-                  </th>
+                  </th> -->
                   <th>Proposed work</th>
-                  <th>Created at</th>
+                  <!-- <th>Created at</th> -->
                   <!-- <th>Deadline achievable?</th>
                   <th>Free/discounted first consultation?</th> -->
                   <th>Actions</th>
@@ -175,19 +175,19 @@
                 </tr>
                 <tr v-else class="text-left" v-for="(item,index) in data_paginated" :key="index">
                   <!-- <td>testing client (crinimal)</td> -->
-                  <td class="text-center"> <span class="btn-dark btn">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</span></td>
-                  <td>{{ item?.charge_type }}</td>
+                  <td class="text-center"> <button @click="openLawyerDetailsModal(item?.lawyer)" class="btn-dark btn">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</button></td>
+                  <!-- <td>{{ item?.charge_type }}</td> -->
                   <td>{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
-                  <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td>
+                  <!-- <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td> -->
                   <td>{{ item?.description }}</td>
-                  <td>{{ formatCreatedAt(item?.created_at) }}</td>
+                  <!-- <td>{{ formatCreatedAt(item?.created_at) }}</td> -->
 
                   <!-- <td>Yes</td>
                   <td>No</td> -->
                   <td>
                     <div class="text-center" v-if="item?.status == 'Open'">
                       <button
-                        class="btn btn-light btn-sm border p-1 px-2 mb-1 w-100"
+                        class="btn btn-dark text-white btn-sm border p-1 px-2 mb-1 w-100"
                         @click="handleAcceptBidAction(item?.id,item?.lawyer?.id,item?.job_id)"
                       >
                         Accept
@@ -206,16 +206,13 @@
                       >
                         Reject
                       </button>
-                      <form method="post" action="backend/rejectBid.php">
-                        <input value="146" class="d-none" name="id" />
-                        <button class="d-none" name="reject">
-                          <i class="bi bi-x-lg"></i>Reject
-                        </button>
-                      </form>
                       <button
                         class="btn btn-secondary btn-sm p-1 px-2 w-100"
                       >
                         Message
+                      </button>
+                      <button @click="openProposalDetailsModal(item)" class="btn btn-dark text-white mt-1 btn-sm p-1 px-2 w-100">
+                        View
                       </button>
                     </div>
                     <p v-else>{{ item?.status }}</p>

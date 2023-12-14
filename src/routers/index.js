@@ -4,6 +4,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import NeedLawyer from "@/pages/forms/NeedLawyer.vue";
 // import FindClient from "@/pages/forms/FindClient.vue";
 import LoginForm from "@/pages/forms/LoginForm.vue";
+
+
+import UserChats from "@/pages/UserChats.vue";
+
 // admin
 import AdminLogin from "@/pages/admin/Login.vue";
 import AdminLawyer from "@/pages/admin/Lawyers.vue";
@@ -142,6 +146,15 @@ const routes = [
   //   component: LawyerLoginForm,
   //   beforeEnter: reverse_guard,
   // },
+
+
+  {
+    path: "/chat",
+    component: UserChats,
+    meta: { requiresAuth: true },
+  },
+
+
   {
     path: "/lawyer-register",
     component: LawyerRegister,
@@ -435,13 +448,21 @@ router.beforeEach(async (to, from, next) => {
         } else {
           console.log("cr", to);
           console.log("cr 2", from);
+          
           if (result?.data?.subscription != null) {
             store.commit("SET_SUB_STATUS", "subscribed");
             store.commit(
               "SET_SUB_CANCEL_STATUS",
               result?.data?.subscription.is_cancel
             );
+            // const current_date = new Date();
+            // const current_period_end = new Date(result?.data?.subscription?.current_period_end);
+            // if(result?.data?.subscription.is_cancel && current_period_end >= current_date){
+            //   store.commit("SET_SUB_STATUS", null);
+            //   store.commit("SET_SUB_CANCEL_STATUS",false);
+            // }            
           }
+
           if (result?.data?.data?.admin_approval == "approve") {
             store.commit(
               "SET_APPROVAL_STATUS",

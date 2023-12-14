@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+
 import App from "./App.vue";
 import router from "@/routers";
 import store from "./store";
@@ -33,7 +34,28 @@ import "sweetalert2/dist/sweetalert2.min.css";
 /* add icons to the library */
 library.add(faUserSecret);
 
+
+// import { firebaseApp } from '@/config/firebaseConfig';
+
+// import { initializeApp } from "firebase/app";
+// import { getFirestore } from 'firebase/firestore';
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCYtz53UDjnL1Sxvvvj0trjYpkYu2yc_8w",
+//   authDomain: "simplawfy-eb7b9.firebaseapp.com",
+//   projectId: "simplawfy-eb7b9",
+//   storageBucket: "simplawfy-eb7b9.appspot.com",
+//   messagingSenderId: "121685485242",
+//   appId: "1:121685485242:web:4668ea675f42110f49c483"
+// };
+// // initializeApp(firebaseConfig);
+// const firebaseApp = initializeApp(firebaseConfig);
+// const db = getFirestore(firebaseApp);
+
 const app = createApp(App).component("font-awesome-icon", FontAwesomeIcon);
+
+
+// app.config.globalProperties.$db = db;
 
 app.mixin({
   data() {
@@ -74,6 +96,9 @@ app.mixin({
   },
 
   computed: {
+    loadMorePrevData(){
+      return this.$store.state.loadMorePrevData;
+    },
     loginUserEmail() {
       return this.$store.getters?.loginUser?.email;
     },
@@ -172,9 +197,10 @@ app.mixin({
       // console.log("curr search : ", this.currentPage);
     },
 
-    setUserInStateAndLocalStorage(res) {
+    setUserInStateAndLocalStorage(res,removeFromLocalStorage = true) {
       console.log("new func : ", res?.data?.data?.link);
       const userData = {
+        id: res?.data?.data?.id,
         first_name: res?.data?.data?.first_name,
         last_name: res?.data?.data?.last_name,
         email: res?.data?.data?.email,
@@ -192,9 +218,11 @@ app.mixin({
         remote_consultation:
           res?.data?.data?.remote_consultation == 1 ? true : false,
         mobile_friendly: res?.data?.data?.mobile_friendly == 1 ? true : false,
+        fields : res?.data?.data?.fields,
+        locations : res?.data?.data?.locations,
       };
 
-      if (localStorage.getItem("loginUser")) {
+      if (localStorage.getItem("loginUser") && removeFromLocalStorage) {
         localStorage.removeItem("loginUser");
       }
       localStorage.setItem("loginUser", JSON.stringify(userData));
@@ -264,6 +292,288 @@ app.mixin({
       }
       this.$router.push({ path: path });
     },
+
+
+
+    openRequirementsModal(data) {
+      let newData = {};
+      if (data && typeof data === 'object') {
+        for (const key in data) {
+          if (Object.prototype.hasOwnProperty.call(data, key)) {
+            const value = data[key];
+            if (value !== null && key != 'id' && key != 'job_id' && key != 'user_id' && key != 'created_at' && key != 'updated_at') {
+              let objKey = key;
+              objKey = objKey.replace(/_/g, " ");
+              newData[objKey] = value;
+            }
+          }
+        }
+      }
+      const htmlContent = Object.entries(newData)
+        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div><br />`)
+        .join('');
+
+      // Use dynamic HTML inside SweetAlert2 modal
+      this.$swal.fire({
+        title: 'Accessibility Requirements',
+        html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+          container: 'my-swal-container', // You can define your custom class for styling
+        },
+      });
+    },
+
+
+    openLawyerDetailsModal(data) {
+      let newData = {};
+      if (data && typeof data === 'object') {
+        for (const key in data) {
+          if (Object.prototype.hasOwnProperty.call(data, key)) {
+            const value = data[key];
+            if (value !== null && value != 0 && key != 'id' && 
+            key != 'admin_approval' && key != 'otp_verified' && key != "area_insert" && key != "state_insert"
+            && key != 'is_subscribed_first' && key != 'followup_email_status_two' && key != 'api_token'
+            && key != 'created_at' && key != 'updated_at') {
+              let objKey = key;
+              objKey = objKey.replace(/_/g, " ");
+              newData[objKey] = value;
+            }
+          }
+        }
+      }
+      const htmlContent = Object.entries(newData)
+        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`)
+        .join('');
+
+      // Use dynamic HTML inside SweetAlert2 modal
+      this.$swal.fire({
+        title: 'Lawyer Details',
+        html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+          container: 'my-swal-container', // You can define your custom class for styling
+        },
+      });
+    },
+
+
+
+    // openProposalDetailsModal(data) {
+    //   console.log('proposal details : ' , data);
+    //   let newData = {};
+    //   let specificTasks = [];
+    //   let disbursements = [];
+    //   let feeEarners = [];
+    //   if (data && typeof data === 'object') {
+    //     for (const key in data) {
+    //       if (Object.prototype.hasOwnProperty.call(data, key)) {
+    //         const value = data[key];
+    //         if (value !== null 
+    //           && key != 'id' 
+    //           && key != 'lawyer_id' 
+    //           && key != 'job_id' 
+    //           && key != 'user_id' 
+    //           && key != 'created_at' 
+    //           && key != 'updated_at'
+    //           ) {
+    //             let objKey = key;
+    //             objKey = objKey.replace(/_/g, " ");
+    //             if(key == 'specific_tasks'){
+    //               specificTasks = [...value];
+    //             }
+    //             else if(key == 'disbursements'){
+    //               disbursements = [...value];
+    //             }
+    //             else if(key == 'fee_earners'){
+    //               feeEarners = [...value];
+    //             }
+    //             else{
+    //               if(objKey == "lawyer" && value != null){
+    //                 newData["lawyer email"] = value?.email;
+    //               }else{
+    //                 newData[objKey] = value;
+    //               }
+    //             }
+    //         }
+    //       }
+    //     }
+    //   }
+
+    //   console.log(specificTasks);
+    //   console.log(disbursements);
+    //   console.log(feeEarners);
+      
+    //   const htmlContent = Object.entries(newData)
+    //     .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b>${key}: </b><span>${value}</span></h6></div>`)
+    //     .join('');
+
+    //   // Use dynamic HTML inside SweetAlert2 modal
+    //   this.$swal.fire({
+    //     title: 'Proposal Details',
+    //     html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
+    //     showCloseButton: true,
+    //     showConfirmButton: false,
+    //     customClass: {
+    //       container: 'my-swal-container', // You can define your custom class for styling
+    //     },
+    //   });
+    // },
+
+
+
+    openProposalDetailsModal(data,renderAsHtml = false) {
+      console.log('proposal details:', data);
+      let newData = {};
+      let specificTasks = [];
+      let disbursements = [];
+      let feeEarners = [];
+    
+      if (data && typeof data === 'object') {
+        for (const key in data) {
+          if (Object.prototype.hasOwnProperty.call(data, key)) {
+            const value = data[key];
+            if (
+              value !== null &&
+              key != 'id' &&
+              key != 'lawyer_id' &&
+              key != 'job_id' &&
+              key != 'user_id' &&
+              key != 'created_at' &&
+              key != 'updated_at'
+            ) {
+              let objKey = key;
+              objKey = objKey.replace(/_/g, ' ');
+    
+              if (key == 'specific_tasks') {
+                specificTasks = [...value];
+              } else if (key == 'disbursements') {
+                disbursements = [...value];
+              } else if (key == 'fee_earners') {
+                feeEarners = [...value];
+              } 
+              else{
+                              if(objKey == "lawyer" && value != null){
+                                newData["lawyer email"] = value?.email;
+                              }else{
+                                newData[objKey] = value;
+                              }
+                            }
+            }
+          }
+        }
+      }
+  
+      const mainHtmlContent = Object.entries(newData)
+        .map(
+          ([key, value]) =>
+            `<div class="wrapper" v-if="value != null"><h6"><b style="text-transform: capitalize;">${key}:</b> <span>${value}</span></h6></div><br />`
+        )
+        .join('');
+    
+        let specificTasksTable = "<span></span>";
+        let disbursementsTable = "<span></span>";
+        let feeEarnersTable = "<span></span>";
+        if(specificTasks.length > 0){
+          specificTasksTable = this.createTableHtml('Specific Tasks', specificTasks);
+        }
+        if(disbursements.length > 0){
+          disbursementsTable = this.createTableHtml('Disbursements', disbursements); 
+        }
+        if(feeEarners.length > 0){
+          feeEarnersTable = this.createTableHtmlFeeEarners('Fee Earners', feeEarners); 
+        }
+    
+      const swalHtmlContent = `
+        <div class="table-wrap" style="text-align: left !important;">${mainHtmlContent}</div>
+        ${specificTasksTable}
+        ${disbursementsTable}
+        ${feeEarnersTable}
+      `;
+    
+      // Use dynamic HTML inside SweetAlert2 modal
+
+      if(renderAsHtml){
+        return swalHtmlContent;
+      }else{
+        this.$swal.fire({
+          title: 'Proposal Details',
+          html: swalHtmlContent,
+          showCloseButton: true,
+          showConfirmButton: false,
+          customClass: {
+            container: 'my-swal-container', // You can define your custom class for styling
+          },
+        });
+      }
+    },
+    
+    createTableHtml(title, dataArray) {
+      const tableContent = dataArray
+        .map(
+          (item, index) => `
+            <tr>
+              <td>${index + 1}</td>
+              <td>${item.task ?? item.itemDisbursement}</td> 
+              <td>$${item.cost ?? item.costAud}</td>
+            </tr>
+          `
+        )
+        .join('');
+    
+      return `
+        <div class="table-title"><h5 style="text-align:left !important">${title} : </h5></div>
+        <table class='table table-bordered dynamicTable'>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Task</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableContent}
+          </tbody>
+        </table>
+      `;
+    },
+
+
+    createTableHtmlFeeEarners(title, dataArray) {
+      const tableContent = dataArray
+        .map(
+          (item, index) => `
+            <tr>
+              <td>${index + 1}</td>
+              <td>${item.title}</td> <!-- Replace with actual properties -->
+              <td>$${item.hourly_rate ?? item.hourlyRate}</td>
+              <td>${item.hours ?? item.estimatedHours}</td>
+            </tr>
+          `
+        )
+        .join('');
+    
+      return `
+        <div class="table-title"><h5 style="text-align:left !important">${title} : </h5></div>
+        <table class='table table-bordered dynamicTable'>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Hourly Rate</th>
+              <th>Hours</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableContent}
+          </tbody>
+        </table>
+      `;
+    },
+
+    
 
     // check subscription status of login user
     // checkSubscriptionAndAdminApproval() {
@@ -450,6 +760,14 @@ app.mixin({
     },
 
     async loadMore(status = null, reset = null) {
+      console.log('check computed : ' , this.loadMorePrevData)
+      if(this.loadMorePrevData != null){
+        this.currentPage = this.loadMorePrevData.currentPage;
+        this.lastPage = this.loadMorePrevData.lastPage;
+        this.openJobs = this.loadMorePrevData.openJobs;
+        this.$store.commit('SET_LOADMOREPREVDATA',null);
+        return false;
+      }
       console.log(status, "l1");
       // if (this.currentPage > this.lastPage) {
       //   return;
@@ -540,8 +858,8 @@ app.mixin({
       const month = date.getMonth() + 1; // Months are zero-based
       const year = date.getFullYear().toString().slice(-2); // Get the last 2 digits of the year
       let hours = date.getHours();
-      const minutes = date.getMinutes();
-      const period = hours < 12 ? "am" : "pm";
+      // const minutes = date.getMinutes();
+      // const period = hours < 12 ? "am" : "pm";
 
       // Adjust hours to 12-hour format
       if (hours > 12) {
@@ -551,10 +869,11 @@ app.mixin({
       // Ensure leading zeros for single-digit day, month, hours, and minutes
       const formattedDay = day < 10 ? "0" + day : day;
       const formattedMonth = month < 10 ? "0" + month : month;
-      const formattedHours = hours < 10 ? "0" + hours : hours;
-      const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+      // const formattedHours = hours < 10 ? "0" + hours : hours;
+      // const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
       // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period} AEST`;
+      return `${formattedDay}/${formattedMonth}/${year}`;
+      // return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period} AEST`;
     },
 
     // date time format function end

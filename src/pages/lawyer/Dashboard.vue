@@ -24,9 +24,16 @@
         </p>
 
       <div data-v-511b78bb="" class="container">
+
         <div v-if="adminApproval != 'approve'">
           <p class="h5 m-3 text-center">
             Your profile has not been approved yet.
+          </p>
+        </div>
+        <!-- <div v-else-if="openJobs.length == 0 && searchQuery == '' && tab == 'open'" class="border rounded bg-light p-3 d-flex flex-wrap"> -->
+        <div v-else-if="!userFields && !userLocations" class="border rounded bg-light p-3 d-flex flex-wrap">
+          <p class="mx-auto my-0">Your profile is not completed . Click here to complete your
+            <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
           </p>
         </div>
         <div v-else-if="subscriptionStatus != 'subscribed'">
@@ -134,7 +141,7 @@
                 else :
                   listing -->
 
-              <div
+              <!-- <div
                 v-if="
                   openJobs.length == 0 && searchQuery == '' && tab == 'open'
                 "
@@ -149,7 +156,7 @@
                     >Profile</router-link
                   >
                 </p>
-              </div>
+              </div> -->
 
               <div
                 v-if="
@@ -163,8 +170,8 @@
 
 
               <div
-                v-if="
-                   tab == 'close'
+                v-else-if="
+                    openJobs.length == 0 && searchQuery == '' && tab == 'close'
                 "
                 class="border rounded bg-light p-3 d-flex flex-wrap"
               >
@@ -175,8 +182,7 @@
 
               <div
                 v-else
-                class="border rounded bg-light px-2 py-3 d-flex flex-wrap align-center justify-content-center"
-              >
+                class="border rounded bg-light px-2 py-3 d-flex flex-wrap align-center justify-content-center">
                 <div class="input-group mb-3 search-field">
                   <input
                     type="text"
@@ -225,11 +231,22 @@
                         <div>
                           <p class="badge" title="Area">
                             {{ item?.field?.title }}
-                          </p>
+                          </p>            
+
                           &nbsp;
                           <p class="badge" title="Location">
                             {{ item?.location?.title }}
                           </p>
+                          &nbsp;
+                            <div v-if="tab == 'pending' || tab == 'close'">
+                            <p class="badge bg-dark" v-if="tab == 'pending'">
+                              Submitted
+                            </p>
+                            <p v-else-if="item?.proposals != null && item?.proposals.length > 0" class="badge bg-dark">
+                              <span v-if="item?.proposals[0].status == 'Accept' || item?.proposals[0].status == 'accept'">Accepted</span>
+                              <span v-if="item?.proposals[0].status == 'Reject' || item?.proposals[0].status == 'reject'">Rejected</span>
+                            </p>
+                          </div>
                         </div>
                         <div>
                           <p span class="smallFont">
@@ -262,6 +279,17 @@
                             
                           </span>
                         </div>
+                        <button
+                              :disabled="!item?.requirement"
+                              type="button"
+                              class="btn btn-dark btn-sm custom-pad"
+                              :data-target="`.edit-job-title-modal${index}`"
+                              :data-bs-toggle="`modal${index}`"
+                              data-bs-target="#Accessibility"
+                              @click="openRequirementsModal(item?.requirement)"
+                            >
+                            Accessibility Requirements{{ (!item?.requirement) ? ', (N/A)' : ''}}
+                            </button>
                       </div>
 
                           <!-- modal -->
@@ -286,31 +314,34 @@
                         >
                           <button
                             @click="submitProposal(item)"
-                            v-if="tab != 'pending'"
-                            class="btn btn-light border btn-sm card-btn my-1 mx-1"
+                            v-if="tab == 'open'"
+                            class="btn btn-light btn-sm card-btn my-1 mx-1"
                           >
                             Submit a proposal
                           </button>
 
                           <button
-                            @click="submitProposal(item)"
+                            @click="openProposalDetailsModal(item.proposal)"
                             v-if="tab === 'pending'"
                             class="btn btn-light border btn-sm card-btn my-1 mx-1"
                           >
                             View proposal
                           </button>
-                          <button
-                            v-if="tab != 'close'"
-                            @click="declineJob(item.id,index)"
-                            class="btn btn-danger btn-sm card-btn my-1 mx-1"
-                          >
+                          
+                          <button v-if="tab == 'open'" @click="declineJob(item.id,index)" class="btn btn-danger btn-sm card-btn my-1 mx-1">
                             Decline
                           </button>
-                          <router-link
-                            v-if="tab != 'pending'"
+
+                          <button v-if="tab == 'pending'" @click="withDrawJob(item.id,index)" class="btn btn-danger btn-sm card-btn my-1 mx-1">
+                            Withdraw
+                          </button>
+
+
+                          <button
+                            v-if="tab == 'open'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
-                            to="/request-info"
-                            >Message</router-link
+                            @click="goToMessagePage(item)"
+                            >Message</button
                           >
                           <router-link
                             v-if="tab === 'pending'"
@@ -422,6 +453,13 @@ export default {
   },
 
   computed: {
+    userFields() {
+      console.log('user : ', this.$store.getters?.loginUser);
+      return `${this.$store.getters?.loginUser?.fields}`;
+    },
+    userLocations() {
+      return `${this.$store.getters?.loginUser?.locations}`;
+    },
     userName() {
       return `${this.$store.getters?.loginUser?.first_name} ${this.$store.getters?.loginUser?.last_name}`;
     },
@@ -441,86 +479,25 @@ export default {
   // },
   methods: {
 
-    openRequirementsModal(data) {
-
-      let newData = {};
-
-      if (data && typeof data === 'object') {
-        for (const key in data) {
-          if (Object.prototype.hasOwnProperty.call(data, key)) {
-            const value = data[key];
-            if (value !== null && key != 'id' && key != 'job_id' && key != 'user_id' && key != 'created_at' && key != 'updated_at') {
-              newData[key] = value;
-            }
-          }
-        }
+    goToMessagePage(item){
+      this.$store.commit('SET_USERTOCHAT',item?.owner);
+      this.$store.commit('SET_JOBIDTOCHAT',item?.id);
+      if(!item?.lawyer_chat){
+        this.$store.commit('SET_CHATSTATUS','new');
+      }else{
+        this.$store.commit('SET_CHATSTATUS','old');
       }
 
+      // if(item?.lawyer_chat?.client_reply){
+      //   this.$store.commit('SET_LAWYER_ELIGIBLE_STATUS',true);
+      // }
 
-      // Construct HTML dynamically for key-value pairs
-
-      // let data2 = Object.fromEntries(data);
-      // console.log('v : ' , data2);
-      // data.filter((value) => {
-      //   console.log('filter : ', value);
-      //   return value !== null;
-      // });
-
-      // const filteredData = Object.fromEntries(
-      //   Object.entries(data).filter(([value]) => value !== null)
-      // );
-
-      const htmlContent = Object.entries(newData)
-        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b>${key}: </b><span>${value}</span></h6></div>`)
-        .join('');
-
-      // Use dynamic HTML inside SweetAlert2 modal
-      this.$swal.fire({
-        title: 'Accessibility Requirements',
-        html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
-        showCloseButton: true,
-        showConfirmButton: false,
-        customClass: {
-          container: 'my-swal-container', // You can define your custom class for styling
-        },
-      });
-
-
-      // Use SweetAlert2 to create a modal
-      // this.$swal.fire({
-      //   title: 'Accessibility Requirements',
-      //   html: `
-      //     <div class="table-wrap" style="text-align:left !important;">
-      //       <div class="wrapper">
-      //         <h6><b>Visual Impairment:</b></h6>
-      //         <p>Blind</p>
-      //       </div>
-
-      //       <div class="wrapper">
-      //         <h6>Auditory Impairment:</h6>
-      //         <p>Deaf</p>
-      //       </div>
-
-      //       <div class="wrapper">
-      //         <h6>Psychiatric Disability:</h6>
-      //         <p>Depression</p>
-      //       </div>
-
-      //       <div class="wrapper">
-      //         <h6>Language:</h6>
-      //         <p>Macedonian</p>
-      //       </div>
-      //     </div>`,
-      //   showCloseButton: true,
-      //   showConfirmButton: false,
-      //   customClass: {
-      //     container: 'my-swal-container', // You can define your custom class for styling
-      //   },
-      // });
+      // localStorage.setItem('userEmailToChat',userEmail);
+      this.$router.push({ path : "/chat" });
     },
 
-
     async changeTab(status) {
+      this.tab = status;
       if (status == "open") {
         this.endpoint = "/lawyer/show-open-related-jobs";
         await this.loadMore(null, true);
@@ -536,7 +513,7 @@ export default {
       //   this.endpoint = '/lawyer/show-reject-jobs';
       //   await this.loadMore(null,true);
       // }
-      this.tab = status;
+
     },
 
     // async getJobs(){
@@ -572,6 +549,40 @@ export default {
                 this.$swal(
                   "",
                   `Job has been decline successfully`,
+                  "success"
+                ).then(async () => {
+                  this.fixLoadMoreAfterDeleteRecord(index);
+                });
+              })
+              .catch((error) => {
+                console.log("error : ", error);
+              });
+          }
+        });
+      } catch (error) {
+        console.error("Error fetching options:", error);
+      }
+    },
+
+
+    async withDrawJob(job_id, index) {
+      try {
+        this.$swal({
+          title: "Are you sure?",
+          text: `Are you sure you want to withdraw from your proposal on this job, You will not be able to see this anymore.`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: `Yes, Withdraw`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            api
+              .get(`/lawyer/withdraw-proposal-by-job/${job_id}`)
+              .then(() => {
+                this.$swal(
+                  "",
+                  `Proposal has been withdraw successfully`,
                   "success"
                 ).then(async () => {
                   this.fixLoadMoreAfterDeleteRecord(index);
@@ -792,29 +803,35 @@ p.badge {
   padding: 5px;
 }
 }
+
 @media only screen and (max-width: 992px) {
-  .card-btn{
-  width: 100%;
+  .card-btn {
+    width: 100%;
+  }
 }
-}
+
 @media only screen and (max-width: 600px) {
   .l-main {
     padding-bottom: 100px;
   }
-  ul#pills-tab{
+
+  ul#pills-tab {
     width: 290px !important;
   }
+
   .nav-pills .nav-link {
     font-size: 12px;
+  }
 }
-}
+
 @media only screen and (max-width: 340px) {
-p.badge {
+  p.badge {
     font-size: 12px;
-}
-.custom-pad{
-  padding: 5px;
-  font-size: 13px;
-}
+  }
+
+  .custom-pad {
+    padding: 5px;
+    font-size: 13px;
+  }
 }
 </style>

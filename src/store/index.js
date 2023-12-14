@@ -18,10 +18,30 @@ const store = createStore({
     lastPaginationPage : null,
     paginationEndpoint : null,
     otpEmail : null,
-
+    loadMorePrevData: null,
     userType : null,
+
+    userToChat : null,
+    jobIdToChat : null,
+    chatStatus : null,
+    // lawyerEligibleStatus : false,
   },
   mutations: {
+    // SET_LAWYER_ELIGIBLE_STATUS(state,value){
+    //   state.lawyerEligibleStatus = value
+    // },
+    SET_CHATSTATUS(state,value){
+      state.chatStatus = value
+    },
+    SET_JOBIDTOCHAT(state,id){
+      state.jobIdToChat = id
+    },
+    SET_USERTOCHAT(state,data){
+      state.userToChat = data
+    },
+    SET_LOADMOREPREVDATA(state,data){
+      state.loadMorePrevData = data
+    },
     SET_USER_TYPE(state,value){
       state.userType = value;
     },

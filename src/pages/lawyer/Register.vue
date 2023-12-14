@@ -135,8 +135,12 @@ import * as yup from "yup";
 export default {
     data() {
         const schema = yup.object().shape({
-            first_name: yup.string().required('Please enter your first name.'),
-            last_name: yup.string().required('Please enter your last name.'),
+            first_name: yup.string()
+            .max(20, 'First name maximum limit is 20 characters.')
+            .required('Please enter your first name.'),
+            last_name: yup.string()
+            .max(35, 'Last name maximum limit is 35 characters.')
+            .required('Please enter your last name.'),
             phone: yup.string().required('Please enter your phone number.').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/, 'Phone number is not valid'),
             email: yup.string()
                 .min(3, 'Please enter valid email.')
