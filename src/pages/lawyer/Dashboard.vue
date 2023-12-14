@@ -483,9 +483,9 @@ export default {
         this.$store.commit('SET_CHATSTATUS','old');
       }
 
-      if(item?.lawyer_chat?.client_reply){
-        this.$store.commit('SET_LAWYER_ELIGIBLE_STATUS',true);
-      }
+      // if(item?.lawyer_chat?.client_reply){
+      //   this.$store.commit('SET_LAWYER_ELIGIBLE_STATUS',true);
+      // }
 
       // localStorage.setItem('userEmailToChat',userEmail);
       this.$router.push({ path : "/chat" });

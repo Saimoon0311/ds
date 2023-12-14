@@ -44,6 +44,7 @@
       <div class="row">
         <h1 class="mainHeading">Chat Screen</h1>
         <!-- Client View: Select Lawyer -->
+
         <div v-if="userFirst.type === 'client' && lawyer_data.length > 0"
           :class="{ 'col-md-3': userFirst.type === 'client' }">
           <h2>Select Lawyer to Chat</h2>
@@ -156,13 +157,15 @@ export default {
       newMessage: '',
       messages: [],
       lawyer_data: [],
+
+      is_client_reply : false,
     };
   },
 
   computed: {
-    lawyerEligibleStatus() {
-      return this.$store.state.lawyerEligibleStatus;
-    },
+    // lawyerEligibleStatus() {
+    //   return this.$store.state.lawyerEligibleStatus;
+    // },
     chatStatus() {
       return this.$store.state.chatStatus;
     },
@@ -177,9 +180,7 @@ export default {
     }
   },
   mounted() {
-    // this.createChatGroup('ham@ham.com','zafar@zafar.com');
-
-    if (this.userFirst?.type == "client") {
+   if (this.userFirst?.type == "client") {
       api.get(`/client/get-lawyers-list-to-chat/${this.jobId}`).then((res) => {
         this.lawyer_data = res?.data;
         console.log(this.lawyer_data);
@@ -242,19 +243,29 @@ export default {
       });
     },
     sendMessage() {
+      console.log(addDoc);
+      console.log(serverTimestamp);
+
       if (this.newMessage == "" || this.newMessage == null) {
+        return false;
+      }
+
+      if(this.userFirst?.type == 'lawyer' && 
+      this.messages[this.messages.length - 1].sender_email == this.userFirst?.email){
+        alert('You can not send message until client reply on your previous messages, please wait for client reply');
+        this.newMessage = '';
         return false;
       }
 
       console.log(this.chatStatus);
         console.log(this.userFirst?.type);
-        console.log(this.lawyerEligibleStatus);
+        // console.log(this.lawyerEligibleStatus);
 
-      if(this.chatStatus != "new" 
-      && this.userFirst?.type == "lawyer" 
-      && !this.lawyerEligibleStatus){
-        return false;
-      }
+      // if(this.chatStatus != "new" 
+      // && this.userFirst?.type == "lawyer" 
+      // && !this.lawyerEligibleStatus){
+      //   return false;
+      // }
 
       // console.log(this.chatId);
       const messagesRef = collection(db, 'chats', this.chatId, 'messages');
@@ -276,11 +287,11 @@ export default {
         if (this.chatStatus != "new" && this.userFirst?.type == "lawyer") {
           api.post('/update-seen-status', { "id": this.chatId , "status" : false});
         }
-        let replyStatus = false;
-        if(this.userFirst?.type == "client") {
-          replyStatus = true;
-        }
-        api.post('/update-reply-status', { "id": this.chatId , "status" : replyStatus});
+        // let replyStatus = false;
+        // if(this.userFirst?.type == "client") {
+        //   replyStatus = true;
+        // }
+        // api.post('/update-reply-status', { "id": this.chatId , "status" : replyStatus});
 
         console.log('Document written with ID:', docRef.id);
       })
