@@ -1,7 +1,7 @@
 <!-- Chat.vue -->
 <!-- <template>
   <div>
-    <div v-if="this.userFirst.type == 'client'">
+    <div v-if="this.userFirst?.type == 'client'">
       <div v-if="this.lawyer_data.length > 0">
         <h2>Select Lawyer to chat</h2>
         <ul>
@@ -33,24 +33,29 @@
 
 <template>
   <section class="chatSection">
-    <div v-if="userFirst && userFirst.type == 'client'">
+    <div v-if="userFirst && userFirst?.type == 'client'">
       <ClientHeader />
     </div>
-    <div v-else-if="userFirst && userFirst.type == 'lawyer'">
+    <div v-else-if="userFirst && userFirst?.type == 'lawyer'">
       <LawyerHeader />
     </div>
 
     <div class="container my-4">
 
-        <router-link v-if="userFirst?.type == 'lawyer'" class="btn btn-dark btn-sm my-3"
-          :to="{ path: '/lawyer-dashboard' }"><i class="bi bi-arrow-left"></i> Back</router-link>
-        <router-link v-else-if="userFirst?.type == 'client'" class="btn btn-dark btn-sm my-3"
-          :to="{ path: '/client-dashboard' }"><i class="bi bi-arrow-left"></i> Back</router-link>
+      <router-link v-if="userFirst?.type == 'lawyer'" class="btn btn-dark btn-sm my-3"
+        :to="{ path: '/lawyer-dashboard' }"><i class="bi bi-arrow-left"></i> Back</router-link>
+      <router-link v-else-if="userFirst?.type == 'client'" class="btn btn-dark btn-sm my-3"
+        :to="{ path: '/client-dashboard' }"><i class="bi bi-arrow-left"></i> Back</router-link>
 
       <div class="row">
 
         <ShowJobDetails :jobData="jobData" />
-        
+
+        <button @click="submitProposal(jobData)" v-if="userFirst && userFirst?.type == 'lawyer'"
+          class="btn btn-light btn-sm card-btn my-1 mx-1 border">
+          Submit a Proposal Now
+        </button>
+
       </div>
 
       <div class="row">
@@ -58,8 +63,8 @@
         <h1 class="mainHeading">Chats</h1>
         <!-- Client View: Select Lawyer -->
 
-        <div v-if="userFirst.type === 'client' && lawyer_data.length > 0"
-          :class="{ 'col-md-3': userFirst.type === 'client' }">
+        <div v-if="userFirst?.type === 'client' && lawyer_data.length > 0"
+          :class="{ 'col-md-3': userFirst?.type === 'client' }">
           <h2>Select Lawyer to Chat</h2>
           <ul class="lawyer-list">
             <li @click="startChatForClient(data, index)" v-for="(data, index) in lawyer_data" :key="data.id">
@@ -77,10 +82,10 @@
         <!-- client chat box -->
         <div
           v-if="this.userFirst?.type == 'client' && this.lawyerSelected && chatStatus && jobId && userFirst && userSecond"
-          :class="{ 'col-md-9': userFirst.type === 'client', 'chatbox': true }">
+          :class="{ 'col-md-9': userFirst?.type === 'client', 'chatbox': true }">
           <div class="text-right my-4">
             <span
-              v-if="userFirst.type === 'client' && chatStatus && jobId && userFirst && userSecond && messages.length > 0"
+              v-if="userFirst?.type === 'client' && chatStatus && jobId && userFirst && userSecond && messages.length > 0"
               class="close-button">
               <button class="btn btn-danger" @click="closeChatForClient">x</button>
             </span>
@@ -214,6 +219,11 @@ export default {
     }
   },
   methods: {
+
+    submitProposal(item) {
+      this.saveJobInfo(item);
+      this.$router.push({ path: "/proposal" });
+    },
 
     humanReadableDate(timestamp) {
       if (timestamp) {
