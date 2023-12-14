@@ -3,62 +3,9 @@
   <div class="f-main">
     <div class="container">
       <h6 class="fs-3 text-center mt-4">Submit a proposal</h6>
-      <div
-        class="border rounded bg-secondary text-white p-3 text-start col-md-7 m-auto mt-3"
-        id="28"
-      >
-        <div>
-          <p class="badge bg-dark" title="Area">{{ jobData?.field?.title }}</p>
-          &nbsp;
-          <p class="badge bg-dark" title="Location">
-            {{ jobData?.location?.title }}
-          </p>
-          <!-- <p><b>City/suburb:</b> {{ jobData?.identity }}</p>
-          <p><b>City/suburb:</b> {{ jobData?.city }}</p>
-          <p><b>City/suburb:</b> {{ jobData?.title }}</p>
-          <p></p> -->
-
-          <p class="text-center mt-3 mb-2">
-            <b>{{ jobData?.title }}</b>
-          </p>
-          <p id="description28" class="cardProposalDes">
-            {{ jobData?.description }}
-          </p>
-          <!-- <p><b>City/suburb:</b> </p> -->
-          <!-- <p><b class="smallFont">Posted by:</b> <span class="smallFont">Jess ({{ jobData?.city }}) at 10.30pm on
-              19/11/23.</span> </p>
-          <p><b class="smallFont">Job No:</b> <span class="smallFont">{{ jobData?.identity }}</span></p> -->
-          <button
-            :disabled="!jobData?.requirement"
-            type="button"
-            class="btn btn-dark btn-sm custom-pad"
-            :data-target="`.edit-job-title-modal${index}`"
-            title="Edit"
-            :data-bs-toggle="`modal${index}`"
-            data-bs-target="#Accessibility"
-            @click="openRequirementsModal(jobData?.requirement)"
-          >
-            Accessibility Requirements
-          </button>
-          <span class="spacer">
-            <p class="smallFont">
-              Posted by {{ jobData?.owner?.first_name }} {{ jobData?.owner?.last_name }}
-              <span class="text-capitalize">({{ jobData?.city }})</span>
-              on {{ formatCreatedAt(jobData?.created_at) }}
-            </p>
-            <p span class="smallFont">Job No: {{ jobData?.identity }}</p>
-          </span>
-          <div>
-            <!-- <p><b>Posted by:</b> test@mailinator.com</p>
-            <p>
-              <b> Deadline:</b>
-
-              27-12-2023
-            </p>
-            <p><b> Preferred contact time:</b> Flexible</p> -->
-          </div>
-        </div>
-      </div>
+      
+      <ShowJobDetails :jobData="jobData" />
+      
     </div>
     <div class="container f-pt mx-auto">
       <Form
@@ -2094,6 +2041,9 @@
 <script setup>
 
 import MainFooter from "../../components/global/MainFooter.vue";
+
+import ShowJobDetails from "../../components/ShowJobDetails";
+
 </script>
 <script>
 import LawyerHeader from "./Header.vue";
@@ -2101,7 +2051,6 @@ import api from "@/config/api";
 
 
 export default {
- 
 
   data() {
  
@@ -2246,7 +2195,7 @@ export default {
   components: {
     LawyerHeader,
     MainFooter,
-   
+    ShowJobDetails
   },
 
   mounted() {

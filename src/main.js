@@ -113,6 +113,19 @@ app.mixin({
   },
 
   methods: {
+
+    saveJobInfo(item){
+      this.$store.commit("SET_JOB_DATA", item);
+      localStorage.setItem("jobData", JSON.stringify(item));
+    },
+
+    // save load more pagination data
+    saveLoadMoreData() {
+      this.$store.commit('SET_LOADMOREPREVDATA',{'currentPage' : this.currentPage, 'lastPage' : this.lastPage, 'openJobs' : this.openJobs});
+      console.log('curr : ' , this.currentPage)
+      console.log('last : ' , this.lastPage)
+    },
+
     goToLoginPage(type) {
       this.$store.commit("SET_USER_TYPE", type);
       localStorage.setItem("userType", type);

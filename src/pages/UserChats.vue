@@ -41,8 +41,21 @@
     </div>
 
     <div class="container my-4">
+
+        <router-link v-if="userFirst?.type == 'lawyer'" class="btn btn-dark btn-sm my-3"
+          :to="{ path: '/lawyer-dashboard' }"><i class="bi bi-arrow-left"></i> Back</router-link>
+        <router-link v-else-if="userFirst?.type == 'client'" class="btn btn-dark btn-sm my-3"
+          :to="{ path: '/client-dashboard' }"><i class="bi bi-arrow-left"></i> Back</router-link>
+
       <div class="row">
-        <h1 class="mainHeading">Chat Screen</h1>
+
+        <ShowJobDetails :jobData="jobData" />
+        
+      </div>
+
+      <div class="row">
+
+        <h1 class="mainHeading">Chats</h1>
         <!-- Client View: Select Lawyer -->
 
         <div v-if="userFirst.type === 'client' && lawyer_data.length > 0"
@@ -134,6 +147,9 @@ import MainFooter from "../components/global/MainFooter.vue";
 import ClientHeader from "../pages/client/Header.vue";
 import LawyerHeader from "../pages/lawyer/Header.vue";
 
+
+import ShowJobDetails from "../components/ShowJobDetails";
+
 import api from "@/config/api";
 import { collection, addDoc, serverTimestamp, onSnapshot } from 'firebase/firestore';
 // import { FieldValue } from 'firebase/firestore';
@@ -144,8 +160,8 @@ export default {
   components: {
     MainFooter,
     ClientHeader,
-    LawyerHeader
-
+    LawyerHeader,
+    ShowJobDetails
   },
 
   data() {
@@ -158,11 +174,16 @@ export default {
       messages: [],
       lawyer_data: [],
 
-      is_client_reply : false,
+      is_client_reply: false,
     };
   },
 
   computed: {
+    jobData() {
+      // console.log('job data : ' , this.$store.state.jobData);
+      return this.$store.state.jobData;
+    },
+
     // lawyerEligibleStatus() {
     //   return this.$store.state.lawyerEligibleStatus;
     // },
@@ -180,7 +201,10 @@ export default {
     }
   },
   mounted() {
-   if (this.userFirst?.type == "client") {
+    if (!this.userFirst) {
+      this.$router.go(-1);
+    }
+    if (this.userFirst?.type == "client") {
       api.get(`/client/get-lawyers-list-to-chat/${this.jobId}`).then((res) => {
         this.lawyer_data = res?.data;
         console.log(this.lawyer_data);
@@ -227,7 +251,7 @@ export default {
     },
 
     clientSeenStatusUpdate(data, index) {
-      api.post('/update-seen-status', { "id": data?.id , "status" : true}).then(() => {
+      api.post('/update-seen-status', { "id": data?.id, "status": true }).then(() => {
         this.lawyer_data[index].client_seen = 1;
       });
     },
@@ -250,16 +274,17 @@ export default {
         return false;
       }
 
-      if(this.userFirst?.type == 'lawyer' && 
-      this.messages[this.messages.length - 1].sender_email == this.userFirst?.email){
-        alert('You can not send message until client reply on your previous messages, please wait for client reply');
-        this.newMessage = '';
-        return false;
+      if (this.messages.length > 0 && this.userFirst?.type == 'lawyer') {
+        if (this.messages[this.messages.length - 1].sender_email == this.userFirst?.email) {
+          this.$swal("", "You can not send message until client reply on your previous messages, please wait for client reply", "error");
+          this.newMessage = '';
+          return false;
+        }
       }
 
       console.log(this.chatStatus);
-        console.log(this.userFirst?.type);
-        // console.log(this.lawyerEligibleStatus);
+      console.log(this.userFirst?.type);
+      // console.log(this.lawyerEligibleStatus);
 
       // if(this.chatStatus != "new" 
       // && this.userFirst?.type == "lawyer" 
@@ -285,7 +310,7 @@ export default {
           })
         }
         if (this.chatStatus != "new" && this.userFirst?.type == "lawyer") {
-          api.post('/update-seen-status', { "id": this.chatId , "status" : false});
+          api.post('/update-seen-status', { "id": this.chatId, "status": false });
         }
         // let replyStatus = false;
         // if(this.userFirst?.type == "client") {

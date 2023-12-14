@@ -155,8 +155,8 @@
                       >
                         View Proposal
                       </button>
-                      <button class="btn btn-dark btn-sm card-btn my-1 mx-1" @click="goToMessagePage(item)">
-                        View Messages
+                      <button :disabled="item?.chats.length == 0" class="btn btn-dark btn-sm card-btn my-1 mx-1" @click="goToMessagePage(item)">
+                        View Messages {{ (item?.chats.length == 0) ? ', (N/A)' : ''}}
                       </button>
                       <button class="btn btn-danger btn-sm card-btn my-1 mx-1">
                         View Lawyer's Details
@@ -219,6 +219,8 @@ export default {
   methods: {
 
     goToMessagePage(item){
+      this.saveJobInfo(item);
+      this.saveLoadMoreData();
       // this.$store.commit('SET_USERTOCHAT',item?.owner);
       this.$store.commit('SET_JOBIDTOCHAT',item?.id);
       
@@ -242,9 +244,10 @@ export default {
     },
 
     goToViewProposals(id) {
-      this.$store.commit('SET_LOADMOREPREVDATA',{'currentPage' : this.currentPage, 'lastPage' : this.lastPage, 'openJobs' : this.openJobs});
-      console.log('curr : ' , this.currentPage)
-      console.log('last : ' , this.lastPage)
+      // this.$store.commit('SET_LOADMOREPREVDATA',{'currentPage' : this.currentPage, 'lastPage' : this.lastPage, 'openJobs' : this.openJobs});
+      // console.log('curr : ' , this.currentPage)
+      // console.log('last : ' , this.lastPage)
+      this.saveLoadMoreData();
       this.$store.commit("SET_JOB_ID", id);
       localStorage.setItem("jobId", id);
       this.$router.push({ path: "/view-proposals" });

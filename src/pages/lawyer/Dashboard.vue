@@ -220,48 +220,53 @@
                     <div
                       v-for="(item, index) in openJobs"
                       :key="index"
-                      class="col-md-6"
+                      class="col-md-12"
                       id="28"
                     >
                       <div
-                        class="border rounded bg-secondary d-flex justify-content-between text-white p-3 flex-column mb-3 class"
+                        class="border rounded d-flex justify-content-between text-white flex-column mb-3 pb-3"
                       >
                         <div>
-                          <div class="d-flex align-items-center justify-content-between flex-wrap">
-                              <div>
-                                <p class="badge bg-dark" title="Area">
+                      <div class="p-3 card-top">
+                        <div>
+                          <p class="badge" title="Area">
                             {{ item?.field?.title }}
                           </p>            
 
                           &nbsp;
-                          <p class="badge bg-dark" title="Location">
+                          <p class="badge" title="Location">
                             {{ item?.location?.title }}
                           </p>
-                          </div>
-                              
+                          &nbsp;
+                          
+                        </div>
+                        <div>
+                          <p span class="smallFont">
+                            Job No: <b>{{ item?.identity }}</b>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="p-3">
+                        <div class="card-body d-flex align-items-start justify-content-between ">
+                          <p class="text-left  text-black title">
+                          {{ item?.title }}
+                          </p>
                           <div v-if="tab == 'pending' || tab == 'close'">
-                            <p class="badge bg-dark" v-if="tab == 'pending'">
+                            <p class="badge border text-black" v-if="tab == 'pending'">
                               Submitted
                             </p>
-                            <p v-else-if="item?.proposals != null && item?.proposals.length > 0" class="badge bg-dark">
+                            <p v-else-if="item?.proposals != null && item?.proposals.length > 0" class="badge border text-black">
                               <span v-if="item?.proposals[0].status == 'Accept' || item?.proposals[0].status == 'accept'">Accepted</span>
                               <span v-if="item?.proposals[0].status == 'Reject' || item?.proposals[0].status == 'reject'">Rejected</span>
                             </p>
-                          </div>
-                          
-                          
+                          </div>                       
                         </div>
-                         
-                          
-                          
-                          <p class="text-center mt-3 mb-2">
-                            <b>{{ item?.title }}</b>
-                          </p>
-                          <p id="description28" class="descriptionText">
-                            <!-- <b>Job description: </b> -->
+                        <div  id="description" class="descriptionText text-black ">
                             {{ item?.description }}
-                          </p>
-                          <p>
+                        </div>
+                        <div class="widthcn">
+
+                          <span class="spacer">
                             <button
                               :disabled="!item?.requirement"
                               type="button"
@@ -272,26 +277,27 @@
                               @click="openRequirementsModal(item?.requirement)"
                             >
                             Accessibility Requirements{{ (!item?.requirement) ? ', (N/A)' : ''}}
-                            </button>
-                          </p>
+                          </button>
+                            <p class="smallFont text-black smallFont1">
+                              Posted by:
+                              <span class="text-capitalize"
+                              > {{ item?.owner?.first_name }} {{ item?.owner?.last_name }} ({{ item?.city }})
+                              on
+                              {{ formatCreatedAt(item.created_at) }}
+                              </span
+                              >
+                            </p>
+                            
+                          </span>
+                        </div>
+                       
+                      </div>
 
                           <!-- modal -->
                       
 
                           <!-- <p><b>City/suburb:</b> {{ item?.city }}</p> -->
-                          <span class="spacer">
-                            <p class="smallFont">
-                              Posted by {{ item?.owner?.first_name }} {{ item?.owner?.last_name }}
-                              <span class="text-capitalize"
-                                >({{ item?.city }})</span
-                              >
-                              on
-                              {{ formatCreatedAt(item.created_at) }}
-                            </p>
-                            <p span class="smallFont">
-                              Job No: {{ item?.identity }}
-                            </p>
-                          </span>
+                      
 
                           <!-- <details>
                             <summary>More details</summary>
@@ -310,7 +316,7 @@
                           <button
                             @click="submitProposal(item)"
                             v-if="tab == 'open'"
-                            class="btn btn-light btn-sm card-btn my-1 mx-1"
+                            class="btn btn-light btn-sm card-btn my-1 mx-1 border"
                           >
                             Submit a proposal
                           </button>
@@ -318,7 +324,7 @@
                           <button
                             @click="openProposalDetailsModal(item.proposal)"
                             v-if="tab === 'pending'"
-                            class="btn btn-light btn-sm card-btn my-1 mx-1"
+                            class="btn btn-light border btn-sm card-btn my-1 mx-1"
                           >
                             View proposal
                           </button>
@@ -342,7 +348,7 @@
                             v-if="tab === 'pending'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
                             to="/request-info"
-                            >View Messages</router-link
+                            >View Message</router-link
                           >
                         </div>
                         <div
@@ -475,6 +481,8 @@ export default {
   methods: {
 
     goToMessagePage(item){
+      this.saveJobInfo(item);
+      this.saveLoadMoreData();
       this.$store.commit('SET_USERTOCHAT',item?.owner);
       this.$store.commit('SET_JOBIDTOCHAT',item?.id);
       if(!item?.lawyer_chat){
@@ -522,10 +530,10 @@ export default {
     // },
 
     submitProposal(item) {
-      this.$store.commit("SET_JOB_DATA", item);
-      localStorage.setItem("jobData", JSON.stringify(item));
+      this.saveJobInfo(item);
       this.$router.push({ path: "/proposal" });
     },
+
     async declineJob(job_id, index) {
       try {
         this.$swal({
@@ -596,6 +604,7 @@ export default {
   name: "DashboardTab",
 };
 </script>
+
 <style scoped>
 ul#pills-tab {
   width: 400px !important;
@@ -680,8 +689,16 @@ ul#pills-tab {
 }
 
 .smallFont {
-  font-size: 12px;
+  font-size: 16px;
+  margin: 0;
+}
+.smallFont1 span{
+  font-weight: 600;
+}
+.smallFont1 {
+  font-size: 16px;
   margin: 0 0 5px 0;
+  color: black;
 }
 
 .search-field {
@@ -691,7 +708,7 @@ ul#pills-tab {
 .descriptionText {
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 145px;
+  height: 100px;
   /* line-break: anywhere; */
   overflow-y: auto;
   padding-right: 10px;
@@ -704,27 +721,49 @@ ul#pills-tab {
 }
 
 .descriptionText::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px #0000004d;
+  box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
   border-radius: 10px;
 }
 
 .descriptionText::-webkit-scrollbar-thumb {
-  background-color: #969696;
+  background-color: rgba(217, 217, 217, 1);
   /* outline: 1px solid #292929; */
   border-radius: 10px;
 }
 
 .card-btn {
   width: 30%;
+  height: 45px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 p.badge {
   font-size: 14px;
+  font-weight: 400;
+  border: 1px solid rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  margin: 0;
 }
-
+.card-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px 5px 0 0;
+  background: rgba(55, 59, 62, 1);
+}
 .spacer {
-  margin: 25px 0;
-  display: block;
+  margin: 20px 0;
+    display: block;
+    border-top: 1px solid black;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .table-wrap * {
@@ -758,22 +797,42 @@ p.badge {
 .my-swal-container .swal2-title {
   font-size: 25px;
 }
-
-@media only screen and (max-width: 1400px) and (min-width: 992px) {
-  .card-btn {
-    width: 30%;
-    font-size: 11px;
-    padding: 5px;
-  }
+.title{
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+@media only screen and (max-width: 1400px) and (min-width: 992px)  {
+  .card-btn{
+  width: 30%;
+  font-size: 11px;
+  padding: 5px;
+}
 }
 
 @media only screen and (max-width: 992px) {
   .card-btn {
-    width: 100%;
+    width: 95%;
+  }
+  .smallFont{
+    margin: 5px;
+    font-size: 14px;
   }
 }
-
+@media only screen and (max-width: 767px) {
+.spacer{
+  display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+}
 @media only screen and (max-width: 600px) {
+  p.badge{
+    margin-bottom: 10px;
+  }
   .l-main {
     padding-bottom: 100px;
   }
