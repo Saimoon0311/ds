@@ -381,12 +381,12 @@
                           </button>
 
                           <button
-                            v-if="tab == 'open'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
                             @click="goToMessagePage(item)"
                           >
-                            Message
+                          Message
                           </button>
+
                           <router-link
                             v-if="tab === 'pending'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
@@ -399,7 +399,15 @@
                           class="d-flex flex-column justify-content-center align-items-center"
                           style="min-width: 150px"
                         >
-                          <h3>Closed</h3>
+                          <!-- <h3>Closed</h3> -->
+
+                          <button
+                            class="btn btn-dark btn-sm card-btn my-1 mx-1"
+                            @click="goToMessagePage(item)"
+                          >
+                            View Messages
+                          </button>
+
                         </div>
                       </div>
                     </div>
@@ -533,6 +541,10 @@ export default {
         this.$store.commit("SET_CHATSTATUS", "new");
       } else {
         this.$store.commit("SET_CHATSTATUS", "old");
+      }
+
+      if(this.tab == 'close'){
+        this.$store.commit('SET_JOBTABCHAT','close');
       }
 
       // if(item?.lawyer_chat?.client_reply){

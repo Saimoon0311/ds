@@ -24,12 +24,16 @@ const store = createStore({
     userToChat : null,
     jobIdToChat : null,
     chatStatus : null,
+    jobTabChat : null,
     // lawyerEligibleStatus : false,
   },
   mutations: {
     // SET_LAWYER_ELIGIBLE_STATUS(state,value){
     //   state.lawyerEligibleStatus = value
     // },
+    SET_JOBTABCHAT(state,value){
+      state.jobTabChat = value
+    },
     SET_CHATSTATUS(state,value){
       state.chatStatus = value
     },

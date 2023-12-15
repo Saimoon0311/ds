@@ -55,7 +55,7 @@
 
       <div class="row">
         <div class="col-6 offset-5">
-          <button @click="submitProposal(jobData)" v-if="userFirst && userFirst?.type == 'lawyer'"
+          <button @click="submitProposal(jobData)" v-if="userFirst && userFirst?.type == 'lawyer' && jobTabName != 'close'"
             class="btn btn-dark btn-sm card-btn my-1 mx-1 border">
             Submit a Proposal Now
           </button>
@@ -110,7 +110,7 @@
             </div>
           </div>
 
-          <div class="chat-input">
+          <div class="chat-input" v-if="jobTabName != 'close'">
             <input v-model="newMessage" placeholder="Type your message..." @input="checkInput" />
             <button @click="sendMessage" class="bg-dark text-white" :disabled="this.showTypeError">Send</button>
           </div>
@@ -132,7 +132,6 @@
                 You can send one message to the client if you need more information about the job in order to submit a
                 proposal. if client reply you so you are free to chat with client.
               </div>
-              {{  chatStatus }}
 
               <div class="text-right my-4">
               </div>
@@ -151,7 +150,7 @@
                 </div>
               </div>
 
-              <div class="chat-input">
+              <div class="chat-input" v-if="jobTabName != 'close'">
                 <input v-model="newMessage" placeholder="Type your message..." @input="checkInput" />
                 <button @click="sendMessage" class="bg-dark text-white" :disabled="this.showTypeError">Send</button>
               </div>
@@ -225,6 +224,9 @@ export default {
     // lawyerEligibleStatus() {
     //   return this.$store.state.lawyerEligibleStatus;
     // },
+    jobTabName(){
+      return this.$store.state.jobTabChat;
+    },
     chatStatus() {
       return this.$store.state.chatStatus;
     },
