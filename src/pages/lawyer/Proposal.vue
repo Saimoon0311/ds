@@ -1675,7 +1675,7 @@
                 v-if="currentStep !== 0"
                 type="button"
                 @click="proPrevStep"
-                class="btn btn-dark mr"
+                class="btn text-black border mr"
               >
                 Previous
               </button>
@@ -1684,7 +1684,7 @@
                 type="submit"
                 @click="proStep"
                 :disabled="!selectedOption"
-                class="btn btn-dark"
+                class="btn btn-bg"
               >
                 Next
               </button>
@@ -2000,7 +2000,7 @@
 
         <div class="stepbtn mt-3">
           <span v-if="selectedOption == 'Pro'">
-            <span class="pagination-indicator"> {{ 3 }} of {{ 3 }} </span>
+            <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
           </span>
           <span v-else>
             <span v-if="currentStep !== 5" class="pagination-indicator">
@@ -2012,14 +2012,14 @@
               v-if="currentStep !== 0"
               type="button"
               @click="prevStep"
-              class="btn btn-dark mr"
+              class="btn border mr text-black"
             >
               Previous
             </button>
             <button
               type="submit"
               :disabled="!selectedOption"
-              class="btn btn-dark"
+              class="btn btn-bg"
             >
               {{ buttonText }}
             </button>
@@ -2474,7 +2474,7 @@ export default {
 
 .btn {
   padding: 5px 25px;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 #successFeeTerms {
@@ -2546,7 +2546,10 @@ input[type="radio"]:checked {
   outline: 1px solid slategrey;
   border-radius: 10px;
 }
-
+.btn-bg{
+  background: rgba(55, 59, 62, 1) !important;
+  color: white !important;
+}
 .smallFont {
   font-size: 12px;
   margin: 0 0 5px 0;
