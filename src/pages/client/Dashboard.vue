@@ -144,9 +144,10 @@
                       >
                         View Proposal
                       </button>
-                      <button :disabled="item?.chats.length == 0" class="btn btn-dark btn-sm card-btn my-1 mx-1" @click="goToMessagePage(item)">
-                        View Messages {{ (item?.chats.length == 0) ? ', (N/A)' : ''}}
+                      <button :disabled="item?.chats && item?.chats.length == 0" class="btn btn-dark btn-sm card-btn my-1 mx-1" @click="goToMessagePage(item)">
+                        View Messages {{ (item?.chats && item?.chats.length == 0) ? ', (N/A)' : ''}}
                       </button>
+
                       <button class="btn btn-danger btn-sm card-btn my-1 mx-1">
                         View Lawyer's Details
                       </button>
