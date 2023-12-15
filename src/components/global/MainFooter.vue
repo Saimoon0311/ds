@@ -1,6 +1,6 @@
 <template lang="">
     <div class="footer-main">
-        <div>
+        <div class="container">        <div>
             
             © 2023 Simplawfy Pty Ltd. | <router-link class="link" to="/privacy-policy" target="_blank">Privacy Policy</router-link> | <router-link class="link" to="/terms-of-use" target="_blank">Website Terms of Use</router-link> | <router-link class="link" to="/contact-us">Contact</router-link> | <a class="sitemap link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Site Map <i class=" caret-ico fa-solid fa-angle-up"></i>
@@ -23,7 +23,8 @@
             </span>
         </div>
 
-       
+    </div>
+ 
     </div>
 </template>
 <script>
