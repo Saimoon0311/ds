@@ -34,7 +34,6 @@ import "sweetalert2/dist/sweetalert2.min.css";
 /* add icons to the library */
 library.add(faUserSecret);
 
-
 // import { firebaseApp } from '@/config/firebaseConfig';
 
 // import { initializeApp } from "firebase/app";
@@ -53,7 +52,6 @@ library.add(faUserSecret);
 // const db = getFirestore(firebaseApp);
 
 const app = createApp(App).component("font-awesome-icon", FontAwesomeIcon);
-
 
 // app.config.globalProperties.$db = db;
 
@@ -96,7 +94,7 @@ app.mixin({
   },
 
   computed: {
-    loadMorePrevData(){
+    loadMorePrevData() {
       return this.$store.state.loadMorePrevData;
     },
     loginUserEmail() {
@@ -113,17 +111,20 @@ app.mixin({
   },
 
   methods: {
-
-    saveJobInfo(item){
+    saveJobInfo(item) {
       this.$store.commit("SET_JOB_DATA", item);
       localStorage.setItem("jobData", JSON.stringify(item));
     },
 
     // save load more pagination data
     saveLoadMoreData() {
-      this.$store.commit('SET_LOADMOREPREVDATA',{'currentPage' : this.currentPage, 'lastPage' : this.lastPage, 'openJobs' : this.openJobs});
-      console.log('curr : ' , this.currentPage)
-      console.log('last : ' , this.lastPage)
+      this.$store.commit("SET_LOADMOREPREVDATA", {
+        currentPage: this.currentPage,
+        lastPage: this.lastPage,
+        openJobs: this.openJobs,
+      });
+      console.log("curr : ", this.currentPage);
+      console.log("last : ", this.lastPage);
     },
 
     goToLoginPage(type) {
@@ -210,7 +211,7 @@ app.mixin({
       // console.log("curr search : ", this.currentPage);
     },
 
-    setUserInStateAndLocalStorage(res,removeFromLocalStorage = true) {
+    setUserInStateAndLocalStorage(res, removeFromLocalStorage = true) {
       console.log("new func : ", res?.data?.data?.link);
       const userData = {
         id: res?.data?.data?.id,
@@ -231,8 +232,8 @@ app.mixin({
         remote_consultation:
           res?.data?.data?.remote_consultation == 1 ? true : false,
         mobile_friendly: res?.data?.data?.mobile_friendly == 1 ? true : false,
-        fields : res?.data?.data?.fields,
-        locations : res?.data?.data?.locations,
+        fields: res?.data?.data?.fields,
+        locations: res?.data?.data?.locations,
       };
 
       if (localStorage.getItem("loginUser") && removeFromLocalStorage) {
@@ -294,8 +295,8 @@ app.mixin({
           console.log("len of locations : ", res?.data?.data?.locations.length);
           if (
             res?.data?.data?.fields.length > 0 &&
-            res?.data?.data?.locations.length > 0 && 
-            res?.data?.data?.admin_approval == 'approve'
+            res?.data?.data?.locations.length > 0 &&
+            res?.data?.data?.admin_approval == "approve"
           ) {
             path = "lawyer-dashboard";
           } else {
@@ -306,15 +307,20 @@ app.mixin({
       this.$router.push({ path: path });
     },
 
-
-
     openRequirementsModal(data) {
       let newData = {};
-      if (data && typeof data === 'object') {
+      if (data && typeof data === "object") {
         for (const key in data) {
           if (Object.prototype.hasOwnProperty.call(data, key)) {
             const value = data[key];
-            if (value !== null && key != 'id' && key != 'job_id' && key != 'user_id' && key != 'created_at' && key != 'updated_at') {
+            if (
+              value !== null &&
+              key != "id" &&
+              key != "job_id" &&
+              key != "user_id" &&
+              key != "created_at" &&
+              key != "updated_at"
+            ) {
               let objKey = key;
               objKey = objKey.replace(/_/g, " ");
               newData[objKey] = value;
@@ -323,32 +329,44 @@ app.mixin({
         }
       }
       const htmlContent = Object.entries(newData)
-        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div><br />`)
-        .join('');
+        .map(
+          ([key, value]) =>
+            `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div><br />`
+        )
+        .join("");
 
       // Use dynamic HTML inside SweetAlert2 modal
       this.$swal.fire({
-        title: 'Accessibility Requirements',
+        title: "Accessibility Requirements",
         html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
         showCloseButton: true,
         showConfirmButton: false,
         customClass: {
-          container: 'my-swal-container', // You can define your custom class for styling
+          container: "my-swal-container", // You can define your custom class for styling
         },
       });
     },
-
 
     openLawyerDetailsModal(data) {
       let newData = {};
-      if (data && typeof data === 'object') {
+      if (data && typeof data === "object") {
         for (const key in data) {
           if (Object.prototype.hasOwnProperty.call(data, key)) {
             const value = data[key];
-            if (value !== null && value != 0 && key != 'id' && 
-            key != 'admin_approval' && key != 'otp_verified' && key != "area_insert" && key != "state_insert"
-            && key != 'is_subscribed_first' && key != 'followup_email_status_two' && key != 'api_token'
-            && key != 'created_at' && key != 'updated_at') {
+            if (
+              value !== null &&
+              value != 0 &&
+              key != "id" &&
+              key != "admin_approval" &&
+              key != "otp_verified" &&
+              key != "area_insert" &&
+              key != "state_insert" &&
+              key != "is_subscribed_first" &&
+              key != "followup_email_status_two" &&
+              key != "api_token" &&
+              key != "created_at" &&
+              key != "updated_at"
+            ) {
               let objKey = key;
               objKey = objKey.replace(/_/g, " ");
               newData[objKey] = value;
@@ -357,22 +375,23 @@ app.mixin({
         }
       }
       const htmlContent = Object.entries(newData)
-        .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`)
-        .join('');
+        .map(
+          ([key, value]) =>
+            `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`
+        )
+        .join("");
 
       // Use dynamic HTML inside SweetAlert2 modal
       this.$swal.fire({
-        title: 'Lawyer Details',
+        title: "Lawyer Details",
         html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
         showCloseButton: true,
         showConfirmButton: false,
         customClass: {
-          container: 'my-swal-container', // You can define your custom class for styling
+          container: "my-swal-container", // You can define your custom class for styling
         },
       });
     },
-
-
 
     // openProposalDetailsModal(data) {
     //   console.log('proposal details : ' , data);
@@ -384,12 +403,12 @@ app.mixin({
     //     for (const key in data) {
     //       if (Object.prototype.hasOwnProperty.call(data, key)) {
     //         const value = data[key];
-    //         if (value !== null 
-    //           && key != 'id' 
-    //           && key != 'lawyer_id' 
-    //           && key != 'job_id' 
-    //           && key != 'user_id' 
-    //           && key != 'created_at' 
+    //         if (value !== null
+    //           && key != 'id'
+    //           && key != 'lawyer_id'
+    //           && key != 'job_id'
+    //           && key != 'user_id'
+    //           && key != 'created_at'
     //           && key != 'updated_at'
     //           ) {
     //             let objKey = key;
@@ -418,7 +437,7 @@ app.mixin({
     //   console.log(specificTasks);
     //   console.log(disbursements);
     //   console.log(feeEarners);
-      
+
     //   const htmlContent = Object.entries(newData)
     //     .map(([key, value]) => `<div class="wrapper" v-if="value != null"><h6><b>${key}: </b><span>${value}</span></h6></div>`)
     //     .join('');
@@ -435,94 +454,100 @@ app.mixin({
     //   });
     // },
 
-
-
-    openProposalDetailsModal(data,renderAsHtml = false) {
-      console.log('proposal details:', data);
+    openProposalDetailsModal(data, renderAsHtml = false) {
+      console.log("proposal details:", data);
       let newData = {};
       let specificTasks = [];
       let disbursements = [];
       let feeEarners = [];
-    
-      if (data && typeof data === 'object') {
+
+      if (data && typeof data === "object") {
         for (const key in data) {
           if (Object.prototype.hasOwnProperty.call(data, key)) {
             const value = data[key];
             if (
               value !== null &&
-              key != 'id' &&
-              key != 'lawyer_id' &&
-              key != 'job_id' &&
-              key != 'user_id' &&
-              key != 'created_at' &&
-              key != 'updated_at'
+              key != "id" &&
+              key != "lawyer_id" &&
+              key != "job_id" &&
+              key != "user_id" &&
+              key != "created_at" &&
+              key != "updated_at"
             ) {
               let objKey = key;
-              objKey = objKey.replace(/_/g, ' ');
-    
-              if (key == 'specific_tasks') {
+              objKey = objKey.replace(/_/g, " ");
+
+              if (key == "specific_tasks") {
                 specificTasks = [...value];
-              } else if (key == 'disbursements') {
+              } else if (key == "disbursements") {
                 disbursements = [...value];
-              } else if (key == 'fee_earners') {
+              } else if (key == "fee_earners") {
                 feeEarners = [...value];
-              } 
-              else{
-                              if(objKey == "lawyer" && value != null){
-                                newData["lawyer email"] = value?.email;
-                              }else{
-                                newData[objKey] = value;
-                              }
-                            }
+              } else {
+                if (objKey == "lawyer" && value != null) {
+                  newData["lawyer email"] = value?.email;
+                } else {
+                  newData[objKey] = value;
+                }
+              }
             }
           }
         }
       }
-  
+
       const mainHtmlContent = Object.entries(newData)
         .map(
           ([key, value]) =>
             `<div class="wrapper" v-if="value != null"><h6"><b style="text-transform: capitalize;">${key}:</b> <span>${value}</span></h6></div><br />`
         )
-        .join('');
-    
-        let specificTasksTable = "<span></span>";
-        let disbursementsTable = "<span></span>";
-        let feeEarnersTable = "<span></span>";
-        if(specificTasks.length > 0){
-          specificTasksTable = this.createTableHtml('Specific Tasks', specificTasks);
-        }
-        if(disbursements.length > 0){
-          disbursementsTable = this.createTableHtml('Disbursements', disbursements); 
-        }
-        if(feeEarners.length > 0){
-          feeEarnersTable = this.createTableHtmlFeeEarners('Fee Earners', feeEarners); 
-        }
-    
+        .join("");
+
+      let specificTasksTable = "<span></span>";
+      let disbursementsTable = "<span></span>";
+      let feeEarnersTable = "<span></span>";
+      if (specificTasks.length > 0) {
+        specificTasksTable = this.createTableHtml(
+          "Specific Tasks",
+          specificTasks
+        );
+      }
+      if (disbursements.length > 0) {
+        disbursementsTable = this.createTableHtml(
+          "Disbursements",
+          disbursements
+        );
+      }
+      if (feeEarners.length > 0) {
+        feeEarnersTable = this.createTableHtmlFeeEarners(
+          "Fee Earners",
+          feeEarners
+        );
+      }
+
       const swalHtmlContent = `
         <div class="table-wrap" style="text-align: left !important;">${mainHtmlContent}</div>
         ${specificTasksTable}
         ${disbursementsTable}
         ${feeEarnersTable}
       `;
-    
+
       // Use dynamic HTML inside SweetAlert2 modal
 
-      if(renderAsHtml){
+      if (renderAsHtml) {
         return swalHtmlContent;
-      }else{
+      } else {
         this.$swal.fire({
-          title: 'Proposal Details',
+          title: "Proposal Details",
           html: swalHtmlContent,
           showCloseButton: true,
           showConfirmButton: false,
           customClass: {
-            container: 'my-swal-container', // You can define your custom class for styling
+            container: "my-swal-container", // You can define your custom class for styling
           },
         });
       }
     },
-    
+
     createTableHtml(title, dataArray) {
       const tableContent = dataArray
         .map(
@@ -534,8 +559,8 @@ app.mixin({
             </tr>
           `
         )
-        .join('');
-    
+        .join("");
+
       return `
         <div class="table-title"><h5 style="text-align:left !important">${title} : </h5></div>
         <table class='table table-bordered dynamicTable'>
@@ -553,7 +578,6 @@ app.mixin({
       `;
     },
 
-
     createTableHtmlFeeEarners(title, dataArray) {
       const tableContent = dataArray
         .map(
@@ -566,8 +590,8 @@ app.mixin({
             </tr>
           `
         )
-        .join('');
-    
+        .join("");
+
       return `
         <div class="table-title"><h5 style="text-align:left !important">${title} : </h5></div>
         <table class='table table-bordered dynamicTable'>
@@ -585,8 +609,6 @@ app.mixin({
         </table>
       `;
     },
-
-    
 
     // check subscription status of login user
     // checkSubscriptionAndAdminApproval() {
@@ -732,6 +754,12 @@ app.mixin({
       this.$store.commit("SET_SUB_CANCEL_STATUS", false);
       this.$store.commit("SET_APPROVAL_STATUS", null);
       this.$store.commit("SET_SUBSCRIPTION_DATA", null);
+
+      this.$store.commit("SET_DATATAB", null);
+      this.$store.commit("SET_CHATSTATUS", null);
+      this.$store.commit("SET_JOBIDTOCHAT", null);
+      this.$store.commit("SET_USERTOCHAT", null);
+
       if (redirection) {
         this.$router.push({ path: redirectUrl });
       }
@@ -773,12 +801,12 @@ app.mixin({
     },
 
     async loadMore(status = null, reset = null) {
-      console.log('check computed : ' , this.loadMorePrevData)
-      if(this.loadMorePrevData != null){
+      console.log("check computed : ", this.loadMorePrevData);
+      if (this.loadMorePrevData != null) {
         this.currentPage = this.loadMorePrevData.currentPage;
         this.lastPage = this.loadMorePrevData.lastPage;
         this.openJobs = this.loadMorePrevData.openJobs;
-        this.$store.commit('SET_LOADMOREPREVDATA',null);
+        this.$store.commit("SET_LOADMOREPREVDATA", null);
         return false;
       }
       console.log(status, "l1");

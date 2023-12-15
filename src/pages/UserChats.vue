@@ -127,7 +127,7 @@
         <span v-if="this.userFirst?.type == 'lawyer'">
           <div class="row lawyer">
 
-            <div v-if="chatStatus && jobId && userFirst && userSecond" class="chatbox col-md-7 m-auto">
+            <div v-if="chatStatus && jobId && userFirst && userSecond && jobTabName != 'close'" class="chatbox col-md-7 m-auto">
               <div v-if="chatStatus == 'new'" class="alert alert-danger" role="alert">
                 You can send one message to the client if you need more information about the job in order to submit a
                 proposal. if client reply you so you are free to chat with client.
@@ -225,7 +225,7 @@ export default {
     //   return this.$store.state.lawyerEligibleStatus;
     // },
     jobTabName(){
-      return this.$store.state.jobTabChat;
+      return this.$store.state.dataTab;
     },
     chatStatus() {
       return this.$store.state.chatStatus;
@@ -341,14 +341,17 @@ export default {
     },
 
     loadMessages() {
+      console.log('chat id 1::::: ' , this.chatId);
       if (this.chatId == null) {
         this.chatId = (this.userFirst?.type == "lawyer") ? `${this.userFirst?.email}_${this.userSecond?.email}` : `${this.userSecond?.email}_${this.userFirst?.email}`;
       }
+      console.log('chat id 2::::: ' , this.chatId);
       const messagesRef = collection(db, 'chats', this.chatId, 'messages');
-
+      console.log('chat id 3::::: ' , this.messagesRef);
       onSnapshot(messagesRef, (snapshot) => {
         this.messages = snapshot.docs.map(doc => doc.data()).sort((a, b) => a.timestamp - b.timestamp);
       });
+      console.log('chat id 4::::: ' , this.messages);
     },
     sendMessage() {
       console.log(addDoc);

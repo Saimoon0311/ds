@@ -60,7 +60,7 @@
             <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
                 data-v-511b78bb=""
-                class="nav-link active"
+                :class="{ 'nav-link' : true, 'active' : tab == 'open' }"
                 id="pills-home-tab"
                 data-bs-toggle="pill"
                 data-bs-target="#pills-home"
@@ -76,7 +76,7 @@
             <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
                 data-v-511b78bb=""
-                class="nav-link"
+                :class="{ 'nav-link' : true, 'active' : tab == 'pending' }"
                 id="pills-profile-tab"
                 data-bs-toggle="pill"
                 data-bs-target="#pills-profile"
@@ -93,7 +93,7 @@
             <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
                 data-v-511b78bb=""
-                class="nav-link"
+                :class="{ 'nav-link' : true, 'active' : tab == 'close' }"
                 id="pills-profile-tab"
                 data-bs-toggle="pill"
                 data-bs-target="#pills-profile"
@@ -387,20 +387,19 @@
                           Message
                           </button>
 
-                          <router-link
+                          <!-- <router-link
                             v-if="tab === 'pending'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
                             to="/request-info"
                             >View Message</router-link
-                          >
+                          > -->
                         </div>
+
                         <div
-                          v-else
+                          v-if="tab == 'close'"
                           class="d-flex flex-column justify-content-center align-items-center"
                           style="min-width: 150px"
                         >
-                          <!-- <h3>Closed</h3> -->
-
                           <button
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
                             @click="goToMessagePage(item)"
@@ -505,6 +504,9 @@ export default {
   },
 
   computed: {
+    jobTabName(){
+      return this.$store.state.dataTab;
+    },
     userFields() {
       console.log("user : ", this.$store.getters?.loginUser);
       return `${this.$store.getters?.loginUser?.fields}`;
@@ -525,6 +527,9 @@ export default {
   },
   async created() {
     await this.loadMore();
+    if(this.jobTabName){
+      this.setTab(this.jobTabName);
+    }
   },
   // mounted(){
   //   this.getJobs();
@@ -542,10 +547,8 @@ export default {
       } else {
         this.$store.commit("SET_CHATSTATUS", "old");
       }
-
-      if(this.tab == 'close'){
-        this.$store.commit('SET_JOBTABCHAT','close');
-      }
+      
+      this.$store.commit('SET_DATATAB',this.tab);
 
       // if(item?.lawyer_chat?.client_reply){
       //   this.$store.commit('SET_LAWYER_ELIGIBLE_STATUS',true);
@@ -553,6 +556,18 @@ export default {
 
       // localStorage.setItem('userEmailToChat',userEmail);
       this.$router.push({ path: "/chat" });
+    },
+
+    async setTab(status) {
+      this.tab = status
+      if (status == "open") {
+        this.endpoint = "/lawyer/show-open-related-jobs";
+      } else if (status == "pending") {
+        this.endpoint = "/lawyer/show-pending-jobs";
+      } else if (status == "close") {
+        this.endpoint = "/lawyer/show-approve-jobs";
+      }
+      this.$store.commit('SET_DATATAB',null);
     },
 
     async changeTab(status) {

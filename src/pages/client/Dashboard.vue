@@ -10,6 +10,7 @@
       
 
       <div data-v-511b78bb="" class="container">
+        {{ tab }}
         <div>
           <ul
             data-v-511b78bb=""
@@ -20,7 +21,7 @@
             <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
               data-v-511b78bb=""
-                class="nav-link active"
+              :class="{ 'nav-link' : true, 'active' : tab == 'open' }"
                 id="pills-home-tab"
                 data-bs-toggle="pill"
                 data-bs-target="#pills-home"
@@ -36,7 +37,7 @@
             <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
               data-v-511b78bb=""
-                class="nav-link"
+              :class="{ 'nav-link' : true, 'active' : tab == 'close' }"
                 id="pills-profile-tab"
                 data-bs-toggle="pill"
                 data-bs-target="#pills-profile"
@@ -228,27 +229,45 @@ export default {
 
   async created() {
     await this.loadMore();
+    console.log('job tab ::::: ' , this.jobTabName)
+    if(this.jobTabName){
+      this.setTab(this.jobTabName);
+    }
   },
   computed: {
+    jobTabName(){
+      return this.$store.state.dataTab;
+    },
     userName() {
       return `${this.$store.getters?.loginUser?.first_name} ${this.$store.getters?.loginUser?.last_name}`;
     },
   },
   methods: {
 
-    goToMessagePage(item){
+    goToMessagePage(item) {
       this.saveJobInfo(item);
       this.saveLoadMoreData();
       // this.$store.commit('SET_USERTOCHAT',item?.owner);
-      this.$store.commit('SET_JOBIDTOCHAT',item?.id);
-      
+      this.$store.commit('SET_JOBIDTOCHAT', item?.id);
+
       // if(!item?.lawyer_chat){
       //   this.$store.commit('SET_CHATSTATUS','new');
       // }else{
       //   this.$store.commit('SET_CHATSTATUS','old');
       // }
       // localStorage.setItem('userEmailToChat',userEmail);
-      this.$router.push({ path : "/chat" });
+      this.$store.commit('SET_DATATAB',this.tab);
+      this.$router.push({ path: "/chat" });
+    },
+
+    async setTab(status) {
+      this.tab = status
+      if (status == "open") {
+        this.endpoint = "/client/client-jobs";
+      } else if (status == "close") {
+        this.endpoint = "/client/client-close-jobs";
+      } 
+      this.$store.commit('SET_DATATAB',null);
     },
 
     async changeTab(status) {
@@ -297,7 +316,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
   color: white;
   background-color: #000000;
 }
@@ -353,37 +372,44 @@ ul#pills-tab {
   /* outline: 1px solid #292929; */
   border-radius: 10px;
 }
+
 .card-btn {
-    width: 30%;
+  width: 30%;
 }
+
 p.badge {
-    font-size: 14px;
+  font-size: 14px;
 }
-.spacer{
+
+.spacer {
   margin: 30px 0;
   display: block;
 }
+
 .smallFont {
   font-size: 12px;
-  margin: 0 0 5px 0 ;
+  margin: 0 0 5px 0;
 }
 
-@media only screen and (max-width: 1400px) and (min-width: 992px)  {
-  .card-btn{
-  width: 33%;
-  font-size: 11px;
+@media only screen and (max-width: 1400px) and (min-width: 992px) {
+  .card-btn {
+    width: 33%;
+    font-size: 11px;
+  }
 }
+
+@media only screen and (max-width: 1200px) and (min-width: 992px) {
+  .card-btn {
+    font-size: 10px;
+  }
 }
-@media only screen and (max-width: 1200px) and (min-width: 992px)  {
-  .card-btn{
-  font-size: 10px;
-}
-}
+
 @media only screen and (max-width: 992px) {
-  .card-btn{
-  width: 100%;
+  .card-btn {
+    width: 100%;
+  }
 }
-}
+
 @media only screen and (max-width: 767px) and (min-width: 320px) {
   /* .btn {
     padding: 5px 0px;
@@ -391,5 +417,4 @@ p.badge {
     min-width: 90px;
     font-size: 14px;
   } */
-}
-</style>
+}</style>
