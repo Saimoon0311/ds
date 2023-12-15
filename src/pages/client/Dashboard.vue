@@ -6,22 +6,11 @@
       <p class="m-3" v-if="openJobs.length > 0">
         Here are all the jobs you have posted.
       </p>
+
+      
+
       <div data-v-511b78bb="" class="container">
-        <div
-          v-if="openJobs.length == 0 && searchQuery == ''"
-          class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
-          id="containerActive"
-        >
-          <div class="d-flex justify-content-center align-items-center w-100">
-            <span class="text-center p-2"
-              >You haven't posted a job. Click here to</span
-            >
-            <router-link to="/posting-job" class="btn btn-dark"
-              >Post a Job</router-link
-            >
-          </div>
-        </div>
-        <div v-else>
+        <div>
           <ul
             data-v-511b78bb=""
             class="nav nav-pills mb-3 bg-light border p-2 py-3 rounded"
@@ -62,7 +51,7 @@
               </button>
             </li>
           </ul>
-          <div data-v-511b78bb="" class="tab-content" id="pills-tabContent">
+          <div v-if="openJobs.length > 0" data-v-511b78bb="" class="tab-content" id="pills-tabContent">
             <div
               data-v-511b78bb=""
               class="tab-pane fade text-center active show"
@@ -180,6 +169,34 @@
               </button>
             </div>
           </div>
+
+          <div
+          v-if="openJobs.length == 0 && tab == 'open'"
+          class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
+          id="containerActive"
+          >
+          <div class="d-flex justify-content-center align-items-center w-100">
+            <span class="text-center p-2"
+              >You haven't posted a job. Click here to</span
+            >
+            <router-link to="/posting-job" class="btn btn-dark"
+              >Post a Job</router-link
+            >
+          </div>
+        </div>
+
+        <div
+          v-if="openJobs.length == 0 && tab == 'close'"
+          class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
+          id="containerActive"
+          >
+          <div class="d-flex justify-content-center align-items-center w-100">
+            <span class="text-center p-2"
+              >No Close Job Found</span
+            >
+          </div>
+        </div>
+
         </div>
 
       </div>
