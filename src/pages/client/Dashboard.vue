@@ -7,8 +7,6 @@
         Here are all the jobs you have posted.
       </p>
 
-      
-
       <div data-v-511b78bb="" class="container">
         {{ tab }}
         <div>
@@ -20,8 +18,8 @@
           >
             <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
-              data-v-511b78bb=""
-              :class="{ 'nav-link' : true, 'active' : tab == 'open' }"
+                data-v-511b78bb=""
+                :class="{ 'nav-link': true, active: tab == 'open' }"
                 id="pills-home-tab"
                 data-bs-toggle="pill"
                 data-bs-target="#pills-home"
@@ -36,8 +34,8 @@
             </li>
             <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
-              data-v-511b78bb=""
-              :class="{ 'nav-link' : true, 'active' : tab == 'close' }"
+                data-v-511b78bb=""
+                :class="{ 'nav-link': true, active: tab == 'close' }"
                 id="pills-profile-tab"
                 data-bs-toggle="pill"
                 data-bs-target="#pills-profile"
@@ -52,7 +50,12 @@
               </button>
             </li>
           </ul>
-          <div v-if="openJobs.length > 0" data-v-511b78bb="" class="tab-content" id="pills-tabContent">
+          <div
+            v-if="openJobs.length > 0"
+            data-v-511b78bb=""
+            class="tab-content"
+            id="pills-tabContent"
+          >
             <div
               data-v-511b78bb=""
               class="tab-pane fade text-center active show"
@@ -84,31 +87,47 @@
                 <div
                   v-for="(item, index) in openJobs"
                   :key="index"
-                  class="col-md-6"
+                  class="col-md-12"
                   id="30"
                 >
                   <div
-                    class="border rounded bg-secondary d-flex justify-content-between text-white p-3 flex-column mb-3"
+                    class="border rounded d-flex justify-content-between text-white flex-column mb-3 pb-3"
                   >
-                    <div class="text-left">
-                      <p class="badge bg-dark" title="Area">
-                        {{ item?.field?.title }}
-                      </p>
-                      &nbsp;
-                      <p class="badge bg-dark" title="Location">
-                        {{ item?.location?.title }}
-                      </p>
-                      <p class="text-center mt-3 mb-2">
-                        <b>{{ item?.title }}</b>
-                      </p>
-                      <p id="description28" class="descriptionText">
-                        <!-- <b>Job description: </b> -->
+                    <div class="p-3 card-top">
+                      <div>
+                        <p class="badge" title="Area">
+                          {{ item?.field?.title }}
+                        </p>
+
+                        &nbsp;
+                        <p class="badge" title="Location">
+                          {{ item?.location?.title }}
+                        </p>
+                        &nbsp;
+                      </div>
+                      <div>
+                        <p span class="smallFont">
+                          Job No: <b>{{ item?.identity }}</b>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="p-3">
+                      <div
+                        class="card-body d-flex align-items-start justify-content-between"
+                      >
+                        <p class="text-left text-black title">
+                          {{ item?.title }}
+                        </p>
+                      </div>
+                      <div id="description" class="descriptionText text-black text-left">
                         {{ item?.description }}
-                      </p>
-                      <!-- <p><b>City/suburb:</b> {{ item?.city }}</p> -->
-                      <span class="spacer">
-                        <p class="smallFont">
-                          Posted 
+                      </div>
+                    </div>
+
+                    <div class="widthcn">
+                      <span class="spacer px-3">
+                        <p class="smallFont text-black">
+                          Posted
                           <!-- by Username
                           <span class="text-capitalize"
                             >({{ item?.city }})</span
@@ -116,22 +135,12 @@
                           on
                           {{ formatCreatedAt(item.created_at) }}
                         </p>
-                        <p span class="smallFont">
-                          Job No: {{ item?.identity }}
-                        </p>
                       </span>
-
-                      <!-- <details>
-                            <summary>More details</summary>
-                            <div class="bg-dark border rounded p-3 m-1">
-                              <p><b>Posted by:</b> mailto:junucyme@mailinator.com</p>
-                              <p><b> Deadline:</b> 27-12-2023</p>
-                              <p><b> Preferred contact time:</b> Flexible</p>
-                            </div>
-                          </details> -->
                     </div>
+                    <!-- <p><b>City/suburb:</b> {{ item?.city }}</p> -->
+
                     <div
-                      class="d-flex flex-lg-row justify-content-center align-items-center flex-sm-column"
+                      class="d-flex flex-lg-row justify-content-center align-items-center flex-sm-column flex-wrap"
                       style="min-width: 125px"
                     >
                       <!-- <router-link
@@ -140,13 +149,22 @@
                     >View Proposals</router-link
                   > -->
                       <button
-                        class="btn btn-light btn-sm card-btn my-1 mx-1"
+                        class="btn btn-sm card-btn my-1 mx-1 border text-black"
                         @click="goToViewProposals(item?.id)"
                       >
                         View Proposal
                       </button>
-                      <button :disabled="item?.chats && item?.chats.length == 0" class="btn btn-dark btn-sm card-btn my-1 mx-1" @click="goToMessagePage(item)">
-                        View Messages {{ (item?.chats && item?.chats.length == 0) ? ', (N/A)' : ''}}
+                      <button
+                        :disabled="item?.chats && item?.chats.length == 0"
+                        class="btn btn-dark btn-sm card-btn my-1 mx-1"
+                        @click="goToMessagePage(item)"
+                      >
+                        View Messages
+                        {{
+                          item?.chats && item?.chats.length == 0
+                            ? ", (N/A)"
+                            : ""
+                        }}
                       </button>
 
                       <button class="btn btn-danger btn-sm card-btn my-1 mx-1">
@@ -173,34 +191,30 @@
           </div>
 
           <div
-          v-if="openJobs.length == 0 && tab == 'open'"
-          class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
-          id="containerActive"
+            v-if="openJobs.length == 0 && tab == 'open'"
+            class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
+            id="containerActive"
           >
-          <div class="d-flex justify-content-center align-items-center w-100">
-            <span class="text-center p-2"
-              >You haven't posted a job. Click here to</span
-            >
-            <router-link to="/posting-job" class="btn btn-dark"
-              >Post a Job</router-link
-            >
+            <div class="d-flex justify-content-center align-items-center w-100">
+              <span class="text-center p-2"
+                >You haven't posted a job. Click here to</span
+              >
+              <router-link to="/posting-job" class="btn btn-dark"
+                >Post a Job</router-link
+              >
+            </div>
+          </div>
+
+          <div
+            v-if="openJobs.length == 0 && tab == 'close'"
+            class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
+            id="containerActive"
+          >
+            <div class="d-flex justify-content-center align-items-center w-100">
+              <span class="text-center p-2">No Close Job Found</span>
+            </div>
           </div>
         </div>
-
-        <div
-          v-if="openJobs.length == 0 && tab == 'close'"
-          class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
-          id="containerActive"
-          >
-          <div class="d-flex justify-content-center align-items-center w-100">
-            <span class="text-center p-2"
-              >No Close Job Found</span
-            >
-          </div>
-        </div>
-
-        </div>
-
       </div>
     </div>
     <div class="footer">
@@ -229,13 +243,13 @@ export default {
 
   async created() {
     await this.loadMore();
-    console.log('job tab ::::: ' , this.jobTabName)
-    if(this.jobTabName){
+    console.log("job tab ::::: ", this.jobTabName);
+    if (this.jobTabName) {
       this.setTab(this.jobTabName);
     }
   },
   computed: {
-    jobTabName(){
+    jobTabName() {
       return this.$store.state.dataTab;
     },
     userName() {
@@ -243,12 +257,11 @@ export default {
     },
   },
   methods: {
-
     goToMessagePage(item) {
       this.saveJobInfo(item);
       this.saveLoadMoreData();
       // this.$store.commit('SET_USERTOCHAT',item?.owner);
-      this.$store.commit('SET_JOBIDTOCHAT', item?.id);
+      this.$store.commit("SET_JOBIDTOCHAT", item?.id);
 
       // if(!item?.lawyer_chat){
       //   this.$store.commit('SET_CHATSTATUS','new');
@@ -256,18 +269,18 @@ export default {
       //   this.$store.commit('SET_CHATSTATUS','old');
       // }
       // localStorage.setItem('userEmailToChat',userEmail);
-      this.$store.commit('SET_DATATAB',this.tab);
+      this.$store.commit("SET_DATATAB", this.tab);
       this.$router.push({ path: "/chat" });
     },
 
     async setTab(status) {
-      this.tab = status
+      this.tab = status;
       if (status == "open") {
         this.endpoint = "/client/client-jobs";
       } else if (status == "close") {
         this.endpoint = "/client/client-close-jobs";
-      } 
-      this.$store.commit('SET_DATATAB',null);
+      }
+      this.$store.commit("SET_DATATAB", null);
     },
 
     async changeTab(status) {
@@ -316,7 +329,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
+.nav-pills .show > .nav-link {
   color: white;
   background-color: #000000;
 }
@@ -381,32 +394,109 @@ p.badge {
   font-size: 14px;
 }
 
-.spacer {
-  margin: 30px 0;
-  display: block;
+.title{
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: capitalize;
 }
 
 .smallFont {
   font-size: 12px;
   margin: 0 0 5px 0;
 }
+.card-top{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px 5px 0 0;
+    background: rgba(55, 59, 62, 1);
+}
+p.badge{
+    font-size: 14px;
+    font-weight: 400;
+    border: 1px solid rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    margin: 0;
+}
+.smallFont {
+    font-size: 16px;
+    margin: 0;
+}
+.descriptionText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 100px;
+  /* line-break: anywhere; */
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-right: 5px;
+}
 
+.descriptionText::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 10px;
+}
+
+.descriptionText::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
+  border-radius: 10px;
+}
+
+.descriptionText::-webkit-scrollbar-thumb {
+  background-color: rgba(217, 217, 217, 1);
+  /* outline: 1px solid #292929; */
+  border-radius: 10px;
+}
+.card-btn {
+    width: 30%;
+    height: 45px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.spacer {
+    margin: 20px 0;
+    display: block;
+    border-top: 1px solid black;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 @media only screen and (max-width: 1400px) and (min-width: 992px) {
   .card-btn {
-    width: 33%;
+    width: 30%;
     font-size: 11px;
+    padding: 5px;
   }
 }
 
-@media only screen and (max-width: 1200px) and (min-width: 992px) {
+@media only screen and (max-width: 992px) {
   .card-btn {
-    font-size: 10px;
+    width: 95%;
+  }
+  .smallFont {
+    margin: 5px;
+    font-size: 14px;
   }
 }
 
 @media only screen and (max-width: 992px) {
   .card-btn {
     width: 100%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .spacer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    align-content: flex-start;
+    flex-wrap: wrap;
   }
 }
 
@@ -417,4 +507,9 @@ p.badge {
     min-width: 90px;
     font-size: 14px;
   } */
-}</style>
+  p.badge {
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+}
+</style>
