@@ -241,9 +241,9 @@ export default {
     }
   },
   mounted() {
-    if (!this.userFirst) {
-      this.$router.go(-1);
-    }
+    // if (!this.userFirst) {
+    //   this.$router.go(-1);
+    // }
     if (this.userFirst?.type == "client") {
       api2.get(`/client/get-lawyers-list-to-chat/${this.jobId}`).then((res) => {
         this.lawyer_data = res?.data;
