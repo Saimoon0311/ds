@@ -67,8 +67,8 @@
         <h2 class="mainHeading">Chats</h2>
         <!-- Client View: Select Lawyer -->
 
-        <div v-if="userFirst.type === 'client' && lawyer_data.length > 0"
-          :class="{ 'col-md-3': userFirst.type === 'client' }">
+        <div v-if="userFirst?.type === 'client' && lawyer_data.length > 0"
+          :class="{ 'col-md-3': userFirst?.type === 'client' }">
           <h4>Select Lawyer to Chat</h4>
           <ul class="lawyer-list">
             <li @click="startChatForClient(data, index)" v-for="(data, index) in lawyer_data" :key="data.id"
@@ -87,7 +87,7 @@
         <!-- client chat box -->
         <div
           v-if="this.userFirst?.type == 'client' && this.lawyerSelected && chatStatus && jobId && userFirst && userSecond"
-          :class="{ 'col-md-9': userFirst.type === 'client', 'chatbox': true }">
+          :class="{ 'col-md-9': userFirst?.type === 'client', 'chatbox': true }">
           <div class="text-end mb-3">
             <span
               v-if="userFirst?.type === 'client' && chatStatus && jobId && userFirst && userSecond && messages.length > 0"
@@ -113,6 +113,11 @@
           <div class="chat-input">
             <input v-model="newMessage" placeholder="Type your message..." @input="checkInput" />
             <button @click="sendMessage" class="bg-dark text-white" :disabled="this.showTypeError">Send</button>
+          </div>
+          <div v-if="showTypeError" class="alert alert-danger" role="alert">
+            Please do not disclose personal details in the messaging system. Contact details will be exchanged when a
+            client
+            accepts a lawyer's proposal.
           </div>
         </div>
         <!-- client chat box end -->
@@ -149,16 +154,18 @@
                 <input v-model="newMessage" placeholder="Type your message..." @input="checkInput" />
                 <button @click="sendMessage" class="bg-dark text-white" :disabled="this.showTypeError">Send</button>
               </div>
+              <div v-if="showTypeError" class="alert alert-danger" role="alert">
+                Please do not disclose personal details in the messaging system. Contact details will be exchanged when a
+                client
+                accepts a lawyer's proposal.
+              </div>
             </div>
           </div>
         </span>
         <!-- lawyer chat box end -->
 
 
-        <div v-if="showTypeError" class="alert alert-danger" role="alert">
-          Please do not disclose personal details in the messaging system. Contact details will be exchanged when a client
-          accepts a lawyer's proposal.
-        </div>
+
 
 
       </div>
@@ -348,16 +355,16 @@ export default {
         return false;
       }
 
-      if (this.messages.length > 0 && this.userFirst?.type == 'lawyer') {
-        if (
-          this.messages.length == 1 &&
-          this.messages[0].sender_email == this.userFirst?.email
-        ) {
-          this.$swal("", "You can not send message until client reply on your first messages, please wait for client reply", "error");
-          this.newMessage = '';
-          return false;
-        }
-      }
+      // if (this.messages.length > 0 && this.userFirst?.type == 'lawyer') {
+      //   if (
+      //     this.messages.length == 1 &&
+      //     this.messages[0].sender_email == this.userFirst?.email
+      //   ) {
+      //     this.$swal("", "You can not send message until client reply on your first messages, please wait for client reply", "error");
+      //     this.newMessage = '';
+      //     return false;
+      //   }
+      // }
 
       // console.log(this.chatStatus);
       // console.log(this.userFirst?.type);
@@ -381,6 +388,8 @@ export default {
         console.log(this.userFirst);
         const lawyer_id = (this.userFirst?.type == "lawyer") ? this.userFirst?.id : this.userSecond?.id;
         const client_id = (this.userFirst?.type == "client") ? this.userFirst?.id : this.userSecond?.id;
+        console.log(this.chatStatus);
+        console.log(this.userFirst?.type);
         if (this.chatStatus == "new" && this.userFirst?.type == "lawyer") {
           api2.post('/save-chat-info', { "lawyer_id": lawyer_id, "client_id": client_id, "job_id": this.jobId, "chat_id": this.chatId }).then(() => {
             this.$store.commit('SET_CHATSTATUS', 'old');
