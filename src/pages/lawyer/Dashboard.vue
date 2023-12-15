@@ -609,7 +609,8 @@ export default {
       try {
         this.$swal({
           title: "Are you sure?",
-          text: `Are you sure you want to decline this job, You will not be able to see this anymore.`,
+          // text: `Are you sure you want to decline this job, You will not be able to see this anymore.`,
+          text : `Are you sure you want to decline this job? Doing so will prevent you from viewing or submitting a proposal for this job.`,
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -622,7 +623,7 @@ export default {
               .then(() => {
                 this.$swal(
                   "",
-                  `Job has been decline successfully`,
+                  `You have successfully declined this job.`,
                   "success"
                 ).then(async () => {
                   this.fixLoadMoreAfterDeleteRecord(index);
@@ -642,7 +643,8 @@ export default {
       try {
         this.$swal({
           title: "Are you sure?",
-          text: `Are you sure you want to withdraw from your proposal on this job, You will not be able to see this anymore.`,
+          // text: `Are you sure you want to withdraw from your proposal on this job, You will not be able to see this anymore.`,
+          text : `Are you sure you want to withdraw your proposal for this job? In doing so, your proposal will not be able to be accepted nor will you be able to submit a new proposal.`,
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -655,7 +657,7 @@ export default {
               .then(() => {
                 this.$swal(
                   "",
-                  `Proposal has been withdraw successfully`,
+                  `You have withdrawn your proposal successfully.`,
                   "success"
                 ).then(async () => {
                   this.fixLoadMoreAfterDeleteRecord(index);

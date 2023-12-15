@@ -8,7 +8,6 @@
       </p>
 
       <div data-v-511b78bb="" class="container">
-        {{ tab }}
         <div>
           <ul
             data-v-511b78bb=""
@@ -167,13 +166,16 @@
                         }}
                       </button>
 
-                      <button class="btn btn-danger btn-sm card-btn my-1 mx-1">
-                        View Lawyer's Details
+                    
+                      <button v-if="tab == 'open'" @click="declineJob(item.id,index)" class="btn btn-danger btn-sm card-btn my-1 mx-1">
+                        Cancel Job
                       </button>
-                      <form method="post" action="index.php" class="d-none">
+
+
+                      <!-- <form method="post" action="index.php" class="d-none">
                         <input class="d-none" name="id" value="30" />
                         <button>Cancel Job</button>
-                      </form>
+                      </form> -->
                     </div>
                   </div>
                 </div>
@@ -226,6 +228,7 @@
 <script>
 import ClientHeader from "./Header.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
+import api from '@/config/api';
 
 export default {
   name: "ClientDashboard",
@@ -257,6 +260,41 @@ export default {
     },
   },
   methods: {
+
+
+    async declineJob(job_id, index) {
+      try {
+        this.$swal({
+          title: "Are you sure?",
+          text: `Are you sure you want to cancel this job, You will not be able to see this anymore.`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: `Yes, Cancel`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            api
+              .post("/client/cancel-job", { job_id: job_id })
+              .then(() => {
+                this.$swal(
+                  "",
+                  `Job has been cancel successfully`,
+                  "success"
+                ).then(async () => {
+                  this.fixLoadMoreAfterDeleteRecord(index);
+                });
+              })
+              .catch((error) => {
+                console.log("error : ", error);
+              });
+          }
+        });
+      } catch (error) {
+        console.error("Error fetching options:", error);
+      }
+    },
+
     goToMessagePage(item) {
       this.saveJobInfo(item);
       this.saveLoadMoreData();
@@ -300,6 +338,7 @@ export default {
       this.saveLoadMoreData();
       this.$store.commit("SET_JOB_ID", id);
       localStorage.setItem("jobId", id);
+      this.$store.commit("SET_DATATAB", this.tab);
       this.$router.push({ path: "/view-proposals" });
     },
     // async getJobs() {
