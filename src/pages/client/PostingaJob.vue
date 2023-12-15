@@ -1,5 +1,6 @@
 <template>
   <div class="f-main">
+    <div class="container">
     <ClientHeader />
     <p class="h3 text-center mt-5">Post a Job</p>
     <div class="container pb-seven">
@@ -282,18 +283,18 @@
 
           <template v-if="currentStep === 4">
             <div class="summ mb-3">
-              <p class="h4 text-center mb-3 mt-2">Summary</p>
+              <p class="h4 text-center fw-bold mb-3 mt-2">Summary</p>
               <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
-              <div class="sum-top mb-3">
-                <p class="areas text-decoration-none badge text-white fs-6 bubbles area-bubble">
+              <div class="sum-top mb-3 bg-dark">
+                <p class="areas text-decoration-none badge text-white">
                   {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
                 </p>
-                <h4 class=" text-center title-font text-white mt-1 mb-2"><b>{{ title }}</b>
+                <h4 class=" text-start title-font text-white mt-3 mb-3"><b>{{ title }}</b>
                 </h4>
-                <h4 class="text-white descriptionText">{{ description }}</h4>
+                <p class="text-white descriptionText">{{ description }}</p>
               </div>
 
-              <h4 class="mb-3 text-capitalize"><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}
+              <h4 class="mb-3 text-capitalize">Location: {{ city }}, {{ locations[selectedLocationIndex].title }}
               </h4>
               <!-- <h4><b>State/Territory</b></h4> -->
               <!-- <h4></h4> -->
@@ -302,6 +303,7 @@
               <!-- <span v-if="requirementsOption">
                 <h4 class="d-inline"><b>Accessibility Requirements: </b></h4>
               </span> -->
+
               <div v-if='this.visualOption != "" ||
                 this.auditoryOption != "" ||
                 this.mobilityOption != "" ||
@@ -311,72 +313,72 @@
                 this.medicalOption != "" ||
                 this.requirementsOptionDescription != "" ||
                 this.otherLanguage != "" ||
-                this.selectedLanguage != ""' class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button class="accordion-button " type="button" data-bs-toggle="collapse"
-                      data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                      aria-controls="panelsStayOpen-collapseOne">
-                      <b>Accessibility Requirements </b>
-                    </button>
-                  </h2>
-                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show "
-                    aria-labelledby="panelsStayOpen-headingOne">
-                    <div class="accordion-body">
+                this.selectedLanguage != ""' >
+                <div >
+              <h4 class="d-inline ">Accessibility Requirements</h4>      
+
+                  <h4 class="d-inline mx-3 font-small" @click="toggleDiv">                
+                      View Details  
+                      <!-- <i class="fa fa-chevron-down"></i>   -->
+                      <i :class="['fa', isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down']"></i>          
+                  </h4>
+                 
+                </div>
+                <div class="mt-3">
+                    <div class="accordion-body-show" v-if="isDivVisible">
                       <div v-if="VisualIsChecked">
-                        <p><i class="fa fa-check"></i><b> Visual Impairment: </b> {{ visualOption }}</p>
+                        <p><i class="fa fa-check"></i> Visual Impairment:  {{ visualOption }}</p>
                       </div>
 
                       <div v-if="AuditoryIsChecked">
-                        <!-- <b><p>Auditory Impairment : </p></b>
+                        <!-- <p>Auditory Impairment : </p>
                 <p>{{ auditoryOption }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Auditory Impairment: </b> {{ auditoryOption }}</p>
+                        <p><i class="fa fa-check"></i> Auditory Impairment:  {{ auditoryOption }}</p>
 
                       </div>
 
                       <div v-if="MobilityIsChecked">
-                        <!-- <b><p>Mobility/Physical Impairment : </p></b>
+                        <!-- <p>Mobility/Physical Impairment : </p>
                 <p>{{ mobilityOption }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Mobility/Physical Impairment: </b> {{ mobilityOption }}</p>
+                        <p><i class="fa fa-check"></i> Mobility/Physical Impairment:  {{ mobilityOption }}</p>
                       </div>
 
                       <div v-if="LearningIsChecked">
-                        <!-- <b><p>Learning Impairment : </p></b>
+                        <!-- <p>Learning Impairment : </p>
                 <p>{{ learningOption }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Learning Impairment: </b> {{ learningOption }}</p>
+                        <p><i class="fa fa-check"></i> Learning Impairment:  {{ learningOption }}</p>
                       </div>
 
                       <div v-if="IntellectualIsChecked">
-                        <!-- <b><p>Intellectual Disability : </p></b>
+                        <!-- <p>Intellectual Disability : </p>
                 <p>{{ intellectualOption }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Intellectual Disability: </b> {{ intellectualOption }}</p>
+                        <p><i class="fa fa-check"></i> Intellectual Disability:  {{ intellectualOption }}</p>
                       </div>
 
                       <div v-if="PsychiatricIsChecked">
-                        <!-- <b><p>Psychiatric Disability : </p></b>
+                        <!-- <p>Psychiatric Disability : </p>
                 <p>{{ psychiatricOption }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Psychiatric Disability: </b> {{ psychiatricOption }}</p>
+                        <p><i class="fa fa-check"></i> Psychiatric Disability:  {{ psychiatricOption }}</p>
                       </div>
 
                       <div v-if="MedicalIsChecked">
-                        <!-- <b><p>Medical Disability : </p></b>
+                        <!-- <p>Medical Disability : </p>
                 <p>{{ medicalOption }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Medical Disability: </b> {{ medicalOption }}</p>
+                        <p><i class="fa fa-check"></i> Medical Disability:  {{ medicalOption }}</p>
                       </div>
 
                       <div v-if="isChecked">
-                        <p><i class="fa fa-check"></i><b> Other: </b> {{ requirementsOptionDescription }}</p>
+                        <p><i class="fa fa-check"></i> Other:  {{ requirementsOptionDescription }}</p>
                       </div>
 
                       <div v-if="languageIsChecked">
-                        <!-- <b><p>Language : </p></b>
+                        <!-- <p>Language : </p>
                 <p>{{ selectedLanguage }}</p> -->
-                        <p><i class="fa fa-check"></i><b> Language: </b> {{ selectedLanguage == 'Other' ? otherLanguage :
+                        <p><i class="fa fa-check"></i> Language:  {{ selectedLanguage == 'Other' ? otherLanguage :
                           selectedLanguage }}</p>
                       </div>
                     </div>
                   </div>
-                </div>
 
 
               </div>
@@ -409,18 +411,18 @@
             </span>
 
             <div>
-              <button v-if="currentStep !== 0" type="button" class="btn btn-dark mr" @click="prevStep">
+              <button v-if="currentStep !== 0" type="button" class="btn border text-black mr" @click="prevStep">
                 Previous
               </button>
-              <button v-if="currentStep !== 3 && currentStep !== 4" type="submit" class="btn btn-dark">
+              <button v-if="currentStep !== 3 && currentStep !== 4" type="submit" class="btn btn-bg">
                 Next
               </button>
 
-              <button v-if="currentStep === 3" type="submit" class="btn btn-dark">
+              <button v-if="currentStep === 3" type="submit" class="btn btn-bg">
                 Summary
               </button>
 
-              <button v-if="currentStep === 4" @click="submitStepForm" type="button" class="btn btn-dark">
+              <button v-if="currentStep === 4" @click="submitStepForm" type="button" class="btn btn-bg">
                 Submit
               </button>
             </div>
@@ -433,6 +435,7 @@
     <div class="footer footer-ct">
       <MainFooter />
     </div>
+  </div>
   </div>
 </template>
 <!-- <script setup>
@@ -476,7 +479,7 @@ export default {
     return {
       currentStep: 0,
       totalSteps: 4,
-
+      isDivVisible: false,
       areas: [],
       locations: [],
       selectedLanguage: "",
@@ -594,6 +597,9 @@ export default {
         this.visualOption = "";
       }
     },
+    toggleDiv() {
+          this.isDivVisible = !this.isDivVisible;
+        },
     resetAuditory() {
       if (!this.AuditoryIsChecked) {
         this.auditoryOption = "";
@@ -864,6 +870,17 @@ export default {
 };
 </script>
 <style scoped>
+.sum-top .badge{
+    font-size: 14px;
+    font-weight: 400;
+    border: 1px solid rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    margin: 0;
+}
+.summ .font-small{
+  font-size: 13px !important;
+}
 .stepbtn {
   display: flex;
   justify-content: space-between;
@@ -876,7 +893,11 @@ export default {
 
 .btn {
   padding: 5px 25px;
-  border-radius: 20px;
+  border-radius: 5px;
+}
+.btn-bg{
+  background: rgba(55, 59, 62, 1) !important;
+  color: white !important;
 }
 
 .bubbles {
@@ -947,10 +968,34 @@ export default {
   bottom: 2px;
 }
 
-h4 {
+.summ h4 {
   font-size: 16px;
+}.summ .accordion-body-show div:first-child{
+  margin: 0;
 }
+.summ .accordion-body-show div {
+    margin: 0 10px;
+}
+.summ .accordion-body-show p i {
+    border: 1px solid #5dc71d;
+    padding: 2.5px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-right: 5px;
+    color: #5dc71d;
+}
+.summ .accordion-body-show p{
+  margin: 0;
+}
+.summ .accordion-body-show div,.summ .accordion-body-show div p{
+  display: inline;
+}
+.summ .accordion-body-show{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 
+}
 .line-break {
   line-break: anywhere;
 }

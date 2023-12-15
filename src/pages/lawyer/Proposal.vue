@@ -1675,7 +1675,7 @@
                 v-if="currentStep !== 0"
                 type="button"
                 @click="proPrevStep"
-                class="btn btn-dark mr"
+                class="btn text-black border mr"
               >
                 Previous
               </button>
@@ -1684,7 +1684,7 @@
                 type="submit"
                 @click="proStep"
                 :disabled="!selectedOption"
-                class="btn btn-dark"
+                class="btn btn-bg"
               >
                 Next
               </button>
@@ -1790,108 +1790,110 @@
 
         <template v-if="currentStep === 3">
           <div class="summ mb-3">
-              <p class="h4 text-center mb-3 mt-2">Summary</p>
+              <p class="h4 text-start fw-bold mb-3 mt-2">Summary</p>
 
 
-                      <div v-if="form.hours">
-                        <p><i class="fa fa-check"></i><b> Hours : </b> {{ form.hours }}</p>
+                      <div v-if="form.hours" >
+                        <p> <span> Hours:</span>  <span>{{form.hours }}</span></p>
                       </div>
 
                       <div v-if="form.hourly_rate">
-                        <p><i class="fa fa-check"></i><b> Hourly Rate : </b> {{ form.hourly_rate }}</p>
+                        <p> <span> Hourly Rate:</span>  <span>{{ form.hourly_rate }}</span></p>
                       </div>
 
                       <div v-if="form.retainer_period">
-                        <p><i class="fa fa-check"></i><b> Retainer Period : </b> {{ form.retainer_period }}</p>
+                        <p> <span> Retainer Peiod:</span>  <span>{{ form.retainer_period }}</span></p>
                       </div>
 
                       <div v-if="form.retainer_limitation">
-                        <p><i class="fa fa-check"></i><b> Retainer Limitation : </b> {{ form.retainer_limitation }}</p>
+                        <p> <span> Retainer Liitation:</span>  <span> {{ form.retainer_limitation }}</span></p>
                       </div>
 
                       <div v-if="form.notice_period">
-                        <p><i class="fa fa-check"></i><b> Notice Period : </b> {{ form.notice_period }}</p>
+                        <p> <span> Notice Perid:</span>  <span>{{ form.notice_period }}</span></p>
                       </div>
 
                       <div v-if="form.retainer_fee">
-                        <p><i class="fa fa-check"></i><b> Retainer Fee : </b> {{ form.retainer_fee }}</p>
+                        <p> <span> Retainer Fee:</span>  <span>{{ form.retainer_fee }}</span></p>
                       </div>
 
                       <div v-if="form.days">
-                        <p><i class="fa fa-check"></i><b> Days : </b> {{ form.days }}</p>
+                        <p> <span> Days:</span>  <span>{{ form.days }}</span></p>
                       </div>
 
                       <div v-if="form.charge_type">
-                        <p><i class="fa fa-check"></i><b> Charge Type : </b> {{ form.charge_type }}</p>
+                        <p> <span> Charge Type:</span>  <span>{{ form.charge_type }}</span></p>
                       </div>
 
                       <div v-if="form.fixed_fee_amount">
-                        <p><i class="fa fa-check"></i><b> Fixed Fee Amount : </b> {{ form.fixed_fee_amount }}</p>
+                        <p> <span> Fixed Fee Aount:</span>  <span>{{ form.fixed_fee_amount }}</span></p>
                       </div>
 
                       <div v-if="form.disbursement_amount">
-                        <p><i class="fa fa-check"></i><b> Disbursement Amount : </b> {{ form.disbursement_amount }}</p>
+                        <p> <span> Disbursemen Amount:</span>  <span>{{ form.disbursement_amount }}</span></p>
                       </div>
 
                       <div v-if="form.law_practice_cost">
-                        <p><i class="fa fa-check"></i><b> Law Practice Cost : </b> {{ form.law_practice_cost }}</p>
+                        <p> <span> Law Practic Cost:</span>  <span>{{ form.law_practice_cost }}</span></p>
                       </div>
 
                       <div v-if="form.fee_earners">
-                        <p><i class="fa fa-check"></i><b> Fee Earners : </b> {{ form.fee_earners }}</p>
+                        <p> <span> Fee Earners:</span>  <span>{{ form.fee_earners }}</span></p>
                       </div>
 
                       <div v-if="form.daily_rate">
-                        <p><i class="fa fa-check"></i><b> Daily Rate : </b> {{ form.daily_rate }}</p>
+                        <p> <span> Daily Rate:</span>   <span>{{ form.daily_rate }}</span></p>
                       </div>
 
                       <div v-if="form.uplift_percentage">
-                        <p><i class="fa fa-check"></i><b>  Uplift Percentage : </b> {{ form.uplift_percentage }}</p>
+                        <p> <span>  Uplift Perentage:</span>  <span>{{ form.uplift_percentage }}</span></p>
                       </div>
 
                       <div v-if="form.estimated_fee">
-                        <p><i class="fa fa-check"></i><b> Estimated Fee : </b> {{ form.estimated_fee }}</p>
+                        <p> <span> Estimated Fee:</span>  <span>{{ form.estimated_fee }}</span></p>
                       </div>
 
                       <div v-if="form.success_fee_term">
-                        <p><i class="fa fa-check"></i><b> Success Fee Term : </b> {{ form.success_fee_term }}</p>
+                        <p> <span> Success FeeTerm:</span> <span>{{ form.success_fee_term }}</span></p>
                       </div>
 
                       <div v-if="form.pro_bono_description">
-                        <p><i class="fa fa-check"></i><b> Pro Bono Description : </b> {{ form.pro_bono_description }}</p>
+                        <p> <span> Pro Bono Decription:</span>  <span>{{ form.pro_bono_description }}</span></p>
                       </div>
 
                       <div v-if="form.meet_deadlines">
-                        <p><i class="fa fa-check"></i><b> Meet Deadlines : </b> {{ form.meet_deadlines }}</p>
+                        <p> <span> Meet Deadlies:</span>  <span>{{ form.meet_deadlines }}</span></p>
                       </div>
 
                       <div v-if="form.miss_deadline_reason">
-                        <p><i class="fa fa-check"></i><b> Miss Deadline Reason : </b> {{ form.miss_deadline_reason }}</p>
+                        <p> <span> Miss Deadlie Reason:</span>  <span>{{ form.miss_deadline_reason }}</span></p>
                       </div>
 
                       <div v-if="form.upfront_payment_status">
-                        <p><i class="fa fa-check"></i><b> Upfront Payment Status : </b> {{ form.upfront_payment_status }}</p>
+                        <p> <span> Upfront Payent Status:</span>  <span>{{ form.upfront_payment_status }}</span></p>
                       </div>
 
                       <div v-if="form.upfront_payment">
-                        <p><i class="fa fa-check"></i><b> Upfront Payment : </b> {{ form.upfront_payment }}</p>
+                        <p> <span> Upfront Payent:</span>  <span>{{ form.upfront_payment }}</span></p>
                       </div>
 
                       <div v-if="form.consultation">
-                        <p><i class="fa fa-check"></i><b> Consultation : </b> {{ form.consultation }}</p>
+                        <p> <span> Consultation:</span> <span>{{ form.consultation }}</span></p>
                       </div>
 
                       <div v-if="form.consultation_time_limit">
-                        <p><i class="fa fa-check"></i><b> Consultation Time Limit : </b> {{ form.consultation_time_limit }}</p>
+                        <p> <span> Consultatio Time Limit:</span>  <span>{{ form.consultation_time_limit }}</span></p>
                       </div>
-
-                      <div v-if="form.description">
-                        <p><i class="fa fa-check"></i><b> Description : </b> {{ form.description }}</p>
-                      </div>
-
 
                       <div v-html="summaryHtml">
                       </div>
+
+                      <div v-if="form.description" class="sumdesc">
+                        <p><b> Description:</b>  </p>
+                        <p class="descriptionText">{{ form.description }} </p>
+                      </div>
+
+                      
 
 
               <!-- hours : null,
@@ -2000,7 +2002,7 @@
 
         <div class="stepbtn mt-3">
           <span v-if="selectedOption == 'Pro'">
-            <span class="pagination-indicator"> {{ 3 }} of {{ 3 }} </span>
+            <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
           </span>
           <span v-else>
             <span v-if="currentStep !== 5" class="pagination-indicator">
@@ -2012,14 +2014,14 @@
               v-if="currentStep !== 0"
               type="button"
               @click="prevStep"
-              class="btn btn-dark mr"
+              class="btn border mr text-black"
             >
               Previous
             </button>
             <button
               type="submit"
               :disabled="!selectedOption"
-              class="btn btn-dark"
+              class="btn btn-bg"
             >
               {{ buttonText }}
             </button>
@@ -2454,6 +2456,21 @@ export default {
 </script>
 
 <style scoped>
+.summ div p {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: capitalize;
+
+}
+.summ .sumdesc p{
+  display: block !important;
+}
+.summ .table-wrap h5{
+  font-size: 18px;
+  font-weight: 600;
+}
 .b-round-start {
   border-radius: 5px 0 0 5px;
 }
@@ -2474,7 +2491,7 @@ export default {
 
 .btn {
   padding: 5px 25px;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 #successFeeTerms {
@@ -2507,7 +2524,31 @@ export default {
   bottom: 0;
   width: 100%;
 }
+.descriptionText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 100px;
+  /* line-break: anywhere; */
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-right: 5px;
+}
 
+.descriptionText::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 10px;
+}
+
+.descriptionText::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
+  border-radius: 10px;
+}
+
+.descriptionText::-webkit-scrollbar-thumb {
+  background-color: rgba(217, 217, 217, 1);
+  /* outline: 1px solid #292929; */
+  border-radius: 10px;
+}
 .f-main {
   min-height: 100vh;
   position: relative;
@@ -2546,7 +2587,10 @@ input[type="radio"]:checked {
   outline: 1px solid slategrey;
   border-radius: 10px;
 }
-
+.btn-bg{
+  background: rgba(55, 59, 62, 1) !important;
+  color: white !important;
+}
 .smallFont {
   font-size: 12px;
   margin: 0 0 5px 0;

@@ -401,6 +401,7 @@
                           style="min-width: 150px"
                         >
                           <button
+                          v-if="tab == 'close'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
                             @click="goToMessagePage(item)"
                           >
@@ -766,9 +767,9 @@ ul#pills-tab {
   font-size: 16px;
   margin: 0;
 }
-.smallFont1 span {
+/* .smallFont1 span {
   font-weight: 600;
-}
+} */
 .smallFont1 {
   font-size: 16px;
   margin: 0 0 5px 0;
