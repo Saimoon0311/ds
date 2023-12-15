@@ -523,11 +523,13 @@ export default {
   // },
   methods: {
     goToMessagePage(item) {
+      console.log('ic : ' , item);
       this.saveJobInfo(item);
       this.saveLoadMoreData();
       this.$store.commit("SET_USERTOCHAT", item?.owner);
       this.$store.commit("SET_JOBIDTOCHAT", item?.id);
-      if (!item?.lawyer_chat) {
+      
+      if (item?.lawyer_chat == null) {
         this.$store.commit("SET_CHATSTATUS", "new");
       } else {
         this.$store.commit("SET_CHATSTATUS", "old");

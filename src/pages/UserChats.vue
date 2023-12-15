@@ -132,6 +132,7 @@
                 You can send one message to the client if you need more information about the job in order to submit a
                 proposal. if client reply you so you are free to chat with client.
               </div>
+              {{  chatStatus }}
 
               <div class="text-right my-4">
               </div>
@@ -350,21 +351,23 @@ export default {
     sendMessage() {
       console.log(addDoc);
       console.log(serverTimestamp);
+      console.log(this.chatStatus);
+      console.log(this.userFirst?.type);
 
       if (this.newMessage == "" || this.newMessage == null) {
         return false;
       }
 
-      // if (this.messages.length > 0 && this.userFirst?.type == 'lawyer') {
-      //   if (
-      //     this.messages.length == 1 &&
-      //     this.messages[0].sender_email == this.userFirst?.email
-      //   ) {
-      //     this.$swal("", "You can not send message until client reply on your first messages, please wait for client reply", "error");
-      //     this.newMessage = '';
-      //     return false;
-      //   }
-      // }
+      if (this.messages.length > 0 && this.userFirst?.type == 'lawyer') {
+        if (
+          this.messages.length == 1 &&
+          this.messages[0].sender_email == this.userFirst?.email
+        ) {
+          this.$swal("", "You can not send message until client reply on your first messages, please wait for client reply", "error");
+          this.newMessage = '';
+          return false;
+        }
+      }
 
       // console.log(this.chatStatus);
       // console.log(this.userFirst?.type);
@@ -388,8 +391,7 @@ export default {
         console.log(this.userFirst);
         const lawyer_id = (this.userFirst?.type == "lawyer") ? this.userFirst?.id : this.userSecond?.id;
         const client_id = (this.userFirst?.type == "client") ? this.userFirst?.id : this.userSecond?.id;
-        console.log(this.chatStatus);
-        console.log(this.userFirst?.type);
+        
         if (this.chatStatus == "new" && this.userFirst?.type == "lawyer") {
           api2.post('/save-chat-info', { "lawyer_id": lawyer_id, "client_id": client_id, "job_id": this.jobId, "chat_id": this.chatId }).then(() => {
             this.$store.commit('SET_CHATSTATUS', 'old');
