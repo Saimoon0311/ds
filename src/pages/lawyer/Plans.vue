@@ -12,24 +12,24 @@
 
   <div class="row py-4 justify-content-center">
     <div class="col-md-4">
-      <h3 class="mt-3 text-center mb-3">Subscription Plans</h3>
-
-      <div class="card subscription-card mb-3">
-        <div class="card-header">
-          <h3 class="text-center">Connect</h3>
+      <h3 class="mt-3 text-center mb-3 text-black fw-bolder">Subscription Plans</h3>
+ 
+      <div class="card subscription-card mb-3 ">
+        <div class="card-header bg-dark d-flex align-items-center justify-content-between">
+          <h4 class="text-center text-white mb-0 fw-normal">Connect</h4>
+          <h4 class="text-center text-white mb-0"><b>$39.00</b>/<span class="fs-6">Month</span></h4>
         </div>
-        <div class="card-body">
-          <h2 class="text-center">$39.00/month</h2>
+        <div class="card-body pb-0">
           <ul class="dotRem">
-            <li><i class="fa fa-check"></i> 60 Day Free Trial</li>
-            <li><i class="fa fa-check"></i> 1 User</li>
-            <li><i class="fa fa-check"></i> Platform Access </li>
-            <li><i class="fa fa-check"></i> Profile</li>
-            <li><i class="fa fa-check"></i> Unlimited Proposals</li>
+            <li class="fw-bold"><i class="fa fa-check"></i> 60 Day Free Trial</li>
+            <li class="fw-bold"><i class="fa fa-check"></i> 1 User</li>
+            <li class="fw-bold"><i class="fa fa-check"></i> Platform Access </li>
+            <li class="fw-bold"><i class="fa fa-check"></i> Profile</li>
+            <li class="fw-bold"><i class="fa fa-check"></i> Unlimited Proposals</li>
           </ul>
         </div>
-        <div class="card-footer text-center">
-          <button @click="goToSubscribePage('basic')" class="btn btn-dark text-light">Subscribe</button>
+        <div class="p-3 text-center">
+          <button @click="goToSubscribePage('basic')" class="btn btn-dark btn-lg text-light">Subscribe</button>
         </div>
       </div>
     </div>
@@ -187,17 +187,26 @@ export default {
   width: 100%;
 }
 ul.dotRem {
-    padding-left: 15px;
+    padding-left: 0px;
     list-style: none;
 }
 ul.dotRem li{
   margin-bottom: 10px;
 }
 ul.dotRem li i {
-  border: 1px solid #000;
-    padding: 5.2px 6px;
-    border-radius: 50px;
-    font-size: 13px;
+  border: 1px solid #5dc71d;
+    padding: 2.5px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+.fa-check:before {
+    content: "\f00c";
+    color: rgba(93, 199, 29, 1);
+}
+.card-header{
+  background: rgba(55, 59, 62, 1) !important;
+    padding: 15px 10px;
 }
 </style>
   
