@@ -217,7 +217,7 @@ export default {
     
     },
     updateIsMobile() {
-      this.isMobile = window.innerWidth < 961;
+      this.isMobile = window.innerWidth < 461;
     },
   },
  
@@ -301,7 +301,7 @@ export default {
   display: none !important;
 }
 } */
-@media (max-width: 960px) {
+@media (max-width: 460px) {
   .hide-mob{
   display: none !important;
 }
