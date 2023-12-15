@@ -427,7 +427,7 @@ export default {
 .chatbox {
   padding: 15px;
   border: 1px solid rgb(220, 212, 212);
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .mainHeading {

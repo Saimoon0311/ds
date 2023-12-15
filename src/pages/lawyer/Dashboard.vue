@@ -298,8 +298,9 @@
                             >
                               {{ item?.description }}
                             </div>
+                          </div>
                             <div class="widthcn">
-                              <span class="spacer">
+                              <span class="spacer px-3">
                                 <button
                                   :disabled="!item?.requirement"
                                   type="button"
@@ -327,7 +328,7 @@
                                 </p>
                               </span>
                             </div>
-                          </div>
+                         
 
                           <!-- modal -->
 
@@ -344,7 +345,7 @@
                         </div>
                         <div
                           v-if="item.status != 'close'"
-                          class="d-flex flex-lg-row justify-content-evenly align-items-center flex-sm-column flex-wrap"
+                          class="d-flex flex-lg-row justify-content-center align-items-center flex-sm-column flex-wrap"
                           style="min-width: 150px"
                         >
                           <button
