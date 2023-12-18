@@ -10,8 +10,8 @@
           </div>
         </div> -->
 
-  <div class="row py-4 justify-content-center">
-    <div class="col-md-4">
+  <div class="row pt-4 pb-2 justify-content-center">
+    <div class=" col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12">
       <h3 class="mt-3 text-center mb-3 text-black fw-bolder">Subscription Plans</h3>
  
       <div class="card subscription-card mb-3 ">
@@ -207,6 +207,9 @@ ul.dotRem li i {
 .card-header{
   background: rgba(55, 59, 62, 1) !important;
     padding: 15px 10px;
+}
+@media only screen and (max-width: 1200px) and (min-width: 768px)  {
+
 }
 </style>
   

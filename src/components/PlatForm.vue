@@ -367,7 +367,7 @@ export default {
 
 }
 
-@media (min-width: 500px) and (max-width: 1024px) {
+@media (min-width: 500px) and (max-width: 1023px) {
   .homepage-circles {
 
     width: 460px !important;

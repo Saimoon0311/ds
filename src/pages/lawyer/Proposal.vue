@@ -1047,7 +1047,7 @@
                         <tr
                           v-for="(row, index) in rows3"
                           :key="index"
-                          class="border extra-class table-mid"
+                          class="border extra-class table-mid show"
                         >
                           <td>{{ row.title }}</td>
                           <td>$ {{ row.hourlyRate }}</td>
@@ -2693,9 +2693,18 @@ td {
 }
 } */
 
-.hourlycost thead,.hourlycost tbody tr {
+.hourlycost {
   display:table;
   width: 100%;
+  table-layout: fixed;
+  
+}
+.hourlycost tbody tr, .hourlycost td, .hourlycost th{
+  width: 1%;
+}
+.hourlycost thead{
+  width: 100%;
+
 }
 @media only screen and (max-width: 992px) {
   form#mainForm {

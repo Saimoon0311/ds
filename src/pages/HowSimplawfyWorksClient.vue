@@ -13,7 +13,7 @@
     <ul class="nav nav-tabs mb-3 container how-tabs" id="ex1" role="tablist">
       <li class="nav-item" role="presentation">
         <a
-          class="nav-link active"
+          class="nav-item" :class="{ 'active': loginUserData && loginUserData.type === 'client' }"
           id="ex3-tab-1"
           data-bs-toggle="tab"
           href="#ex3-tabs-1"
@@ -25,7 +25,9 @@
       </li>
       <li class="nav-item" role="presentation">
         <a
-          class="nav-link"
+        class="nav-item" :class="{ 'active': loginUserData && loginUserData.type === 'lawyer' }"
+
+
           id="ex3-tab-2"
           data-bs-toggle="tab"
           href="#ex3-tabs-2"
@@ -39,14 +41,20 @@
     </ul>
 
 <div class="tab-content" id="ex2-content">
+ 
+    
   <div
     class="tab-pane fade show active"
     id="ex3-tabs-1"
     role="tabpanel"
     aria-labelledby="ex3-tab-1"
+    v-if="loginUserData && loginUserData.type === 'client'"
   >
-  <div class="container-fluid pt-5">
-      
+  
+ 
+ 
+  <div class="container-fluid pt-5"  >
+  
       <div class="mainbox">
         <div class="row">
           <div class="col">
@@ -95,9 +103,22 @@
         </div>
       </div>
     </div>
+    </div>
+    <div v-else>
+    <div
+      class="tab-pane fade text-center pt-2"
+      id="ex3-tabs-1"
+      role="tabpanel"
+      aria-labelledby="ex3-tab-1"
+    >
+      You are not logged in as a client.
+    </div>
   </div>
-  <div class="tab-pane fade" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2">
-    <div class="container-fluid pt-5">
+
+  <div class="tab-pane fade show active" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2"
+  v-if="loginUserData && loginUserData.type === 'lawyer'"
+  >  
+     <div class="container-fluid pt-5"  >
 
       <div class="mainbox">
         <section class="row">
@@ -186,6 +207,17 @@
   <p class="text-center  pt-3 small-para"> *At no point in time can you revise your proposal or see the proposals of other lawyers. Your proposal remains confidential between you and the potential client.</p>
 
     </div>
+  
+  </div>
+  <div v-else>
+    <div
+      class="tab-pane fade text-center pt-2"
+      id="ex3-tabs-2"
+      role="tabpanel"
+      aria-labelledby="ex3-tab-2"
+    >
+      You are not logged in as a lawyer.
+    </div>
   </div>
 </div>
     <!-- ------------ -->
@@ -210,17 +242,22 @@ export default {
     ClientHeader,
     LawyerHeader
   },
-  computed: {
+
+ 
+     computed: {
     loginUserData() {
       console.log('dhuurr', this.$store.getters?.loginUser)
       return this.$store.getters?.loginUser;
-    }
+    },
+   
   },
-
   name: "HowSimplawfyWorks",
 };
 </script>
 <style scoped>
+.how-tabs a{
+  text-decoration: none;
+}
 .howItWorks {
   min-height: 100vh;
   position: relative;
