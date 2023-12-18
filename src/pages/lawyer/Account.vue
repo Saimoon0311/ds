@@ -332,10 +332,10 @@ export default {
           console.log("resp dataaaaaaa : ", res?.data?.data);
           this.receipts = res?.data?.data;
           console.log(res.data?.data);
-          if(res?.data?.clearOldSubscription){
-            this.$store.commit('SET_SUB_STATUS',null);
-            this.$store.commit('SET_SUB_CANCEL_STATUS',false);
-            this.$store.commit('SET_SUBSCRIPTION_DATA',null);
+          if (res?.data?.clearOldSubscription) {
+            this.$store.commit('SET_SUB_STATUS', null);
+            this.$store.commit('SET_SUB_CANCEL_STATUS', false);
+            this.$store.commit('SET_SUBSCRIPTION_DATA', null);
           }
         })
         .catch((error) => {
@@ -379,27 +379,46 @@ export default {
         confirmButtonText: "Yes, Resubscribe",
       }).then((result) => {
         if (result.isConfirmed) {
-          api
-            .get(`/lawyer/resubscribe/${plan}`)
-            .then(() => {
-              this.$swal(
-                'Welcome back!',
-                "You are now resubscribed.",
-                "success"
-              ).then(() => {
-                this.$store.commit("SET_SUB_CANCEL_STATUS", false);
-              });
-            })
-            .catch((error) => {
-              this.$swal(
-                "",
-                error?.response?.data?.error,
-                "error"
-              );
-            });
+          const endpoint = `/lawyer/resubscribe`;
+          const body = { "plan": plan }
+          const title = 'Welcome back!';
+          const msg = 'You are now resubscribed.';
+          this.updateReason(endpoint, body, title, msg);
         }
       });
     },
+
+
+    updateReason(endpoint, body, title, msg, is_cancel = false) {
+      this.$swal.fire({
+        title: 'Type reason here:',
+        input: 'text',
+        inputAttributes: {
+          autocapitalize: 'off',
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        showLoaderOnConfirm: true,
+        preConfirm: async (inputValue) => {
+          try {
+            body.reason = inputValue;
+            await api.post(endpoint, body);
+            this.$store.commit("SET_SUB_CANCEL_STATUS", is_cancel);
+            return inputValue;
+          } catch (error) {
+            // console.error('API Error:',  error?.response?.data?.error,);
+            this.$swal.showValidationMessage(error?.response?.data?.error);
+          }
+        },
+        allowOutsideClick: () => !this.$swal.isLoading(),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$swal(title, msg, "success")
+        }
+      });
+    },
+
+
     handleCancelSubscription() {
       this.$swal({
         title: "Are you sure?",
@@ -411,24 +430,11 @@ export default {
         confirmButtonText: "Yes, Cancel Subscription",
       }).then((result) => {
         if (result.isConfirmed) {
-          api
-            .get("/lawyer/cancel-subscription")
-            .then(() => {
-              this.$swal(
-                `<span class="sadtoast">You have cancelled your subscription.</span>`,
-                `Your subscription will be cancelled from ${this.subscriptionData?.current_period_end} You can resubscribe at any time.`,
-                "success"
-              ).then(() => {
-                this.$store.commit("SET_SUB_CANCEL_STATUS", true);
-              });
-            })
-            .catch((error) => {
-              this.$swal(
-                "",
-                error?.response?.data?.error,
-                "error"
-              );
-            });
+          const endpoint = `/lawyer/cancel-subscription`;
+          const body = {};
+          const title = '<span class="sadtoast">You have cancelled your subscription.</span>';
+          const msg = `Your subscription will be cancelled from ${this.subscriptionData?.current_period_end} You can resubscribe at any time.`;
+          this.updateReason(endpoint, body, title, msg, true);
         }
       });
     },
