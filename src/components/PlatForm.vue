@@ -13,7 +13,7 @@
         </p> -->
       </div>
       <div class="d-flex flex-wrap justify-content-center align-items-center pb-5">
-        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center " v-if="isMobile" @click="toggleDiv1" @touchend.prevent="toggleDiv1">
+        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center " v-if="isMobile" @click="toggleDiv1" >
           <p class="fw-bold law-hd" v-if="headShow1">I'm looking for a lawyer</p>
           <div class="showhover" v-if="showDiv1">
             <p class="fw-bold mb-3">Looking for a lawyer?</p>
@@ -32,7 +32,7 @@
             <!-- <a href="./need-a-lawyer/index" class="text-black fs-5">Register to be notified when the platform goes live.</a> -->
           </div>
         </div>
-        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white" v-if="isMobile" @click="toggleDiv2" @touchend.prevent="toggleDiv2">
+        <div class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white" v-if="isMobile" @click="toggleDiv2" >
           <p class="fw-bold law-hd" v-if="headShow2">I'm looking for clients</p>
           <div class="showhover" v-if="showDiv2">
             <p class="fw-bold mb-3">Looking for clients?</p>
@@ -208,13 +208,12 @@ export default {
       });
     },
     toggleDiv1() {
-      this.showDiv1 = !this.showDiv1;
-      this.headShow1 = !this.headShow1;
+      this.showDiv1 = true;
+      this.headShow1 = false;
     },
     toggleDiv2() {
-      this.showDiv2 = !this.showDiv2;
-      this.headShow2 = !this.headShow2;
-    
+      this.showDiv2 = true;   
+      this.headShow2 = false;
     },
     updateIsMobile() {
       this.isMobile = window.innerWidth < 461;
@@ -367,7 +366,7 @@ export default {
 
 }
 
-@media (min-width: 500px) and (max-width: 1024px) {
+@media (min-width: 500px) and (max-width: 1023px) {
   .homepage-circles {
 
     width: 460px !important;

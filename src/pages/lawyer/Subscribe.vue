@@ -3,11 +3,14 @@
       <LawyerHeader />
       <main class="container ">
         <div class="row justify-custom">
+          <div class="col-md-12">
+            <button  class="btn btn-dark btn-sm my-3 " 
+          @click="()=>this.$router.go(-1)"><i class="bi bi-arrow-left mr-4"></i> Back</button>
+          </div>
         <div class="col-md-6">
         <!-- <h3 class="mt-3 back-st"> -->
         <h3 class="mt-3">
-          <button  class="btn btn-dark btn-sm my-3 " 
-          @click="()=>this.$router.go(-1)"><i class="bi bi-arrow-left mr-4"></i> Back</button>
+        
           
           <!-- <router-link
             class="btn btn-secondary btn-sm my-3"

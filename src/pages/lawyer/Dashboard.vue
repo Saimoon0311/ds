@@ -187,6 +187,15 @@
                 <p class="mx-auto my-0">You have no accepted proposals yet.</p>
                 <!-- <button  class="btn btn-danger btn-sm my-1 mx-1 d-none"> Clear All Rejected Proposals </button> -->
               </div>
+              <div
+                v-else-if="
+                  openJobs.length == 0 && searchQuery == '' && tab == 'open'
+                "
+                class="border rounded bg-light p-3 d-flex flex-wrap"
+              >
+                <p class="mx-auto my-0">No jobs found!</p>
+                <!-- <button  class="btn btn-danger btn-sm my-1 mx-1 d-none"> Clear All Rejected Proposals </button> -->
+              </div>
 
               <div
                 v-else
@@ -361,7 +370,7 @@
                             v-if="tab === 'pending'"
                             class="btn btn-light border btn-sm card-btn my-1 mx-1"
                           >
-                            View proposal
+                            View Proposal
                           </button>
 
                           <button

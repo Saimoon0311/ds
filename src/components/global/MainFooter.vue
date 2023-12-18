@@ -120,6 +120,7 @@ export default {
 
     .footer-main div {
         padding: 4px 5px;
+        font-size: 11px;
     }
 }
 </style>
