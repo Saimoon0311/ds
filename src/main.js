@@ -534,7 +534,7 @@ app.mixin({
       // Use dynamic HTML inside SweetAlert2 modal
 
       if (renderAsHtml) {
-        return swalHtmlContent;
+        return [disbursementsTable,feeEarnersTable,specificTasksTable];
       } else {
         this.$swal.fire({
           title: "Proposal Details",
