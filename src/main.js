@@ -548,7 +548,15 @@ app.mixin({
       }
     },
 
+
+    
+
     createTableHtml(title, dataArray) {
+      const total = dataArray.reduce(
+        (total, row) => total + parseFloat(row.costAud) || 0,
+        0
+      );
+
       const tableContent = dataArray
         .map(
           (item, index) => `
@@ -574,11 +582,25 @@ app.mixin({
           <tbody>
             ${tableContent}
           </tbody>
+          <tfoot>
+            <tr>
+              <td></td><td></td>
+              <td>$${total.toFixed(2)}</td>
+            </tr>
+          </tfoot>
         </table>
       `;
     },
 
+
+    
+
     createTableHtmlFeeEarners(title, dataArray) {
+      const total = dataArray.reduce(
+        (total, row) => total + parseFloat(row.hourlyRate * row.estimatedHours) || 0,
+        0
+      );
+
       const tableContent = dataArray
         .map(
           (item, index) => `
@@ -587,6 +609,7 @@ app.mixin({
               <td>${item.title}</td> <!-- Replace with actual properties -->
               <td>$${item.hourly_rate ?? item.hourlyRate}</td>
               <td>${item.hours ?? item.estimatedHours}</td>
+              <td>$${item.hourlyRate * item.estimatedHours}</td>
             </tr>
           `
         )
@@ -601,11 +624,18 @@ app.mixin({
               <th>Title</th>
               <th>Hourly Rate</th>
               <th>Hours</th>
+              <th>Total</th>
             </tr>
           </thead>
           <tbody>
             ${tableContent}
           </tbody>
+          <tfoot>
+            <tr>
+              <td></td><td></td><td></td><td></td>
+              <td>$${total.toFixed(2)}</td>
+            </tr>
+          </tfoot>
         </table>
       `;
     },
