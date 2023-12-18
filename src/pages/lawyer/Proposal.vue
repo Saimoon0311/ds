@@ -1862,7 +1862,7 @@
                       <div v-if="form.fixed_fee_amount && form.disbursement_amount">
                         <p> <span> Total (excluding GST):</span>  <span>${{ (parseFloat(form.fixed_fee_amount) + parseFloat(form.disbursement_amount) - (parseFloat(form.fixed_fee_amount) + parseFloat(form.disbursement_amount)) * 0.10)}}</span></p>
                         <p> <span> GST:</span>  <span>${{ ((parseFloat(form.fixed_fee_amount) + parseFloat(form.disbursement_amount)) * 0.10) }}</span></p>
-                        <p> <span> Total (including GST):</span>  <span>${{ (form.fixed_fee_amount + form.disbursement_amount) }}</span></p>
+                        <p> <span> Total (including GST):</span>  <span>${{ (parseFloat(form.fixed_fee_amount) + parseFloat(form.disbursement_amount)).toFixed(2) }}</span></p>
                       </div>
 
 
