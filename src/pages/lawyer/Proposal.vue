@@ -2813,4 +2813,9 @@ td {
     width: unset;
 }
 }
+@media only screen and (max-width: 360px) {
+.stepbtn .btn {
+    padding: 5px;
+}
+}
 </style>
