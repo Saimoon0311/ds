@@ -2549,14 +2549,18 @@ export default {
 </script>
 
 <style scoped>
+.summ div p span:first-child {
+    font-weight: 600;
+    font-size: 16px;
+}
 .summ div p {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     text-transform: capitalize;
-
 }
+
 .summ .sumdesc p{
   display: block !important;
 }

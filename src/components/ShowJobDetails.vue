@@ -22,7 +22,7 @@
           </p>
         </div>
       </div>
-      <div class="p-3 d-none">
+      <div class="p-3 ">
       <div class="card-body d-flex align-items-start justify-content-between">
         <p class="text-left text-white text-bold title pt-3 ">
           {{ item?.title }}
