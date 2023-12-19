@@ -1863,6 +1863,11 @@
                         </div>
                       </div>
                       
+                      <div v-if="selectedOption == 'item' || selectedOption == 'Item'">
+                        <div v-html="summaryHtmlItemByItemTasks">
+                        </div>
+                      </div>
+                      
 
                       <div v-if="form.disbursement_amount">
                         <p> <span> Estimated amount for disbursements: </span>  <span>${{ parseFloat(form.disbursement_amount).toFixed(2) }}</span></p>
@@ -1887,12 +1892,12 @@
 
 
                       <div>
-                        <p> 
+                        <p v-if="!isNaN(this.totals.totalExcludingGst)"> 
                            <span> Total (excluding GST):</span>  
                            <span>${{ this.totals.totalExcludingGst }}</span>
                         </p>
-                        <p> <span> GST:</span>  <span>${{ this.totals.gst }}</span></p>
-                        <p> <span> Total (including GST):</span>  <span>${{ this.totals.totalIncludingGst }}</span></p>
+                        <p v-if="!isNaN(this.totals.gst)"> <span> GST:</span>  <span>${{ this.totals.gst }}</span></p>
+                        <p v-if="!isNaN(this.totals.totalIncludingGst)"> <span> Total (including GST):</span>  <span>${{ this.totals.totalIncludingGst }}</span></p>
                       </div>
 
 
@@ -2327,56 +2332,55 @@ export default {
         switch (this.selectedOption) {
           case "Fixed":
             console.log('under fixed')
-            this.totals.totalExcludingGst = this.getTotalWithOutGst(parseFloat(this.form.fixed_fee_amount),parseFloat(this.form.disbursement_amount));
-            this.totals.totalIncludingGst = this.getTotalWithGst(parseFloat(this.form.fixed_fee_amount),parseFloat(this.form.disbursement_amount));
-            this.totals.gst = this.getGst(parseFloat(this.form.fixed_fee_amount),parseFloat(this.form.disbursement_amount));
+            total = parseFloat(this.form.fixed_fee_amount) + parseFloat(this.form.disbursement_amount);
             break;
           case "Hourly":
             total = (this.form.fee_earners == 'me') ? (parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)) + parseFloat(this.form.disbursement_amount) : parseFloat(this.form.disbursement_amount)
             // arr = (this.form.fee_earners == 'me') ? [(parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)),parseFloat(this.form.disbursement_amount)] : [this.form.disbursement_amount];
-            this.totals.totalExcludingGst = this.getTotalWithOutGst(total);
-            this.totals.totalIncludingGst = this.getTotalWithGst(total);
-            this.totals.gst = this.getGst(total);
             break;
           case "Daily":
             total = (parseFloat(this.form.daily_rate) * parseFloat(this.form.days)) + parseFloat(this.form.disbursement_amount);
             // arr = (this.form.fee_earners == 'me') ? [(parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)),parseFloat(this.form.disbursement_amount)] : [this.form.disbursement_amount];
-            this.totals.totalExcludingGst = this.getTotalWithOutGst(total);
-            this.totals.totalIncludingGst = this.getTotalWithGst(total);
-            this.totals.gst = this.getGst(total);
+            break;
+          case "Item":
+            total = parseFloat(this.form.disbursement_amount);
             break;
           default:
             break;
         }  
 
+        this.totals.totalExcludingGst = this.getTotalWithOutGst(total);
+        this.totals.totalIncludingGst = total
+        this.totals.gst = this.getGst(total);
+
     },
 
-    getTotalWithGst(...valuesArray){
-      console.log('func 3 : ' , valuesArray);
-      if (valuesArray.length === 0) {
-        return 0;
-      }
+    // getTotalWithGst(...valuesArray){
+    //   console.log('func 3 : ' , valuesArray);
+    //   if (valuesArray.length === 0) {
+    //     return 0;
+    //   }
       
-      let total = 0;
+    //   let total = 0;
 
-      for (let i = 0; i < valuesArray.length; i++) {
-        total += parseFloat(valuesArray[i]);
-      }
+    //   for (let i = 0; i < valuesArray.length; i++) {
+    //     total += parseFloat(valuesArray[i]);
+    //   }
 
-      // let total = valuesArray.reduce((acc, value) => acc + (parseFloat(value) || 0), 0);
+    //   // let total = valuesArray.reduce((acc, value) => acc + (parseFloat(value) || 0), 0);
 
-      // let total = valuesArray.reduce((acc, value) => acc + value, 0);
+    //   // let total = valuesArray.reduce((acc, value) => acc + value, 0);
 
-      return total;
-    },
+    //   return total;
+    // },
 
-    getTotalWithOutGst(...valuesArray){
-        console.log('func1 : ' , valuesArray);
-        if (valuesArray.length === 0) {
-          return 0;
-        }
-        let total = this.getTotalWithGst(...valuesArray);
-        console.log(total);
+    getTotalWithOutGst(total){
+        console.log('func1 : ' , total);
+        // if (valuesArray.length === 0) {
+        //   return 0;
+        // }
+        // let total = this.getTotalWithGst(...valuesArray);
+        // console.log(total);
         // const numericValues = valuesArray.map(value => parseFloat(value) || 0);
         // console.log(numericValues);
         // let totalBeforeFix = Math.max(...numericValues) - (Math.max(...numericValues) * 0.10);
@@ -2384,9 +2388,9 @@ export default {
         return totalBeforeFix.toFixed(2);
     },
 
-    getGst(...valuesArray){
-        console.log('func 2 : ' , valuesArray);
-        let total = this.getTotalWithGst(...valuesArray);
+    getGst(total){
+        console.log('func 2 : ' , total);
+        // let total = this.getTotalWithGst(...valuesArray);
         let gst = total * 0.10;
         return gst.toFixed(2);
     },
@@ -2429,7 +2433,7 @@ export default {
         pro_bono_description: null,
         meet_deadlines: null,
         miss_deadline_reason: null,
-        upfront_payment_status: "yes",
+        upfront_payment_status: "no",
         upfront_payment: null,
         consultation: null,
         consultation_time_limit: null,
@@ -2438,6 +2442,7 @@ export default {
         job_id: null,
       },
      
+      this.paySucc = "No",
       // this.newRow.itemDisbursement = "";
       // this.newRow.costAud = "";
       // this.newRow.gst_not_applicable = false;
