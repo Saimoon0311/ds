@@ -243,6 +243,44 @@ app.mixin({
       this.$store.commit("SET_LOGIN_USER", userData);
     },
 
+
+    setUserStatus(result){
+      if (
+        result?.data?.subscription != null && 
+        (result?.data?.subscription?.subscription_status == 'trialing' || 
+        result?.data?.subscription?.subscription_status == 'active')
+      ) 
+      {
+          store.commit("SET_SUB_STATUS", "subscribed");
+          store.commit(
+            "SET_SUB_CANCEL_STATUS",
+            result?.data?.subscription?.is_cancel
+          );
+      }
+      else if(
+        result?.data?.subscription != null && 
+        result?.data?.subscription?.subscription_status != 'trialing' && 
+        result?.data?.subscription?.subscription_status != 'active'
+      )
+      {
+        store.commit("SET_SUB_STATUS", "incomplete");
+        store.commit("SET_SUB_CANCEL_STATUS",false);
+      }
+      else{
+        store.commit("SET_SUB_STATUS", null);
+        store.commit("SET_SUB_CANCEL_STATUS",false);
+      }
+
+      if (result?.data?.data?.admin_approval == "approve") {
+        store.commit(
+          "SET_APPROVAL_STATUS",
+          result?.data?.data?.admin_approval
+        );
+      }
+
+      store.commit("SET_SUBSCRIPTION_DATA", result?.data?.subscription);
+    },
+
     fetchUserData() {
       api
         .get("/verify")

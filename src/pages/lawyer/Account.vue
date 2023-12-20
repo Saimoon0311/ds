@@ -406,6 +406,11 @@ export default {
             body.reason = inputValue;
             await api.post(endpoint, body);
             this.$store.commit("SET_SUB_CANCEL_STATUS", is_cancel);
+
+            const result = await api.get("/verify");
+            this.setUserStatus(result);
+            // this.verifyUser(result);
+            
             return inputValue;
           } catch (error) {
             // console.error('API Error:',  error?.response?.data?.error,);
@@ -419,6 +424,18 @@ export default {
         }
       });
     },
+
+
+    // verifyUser() {
+    //   api
+    //     .get("/verify")
+    //     .then((res) => {
+    //       this.setUserStatus(res);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
 
 
     handleCancelSubscription() {

@@ -275,14 +275,23 @@
                 <div class="form-group mt-3">
                   <label> Retainer period: </label>
                   <div class="mb-3">
-                    <input
+                    <!-- <input
                       type="text"
                       v-model="form.retainer_period"
                       id="fixedFeeAmount"
                       name="fixedFeeAmount"
                       class="form-control"
                       placeholder="Eg: monthly"
-                    />
+                    /> -->
+
+                    <select v-model="form.retainer_period" class="form-control" id="fixedFeeAmount" name="fixedFeeAmount">
+                      <option value="week">Weekly</option>
+                      <option value="fortnight">Fortnightly</option>
+                      <option value="month">Monthly</option>
+                      <option value="quarter">Quarterly</option>
+                      <option value="annual">Annually</option>
+                    </select>
+
                   </div>
                   <label> Time/other limitations: </label>
                   <div class="mb-3">
@@ -1818,9 +1827,14 @@
                         <p> <span> Hourly Rate:</span>  <span>${{ parseFloat(form.hourly_rate).toFixed(2) }}</span></p>
                       </div>
 
-                      <div v-if="form.retainer_period">
-                        <p> <span> Retainer Peiod:</span>  <span>{{ form.retainer_period }}</span></p>
+                      <!-- <span v-if="selectedOption == 'Hourly'"> -->
+                      <div v-if="form.retainer_fee">
+                        <p> <span> Retainer Fee with period:</span>  <span>${{ parseFloat(form.retainer_fee).toFixed(2) }}/{{ form.retainer_period }} </span></p>
                       </div>
+
+                      <!-- <div v-if="form.retainer_period">
+                        <p> <span> Retainer Peiod:</span>  <span>{{ form.retainer_period }}</span></p>
+                      </div> -->
 
                       <div v-if="form.retainer_limitation">
                         <p> <span> Retainer Limitation:</span>  <span> {{ form.retainer_limitation }}</span></p>
@@ -1829,10 +1843,10 @@
                       <div v-if="form.notice_period">
                         <p> <span> Notice Period:</span>  <span>{{ form.notice_period }}</span></p>
                       </div>
+                    <!-- </span> -->
 
-                      <div v-if="form.retainer_fee">
-                        <p> <span> Retainer Fee:</span>  <span>${{ parseFloat(form.retainer_fee).toFixed(2) }}</span></p>
-                      </div>
+
+                     
 
                       <div v-if="form.days">
                         <p> <span> Days:</span>  <span>{{ form.days }}</span></p>
@@ -1933,8 +1947,21 @@
                       </div>
 
                       <div v-if="form.estimated_fee">
-                        <p> <span> Estimated Fee:</span>  <span>{{ form.estimated_fee }}</span></p>
+                        <p> <span> Estimated Fee:</span>  <span>${{ form.estimated_fee }}</span></p>
                       </div>
+
+
+                      <span v-if="selectedOption == 'Success' && form.uplift_percentage && form.estimated_fee">
+
+                        <div>
+                          <p> <span> If the case is not successful:</span>  <span>$0.00</span></p>
+                        </div>
+                        <div>
+                          <p> <span> If the case is successful:</span>  <span>${{  parseFloat(parseFloat(this.form.estimated_fee) + parseFloat((25 / 100) * this.form.estimated_fee)).toFixed(2) }}</span></p>
+                        </div>
+
+                      </span>
+
 
                       <div v-if="form.success_fee_term">
                         <p> <span> Success Fee Term:</span> <span>{{ form.success_fee_term }}</span></p>
@@ -2348,6 +2375,9 @@ export default {
             // arr = (this.form.fee_earners == 'me') ? [(parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)),parseFloat(this.form.disbursement_amount)] : [this.form.disbursement_amount];
             break;
           case "Item":
+          case "Retainer":
+          case "Success":
+          case "Pro":
             total = parseFloat(this.form.disbursement_amount);
             break;
           default:
