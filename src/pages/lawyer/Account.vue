@@ -42,7 +42,8 @@
               <span
                 v-if="
                   subscriptionData?.subscription_status == 'active' ||
-                  subscriptionData?.subscription_status == 'trialing'
+                  subscriptionData?.subscription_status == 'trialing' ||
+                  subscriptionData?.subscription_status == 'past due'
                 "
               >
                 Next bill due <b>{{ subscriptionData?.current_period_end }}</b>
@@ -142,7 +143,7 @@
                 at any time.
               </p>
             </div>
-            <button v-else-if="subscriptionStatus == 'subscribed'"
+            <button v-else-if="subscriptionStatus == 'subscribed' || subscriptionStatus == 'incomplete'"
               class="btn btn-danger"
               id="cancel-subscription"
               @click="handleCancelSubscription"
@@ -366,6 +367,7 @@ export default {
 
     replacePaymentMethod(plan) {
       this.$store.commit("SET_REPLACE_PAYMENT_METHOD", true);
+      localStorage.setItem('replacePaymentMethod',true);
       this.$router.push({ path: `/subscribe/${plan}` });
     },
     resubscribe(plan) {

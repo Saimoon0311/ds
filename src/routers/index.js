@@ -449,9 +449,12 @@ router.beforeEach(async (to, from, next) => {
           console.log("cr", to);
           console.log("cr 2", from);
           
-          if (result?.data?.subscription != null && 
-            (result?.data?.subscription?.subscription_status == 'trialing' || result?.data?.subscription?.subscription_status == 'active')) {
-            
+          if (
+            result?.data?.subscription != null && 
+            (result?.data?.subscription?.subscription_status == 'trialing' || 
+            result?.data?.subscription?.subscription_status == 'active')
+          ) 
+          {
               store.commit("SET_SUB_STATUS", "subscribed");
               store.commit(
                 "SET_SUB_CANCEL_STATUS",
@@ -463,6 +466,19 @@ router.beforeEach(async (to, from, next) => {
             //   store.commit("SET_SUB_STATUS", null);
             //   store.commit("SET_SUB_CANCEL_STATUS",false);
             // }            
+          }
+          else if(
+            result?.data?.subscription != null && 
+            result?.data?.subscription?.subscription_status != 'trialing' && 
+            result?.data?.subscription?.subscription_status != 'active'
+          )
+          {
+            store.commit("SET_SUB_STATUS", "incomplete");
+            store.commit("SET_SUB_CANCEL_STATUS",false);
+          }
+          else{
+            store.commit("SET_SUB_STATUS", null);
+            store.commit("SET_SUB_CANCEL_STATUS",false);
           }
 
           if (result?.data?.data?.admin_approval == "approve") {

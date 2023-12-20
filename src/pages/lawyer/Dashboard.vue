@@ -41,11 +41,19 @@
             >
           </p>
         </div>
-        <div v-else-if="subscriptionStatus != 'subscribed'">
+        <div v-else-if="subscriptionStatus != 'subscribed' && subscriptionStatus != 'incomplete'">
           <div class="alert alert-danger text-center m-0 p-2">
             You have not subscribed yet.
             <router-link to="/plans" class="btn btn-dark text-white"
               >Subscribe now</router-link
+            >
+          </div>
+        </div>
+        <div v-else-if="subscriptionStatus == 'incomplete'">
+          <div class="alert alert-danger text-center m-0 p-2">
+            Incomplete subscription due to payment failed.
+            <router-link to="/lawyer-account" class="btn btn-dark text-white"
+              >Modify subscription</router-link
             >
           </div>
         </div>

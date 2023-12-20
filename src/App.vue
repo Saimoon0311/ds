@@ -29,6 +29,9 @@ export default {
     if(this.$store.getters.userType == null || this.$store.getters.userType == ""){
       this.$store.commit('SET_USER_TYPE',localStorage.getItem('userType'));
     }
+    if(this.$store.getters.replacePaymentMethod == null || this.$store.getters.replacePaymentMethod == "" || this.$store.getters.replacePaymentMethod == false){
+      this.$store.commit('SET_REPLACE_PAYMENT_METHOD',localStorage.getItem('replacePaymentMethod'));
+    }
   }
 }
 </script>

@@ -86,6 +86,10 @@ export default {
     this.plan = urlData[urlData.length - 1];
     this.initializeStripe();
   },
+  beforeUnmount(){
+    this.$store.commit('SET_REPLACE_PAYMENT_METHOD',false);
+    localStorage.removeItem('replacePaymentMethod');
+  },
   methods: {
     async subscribe() {
       try {
