@@ -175,11 +175,20 @@
                 </tr>
                 <tr v-else class="text-left" v-for="(item,index) in data_paginated" :key="index">
                   <!-- <td>testing client (crinimal)</td> -->
-                  <td class="text-center"> <button @click="openLawyerDetailsModal(item?.lawyer)" class="btn-dark btn">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</button></td>
+                  <td class="text-center"> <button @click="openLawyerDetailsModal(item?.lawyer)" class="btn-dark btn btn-sm rounded-pill">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</button></td>
                   <!-- <td>{{ item?.charge_type }}</td> -->
-                  <td>{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</td>
+                  <td class="text-center">
+                      <span class="bg-dark text-white py-0 px-3 rounded-pill">Fixed</span>
+                    <p class="my-1">{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</p>
+                    <span class="bg-dark rounded-pill text-white py-0 px-3 text-capitalize">See more</span>
+
+                    </td>
+
                   <!-- <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td> -->
-                  <td>{{ item?.description }}</td>
+                  <td class="text-center">
+                    <p class="mb-1">{{ item?.description }}</p>
+                    <span class="bg-dark rounded-pill text-white py-0 px-3 text-capitalize">See more</span>
+                  </td>
                   <!-- <td>{{ formatCreatedAt(item?.created_at) }}</td> -->
 
                   <!-- <td>Yes</td>
@@ -211,9 +220,9 @@
                       >
                         Message
                       </button>
-                      <button @click="openProposalDetailsModal(item)" class="btn btn-dark text-white mt-1 btn-sm p-1 px-2 w-100">
+                      <!-- <button @click="openProposalDetailsModal(item)" class="btn btn-dark text-white mt-1 btn-sm p-1 px-2 w-100">
                         View
-                      </button>
+                      </button> -->
                     </div>
                     <p v-else>{{ item?.status }}</p>
                   </td>

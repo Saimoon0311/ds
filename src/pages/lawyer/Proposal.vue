@@ -1806,9 +1806,10 @@
 
 
                       <div v-if="selectedOption" >
-                        <p> <span> How will you charge? </span>  <span class="btn-sm btn-dark btn rounded btn-charge">{{ selectedOption }}</span></p>
+                        <p class="topcharge"> <span> How will you charge? </span><span class="btn-sm btn-dark btn rounded btn-charge">{{ selectedOption }}</span> <span @click="toggleDiv" class="summarytogicon"><i :class="['fas', isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down']"></i></span> </p>
                       </div>
                       
+                      <div v-if="isDivVisible">
                       <div v-if="form.hours" >
                         <p> <span> Hours:</span>  <span>{{form.hours }}</span></p>
                       </div>
@@ -1891,14 +1892,7 @@
                       <!-- totals here  -->
 
 
-                      <div>
-                        <p v-if="!isNaN(this.totals.totalExcludingGst)"> 
-                           <span> Total (excluding GST):</span>  
-                           <span>${{ this.totals.totalExcludingGst }}</span>
-                        </p>
-                        <p v-if="!isNaN(this.totals.gst)"> <span> GST:</span>  <span>${{ this.totals.gst }}</span></p>
-                        <p v-if="!isNaN(this.totals.totalIncludingGst)"> <span> Total (including GST):</span>  <span>${{ this.totals.totalIncludingGst }}</span></p>
-                      </div>
+                    
 
 
                       <!-- totals end -->
@@ -1974,8 +1968,16 @@
                         <p><b> Tell the potential client what you will do for them ?</b>  </p>
                         <p class="descriptionText">{{ form.description }} </p>
                       </div>
-
+                      <div>
+                        <p v-if="!isNaN(this.totals.totalExcludingGst)"> 
+                           <span> Total (excluding GST):</span>  
+                           <span>${{ this.totals.totalExcludingGst }}</span>
+                        </p>
+                        <p v-if="!isNaN(this.totals.gst)"> <span> GST:</span>  <span>${{ this.totals.gst }}</span></p>
+                        <p v-if="!isNaN(this.totals.totalIncludingGst)" class="bg-dark text-white p-2 rounded"> <span> Total (including GST):</span>  <span>${{ this.totals.totalIncludingGst }}</span></p>
+                      </div>
                       
+                    </div>
 
 
               <!-- hours : null,
@@ -2139,6 +2141,7 @@ export default {
   data() {
  
     return {
+      isDivVisible: false,
       editRow : null,
       summaryHtmlDisbursement : null,
       summaryHtmlItemByItemTasks : null,
@@ -2302,7 +2305,9 @@ export default {
   },
 
   methods: {
-
+    toggleDiv() {
+      this.isDivVisible = !this.isDivVisible; // Toggle the boolean value
+    },
 
     setTwoDigitsAfterDecimal(key){
       console.log('obj key : ' , this.form[key]);
@@ -2959,19 +2964,31 @@ td {
 }
 .hourlycost thead{
   width: 100%;
-
+}
+.summarytogicon i{
+  font-size: 24px;
+  cursor: pointer;
 }
 @media only screen and (max-width: 992px) {
   form#mainForm {
     width: 70%;
+}
+.summarytogicon i{
+  font-size: 18px;
 }
 }
 @media only screen and (max-width: 767px) {
   form#mainForm {
     width: unset;
 }
+.summarytogicon i{
+  font-size: 18px;
+}
 }
 @media only screen and (max-width: 360px) {
+  .summarytogicon i{
+  font-size: 18px;
+}
 .stepbtn .btn {
     padding: 5px;
 }
