@@ -389,11 +389,19 @@
                             Withdraw
                           </button>
 
+                          <!-- <button
+                          v-if="tab == 'close'"
+                            class="btn btn-dark btn-sm card-btn my-1 mx-1"
+                            @click="goToMessagePage(item)"
+                          >
+                            View Messages
+                          </button> -->
+
                           <button
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
                             @click="goToMessagePage(item)"
                           >
-                          Message
+                          View Message
                           </button>
 
                           <!-- <router-link
@@ -404,7 +412,7 @@
                           > -->
                         </div>
 
-                        <div
+                        <!-- <div
                           v-if="tab == 'close'"
                           class="d-flex flex-column justify-content-center align-items-center"
                           style="min-width: 150px"
@@ -417,7 +425,7 @@
                             View Messages
                           </button>
 
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
