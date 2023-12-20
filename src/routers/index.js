@@ -449,12 +449,14 @@ router.beforeEach(async (to, from, next) => {
           console.log("cr", to);
           console.log("cr 2", from);
           
-          if (result?.data?.subscription != null) {
-            store.commit("SET_SUB_STATUS", "subscribed");
-            store.commit(
-              "SET_SUB_CANCEL_STATUS",
-              result?.data?.subscription.is_cancel
-            );
+          if (result?.data?.subscription != null && 
+            (result?.data?.subscription?.subscription_status == 'trialing' || result?.data?.subscription?.subscription_status == 'active')) {
+            
+              store.commit("SET_SUB_STATUS", "subscribed");
+              store.commit(
+                "SET_SUB_CANCEL_STATUS",
+                result?.data?.subscription?.is_cancel
+              );
             // const current_date = new Date();
             // const current_period_end = new Date(result?.data?.subscription?.current_period_end);
             // if(result?.data?.subscription.is_cancel && current_period_end >= current_date){
