@@ -171,6 +171,19 @@
                 </p>
               </div> -->
 
+
+              <div
+                v-if="
+                  openJobs.length > 0 &&
+                  tab == 'close'
+                "
+                class="border rounded bg-light p-3 d-flex flex-wrap mb-2"
+                >
+                  <button @click="deleteAllRejected" class="btn btn-danger btn-sm my-1 mx-1">
+                    Clear All Rejected Proposals
+                  </button>
+                </div>
+
               <div
                 v-if="
                   openJobs.length == 0 &&
@@ -181,9 +194,7 @@
                 class="border rounded bg-light p-3 d-flex flex-wrap mb-2"
               >
                 <p class="mx-auto my-0">You have no pending jobs.</p>
-                <button class="btn btn-danger btn-sm my-1 mx-1 d-none">
-                  Clear All Rejected Proposals
-                </button>
+                
               </div>
 
               <div
@@ -287,22 +298,21 @@
                                 </p>
                                 <p
                                   v-else-if="
-                                    item?.proposals != null &&
-                                    item?.proposals.length > 0
+                                    item?.proposal != null
                                   "
                                   class="badge border text-black tag"
                                 >
                                   <span
                                     v-if="
-                                      item?.proposals[0].status == 'Accept' ||
-                                      item?.proposals[0].status == 'accept'
+                                      item?.proposal?.status == 'Accept' ||
+                                      item?.proposal?.status == 'accept'
                                     "
                                     >Accepted</span
                                   >
                                   <span
                                     v-if="
-                                      item?.proposals[0].status == 'Reject' ||
-                                      item?.proposals[0].status == 'reject'
+                                      item?.proposal?.status == 'Reject' ||
+                                      item?.proposal?.status == 'reject'
                                     "
                                     >Rejected</span
                                   >
@@ -319,6 +329,7 @@
                             <div class="widthcn">
                               <span class="spacer px-3">
                                 <button
+                                  v-if="item?.requirement"
                                   :disabled="!item?.requirement"
                                   type="button"
                                   class="btn btn-dark btn-sm custom-pad"
@@ -375,7 +386,7 @@
 
                           <button
                             @click="openProposalDetailsModal(item.proposal)"
-                            v-if="tab === 'pending'"
+                            v-if="tab == 'pending' || tab == 'close'"
                             class="btn btn-light border btn-sm card-btn my-1 mx-1"
                           >
                             View Proposal
@@ -405,12 +416,25 @@
                             View Messages
                           </button> -->
 
+                       
+                          
+
                           <button
+                          v-if="tab == 'close'"    
+                            class="btn btn-danger btn-sm card-btn my-1 mx-1"
+                            @click="openLawyerDetailsModal(item?.owner)"
+                          >
+                          View Client Details
+                          </button>
+
+                          <button
+                          v-if="tab == 'close'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
                             @click="goToMessagePage(item)"
                           >
-                          View Message
+                          View Messages
                           </button>
+                      
 
                           <!-- <router-link
                             v-if="tab === 'pending'"
@@ -533,7 +557,7 @@ export default {
   },
 
   computed: {
-    jobTabName(){
+    jobTabName() {
       return this.$store.state.dataTab;
     },
     userFields() {
@@ -563,24 +587,54 @@ export default {
     //   this.setTab(this.jobTabName);
     // }
   },
- 
+
   // mounted(){
   //   this.getNextUser();
   // },
 
-  beforeUnmount(){
+  beforeUnmount() {
     // Remove the scroll event listener before the component is destroyed
     window.removeEventListener('scroll', this.getNextUser);
   },
 
   methods: {
 
+    deleteAllRejected(){
+      try{
+        this.$swal({
+          title: "Are you sure?",
+          text: `Are you sure you want to delete rejected proposals.`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: `Yes, Delete`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            api.get('/lawyer/decline-rejected-proposals').then(()=>{
+              this.$swal(
+                        "",
+                        `Rejected Proposals Deleted Successfully`,
+                        "success"
+                      ).then(async () => {
+                        this.loadMore(null,true);
+                      });
+            });
+          }
+        })
+      } catch (error) {
+        console.error("Error fetching options:", error);
+      }
+    },
+
     getNextUser() {
-      let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-      if (bottomOfWindow) {
-        this.loadMore();
-        if (this.jobTabName) {
-          this.setTab(this.jobTabName);
+      if (this.currentPage < this.lastPage) {
+        let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+        if (bottomOfWindow) {
+          this.loadMore();
+          if (this.jobTabName) {
+            this.setTab(this.jobTabName);
+          }
         }
       }
     },
@@ -597,19 +651,19 @@ export default {
     //   }
     // },
     goToMessagePage(item) {
-      console.log('ic : ' , item);
+      console.log('ic : ', item);
       this.saveJobInfo(item);
       this.saveLoadMoreData();
       this.$store.commit("SET_USERTOCHAT", item?.owner);
       this.$store.commit("SET_JOBIDTOCHAT", item?.id);
-      
+
       if (item?.lawyer_chat == null) {
         this.$store.commit("SET_CHATSTATUS", "new");
       } else {
         this.$store.commit("SET_CHATSTATUS", "old");
       }
-      
-      this.$store.commit('SET_DATATAB',this.tab);
+
+      this.$store.commit('SET_DATATAB', this.tab);
 
       // if(item?.lawyer_chat?.client_reply){
       //   this.$store.commit('SET_LAWYER_ELIGIBLE_STATUS',true);
@@ -628,7 +682,7 @@ export default {
       } else if (status == "close") {
         this.endpoint = "/lawyer/show-approve-jobs";
       }
-      this.$store.commit('SET_DATATAB',null);
+      this.$store.commit('SET_DATATAB', null);
     },
 
     async changeTab(status) {
@@ -670,7 +724,7 @@ export default {
         this.$swal({
           title: "Are you sure?",
           // text: `Are you sure you want to decline this job, You will not be able to see this anymore.`,
-          text : `Are you sure you want to decline this job? Doing so will prevent you from viewing or submitting a proposal for this job.`,
+          text: `Are you sure you want to decline this job? Doing so will prevent you from viewing or submitting a proposal for this job.`,
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -704,7 +758,7 @@ export default {
         this.$swal({
           title: "Are you sure?",
           // text: `Are you sure you want to withdraw from your proposal on this job, You will not be able to see this anymore.`,
-          text : `Are you sure you want to withdraw your proposal for this job? In doing so, your proposal will not be able to be accepted nor will you be able to submit a new proposal.`,
+          text: `Are you sure you want to withdraw your proposal for this job? In doing so, your proposal will not be able to be accepted nor will you be able to submit a new proposal.`,
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -741,12 +795,14 @@ export default {
 ul#pills-tab {
   width: 400px !important;
 }
+
 p.tag {
   border-radius: 100px;
   padding: 5px 10px !important;
   border-color: gray !important;
   font-size: 12px;
 }
+
 .navbar-nav {
   display: flex;
   align-items: center;
@@ -814,7 +870,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
   color: white;
   background-color: #000000;
 }
@@ -829,6 +885,7 @@ ul#pills-tab {
   font-size: 16px;
   margin: 0;
 }
+
 /* .smallFont1 span {
   font-weight: 400: 600;
 } */
@@ -886,6 +943,7 @@ p.badge {
   padding: 10px;
   margin: 0;
 }
+
 .card-top {
   display: flex;
   flex-wrap: wrap;
@@ -894,6 +952,7 @@ p.badge {
   border-radius: 5px 5px 0 0;
   background: rgba(55, 59, 62, 1);
 }
+
 .spacer {
   margin: 20px 0;
   display: block;
@@ -935,11 +994,13 @@ p.badge {
 .my-swal-container .swal2-title {
   font-size: 25px;
 }
+
 .title {
   font-size: 20px;
   font-weight: 600;
   text-transform: capitalize;
 }
+
 @media only screen and (max-width: 1400px) and (min-width: 992px) {
   .card-btn {
     width: 30%;
@@ -952,11 +1013,13 @@ p.badge {
   .card-btn {
     width: 95%;
   }
+
   .smallFont {
     margin: 5px;
     font-size: 14px;
   }
 }
+
 @media only screen and (max-width: 767px) {
   .spacer {
     display: flex;
@@ -967,10 +1030,12 @@ p.badge {
     flex-wrap: wrap;
   }
 }
+
 @media only screen and (max-width: 600px) {
   p.badge {
     margin-bottom: 10px;
   }
+
   .l-main {
     padding-bottom: 100px;
   }
@@ -993,5 +1058,4 @@ p.badge {
     padding: 5px;
     font-size: 13px;
   }
-}
-</style>
+}</style>

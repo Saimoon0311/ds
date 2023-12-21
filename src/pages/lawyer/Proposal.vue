@@ -1996,12 +1996,12 @@
                         <p class="descriptionText">{{ form.description }} </p>
                       </div>
                       <div>
-                        <p v-if="!isNaN(this.totals?.totalExcludingGst)"> 
+                        <p v-if="!isNaN(totals?.totalExcludingGst)"> 
                            <span> Total (excluding GST):</span>  
-                           <span>${{ this.totals?.totalExcludingGst }}</span>
+                           <span>${{ totals?.totalExcludingGst.toFixed(2) }}</span>
                         </p>
-                        <p v-if="!isNaN(this.totals?.gst)"> <span> GST:</span>  <span>${{ this.totals?.gst }}</span></p>
-                        <p v-if="!isNaN(this.totals?.totalIncludingGst)" class="bg-dark text-white p-2 rounded"> <span> Total (including GST):</span>  <span>${{ this.totals?.totalIncludingGst }}</span></p>
+                        <p v-if="!isNaN(totals?.gst)"> <span> GST:</span>  <span>${{ totals?.gst.toFixed(2) }}</span></p>
+                        <p v-if="!isNaN(totals?.totalIncludingGst)" class="bg-dark text-white p-2 rounded"> <span> Total (including GST):</span>  <span>${{ totals?.totalIncludingGst.toFixed(2) }}</span></p>
                       </div>
                       
                     </div>
@@ -2332,10 +2332,6 @@ export default {
   },
 
   methods: {
-    toggleDiv() {
-      this.isDivVisible = !this.isDivVisible; // Toggle the boolean value
-    },
-
     setTwoDigitsAfterDecimal(key){
       console.log('obj key : ' , this.form[key]);
   
@@ -2411,12 +2407,12 @@ export default {
 
     getTotalWithOutGst(total){
         let totalBeforeFix = total - (total * 0.10);
-        return totalBeforeFix.toFixed(2);
+        return parseFloat(totalBeforeFix);
     },
 
     getGst(total){
         let gst = total * 0.10;
-        return gst.toFixed(2);
+        return parseFloat(gst);
     },
 
 
@@ -2424,7 +2420,7 @@ export default {
 
       this.calculateTotals();
 
-      console.log('total :::: ',  this.totals)
+      // console.log('total :::: ',  this.totals)
 
       const arr = this.openProposalDetailsModal({'specific_tasks' : this.rows2 , 'disbursements' : this.rows , 'fee_earners' : this.rows3},true)
       if(arr.length > 0){
@@ -2532,9 +2528,9 @@ export default {
       this.form.specificTasks = this.rows2; // item by item specific tasks
       this.form.feeEarners = this.rows3; // additional fee earner
 
-      this.form.total_with_gst = this.totals['totalIncludingGst'];
-      this.form.total_without_gst = this.totals['totalExcludingGst'];
-      this.form.gst = this.totals['gst'];
+      this.form.total_with_gst = this.totals['totalIncludingGst'].toFixed(2);
+      this.form.total_without_gst = this.totals['totalExcludingGst'].toFixed(2);
+      this.form.gst = this.totals['gst'].toFixed(2);
 
 
       // console.log(this.formValues);
@@ -2602,6 +2598,12 @@ export default {
       }
     },
 
+    toggleDiv(){
+      console.log('div vis : ' , this.isDivVisible);
+      this.isDivVisible = !this.isDivVisible;
+    },
+
+
     removeRow(index) {
       this.rows.splice(index, 1);
     },
@@ -2654,7 +2656,7 @@ export default {
       if(this.currentStep == 2){
         this.openSummaryTab();
       }
-
+      console.log('this ::::: ' , this);
       this.currentStep++;
     },
 

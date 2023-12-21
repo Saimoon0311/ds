@@ -4,6 +4,7 @@ import App from "./App.vue";
 import router from "@/routers";
 import store from "./store";
 import api from "@/config/api.js";
+import api2 from "@/config/api2.js";
 
 import VueSelect from "vue-select";
 
@@ -421,7 +422,7 @@ app.mixin({
 
       // Use dynamic HTML inside SweetAlert2 modal
       this.$swal.fire({
-        title: "Lawyer Details",
+        title: `${this.capitalizeFirstLetter(data?.type)} Details`,
         html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
         showCloseButton: true,
         showConfirmButton: false,
@@ -430,6 +431,8 @@ app.mixin({
         },
       });
     },
+
+   
 
     // openProposalDetailsModal(data) {
     //   console.log('proposal details : ' , data);
@@ -953,7 +956,12 @@ app.mixin({
       this.clear = false;
     },
     async fetchData(url) {
-      const response = await api.get(url);
+      let response = null;
+      if(this.openJobs.length > 0){
+        response = await api2.get(url);
+      }else{
+        response = await api.get(url);
+      }
       return response?.data;
     },
 

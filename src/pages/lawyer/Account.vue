@@ -391,40 +391,53 @@ export default {
     },
 
 
-    updateReason(endpoint, body, title, msg, is_cancel = false) {
-      this.$swal.fire({
-        title: 'Type reason here:',
-        input: 'text',
-        inputAttributes: {
-          autocapitalize: 'off',
-        },
-        showCancelButton: true,
-        confirmButtonText: 'Submit',
-        showLoaderOnConfirm: true,
-        preConfirm: async (inputValue) => {
-          try {
-            body.reason = inputValue;
+    async updateReason(endpoint, body, title, msg, is_cancel = false) {
+
+      try {
             await api.post(endpoint, body);
             this.$store.commit("SET_SUB_CANCEL_STATUS", is_cancel);
-
             const result = await api.get("/verify");
             this.setUserStatus(result);
-            // this.verifyUser(result);
-            
-            return inputValue;
+            this.$swal(title, msg, "success").then(()=>{
+              this.$router.push({ path: "/lawyer-dashboard" });
+            })
           } catch (error) {
-            // console.error('API Error:',  error?.response?.data?.error,);
             this.$swal.showValidationMessage(error?.response?.data?.error);
           }
-        },
-        allowOutsideClick: () => !this.$swal.isLoading(),
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.$swal(title, msg, "success").then(()=>{
-            this.$router.push({ path: "/lawyer-dashboard" });
-          })
-        }
-      });
+
+      // this.$swal.fire({
+      //   title: 'Type reason here:',
+      //   input: 'text',
+      //   inputAttributes: {
+      //     autocapitalize: 'off',
+      //   },
+      //   showCancelButton: true,
+      //   confirmButtonText: 'Submit',
+      //   showLoaderOnConfirm: true,
+      //   preConfirm: async (inputValue) => {
+      //     try {
+      //       body.reason = inputValue;
+      //       await api.post(endpoint, body);
+      //       this.$store.commit("SET_SUB_CANCEL_STATUS", is_cancel);
+
+      //       const result = await api.get("/verify");
+      //       this.setUserStatus(result);
+      //       // this.verifyUser(result);
+            
+      //       return inputValue;
+      //     } catch (error) {
+      //       // console.error('API Error:',  error?.response?.data?.error,);
+      //       this.$swal.showValidationMessage(error?.response?.data?.error);
+      //     }
+      //   },
+      //   allowOutsideClick: () => !this.$swal.isLoading(),
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
+      //     this.$swal(title, msg, "success").then(()=>{
+      //       this.$router.push({ path: "/lawyer-dashboard" });
+      //     })
+      //   }
+      // });
     },
 
 

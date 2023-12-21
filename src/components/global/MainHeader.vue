@@ -13,6 +13,7 @@
         <li><router-link class="dropdown-item" to="/client-faqs">Client FAQs</router-link></li>
         <li><router-link class="dropdown-item" to="/lawyer-faqs">Lawyer FAQs</router-link></li>
         <li> <router-link class="dropdown-item" to="/contact-us">Contact Us</router-link></li>
+        <li> <router-link class="dropdown-item" to="/login">Login</router-link></li>
       </ul>
     </div>
   </div>
