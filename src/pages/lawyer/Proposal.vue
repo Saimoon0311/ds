@@ -1094,11 +1094,12 @@
                         >
                           <td
                             class="bg-transparent text-white p-0 px-2 b-round-start"
+                            colspan="3"
                           >
                             Total (excluding GST):
                           </td>
-                          <td class="bg-transparent p-0"></td>
-                          <td class="bg-transparent p-0"></td>
+                          <!-- <td class="bg-transparent p-0"></td>
+                          <td class="bg-transparent p-0"></td> -->
                           <td class="bg-transparent text-white p-0 px-2">
                             $ {{ grandTotal3.toFixed(2) }}
                           </td>
@@ -2995,7 +2996,7 @@ td {
 }
 @media only screen and (max-width: 992px) {
   form#mainForm {
-    width: 70%;
+    width: 80%;
 }
 .summarytogicon i{
   font-size: 18px;
