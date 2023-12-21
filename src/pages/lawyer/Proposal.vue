@@ -769,7 +769,7 @@
               <!-- <span class="invalid-feedback">{{errors.fixedFeeAmount}}</span> -->
 
               
-              <br />
+              
               <div class="disbursement-fields">
                 <div class="form-group mt-3">
                   <label>

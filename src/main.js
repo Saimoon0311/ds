@@ -602,9 +602,9 @@ app.mixin({
         .map(
           (item, index) => `
             <tr>
-              <td>${index + 1}</td>
-              <td>${item.task ?? item.itemDisbursement}</td> 
-              <td>$${item.cost ?? item.costAud}</td>
+              <td class='border'>${index + 1}</td>
+              <td class='border'>${item.task ?? item.itemDisbursement}</td> 
+              <td class='border'>$${item.cost ?? item.costAud}</td>
             </tr>
           `
         )
@@ -612,21 +612,21 @@ app.mixin({
 
       return `
         <div class="table-title"><h5 style="text-align:left !important">${title} : </h5></div>
-        <table class='table table-bordered dynamicTable'>
+        <table class='table dynamicTable'>
           <thead>
-            <tr>
-              <th>#</th>
-              <th>Task</th>
-              <th>Cost</th>
+            <tr class='border'>
+              <th class='border'>#</th>
+              <th class='border'>Task</th>
+              <th class='border'>Cost</th>
             </tr>
           </thead>
           <tbody>
             ${tableContent}
           </tbody>
           <tfoot>
-            <tr>
-              <td></td><td></td>
-              <td>$${total.toFixed(2)}</td>
+            <tr >
+              <td class='bg-dark text-white'>Total</td><td class='bg-dark'></td>
+              <td class='bg-dark text-white'>$${total.toFixed(2)}</td>
             </tr>
           </tfoot>
         </table>
@@ -646,11 +646,11 @@ app.mixin({
         .map(
           (item, index) => `
             <tr>
-              <td>${index + 1}</td>
-              <td>${item.title}</td> <!-- Replace with actual properties -->
-              <td>$${item.hourly_rate ?? item.hourlyRate}</td>
-              <td>${item.hours ?? item.estimatedHours}</td>
-              <td>$${item.hourlyRate * item.estimatedHours}</td>
+              <td class='border'>${index + 1}</td>
+              <td class='border'>${item.title}</td> <!-- Replace with actual properties -->
+              <td class='border'>$${item.hourly_rate ?? item.hourlyRate}</td>
+              <td class='border'>${item.hours ?? item.estimatedHours}</td>
+              <td class='border'>$${item.hourlyRate * item.estimatedHours}</td>
             </tr>
           `
         )
@@ -658,14 +658,14 @@ app.mixin({
 
       return `
         <div class="table-title"><h5 style="text-align:left !important">${title} : </h5></div>
-        <table class='table table-bordered dynamicTable'>
+        <table class='table dynamicTable'>
           <thead>
             <tr>
-              <th>#</th>
-              <th>Title</th>
-              <th>Hourly Rate</th>
-              <th>Hours</th>
-              <th>Total</th>
+              <th class='border'>#</th>
+              <th class='border'>Title</th>
+              <th class='border'>Hourly Rate</th>
+              <th class='border'>Hours</th>
+              <th class='border'>Total</th>
             </tr>
           </thead>
           <tbody>
@@ -673,8 +673,8 @@ app.mixin({
           </tbody>
           <tfoot>
             <tr>
-              <td></td><td></td><td></td><td></td>
-              <td>$${total.toFixed(2)}</td>
+              <td class='bg-dark text-white'>Total</td><td class='bg-dark'></td><td class='bg-dark'></td><td class='bg-dark'></td>
+              <td class='bg-dark text-white'>$${total.toFixed(2)}</td>
             </tr>
           </tfoot>
         </table>
