@@ -402,53 +402,25 @@
 
         </div>
       </div>
-      <!-- request info -->
-      <!-- <h4>Information Requests</h4>
-      <table class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <th>Lawyer</th>
-            <th>
-              Requested information
-              <i
-                class="bi bi-question-circle"
-                onmouseover="showRequestedInformationInfo()"
-                onmouseout="hideRequestedInformationInfo()"
-              ></i>
-              <dl
-                class="d-none position-absolute bg-grey p-3 me-3 border rounded fw-light"
-                id="requestedInformationToolTip"
-              >
-                <dt>Requested information:</dt>
-                <dd class="ms-3">
-                  The lawyer requires some further information about your job in
-                  order to finalise their Proposal.
-                </dd>
-              </dl>
-            </th>
-            <th class="col-1">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colspan="6" class="text-center">
-              No pending information requests.
-            </td>
-          </tr>
-          <tr>
-            <td>testing client</td>
-            <td>further information</td>
-            <td>
-              <router-link
-                to="/reply-info-request"
-                class="btn btn-outline-dark btn-sm"
-                title="send reply"
-                ><i class="fa fa-reply-fill"></i> Reply</router-link
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
+      <div class="client-pro-des">
+        <div class="row">
+          <div class="col-2 text-center">
+            <p class="bg-dark rounded-pill text-white fw-bolder px-2 py-1">Tim rogers</p>
+          </div>
+          <div class="col-2 text-center">
+            <p class="bg-dark rounded-pill text-white fw-bolder px-2 py-1">Tim rogers</p>
+          </div>
+          <div class="col-2 text-center">
+            <p class="bg-dark rounded-pill text-white fw-bolder px-2 py-1">Tim rogers</p>
+          </div>
+          <div class="col-2 text-center">
+            <p class="bg-dark rounded-pill text-white fw-bolder px-2 py-1">Tim rogers</p>
+          </div>
+          <div class="col-2 text-center">
+            <p class="bg-dark rounded-pill text-white fw-bolder px-2 py-1">Tim rogers</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -11,7 +11,7 @@
             mso-fareast-font-family: Calibri;
             text-transform: uppercase;
             mso-ansi-language: EN-AU;
-            font-weight: bold;
+            font-weight: 400: bold;
           "
           >Privacy Policy<o:p></o:p
         ></span>
@@ -28,12 +28,12 @@
           tab-stops: 36pt;
         "
       >
-        <span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
+        <span lang="EN-US" style="font-family: Montserrat; font-weight: 400: normal"
           >This Privacy Policy applies to all personal information collected by
           <span class="SpellE">Simplawfy</span> Pty Ltd via the website
           'makinglawsimple.com.au' (</span
         ><span lang="EN-US" style="font-family: Montserrat">Website</span
-        ><span lang="EN-US" style="font-family: Montserrat; font-weight: normal"
+        ><span lang="EN-US" style="font-family: Montserrat; font-weight: 400: normal"
           >).<o:p></o:p
         ></span>
       </p>
@@ -574,6 +574,6 @@ export default {
 <style scoped>
 .LNNumberedHeading1 span {
   font-size: 14pt !important;
-  font-weight: bold;
+  font-weight: 400: bold;
 }
 </style>

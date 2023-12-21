@@ -13,7 +13,7 @@
     <ul class="nav nav-tabs mb-3 container how-tabs" id="ex1" role="tablist">
       <li class="nav-item" role="presentation">
         <a
-          class="nav-item" :class="{ 'active': loginUserData && loginUserData.type === 'client' }"
+          class="nav-link active" 
           id="ex3-tab-1"
           data-bs-toggle="tab"
           href="#ex3-tabs-1"
@@ -25,7 +25,7 @@
       </li>
       <li class="nav-item" role="presentation">
         <a
-        class="nav-item" :class="{ 'active': loginUserData && loginUserData.type === 'lawyer' }"
+        class="nav-link" 
 
 
           id="ex3-tab-2"
@@ -44,7 +44,7 @@
  
     
   <div
-    class="tab-pane fade show " :class="{ 'active': loginUserData && loginUserData.type === 'client' }"
+    class="tab-pane fade show active" 
     id="ex3-tabs-1"
     role="tabpanel"
     aria-labelledby="ex3-tab-1"
@@ -106,7 +106,7 @@
     </div>
   
 
-  <div class="tab-pane fade show" :class="{ 'active': loginUserData && loginUserData.type === 'lawyer' }" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2"
+  <div class="tab-pane fade show"  id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2"
  
   >  
      <div class="container-fluid pt-5"  >
@@ -295,7 +295,7 @@ p {
   border-radius: 50%;
   background: #000;
   color: #fff;
-  font-weight: 700;
+  font-weight: 400;
   text-align: center;
   display: flex;
   align-items: center;
@@ -329,7 +329,7 @@ p {
 .tandc:hover {
   color: #000;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 400;
 
 }
 

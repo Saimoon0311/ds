@@ -11,7 +11,7 @@
             mso-fareast-font-family: Calibri;
             text-transform: uppercase;
             mso-ansi-language: EN-AU;
-            font-weight: bold;
+            font-weight: 400: bold;
           "
           >Terms And Conditions For Lawyers <o:p></o:p
         ></span>
@@ -41,7 +41,7 @@ export default {
 <style scoped>
 .LNNumberedHeading1 span {
   font-size: 14pt !important;
-  font-weight: bold;
+  font-weight: 400: bold;
 }
 
 .tac-for-lawyer {

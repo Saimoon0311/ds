@@ -718,7 +718,7 @@ p.badge {
 }
 
 .table-wrap .wrapper h6 {
-  font-weight: 600;
+  font-weight: 400: 600;
 }
 
 .my-swal-container .swal2-close:focus {

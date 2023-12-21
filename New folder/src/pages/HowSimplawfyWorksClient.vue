@@ -276,7 +276,7 @@ p {
   border-radius: 50%;
   background: #000;
   color: #fff;
-  font-weight: 700;
+  font-weight: 400: 700;
   text-align: center;
   display: flex;
   align-items: center;
@@ -310,7 +310,7 @@ p {
 .tandc:hover {
   color: #000;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 400: 600;
 
 }
 

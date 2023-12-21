@@ -8,11 +8,11 @@
           style="
             font-size: 20pt;
             mso-bidi-font-size: 10.5pt;
-            font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
             mso-fareast-font-family: Calibri;
             text-transform: uppercase;
             mso-ansi-language: EN-AU;
-            font-weight: bold;
+            font-weight: 400: bold;
           "
           >Website terms of use<o:p></o:p
         ></span>
@@ -29,10 +29,10 @@
               ><span style="font-family: Montserrat">Simplawfy</span></span
             ></span
           >) owns and operates this website 'makinglawsimple.com.au' (<b
-            style="mso-bidi-font-weight: normal"
+            style="mso-bidi-font-weight: 400: normal"
             >Website</b
           >). Access to and use of this Website<b
-            style="mso-bidi-font-weight: normal"
+            style="mso-bidi-font-weight: 400: normal"
           >
           </b
           >and the products and services available through this Website
@@ -53,9 +53,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >1<span style="font: 7pt 'Times New Roman'"
@@ -86,9 +86,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >2<span style="font: 7pt 'Times New Roman'"
@@ -112,9 +112,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(a)<span style="font: 7pt 'Times New Roman'"
@@ -133,9 +133,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(b)<span style="font: 7pt 'Times New Roman'"
@@ -154,9 +154,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >3<span style="font: 7pt 'Times New Roman'"
@@ -186,9 +186,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >4<span style="font: 7pt 'Times New Roman'"
@@ -219,9 +219,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >5<span style="font: 7pt 'Times New Roman'"
@@ -237,9 +237,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(a)<span style="font: 7pt 'Times New Roman'"
@@ -255,9 +255,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(i)<span style="font: 7pt 'Times New Roman'"
@@ -273,9 +273,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(ii)<span style="font: 7pt 'Times New Roman'"
@@ -293,9 +293,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(iii)<span style="font: 7pt 'Times New Roman'"
@@ -311,9 +311,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(iv)<span style="font: 7pt 'Times New Roman'"
@@ -329,9 +329,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(v)<span style="font: 7pt 'Times New Roman'"
@@ -347,9 +347,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(vi)<span style="font: 7pt 'Times New Roman'"
@@ -366,9 +366,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(vii)<span style="font: 7pt 'Times New Roman'"
@@ -385,9 +385,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(viii)<span style="font: 7pt 'Times New Roman'"
@@ -404,9 +404,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(b)<span style="font: 7pt 'Times New Roman'"
@@ -431,9 +431,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >6<span style="font: 7pt 'Times New Roman'"
@@ -466,9 +466,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >7<span style="font: 7pt 'Times New Roman'"
@@ -484,9 +484,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(a)<span style="font: 7pt 'Times New Roman'"
@@ -505,9 +505,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(b)<span style="font: 7pt 'Times New Roman'"
@@ -536,9 +536,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >(c)<span style="font: 7pt 'Times New Roman'"
@@ -556,9 +556,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >8<span style="font: 7pt 'Times New Roman'"
@@ -588,9 +588,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >9<span style="font: 7pt 'Times New Roman'"
@@ -623,9 +623,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >10<span style="font: 7pt 'Times New Roman'"
@@ -652,9 +652,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >11<span style="font: 7pt 'Times New Roman'"
@@ -685,9 +685,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >12<span style="font: 7pt 'Times New Roman'"
@@ -718,9 +718,9 @@
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
-            font-family: Montserrat;
-            mso-fareast-font-family: Montserrat;
-            mso-bidi-font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
             >13<span style="font: 7pt 'Times New Roman'"
@@ -772,6 +772,6 @@ export default {
 <style scoped>
 .LNNumberedHeading1 span {
   font-size: 14pt !important;
-  font-weight: bold;
+  font-weight: 400;
 }
 </style>

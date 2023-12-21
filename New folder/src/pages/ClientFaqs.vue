@@ -18,7 +18,7 @@
             mso-fareast-font-family: Calibri;
             
             mso-ansi-language: EN-AU;
-            font-weight: bold;
+            font-weight: 400: bold;
           "
           >FAQs<o:p></o:p
         ></span>
@@ -47,7 +47,7 @@
                   mso-fareast-font-family: Calibri;
                   text-transform: uppercase;
                   mso-ansi-language: EN-AU;
-                  font-weight: bold;
+                  font-weight: 400: bold;
                 "
                 >Client Faq's<o:p></o:p
               ></span>
@@ -77,7 +77,7 @@
                   mso-fareast-font-family: Calibri;
                   text-transform: uppercase;
                   mso-ansi-language: EN-AU;
-                  font-weight: bold;
+                  font-weight: 400: bold;
                 "
                 >LAWYER FAQ'S <o:p></o:p
               ></span>
@@ -115,7 +115,7 @@
                   >
                     <span
                       lang="EN-US"
-                      style="font-family: Montserrat; font-weight: normal"
+                      style="font-family: Montserrat; font-weight: 400: normal"
                     >
                       <b>I am considering posting a job, but</b>
                     </span>
@@ -134,7 +134,7 @@
                       <h2 class="accordion-header" id="headingOne">
                         <button
                           class="accordion-button collapsed"
-                          style="font-weight: 600"
+                          style="font-weight: 400: 600"
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target="#collapseOne"
@@ -161,7 +161,7 @@
                       <h2 class="accordion-header" id="headingTwo">
                         <button
                           class="accordion-button collapsed"
-                          style="font-weight: 600"
+                          style="font-weight: 400: 600"
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target="#collapseTwo"
@@ -191,7 +191,7 @@
                       <h2 class="accordion-header" id="headingThree">
                         <button
                           class="accordion-button collapsed"
-                          style="font-weight: 600"
+                          style="font-weight: 400: 600"
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target="#collapseThree"
@@ -243,7 +243,7 @@
                   >
                     <span
                       lang="EN-US"
-                      style="font-family: Montserrat; font-weight: normal"
+                      style="font-family: Montserrat; font-weight: 400: normal"
                     >
                       <b>I have posted a job, but</b>
                     </span>
@@ -262,7 +262,7 @@
                       <h2 class="accordion-header" id="headingFour">
                         <button
                           class="accordion-button collapsed"
-                          style="font-weight: 600"
+                          style="font-weight: 400: 600"
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target="#collapseFour"
@@ -314,7 +314,7 @@
                   >
                     <span
                       lang="EN-US"
-                      style="font-family: Montserrat; font-weight: normal"
+                      style="font-family: Montserrat; font-weight: 400: normal"
                     >
                       <b>I have received a lawyer’s proposal, but</b>
                     </span>
@@ -333,7 +333,7 @@
                       <h2 class="accordion-header" id="headingFive">
                         <button
                           class="accordion-button collapsed"
-                          style="font-weight: 600"
+                          style="font-weight: 400: 600"
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target="#collapseFive"
@@ -391,7 +391,7 @@
                   >
                     <span
                       lang="EN-US"
-                      style="font-family: Montserrat; font-weight: normal"
+                      style="font-family: Montserrat; font-weight: 400: normal"
                     >
                       <b>I have accepted a lawyer’s proposal, but</b>
                     </span>
@@ -410,7 +410,7 @@
                       <h2 class="accordion-header" id="headingSix">
                         <button
                           class="accordion-button collapsed"
-                          style="font-weight: 600"
+                          style="font-weight: 400: 600"
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target="#collapseSix"
@@ -444,7 +444,7 @@
                       <h2 class="accordion-header" id="headingSeven">
                         <button
                           class="accordion-button collapsed"
-                          style="font-weight: 600"
+                          style="font-weight: 400: 600"
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target="#collapseSeven"
@@ -498,7 +498,7 @@
                   >
                     <span
                       lang="EN-US"
-                      style="font-family: Montserrat; font-weight: normal"
+                      style="font-family: Montserrat; font-weight: 400: normal"
                     >
                       <b
                         >I want to message a lawyer through the platform, but</b
@@ -519,7 +519,7 @@
                       <h2 class="accordion-header" id="headingEight">
                         <button
                           class="accordion-button collapsed"
-                          style="font-weight: 600"
+                          style="font-weight: 400: 600"
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target="#collapseEight"
@@ -570,7 +570,7 @@
           >
             <span
               lang="EN-US"
-              style="font-family: Montserrat; font-weight: normal"
+              style="font-family: Montserrat; font-weight: 400: normal"
             >
               <b>I have a question that isn’t listed here.</b>
             </span>
@@ -605,7 +605,7 @@ export default {
 </script>
 <style scoped>
 .LNNumberedHeading1 span {
-  font-weight: bold !important;
+  font-weight: 400: bold !important;
   font-size: 21px !important;
   color: black;
 }
@@ -635,7 +635,7 @@ export default {
 
 .accordion-button {
   padding: 13px 10px !important;
-  font-weight: 400 !important;
+  font-weight: 400: 400 !important;
   font-size: 17px;
 }
 
@@ -655,7 +655,7 @@ export default {
 }
 
 .accordion-body {
-  /* font-weight: 600; */
+  /* font-weight: 400: 600; */
   font-size: 15px;
 }
 
@@ -680,7 +680,7 @@ export default {
   display: inline-block;
   padding-left: 0 !important;
   padding-right: 0 !important;
-  font-weight: 600 !important;
+  font-weight: 400: 600 !important;
   color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
   text-decoration: underline;
 }

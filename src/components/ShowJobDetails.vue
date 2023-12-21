@@ -72,7 +72,7 @@ export default {
   margin: 0;
 }
 .smallFont1 span {
-  font-weight: 600;
+  font-weight: 400;
 }
 .smallFont1 {
   font-size: 16px;
@@ -90,7 +90,7 @@ export default {
 }
 .title{
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 400;
 }
 .descriptionText::-webkit-scrollbar {
   width: 6px;
@@ -141,7 +141,7 @@ export default {
   }
   .title{
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
 }
 }
 @media only screen and (max-width: 992px) {

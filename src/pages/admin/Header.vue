@@ -30,28 +30,28 @@
               <div class="left-menu">
                 <router-link
                   to="/admin-dashboard"
-                  class="nav-link fw-bolder menuItem-active-link"
+                  class="nav-link fw-normal menuItem-active-link"
                   id="lawyers"
                   aria-current="page"
                   >Lawyers</router-link
                 >
                 <router-link
                   to="/client"
-                  class="nav-link fw-bolder menuItem-active-link"
+                  class="nav-link fw-normal menuItem-active-link"
                   id="clients"
                   aria-current="page"
                   >Clients</router-link
                 >
                 <router-link
                   to="/job"
-                  class="nav-link fw-bolder menuItem-active-link"
+                  class="nav-link fw-normal menuItem-active-link"
                   id="jobs"
                   aria-current="page"
                   >Jobs</router-link
                 >
                 <router-link
                   to="/admin-account"
-                  class="nav-link fw-bolder menuItem-active-link"
+                  class="nav-link fw-normal menuItem-active-link"
                   id="account"
                   aria-current="page"
                   >Account</router-link
@@ -157,7 +157,7 @@ export default {
 .lg-btn .link {
 
   color: #000000a6 !important;
-  font-weight: bolder;
+  font-weight: 400;
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {

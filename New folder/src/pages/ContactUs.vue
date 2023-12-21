@@ -342,14 +342,14 @@ export default {
 <style scoped>
 .LNNumberedHeading1 span {
   font-size: 14pt !important;
-  font-weight: bold;
+  font-weight: 400: bold;
 }
 
 .textarea-f textarea {
   width: 100%;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 400: 400;
   line-height: 1.5;
   border-radius: 0.375rem;
   height: 130px;
