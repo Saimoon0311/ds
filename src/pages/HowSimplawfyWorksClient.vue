@@ -44,11 +44,11 @@
  
     
   <div
-    class="tab-pane fade show active"
+    class="tab-pane fade show " :class="{ 'active': loginUserData && loginUserData.type === 'client' }"
     id="ex3-tabs-1"
     role="tabpanel"
     aria-labelledby="ex3-tab-1"
-    v-if="loginUserData && loginUserData.type === 'client'"
+  
   >
   
  
@@ -104,19 +104,10 @@
       </div>
     </div>
     </div>
-    <div v-else>
-    <div
-      class="tab-pane fade text-center pt-2"
-      id="ex3-tabs-1"
-      role="tabpanel"
-      aria-labelledby="ex3-tab-1"
-    >
-      You are not logged in as a client.
-    </div>
-  </div>
+  
 
-  <div class="tab-pane fade show active" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2"
-  v-if="loginUserData && loginUserData.type === 'lawyer'"
+  <div class="tab-pane fade show" :class="{ 'active': loginUserData && loginUserData.type === 'lawyer' }" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2"
+ 
   >  
      <div class="container-fluid pt-5"  >
 
@@ -209,16 +200,7 @@
     </div>
   
   </div>
-  <div v-else>
-    <div
-      class="tab-pane fade text-center pt-2"
-      id="ex3-tabs-2"
-      role="tabpanel"
-      aria-labelledby="ex3-tab-2"
-    >
-      You are not logged in as a lawyer.
-    </div>
-  </div>
+
 </div>
     <!-- ------------ -->
     

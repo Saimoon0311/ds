@@ -496,9 +496,12 @@
                 "
                 class="text-center mt-3"
               >
-                <button class="btn custom-button" @click="loadMore">
+                <!-- <button class="btn custom-button" @click="loadMore">
                   Load More
-                </button>
+                </button> -->
+                <div  @click="loadMore">
+                 
+                </div>
               </div>
             </div>
           </div>
@@ -553,14 +556,28 @@ export default {
   },
   async created() {
     await this.loadMore();
+    this.getNextUser();
+
+    // if(this.jobTabName){
+    //   this.setTab(this.jobTabName);
+    // }
+  },
+ 
+  // mounted(){
+  //   this.getNextUser();
+  // },
+  methods: {
+    getNextUser() {
+      window.onscroll = () => {
+        let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight  === document.documentElement.offsetHeight;
+        if (bottomOfWindow) {
+       this.loadMore();
     if(this.jobTabName){
       this.setTab(this.jobTabName);
     }
-  },
-  // mounted(){
-  //   this.getJobs();
-  // },
-  methods: {
+        }
+      }
+    },
     goToMessagePage(item) {
       console.log('ic : ' , item);
       this.saveJobInfo(item);

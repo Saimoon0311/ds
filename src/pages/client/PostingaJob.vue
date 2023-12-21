@@ -1,7 +1,7 @@
 <template>
   <div class="f-main">
-    <div class="container">
     <ClientHeader />
+    <div class="container">
     <p class="h3 text-center mt-5">Post a Job</p>
     <div class="container pb-seven">
       <div class="row justify-content-center">
@@ -432,10 +432,11 @@
         </form>
       </div>
     </div>
-    <div class="footer footer-ct">
+  
+  </div>
+  <div class="footer footer-ct">
       <MainFooter />
     </div>
-  </div>
   </div>
 </template>
 <!-- <script setup>
