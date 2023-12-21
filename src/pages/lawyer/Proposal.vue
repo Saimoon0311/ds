@@ -2432,7 +2432,7 @@ export default {
         this.summaryHtmlDisbursement = arr[0]
         this.summaryHtmlItemByItemTasks = arr[2]
         this.summaryHtmlFeeEarners = arr[1]
-      }
+      } 
     },
 
 
@@ -2739,12 +2739,17 @@ export default {
 .summ div p span:first-child {
     font-weight: 600;
     font-size: 16px;
+   margin-right: 10px;
+}
+.summ div .topcharge{
+  justify-content: space-between;
+
 }
 .summ div p {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     text-transform: capitalize;
 }
 
