@@ -126,13 +126,7 @@
                     <div class="widthcn">
                       <span class="spacer px-3">
                         <p class="smallFont text-black">
-                          Posted
-                          <!-- by Username
-                          <span class="text-capitalize"
-                            >({{ item?.city }})</span
-                          > -->
-                          on
-                          {{ formatCreatedAt(item.created_at) }}
+                          <b>Posted on: </b> {{ formatCreatedAt(item.created_at) }}
                         </p>
                       </span>
                     </div>
@@ -148,14 +142,14 @@
                     >View Proposals</router-link
                   > -->
                       <button
-                        class="btn btn-sm card-btn my-1 mx-1 border text-black"
+                        class="btn btn-sm btn-dark card-btn my-1 mx-1 border"
                         @click="goToViewProposals(item?.id)"
                       >
                         View Proposal
                       </button>
                       <button
                         :disabled="item?.chats && item?.chats.length == 0"
-                        class="btn btn-dark btn-sm card-btn my-1 mx-1"
+                        class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
                         @click="goToMessagePage(item)"
                       >
                         View Messages
@@ -426,9 +420,7 @@ ul#pills-tab {
   border-radius: 10px;
 }
 
-.card-btn {
-  width: 30%;
-}
+
 
 p.badge {
   font-size: 14px;
@@ -491,12 +483,13 @@ p.badge{
   border-radius: 10px;
 }
 .card-btn {
-    width: 30%;
+    width: 32%;
     height: 45px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    font-size: 16px;
 }
 .spacer {
     margin: 20px 0;
@@ -509,8 +502,8 @@ p.badge{
 }
 @media only screen and (max-width: 1400px) and (min-width: 992px) {
   .card-btn {
-    width: 30%;
-    font-size: 11px;
+    width: 32%;
+    font-size: 14px;
     padding: 5px;
   }
 }
@@ -518,6 +511,8 @@ p.badge{
 @media only screen and (max-width: 992px) {
   .card-btn {
     width: 95%;
+    font-size: 14px;
+
   }
   .smallFont {
     margin: 5px;

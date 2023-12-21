@@ -368,7 +368,7 @@
                           <button
                             @click="submitProposal(item)"
                             v-if="tab == 'open'"
-                            class="btn btn-light btn-sm card-btn my-1 mx-1 border"
+                            class="btn btn-dark btn-sm card-btn my-1 mx-1 border"
                           >
                             Submit a Proposal
                           </button>
@@ -376,11 +376,27 @@
                           <button
                             @click="openProposalDetailsModal(item.proposal)"
                             v-if="tab === 'pending'"
-                            class="btn btn-light border btn-sm card-btn my-1 mx-1"
+                            class="btn btn-dark border btn-sm card-btn my-1 mx-1"
                           >
                             View Proposal
                           </button>
 
+                         
+
+                          <!-- <button
+                          v-if="tab == 'close'"
+                            class="btn btn-dark btn-sm card-btn my-1 mx-1"
+                            @click="goToMessagePage(item)"
+                          >
+                            View Messages
+                          </button> -->
+
+                          <button
+                            class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
+                            @click="goToMessagePage(item)"
+                          >
+                          View Message
+                          </button>
                           <button
                             v-if="tab == 'open'"
                             @click="declineJob(item.id, index)"
@@ -395,21 +411,6 @@
                             class="btn btn-danger btn-sm card-btn my-1 mx-1"
                           >
                             Withdraw
-                          </button>
-
-                          <!-- <button
-                          v-if="tab == 'close'"
-                            class="btn btn-dark btn-sm card-btn my-1 mx-1"
-                            @click="goToMessagePage(item)"
-                          >
-                            View Messages
-                          </button> -->
-
-                          <button
-                            class="btn btn-dark btn-sm card-btn my-1 mx-1"
-                            @click="goToMessagePage(item)"
-                          >
-                          View Message
                           </button>
 
                           <!-- <router-link
@@ -870,12 +871,13 @@ ul#pills-tab {
 }
 
 .card-btn {
-  width: 30%;
+  width: 32%;
   height: 45px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  font-size: 16px;
 }
 
 p.badge {
@@ -945,8 +947,8 @@ p.badge {
 }
 @media only screen and (max-width: 1400px) and (min-width: 992px) {
   .card-btn {
-    width: 30%;
-    font-size: 11px;
+    width: 32%;
+    font-size: 14px;
     padding: 5px;
   }
 }
@@ -954,6 +956,8 @@ p.badge {
 @media only screen and (max-width: 992px) {
   .card-btn {
     width: 95%;
+    font-size: 14px;
+
   }
   .search-field{
   width: 100%;
