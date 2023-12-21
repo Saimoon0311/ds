@@ -1996,12 +1996,12 @@
                         <p class="descriptionText">{{ form.description }} </p>
                       </div>
                       <div>
-                        <p v-if="!isNaN(this.totals.totalExcludingGst)"> 
+                        <p v-if="!isNaN(this.totals?.totalExcludingGst)"> 
                            <span> Total (excluding GST):</span>  
-                           <span>${{ this.totals.totalExcludingGst }}</span>
+                           <span>${{ this.totals?.totalExcludingGst }}</span>
                         </p>
-                        <p v-if="!isNaN(this.totals.gst)"> <span> GST:</span>  <span>${{ this.totals.gst }}</span></p>
-                        <p v-if="!isNaN(this.totals.totalIncludingGst)" class="bg-dark text-white p-2 rounded"> <span> Total (including GST):</span>  <span>${{ this.totals.totalIncludingGst }}</span></p>
+                        <p v-if="!isNaN(this.totals?.gst)"> <span> GST:</span>  <span>${{ this.totals?.gst }}</span></p>
+                        <p v-if="!isNaN(this.totals?.totalIncludingGst)" class="bg-dark text-white p-2 rounded"> <span> Total (including GST):</span>  <span>${{ this.totals?.totalIncludingGst }}</span></p>
                       </div>
                       
                     </div>
@@ -2384,9 +2384,9 @@ export default {
             break;
         }  
 
-        this.totals.totalExcludingGst = this.getTotalWithOutGst(total);
-        this.totals.totalIncludingGst = total
-        this.totals.gst = this.getGst(total);
+        this.totals['totalExcludingGst'] = this.getTotalWithOutGst(total);
+        this.totals['totalIncludingGst'] = total;
+        this.totals['gst'] = this.getGst(total);
 
     },
 
@@ -2410,22 +2410,11 @@ export default {
     // },
 
     getTotalWithOutGst(total){
-        console.log('func1 : ' , total);
-        // if (valuesArray.length === 0) {
-        //   return 0;
-        // }
-        // let total = this.getTotalWithGst(...valuesArray);
-        // console.log(total);
-        // const numericValues = valuesArray.map(value => parseFloat(value) || 0);
-        // console.log(numericValues);
-        // let totalBeforeFix = Math.max(...numericValues) - (Math.max(...numericValues) * 0.10);
         let totalBeforeFix = total - (total * 0.10);
         return totalBeforeFix.toFixed(2);
     },
 
     getGst(total){
-        console.log('func 2 : ' , total);
-        // let total = this.getTotalWithGst(...valuesArray);
         let gst = total * 0.10;
         return gst.toFixed(2);
     },
@@ -2542,6 +2531,11 @@ export default {
       this.form.disbursements = this.rows; // Itemise Disbursements
       this.form.specificTasks = this.rows2; // item by item specific tasks
       this.form.feeEarners = this.rows3; // additional fee earner
+
+      this.form.total_with_gst = this.totals['totalIncludingGst'];
+      this.form.total_without_gst = this.totals['totalExcludingGst'];
+      this.form.gst = this.totals['gst'];
+
 
       // console.log(this.formValues);
 

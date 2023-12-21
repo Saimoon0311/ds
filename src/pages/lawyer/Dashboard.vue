@@ -556,7 +556,8 @@ export default {
   },
   async created() {
     await this.loadMore();
-    this.getNextUser();
+    // this.getNextUser();
+    window.addEventListener('scroll', this.getNextUser);
 
     // if(this.jobTabName){
     //   this.setTab(this.jobTabName);
@@ -566,18 +567,35 @@ export default {
   // mounted(){
   //   this.getNextUser();
   // },
+
+  beforeUnmount(){
+    // Remove the scroll event listener before the component is destroyed
+    window.removeEventListener('scroll', this.getNextUser);
+  },
+
   methods: {
+
     getNextUser() {
-      window.onscroll = () => {
-        let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight  === document.documentElement.offsetHeight;
-        if (bottomOfWindow) {
-       this.loadMore();
-    if(this.jobTabName){
-      this.setTab(this.jobTabName);
-    }
+      let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+      if (bottomOfWindow) {
+        this.loadMore();
+        if (this.jobTabName) {
+          this.setTab(this.jobTabName);
         }
       }
     },
+
+    // getNextUser() {
+    //   window.onscroll = () => {
+    //     let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight  === document.documentElement.offsetHeight;
+    //     if (bottomOfWindow) {
+    //    this.loadMore();
+    // if(this.jobTabName){
+    //   this.setTab(this.jobTabName);
+    // }
+    //     }
+    //   }
+    // },
     goToMessagePage(item) {
       console.log('ic : ' , item);
       this.saveJobInfo(item);

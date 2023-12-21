@@ -420,7 +420,9 @@ export default {
         allowOutsideClick: () => !this.$swal.isLoading(),
       }).then((result) => {
         if (result.isConfirmed) {
-          this.$swal(title, msg, "success")
+          this.$swal(title, msg, "success").then(()=>{
+            this.$router.push({ path: "/lawyer-dashboard" });
+          })
         }
       });
     },
