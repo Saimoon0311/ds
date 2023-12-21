@@ -207,7 +207,7 @@
 
               <div
                 v-else
-                class="border rounded bg-light px-2 py-3 d-flex flex-wrap align-center justify-content-center"
+                class=" px-2 py-3 d-flex flex-wrap align-center justify-content-center"
               >
                 <div class="input-group mb-3 search-field">
                   <input
@@ -370,7 +370,7 @@
                             v-if="tab == 'open'"
                             class="btn btn-light btn-sm card-btn my-1 mx-1 border"
                           >
-                            Submit a proposal
+                            Submit a Proposal
                           </button>
 
                           <button
@@ -812,7 +812,7 @@ ul#pills-tab {
   margin: 0;
 }
 /* .smallFont1 span {
-  font-weight: 600;
+  font-weight: 400: 600;
 } */
 .smallFont1 {
   font-size: 16px;
@@ -827,7 +827,8 @@ ul#pills-tab {
 .descriptionText {
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 100px;
+  min-height: 20px;
+  max-height: 100px;
   /* line-break: anywhere; */
   overflow-y: auto;
   padding-right: 10px;
@@ -906,7 +907,7 @@ p.badge {
 }
 
 .table-wrap .wrapper h6 {
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .my-swal-container .swal2-close:focus {

@@ -13,11 +13,11 @@
           style="
             font-size: 20pt;
             mso-bidi-font-size: 10.5pt;
-            font-family: Montserrat;
+                font-family: 'Montserrat', sans-serif;
             mso-fareast-font-family: Calibri;
             
             mso-ansi-language: EN-AU;
-            font-weight: bold;
+            font-weight: 400: bold;
           "
           >FAQs<o:p></o:p
         ></span>
@@ -56,7 +56,7 @@
                   >
                     <span
                       lang="EN-US"
-                      style="font-family: Montserrat; font-weight: normal"
+                      style="    font-family: 'Montserrat', sans-serif; font-weight: 400: normal"
                     >
                       <b>I have created a profile, but</b>
                     </span>
@@ -74,7 +74,7 @@
                       <h2 class="accordion-header" id="headinglOne">
                         <button
                           class="accordion-button collapsed"
-                          style="font-weight: 600"
+                          style="font-weight: 400: 600"
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target="#collapselOne"
@@ -134,7 +134,7 @@
                   >
                     <span
                       lang="EN-US"
-                      style="font-family: Montserrat; font-weight: normal"
+                      style="    font-family: 'Montserrat', sans-serif; font-weight: 400: normal"
                     >
                       <b>I am considering subscribing to your platform, but</b>
                     </span>
@@ -153,7 +153,7 @@
                         <h2 class="accordion-header" id="headinglTwo">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapselTwo"
@@ -210,7 +210,7 @@
                   >
                     <span
                       lang="EN-US"
-                      style="font-family: Montserrat; font-weight: normal"
+                      style="    font-family: 'Montserrat', sans-serif; font-weight: 400: normal"
                     >
                       <b>
                         I am considering submitting a proposal for a job, but</b
@@ -231,7 +231,7 @@
                         <h2 class="accordion-header" id="headinglThree">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapselThree"
@@ -275,7 +275,7 @@
                         <h2 class="accordion-header" id="headinglfour">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapselfour"
@@ -335,7 +335,7 @@
                   >
                     <span
                       lang="EN-US"
-                      style="font-family: Montserrat; font-weight: normal"
+                      style="    font-family: 'Montserrat', sans-serif; font-weight: 400: normal"
                     >
                       <b>I have submitted a proposal to a client, but</b>
                     </span>
@@ -354,7 +354,7 @@
                         <h2 class="accordion-header" id="headinglfive">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapselfive"
@@ -409,7 +409,7 @@
                         <h2 class="accordion-header" id="headinglsix">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapselsix"
@@ -469,7 +469,7 @@
                         <h2 class="accordion-header" id="headinglseven">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapselseven"
@@ -499,7 +499,7 @@
                         <h2 class="accordion-header" id="headingleight">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapseleight"
@@ -560,7 +560,7 @@
                   >
                     <span
                       lang="EN-US"
-                      style="font-family: Montserrat; font-weight: normal"
+                      style="    font-family: 'Montserrat', sans-serif; font-weight: 400: normal"
                     >
                       <b>A client has accepted my proposal, but</b>
                     </span>
@@ -579,7 +579,7 @@
                         <h2 class="accordion-header" id="headinglnine">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapselnine"
@@ -605,7 +605,7 @@
                         <h2 class="accordion-header" id="headinglten">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapselten"
@@ -637,7 +637,7 @@
                         <h2 class="accordion-header" id="headingleleven">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapseleleven"
@@ -674,7 +674,7 @@
                         <h2 class="accordion-header" id="headingltwel">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapseltwel"
@@ -711,7 +711,7 @@
                         <h2 class="accordion-header" id="headinglthirteen">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapselthirteen"
@@ -776,7 +776,7 @@
                   >
                     <span
                       lang="EN-US"
-                      style="font-family: Montserrat; font-weight: normal"
+                      style="    font-family: 'Montserrat', sans-serif; font-weight: 400: normal"
                     >
                       <b
                         >I want to message a client through the platform, but</b
@@ -797,7 +797,7 @@
                         <h2 class="accordion-header" id="headinglfourty">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapselfourty"
@@ -827,7 +827,7 @@
                         <h2 class="accordion-header" id="headinglfifty">
                           <button
                             class="accordion-button collapsed"
-                            style="font-weight: 600"
+                            style="font-weight: 400: 600"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#collapselfifty"
@@ -886,7 +886,7 @@
                   >
                     <span
                       lang="EN-US"
-                      style="font-family: Montserrat; font-weight: normal"
+                      style="    font-family: 'Montserrat', sans-serif; font-weight: 400: normal"
                     >
                       <b>I am a lawyer outside of Australia.</b>
                     </span>
@@ -922,7 +922,7 @@
           >
             <span
               lang="EN-US"
-              style="font-family: Montserrat; font-weight: normal"
+              style="    font-family: 'Montserrat', sans-serif; font-weight: 400: normal"
             >
               <b>I have a question that isn’t listed here.</b>
             </span>
@@ -976,7 +976,7 @@ export default {
 </script>
 <style scoped>
 .LNNumberedHeading1 span {
-  font-weight: bold !important;
+  font-weight: 400 !important;
   font-size: 21px !important;
   color: black;
 }
@@ -1026,7 +1026,7 @@ export default {
 }
 
 .accordion-body {
-  /* font-weight: 600; */
+  /* font-weight: 400: 600; */
   font-size: 15px;
 }
 

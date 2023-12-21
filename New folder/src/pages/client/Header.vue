@@ -252,7 +252,7 @@ ul.dropdown-menu.show {
 
 .lg-btn button {
   color: #000000a6 !important;
-  font-weight: bolder;
+  font-weight: 400: bolder;
 }
 
 .showonmonb {

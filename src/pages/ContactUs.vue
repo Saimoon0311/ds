@@ -347,7 +347,7 @@ export default {
 <style scoped>
 .LNNumberedHeading1 span {
   font-size: 14pt !important;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .textarea-f textarea {

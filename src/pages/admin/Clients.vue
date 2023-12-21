@@ -110,7 +110,7 @@
                           <table class="table table-striped">
                             <tbody>
                               <tr>
-                                <td class="fw-bold">Profile</td>
+                                <td class="fw-normal">Profile</td>
                                 <td>
                                   <!-- <img
                                   src=""
@@ -121,28 +121,28 @@
                                 </td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">Email</td>
+                                <td class="fw-normal">Email</td>
                                 <td>{{ item?.email }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">Name</td>
+                                <td class="fw-normal">Name</td>
                                 <td>{{ item?.first_name }} {{ item?.last_name }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">Job Title</td>
+                                <td class="fw-normal">Job Title</td>
                                 <td>{{ item?.job_title }}
                                 </td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">Law Firm Name</td>
+                                <td class="fw-normal">Law Firm Name</td>
                                 <td>{{ item?.law_firm }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">Phone</td>
+                                <td class="fw-normal">Phone</td>
                                 <td>{{ item?.phone }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">Website</td>
+                                <td class="fw-normal">Website</td>
                                 <td>
                                   <a :href="item?.link" target="_blank"
                                     >{{ item?.link }}</a
@@ -150,7 +150,7 @@
                                 </td>
                               </tr>
                               <tr>
-                                <td class="fw-bold">About</td>
+                                <td class="fw-normal">About</td>
                                 <td>{{ item?.about }}</td>
                               </tr>
 
@@ -253,7 +253,7 @@
                           <table class="table table-striped">
                             <tbody>
                               <tr>
-                                <td class="fw-bold">Profile</td>
+                                <td class="fw-normal">Profile</td>
                                 <td>
                                   <!-- <img
                                   src=""
@@ -264,15 +264,15 @@
                                 </td>
                               </tr>
                               <tr>
-                                <td class="fw-bold d-flex align-items-center justify-content-between">Email</td>
+                                <td class="fw-normal d-flex align-items-center justify-content-between">Email</td>
                                 <td>{{ item?.email }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold d-flex align-items-center justify-content-between">Name</td>
+                                <td class="fw-normal d-flex align-items-center justify-content-between">Name</td>
                                 <td>{{ item?.first_name }} {{ item?.last_name }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold d-flex align-items-center justify-content-between">Job Title
+                                <td class="fw-normal d-flex align-items-center justify-content-between">Job Title
                                   <button
                                     type="button"
                                     class="btn btn-dark btn-sm"
@@ -336,7 +336,7 @@
                                 <td>{{ item?.job_title }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold d-flex align-items-center justify-content-between">Law Firm Name
+                                <td class="fw-normal d-flex align-items-center justify-content-between">Law Firm Name
                                   <button
                                     type="button"
                                     class="btn btn-dark btn-sm"
@@ -396,7 +396,7 @@
                                 <td>{{ item?.law_firm }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold d-flex align-items-center justify-content-between">Phone
+                                <td class="fw-normal d-flex align-items-center justify-content-between">Phone
                                   <button
                                     type="button"
                                     class="btn btn-dark btn-sm"
@@ -461,7 +461,7 @@
                                 <td>{{ item?.phone }}</td>
                               </tr>
                               <tr>
-                                <td class="fw-bold d-flex align-items-center justify-content-between">Website
+                                <td class="fw-normal d-flex align-items-center justify-content-between">Website
                                   <button
                                     type="button"
                                     class="btn btn-dark btn-sm"
@@ -529,7 +529,7 @@
                                 </td>
                               </tr>
                               <tr>
-                                <td class="fw-bold d-flex align-items-center justify-content-between">About
+                                <td class="fw-normal d-flex align-items-center justify-content-between">About
                                   <button
                                     type="button"
                                     class="btn btn-dark btn-sm"

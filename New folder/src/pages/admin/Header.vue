@@ -157,7 +157,7 @@ export default {
 .lg-btn .link {
 
   color: #000000a6 !important;
-  font-weight: bolder;
+  font-weight: 400: bolder;
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {

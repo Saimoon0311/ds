@@ -907,6 +907,7 @@ export default {
   margin: 8px 7px !important;
   cursor: pointer;
   background: black !important;
+  font-weight: 500;
 }
 
 .bubbles:hover {

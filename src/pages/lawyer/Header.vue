@@ -31,35 +31,35 @@
               <div class="left-menu">
                 <router-link
                   to="/lawyer-dashboard"
-                  class="nav-link fw-bolder menuItem-active-link"
+                  class="nav-link fw-normal menuItem-active-link"
                   id="lawyers"
                   aria-current="page"
                   >Dashboard</router-link
                 >
                 <!-- <router-link
                   to="/lawyer-proposals"
-                  class="nav-link fw-bolder menuItem-active-link"
+                  class="nav-link fw-normal menuItem-active-link"
                   id="lawyers"
                   aria-current="page"
                   >Proposals</router-link
                 > -->
                 <router-link
                   to="/lawyer-profile"
-                  class="nav-link fw-bolder menuItem-active-link"
+                  class="nav-link fw-normal menuItem-active-link"
                   id="jobs"
                   aria-current="page"
                   >Profile</router-link
                 >
                 <router-link
                   to="/lawyer-account"
-                  class="nav-link fw-bolder menuItem-active-link"
+                  class="nav-link fw-normal menuItem-active-link"
                   id="jobs"
                   aria-current="page"
                   >Account</router-link
                 >
                 <router-link
                   to="/lawyer-faqs"
-                  class="nav-link fw-bolder menuItem-active-link"
+                  class="nav-link fw-normal menuItem-active-link"
                   id="jobs"
                   aria-current="page"
                   >FAQs</router-link
@@ -68,26 +68,26 @@
                 
                 <ul class="showonmonb">
                   <li>
-                    <router-link class="nav-link fw-bolder menuItem-active-link" to="/about-us"
+                    <router-link class="nav-link fw-normal menuItem-active-link" to="/about-us"
                       >About Us</router-link
                     >
                   </li>
 
                   <li>
-                    <router-link class="nav-link fw-bolder menuItem-active-link" to="/how-simplawfy-works"
+                    <router-link class="nav-link fw-normal menuItem-active-link" to="/how-simplawfy-works"
                       >How Simplawfy Works</router-link
                     >
                   </li>
 
                   <li>
-                    <router-link class="nav-link fw-bolder menuItem-active-link" to="/contact-us"
+                    <router-link class="nav-link fw-normal menuItem-active-link" to="/contact-us"
                       >Contact Us</router-link
                     >
                   </li>
                   <li>
                     <button
                   @click="logout('login')"
-                  class="nav-link fw-bolder menuItem-active-link"
+                  class="nav-link fw-normal menuItem-active-link"
                   id="clients"
                   aria-current="page"
                 >
@@ -237,7 +237,7 @@ ul.dropdown-menu.show {
 
 .lg-btn button {
   color: #000000a6 !important;
-  font-weight: bolder;
+  font-weight: 400;
 }
 
 .showonmonb {

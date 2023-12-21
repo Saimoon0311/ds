@@ -52,7 +52,7 @@ export default {
     text-align: center;
     padding: 4px 0;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 400;
     /* text-transform: uppercase; */
     color: #000;
     letter-spacing: 1px;
@@ -85,7 +85,7 @@ export default {
 
 .footer-main .link {
     /* font-size: 15px; */
-    font-weight: 600;
+    font-weight: 400;
     /* text-transform: uppercase; */
     color: #000;
     text-decoration: none;
@@ -107,7 +107,7 @@ export default {
 }
 
 .dropdown-item {
-    font-weight: 600;
+    font-weight: 400;
 }
 
 @media (min-width: 320px) and (max-width: 425px) {

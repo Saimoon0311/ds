@@ -76,13 +76,13 @@
 
               <div
                 v-if="openJobs.length == 0 && searchQuery != ''"
-                class="border rounded bg-light p-3 my-3 d-flex flex-wrap"
+                class=" p-3 my-3 d-flex flex-wrap"
                 id="containerActive"
               >
                 <span class="text-center w-100">No record found!</span>
               </div>
 
-              <div class="row border rounded bg-light p-3">
+              <div class="row p-3">
                 <div
                   v-for="(item, index) in openJobs"
                   :key="index"
@@ -403,6 +403,7 @@ ul#pills-tab {
 .descriptionText {
   overflow: hidden;
   text-overflow: ellipsis;
+  min-height: 20px;
   max-height: 100px;
   /* line-break: anywhere; */
   overflow-y: auto;
@@ -466,7 +467,8 @@ p.badge{
 .descriptionText {
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 100px;
+  min-height: 20px;
+  max-height: 100px;
   /* line-break: anywhere; */
   overflow-y: auto;
   padding-right: 10px;

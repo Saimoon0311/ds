@@ -8,15 +8,15 @@
           An Australian legal marketplace making law simple by helping you find
           a lawyer or promote your law firm.
         </p>
-        <!-- <p class="h5 fw-bold">
+        <!-- <p class="h5 fw-normal">
           The Revolution is Coming. Be Part of the Change.
         </p> -->
       </div>
       <div class="d-flex flex-wrap justify-content-center align-items-center pb-5">
         <div class="homepage-circles d-flex flex-column align-items-center justify-content-center " v-if="isMobile" @click="toggleDiv1" >
-          <p class="fw-bold law-hd" v-if="headShow1">I'm looking for a lawyer</p>
+          <p class="fw-normal law-hd" v-if="headShow1">I'm looking for a lawyer</p>
           <div class="showhover" v-if="showDiv1">
-            <p class="fw-bold mb-3">Looking for a lawyer?</p>
+            <p class="fw-normal mb-3">Looking for a lawyer?</p>
             <p>Need a lawyer and don't know where to begin?</p>
             <p>
               We take the hassle and uncertainty out of the process of finding a
@@ -33,9 +33,9 @@
           </div>
         </div>
         <div class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white" v-if="isMobile" @click="toggleDiv2" >
-          <p class="fw-bold law-hd" v-if="headShow2">I'm looking for clients</p>
+          <p class="fw-normal law-hd" v-if="headShow2">I'm looking for clients</p>
           <div class="showhover" v-if="showDiv2">
-            <p class="fw-bold mb-3">Looking for clients?</p>
+            <p class="fw-normal mb-3">Looking for clients?</p>
 
             <p>
               Professional networking eating into your billable hours and not
@@ -63,9 +63,9 @@
 
       <div class="d-flex flex-wrap justify-content-center align-items-center pb-5 hide-mob">
         <div class="homepage-circles d-flex flex-column align-items-center justify-content-center " >
-          <p class="fw-bold law-hd" >I'm looking for a lawyer</p>
+          <p class="fw-normal law-hd" >I'm looking for a lawyer</p>
           <div class="showhover" >
-            <p class="fw-bold mb-3">Looking for a lawyer?</p>
+            <p class="fw-normal mb-3">Looking for a lawyer?</p>
             <p>Need a lawyer and don't know where to begin?</p>
             <p>
               We take the hassle and uncertainty out of the process of finding a
@@ -82,9 +82,9 @@
           </div>
         </div>
         <div class="homepage-circles d-flex flex-column align-items-center justify-content-center bg-black text-white" >
-          <p class="fw-bold law-hd" >I'm looking for clients</p>
+          <p class="fw-normal law-hd" >I'm looking for clients</p>
           <div class="showhover" >
-            <p class="fw-bold mb-3">Looking for clients?</p>
+            <p class="fw-normal mb-3">Looking for clients?</p>
 
             <p>
               Professional networking eating into your billable hours and not

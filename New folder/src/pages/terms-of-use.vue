@@ -12,7 +12,7 @@
             mso-fareast-font-family: Calibri;
             text-transform: uppercase;
             mso-ansi-language: EN-AU;
-            font-weight: bold;
+            font-weight: 400: bold;
           "
           >Website terms of use<o:p></o:p
         ></span>
@@ -29,10 +29,10 @@
               ><span style="font-family: Montserrat">Simplawfy</span></span
             ></span
           >) owns and operates this website 'makinglawsimple.com.au' (<b
-            style="mso-bidi-font-weight: normal"
+            style="mso-bidi-font-weight: 400: normal"
             >Website</b
           >). Access to and use of this Website<b
-            style="mso-bidi-font-weight: normal"
+            style="mso-bidi-font-weight: 400: normal"
           >
           </b
           >and the products and services available through this Website
@@ -772,6 +772,6 @@ export default {
 <style scoped>
 .LNNumberedHeading1 span {
   font-size: 14pt !important;
-  font-weight: bold;
+  font-weight: 400: bold;
 }
 </style>

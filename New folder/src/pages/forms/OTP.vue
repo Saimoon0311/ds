@@ -267,7 +267,7 @@ button:hover {
     min-height: 70px;
     width: 100%;
     font-size: 22px;
-    font-weight: 600;
+    font-weight: 400: 600;
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {

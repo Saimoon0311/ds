@@ -2,7 +2,7 @@
   <LawyerHeader />
   <div class="f-main">
     <div class="container">
-      <h6 class="fs-3 text-center mt-4">Submit a proposal</h6>
+      <h6 class="fs-3 text-center mt-4 fw-bold">Submit a Proposal</h6>
       
       <ShowJobDetails :jobData="jobData" />
       
