@@ -146,7 +146,7 @@ export default {
 }
 @media only screen and (max-width: 992px) {
  .f-main .col-md-7{
-  width: 70%;
+  width: 80%;
  }
   .smallFont {
     margin: 5px;
@@ -155,7 +155,7 @@ export default {
 }
 @media only screen and (max-width: 768px) {
   .f-main .col-md-7 {
-  width: 70%;
+  width: 80%;
  }
 }
 @media only screen and (max-width: 767px) {

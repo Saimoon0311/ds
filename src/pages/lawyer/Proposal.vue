@@ -1094,11 +1094,12 @@
                         >
                           <td
                             class="bg-transparent text-white p-0 px-2 b-round-start"
+                            colspan="3"
                           >
                             Total (excluding GST):
                           </td>
-                          <td class="bg-transparent p-0"></td>
-                          <td class="bg-transparent p-0"></td>
+                          <!-- <td class="bg-transparent p-0"></td>
+                          <td class="bg-transparent p-0"></td> -->
                           <td class="bg-transparent text-white p-0 px-2">
                             $ {{ grandTotal3.toFixed(2) }}
                           </td>
@@ -1814,8 +1815,8 @@
               <p class="h4 text-start fw-bold mb-3 mt-2">Summary</p>
 
 
-                      <div v-if="selectedOption" >
-                        <p class="topcharge"> <span> How will you charge? </span><span class="btn-sm btn-dark btn rounded btn-charge">{{ selectedOption }}</span> <span @click="toggleDiv" class="summarytogicon"><i :class="['fas', isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down']"></i></span> </p>
+                      <div v-if="selectedOptionForSummary" >
+                        <p class="topcharge"> <span> How will you charge? </span><span class="btn-sm btn-dark btn rounded btn-charge">{{ selectedOptionForSummary }}</span> <span @click="toggleDiv" class="summarytogicon"><i :class="['fas', isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down']"></i></span> </p>
                       </div>
                       
                       <div v-if="isDivVisible">
@@ -1957,7 +1958,7 @@
                           <p> <span> If the case is not successful:</span>  <span>$0.00</span></p>
                         </div>
                         <div>
-                          <p> <span> If the case is successful:</span>  <span>${{  parseFloat(parseFloat(this.form.estimated_fee) + parseFloat((25 / 100) * this.form.estimated_fee)).toFixed(2) }}</span></p>
+                          <p> <span> If the case is successful:</span>  <span>${{  parseFloat(parseFloat(this.form.estimated_fee) + parseFloat((form.uplift_percentage / 100) * this.form.estimated_fee)).toFixed(2) }}</span></p>
                         </div>
 
                       </span>
@@ -2168,6 +2169,7 @@ export default {
   data() {
  
     return {
+      selectedOptionForSummary : null,
       isDivVisible: false,
       editRow : null,
       summaryHtmlDisbursement : null,
@@ -2420,6 +2422,35 @@ export default {
 
       this.calculateTotals();
 
+      if(this.selectedOption){
+        switch (this.selectedOption) {
+          case "Fixed":
+            this.selectedOptionForSummary = "Fixed fee";
+            break;
+          case "Hourly":
+            this.selectedOptionForSummary = "Hourly rate";
+            break;
+          case "Daily":
+            this.selectedOptionForSummary = "Daily rate";
+            break;
+          case "Item":
+            this.selectedOptionForSummary = "Item by item for specific tasks";
+            break;
+          case "Retainer":
+            this.selectedOptionForSummary = "Retainer";
+            break;
+          case "Success":
+            this.selectedOptionForSummary = "Success fee";
+            break;
+          case "Pro":
+            this.selectedOptionForSummary = "Pro bono";
+            break;
+          default:
+          this.selectedOptionForSummary = this.selectedOption;
+            break;
+        }
+      }
+
       // console.log('total :::: ',  this.totals)
 
       const arr = this.openProposalDetailsModal({'specific_tasks' : this.rows2 , 'disbursements' : this.rows , 'fee_earners' : this.rows3},true)
@@ -2427,7 +2458,7 @@ export default {
         this.summaryHtmlDisbursement = arr[0]
         this.summaryHtmlItemByItemTasks = arr[2]
         this.summaryHtmlFeeEarners = arr[1]
-      }
+      } 
     },
 
 
@@ -2740,12 +2771,17 @@ export default {
 .summ div p span:first-child {
     font-weight: 600;
     font-size: 16px;
+   margin-right: 10px;
+}
+.summ div .topcharge{
+  justify-content: space-between;
+
 }
 .summ div p {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     text-transform: capitalize;
 }
 
@@ -2997,7 +3033,7 @@ td {
 }
 @media only screen and (max-width: 992px) {
   form#mainForm {
-    width: 70%;
+    width: 80%;
 }
 .summarytogicon i{
   font-size: 18px;

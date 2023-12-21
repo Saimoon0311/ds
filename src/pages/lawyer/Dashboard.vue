@@ -1000,7 +1000,9 @@ p.badge {
   font-weight: 600;
   text-transform: capitalize;
 }
-
+.search-field{
+  width: 50%;
+}
 @media only screen and (max-width: 1400px) and (min-width: 992px) {
   .card-btn {
     width: 30%;
@@ -1013,7 +1015,9 @@ p.badge {
   .card-btn {
     width: 95%;
   }
-
+  .search-field{
+  width: 100%;
+}
   .smallFont {
     margin: 5px;
     font-size: 14px;
