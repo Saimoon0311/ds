@@ -177,12 +177,12 @@
             </div>
 
             <div
-              class="mt-3 text-center"
+              class="mt-5 mb-5 text-center"
               v-if="openJobs.length > 0 && currentPage != lastPage"
             >
-              <button class="btn custom-button" @click="loadMore">
+              <div @click="loadMore">
                 Load More
-              </button>
+              </div>
             </div>
           </div>
 
@@ -238,13 +238,13 @@ export default {
     };
   },
 
-  async created() {
-    await this.loadMore();
-    console.log("job tab ::::: ", this.jobTabName);
-    if (this.jobTabName) {
-      this.setTab(this.jobTabName);
-    }
-  },
+  // async created() {
+  //   await this.loadMore();
+  //   console.log("job tab ::::: ", this.jobTabName);
+  //   if (this.jobTabName) {
+  //     this.setTab(this.jobTabName);
+  //   }
+  // },
   computed: {
     jobTabName() {
       return this.$store.state.dataTab;
@@ -252,6 +252,25 @@ export default {
     userName() {
       return `${this.$store.getters?.loginUser?.first_name} ${this.$store.getters?.loginUser?.last_name}`;
     },
+  },
+
+  async created() {
+    await this.loadMore();
+    // this.getNextUser();
+    window.addEventListener('scroll', this.getNextUser);
+
+    // if(this.jobTabName){
+    //   this.setTab(this.jobTabName);
+    // }
+  },
+
+  // mounted(){
+  //   this.getNextUser();
+  // },
+
+  beforeUnmount() {
+    // Remove the scroll event listener before the component is destroyed
+    window.removeEventListener('scroll', this.getNextUser);
   },
   methods: {
 
@@ -288,6 +307,19 @@ export default {
         console.error("Error fetching options:", error);
       }
     },
+
+    getNextUser() {
+      if (this.currentPage < this.lastPage) {
+        let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+        if (bottomOfWindow) {
+          this.loadMore();
+          if (this.jobTabName) {
+            this.setTab(this.jobTabName);
+          }
+        }
+      }
+    },
+
 
     goToMessagePage(item) {
       this.saveJobInfo(item);

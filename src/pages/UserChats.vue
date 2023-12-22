@@ -564,7 +564,7 @@ export default {
 .chat-messages .message .against-msg .text {
   width: fit-content;
   padding: 10px;
-
+  position: relative;
   border-radius: 5px;
   background: black;
   color: white;
@@ -574,12 +574,15 @@ export default {
 small {
   font-size: .75rem;
 }
-
+.chat-messages .message .own-message .text{
+  position: relative;
+}
 .chat-messages {
   min-height: 400px;
   overflow-y: scroll;
   height: 400px;
   padding-right: 10px;
+  padding-left: 5px;
 }
 
 .chat-messages::-webkit-scrollbar {
@@ -596,5 +599,33 @@ small {
   background-color: rgba(217, 217, 217, 1);
   /* outline: 1px solid #292929; */
   border-radius: 10px;
+}
+.chat-messages .message .own-message .text:before {
+    content: '';
+    background: #dddddd;
+    position: absolute;
+    left: -3px;
+    bottom: 3px;
+    display: block;
+    width: 10px;
+    height: 3px;
+    border-left: 2px solid #dddddd;
+    border-right: 2px solid #dddddd;
+    border-bottom: 10px solid #dddddd;
+    transform: rotate(-45deg);
+}
+.chat-messages .message .against-msg .text:before{
+content: '';
+    background: #000000;
+    position: absolute;
+    right: -3px;
+    bottom: 3px;
+    display: block;
+    width: 10px;
+    height: 3px;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #000000;
+    border-bottom: 10px solid #000000;
+    transform: rotate(-45deg);
 }
 </style>
