@@ -143,7 +143,7 @@
                   > -->
                       <button
                         class="btn btn-sm btn-dark card-btn my-1 mx-1 border"
-                        @click="goToViewProposals(item?.id)"
+                        @click="goToViewProposals(item)"
                       >
                         View Proposal
                       </button>
@@ -289,22 +289,6 @@ export default {
       }
     },
 
-    goToMessagePage(item) {
-      this.saveJobInfo(item);
-      this.saveLoadMoreData();
-      // this.$store.commit('SET_USERTOCHAT',item?.owner);
-      this.$store.commit("SET_JOBIDTOCHAT", item?.id);
-
-      // if(!item?.lawyer_chat){
-      //   this.$store.commit('SET_CHATSTATUS','new');
-      // }else{
-      //   this.$store.commit('SET_CHATSTATUS','old');
-      // }
-      // localStorage.setItem('userEmailToChat',userEmail);
-      this.$store.commit("SET_DATATAB", this.tab);
-      this.$router.push({ path: "/chat" });
-    },
-
     async setTab(status) {
       this.tab = status;
       if (status == "open") {
@@ -325,7 +309,8 @@ export default {
       await this.loadMore(null, true);
     },
 
-    goToViewProposals(id) {
+    goToViewProposals(data) {
+      let id = data?.id;
       // this.$store.commit('SET_LOADMOREPREVDATA',{'currentPage' : this.currentPage, 'lastPage' : this.lastPage, 'openJobs' : this.openJobs});
       // console.log('curr : ' , this.currentPage)
       // console.log('last : ' , this.lastPage)
@@ -333,6 +318,7 @@ export default {
       this.$store.commit("SET_JOB_ID", id);
       localStorage.setItem("jobId", id);
       this.$store.commit("SET_DATATAB", this.tab);
+      this.saveJobInfo(data);
       this.$router.push({ path: "/view-proposals" });
     },
     // async getJobs() {
