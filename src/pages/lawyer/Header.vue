@@ -64,12 +64,12 @@
                   aria-current="page"
                   >FAQs</router-link
                 >
-                <button
+                <!-- <button
                   class="nav-link fw-normal menuItem-active-link"
                   id="jobs"
                   aria-current="page"
                   @click="goToChatsPage(null,null,true)"
-                  >Messaging System</button>
+                  >Messaging System</button> -->
                 
                 
                 <ul class="showonmonb">

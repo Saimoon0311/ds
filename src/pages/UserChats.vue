@@ -177,6 +177,85 @@
         </div>
         <!-- client chat box end -->
 
+
+
+
+
+        <!-- client chat box 2 start-->
+        <div
+          v-if="
+            this.userFirst?.type == 'client'
+            && this.checkClientComeFromProposal
+          "
+          :class="{ 'col-md-9': false, chatbox: true }"
+        >
+      
+
+          <JobHeader :jobData="jobData" />
+      
+
+          <div class="text-end mb-3">
+            <span
+              v-if="
+                userFirst?.type === 'client' &&
+                chatStatus &&
+                jobId &&
+                userFirst &&
+                userSecond &&
+                messages.length > 0
+              "
+              class="close-button"
+            >
+              <button class="btn btn-danger" @click="closeChatForClient">
+                x
+              </button>
+            </span>
+          </div>
+          <div v-if="messages.length > 0" class="chat-messages">
+            <div v-for="message in messages" :key="message.id" class="message">
+              <div
+                :class="{
+                  'own-message ': message.sender_email !== loginUserEmail,
+                  'against-msg': message.sender_email == loginUserEmail,
+                }"
+              >
+                <div class="text">
+                  <small class="lawyer-name">{{ message.sender_name }}:</small>
+                  <small>{{ humanReadableDate(message?.timestamp) }}</small>
+                  <div>
+                    <strong>{{ message.text }}</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-input" v-if="jobTabName != 'close'">
+            <input
+              v-model="newMessage"
+              placeholder="Type your message..."
+              @input="checkInput"
+            />
+            <button
+              @click="sendMessage"
+              class="bg-dark text-white"
+              :disabled="this.showTypeError"
+            >
+              Send
+            </button>
+          </div>
+          <div v-if="showTypeError" class="alert alert-danger" role="alert">
+            Please do not disclose personal details in the messaging system.
+            Contact details will be exchanged when a client accepts a lawyer's
+            proposal.
+          </div>
+        </div>
+        <!-- client chat box 2 end -->
+
+
+
+
+
         <!-- lawyer chat box -->
         <span v-if="this.userFirst?.type == 'lawyer'">
           <div class="row lawyer">
@@ -324,6 +403,13 @@ export default {
     userSecond() {
       return this.$store.state.userToChat;
     },
+    checkClientComeFromProposal(){
+      return this.$store.state.clientComeFromProposal;
+    }
+  },
+
+  beforeUnmount(){
+    this.$store.commit("SET_CLIENTCOMEFROMPROPOSAL", false);
   },
 
   mounted() {
@@ -332,10 +418,15 @@ export default {
     // }
 
     if (this.userFirst?.type == "client") {
-      api2.get(`/client/get-lawyers-list-to-chat/${this.jobId}`).then((res) => {
+      if(!this.checkClientComeFromProposal){
+        api2.get(`/client/get-lawyers-list-to-chat/${this.jobId}`).then((res) => {
         this.lawyer_data = res?.data;
         console.log(this.lawyer_data);
       });
+      }else{
+        this.loadMessages();
+      }
+      console.log('user second :' , this.userSecond);  
     } else {
       console.log("else mounte");
       // for lawyer

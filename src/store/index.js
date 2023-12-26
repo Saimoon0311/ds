@@ -25,6 +25,7 @@ const store = createStore({
     jobIdToChat : null,
     chatStatus : null,
     dataTab : null,
+    clientComeFromProposal : null,
     // lawyerEligibleStatus : false,
   },
   mutations: {
@@ -42,6 +43,9 @@ const store = createStore({
     },
     SET_USERTOCHAT(state,data){
       state.userToChat = data
+    },
+    SET_CLIENTCOMEFROMPROPOSAL(state,value){
+      state.clientComeFromProposal = value
     },
     SET_LOADMOREPREVDATA(state,data){
       state.loadMorePrevData = data

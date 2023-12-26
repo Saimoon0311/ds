@@ -387,7 +387,7 @@
                           <button
                             @click="openProposalDetailsModal(item.proposal)"
                             v-if="tab == 'pending' || tab == 'close'"
-                            class="btn btn-light border btn-sm card-btn my-1 mx-1"
+                            class="btn btn-dark border btn-sm card-btn my-1 mx-1"
                           >
                             View Proposal
                           </button>
@@ -457,13 +457,13 @@
 
                         <button
                             @click="openProposalDetailsModal(item.proposal)"
-                            class="btn btn-light border btn-sm card-btn my-1 mx-1"
+                            class="btn btn-dark border btn-sm card-btn my-1 mx-1"
                           >
                             View Proposal
                           </button>
 
                         <button
-                            class="btn btn-dark btn-sm card-btn my-1 mx-1"
+                            class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
                             @click="goToMessagePage(item,'lawyer')"
                           >
                           View Messages

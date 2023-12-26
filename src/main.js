@@ -228,7 +228,7 @@ app.mixin({
         .get(`${this.paginationEndpoint}?page=${this.currentPaginationPage}`)
         .then((res) => {
           this.data_paginated = res?.data?.data;
-          console.log("last api : ", res?.data?.last_page);
+          console.log("last api : ", this.data_paginated);
           this.$store.commit("SET_PAGINATION_LAST", res?.data?.last_page);
         })
         .catch((error) => {
@@ -446,7 +446,7 @@ app.mixin({
               key != "followup_email_status_two" &&
               key != "api_token" &&
               key != "created_at" &&
-              key != "type" && key != "status" && key != "hear_about_us" &&
+              key != "type" && key != "status" && key != "hear_about_us" && key != 'approved_timestamp' &&
               key != "updated_at"
             ) {
               let objKey = key;
@@ -538,6 +538,29 @@ app.mixin({
     //   });
     // },
 
+
+    isNumericString(value) {
+      // Regular expression to check if the string contains only digits or decimals
+      var numericRegex = /^[0-9]+(\.[0-9]+)?$/;
+    
+      return numericRegex.test(value);
+    },
+
+    // disbursementsOrTasksTotal(data) {
+    //   return this.data.reduce(
+    //     (total, row) => total + parseFloat(row.costAud) || 0,
+    //     0
+    //   );
+    // },
+
+    // // additional fee earner
+    // feeEarnersTotal(data) {
+    //   return this.data.reduce(
+    //     (total, row) => total + parseFloat(row.hourlyRate * row.estimatedHours) || 0,
+    //     0
+    //   );
+    // },
+
     openProposalDetailsModal(data, renderAsHtml = false) {
       console.log("proposal details:", data);
       let newData = {};
@@ -548,7 +571,7 @@ app.mixin({
       if (data && typeof data === "object") {
         for (const key in data) {
           if (Object.prototype.hasOwnProperty.call(data, key)) {
-            const value = data[key];
+            let value = data[key];
             if (
               value !== null &&
               key != "id" &&
@@ -556,7 +579,8 @@ app.mixin({
               key != "job_id" &&
               key != "user_id" &&
               key != "created_at" &&
-              key != "updated_at"
+              key != "updated_at" && key != "show" && key != "description" && key != "lawyer"
+              && key != "status"
             ) {
               let objKey = key;
               objKey = objKey.replace(/_/g, " ");
@@ -571,6 +595,7 @@ app.mixin({
                 if (objKey == "lawyer" && value != null) {
                   newData["lawyer email"] = value?.email;
                 } else {
+                  value = (this.isNumericString(value)) ? '$'+value : value;  
                   newData[objKey] = value;
                 }
               }
@@ -637,17 +662,16 @@ app.mixin({
 
     createTableHtml(title, dataArray) {
       const total = dataArray.reduce(
-        (total, row) => total + parseFloat(row.costAud) || 0,
+        (total, row) => total + parseFloat(row.cost) || 0,
         0
       );
-
       const tableContent = dataArray
         .map(
           (item, index) => `
             <tr>
               <td class='border'>${index + 1}</td>
               <td class='border'>${item.task ?? item.itemDisbursement}</td> 
-              <td class='border'>$${item.cost ?? item.costAud}</td>
+              <td class='border'>$${item.cost ?? item.cost}</td>
             </tr>
           `
         )
@@ -680,22 +704,26 @@ app.mixin({
     
 
     createTableHtmlFeeEarners(title, dataArray) {
-      const total = dataArray.reduce(
-        (total, row) => total + parseFloat(row.hourlyRate * row.estimatedHours) || 0,
-        0
-      );
-
+      // const total = dataArray.reduce(
+      //   (total, row) => total + parseFloat(row.hourlyRate * row.estimatedHours) || 0,
+      //   0
+      // );
+      let grandTotal = 0;
       const tableContent = dataArray
         .map(
-          (item, index) => `
+          (item, index) => {
+            const subTotal = (item.hourly_rate ?? item.hourlyRate) * (item.hours ?? item.estimatedHours);
+            grandTotal += subTotal;
+            return `
             <tr>
               <td class='border'>${index + 1}</td>
               <td class='border'>${item.title}</td> <!-- Replace with actual properties -->
               <td class='border'>$${item.hourly_rate ?? item.hourlyRate}</td>
               <td class='border'>${item.hours ?? item.estimatedHours}</td>
-              <td class='border'>$${item.hourlyRate * item.estimatedHours}</td>
+              <td class='border'>$${subTotal.toFixed(2)}</td>
             </tr>
-          `
+          `;
+          }
         )
         .join("");
 
@@ -717,7 +745,7 @@ app.mixin({
           <tfoot>
             <tr>
               <td class='bg-dark text-white'>Total</td><td class='bg-dark'></td><td class='bg-dark'></td><td class='bg-dark'></td>
-              <td class='bg-dark text-white'>$${total.toFixed(2)}</td>
+              <td class='bg-dark text-white'>$${grandTotal.toFixed(2)}</td>
             </tr>
           </tfoot>
         </table>
