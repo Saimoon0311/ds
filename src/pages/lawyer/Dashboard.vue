@@ -177,25 +177,25 @@
                   openJobs.length > 0 &&
                   tab == 'close'
                 "
-                class="border rounded bg-light p-3 d-flex flex-wrap mb-2"
+                class="d-flex flex-wrap mb-2 justify-content-end"
                 >
                   <button @click="deleteAllRejected" class="btn btn-danger btn-sm my-1 mx-1">
                     Clear All Rejected Proposals
                   </button>
                 </div>
 
-              <div
-                v-if="
-                  openJobs.length == 0 &&
-                  searchQuery == '' &&
-                  tab != 'open' &&
-                  tab != 'close'
-                "
-                class="border rounded bg-light p-3 d-flex flex-wrap mb-2"
-              >
-                <p class="mx-auto my-0">You have no pending jobs.</p>
-                
-              </div>
+                <div
+                  v-if="
+                    openJobs.length == 0 &&
+                    searchQuery == '' &&
+                    tab != 'open' &&
+                    tab != 'close'
+                  "
+                  class="border rounded bg-light p-3 d-flex flex-wrap mb-2"
+                >
+                  <p class="mx-auto my-0">You have no pending jobs.</p>
+                  
+                </div>
 
               <div
                 v-else-if="
@@ -212,7 +212,7 @@
                 "
                 class="border rounded bg-light p-3 d-flex flex-wrap"
               >
-                <p class="mx-auto my-0">No jobs found!</p>
+                <p class="mx-auto my-0">There are no jobs available in your area.</p>
                 <!-- <button  class="btn btn-danger btn-sm my-1 mx-1 d-none"> Clear All Rejected Proposals </button> -->
               </div>
 
@@ -435,13 +435,7 @@
                        
                           
 
-                          <button
-                          v-if="tab == 'close'"    
-                            class="btn btn-danger btn-sm card-btn my-1 mx-1"
-                            @click="openLawyerDetailsModal(item?.owner)"
-                          >
-                          View Client Details
-                          </button>
+                          
 
                           
                       
@@ -454,13 +448,37 @@
                           > -->
                         </div>
 
+
+                        <div
+                        v-if="tab == 'close'"
+                          class="d-flex flex-lg-row justify-content-center align-items-center flex-sm-column flex-wrap"
+                          style="min-width: 150px"
+                        >
+
                         <button
-                          v-if="tab == 'close'"
+                            @click="openProposalDetailsModal(item.proposal)"
+                            class="btn btn-light border btn-sm card-btn my-1 mx-1"
+                          >
+                            View Proposal
+                          </button>
+
+                        <button
                             class="btn btn-dark btn-sm card-btn my-1 mx-1"
                             @click="goToMessagePage(item,'lawyer')"
                           >
                           View Messages
                           </button>
+
+                          <button
+                            class="btn btn-danger btn-sm card-btn my-1 mx-1"
+                            @click="openLawyerDetailsModal(item?.owner)"
+                          >
+                          View Client Details
+                          </button>
+
+                         
+
+                        </div>
                           
 
                         <!-- <div

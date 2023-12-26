@@ -427,6 +427,7 @@ app.mixin({
       });
     },
 
+    // for lawyer and client details both
     openLawyerDetailsModal(data) {
       let newData = {};
       if (data && typeof data === "object") {
@@ -445,6 +446,7 @@ app.mixin({
               key != "followup_email_status_two" &&
               key != "api_token" &&
               key != "created_at" &&
+              key != "type" && key != "status" && key != "hear_about_us" &&
               key != "updated_at"
             ) {
               let objKey = key;
