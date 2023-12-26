@@ -54,13 +54,13 @@
       >
 
       <div class="row">
-        <div class="col-6 offset-5">
+        <div class="col-6 offset-5 ">
           <button
             @click="submitProposal(jobData)"
             v-if="
               userFirst && userFirst?.type == 'lawyer' && jobTabName != 'close'
             "
-            class="btn btn-dark btn-sm card-btn my-1 mx-1 border"
+            class="btn btn-dark btn-md card-btn my-1 mx-1 border mb-3"
           >
             Submit a Proposal Now
           </button>
@@ -180,10 +180,13 @@
         <!-- lawyer chat box -->
         <span v-if="this.userFirst?.type == 'lawyer'">
           <div class="row lawyer">
+            
             <div
               v-if="chatStatus && jobId && userFirst && userSecond"
-              class="chatbox col-md-7 m-auto"
+              class="chatbox col-md-9 m-auto"
             >
+          <JobHeader :jobData="jobData" />
+
               <div
                 v-if="chatStatus == 'new'"
                 class="alert alert-danger"
