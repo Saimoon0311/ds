@@ -35,8 +35,9 @@
           <!-- <input class="form-control mb-4" type="text" placeholder="Search Client..." /> -->
           <input  class="form-control mb-4" v-model="searchClient" @input="filterItems" placeholder="Search...">
           <ul class="lawyer-list">
-            <li @click="startChatForAllMessages(data)" v-for="(data, index) in client_data2" :key="index"
-              class="bg-light">
+            <li @click="startChatForAllMessages(data,index)" v-for="(data, index) in client_data2" :key="index"
+              :class="['bg-light', { 'active': (index == userSelectedIndex) ? true : false }]"
+              >
               <span class="lawyer-name">
                 {{ data?.client?.first_name }} {{ data?.client?.last_name }}
               </span>
@@ -141,6 +142,7 @@ export default {
 
   data() {
     return {
+      userSelectedIndex : null,
       searchClient: '',
       lawyerSelected: false,
       clientSelected: false,
@@ -264,8 +266,9 @@ export default {
       }
     },
 
-    startChatForAllMessages(data) {
+    startChatForAllMessages(data,index) {
       console.log('hit 1')
+      this.userSelectedIndex = index;
       this.clientSelected = true;
       this.$store.commit('SET_USERTOCHAT', data?.client);
       this.chatId = data?.chat_id;
