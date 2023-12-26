@@ -181,7 +181,7 @@
               v-if="openJobs.length > 0 && currentPage != lastPage"
             >
               <div @click="loadMore">
-                Load More
+                <!-- Load More -->
               </div>
             </div>
           </div>

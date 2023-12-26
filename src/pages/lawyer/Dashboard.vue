@@ -345,7 +345,7 @@
                                   }}
                                 </button>
                                 <p class="smallFont text-black smallFont1">
-                                  Posted by:
+                                  <b>Posted by: </b>
                                   <span class="text-capitalize">
                                     {{ item?.owner?.first_name }}
                                     {{ item?.owner?.last_name }} ({{
