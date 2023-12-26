@@ -26,7 +26,7 @@
 
         <h2 class="mainHeading">Chats</h2>
         
-
+        <h4 v-if="client_data.length == 0" class="text-center">No chat found with clients!</h4>
 
         <!-- client names start -->
         <div v-if="client_data.length > 0"
@@ -34,20 +34,22 @@
           <h4>Select Client to Chat</h4>
           <!-- <input class="form-control mb-4" type="text" placeholder="Search Client..." /> -->
           <input  class="form-control mb-4" v-model="searchClient" @input="filterItems" placeholder="Search...">
-          <ul class="lawyer-list">
+          <ul class="lawyer-list" v-if="client_data2.length > 0">
             <li @click="startChatForAllMessages(data,index)" v-for="(data, index) in client_data2" :key="index"
               :class="['bg-light', { 'active': (index == userSelectedIndex) ? true : false }]"
               >
               <span class="lawyer-name">
                 {{ data?.client?.first_name }} {{ data?.client?.last_name }}
               </span>
-              <span v-if="data?.client_seen == 0 ||
+              <!-- <span v-if="data?.client_seen == 0 ||
                 data?.client_seen == false ||
                 data?.client_seen == null" class="badge bg-dark mx-1">New Message</span>
-              <span v-else></span>
+              <span v-else></span> -->
             </li>
-          </ul>
+          </ul> 
         </div>
+
+
         <!-- client names end -->
 
 

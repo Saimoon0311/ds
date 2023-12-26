@@ -438,7 +438,10 @@ export default {
           this.userFirst?.type == "lawyer"
             ? `${this.userFirst?.email}_${this.userSecond?.email}`
             : `${this.userSecond?.email}_${this.userFirst?.email}`;
+        
+        this.chatId = `${this.chatId}_${this.jobId}`; 
       }
+
       console.log("chat id 2::::: ", this.chatId);
       const messagesRef = collection(db, "chats", this.chatId, "messages");
       console.log("chat id 3::::: ", messagesRef);

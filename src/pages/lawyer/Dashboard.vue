@@ -649,6 +649,7 @@ export default {
     getNextUser() {
       if (this.currentPage < this.lastPage) {
         let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+        console.log(bottomOfWindow);
         if (bottomOfWindow) {
           this.loadMore();
           if (this.jobTabName) {
