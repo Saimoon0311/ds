@@ -112,18 +112,59 @@ app.mixin({
   },
 
   methods: {
-    saveJobInfo(item) {
-      this.$store.commit("SET_JOB_DATA", item);
-      localStorage.setItem("jobData", JSON.stringify(item));
+
+    goToMessagePage(item = null,type = null,reset = false) {
+      if(item){
+        this.saveJobInfo(item);
+        this.saveLoadMoreData();
+
+        this.$store.commit("SET_JOBIDTOCHAT", item?.id);
+        this.$store.commit("SET_DATATAB", this.tab);
+
+        if(type == 'lawyer'){
+          this.$store.commit("SET_USERTOCHAT", item?.owner);
+          if (item?.lawyer_chat == null) {
+            this.$store.commit("SET_CHATSTATUS", "new");
+          } else {
+            this.$store.commit("SET_CHATSTATUS", "old");
+          }
+        }
+      }
+      
+      if(item == null){
+        console.log('else else else');
+        this.saveJobInfo(null,reset);
+        this.saveLoadMoreData(reset);
+        this.$store.commit("SET_JOBIDTOCHAT", null);
+        this.$store.commit("SET_DATATAB", null);
+        this.$store.commit("SET_USERTOCHAT", null);
+        this.$store.commit("SET_CHATSTATUS", null);
+      }
+      this.$router.push({ path: "/chat" });
+    },
+
+    saveJobInfo(item = null,reset = false) {
+      if(reset){
+        this.$store.commit("SET_JOB_DATA", null);
+        localStorage.removeItem("jobData");
+      }else{
+        this.$store.commit("SET_JOB_DATA", item);
+        localStorage.setItem("jobData", JSON.stringify(item));
+      }
     },
 
     // save load more pagination data
-    saveLoadMoreData() {
-      this.$store.commit("SET_LOADMOREPREVDATA", {
-        currentPage: this.currentPage,
-        lastPage: this.lastPage,
-        openJobs: this.openJobs,
-      });
+    saveLoadMoreData(reset = false) {
+      if(reset){
+        this.$store.commit("SET_LOADMOREPREVDATA", null);
+      }else{
+        this.$store.commit("SET_LOADMOREPREVDATA", {
+          currentPage: this.currentPage,
+          lastPage: this.lastPage,
+          openJobs: this.openJobs,
+        });
+      }
+      
       console.log("curr : ", this.currentPage);
       console.log("last : ", this.lastPage);
     },

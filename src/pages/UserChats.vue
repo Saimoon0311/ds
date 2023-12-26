@@ -30,7 +30,6 @@
   </div>
 </template> -->
 
-
 <template>
   <section class="chatSection">
     <div v-if="userFirst && userFirst?.type == 'client'">
@@ -40,68 +39,114 @@
       <LawyerHeader />
     </div>
 
-    <div class="container my-4">
-
-      <router-link v-if="userFirst?.type == 'lawyer'" class="btn btn-dark btn-sm my-3"
-        :to="{ path: '/lawyer-dashboard' }"><i class="bi bi-arrow-left"></i> Back</router-link>
-      <router-link v-else-if="userFirst?.type == 'client'" class="btn btn-dark btn-sm my-3"
-        :to="{ path: '/client-dashboard' }"><i class="bi bi-arrow-left"></i> Back</router-link>
-
-      <div class="row">
-
-        <ShowJobDetails :jobData="jobData" />
-
-      </div>
+    <div class="container mx-4 mb  mx-auto">
+      <router-link
+        v-if="userFirst?.type == 'lawyer'"
+        class="btn btn-dark btn-sm my-3"
+        :to="{ path: '/lawyer-dashboard' }"
+        ><i class="bi bi-arrow-left"></i> Back</router-link
+      >
+      <router-link
+        v-else-if="userFirst?.type == 'client'"
+        class="btn btn-dark btn-sm my-3"
+        :to="{ path: '/client-dashboard' }"
+        ><i class="bi bi-arrow-left"></i> Back</router-link
+      >
 
       <div class="row">
         <div class="col-6 offset-5">
-          <button @click="submitProposal(jobData)" v-if="userFirst && userFirst?.type == 'lawyer' && jobTabName != 'close'"
-            class="btn btn-dark btn-sm card-btn my-1 mx-1 border">
+          <button
+            @click="submitProposal(jobData)"
+            v-if="
+              userFirst && userFirst?.type == 'lawyer' && jobTabName != 'close'
+            "
+            class="btn btn-dark btn-sm card-btn my-1 mx-1 border"
+          >
             Submit a Proposal Now
           </button>
         </div>
       </div>
-
+     
       <div class="row">
-
         <h2 class="mainHeading">Chats</h2>
         <!-- Client View: Select Lawyer -->
 
-        <div v-if="userFirst?.type === 'client' && lawyer_data.length > 0"
-          :class="{ 'col-md-3': userFirst?.type === 'client' }">
+        <!-- lawyer names start -->
+        <div
+          v-if="userFirst?.type === 'client' && lawyer_data.length > 0"
+          :class="{ 'col-md-3': userFirst?.type === 'client' }"
+        >
           <h4>Select Lawyer to Chat</h4>
           <ul class="lawyer-list">
-            <li @click="startChatForClient(data, index)" v-for="(data, index) in lawyer_data" :key="data.id"
-              class="bg-light">
+            <li
+              @click="startChatForClient(data, index)"
+              v-for="(data, index) in lawyer_data"
+              :key="data.id"
+              class="bg-light"
+            >
               <span class="lawyer-name">
                 {{ data?.lawyer?.first_name }} {{ data?.lawyer?.last_name }}
               </span>
-              <span v-if="data?.client_seen == 0 ||
-                data?.client_seen == false ||
-                data?.client_seen == null" class="badge bg-dark mx-1">New Message</span>
+              <span
+                v-if="
+                  data?.client_seen == 0 ||
+                  data?.client_seen == false ||
+                  data?.client_seen == null
+                "
+                class="badge bg-dark mx-1"
+                >New Message</span
+              >
               <span v-else></span>
             </li>
           </ul>
         </div>
+        <!-- lawyer names end -->
 
         <!-- client chat box -->
         <div
-          v-if="this.userFirst?.type == 'client' && this.lawyerSelected && chatStatus && jobId && userFirst && userSecond"
-          :class="{ 'col-md-9': userFirst?.type === 'client', 'chatbox': true }">
+          v-if="
+            this.userFirst?.type == 'client' &&
+            this.lawyerSelected &&
+            chatStatus &&
+            jobId &&
+            userFirst &&
+            userSecond
+          "
+          :class="{ 'col-md-9': userFirst?.type === 'client', chatbox: true }"
+        >
+      
+
+          <JobHeader :jobData="jobData" />
+      
+
           <div class="text-end mb-3">
             <span
-              v-if="userFirst?.type === 'client' && chatStatus && jobId && userFirst && userSecond && messages.length > 0"
-              class="close-button">
-              <button class="btn btn-danger" @click="closeChatForClient">x</button>
+              v-if="
+                userFirst?.type === 'client' &&
+                chatStatus &&
+                jobId &&
+                userFirst &&
+                userSecond &&
+                messages.length > 0
+              "
+              class="close-button"
+            >
+              <button class="btn btn-danger" @click="closeChatForClient">
+                x
+              </button>
             </span>
           </div>
           <div v-if="messages.length > 0" class="chat-messages">
             <div v-for="message in messages" :key="message.id" class="message">
               <div
-                :class="{ 'own-message ': message.sender_email !== loginUserEmail, 'against-msg': message.sender_email == loginUserEmail }">
+                :class="{
+                  'own-message ': message.sender_email !== loginUserEmail,
+                  'against-msg': message.sender_email == loginUserEmail,
+                }"
+              >
                 <div class="text">
-                  <small class="lawyer-name">{{ message.sender_name }}:</small> <small>{{
-                    humanReadableDate(message?.timestamp) }}</small>
+                  <small class="lawyer-name">{{ message.sender_name }}:</small>
+                  <small>{{ humanReadableDate(message?.timestamp) }}</small>
                   <div>
                     <strong>{{ message.text }}</strong>
                   </div>
@@ -111,37 +156,62 @@
           </div>
 
           <div class="chat-input" v-if="jobTabName != 'close'">
-            <input v-model="newMessage" placeholder="Type your message..." @input="checkInput" />
-            <button @click="sendMessage" class="bg-dark text-white" :disabled="this.showTypeError">Send</button>
+            <input
+              v-model="newMessage"
+              placeholder="Type your message..."
+              @input="checkInput"
+            />
+            <button
+              @click="sendMessage"
+              class="bg-dark text-white"
+              :disabled="this.showTypeError"
+            >
+              Send
+            </button>
           </div>
           <div v-if="showTypeError" class="alert alert-danger" role="alert">
-            Please do not disclose personal details in the messaging system. Contact details will be exchanged when a
-            client
-            accepts a lawyer's proposal.
+            Please do not disclose personal details in the messaging system.
+            Contact details will be exchanged when a client accepts a lawyer's
+            proposal.
           </div>
         </div>
         <!-- client chat box end -->
 
-
         <!-- lawyer chat box -->
         <span v-if="this.userFirst?.type == 'lawyer'">
           <div class="row lawyer">
-
-            <div v-if="chatStatus && jobId && userFirst && userSecond && jobTabName != 'close'" class="chatbox col-md-7 m-auto">
-              <div v-if="chatStatus == 'new'" class="alert alert-danger" role="alert">
-                You can send one message to the client if you need more information about the job in order to submit a
-                proposal. if client reply you so you are free to chat with client.
+            <div
+              v-if="chatStatus && jobId && userFirst && userSecond"
+              class="chatbox col-md-7 m-auto"
+            >
+              <div
+                v-if="chatStatus == 'new'"
+                class="alert alert-danger"
+                role="alert"
+              >
+                You can send one message to the client if you need more
+                information about the job in order to submit a proposal. if
+                client reply you so you are free to chat with client.
               </div>
 
-              <div class="text-right my-4">
-              </div>
+              <div class="text-right my-4"></div>
               <div v-if="messages.length > 0" class="chat-messages">
-                <div v-for="message in messages" :key="message.id" class="message">
+                <div
+                  v-for="message in messages"
+                  :key="message.id"
+                  class="message"
+                >
                   <div
-                    :class="{ 'own-message': message.sender_email !== loginUserEmail, 'against-msg': message.sender_email == loginUserEmail }">
+                    :class="{
+                      'own-message': message.sender_email !== loginUserEmail,
+                      'against-msg': message.sender_email == loginUserEmail,
+                    }"
+                  >
                     <div class="text">
-                      <small class="lawyer-name">{{ message.sender_name }}:</small> <small>{{
-                        humanReadableDate(message?.timestamp) }}</small>
+                      <small class="lawyer-name"
+                        >{{ message.sender_name }}:</small
+                      >
+                      <small>{{ humanReadableDate(message?.timestamp) }}</small>
                       <div>
                         <strong>{{ message.text }}</strong>
                       </div>
@@ -151,54 +221,62 @@
               </div>
 
               <div class="chat-input" v-if="jobTabName != 'close'">
-                <input v-model="newMessage" placeholder="Type your message..." @input="checkInput" />
-                <button @click="sendMessage" class="bg-dark text-white" :disabled="this.showTypeError">Send</button>
+                <input
+                  v-model="newMessage"
+                  placeholder="Type your message..."
+                  @input="checkInput"
+                />
+                <button
+                  @click="sendMessage"
+                  class="bg-dark text-white"
+                  :disabled="this.showTypeError"
+                >
+                  Send
+                </button>
               </div>
               <div v-if="showTypeError" class="alert alert-danger" role="alert">
-                Please do not disclose personal details in the messaging system. Contact details will be exchanged when a
-                client
-                accepts a lawyer's proposal.
+                Please do not disclose personal details in the messaging system.
+                Contact details will be exchanged when a client accepts a
+                lawyer's proposal.
               </div>
             </div>
           </div>
         </span>
         <!-- lawyer chat box end -->
-
-
-
-
-
       </div>
     </div>
 
-    <div class="footer">
-
+    <div class="footer ">
       <MainFooter />
     </div>
   </section>
 </template>
-  
-<script>
 
+<script>
 import MainFooter from "../components/global/MainFooter.vue";
 import ClientHeader from "../pages/client/Header.vue";
 import LawyerHeader from "../pages/lawyer/Header.vue";
 
-
-import ShowJobDetails from "../components/ShowJobDetails";
+// import ShowJobDetails from "../components/ShowJobDetails";
+import JobHeader from "../components/JobHeader";
 
 import api2 from "@/config/api";
-import { collection, addDoc, serverTimestamp, onSnapshot } from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  onSnapshot,
+} from "firebase/firestore";
 // import { FieldValue } from 'firebase/firestore';
-import db from '@/config/firebaseConfig';
+import db from "@/config/firebaseConfig";
 
 export default {
-
   components: {
     MainFooter,
     ClientHeader,
     LawyerHeader,
-    ShowJobDetails
+    JobHeader,
+    // ShowJobDetails
   },
 
   data() {
@@ -207,9 +285,10 @@ export default {
       chatId: null,
       chats: null,
       chat: null,
-      newMessage: '',
+      newMessage: "",
       messages: [],
       lawyer_data: [],
+      client_data: [],
       showTypeError: false,
       is_client_reply: false,
     };
@@ -224,8 +303,11 @@ export default {
     // lawyerEligibleStatus() {
     //   return this.$store.state.lawyerEligibleStatus;
     // },
-    jobTabName(){
+    jobTabName() {
       return this.$store.state.dataTab;
+    },
+    showAllMessages() {
+      return this.$store.state.showAllMessages;
     },
     chatStatus() {
       return this.$store.state.chatStatus;
@@ -238,24 +320,26 @@ export default {
     },
     userSecond() {
       return this.$store.state.userToChat;
-    }
+    },
   },
+
   mounted() {
     // if (!this.userFirst) {
     //   this.$router.go(-1);
     // }
+
     if (this.userFirst?.type == "client") {
       api2.get(`/client/get-lawyers-list-to-chat/${this.jobId}`).then((res) => {
         this.lawyer_data = res?.data;
         console.log(this.lawyer_data);
-      })
+      });
     } else {
+      console.log("else mounte");
+      // for lawyer
       this.loadMessages();
     }
   },
   methods: {
-
-
     //     indexOfNumber(inputString) {
     //   for (let i = 0; i < inputString.length; i++) {
     //     if (!isNaN(inputString[i])) {
@@ -268,7 +352,9 @@ export default {
     checkInput() {
       // Check if the input contains a continuous sequence of 8 numbers or @
       const numberSequenceRegex = /\d{8}/;
-      this.showTypeError = numberSequenceRegex.test(this.newMessage) || this.newMessage.includes('@');
+      this.showTypeError =
+        numberSequenceRegex.test(this.newMessage) ||
+        this.newMessage.includes("@");
     },
 
     submitProposal(item) {
@@ -293,33 +379,33 @@ export default {
     //   }
     // },
 
-
     humanReadableDate(timestamp) {
       if (timestamp) {
-        const date = new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6);
+        const date = new Date(
+          timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6
+        );
 
         // Format the date
         const options = {
-          year: '2-digit',
-          month: '2-digit',
-          day: '2-digit',
-          hour: 'numeric',
-          minute: 'numeric',
+          year: "2-digit",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "numeric",
+          minute: "numeric",
           hour12: true,
-          // timeZone: 'Australia/Sydney', 
+          // timeZone: 'Australia/Sydney',
         };
 
-        const formattedDate = date.toLocaleString('en-AU', options);
+        const formattedDate = date.toLocaleString("en-AU", options);
 
-        return formattedDate.replace(',', ''); // Remove the comma from the date
+        return formattedDate.replace(",", ""); // Remove the comma from the date
       }
     },
 
-
     startChatForClient(data, index) {
       this.lawyerSelected = true;
-      this.$store.commit('SET_CHATSTATUS', 'old');
-      this.$store.commit('SET_USERTOCHAT', data?.lawyer);
+      this.$store.commit("SET_CHATSTATUS", "old");
+      this.$store.commit("SET_USERTOCHAT", data?.lawyer);
       this.chatId = data?.chat_id;
       this.loadMessages();
       if (!data?.client_seen) {
@@ -328,30 +414,38 @@ export default {
     },
 
     closeChatForClient() {
-      this.$store.commit('SET_CHATSTATUS', null);
-      this.$store.commit('SET_USERTOCHAT', null);
+      this.$store.commit("SET_CHATSTATUS", null);
+      this.$store.commit("SET_USERTOCHAT", null);
       this.chatId = null;
       this.messages = [];
     },
 
     clientSeenStatusUpdate(data, index) {
-      api2.post('/update-seen-status', { "id": data?.id, "status": true }).then(() => {
-        this.lawyer_data[index].client_seen = 1;
-      });
+      api2
+        .post("/update-seen-status", { id: data?.id, status: true })
+        .then(() => {
+          this.lawyer_data[index].client_seen = 1;
+        });
     },
 
     loadMessages() {
-      console.log('chat id 1::::: ' , this.chatId);
+      console.log("chat id 1::::: ", this.chatId);
       if (this.chatId == null) {
-        this.chatId = (this.userFirst?.type == "lawyer") ? `${this.userFirst?.email}_${this.userSecond?.email}` : `${this.userSecond?.email}_${this.userFirst?.email}`;
+        this.chatId =
+          this.userFirst?.type == "lawyer"
+            ? `${this.userFirst?.email}_${this.userSecond?.email}`
+            : `${this.userSecond?.email}_${this.userFirst?.email}`;
       }
-      console.log('chat id 2::::: ' , this.chatId);
-      const messagesRef = collection(db, 'chats', this.chatId, 'messages');
-      console.log('chat id 3::::: ' , this.messagesRef);
+      console.log("chat id 2::::: ", this.chatId);
+      const messagesRef = collection(db, "chats", this.chatId, "messages");
+      console.log("chat id 3::::: ", messagesRef);
       onSnapshot(messagesRef, (snapshot) => {
-        this.messages = snapshot.docs.map(doc => doc.data()).sort((a, b) => a.timestamp - b.timestamp);
+        console.log("snap :::: ", snapshot);
+        this.messages = snapshot.docs
+          .map((doc) => doc.data())
+          .sort((a, b) => a.timestamp - b.timestamp);
       });
-      console.log('chat id 4::::: ' , this.messages);
+      console.log("chat id 4::::: ", this.messages);
     },
     sendMessage() {
       console.log(addDoc);
@@ -363,13 +457,17 @@ export default {
         return false;
       }
 
-      if (this.messages.length > 0 && this.userFirst?.type == 'lawyer') {
+      if (this.messages.length > 0 && this.userFirst?.type == "lawyer") {
         if (
           this.messages.length == 1 &&
           this.messages[0].sender_email == this.userFirst?.email
         ) {
-          this.$swal("", "You can not send message until client reply on your first messages, please wait for client reply", "error");
-          this.newMessage = '';
+          this.$swal(
+            "",
+            "You can not send message until client reply on your first messages, please wait for client reply",
+            "error"
+          );
+          this.newMessage = "";
           return false;
         }
       }
@@ -378,52 +476,66 @@ export default {
       // console.log(this.userFirst?.type);
       // console.log(this.lawyerEligibleStatus);
 
-      // if(this.chatStatus != "new" 
-      // && this.userFirst?.type == "lawyer" 
+      // if(this.chatStatus != "new"
+      // && this.userFirst?.type == "lawyer"
       // && !this.lawyerEligibleStatus){
       //   return false;
       // }
 
       // console.log(this.chatId);
-      const messagesRef = collection(db, 'chats', this.chatId, 'messages');
+      const messagesRef = collection(db, "chats", this.chatId, "messages");
       console.log(messagesRef);
       addDoc(messagesRef, {
         sender_name: `${this.userFirst?.first_name} ${this.userFirst?.last_name}`,
         sender_email: this.userFirst?.email,
         text: this.newMessage,
         timestamp: serverTimestamp(),
-      }).then((docRef) => {
-        console.log(this.userFirst);
-        const lawyer_id = (this.userFirst?.type == "lawyer") ? this.userFirst?.id : this.userSecond?.id;
-        const client_id = (this.userFirst?.type == "client") ? this.userFirst?.id : this.userSecond?.id;
-        
-        if (this.chatStatus == "new" && this.userFirst?.type == "lawyer") {
-          api2.post('/save-chat-info', { "lawyer_id": lawyer_id, "client_id": client_id, "job_id": this.jobId, "chat_id": this.chatId }).then(() => {
-            this.$store.commit('SET_CHATSTATUS', 'old');
-          })
-        }
-        if (this.chatStatus != "new" && this.userFirst?.type == "lawyer") {
-          api2.post('/update-seen-status', { "id": this.chatId, "status": false });
-        }
-        // let replyStatus = false;
-        // if(this.userFirst?.type == "client") {
-        //   replyStatus = true;
-        // }
-        // api.post('/update-reply-status', { "id": this.chatId , "status" : replyStatus});
-
-        console.log('Document written with ID:', docRef.id);
       })
-        .catch((error) => {
-          console.error('Error adding document:', error);
-        });
-      this.newMessage = '';
-    },
+        .then((docRef) => {
+          console.log(this.userFirst);
+          const lawyer_id =
+            this.userFirst?.type == "lawyer"
+              ? this.userFirst?.id
+              : this.userSecond?.id;
+          const client_id =
+            this.userFirst?.type == "client"
+              ? this.userFirst?.id
+              : this.userSecond?.id;
 
+          if (this.chatStatus == "new" && this.userFirst?.type == "lawyer") {
+            api2
+              .post("/save-chat-info", {
+                lawyer_id: lawyer_id,
+                client_id: client_id,
+                job_id: this.jobId,
+                chat_id: this.chatId,
+              })
+              .then(() => {
+                this.$store.commit("SET_CHATSTATUS", "old");
+              });
+          }
+          if (this.chatStatus != "new" && this.userFirst?.type == "lawyer") {
+            api2.post("/update-seen-status", {
+              id: this.chatId,
+              status: false,
+            });
+          }
+          // let replyStatus = false;
+          // if(this.userFirst?.type == "client") {
+          //   replyStatus = true;
+          // }
+          // api.post('/update-reply-status', { "id": this.chatId , "status" : replyStatus});
+
+          console.log("Document written with ID:", docRef.id);
+        })
+        .catch((error) => {
+          console.error("Error adding document:", error);
+        });
+      this.newMessage = "";
+    },
   },
 };
 </script>
-
-
 
 <style scoped>
 .warning-alert {
@@ -439,7 +551,6 @@ export default {
 
 .mainHeading {
   text-align: center;
-
 }
 
 /* Add your custom styles here */
@@ -477,7 +588,6 @@ export default {
 
   /* text-align: right;
   margin-left: 10px; */
-
 }
 
 .chat-input {
@@ -496,7 +606,7 @@ export default {
 
 .chat-input button {
   padding: 8px 15px;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -523,7 +633,6 @@ export default {
 
 .lawyer .chat-messages .message .own-message {
   justify-content: start;
-
 }
 
 .lawyer .chat-messages .message .against-msg {
@@ -542,14 +651,12 @@ export default {
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
-
 }
 
 .lawyer .chat-messages .message .own-message.text {
   background: black !important;
   color: white !important;
   text-align: end !important;
-
 }
 
 .chat-messages .message .own-message .text {
@@ -572,9 +679,9 @@ export default {
 
 .small,
 small {
-  font-size: .75rem;
+  font-size: 0.75rem;
 }
-.chat-messages .message .own-message .text{
+.chat-messages .message .own-message .text {
   position: relative;
 }
 .chat-messages {
@@ -601,31 +708,75 @@ small {
   border-radius: 10px;
 }
 .chat-messages .message .own-message .text:before {
-    content: '';
-    background: #dddddd;
-    position: absolute;
-    left: -3px;
-    bottom: 3px;
-    display: block;
-    width: 10px;
-    height: 3px;
-    border-left: 2px solid #dddddd;
-    border-right: 2px solid #dddddd;
-    border-bottom: 10px solid #dddddd;
-    transform: rotate(-45deg);
+  content: "";
+  background: #dddddd;
+  position: absolute;
+  left: -3px;
+  bottom: 3px;
+  display: block;
+  width: 10px;
+  height: 3px;
+  border-left: 2px solid #dddddd;
+  border-right: 2px solid #dddddd;
+  border-bottom: 10px solid #dddddd;
+  transform: rotate(-45deg);
 }
-.chat-messages .message .against-msg .text:before{
-content: '';
-    background: #000000;
+.chat-messages .message .against-msg .text:before {
+  content: "";
+  background: #000000;
+  position: absolute;
+  right: -3px;
+  bottom: 3px;
+  display: block;
+  width: 10px;
+  height: 3px;
+  border-left: 2px solid #000000;
+  border-right: 2px solid #000000;
+  border-bottom: 10px solid #000000;
+  transform: rotate(-45deg);
+}
+.footer {
     position: absolute;
-    right: -3px;
-    bottom: 3px;
-    display: block;
-    width: 10px;
-    height: 3px;
-    border-left: 2px solid #000000;
-    border-right: 2px solid #000000;
-    border-bottom: 10px solid #000000;
-    transform: rotate(-45deg);
+    bottom: 0;
+    width: 100%;
+}
+section.chatSection{
+  position: relative;
+  min-height: 100vh;
+}
+@media screen and (max-width: 1600px) {
+.mb{
+  padding-bottom: 50px;
+}
+}
+@media screen and (max-width: 768px) {
+
+h4{
+  font-size: 20px;
+}
+}
+@media screen and (max-width: 767px) {
+  .footer{
+    position: relative;
+  }
+  .mb{
+    padding-bottom: 10px;
+  }
+  .chatbox {
+    width: 94%;
+    margin: auto;
+}
+h4{
+    font-size: 16px;
+}
+}
+@media screen and (max-width: 350px) {
+.chat-input{
+  flex-wrap: wrap;
+}
+.chat-input button {
+    width: -webkit-fill-available;
+
+}
 }
 </style>

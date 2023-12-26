@@ -197,7 +197,7 @@
                     <div class="text-center" v-if="item?.status == 'Open'">
                       <button
                         class="btn btn-dark text-white btn-sm border p-1 px-2 mb-1 w-100"
-                        @click="handleAcceptBidAction(item?.id,item?.lawyer?.id,item?.job_id)"
+                        @click="handleAcceptBidAction(item?.id,item?.lawyer,item?.job_id)"
                       >
                         Accept
                       </button>
@@ -211,7 +211,7 @@
                       </form>
                       <button
                         class="btn btn-danger btn-sm p-1 px-2 mb-1 w-100"
-                        @click="handleRejectBidAction(item?.id,item?.lawyer?.id,item?.job_id)"
+                        @click="handleRejectBidAction(item?.id,item?.lawyer,item?.job_id)"
                       >
                         Reject
                       </button>
@@ -437,7 +437,10 @@ export default {
   computed: {
     jobId() {
       return this.$store.state.jobId;
-    }
+    },
+    jobData() {
+      return this.$store.state.jobData;
+    },
   },
   watch: {
     // for pagination
@@ -464,13 +467,13 @@ export default {
       this.$store.commit('SET_ENDPOINT_FOR_PAGINATED_DATA', `/client/job-proposals/${this.jobId}/${status}`);
       await this.getPaginatedData();
     },
-    handleAcceptBidAction(proposal_id, lawyer_id, job_id) {
+    handleAcceptBidAction(proposal_id, lawyer, job_id) {
       let status = "Accept";
-      this.changeStatus({ status, proposal_id, lawyer_id, job_id });
+      this.changeStatus({ status, proposal_id, lawyer, job_id });
     },
-    handleRejectBidAction(proposal_id, lawyer_id, job_id) {
+    handleRejectBidAction(proposal_id, lawyer, job_id) {
       let status = "Reject";
-      this.changeStatus({ status, proposal_id, lawyer_id, job_id });
+      this.changeStatus({ status, proposal_id, lawyer, job_id });
     },
     changeStatus(obj) {
       this.$swal({
@@ -483,9 +486,27 @@ export default {
         confirmButtonText: `Yes, ${obj.status}`
       }).then(result => {
         if (result.isConfirmed) {
+          obj.lawyer_id = obj?.lawyer?.id;
           api.post('/client/change-proposal-status', obj).then(res => {
-            this.$swal('', `Proposal has been ${obj.status}ed successfully`, 'success').then(async () => {
-              await this.getPaginatedData();
+            // this.$swal('', `Proposal has been ${obj.status}ed successfully`, 'success').then(async () => {
+              let msg = "";
+              if(obj.status == "accept" || obj.status == "Accept"){
+                msg = `Congratulations on finding a lawyer!
+                We're so glad that you found a lawyer for your job '[${this.jobData?.title} - ${this.jobData?.identity}.]' through Simplawfy. 
+                Here are your lawyer's contact details so you can communicate with them directly:
+                [${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, ${obj?.lawyer?.email} and ${obj?.lawyer?.phone}]. 
+
+                You will receive an email shortly with all these details as well as the details of the proposal you accepted, the details of your job and any correspondence between you and your chosen Lawyer.`;
+              }else{
+                msg = `Proposal has been ${obj.status}ed successfully`;
+              }
+
+            this.$swal('', msg, 'success').then(async () => {
+              if(obj.status == "accept" || obj.status == "Accept"){
+                this.$router.push("/client-dashboard");
+              }else{
+                await this.getPaginatedData();
+              }
             })
             console.log('response : ', res);
           }).catch((error) => {

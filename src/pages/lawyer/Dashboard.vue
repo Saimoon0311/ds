@@ -404,9 +404,9 @@
 
                           <button
                             class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
-                            @click="goToMessagePage(item)"
+                            @click="goToMessagePage(item,'lawyer')"
                           >
-                          View Message
+                          View Messages
                           </button>
                           <button
                             v-if="tab == 'open'"
@@ -443,13 +443,7 @@
                           View Client Details
                           </button>
 
-                          <button
-                          v-if="tab == 'close'"
-                            class="btn btn-dark btn-sm card-btn my-1 mx-1"
-                            @click="goToMessagePage(item)"
-                          >
-                          View Messages
-                          </button>
+                          
                       
 
                           <!-- <router-link
@@ -459,6 +453,15 @@
                             >View Message</router-link
                           > -->
                         </div>
+
+                        <button
+                          v-if="tab == 'close'"
+                            class="btn btn-dark btn-sm card-btn my-1 mx-1"
+                            @click="goToMessagePage(item,'lawyer')"
+                          >
+                          View Messages
+                          </button>
+                          
 
                         <!-- <div
                           v-if="tab == 'close'"
@@ -666,28 +669,7 @@ export default {
     //     }
     //   }
     // },
-    goToMessagePage(item) {
-      console.log('ic : ', item);
-      this.saveJobInfo(item);
-      this.saveLoadMoreData();
-      this.$store.commit("SET_USERTOCHAT", item?.owner);
-      this.$store.commit("SET_JOBIDTOCHAT", item?.id);
-
-      if (item?.lawyer_chat == null) {
-        this.$store.commit("SET_CHATSTATUS", "new");
-      } else {
-        this.$store.commit("SET_CHATSTATUS", "old");
-      }
-
-      this.$store.commit('SET_DATATAB', this.tab);
-
-      // if(item?.lawyer_chat?.client_reply){
-      //   this.$store.commit('SET_LAWYER_ELIGIBLE_STATUS',true);
-      // }
-
-      // localStorage.setItem('userEmailToChat',userEmail);
-      this.$router.push({ path: "/chat" });
-    },
+    
 
     async setTab(status) {
       this.tab = status

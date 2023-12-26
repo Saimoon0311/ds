@@ -143,7 +143,7 @@
                   > -->
                       <button
                         class="btn btn-sm btn-dark card-btn my-1 mx-1 border"
-                        @click="goToViewProposals(item?.id)"
+                        @click="goToViewProposals(item)"
                       >
                         View Proposal
                       </button>
@@ -357,7 +357,8 @@ export default {
       await this.loadMore(null, true);
     },
 
-    goToViewProposals(id) {
+    goToViewProposals(data) {
+      let id = data?.id;
       // this.$store.commit('SET_LOADMOREPREVDATA',{'currentPage' : this.currentPage, 'lastPage' : this.lastPage, 'openJobs' : this.openJobs});
       // console.log('curr : ' , this.currentPage)
       // console.log('last : ' , this.lastPage)
@@ -365,6 +366,7 @@ export default {
       this.$store.commit("SET_JOB_ID", id);
       localStorage.setItem("jobId", id);
       this.$store.commit("SET_DATATAB", this.tab);
+      this.saveJobInfo(data);
       this.$router.push({ path: "/view-proposals" });
     },
     // async getJobs() {
@@ -579,5 +581,8 @@ p.badge{
     margin-bottom: 10px;
     font-size: 12px;
   }
+  .p-3.card-top > div {
+    text-align: start;
+}
 }
 </style>

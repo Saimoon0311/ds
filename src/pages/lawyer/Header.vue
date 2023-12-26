@@ -64,6 +64,12 @@
                   aria-current="page"
                   >FAQs</router-link
                 >
+                <button
+                  class="nav-link fw-normal menuItem-active-link"
+                  id="jobs"
+                  aria-current="page"
+                  @click="goToChatsPage(null,null,true)"
+                  >Messaging System</button>
                 
                 
                 <ul class="showonmonb">
@@ -150,7 +156,13 @@
 <script>
 export default {
   components: {},
-  methods: {},
+  methods: {
+
+    goToChatsPage() {      
+      this.$router.push({ path: "/chats" });
+    },
+
+  },
   name: "LawyerHeader",
 };
 </script>
@@ -224,6 +236,15 @@ ul.dropdown-menu.show {
 .navbar-nav .left-menu a.nav-link {
   color: black;
 }
+
+.navbar-nav .left-menu button.nav-link:hover {
+  color: #606060;
+}
+
+.navbar-nav .left-menu button.nav-link {
+  color: black;
+}
+
 
 .bg-grey {
   background: rgb(0, 0, 0);

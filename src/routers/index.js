@@ -8,6 +8,8 @@ import LoginForm from "@/pages/forms/LoginForm.vue";
 
 import UserChats from "@/pages/UserChats.vue";
 
+import FullChatLawyer from "@/pages/FullChatLawyer.vue";
+
 // admin
 import AdminLogin from "@/pages/admin/Login.vue";
 import AdminLawyer from "@/pages/admin/Lawyers.vue";
@@ -154,6 +156,11 @@ const routes = [
     meta: { requiresAuth: true },
   },
 
+  {
+    path: "/chats",
+    component: FullChatLawyer,
+    meta: { requiresAuth: true },
+  },
 
   {
     path: "/lawyer-register",

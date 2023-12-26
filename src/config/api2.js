@@ -3,6 +3,13 @@
 // const baseURL ="http://127.0.0.1:8000/api"
 const baseURL = "https://virtualrealitycreators.com/law-backend/api"; 
 
+
+// const baseURL =
+//   process.env.NODE_ENV === "production"
+//     ? "https://virtualrealitycreators.com/law-backend/api"
+//     : "http://127.0.0.1:8000/api";
+
+
 import axios from "axios";
 import store from "../store";
 let API = axios.create({ baseURL });
