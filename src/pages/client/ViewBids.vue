@@ -59,61 +59,11 @@
             role="tabpanel"
             aria-labelledby="pills-home-tab"
           >
-            <table class="table table-bordered table-striped" id="bidsActive">
-              <thead>
+            <table class="table table-bordered table-striped table-layout" id="bidsActive">
+              <thead class="table-dark">
                 <tr>
-                  <th>Lawyer</th>
-                  <!-- <th>
-                    Billing method
-                    <i
-                      class="bi bi-question-circle"
-                      onmouseover="showBillingMethodInfo()"
-                      onmouseout="hideBillingMethodInfo()"
-                    ></i>
-                    <dl
-                      class="position-absolute bg-grey p-3 me-3 border rounded fw-light d-none"
-                      id="billingMethodInfoToolTip"
-                    >
-                      <dt><i class="bi bi-dot"></i>Hourly rate:</dt>
-                      <dd class="ms-3">
-                        The lawyer charges an hourly rate (often billed in 6
-                        minute increments) based on the actual time spent
-                        working on your matter. If there is a team of lawyers,
-                        they may have different hourly rates, depending on their
-                        level of experience. The fee estimate is based on a
-                        calculation of the total hours the job is expected to
-                        take multiplied by the hourly rate. It is not a fixed
-                        quote — the final legal costs may be more or less
-                        depending on how the matter progresses and the actual
-                        time taken. This is the most common way in which lawyers
-                        charge.
-                      </dd>
-                      <dt><i class="bi bi-dot"></i>Fixed fee:</dt>
-                      <dd class="ms-3">
-                        The lawyer is prepared to charge you this fixed amount
-                        for the work. You should not have to pay more than this.
-                      </dd>
-                      <dt><i class="bi bi-dot"></i>Success fee:</dt>
-                      <dd class="ms-3">
-                        In cases where the lawyer's costs are conditional on a
-                        successful outcome (eg. a 'no win, no fee' arrangement),
-                        the lawyer can charge a success fee (also called an
-                        uplift fee) where they achieve that successful outcome
-                        (eg. winning a court case or a settlement in the
-                        client's favour). This fee is up to a maximum of 25% and
-                        is paid on top of the lawyer's usual legal costs. This
-                        is in recognition of the risk the lawyer has taken of
-                        not getting paid for their work if the matter was
-                        unsuccessful. This billing method is more common in
-                        personal injury matters.
-                      </dd>
-                      <dt><i class="bi bi-dot"></i>Pro bono:</dt>
-                      <dd class="ms-3">
-                        The lawyer is prepared to take on your matter for free.
-                        You will not have to pay any legal costs.
-                      </dd>
-                    </dl>
-                  </th> -->
+                  <th >Lawyer</th>
+                  
                   <th>
                     Fee estimate
                     <i
@@ -140,29 +90,9 @@
                       </dd>
                     </dl>
                   </th>
-                  <!-- <th>
-                    Upfront payment
-                    <i
-                      class="bi bi-question-circle"
-                      onmouseover="showUpfrontPaymentInfo()"
-                      onmouseout="hideUpfrontPaymentInfo()"
-                    ></i>
-                    <dl
-                      class="d-none position-absolute bg-grey p-3 me-3 border rounded fw-light"
-                      id="upfrontPaymentInfoToolTip"
-                    >
-                      <dt>Upfront payment:</dt>
-                      <dd>
-                        The lawyer may require payment of part of the estimated
-                        fees upfront, which they will hold in trust and apply
-                        towards the legal costs.
-                      </dd>
-                    </dl>
-                  </th> -->
+                
                   <th>Proposed work</th>
-                  <!-- <th>Created at</th> -->
-                  <!-- <th>Deadline achievable?</th>
-                  <th>Free/discounted first consultation?</th> -->
+                  
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -175,26 +105,32 @@
                 </tr>
                 <tr v-else class="text-left" v-for="(item,index) in data_paginated" :key="index">
                   <!-- <td>testing client (crinimal)</td> -->
-                  <td class="text-center"> <button @click="openLawyerDetailsModal(item?.lawyer)" class="btn-dark btn btn-sm rounded-pill">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</button></td>
+                  <td class="text-center" style="width:15%"> <p @click="openLawyerDetailsModal(item?.lawyer)" class="text-dark text-capitalize fw-bolder">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</p></td>
                   <!-- <td>{{ item?.charge_type }}</td> -->
-                  <td class="text-center">
-                      <span class="bg-dark text-white py-0 px-3 rounded-pill">Fixed</span>
-                    <p class="my-1">{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</p>
-                    <span class="bg-dark rounded-pill text-white py-0 px-3 text-capitalize">See more</span>
+                  <td class="text-center" style="width:25%">
+                      
+                    
+                    <p class="my-1 fw-bolder"> {{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}} - <span class="text-capitalize text-dark fw-normal">Fixed</span></p>
 
                     </td>
 
                   <!-- <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td> -->
-                  <td class="text-center">
-                    <p class="mb-1">{{ item?.description }}</p>
+                  <td class="text-center" style="width:45%">
+                    <!-- <p class="mb-1">{{ item?.description }}</p> -->
+                    <p class="mb-1">{{ generateExcerpt(item?.description) }}</p>
                     <span class="bg-dark rounded-pill text-white py-0 px-3 text-capitalize">See more</span>
                   </td>
                   <!-- <td>{{ formatCreatedAt(item?.created_at) }}</td> -->
 
                   <!-- <td>Yes</td>
                   <td>No</td> -->
-                  <td>
+                  <td style="width:15%">
                     <div class="text-center" v-if="item?.status == 'Open'">
+                      <button
+                        class="btn btn-light btn-sm p-1 px-2 w-100 mb-1 border"
+                      >
+                        Message
+                      </button>
                       <button
                         class="btn btn-dark text-white btn-sm border p-1 px-2 mb-1 w-100"
                         @click="handleAcceptBidAction(item?.id,item?.lawyer,item?.job_id)"
@@ -215,11 +151,7 @@
                       >
                         Reject
                       </button>
-                      <button
-                        class="btn btn-secondary btn-sm p-1 px-2 w-100"
-                      >
-                        Message
-                      </button>
+                      
                       <!-- <button @click="openProposalDetailsModal(item)" class="btn btn-dark text-white mt-1 btn-sm p-1 px-2 w-100">
                         View
                       </button> -->
@@ -402,25 +334,7 @@
 
         </div>
       </div>
-      <div class="client-pro-des">
-        <div class="row">
-          <div class="col-2 text-center">
-            <p class="bg-dark rounded-pill text-white fw-bolder px-2 py-1">Tim rogers</p>
-          </div>
-          <div class="col-2 text-center">
-            <p class="bg-dark rounded-pill text-white fw-bolder px-2 py-1">Tim rogers</p>
-          </div>
-          <div class="col-2 text-center">
-            <p class="bg-dark rounded-pill text-white fw-bolder px-2 py-1">Tim rogers</p>
-          </div>
-          <div class="col-2 text-center">
-            <p class="bg-dark rounded-pill text-white fw-bolder px-2 py-1">Tim rogers</p>
-          </div>
-          <div class="col-2 text-center">
-            <p class="bg-dark rounded-pill text-white fw-bolder px-2 py-1">Tim rogers</p>
-          </div>
-        </div>
-      </div>
+    
     </div>
   </div>
 </template>
@@ -462,6 +376,12 @@ export default {
   },
 
   methods: {
+    generateExcerpt(text) {
+      if (!text) return ''; // Handle cases where text is null or undefined
+      const words = text.split(' ');
+      const excerpt = words.slice(0, 15).join(' ');
+      return `${excerpt}...`;
+    },
     async setStatus(status) {
       this.$store.commit('set_pagination_page', 1);
       this.$store.commit('SET_ENDPOINT_FOR_PAGINATED_DATA', `/client/job-proposals/${this.jobId}/${status}`);
