@@ -90,7 +90,7 @@
                   id="30"
                 >
                   <div
-                    class="border rounded d-flex justify-content-between text-white flex-column mb-3 pb-3"
+                    class="border rounded d-flex justify-content-between text-white flex-column mb-3 pb-3 bg-light"
                   >
                     <div class="p-3 card-top">
                       <div>
@@ -184,6 +184,7 @@
                 <!-- Load More -->
               </div>
             </div>
+           
           </div>
 
           <div
@@ -334,7 +335,7 @@ export default {
       // }
       // localStorage.setItem('userEmailToChat',userEmail);
       this.$store.commit("SET_DATATAB", this.tab);
-      this.$router.push({ path: "/chat" });
+      this.$router.push({ path: "/message" });
     },
 
     async setTab(status) {
@@ -528,7 +529,7 @@ p.badge{
 .spacer {
     margin: 20px 0;
     display: block;
-    border-top: 1px solid black;
+    border-top: 1px solid #c7c7c7;
     padding-top: 20px;
     display: flex;
     justify-content: space-between;
