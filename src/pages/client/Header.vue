@@ -44,7 +44,12 @@
                   aria-current="page"
                   >Post a Job</router-link
                 >
-
+<!-- <button
+                  class="nav-link fw-normal menuItem-active-link"
+                  id="jobs"
+                  aria-current="page"
+                  @click="goToChatsPage(null,null,true)"
+                  >Messages</button> -->
                 
                 <router-link
                   to="/client-account"

@@ -1,10 +1,10 @@
 <template>
   <div
-    class="border rounded d-flex justify-content-between text-white flex-column mb-3 col-md-7 m-auto bg-col p-0"
+    class="border rounded d-flex justify-content-between text-white flex-column mb-3 col-md-7 m-auto  p-0"
     id="28"
   >
     <div class="">
-      <div class="card-top p-3">
+      <div class="card-top p-3 bg-col">
         <div>
           <p class="badge" title="Area">
             {{ jobData?.field?.title }}
@@ -22,13 +22,13 @@
           </p>
         </div>
       </div>
-      <div class="p-3 ">
+      <div class="p-3 bg-light">
       <div class="card-body d-flex align-items-start justify-content-between">
-        <p class="text-left text-white text-bold title pt-3 ">
+        <p class="text-left text-black text-bold title pt-3 ">
           {{ item?.title }}
         </p>
       </div>
-      <div id="description" class="descriptionText text-white">
+      <div id="description" class="descriptionText text-black">
         {{ jobData?.description }}
       </div>
       <div class="widthcn">
@@ -36,7 +36,7 @@
           <button
             :disabled="!jobData?.requirement"
             type="button"
-            class="btn btn-sm custom-pad badge"
+            class="btn btn-sm custom-pad badge bg-dark"
             :data-target="`.edit-job-title-modal${index}`"
             title="Edit"
             :data-bs-toggle="`modal${index}`"
@@ -46,11 +46,11 @@
             Accessibility Requirements
           </button>
          
-            <p class="smallFont">
-              Posted by: <b>{{ jobData?.owner?.first_name }}
+            <p class="smallFont text-black">
+              <b>Posted by:</b>{{ jobData?.owner?.first_name }}
               {{ jobData?.owner?.last_name }}
               <span class="text-capitalize">({{ jobData?.city }})</span>
-              on {{ formatCreatedAt(jobData?.created_at) }} </b>
+              on {{ formatCreatedAt(jobData?.created_at) }} 
             </p>
         
         </span>
