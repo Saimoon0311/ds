@@ -260,7 +260,7 @@ export default {
       this.$store.commit("SET_CLIENTCOMEFROMPROPOSAL", true);
       console.log('law : ' , item?.lawyer);
       this.$store.commit("SET_USERTOCHAT", item?.lawyer);
-      this.$router.push({ path: "/chat" });  
+      this.$router.push({ path: "/messages" });  
     },
 
     openDescription(text){
@@ -331,9 +331,9 @@ export default {
 
             this.$swal('', msg, 'success').then(async () => {
               if(obj.status == "accept" || obj.status == "Accept"){
-                // this.$router.push("/client-dashboard");
+                this.$router.push("/client-dashboard");
               }else{
-                // await this.getPaginatedData();
+                await this.getPaginatedData();
               }
             })
             console.log('response : ', res);

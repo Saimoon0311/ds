@@ -1994,7 +1994,7 @@
 
                       <div v-if="form.description" class="sumdesc">
                         <p><b> Tell the potential client what you will do for them ?</b>  </p>
-                        <p class="descriptionText">{{ form.description }} </p>
+                        <p class="descriptionText" style="white-space: pre-line;">{{ form.description }} </p>
                       </div>
                       <div>
                         <p v-if="!isNaN(totals?.totalExcludingGst)"> 
@@ -2455,6 +2455,7 @@ export default {
 
       const arr = this.openProposalDetailsModal({'specific_tasks' : this.rows2 , 'disbursements' : this.rows , 'fee_earners' : this.rows3},true)
       if(arr.length > 0){
+        console.log('dis burse : ' , arr[0]);
         this.summaryHtmlDisbursement = arr[0]
         this.summaryHtmlItemByItemTasks = arr[2]
         this.summaryHtmlFeeEarners = arr[1]

@@ -556,7 +556,7 @@
                   subscriptionStatus == 'subscribed'
                 "
                 class="text-center mt-3"
-              >
+                >
                 <!-- <button class="btn custom-button" @click="loadMore">
                   Load More
                 </button> -->
@@ -564,6 +564,10 @@
                  
                 </div>
               </div>
+
+              <h6 class="text-center" v-if="openJobs.length > 0 && currentPage == lastPage">
+                End of results   
+              </h6>
             </div>
           </div>
         </div>

@@ -43,12 +43,14 @@
                   aria-current="page"
                   >Proposals</router-link
                 > -->
-                 <!-- <button
+                 
+                <button
                   class="nav-link fw-normal menuItem-active-link"
                   id="jobs"
                   aria-current="page"
-                  @click="goToChatsPage(null,null,true)"
-                  >Messages</button> -->
+                  @click="goToChatsPage()"
+                  >Messages</button>
+
                 <router-link
                   to="/lawyer-profile"
                   class="nav-link fw-normal menuItem-active-link"
@@ -160,7 +162,7 @@ export default {
   methods: {
 
     goToChatsPage() {      
-      this.$router.push({ path: "/chats" });
+      this.$router.push({ path: "/messages-history" });
     },
 
   },

@@ -39,7 +39,7 @@
               :class="['bg-light', { 'active': (index == userSelectedIndex) ? true : false }]"
               >
               <span class="lawyer-name">
-                {{ data?.client?.first_name }} {{ data?.client?.last_name }}
+                {{ data?.client?.first_name }} {{ data?.client?.last_name }} ({{ data?.job?.title }})
               </span>
               <!-- <span v-if="data?.client_seen == 0 ||
                 data?.client_seen == false ||

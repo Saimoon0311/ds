@@ -160,6 +160,14 @@
                         }}
                       </button>
 
+                      <button 
+                            v-if="tab == 'close' && item?.assigned_lawyer != null"
+                            class="btn btn-danger btn-sm card-btn my-1 mx-1"
+                            @click="openLawyerDetailsModal(item?.assigned_lawyer)"
+                          >
+                          View Lawyer Details
+                          </button>
+
                     
                       <button v-if="tab == 'open'" @click="declineJob(item.id,index)" class="btn btn-danger btn-sm card-btn my-1 mx-1">
                         Cancel Job
@@ -179,11 +187,15 @@
             <div
               class="mt-5 mb-5 text-center"
               v-if="openJobs.length > 0 && currentPage != lastPage"
-            >
+              >
               <div @click="loadMore">
                 <!-- Load More -->
               </div>
             </div>
+
+            <h6 class="text-center" v-if="openJobs.length > 0 && currentPage == lastPage">
+                End of results   
+            </h6>
            
           </div>
 
@@ -335,7 +347,7 @@ export default {
       // }
       // localStorage.setItem('userEmailToChat',userEmail);
       this.$store.commit("SET_DATATAB", this.tab);
-      this.$router.push({ path: "/message" });
+      this.$router.push({ path: "/messages" });
     },
 
     async setTab(status) {

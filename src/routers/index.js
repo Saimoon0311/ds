@@ -151,13 +151,13 @@ const routes = [
 
 
   {
-    path: "/message",
+    path: "/messages",
     component: UserChats,
     meta: { requiresAuth: true },
   },
 
   {
-    path: "/messages",
+    path: "/messages-history",
     component: FullChatLawyer,
     meta: { requiresAuth: true },
   },

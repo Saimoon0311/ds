@@ -140,7 +140,7 @@ app.mixin({
         this.$store.commit("SET_USERTOCHAT", null);
         this.$store.commit("SET_CHATSTATUS", null);
       }
-      this.$router.push({ path: "/message" });
+      this.$router.push({ path: "/messages" });
     },
 
     saveJobInfo(item = null,reset = false) {
@@ -654,7 +654,6 @@ app.mixin({
           }
         }
       }
-
       const mainHtmlContent = Object.entries(newData)
         .map(
           ([key, value]) =>
@@ -677,6 +676,7 @@ app.mixin({
           disbursements
         );
       }
+      console.log('dis 1 : ' , disbursementsTable);
       if (feeEarners.length > 0) {
         feeEarnersTable = this.createTableHtmlFeeEarners(
           "Fee Earners",
@@ -713,7 +713,7 @@ app.mixin({
 
     createTableHtml(title, dataArray) {
       const total = dataArray.reduce(
-        (total, row) => total + parseFloat(row.cost) || 0,
+        (total, row) => total + parseFloat(row.cost ?? row.costAud) || 0,
         0
       );
       const tableContent = dataArray
@@ -722,7 +722,7 @@ app.mixin({
             <tr>
               <td class='border'>${index + 1}</td>
               <td class='border'>${item.task ?? item.itemDisbursement}</td> 
-              <td class='border'>$${item.cost ?? item.cost}</td>
+              <td class='border'>$${item.cost ?? item.costAud}</td>
             </tr>
           `
         )
