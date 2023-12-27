@@ -387,6 +387,57 @@ app.mixin({
       this.$router.push({ path: path });
     },
 
+
+
+    openJobDetailModal(data) {
+      let newData = {};
+      if (data && typeof data === "object") {
+        for (const key in data) {
+          if (Object.prototype.hasOwnProperty.call(data, key)) {
+            const value = data[key];
+            if (
+              value !== null &&
+              key != "id" &&
+              key != "field_id" &&
+              key != "location_id" &&
+              key != "status" &&
+              key != "owner_id" &&
+              key != "accessibility_requirements" &&
+              key != "created_at" &&
+              key != "chats" &&
+              key != "updated_at"
+            ) {
+              let objKey = key;
+              objKey = objKey.replace(/_/g, " ");
+              newData[objKey] = value;
+
+              if(key == 'field' || key == 'location'){
+                newData[objKey] = value?.title;
+              }
+            }
+          }
+        }
+      }
+      const htmlContent = Object.entries(newData)
+        .map(
+          ([key, value]) =>
+            `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div><br />`
+        )
+        .join("");
+
+      // Use dynamic HTML inside SweetAlert2 modal
+      this.$swal.fire({
+        title: "Job Details",
+        html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+          container: "my-swal-container", // You can define your custom class for styling
+        },
+      });
+    },
+
+
     openRequirementsModal(data) {
       let newData = {};
       if (data && typeof data === "object") {

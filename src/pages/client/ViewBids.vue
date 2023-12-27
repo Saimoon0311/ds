@@ -331,9 +331,9 @@ export default {
 
             this.$swal('', msg, 'success').then(async () => {
               if(obj.status == "accept" || obj.status == "Accept"){
-                this.$router.push("/client-dashboard");
+                // this.$router.push("/client-dashboard");
               }else{
-                await this.getPaginatedData();
+                // await this.getPaginatedData();
               }
             })
             console.log('response : ', res);

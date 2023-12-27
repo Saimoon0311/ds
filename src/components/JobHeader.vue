@@ -21,6 +21,10 @@
               Job No: <b>{{ jobData?.identity }}</b>
             </p>
           </div>
+
+          <div>
+            <button @click="openJobDetailModal(jobData)" class="btn btn-dark btn-sm">See Details</button>
+          </div>
         </div>
        
       </div>
