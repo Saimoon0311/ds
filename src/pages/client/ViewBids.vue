@@ -134,7 +134,7 @@
                       </button>
                       <button
                         class="btn btn-dark text-white btn-sm border p-1 px-2 mb-1 w-100"
-                        @click="handleAcceptBidAction(item?.id,item?.lawyer,item?.job_id)"
+                        @click="handleAcceptBidAction(item?.id,item?.lawyer,item?.job_id,item.job?.client_chat?.chat_id)"
                       >
                         Accept
                       </button>
@@ -179,6 +179,13 @@
 import ClientHeader from "./Header.vue";
 import CustomPagination from '@/components/CustomPagination';
 import api from "@/config/api";
+
+import {
+  collection,
+  onSnapshot,
+} from "firebase/firestore";
+import db from "@/config/firebaseConfig";
+
 export default {
   name: "ClientDashboard",
   components: {
@@ -219,10 +226,37 @@ export default {
 
   methods: {
 
+    // getJobChat(chat_id){
+    //   const messagesRef = collection(db, "chats", chat_id, "messages");
+    //   let messages = [];
+    //   onSnapshot(messagesRef, (snapshot) => {
+    //     messages = snapshot.docs
+    //       .map((doc) => doc.data())
+    //       .sort((a, b) => a.timestamp - b.timestamp);
+    //   });
+    //   return messages
+    // },
+
+
+    getJobChat(chat_id) {
+      const messagesRef = collection(db, "chats", chat_id, "messages");
+      return new Promise((resolve, reject) => {
+        onSnapshot(messagesRef, (snapshot) => {
+          const messages = snapshot.docs
+            .map((doc) => doc.data())
+            .sort((a, b) => a.timestamp - b.timestamp);
+          resolve(messages);
+        }, (error) => {
+          reject(error);
+        });
+      });
+    },   
+
+
     goToMessagePage(item) {
       console.log(item?.job?.client_chat?.chat_id);
       this.saveJobInfo(item?.job);
-      this.$store.commit("SET_JOBIDTOCHAT", item?.job?.id);
+      this.$store.commit("SET_JOBIDTOCHAT", item?.job?.id); 
       this.$store.commit("SET_CLIENTCOMEFROMPROPOSAL", true);
       console.log('law : ' , item?.lawyer);
       this.$store.commit("SET_USERTOCHAT", item?.lawyer);
@@ -252,9 +286,18 @@ export default {
       this.$store.commit('SET_ENDPOINT_FOR_PAGINATED_DATA', `/client/job-proposals/${this.jobId}/${status}`);
       await this.getPaginatedData();
     },
-    handleAcceptBidAction(proposal_id, lawyer, job_id) {
+    handleAcceptBidAction(proposal_id, lawyer, job_id, chat_id) {
       let status = "Accept";
-      this.changeStatus({ status, proposal_id, lawyer, job_id });
+      console.log(proposal_id,lawyer,job_id,chat_id);
+      // console.log(this.getJobChat(chat_id));
+      this.getJobChat(chat_id)
+      .then((messages) => {
+        console.log(messages);
+        this.changeStatus({ status, proposal_id, lawyer, job_id, messages });
+      })
+      .catch((error) => {
+        console.error("Error fetching messages:", error);
+      });
     },
     handleRejectBidAction(proposal_id, lawyer, job_id) {
       let status = "Reject";

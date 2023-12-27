@@ -579,7 +579,7 @@ app.mixin({
               key != "job_id" &&
               key != "user_id" &&
               key != "created_at" &&
-              key != "updated_at" && key != "show" && key != "description" && key != "lawyer"
+              key != "updated_at" && key != "show" && key != "description" && key != "lawyer" && key != "job"
               && key != "status"
             ) {
               let objKey = key;
