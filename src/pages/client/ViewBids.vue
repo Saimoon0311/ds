@@ -117,8 +117,8 @@
                   <!-- <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td> -->
                   <td class="text-center" style="width:45%">
                     <!-- <p class="mb-1">{{ item?.description }}</p> -->
-                    <p class="mb-1">{{ generateExcerpt(item?.description) }}</p>
-                    <span class="bg-dark rounded-pill text-white py-0 px-3 text-capitalize" @click="openDescription(item?.description)">See more</span>
+                    <p class="mb-1">{{ generateExcerpt(item?.description) }} <span class=" text-black fw-bolder" @click="openDescription(item?.description)"> See more</span></p>
+                    
                   </td>
                   <!-- <td>{{ formatCreatedAt(item?.created_at) }}</td> -->
 
@@ -374,5 +374,8 @@ ul#pills-tab {
 
 .text-left {
   text-align: left;
+}
+.text-left .fw-bolder {
+    cursor: pointer;
 }
 </style>

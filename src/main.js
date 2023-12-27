@@ -140,7 +140,7 @@ app.mixin({
         this.$store.commit("SET_USERTOCHAT", null);
         this.$store.commit("SET_CHATSTATUS", null);
       }
-      this.$router.push({ path: "/chat" });
+      this.$router.push({ path: "/message" });
     },
 
     saveJobInfo(item = null,reset = false) {

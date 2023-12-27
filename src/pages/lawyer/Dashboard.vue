@@ -261,7 +261,7 @@
                       id="28"
                     >
                       <div
-                        class="border rounded d-flex justify-content-between text-white flex-column mb-3 pb-3"
+                        class="border rounded d-flex justify-content-between text-white flex-column mb-3 pb-3 bg-light"
                       >
                         <div>
                           <div class="p-3 card-top">
@@ -406,7 +406,7 @@
                             class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
                             @click="goToMessagePage(item,'lawyer')"
                           >
-                          View Messages
+                          Messages
                           </button>
                           <button
                             v-if="tab == 'open'"
@@ -466,7 +466,7 @@
                             class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
                             @click="goToMessagePage(item,'lawyer')"
                           >
-                          View Messages
+                          Messages
                           </button>
 
                           <button
@@ -675,6 +675,7 @@ export default {
           }
         }
       }
+      
     },
 
     // getNextUser() {
@@ -974,7 +975,7 @@ p.badge {
 .spacer {
   margin: 20px 0;
   display: block;
-  border-top: 1px solid black;
+  border-top: 1px solid #c7c7c7;
   padding-top: 20px;
   display: flex;
   justify-content: space-between;
