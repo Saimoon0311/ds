@@ -278,7 +278,7 @@
                             </div>
                             <div>
                               <p span class="smallFont">
-                                Job No: <b>{{ item?.identity }}</b>
+                                <b>Job No: </b>{{ item?.identity }}
                               </p>
                             </div>
                           </div>

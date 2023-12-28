@@ -1866,12 +1866,12 @@
 
 
                       <div v-if="form.fixed_fee_amount">
-                        <p> <span> Fixed fee amount:</span>  <span>${{ parseFloat(form.fixed_fee_amount).toFixed(2) }}</span></p>
+                        <p> <span> Fixed fee amount:</span>  <span>${{ formatNumber(parseFloat(form.fixed_fee_amount)) }}</span> </p> 
                       </div>
 
 
                       <div v-if="form.fee_earners && selectedOption == 'Hourly'">
-                        <p> <span> How many fee earners will be working on this matter? :</span>  <span>{{ (form.fee_earners == 'team') ? "I'm part of a team" : "Just me" }}</span></p>
+                        <p> <span> How many fee earners will be working on this matter?:</span>  <span>{{ (form.fee_earners == 'team') ? "I'm part of a team" : "Just me" }}</span></p>
                       </div>
 
                       <div v-if="form.fee_earners && selectedOption == 'Hourly'">
@@ -2334,6 +2334,17 @@ export default {
   },
 
   methods: {
+    formatNumber(number) {
+      // Ensure that the input is a number
+      if (typeof number !== 'number') {
+        return number;
+      }
+
+      // Use a custom function to format the number with space as a thousands separator
+      const parts = number.toFixed(2).toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+      return parts.join('.');
+    },
     setTwoDigitsAfterDecimal(key){
       console.log('obj key : ' , this.form[key]);
   
