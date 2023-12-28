@@ -44,8 +44,9 @@
                   >Proposals</router-link
                 > -->
                  
+                <!-- class="nav-link fw-normal menuItem-active-link" -->
                 <button
-                  class="nav-link fw-normal menuItem-active-link"
+                :class="{ 'nav-link': true, 'fw-normal': true, 'menuItem-active-link': $route.path === '/messages-history', 'router-link-active': $route.path === '/messages-history', 'router-link-exact-active': $route.path === '/messages-history' }"
                   id="jobs"
                   aria-current="page"
                   @click="goToChatsPage()"

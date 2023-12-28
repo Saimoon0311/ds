@@ -4,7 +4,7 @@
       <LawyerHeader />
     </div>
 
-    <div class="container my-4">
+    <div class="container mb my-4">
 
 
       <!-- <div class="row">
@@ -553,5 +553,49 @@ small {
   background-color: rgba(217, 217, 217, 1);
   /* outline: 1px solid #292929; */
   border-radius: 10px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+section.chatSection{
+  position: relative;
+  min-height: 100vh;
+}
+@media screen and (max-width: 1600px) {
+.mb{
+  padding-bottom: 50px;
+}
+}
+@media screen and (max-width: 768px) {
+
+h4{
+  font-size: 20px;
+}
+}
+@media screen and (max-width: 767px) {
+  .footer{
+    position: relative;
+  }
+  .mb{
+    padding-bottom: 10px;
+  }
+  .chatbox {
+    width: 94%;
+    margin: auto;
+}
+h4{
+    font-size: 16px;
+}
+}
+@media screen and (max-width: 350px) {
+.chat-input{
+  flex-wrap: wrap;
+}
+.chat-input button {
+    width: -webkit-fill-available;
+
+}
 }
 </style>

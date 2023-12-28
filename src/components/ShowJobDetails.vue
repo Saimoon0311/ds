@@ -47,7 +47,7 @@
           </button>
          
             <p class="smallFont text-black">
-              <b>Posted by:</b>{{ jobData?.owner?.first_name }}
+              <b>Posted by: </b>{{ jobData?.owner?.first_name }}
               {{ jobData?.owner?.last_name }}
               <span class="text-capitalize">({{ jobData?.city }})</span>
               on {{ formatCreatedAt(jobData?.created_at) }} 
