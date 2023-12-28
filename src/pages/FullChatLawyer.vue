@@ -26,20 +26,20 @@
 
         <h2 class="mainHeading">Chats</h2>
         
-        <h4 v-if="client_data.length == 0" class="text-center">No chat found with clients!</h4>
+        <h4 v-if="client_data.length == 0" class="text-center">No chat found!</h4>
 
         <!-- client names start -->
         <div v-if="client_data.length > 0"
           :class="{ 'col-md-3': true}">
-          <h4>Select Client to Chat</h4>
+          <h4>Select {{ userFirst.type == 'lawyer' ? 'Client' : 'Lawyer' }} to Chat</h4>
           <!-- <input class="form-control mb-4" type="text" placeholder="Search Client..." /> -->
           <input  class="form-control mb-4" v-model="searchClient" @input="filterItems" placeholder="Search...">
           <ul class="lawyer-list" v-if="client_data2.length > 0">
             <li @click="startChatForAllMessages(data,index)" v-for="(data, index) in client_data2" :key="index"
               :class="['bg-light', { 'active': (index == userSelectedIndex) ? true : false }]"
               >
-              <span class="lawyer-name">
-                {{ data?.client?.first_name }} {{ data?.client?.last_name }} ({{ data?.job?.title }})
+              <span class="lawyer-name" data-toggle="tooltip" data-placement="right" :title="data?.job?.title">
+                {{ data?.client?.first_name ?? data?.lawyer?.first_name }} {{ data?.client?.last_name ?? data?.lawyer?.first_name }} ({{ generateExcerpt(data?.job?.title) }})
               </span>
               <!-- <span v-if="data?.client_seen == 0 ||
                 data?.client_seen == false ||
@@ -131,7 +131,7 @@ import LawyerHeader from "../pages/lawyer/Header.vue";
 import api2 from "@/config/api";
 import { collection, addDoc, serverTimestamp, onSnapshot } from 'firebase/firestore';
 // import { FieldValue } from 'firebase/firestore';
-import db from '@/config/firebaseConfig';
+import { db } from '@/config/firebaseConfig';
 
 export default {
 
@@ -190,7 +190,7 @@ export default {
 
   mounted() {
         // show all messages
-        api2.get('/lawyer/get-all-clients-of-jobs').then((res) => {
+        api2.get('/get-all-users-of-jobs').then((res) => {
           this.client_data = res?.data;
           this.client_data2 = this.client_data;
           console.log(' cleint data : ' , this.client_data);

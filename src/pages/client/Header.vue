@@ -37,6 +37,22 @@
                   aria-current="page"
                   >Dashboard</router-link
                 >
+
+                <!-- <button
+                :class="{ 'nav-link': true, 'fw-normal': true, 'menuItem-active-link': $route.path === '/messages-history', 'router-link-active': $route.path === '/messages-history', 'router-link-exact-active': $route.path === '/messages-history' }"
+                  id="jobs"
+                  aria-current="page"
+                  @click="goToChatsPage()"
+                  >Messages</button> -->
+
+                <router-link
+                  to="/messages-history"
+                  class="nav-link fw-normal menuItem-active-link"
+                  id="lawyers"
+                  aria-current="page"
+                  >Messages</router-link
+                >
+
                 <router-link
                   to="/posting-job"
                   class="nav-link fw-normal menuItem-active-link"

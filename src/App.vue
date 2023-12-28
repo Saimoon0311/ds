@@ -5,6 +5,9 @@
 
 <script>
 import LoadingIndicator from '@/components/LoadingIndicator.vue';
+import { messaging } from "@/config/firebaseConfig";
+import { onMessage } from "firebase/messaging";
+
 
 export default {
   name: 'App',
@@ -12,6 +15,12 @@ export default {
     LoadingIndicator
   },
   created() {
+
+    onMessage(messaging, (payload) => {
+      console.log('Message received. ', payload);
+      this.$store.commit('SET_NOTI', payload);
+    });
+
     if (this.$store.getters.loginUser == null || this.$store.getters.loginUser == "") {
       const loginUser = JSON.parse(localStorage.getItem('loginUser'));
       this.$store.commit('SET_LOGIN_USER', loginUser);
@@ -20,19 +29,58 @@ export default {
       const item = JSON.parse(localStorage.getItem('jobData'));
       this.$store.commit('SET_JOB_DATA', item);
     }
-    if(this.$store.getters.jobId == null || this.$store.getters.jobId == ""){
-      this.$store.commit('SET_JOB_ID',localStorage.getItem('jobId'));
+    if (this.$store.getters.jobId == null || this.$store.getters.jobId == "") {
+      this.$store.commit('SET_JOB_ID', localStorage.getItem('jobId'));
     }
-    if(this.$store.getters.otpEmail == null || this.$store.getters.otpEmail == ""){
-      this.$store.commit('SET_OTP_EMAIL',localStorage.getItem('otpEmail'));
+    if (this.$store.getters.otpEmail == null || this.$store.getters.otpEmail == "") {
+      this.$store.commit('SET_OTP_EMAIL', localStorage.getItem('otpEmail'));
     }
-    if(this.$store.getters.userType == null || this.$store.getters.userType == ""){
-      this.$store.commit('SET_USER_TYPE',localStorage.getItem('userType'));
+    if (this.$store.getters.userType == null || this.$store.getters.userType == "") {
+      this.$store.commit('SET_USER_TYPE', localStorage.getItem('userType'));
     }
-    if(this.$store.getters.replacePaymentMethod == null || this.$store.getters.replacePaymentMethod == "" || this.$store.getters.replacePaymentMethod == false){
-      this.$store.commit('SET_REPLACE_PAYMENT_METHOD',localStorage.getItem('replacePaymentMethod'));
+    if (this.$store.getters.replacePaymentMethod == null || this.$store.getters.replacePaymentMethod == "" || this.$store.getters.replacePaymentMethod == false) {
+      this.$store.commit('SET_REPLACE_PAYMENT_METHOD', localStorage.getItem('replacePaymentMethod'));
     }
+
+    // console.log('app vue mes : ' , messaging);
+    // messaging.onBackgroundMessage((payload) => {
+    //     console.log('Message received:', payload);
+    // });
+  },
+
+  watch: {
+    // Watch for changes in the 'noti' property in the Vuex store
+    '$store.state.noti': {
+      handler(newValue) {
+        if (newValue) {
+          // Handle the changes, for example, display a notification
+          console.log('noti changed:', newValue);
+          // this.$swal(newValue?.notification?.title, newValue?.notification?.body, 'success');
+
+          this.$swal({
+          title: "New Notification",
+          text: newValue?.notification?.title,
+          icon: 'info',
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
+
+        }
+      },
+      immediate: true, // Trigger the handler immediately when the component is created
+    },
+  },
+
+  computed: {
+
+    firebaseNoti() {
+      return this.$store.state.noti;
+    },
   }
+
 }
 </script>
 
@@ -52,9 +100,8 @@ export default {
   z-index: 1 !important;
 }
 
-.dynamicTable th,.dynamicTable td{
+.dynamicTable th,
+.dynamicTable td {
   font-size: 1rem;
 }
-
-
 </style>
