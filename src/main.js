@@ -116,6 +116,19 @@ app.mixin({
 
   methods: {
 
+    // convert numbers in currency format 
+    formatNumber(number) {
+      // Ensure that the input is a number
+      if (typeof number !== 'number') {
+        return number;
+      }
+
+      // Use a custom function to format the number with space as a thousands separator
+      const parts = number.toFixed(2).toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+      return parts.join('.');
+    },
+
     goToMessagePage(item = null,type = null,reset = false) {
       if(item){
         this.saveJobInfo(item);
@@ -775,7 +788,7 @@ app.mixin({
             <tr>
               <td class='border'>${index + 1}</td>
               <td class='border'>${item.task ?? item.itemDisbursement}</td> 
-              <td class='border'>$${item.cost ?? item.costAud}</td>
+              <td class='border'>$${this.formatNumber(item.cost ?? item.costAud)}</td>
             </tr>
           `
         )
@@ -797,7 +810,7 @@ app.mixin({
           <tfoot>
             <tr >
               <td class='bg-dark text-white'>Total</td><td class='bg-dark'></td>
-              <td class='bg-dark text-white'>$${total.toFixed(2)}</td>
+              <td class='bg-dark text-white'>$${this.formatNumber(total)}</td>
             </tr>
           </tfoot>
         </table>
@@ -822,9 +835,9 @@ app.mixin({
             <tr>
               <td class='border'>${index + 1}</td>
               <td class='border'>${item.title}</td> <!-- Replace with actual properties -->
-              <td class='border'>$${item.hourly_rate ?? item.hourlyRate}</td>
+              <td class='border'>$${this.formatNumber(item.hourly_rate ?? item.hourlyRate)}</td>
               <td class='border'>${item.hours ?? item.estimatedHours}</td>
-              <td class='border'>$${subTotal.toFixed(2)}</td>
+              <td class='border'>$${this.formatNumber(subTotal)}</td>
             </tr>
           `;
           }
@@ -849,7 +862,7 @@ app.mixin({
           <tfoot>
             <tr>
               <td class='bg-dark text-white'>Total</td><td class='bg-dark'></td><td class='bg-dark'></td><td class='bg-dark'></td>
-              <td class='bg-dark text-white'>$${grandTotal.toFixed(2)}</td>
+              <td class='bg-dark text-white'>$${this.formatNumber(grandTotal)}</td>
             </tr>
           </tfoot>
         </table>
