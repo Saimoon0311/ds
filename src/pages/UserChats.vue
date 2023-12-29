@@ -74,9 +74,9 @@
         <!-- lawyer names start -->
         <div
           v-if="userFirst?.type === 'client' && lawyer_data.length > 0"
-          :class="{ 'col-md-3': userFirst?.type === 'client' }"
+          :class="{ 'col-md-3 p-2 rounded border': userFirst?.type === 'client' }"
         >
-          <h4>Select Lawyer to Chat</h4>
+          <h4 class="d-block bg-dark text-white text-center py-2 rounded"> Lawyer</h4>
           <ul class="lawyer-list">
             <li
               @click="startChatForClient(data, index)"
@@ -148,7 +148,7 @@
                   <small class="lawyer-name">{{ message.sender_name }}:</small>
                   <small>{{ humanReadableDate(message?.timestamp) }}</small>
                   <div>
-                    <strong>{{ message.text }}</strong>
+                    {{ message.text }}
                   </div>
                 </div>
               </div>
@@ -223,7 +223,7 @@
                   <small class="lawyer-name">{{ message.sender_name }}:</small>
                   <small>{{ humanReadableDate(message?.timestamp) }}</small>
                   <div>
-                    <strong>{{ message.text }}</strong>
+                    {{ message.text }}
                   </div>
                 </div>
               </div>
@@ -295,7 +295,7 @@
                       >
                       <small>{{ humanReadableDate(message?.timestamp) }}</small>
                       <div>
-                        <strong>{{ message.text }}</strong>
+                        {{ message.text }}
                       </div>
                     </div>
                   </div>

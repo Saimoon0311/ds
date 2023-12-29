@@ -1,5 +1,5 @@
 <template>
-    <h3 class="my-3 mt-5">Change Password</h3>
+    <h4 class="my-3 mt-5">Change Password</h4>
 
     <Form class="col-md-6 col-sm-12" @submit="changePassword" :validation-schema="schema" v-slot="{ errors }">
 

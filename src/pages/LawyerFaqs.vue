@@ -4,24 +4,12 @@
     <LawyerHeader />
     <div class="WordSection1 container">
       <!-- ----------- -->
-      <p
-        class="LNDocumentTitleShort mt-5 mb-5"
-        align="center"
+      <h3
+        class="mt-5 mb-5"
         style="text-align: center"
       >
-        <span
-          style="
-            font-size: 20pt;
-            mso-bidi-font-size: 10.5pt;
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-font-family: Calibri;
-            
-            mso-ansi-language: EN-AU;
-            font-weight: 400;;
-          "
-          >FAQs<o:p></o:p
-        ></span>
-      </p>
+        FAQs
+    </h3>
       
 
       

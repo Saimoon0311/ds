@@ -30,8 +30,8 @@
 
         <!-- client names start -->
         <div v-if="client_data.length > 0"
-          :class="{ 'col-md-3': true}">
-          <h4>Select {{ userFirst.type == 'lawyer' ? 'Client' : 'Lawyer' }} to Chat</h4>
+          :class="{ 'col-md-3 p-2 rounded border': true}">
+          <h4 class="d-block bg-dark text-white text-center py-2 rounded"> {{ userFirst.type == 'lawyer' ? 'Client' : 'Lawyer' }} </h4>
           <!-- <input class="form-control mb-4" type="text" placeholder="Search Client..." /> -->
           <input  class="form-control mb-4" v-model="searchClient" @input="filterItems" placeholder="Search...">
           <ul class="lawyer-list" v-if="client_data2.length > 0">
@@ -86,7 +86,7 @@
                       <small class="lawyer-name">{{ message.sender_name }}:</small> <small>{{
                         humanReadableDate(message?.timestamp) }}</small>
                       <div>
-                        <strong>{{ message.text }}</strong>
+                        {{ message.text }}
                       </div>
                     </div>
                   </div>

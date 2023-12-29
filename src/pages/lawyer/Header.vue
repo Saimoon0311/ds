@@ -57,7 +57,9 @@
                   class="nav-link fw-normal menuItem-active-link"
                   id="lawyers"
                   aria-current="page"
-                  >Messages</router-link
+                  >Messages
+                    <span class="countmsg">1</span>
+                  </router-link
                 >
 
                 <router-link
@@ -242,6 +244,7 @@ ul.dropdown-menu.show {
 
 .navbar-nav .left-menu a.nav-link {
   color: black;
+  position: relative;
 }
 
 .navbar-nav .left-menu button.nav-link:hover {
@@ -267,7 +270,19 @@ ul.dropdown-menu.show {
   color: #000000a6 !important;
   font-weight: 400;
 }
-
+span.countmsg {
+    border-radius: 50%;
+    background: red;
+    width: 20px;
+    position: absolute;
+    height: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    top: 0;
+    right: 0;
+}
 .showonmonb {
   display: none;
 }

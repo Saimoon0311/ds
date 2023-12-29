@@ -5,24 +5,12 @@
 
     <div class="WordSection1 container">
       <!-- ----------- -->
-      <p
-        class="LNDocumentTitleShort mt-5 mb-5"
-        align="center"
+      <h3
+        class="mt-5 mb-5"
         style="text-align: center"
       >
-        <span
-          style="
-            font-size: 20pt;
-            mso-bidi-font-size: 10.5pt;
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-font-family: Calibri;
-            
-            mso-ansi-language: EN-AU;
-            font-weight: 400: bold;
-          "
-          >FAQs<o:p></o:p
-        ></span>
-      </p>
+        FAQs
+    </h3>
       <!-- <ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
         <li class="nav-item" role="presentation">
           <a
@@ -604,6 +592,9 @@ export default {
 };
 </script>
 <style scoped>
+a, a:hover {
+    color: #000;
+}
 .LNNumberedHeading1 span {
   font-weight: 400 !important;
   font-size: 21px !important;

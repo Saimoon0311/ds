@@ -14,20 +14,22 @@
           </p>
           &nbsp;
         </div>
-        <div>
-          <p span class="smallFont">
+        
+
+        <div class="d-flex align-items-center">
+          <div v-if="userFirst?.type == 'client'" >
+            <button @click="goToViewProposals(jobData)" class="btn btn-dark btn-sm">Proposals</button>
+          </div>
+
+          <div class="mx-1">
+            <button @click="openJobDetailModal(jobData)" class="btn btn-dark btn-sm">See Details</button>
+          </div>
+          <div>
+          <p span class="smallFont m-0">
             <b>Job No: </b>{{ jobData?.identity }}
           </p>
         </div>
 
-        <div class="d-flex">
-          <div v-if="userFirst?.type == 'client'" class="mx-1">
-            <button @click="goToViewProposals(jobData)" class="btn btn-dark btn-sm">Proposals</button>
-          </div>
-
-          <div>
-            <button @click="openJobDetailModal(jobData)" class="btn btn-dark btn-sm">See Details</button>
-          </div>
         </div>
       </div>
 

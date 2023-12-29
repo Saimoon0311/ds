@@ -2,7 +2,7 @@
   <section class="tac-for-lawyer">
     <GeneralHeader />
     <div class="WordSection1 container pt-3">
-      <p class="LNDocumentTitleShort" align="center" style="text-align: center">
+      <h3 class="LNDocumentTitleShort" align="center" style="text-align: center">
         <span
           style="
             font-size: 20pt;
@@ -15,7 +15,7 @@
           "
           >Terms And Conditions For Lawyers <o:p></o:p
         ></span>
-      </p>
+      </h3>
 
       
     </div>
