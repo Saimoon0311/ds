@@ -4,17 +4,13 @@
     <div class="container">
       <div class="row pt-4">
         <div class="col-md-6 col-sm-12">
-          <button class="btn btn-dark ">
-            Back
-          </button>
+          <button class="btn btn-dark">Back</button>
         </div>
-        
       </div>
-     
+
       <h6 class="fs-3 text-center mt-4 submithead">Submit a Proposal</h6>
-      
+
       <ShowJobDetails :jobData="jobData" />
-      
     </div>
     <div class="container f-pt mx-auto">
       <Form
@@ -27,7 +23,7 @@
         <template v-if="currentStep === 0">
           <div class="form-group mb-4">
             <label
-              >How will you charge?<sup><code>*</code></sup></label
+              >How you will charge?<sup><code>*</code></sup></label
             >
             <div class="dropdown bootstrap-select w-100 border rounded dropup">
               <select
@@ -115,7 +111,9 @@
                       class="form-control d-input"
                       min="1"
                       pattern="[0-9]*[.,]?[0-9]*"
-                      v-on:blur="setTwoDigitsAfterDecimal('disbursement_amount')"
+                      v-on:blur="
+                        setTwoDigitsAfterDecimal('disbursement_amount')
+                      "
                       placeholder=""
                     />
                   </div>
@@ -166,7 +164,6 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            
                           />
                         </div>
                       </label>
@@ -213,7 +210,10 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                            <td>
+                              $ {{ row.costAud
+                              }}{{ row.gst_not_applicable ? "*" : "" }}
+                            </td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -293,14 +293,18 @@
                       placeholder="Eg: monthly"
                     /> -->
 
-                    <select v-model="form.retainer_period" class="form-control" id="fixedFeeAmount" name="fixedFeeAmount">
+                    <select
+                      v-model="form.retainer_period"
+                      class="form-control"
+                      id="fixedFeeAmount"
+                      name="fixedFeeAmount"
+                    >
                       <option value="week">Weekly</option>
                       <option value="fortnight">Fortnightly</option>
                       <option value="month">Monthly</option>
                       <option value="quarter">Quarterly</option>
                       <option value="annual">Annually</option>
                     </select>
-
                   </div>
                   <label> Time/other limitations: </label>
                   <div class="mb-3">
@@ -338,7 +342,9 @@
                       class="form-control d-input"
                       min="1"
                       pattern="[0-9]*[.,]?[0-9]*"
-                      v-on:blur="setTwoDigitsAfterDecimal('disbursement_amount')"
+                      v-on:blur="
+                        setTwoDigitsAfterDecimal('disbursement_amount')
+                      "
                       placeholder=""
                     />
                   </div>
@@ -372,7 +378,6 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          
                         />
                       </label>
                       <br />
@@ -390,7 +395,6 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            
                           />
                         </div>
                       </label>
@@ -437,7 +441,10 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                            <td>
+                              $ {{ row.costAud
+                              }}{{ row.gst_not_applicable ? "*" : "" }}
+                            </td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -502,7 +509,6 @@
                       v-model="newRow2.itemDisbursement"
                       placeholder="Eg: letter of advice"
                       class="form-control"
-                      
                     />
                   </label>
                   <br />
@@ -522,7 +528,6 @@
                         min="1"
                         type="number"
                         class="form-control d-input"
-                        
                       />
                     </div>
                   </label>
@@ -607,7 +612,9 @@
                       class="form-control d-input"
                       min="1"
                       pattern="[0-9]*[.,]?[0-9]*"
-                      v-on:blur="setTwoDigitsAfterDecimal('disbursement_amount')"
+                      v-on:blur="
+                        setTwoDigitsAfterDecimal('disbursement_amount')
+                      "
                       placeholder=""
                     />
                   </div>
@@ -641,7 +648,6 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          
                         />
                       </label>
                       <br />
@@ -659,7 +665,6 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            
                           />
                         </div>
                       </label>
@@ -706,7 +711,10 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                            <td>
+                              $ {{ row.costAud
+                              }}{{ row.gst_not_applicable ? "*" : "" }}
+                            </td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -772,13 +780,10 @@
                   pattern="[0-9]+([.,][0-9]+)?"
                   v-on:blur="setTwoDigitsAfterDecimal('fixed_fee_amount')"
                   required="required"
-           
                 />
               </div>
               <!-- <span class="invalid-feedback">{{errors.fixedFeeAmount}}</span> -->
 
-              
-              
               <div class="disbursement-fields">
                 <div class="form-group mt-3">
                   <label>
@@ -795,7 +800,9 @@
                       class="form-control d-input"
                       min="1"
                       pattern="[0-9]*[.,]?[0-9]*"
-                      v-on:blur="setTwoDigitsAfterDecimal('disbursement_amount')"
+                      v-on:blur="
+                        setTwoDigitsAfterDecimal('disbursement_amount')
+                      "
                       placeholder=""
                     />
                   </div>
@@ -829,8 +836,6 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
-                          
-                          
                         />
                       </label>
 
@@ -849,8 +854,6 @@
                             min="1"
                             type="number"
                             class="form-control d-input"
-                            
-                            
                           />
                         </div>
                       </label>
@@ -898,7 +901,10 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                            <td>
+                              $ {{ row.costAud
+                              }}{{ row.gst_not_applicable ? "*" : "" }}
+                            </td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white">Total (excluding GST): ${{
                               row.total }}
@@ -939,7 +945,6 @@
                   </div>
                 </div>
               </div>
-              
             </div>
 
             <!-- If they select ‘Hourly rate’ -->
@@ -990,139 +995,147 @@
                   Add fee earner
                 </button>
                 <div class="form-group">
-                <div class="" id="additionalFeeEarners" v-if="divEarnerVisible">
-                  <fieldset
-                    class="border p-2 my-2 bg-light text-center"
-                    style="margin: auto"
+                  <div
+                    class=""
+                    id="additionalFeeEarners"
+                    v-if="divEarnerVisible"
                   >
-                    <legend
-                      class="w-auto"
-                      style="float: none; padding: inherit; font-size: 1rem"
+                    <fieldset
+                      class="border p-2 my-2 bg-light text-center"
+                      style="margin: auto"
                     >
-                      Add fee earner
-                    </legend>
-                    <label class="w-100 text-start">
-                      Title:<sup><code>*</code></sup>
-                      <input
-                        v-model="newRow3.title"
-                        autocomplete="on"
-                        placeholder="Eg: Associate"
-                        class="form-control"
-                        
-                      />
-                    </label>
-                    <br />
-                    <br />
-                    <label class="w-100 text-start">
-                      Hourly rate (excluding GST):<sup><code>*</code></sup>
-                      <div>
-                        <span class="position-absolute d-span">$</span>
+                      <legend
+                        class="w-auto"
+                        style="float: none; padding: inherit; font-size: 1rem"
+                      >
+                        Add fee earner
+                      </legend>
+                      <label class="w-100 text-start">
+                        Title:<sup><code>*</code></sup>
                         <input
-                          v-model="newRow3.hourlyRate"
+                          v-model="newRow3.title"
+                          autocomplete="on"
+                          placeholder="Eg: Associate"
+                          class="form-control"
+                        />
+                      </label>
+                      <br />
+                      <br />
+                      <label class="w-100 text-start">
+                        Hourly rate (excluding GST):<sup><code>*</code></sup>
+                        <div>
+                          <span class="position-absolute d-span">$</span>
+                          <input
+                            v-model="newRow3.hourlyRate"
+                            min="1"
+                            autocomplete="on"
+                            type="number"
+                            class="form-control d-input"
+                          />
+                        </div>
+                      </label>
+                      <br />
+                      <br />
+                      <label class="w-100 text-start">
+                        Estimated number of hours:<sup><code>*</code></sup>
+                        <input
+                          v-model="newRow3.estimatedHours"
                           min="1"
                           autocomplete="on"
                           type="number"
-                          class="form-control d-input"
-                          
+                          class="form-control"
                         />
-                      </div>
-                    </label>
-                    <br />
-                    <br />
-                    <label class="w-100 text-start">
-                      Estimated number of hours:<sup><code>*</code></sup>
-                      <input
-                        v-model="newRow3.estimatedHours"
-                        min="1"
-                        autocomplete="on"
-                        type="number"
-                        class="form-control"
-                        
-                      />
-                    </label>
-                    <br />
-                    <br />
-                    <button v-if="editRow != null" type="button" @click="updateRow3" class="btn btn-dark">
-                      Update
-                    </button>
-                    <button v-else type="button" @click="addRow3" class="btn btn-dark">
-                      Add
-                    </button>
-                  </fieldset>
+                      </label>
+                      <br />
+                      <br />
+                      <button
+                        v-if="editRow != null"
+                        type="button"
+                        @click="updateRow3"
+                        class="btn btn-dark"
+                      >
+                        Update
+                      </button>
+                      <button
+                        v-else
+                        type="button"
+                        @click="addRow3"
+                        class="btn btn-dark"
+                      >
+                        Add
+                      </button>
+                    </fieldset>
 
-                <div class="table-responsive">
-
-                
-                    <table
-                      class="table table-bordered mb-3 hourlycost"
-                      id="additionalFeeEarnersTable"
-                    >
-                      <thead>
-                        <tr class="border table-top">
-                          <!-- <th></th> -->
-                          <th>Title</th>
-                          <th>Hourly rate</th>
-                          <th>Hours</th>
-                          <th>Subtotal</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody id="addFeeEarnersRow">
-                        <tr
-                          v-for="(row, index) in rows3"
-                          :key="index"
-                          class="border extra-class table-mid show"
-                        >
-                          <td>{{ row.title }}</td>
-                          <td>$ {{ row.hourlyRate }}</td>
-                          <td>{{ row.estimatedHours }}</td>
-                          <td>$ {{ row.hourlyRate * row.estimatedHours }}</td>
-
-                          <td>
-                            <button
-                              type="button"
-                              class="btn btn-default btn-circle p-1"
-                              @click="editRow3(index)"
-                              >
-                              <i class="fa fa-edit"></i>
-                            </button>
-                            <button
-                              type="button"
-                              class="btn btn-default btn-circle p-1"
-                              @click="removeRow3(index)"
-                            >
-                              <i class="fa fa-trash"></i>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="p-1"></td>
-                        </tr>
-                        <tr
-                          class="bg-dark text-white border-0 extra-class extra-class1"
-                        >
-                          <td
-                            class="bg-transparent text-white p-0 px-2 b-round-start"
-                            colspan="3"
+                    <div class="table-responsive">
+                      <table
+                        class="table table-bordered mb-3 hourlycost"
+                        id="additionalFeeEarnersTable"
+                      >
+                        <thead>
+                          <tr class="border table-top">
+                            <!-- <th></th> -->
+                            <th>Title</th>
+                            <th>Hourly rate</th>
+                            <th>Hours</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody id="addFeeEarnersRow">
+                          <tr
+                            v-for="(row, index) in rows3"
+                            :key="index"
+                            class="border extra-class table-mid show"
                           >
-                            Total (excluding GST):
-                          </td>
-                          <!-- <td class="bg-transparent p-0"></td>
+                            <td>{{ row.title }}</td>
+                            <td>$ {{ row.hourlyRate }}</td>
+                            <td>{{ row.estimatedHours }}</td>
+                            <td>$ {{ row.hourlyRate * row.estimatedHours }}</td>
+
+                            <td>
+                              <button
+                                type="button"
+                                class="btn btn-default btn-circle p-1"
+                                @click="editRow3(index)"
+                              >
+                                <i class="fa fa-edit"></i>
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-default btn-circle p-1"
+                                @click="removeRow3(index)"
+                              >
+                                <i class="fa fa-trash"></i>
+                              </button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="p-1"></td>
+                          </tr>
+                          <tr
+                            class="bg-dark text-white border-0 extra-class extra-class1"
+                          >
+                            <td
+                              class="bg-transparent text-white p-0 px-2 b-round-start"
+                              colspan="3"
+                            >
+                              Total (excluding GST):
+                            </td>
+                            <!-- <td class="bg-transparent p-0"></td>
                           <td class="bg-transparent p-0"></td> -->
-                          <td class="bg-transparent text-white p-0 px-2">
-                            $ {{ formatNumber(grandTotal3) }}
-                          </td>
-                          <td class="bg-transparent p-0 b-round-end"></td>
-                        </tr>
-                        <tr class="border-0 p-0">
-                          <td class="gstStyle p-0">*GST Not Applicable</td>
-                        </tr>
-                      </tbody>
-                     
-                    </table>
+                            <td class="bg-transparent text-white p-0 px-2">
+                              $ {{ formatNumber(grandTotal3) }}
+                            </td>
+                            <td class="bg-transparent p-0 b-round-end"></td>
+                          </tr>
+                          <tr class="border-0 p-0">
+                            <td class="gstStyle p-0">*GST Not Applicable</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
-              </div>
               </div>
 
               <div v-if="isVisible === 'Yes'">
@@ -1150,8 +1163,7 @@
                       pattern="[0-9]*[.,]?[0-9]*"
                       v-on:blur="setTwoDigitsAfterDecimal('hourly_rate')"
                       class="form-control d-input"
-                  required
-
+                      required
                     />
                   </div>
 
@@ -1167,8 +1179,7 @@
                     v-model="form.hours"
                     min="1"
                     class="form-control"
-                  required
-
+                    required
                   />
 
                   <br />
@@ -1201,7 +1212,9 @@
                       class="form-control d-input"
                       min="1"
                       pattern="[0-9]*[.,]?[0-9]*"
-                      v-on:blur="setTwoDigitsAfterDecimal('disbursement_amount')"
+                      v-on:blur="
+                        setTwoDigitsAfterDecimal('disbursement_amount')
+                      "
                       placeholder=""
                     />
                   </div>
@@ -1250,7 +1263,6 @@
                           <input
                             v-model="newRow.costAud"
                             min="1"
-                            
                             type="number"
                             class="form-control d-input"
                           />
@@ -1299,7 +1311,10 @@
                           class="border"
                         >
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                          <td>
+                            $ {{ row.costAud
+                            }}{{ row.gst_not_applicable ? "*" : "" }}
+                          </td>
                           <!-- <td class="text-center"> -->
                           <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -1403,7 +1418,9 @@
                       class="form-control d-input"
                       min="1"
                       pattern="[0-9]*[.,]?[0-9]*"
-                      v-on:blur="setTwoDigitsAfterDecimal('disbursement_amount')"
+                      v-on:blur="
+                        setTwoDigitsAfterDecimal('disbursement_amount')
+                      "
                       placeholder=""
                     />
                   </div>
@@ -1500,7 +1517,10 @@
                           class="border"
                         >
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                          <td>
+                            $ {{ row.costAud
+                            }}{{ row.gst_not_applicable ? "*" : "" }}
+                          </td>
                           <!-- <td class="text-center"> -->
                           <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -1659,7 +1679,10 @@
                         class="border"
                       >
                         <td>{{ row.itemDisbursement }}</td>
-                        <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                        <td>
+                          $ {{ row.costAud
+                          }}{{ row.gst_not_applicable ? "*" : "" }}
+                        </td>
                         <!-- <td class="text-center"> -->
                         <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                           </p> -->
@@ -1821,305 +1844,294 @@
 
         <template v-if="currentStep === 3">
           <div class="summ mb-3">
-              <p class="h4 text-start fw-bold mb-3 mt-2">Summary</p>
+            <h4 class="h4 text-center fw-bold mb-3 mt-2">Summary</h4>
 
+            <div v-if="selectedOptionForSummary" class="text-center">
+              <p class="topcharge topcharge1 text-center">
+                 How you will charge. 
+              </p>
+              <p class="topcharge text-center">
+                <span
+                  class="btn-sm btn-dark btn rounded btn-charge py-1 px-3 text-center fs-6"
+                  >{{ selectedOptionForSummary }}</span
+                >
+              </p>
+            </div>
+            <!-- <span @click="toggleDiv" class="summarytogicon"><i :class="['fas', isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down']"></i></span> -->
+            <!-- <div v-if="isDivVisible"> -->
+            <div v-if="form.hours">
+              <p>
+                <span> Hours:</span> <span>{{ form.hours }}</span>
+              </p>
+            </div>
 
-                      <div v-if="selectedOptionForSummary" >
-                        <p class="topcharge"> <span> How will you charge? </span><span class="btn-sm btn-dark btn rounded btn-charge">{{ selectedOptionForSummary }}</span> <span @click="toggleDiv" class="summarytogicon"><i :class="['fas', isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down']"></i></span> </p>
-                      </div>
-                      
-                      <div v-if="isDivVisible">
-                      <div v-if="form.hours" >
-                        <p> <span> Hours:</span>  <span>{{form.hours }}</span></p>
-                      </div>
+            <div v-if="form.hourly_rate">
+              <p>
+                <span> Hourly Rate:</span>
+                <span>${{ formatNumber(parseFloat(form.hourly_rate)) }}</span>
+              </p>
+            </div>
 
-                      <div v-if="form.hourly_rate">
-                        <p> <span> Hourly Rate:</span>  <span>${{ formatNumber(parseFloat(form.hourly_rate)) }}</span></p>
-                      </div>
+            <!-- <span v-if="selectedOption == 'Hourly'"> -->
+            <div v-if="form.retainer_fee">
+              <p>
+                <span> Retainer Fee with period:</span>
+                <span
+                  >${{ formatNumber(parseFloat(form.retainer_fee)) }}/{{
+                    form.retainer_period
+                  }}
+                </span>
+              </p>
+            </div>
 
-                      <!-- <span v-if="selectedOption == 'Hourly'"> -->
-                      <div v-if="form.retainer_fee">
-                        <p> <span> Retainer Fee with period:</span>  <span>${{ formatNumber(parseFloat(form.retainer_fee)) }}/{{ form.retainer_period }} </span></p>
-                      </div>
-
-                      <!-- <div v-if="form.retainer_period">
+            <!-- <div v-if="form.retainer_period">
                         <p> <span> Retainer Peiod:</span>  <span>{{ form.retainer_period }}</span></p>
                       </div> -->
 
-                      <div v-if="form.retainer_limitation">
-                        <p> <span> Retainer Limitation:</span>  <span> {{ form.retainer_limitation }}</span></p>
-                      </div>
+            <div v-if="form.retainer_limitation">
+              <p>
+                <span> Retainer Limitation:</span>
+                <span> {{ form.retainer_limitation }}</span>
+              </p>
+            </div>
 
-                      <div v-if="form.notice_period">
-                        <p> <span> Notice Period:</span>  <span>{{ form.notice_period }}</span></p>
-                      </div>
-                    <!-- </span> -->
+            <div v-if="form.notice_period">
+              <p>
+                <span> Notice Period:</span>
+                <span>{{ form.notice_period }}</span>
+              </p>
+            </div>
+            <!-- </span> -->
 
+            <div v-if="form.days">
+              <p>
+                <span> Days:</span> <span>{{ form.days }}</span>
+              </p>
+            </div>
 
-                     
+            <div v-if="form.daily_rate">
+              <p>
+                <span> Daily Rate:</span>
+                <span>{{ formatNumber(form.daily_rate) }}</span>
+              </p>
+            </div>
 
-                      <div v-if="form.days">
-                        <p> <span> Days:</span>  <span>{{ form.days }}</span></p>
-                      </div>
+            <div v-if="form.charge_type">
+              <p>
+                <span> Charge Type:</span> <span>{{ form.charge_type }}</span>
+              </p>
+            </div>
 
-                      <div v-if="form.daily_rate">
-                        <p> <span> Daily Rate:</span>   <span>{{ formatNumber(form.daily_rate) }}</span></p>
-                      </div>
+            <div v-if="form.fixed_fee_amount">
+              <p>
+                <span> Fixed fee amount:</span>
+                <span
+                  >${{ formatNumber(parseFloat(form.fixed_fee_amount)) }}</span
+                >
+              </p>
+            </div>
 
+            <div v-if="form.fee_earners && selectedOption == 'Hourly'">
+              <p>
+                <span> Fee earners working on this matter:</span>
+                <span>{{
+                  form.fee_earners == "team" ? "I'm part of a team" : "Just me"
+                }}</span>
+              </p>
+            </div>
 
-                      <div v-if="form.charge_type">
-                        <p> <span> Charge Type:</span>  <span>{{ form.charge_type }}</span></p>
-                      </div>
+            <div v-if="form.fee_earners && selectedOption == 'Hourly'" class="mb-2">
+              <div class="d-flex table-title">
+                <h5 style="text-align: left !important">Fee Earners:</h5>
+                <span @click="toggleDiv" class="summarytogicon mr-2">
+                  <i :class="['fas', isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down',]"></i>
+                </span>
+              </div>
+              <div v-if="isDivVisible">
+                <div v-html="summaryHtmlFeeEarners"></div>
+              </div>
+            </div>
 
+            <div v-if="selectedOption == 'item' || selectedOption == 'Item'" class="mb-2">
+              <div class="d-flex table-title">
+                <h5 style="text-align: left !important">Specific Tasks:</h5>
+                <span @click="toggleDiv1" class="summarytogicon mr-2">
+                  <i :class="['fas', isDivVisible1 ? 'fa-chevron-up' : 'fa-chevron-down',]"></i>
+                 
+              </span>
+              </div>
+              <div v-if="isDivVisible1">
+                <div v-html="summaryHtmlItemByItemTasks"></div>
+              </div>
+            </div>
 
+            <div v-if="form.disbursement_amount">
+              <p>
+                <span> Estimated amount for disbursements: </span>
+                <span
+                  >${{
+                    formatNumber(parseFloat(form.disbursement_amount))
+                  }}</span
+                >
+              </p>
+            </div>
 
+            <div class="mb-2">
+              <div class="d-flex table-title">
+                <h5 style="text-align: left !important">
+                  Itemised Disbursements:
+                </h5>
+                <span @click="toggleDiv2" class="summarytogicon mr-2">
+                  <i :class="['fas', isDivVisible2 ? 'fa-chevron-up' : 'fa-chevron-down',]"></i>
+                
+                </span>
+              </div>
+              <div v-if="isDivVisible2">
+                <div v-html="summaryHtmlDisbursement"></div>
+              </div>
+            </div>
 
-                      <div v-if="form.fixed_fee_amount">
-                        <p> <span> Fixed fee amount:</span>  <span>${{ formatNumber(parseFloat(form.fixed_fee_amount)) }}</span> </p> 
-                      </div>
-
-
-                      <div v-if="form.fee_earners && selectedOption == 'Hourly'">
-                        <p> <span> How many fee earners will be working on this matter?:</span>  <span>{{ (form.fee_earners == 'team') ? "I'm part of a team" : "Just me" }}</span></p>
-                      </div>
-
-                      <div v-if="form.fee_earners && selectedOption == 'Hourly'">
-                        <div v-html="summaryHtmlFeeEarners">
-                        </div>
-                      </div>
-                      
-                      <div v-if="selectedOption == 'item' || selectedOption == 'Item'">
-                        <div v-html="summaryHtmlItemByItemTasks">
-                        </div>
-                      </div>
-                      
-
-                      <div v-if="form.disbursement_amount">
-                        <p> <span> Estimated amount for disbursements: </span>  <span>${{ formatNumber(parseFloat(form.disbursement_amount)) }}</span></p>
-                      </div>
-
-                      <div v-html="summaryHtmlDisbursement">
-                      </div>
-
-
-                      <!-- <div v-if="form.upfront_payment_status">
+            <!-- <div v-if="form.upfront_payment_status">
                         <p> <span> Upfront Payment Status:</span>  <span>{{ form.upfront_payment_status }}</span></p>
                       </div> -->
 
-                      <div v-if="form.upfront_payment && form.upfront_payment_status.toLowerCase() == 'yes'">
-                        <p> <span> Upfront payment:</span>  <span>${{ formatNumber(parseFloat(form.upfront_payment)) }}</span></p>
-                      </div>
-
-                      
-
-
-                      <!-- totals here  -->
-
-
-                    
-
-
-                      <!-- totals end -->
-
-<!-- 
-                      <div v-if="form.fixed_fee_amount && form.disbursement_amount">
-                         <p> 
-                           <span> Total (excluding GST):</span>  
-                           <span>${{ 
-                          ((
-                            parseFloat(form.fixed_fee_amount) + parseFloat(form.disbursement_amount)
-                          ) - (
-                            (parseFloat(form.fixed_fee_amount) + parseFloat(form.disbursement_amount)) 
-                            * 0.10)).toFixed(2)
-                          }}</span>
-                        </p>
-                        <p> <span> GST:</span>  <span>${{ ((parseFloat(form.fixed_fee_amount) + parseFloat(form.disbursement_amount)) * 0.10).toFixed(2) }}</span></p>
-                        <p> <span> Total (including GST):</span>  <span>${{ (parseFloat(form.fixed_fee_amount) + parseFloat(form.disbursement_amount)).toFixed(2) }}</span></p>
-                      </div> -->
-
-
-
-
-
-
-                      <div v-if="form.law_practice_cost">
-                        <p> <span> Law Practice Cost:</span>  <span>{{ formatNumber(form.law_practice_cost) }}</span></p>
-                      </div>
-
-                      <!-- <div v-if="form.fee_earners && selectedOption == 'Hourly'">
-                        <p> <span> Fee Earners:</span>  <span>{{ form.fee_earners }}</span></p>
-                      </div> -->
-
-                     
-
-                      <div v-if="form.uplift_percentage">
-                        <p> <span>  Uplift Percentage:</span>  <span>{{ form.uplift_percentage }}</span></p>
-                      </div>
-
-                      <div v-if="form.estimated_fee">
-                        <p> <span> Estimated Fee:</span>  <span>${{ formatNumber(form.estimated_fee) }}</span></p>
-                      </div>
-
-
-                      <span v-if="selectedOption == 'Success' && form.uplift_percentage && form.estimated_fee">
-
-                        <div>
-                          <p> <span> If the case is not successful:</span>  <span>$0.00</span></p>
-                        </div>
-                        <div>
-                          <p> <span> If the case is successful:</span>  <span>${{  formatNumber(parseFloat(parseFloat(this.form.estimated_fee) + parseFloat((form.uplift_percentage / 100) * this.form.estimated_fee))) }}</span></p>
-                        </div>
-
-                      </span>
-
-
-                      <div v-if="form.success_fee_term">
-                        <p> <span> Success Fee Term:</span> <span>{{ form.success_fee_term }}</span></p>
-                      </div>
-
-                      <div v-if="form.pro_bono_description">
-                        <p> <span> Pro Bono Decription:</span>  <span>{{ form.pro_bono_description }}</span></p>
-                      </div>
-
-                      <div v-if="form.meet_deadlines">
-                        <p> <span> Meet Deadlines:</span>  <span>{{ form.meet_deadlines }}</span></p>
-                      </div>
-
-                      <div v-if="form.miss_deadline_reason">
-                        <p> <span> Miss Deadline Reason:</span>  <span>{{ form.miss_deadline_reason }}</span></p>
-                      </div>
-
-                      
-
-                      <div v-if="form.consultation">
-                        <p> <span> Consultation:</span> <span>{{ form.consultation }}</span></p>
-                      </div>
-
-                      <div v-if="form.consultation_time_limit">
-                        <p> <span> Consultation Time Limit:</span>  <span>{{ form.consultation_time_limit }}</span></p>
-                      </div>
-
-                     
-
-                      <div v-if="form.description" class="sumdesc">
-                        <p><b> Tell the potential client what you will do for them ?</b>  </p>
-                        <p class="descriptionText" style="white-space: pre-line;">{{ form.description }} </p>
-                      </div>
-                      <div>
-                        <p v-if="!isNaN(totals?.totalExcludingGst)"> 
-                           <span> Total (excluding GST):</span>  
-                           <span>${{ formatNumber(totals?.totalExcludingGst) }}</span>
-                        </p>
-                        <p v-if="!isNaN(totals?.gst)"> <span> GST:</span>  <span>${{ formatNumber(totals?.gst) }}</span></p>
-                        <p v-if="!isNaN(totals?.totalIncludingGst)" class="bg-dark text-white p-2 rounded"> <span> Total (including GST):</span>  <span>${{ formatNumber(totals?.totalIncludingGst) }}</span></p>
-                      </div>
-                      
-                    </div>
-
-
-              <!-- hours : null,
-        hourly_rate : null,
-        retainer_period: null,
-        retainer_limitation: null,
-        notice_period : null,
-        retainer_fee : null,
-        days : null,
-        charge_type: null,
-        fixed_fee_amount: null,
-        disbursement_amount: null,
-        law_practice_cost: null,
-        fee_earners: "me",
-        daily_rate: null,
-        uplift_percentage: null,
-        estimated_fee: null,
-        success_fee_term: null,
-        pro_bono_description: null,
-        meet_deadlines: null,
-        miss_deadline_reason: null,
-        upfront_payment_status: "yes",
-        upfront_payment: null,
-        consultation: null,
-        consultation_time_limit: null,
-        description: null,
-        lawyer_id: null,
-        job_id: null, -->
-
-
-              <!-- <div class="sum-top mb-3">
-                <p class="areas text-decoration-none badge text-white fs-6 bubbles area-bubble">
-                  {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
-                </p>
-                <h4 class=" text-center title-font text-white mt-1 mb-2"><b>{{ title }}</b>
-                </h4>
-                <h4 class="text-white descriptionText">{{ description }}</h4>
-              </div> -->
-
-              <!-- <h4 class="mb-3 text-capitalize"><b>Location</b>: {{ city }}, {{ locations[selectedLocationIndex].title }}
-              </h4> -->
-              <!-- <div v-if='this.visualOption != "" ||
-                this.auditoryOption != "" ||
-                this.mobilityOption != "" ||
-                this.learningOption != "" ||
-                this.intellectualOption != "" ||
-                this.psychiatricOption != "" ||
-                this.medicalOption != "" ||
-                this.requirementsOptionDescription != "" ||
-                this.otherLanguage != "" ||
-                this.selectedLanguage != ""' class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button class="accordion-button " type="button" data-bs-toggle="collapse"
-                      data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                      aria-controls="panelsStayOpen-collapseOne">
-                      <b>Accessibility Requirements </b>
-                    </button>
-                  </h2>
-                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show "
-                    aria-labelledby="panelsStayOpen-headingOne">
-                    <div class="accordion-body">
-                      <div v-if="VisualIsChecked">
-                        <p><i class="fa fa-check"></i><b> Visual Impairment: </b> {{ visualOption }}</p>
-                      </div>
-
-                      <div v-if="AuditoryIsChecked">
-                        <p><i class="fa fa-check"></i><b> Auditory Impairment: </b> {{ auditoryOption }}</p>
-
-                      </div>
-
-                      <div v-if="MobilityIsChecked">
-                        <p><i class="fa fa-check"></i><b> Mobility/Physical Impairment: </b> {{ mobilityOption }}</p>
-                      </div>
-
-                      <div v-if="LearningIsChecked">
-                        <p><i class="fa fa-check"></i><b> Learning Impairment: </b> {{ learningOption }}</p>
-                      </div>
-
-                      <div v-if="IntellectualIsChecked">
-                        <p><i class="fa fa-check"></i><b> Intellectual Disability: </b> {{ intellectualOption }}</p>
-                      </div>
-
-                      <div v-if="PsychiatricIsChecked">
-                        <p><i class="fa fa-check"></i><b> Psychiatric Disability: </b> {{ psychiatricOption }}</p>
-                      </div>
-
-                      <div v-if="MedicalIsChecked">
-                        <p><i class="fa fa-check"></i><b> Medical Disability: </b> {{ medicalOption }}</p>
-                      </div>
-
-                      <div v-if="isChecked">
-                        <p><i class="fa fa-check"></i><b> Other: </b> {{ requirementsOptionDescription }}</p>
-                      </div>
-
-                      <div v-if="languageIsChecked">
-                        <p><i class="fa fa-check"></i><b> Language: </b> {{ selectedLanguage == 'Other' ? otherLanguage :
-                          selectedLanguage }}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
+            <div
+              v-if="
+                form.upfront_payment &&
+                form.upfront_payment_status.toLowerCase() == 'yes'
+              "
+            >
+              <p>
+                <span> Upfront payment:</span>
+                <span
+                  >${{ formatNumber(parseFloat(form.upfront_payment)) }}</span
+                >
+              </p>
             </div>
-      </template>
+
+            <div v-if="form.law_practice_cost">
+              <p>
+                <span> Law Practice Cost:</span>
+                <span>{{ formatNumber(form.law_practice_cost) }}</span>
+              </p>
+            </div>
+
+            <div v-if="form.uplift_percentage">
+              <p>
+                <span> Uplift Percentage:</span>
+                <span>{{ form.uplift_percentage }}</span>
+              </p>
+            </div>
+
+            <div v-if="form.estimated_fee">
+              <p>
+                <span> Estimated Fee:</span>
+                <span>${{ formatNumber(form.estimated_fee) }}</span>
+              </p>
+            </div>
+
+            <span
+              v-if="
+                selectedOption == 'Success' &&
+                form.uplift_percentage &&
+                form.estimated_fee
+              "
+            >
+              <div>
+                <p>
+                  <span> If the case is not successful:</span>
+                  <span>$0.00</span>
+                </p>
+              </div>
+              <div>
+                <p>
+                  <span> If the case is successful:</span>
+                  <span
+                    >${{
+                      formatNumber(
+                        parseFloat(
+                          parseFloat(this.form.estimated_fee) +
+                            parseFloat(
+                              (form.uplift_percentage / 100) *
+                                this.form.estimated_fee
+                            )
+                        )
+                      )
+                    }}</span
+                  >
+                </p>
+              </div>
+            </span>
+
+            <div v-if="form.success_fee_term">
+              <p>
+                <span> Success Fee Term:</span>
+                <span>{{ form.success_fee_term }}</span>
+              </p>
+            </div>
+
+            <div v-if="form.pro_bono_description">
+              <p>
+                <span> Pro Bono Decription:</span>
+                <span>{{ form.pro_bono_description }}</span>
+              </p>
+            </div>
+
+            <div v-if="form.meet_deadlines">
+              <p>
+                <span> Meet Deadlines:</span>
+                <span>{{ form.meet_deadlines }}</span>
+              </p>
+            </div>
+
+            <div v-if="form.miss_deadline_reason">
+              <p>
+                <span> Miss Deadline Reason:</span>
+                <span>{{ form.miss_deadline_reason }}</span>
+              </p>
+            </div>
+
+            <div v-if="form.consultation">
+              <p>
+                <span> Consultation:</span> <span>{{ form.consultation }}</span>
+              </p>
+            </div>
+
+            <div v-if="form.consultation_time_limit">
+              <p>
+                <span> Consultation Time Limit:</span>
+                <span>{{ form.consultation_time_limit }}</span>
+              </p>
+            </div>
+
+            <div v-if="form.description" class="sumdesc">
+              <p class="text-center">
+                <b> What you will do.</b>
+              </p>
+              <p class="descriptionText" style="white-space: pre-line">
+                {{ form.description }}
+              </p>
+            </div>
+            <div>
+              <p v-if="!isNaN(totals?.totalExcludingGst)">
+                <span class="text-trans"> Total (excluding GST):</span>
+                <span>${{ formatNumber(totals?.totalExcludingGst) }}</span>
+              </p>
+              <p v-if="!isNaN(totals?.gst)">
+                <span> GST:</span> <span>${{ formatNumber(totals?.gst) }}</span>
+              </p>
+              <p
+                v-if="!isNaN(totals?.totalIncludingGst)"
+                class="bg-dark text-white p-2 rounded"
+              >
+                <span class="text-trans"> Total (including GST):</span>
+                <span>${{ formatNumber(totals?.totalIncludingGst) }}</span>
+              </p>
+            </div>
+
+            <!-- </div> -->
+          </div>
+        </template>
 
         <div class="stepbtn mt-3">
           <span v-if="selectedOption == 'Pro'">
@@ -2162,36 +2174,33 @@
   </div>
 </template>
 <script setup>
-
 import MainFooter from "../../components/global/MainFooter.vue";
 
 import ShowJobDetails from "../../components/ShowJobDetails";
-
 </script>
 <script>
 import LawyerHeader from "./Header.vue";
 import api from "@/config/api";
 
-
 export default {
-
   data() {
- 
     return {
-      selectedOptionForSummary : null,
+      selectedOptionForSummary: null,
       isDivVisible: false,
-      editRow : null,
-      summaryHtmlDisbursement : null,
-      summaryHtmlItemByItemTasks : null,
-      summaryHtmlFeeEarners : null,
+      isDivVisible1: false,
+      isDivVisible2: false,
+      editRow: null,
+      summaryHtmlDisbursement: null,
+      summaryHtmlItemByItemTasks: null,
+      summaryHtmlFeeEarners: null,
       form: {
-        hours : null,
-        hourly_rate : null,
+        hours: null,
+        hourly_rate: null,
         retainer_period: null,
         retainer_limitation: null,
-        notice_period : null,
-        retainer_fee : null,
-        days : null,
+        notice_period: null,
+        retainer_fee: null,
+        days: null,
         charge_type: null,
         fixed_fee_amount: null,
         disbursement_amount: null,
@@ -2216,7 +2225,7 @@ export default {
       newRow: {
         itemDisbursement: "",
         costAud: "",
-        gst_not_applicable : false,
+        gst_not_applicable: false,
       },
       rows: [], // Itemise Disbursements
       newRow2: {
@@ -2247,33 +2256,31 @@ export default {
       divEarnerVisible: false,
       input1: null,
 
-      totals : {
-        totalExcludingGst : 0.00,
-        totalIncludingGst : 0.00,
-        gst : 0.00,
-      }
-      
+      totals: {
+        totalExcludingGst: 0.0,
+        totalIncludingGst: 0.0,
+        gst: 0.0,
+      },
     };
   },
   computed: {
-
     buttonText() {
       if (this.currentStep === 0 || this.currentStep === 1) {
-        return 'Next';
+        return "Next";
       } else if (this.currentStep === 2) {
-        return 'Summary';
+        return "Summary";
       } else if (this.currentStep === 3) {
-        return 'Submit';
+        return "Submit";
       } else {
         // Add a default value if needed
-        return 'Unknown';
+        return "Unknown";
       }
     },
 
     // fixedFeeAmountValue() {
     //   // if (!isNaN(this.form?.fixed_fee_amount)) {
-    //     this.form.fixed_fee_amount = parseFloat(this.form?.fixed_fee_amount).toFixed(2); 
-        
+    //     this.form.fixed_fee_amount = parseFloat(this.form?.fixed_fee_amount).toFixed(2);
+
     //     // console.log(parseFloat(this.form?.fixed_fee_amount).toFixed(2));
     //     // return parseFloat(this.form?.fixed_fee_amount).toFixed(2);
     //   // } else {
@@ -2287,7 +2294,7 @@ export default {
     //     }
     // },
     jobData() {
-      console.log('job data : ' , this.$store.state.jobData);
+      console.log("job data : ", this.$store.state.jobData);
       return this.$store.state.jobData;
     },
     loginUser() {
@@ -2313,7 +2320,8 @@ export default {
     // additional fee earner
     grandTotal3() {
       return this.rows3.reduce(
-        (total, row) => total + parseFloat(row.hourlyRate * row.estimatedHours) || 0,
+        (total, row) =>
+          total + parseFloat(row.hourlyRate * row.estimatedHours) || 0,
         0
       );
     },
@@ -2328,7 +2336,7 @@ export default {
   components: {
     LawyerHeader,
     MainFooter,
-    ShowJobDetails
+    ShowJobDetails,
   },
 
   mounted() {
@@ -2343,19 +2351,17 @@ export default {
   },
 
   methods: {
-    setTwoDigitsAfterDecimal(key){
-      console.log('obj key : ' , this.form[key]);
-  
+    setTwoDigitsAfterDecimal(key) {
+      console.log("obj key : ", this.form[key]);
+
       if (isNaN(this.form[key])) {
-        this.form[key] = null
-      }else{
+        this.form[key] = null;
+      } else {
         this.form[key] = parseFloat(this.form[key]).toFixed(2);
       }
     },
 
-
-    calculateTotals(){
-
+    calculateTotals() {
       // <option disabled selected value="">Select an option</option>
       //           <option value="Fixed">Fixed fee</option>
       //           <option value="Hourly">Hourly rate</option>
@@ -2365,36 +2371,44 @@ export default {
       //           <option value="Success">Success fee</option>
       //           <option value="Pro">Pro bono</option>
 
-        console.log(this.selectedOption)
-        // let arr = [];
-        let total = 0;
-        switch (this.selectedOption) {
-          case "Fixed":
-            console.log('under fixed')
-            total = parseFloat(this.form.fixed_fee_amount) + parseFloat(this.form.disbursement_amount);
-            break;
-          case "Hourly":
-            total = (this.form.fee_earners == 'me') ? (parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)) + parseFloat(this.form.disbursement_amount) : parseFloat(this.form.disbursement_amount)
-            // arr = (this.form.fee_earners == 'me') ? [(parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)),parseFloat(this.form.disbursement_amount)] : [this.form.disbursement_amount];
-            break;
-          case "Daily":
-            total = (parseFloat(this.form.daily_rate) * parseFloat(this.form.days)) + parseFloat(this.form.disbursement_amount);
-            // arr = (this.form.fee_earners == 'me') ? [(parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)),parseFloat(this.form.disbursement_amount)] : [this.form.disbursement_amount];
-            break;
-          case "Item":
-          case "Retainer":
-          case "Success":
-          case "Pro":
-            total = parseFloat(this.form.disbursement_amount);
-            break;
-          default:
-            break;
-        }  
+      console.log(this.selectedOption);
+      // let arr = [];
+      let total = 0;
+      switch (this.selectedOption) {
+        case "Fixed":
+          console.log("under fixed");
+          total =
+            parseFloat(this.form.fixed_fee_amount) +
+            parseFloat(this.form.disbursement_amount);
+          break;
+        case "Hourly":
+          total =
+            this.form.fee_earners == "me"
+              ? parseFloat(this.form.hourly_rate) *
+                  parseFloat(this.form.hours) +
+                parseFloat(this.form.disbursement_amount)
+              : parseFloat(this.form.disbursement_amount);
+          // arr = (this.form.fee_earners == 'me') ? [(parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)),parseFloat(this.form.disbursement_amount)] : [this.form.disbursement_amount];
+          break;
+        case "Daily":
+          total =
+            parseFloat(this.form.daily_rate) * parseFloat(this.form.days) +
+            parseFloat(this.form.disbursement_amount);
+          // arr = (this.form.fee_earners == 'me') ? [(parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)),parseFloat(this.form.disbursement_amount)] : [this.form.disbursement_amount];
+          break;
+        case "Item":
+        case "Retainer":
+        case "Success":
+        case "Pro":
+          total = parseFloat(this.form.disbursement_amount);
+          break;
+        default:
+          break;
+      }
 
-        this.totals['totalExcludingGst'] = this.getTotalWithOutGst(total);
-        this.totals['totalIncludingGst'] = total;
-        this.totals['gst'] = this.getGst(total);
-
+      this.totals["totalExcludingGst"] = this.getTotalWithOutGst(total);
+      this.totals["totalIncludingGst"] = total;
+      this.totals["gst"] = this.getGst(total);
     },
 
     // getTotalWithGst(...valuesArray){
@@ -2402,7 +2416,7 @@ export default {
     //   if (valuesArray.length === 0) {
     //     return 0;
     //   }
-      
+
     //   let total = 0;
 
     //   for (let i = 0; i < valuesArray.length; i++) {
@@ -2416,22 +2430,20 @@ export default {
     //   return total;
     // },
 
-    getTotalWithOutGst(total){
-        let totalBeforeFix = total - (total * 0.10);
-        return parseFloat(totalBeforeFix);
+    getTotalWithOutGst(total) {
+      let totalBeforeFix = total - total * 0.1;
+      return parseFloat(totalBeforeFix);
     },
 
-    getGst(total){
-        let gst = total * 0.10;
-        return parseFloat(gst);
+    getGst(total) {
+      let gst = total * 0.1;
+      return parseFloat(gst);
     },
 
-
-    openSummaryTab(){
-
+    openSummaryTab() {
       this.calculateTotals();
 
-      if(this.selectedOption){
+      if (this.selectedOption) {
         switch (this.selectedOption) {
           case "Fixed":
             this.selectedOptionForSummary = "Fixed fee";
@@ -2455,33 +2467,38 @@ export default {
             this.selectedOptionForSummary = "Pro bono";
             break;
           default:
-          this.selectedOptionForSummary = this.selectedOption;
+            this.selectedOptionForSummary = this.selectedOption;
             break;
         }
       }
 
       // console.log('total :::: ',  this.totals)
 
-      const arr = this.openProposalDetailsModal({'specific_tasks' : this.rows2 , 'disbursements' : this.rows , 'fee_earners' : this.rows3},true)
-      if(arr.length > 0){
-        console.log('dis burse : ' , arr[0]);
-        this.summaryHtmlDisbursement = arr[0]
-        this.summaryHtmlItemByItemTasks = arr[2]
-        this.summaryHtmlFeeEarners = arr[1]
-      } 
+      const arr = this.openProposalDetailsModal(
+        {
+          specific_tasks: this.rows2,
+          disbursements: this.rows,
+          fee_earners: this.rows3,
+        },
+        true
+      );
+      if (arr.length > 0) {
+        console.log("dis burse : ", arr[0]);
+        this.summaryHtmlDisbursement = arr[0];
+        this.summaryHtmlItemByItemTasks = arr[2];
+        this.summaryHtmlFeeEarners = arr[1];
+      }
     },
 
-
-    resetForm(){
-
-      this.form = {
-        hours : null,
-        hourly_rate : null,
+    resetForm() {
+      (this.form = {
+        hours: null,
+        hourly_rate: null,
         retainer_period: null,
         retainer_limitation: null,
-        notice_period : null,
-        retainer_fee : null,
-        days : null,
+        notice_period: null,
+        retainer_fee: null,
+        days: null,
         charge_type: null,
         fixed_fee_amount: null,
         disbursement_amount: null,
@@ -2501,13 +2518,12 @@ export default {
         description: null,
         lawyer_id: null,
         job_id: null,
-      },
-     
-      this.paySucc = "No",
-      // this.newRow.itemDisbursement = "";
-      // this.newRow.costAud = "";
-      // this.newRow.gst_not_applicable = false;
-      this.newRow2.itemDisbursement = "";
+      }),
+        (this.paySucc = "No"),
+        // this.newRow.itemDisbursement = "";
+        // this.newRow.costAud = "";
+        // this.newRow.gst_not_applicable = false;
+        (this.newRow2.itemDisbursement = "");
       this.newRow2.costAud = "";
       this.newRow3.title = "";
       this.newRow3.hourlyRate = "";
@@ -2526,9 +2542,8 @@ export default {
       // console.log('schema', this.selectedOption);
     },
     async submitStepForm() {
-      console.log('form data : ' , this.form);
+      console.log("form data : ", this.form);
       console.log(api);
-
 
       // charge_type
       // fixed_fee_amount
@@ -2536,9 +2551,6 @@ export default {
       // disbursements (array of object)
       // upfront_payment
       // description
-
-
-
 
       // const formData = {
       //   "title": this.title,
@@ -2552,27 +2564,22 @@ export default {
       //   formData.requirements_description = this.requirementsOptionDescription;
       // }
 
-
-      
-
       this.form.job_id = this.jobData?.id;
       this.form.lawyer_id = this.loginUser?.email;
       this.form.charge_type = this.selectedOption;
 
-      if(this.selectedOption != 'Hourly'){
+      if (this.selectedOption != "Hourly") {
         this.form.fee_earners = null;
       }
-
 
       console.log("rows 3 : ", this.rows3);
       this.form.disbursements = this.rows; // Itemise Disbursements
       this.form.specificTasks = this.rows2; // item by item specific tasks
       this.form.feeEarners = this.rows3; // additional fee earner
 
-      this.form.total_with_gst = this.totals['totalIncludingGst'].toFixed(2);
-      this.form.total_without_gst = this.totals['totalExcludingGst'].toFixed(2);
-      this.form.gst = this.totals['gst'].toFixed(2);
-
+      this.form.total_with_gst = this.totals["totalIncludingGst"].toFixed(2);
+      this.form.total_without_gst = this.totals["totalExcludingGst"].toFixed(2);
+      this.form.gst = this.totals["gst"].toFixed(2);
 
       // console.log(this.formValues);
 
@@ -2639,11 +2646,18 @@ export default {
       }
     },
 
-    toggleDiv(){
-      console.log('div vis : ' , this.isDivVisible);
+    toggleDiv() {
+      console.log("div vis : ", this.isDivVisible);
       this.isDivVisible = !this.isDivVisible;
     },
-
+    toggleDiv1() {
+      console.log("div vis : ", this.isDivVisible);
+      this.isDivVisible1 = !this.isDivVisible1;
+    },
+    toggleDiv2() {
+      console.log("div vis : ", this.isDivVisible);
+      this.isDivVisible2 = !this.isDivVisible2;
+    },
 
     removeRow(index) {
       this.rows.splice(index, 1);
@@ -2655,16 +2669,16 @@ export default {
       this.rows3.splice(index, 1);
     },
 
-    editRow3(index){
+    editRow3(index) {
       console.log(index);
       this.editRow = index;
-      console.log('row s 3 : ' , this.rows3[index]);
+      console.log("row s 3 : ", this.rows3[index]);
       this.newRow3.title = this.rows3[index].title;
       this.newRow3.hourlyRate = this.rows3[index].hourlyRate;
       this.newRow3.estimatedHours = this.rows3[index].estimatedHours;
     },
 
-    updateRow3(){
+    updateRow3() {
       if (
         this.newRow3.title &&
         this.newRow3.hourlyRate &&
@@ -2674,14 +2688,13 @@ export default {
           title: this.newRow3.title,
           hourlyRate: this.newRow3.hourlyRate,
           estimatedHours: this.newRow3.estimatedHours,
-        }
+        };
         this.rows3[this.editRow] = obj;
         this.newRow3.title = "";
         this.newRow3.hourlyRate = "";
         this.newRow3.estimatedHours = "";
         this.editRow = null;
       }
-
     },
 
     nextStep() {
@@ -2694,10 +2707,10 @@ export default {
         return;
       }
 
-      if(this.currentStep == 2){
+      if (this.currentStep == 2) {
         this.openSummaryTab();
       }
-      console.log('this ::::: ' , this);
+      console.log("this ::::: ", this);
       this.currentStep++;
     },
 
@@ -2747,7 +2760,7 @@ export default {
     },
     setPaySucc(value) {
       this.paySucc = value;
-      if(value == "No"){
+      if (value == "No") {
         this.form.upfront_payment = null;
       }
     },
@@ -2771,7 +2784,6 @@ export default {
         this.form.uplift_percentage = value;
       }
     },
-
   },
   name: "DashboardTab",
 };
@@ -2779,26 +2791,35 @@ export default {
 
 <style scoped>
 .summ div p span:first-child {
-    font-weight: 600;
-    font-size: 16px;
-   margin-right: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  margin-right: 10px;
 }
-.summ div .topcharge{
-  justify-content: space-between;
-
+.summ div .topcharge {
+  display: block;
+}
+.summ div .topcharge1 {
+  font-weight: 600;
+    font-size: 16px;
+}
+.summ div .topcharge span{
+  font-weight: 500 !important;
+  font-size: 14px !important;
 }
 .summ div p {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
-    text-transform: capitalize;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  text-transform: capitalize;
 }
-
-.summ .sumdesc p{
+.text-trans{
+  text-transform: none !important;
+}
+.summ .sumdesc p {
   display: block !important;
 }
-.summ .table-wrap h5{
+.summ .table-wrap h5 {
   font-size: 18px;
   font-weight: 600;
 }
@@ -2839,7 +2860,8 @@ export default {
 #mainForm label {
   font-size: 15px;
 }
-.btn-charge{  border-radius: 50px !important;
+.btn-charge {
+  border-radius: 50px !important;
 }
 .d-span {
   line-height: 39px !important;
@@ -2919,7 +2941,7 @@ input[type="radio"]:checked {
   outline: 1px solid slategrey;
   border-radius: 10px;
 }
-.btn-bg{
+.btn-bg {
   background: rgba(55, 59, 62, 1) !important;
   color: white !important;
 }
@@ -3002,7 +3024,7 @@ td {
 .charge-drop:focus {
   box-shadow: none;
 }
-.submithead{
+.submithead {
   font-weight: 500;
 }
 /* @media only screen and (max-width: 600px) {
@@ -3028,43 +3050,45 @@ td {
 } */
 
 .hourlycost {
-  display:table;
+  display: table;
   width: 100%;
   table-layout: fixed;
-  
 }
-.hourlycost tbody tr, .hourlycost td, .hourlycost th{
+.hourlycost tbody tr,
+.hourlycost td,
+.hourlycost th {
   width: 1%;
 }
-.hourlycost thead{
+.hourlycost thead {
   width: 100%;
 }
-.summarytogicon i{
-  font-size: 24px;
+.summarytogicon i {
+  font-size: 22px;
   cursor: pointer;
+  padding-left: 10px;
 }
 @media only screen and (max-width: 992px) {
   form#mainForm {
     width: 80%;
-}
-.summarytogicon i{
-  font-size: 18px;
-}
+  }
+  .summarytogicon i {
+    font-size: 18px;
+  }
 }
 @media only screen and (max-width: 767px) {
   form#mainForm {
     width: unset;
-}
-.summarytogicon i{
-  font-size: 18px;
-}
+  }
+  .summarytogicon i {
+    font-size: 18px;
+  }
 }
 @media only screen and (max-width: 360px) {
-  .summarytogicon i{
-  font-size: 18px;
-}
-.stepbtn .btn {
+  .summarytogicon i {
+    font-size: 18px;
+  }
+  .stepbtn .btn {
     padding: 5px;
-}
+  }
 }
 </style>

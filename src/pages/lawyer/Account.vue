@@ -2,6 +2,9 @@
   <div class="l-main">
     <LawyerHeader />
     <div class="container">
+      <div class="text-center">
+        <h3  class="mt-3 text-center">Account</h3>
+      </div>
       <div v-if="isLoading" class="loading-indicator"></div>
 
       <div v-if="adminApproval != 'approve'">
@@ -26,7 +29,7 @@
 
         <span v-else>
           <div v-if="subscriptionData != null" >
-            <h3 class="my-3 mt-4">Subscription</h3>
+            <h4 class="my-3 mt-4">Subscription</h4>
             <p>
               Subscription Status :
               <span v-if="subscriptionData?.subscription_status == 'trialing'">
@@ -65,7 +68,7 @@
               Replace Payment Method
             </button>
 
-            <h3 class="my-3 mt-4">Receipts</h3>
+            <h4 class="my-3 mt-4">Receipts</h4>
 
 
             <!-- <form @submit.prevent="searchReceipts">
@@ -163,7 +166,7 @@
 
         <ChangePasswordForm />
 
-        <!-- <h3 class="my-3 mt-5">Change Password</h3>
+        <!-- <h4 class="my-3 mt-5">Change Password</h4>
 
         <Form  class="col-md-6 col-sm-12" @submit="changePassword" :validation-schema="schema" v-slot="{errors}">
 
@@ -220,7 +223,7 @@
         </form> -->
 
         <!-- Delete account permanently -->
-        <h3 class="mt-4">Delete Account</h3>
+        <h4 class="mt-4">Delete Account</h4>
         <button @click="deleteAccount" class="btn btn-danger">
           <i class="bi bi-trash-fill"></i> Delete Account
         </button>

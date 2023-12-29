@@ -784,9 +784,8 @@ app.mixin({
       );
       const tableContent = dataArray
         .map(
-          (item, index) => `
+          (item) => `
             <tr>
-              <td class='border'>${index + 1}</td>
               <td class='border'>${item.task ?? item.itemDisbursement}</td> 
               <td class='border'>$${this.formatNumber(item.cost ?? item.costAud)}</td>
             </tr>
@@ -795,11 +794,10 @@ app.mixin({
         .join("");
 
       return `
-        <div class="table-title"><h5 style="text-align:left !important">${title} : </h5></div>
+        <div class="table-title"></div>
         <table class='table dynamicTable'>
           <thead>
             <tr class='border'>
-              <th class='border'>#</th>
               <th class='border'>Task</th>
               <th class='border'>Cost</th>
             </tr>
@@ -809,7 +807,7 @@ app.mixin({
           </tbody>
           <tfoot>
             <tr >
-              <td class='bg-dark text-white'>Total</td><td class='bg-dark'></td>
+              <td class='bg-dark text-white'>Total</td>
               <td class='bg-dark text-white'>$${this.formatNumber(total)}</td>
             </tr>
           </tfoot>
@@ -828,12 +826,11 @@ app.mixin({
       let grandTotal = 0;
       const tableContent = dataArray
         .map(
-          (item, index) => {
+          (item) => {
             const subTotal = (item.hourly_rate ?? item.hourlyRate) * (item.hours ?? item.estimatedHours);
             grandTotal += subTotal;
             return `
             <tr>
-              <td class='border'>${index + 1}</td>
               <td class='border'>${item.title}</td> <!-- Replace with actual properties -->
               <td class='border'>$${this.formatNumber(item.hourly_rate ?? item.hourlyRate)}</td>
               <td class='border'>${item.hours ?? item.estimatedHours}</td>
@@ -845,11 +842,10 @@ app.mixin({
         .join("");
 
       return `
-        <div class="table-title"><h5 style="text-align:left !important">${title} : </h5></div>
+        <div class="table-title"></div>
         <table class='table dynamicTable'>
           <thead>
             <tr>
-              <th class='border'>#</th>
               <th class='border'>Title</th>
               <th class='border'>Hourly Rate</th>
               <th class='border'>Hours</th>
@@ -861,7 +857,7 @@ app.mixin({
           </tbody>
           <tfoot>
             <tr>
-              <td class='bg-dark text-white'>Total</td><td class='bg-dark'></td><td class='bg-dark'></td><td class='bg-dark'></td>
+              <td class='bg-dark text-white'>Total</td><td class='bg-dark'></td><td class='bg-dark'></td>
               <td class='bg-dark text-white'>$${this.formatNumber(grandTotal)}</td>
             </tr>
           </tfoot>

@@ -972,11 +972,11 @@ export default {
 
 .summ h4 {
   font-size: 16px;
-}.summ .accordion-body-show div:first-child{
+}.summ .accordion-body-show div:last-child{
   margin: 0;
 }
 .summ .accordion-body-show div {
-    margin: 0 10px;
+    margin-right:10px;
 }
 .summ .accordion-body-show p i {
     border: 1px solid #5dc71d;

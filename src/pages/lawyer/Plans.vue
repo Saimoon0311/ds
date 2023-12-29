@@ -12,7 +12,7 @@
 
   <div class="row pt-4 pb-2 justify-content-center">
     <div class=" col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-      <h3 class="mt-3 text-center mb-3 text-black fw-bolder">Subscription Plans</h3>
+      <h3 class="mt-3 text-center mb-3 text-black ">Subscription Plans</h3>
  
       <div class="card subscription-card mb-3 ">
         <div class="card-header bg-dark d-flex align-items-center justify-content-between">
