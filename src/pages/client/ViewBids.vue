@@ -59,10 +59,10 @@
             role="tabpanel"
             aria-labelledby="pills-home-tab"
           >
-            <table class="table table-bordered table-striped table-layout" id="bidsActive">
-              <thead class="table-dark">
+            <table class="table  table-layout" id="bidsActive">
+              <thead class="">
                 <tr>
-                  <th >Lawyer</th>
+                  <th class="">Lawyer</th>
                   
                   <th>
                     Fee estimate
@@ -103,21 +103,25 @@
                     No active Proposals are available.
                   </td>
                 </tr>
-                <tr v-else class="text-left" v-for="(item,index) in data_paginated" :key="index">
+                <tr v-else class="text-left border-bottom" v-for="(item,index) in data_paginated" :key="index">
                   <!-- <td>testing client (crinimal)</td> -->
-                  <td class="text-center" style="width:15%"> <p @click="openLawyerDetailsModal(item?.lawyer)" class="text-dark text-capitalize fw-bolder">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</p></td>
+                  <td class="text-center" style="width:15%"> <p @click="openLawyerDetailsModal(item?.lawyer)" class="btn-dark rounded-pill btn text-capitalize fw-bold px-4 py-1">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</p></td>
                   <!-- <td>{{ item?.charge_type }}</td> -->
-                  <td class="text-center" style="width:25%">
+                  <td class="text-center" style="width:30%">
                       
+                   
+                      <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ item?.charge_type }}</p>
+                      <p class="text-capitalize text-black fw-normal mb-1">{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</p>
+                      <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-0 font-small" @click="openProposalDetailsModal(item)">see more</p>
                     
-                    <p class="my-1 fw-bolder" @click="openProposalDetailsModal(item)">{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}} - <span class="text-capitalize text-dark fw-normal">{{ item?.charge_type }}</span></p>
 
                     </td>
 
                   <!-- <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td> -->
-                  <td class="text-center" style="width:45%">
+                  <td class="text-center" style="width:40%">
                     <!-- <p class="mb-1">{{ item?.description }}</p> -->
-                    <p class="mb-1">{{ generateExcerpt(item?.description) }} <span class=" text-black fw-bolder" @click="openDescription(item?.description)"> See more</span></p>
+                    <!-- <p class="mb-1">{{ generateExcerpt(item?.description) }} <span class=" text-black fw-bolder" @click="openDescription(item?.description)"> See more</span></p> -->
+                    <p class="mb-1 descriptionText">{{ item?.description }} </p>
                     
                   </td>
                   <!-- <td>{{ formatCreatedAt(item?.created_at) }}</td> -->
@@ -126,14 +130,9 @@
                   <td>No</td> -->
                   <td style="width:15%" v-if="tab == 'Open'">
                     <div class="text-center" v-if="item?.status == 'Open'">
+                     
                       <button
-                        class="btn btn-light btn-sm p-1 px-2 w-100 mb-1 border"
-                        @click="goToMessagePage(item)"
-                      >
-                        Message
-                      </button>
-                      <button
-                        class="btn btn-dark text-white btn-sm border p-1 px-2 mb-1 w-100"
+                        class="btn btn-dark text-white btn-sm border p-1 px-2 mb-1 w-75 rounded-pill"
                         @click="handleAcceptBidAction(item?.id,item?.lawyer,item?.job_id,item.job?.client_chat?.chat_id)"
                       >
                         Accept
@@ -147,7 +146,13 @@
                         </button>
                       </form>
                       <button
-                        class="btn btn-danger btn-sm p-1 px-2 mb-1 w-100"
+                        class="btn btn-light btn-sm p-1 px-2 w-75 rounded-pill mb-1 border"
+                        @click="goToMessagePage(item)"
+                      >
+                        Message
+                      </button>
+                      <button
+                        class="btn btn-danger btn-sm p-1 px-2 mb-1 w-75 rounded-pill"
                         @click="handleRejectBidAction(item?.id,item?.lawyer,item?.job_id)"
                       >
                         Reject
@@ -344,6 +349,9 @@ export default {
 </script>
 
 <style scoped>
+.font-small{
+  font-size: 12px;
+}
 ul#pills-tab {
   text-align: center;
   margin: 0 auto;
@@ -372,5 +380,38 @@ ul#pills-tab {
 }
 .text-left .fw-bolder {
     cursor: pointer;
+}
+.fw-bold{
+  font-weight: 600 !important;
+}
+.table td{
+  border: unset;
+}
+
+.table td.text-center {
+    vertical-align: middle;
+}
+.descriptionText{
+  overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 20px;
+    max-height: 100px;
+    /* line-break: anywhere; */
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-right: 5px;
+}
+.descriptionText::-webkit-scrollbar{
+  width: 6px;
+    border-radius: 10px;
+}
+.descriptionText::-webkit-scrollbar-thumb {
+    background-color: #969696;
+    /* outline: 1px solid #292929; */
+    border-radius: 10px;
+}
+.descriptionText::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
+    border-radius: 10px;
 }
 </style>
