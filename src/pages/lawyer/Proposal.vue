@@ -2,7 +2,16 @@
   <LawyerHeader />
   <div class="f-main">
     <div class="container">
-      <h6 class="fs-3 text-center mt-4 fw-bold">Submit a Proposal</h6>
+      <div class="row pt-4">
+        <div class="col-md-6 col-sm-12">
+          <button class="btn btn-dark ">
+            Back
+          </button>
+        </div>
+        
+      </div>
+     
+      <h6 class="fs-3 text-center mt-4 submithead">Submit a Proposal</h6>
       
       <ShowJobDetails :jobData="jobData" />
       
@@ -232,7 +241,7 @@
                               Total (excluding GST):
                             </td>
                             <td class="bg-transparent text-white p-0 px-2">
-                              $ {{ grandTotal.toFixed(2) }}
+                              $ {{ formatNumber(grandTotal) }}
                             </td>
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
@@ -455,7 +464,7 @@
                               Total (excluding GST):
                             </td>
                             <td class="bg-transparent text-white p-0 px-2">
-                              $ {{ grandTotal.toFixed(2) }}
+                              $ {{ formatNumber(grandTotal) }}
                             </td>
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
@@ -568,7 +577,7 @@
                         Total (excluding GST):
                       </td>
                       <td class="bg-transparent text-white p-0 px-2">
-                        $ {{ grandTotal2.toFixed(2) }}
+                        $ {{ formatNumber(grandTotal2) }}
                       </td>
                       <td class="bg-transparent p-0 b-round-end"></td>
                     </tr>
@@ -725,7 +734,7 @@
                               Total (excluding GST):
                             </td>
                             <td class="bg-transparent text-white p-0 px-2">
-                              $ {{ grandTotal.toFixed(2) }}
+                              $ {{ formatNumber(grandTotal) }}
                             </td>
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
@@ -917,7 +926,7 @@
                               Total (excluding GST):
                             </td>
                             <td class="bg-transparent text-white p-0 px-2">
-                              $ {{ grandTotal.toFixed(2) }}
+                              $ {{ formatNumber(grandTotal) }}
                             </td>
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
@@ -1101,7 +1110,7 @@
                           <!-- <td class="bg-transparent p-0"></td>
                           <td class="bg-transparent p-0"></td> -->
                           <td class="bg-transparent text-white p-0 px-2">
-                            $ {{ grandTotal3.toFixed(2) }}
+                            $ {{ formatNumber(grandTotal3) }}
                           </td>
                           <td class="bg-transparent p-0 b-round-end"></td>
                         </tr>
@@ -1317,7 +1326,7 @@
                             Total (excluding GST):
                           </td>
                           <td class="bg-transparent text-white p-0 px-2">
-                            $ {{ grandTotal.toFixed(2) }}
+                            $ {{ formatNumber(grandTotal) }}
                           </td>
                           <td class="bg-transparent p-0 b-round-end"></td>
                         </tr>
@@ -1518,7 +1527,7 @@
                             Total (excluding GST):
                           </td>
                           <td class="bg-transparent text-white p-0 px-2">
-                            $ {{ grandTotal.toFixed(2) }}
+                            $ {{ formatNumber(grandTotal) }}
                           </td>
                           <td class="bg-transparent p-0 b-round-end"></td>
                         </tr>
@@ -1677,7 +1686,7 @@
                           Total (excluding GST):
                         </td>
                         <td class="bg-transparent text-white p-0 px-2">
-                          $ {{ grandTotal.toFixed(2) }}
+                          $ {{ formatNumber(grandTotal) }}
                         </td>
                         <td class="bg-transparent p-0 b-round-end"></td>
                       </tr>
@@ -1825,12 +1834,12 @@
                       </div>
 
                       <div v-if="form.hourly_rate">
-                        <p> <span> Hourly Rate:</span>  <span>${{ parseFloat(form.hourly_rate).toFixed(2) }}</span></p>
+                        <p> <span> Hourly Rate:</span>  <span>${{ formatNumber(parseFloat(form.hourly_rate)) }}</span></p>
                       </div>
 
                       <!-- <span v-if="selectedOption == 'Hourly'"> -->
                       <div v-if="form.retainer_fee">
-                        <p> <span> Retainer Fee with period:</span>  <span>${{ parseFloat(form.retainer_fee).toFixed(2) }}/{{ form.retainer_period }} </span></p>
+                        <p> <span> Retainer Fee with period:</span>  <span>${{ formatNumber(parseFloat(form.retainer_fee)) }}/{{ form.retainer_period }} </span></p>
                       </div>
 
                       <!-- <div v-if="form.retainer_period">
@@ -1854,7 +1863,7 @@
                       </div>
 
                       <div v-if="form.daily_rate">
-                        <p> <span> Daily Rate:</span>   <span>{{ form.daily_rate }}</span></p>
+                        <p> <span> Daily Rate:</span>   <span>{{ formatNumber(form.daily_rate) }}</span></p>
                       </div>
 
 
@@ -1886,7 +1895,7 @@
                       
 
                       <div v-if="form.disbursement_amount">
-                        <p> <span> Estimated amount for disbursements: </span>  <span>${{ parseFloat(form.disbursement_amount).toFixed(2) }}</span></p>
+                        <p> <span> Estimated amount for disbursements: </span>  <span>${{ formatNumber(parseFloat(form.disbursement_amount)) }}</span></p>
                       </div>
 
                       <div v-html="summaryHtmlDisbursement">
@@ -1898,7 +1907,7 @@
                       </div> -->
 
                       <div v-if="form.upfront_payment && form.upfront_payment_status.toLowerCase() == 'yes'">
-                        <p> <span> Upfront payment:</span>  <span>${{ parseFloat(form.upfront_payment).toFixed(2) }}</span></p>
+                        <p> <span> Upfront payment:</span>  <span>${{ formatNumber(parseFloat(form.upfront_payment)) }}</span></p>
                       </div>
 
                       
@@ -1934,7 +1943,7 @@
 
 
                       <div v-if="form.law_practice_cost">
-                        <p> <span> Law Practice Cost:</span>  <span>{{ form.law_practice_cost }}</span></p>
+                        <p> <span> Law Practice Cost:</span>  <span>{{ formatNumber(form.law_practice_cost) }}</span></p>
                       </div>
 
                       <!-- <div v-if="form.fee_earners && selectedOption == 'Hourly'">
@@ -1948,7 +1957,7 @@
                       </div>
 
                       <div v-if="form.estimated_fee">
-                        <p> <span> Estimated Fee:</span>  <span>${{ form.estimated_fee }}</span></p>
+                        <p> <span> Estimated Fee:</span>  <span>${{ formatNumber(form.estimated_fee) }}</span></p>
                       </div>
 
 
@@ -1958,7 +1967,7 @@
                           <p> <span> If the case is not successful:</span>  <span>$0.00</span></p>
                         </div>
                         <div>
-                          <p> <span> If the case is successful:</span>  <span>${{  parseFloat(parseFloat(this.form.estimated_fee) + parseFloat((form.uplift_percentage / 100) * this.form.estimated_fee)).toFixed(2) }}</span></p>
+                          <p> <span> If the case is successful:</span>  <span>${{  formatNumber(parseFloat(parseFloat(this.form.estimated_fee) + parseFloat((form.uplift_percentage / 100) * this.form.estimated_fee))) }}</span></p>
                         </div>
 
                       </span>
@@ -1999,10 +2008,10 @@
                       <div>
                         <p v-if="!isNaN(totals?.totalExcludingGst)"> 
                            <span> Total (excluding GST):</span>  
-                           <span>${{ totals?.totalExcludingGst.toFixed(2) }}</span>
+                           <span>${{ formatNumber(totals?.totalExcludingGst) }}</span>
                         </p>
-                        <p v-if="!isNaN(totals?.gst)"> <span> GST:</span>  <span>${{ totals?.gst.toFixed(2) }}</span></p>
-                        <p v-if="!isNaN(totals?.totalIncludingGst)" class="bg-dark text-white p-2 rounded"> <span> Total (including GST):</span>  <span>${{ totals?.totalIncludingGst.toFixed(2) }}</span></p>
+                        <p v-if="!isNaN(totals?.gst)"> <span> GST:</span>  <span>${{ formatNumber(totals?.gst) }}</span></p>
+                        <p v-if="!isNaN(totals?.totalIncludingGst)" class="bg-dark text-white p-2 rounded"> <span> Total (including GST):</span>  <span>${{ formatNumber(totals?.totalIncludingGst) }}</span></p>
                       </div>
                       
                     </div>
@@ -2334,17 +2343,6 @@ export default {
   },
 
   methods: {
-    formatNumber(number) {
-      // Ensure that the input is a number
-      if (typeof number !== 'number') {
-        return number;
-      }
-
-      // Use a custom function to format the number with space as a thousands separator
-      const parts = number.toFixed(2).toString().split('.');
-      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-      return parts.join('.');
-    },
     setTwoDigitsAfterDecimal(key){
       console.log('obj key : ' , this.form[key]);
   
@@ -3004,7 +3002,9 @@ td {
 .charge-drop:focus {
   box-shadow: none;
 }
-
+.submithead{
+  font-weight: 500;
+}
 /* @media only screen and (max-width: 600px) {
   .extra-class th , .extra-class td , .extra-class td i{
   font-size: 13px;

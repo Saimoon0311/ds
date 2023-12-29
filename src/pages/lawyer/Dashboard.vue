@@ -261,7 +261,7 @@
                       id="28"
                     >
                       <div
-                        class="border rounded d-flex justify-content-between text-white flex-column mb-3 pb-3 bg-light"
+                        class="border rounded d-flex justify-content-between text-white flex-column mb-3 pb-3 card-cus"
                       >
                         <div>
                           <div class="p-3 card-top">
@@ -406,7 +406,7 @@
                             class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
                             @click="goToMessagePage(item,'lawyer')"
                           >
-                          Messages
+                          Message
                           </button>
                           <button
                             v-if="tab == 'open'"
@@ -466,7 +466,7 @@
                             class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
                             @click="goToMessagePage(item,'lawyer')"
                           >
-                          Messages
+                          View Message
                           </button>
 
                           <button
@@ -902,7 +902,9 @@ ul#pills-tab {
 .nav-link:hover {
   color: #000000;
 }
-
+.card-cus{
+  box-shadow: 5px 5px 20px #00000017;
+}
 .smallFont {
   font-size: 16px;
   margin: 0;

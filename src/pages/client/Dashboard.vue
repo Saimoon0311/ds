@@ -90,7 +90,7 @@
                   id="30"
                 >
                   <div
-                    class="border rounded d-flex justify-content-between text-white flex-column mb-3 pb-3 bg-light"
+                    class="border rounded d-flex justify-content-between text-white flex-column mb-3 pb-3 card-cus"
                   >
                     <div class="p-3 card-top">
                       <div>
@@ -148,11 +148,25 @@
                         View Proposal
                       </button>
                       <button
+                      v-if="tab == 'open'"
                         :disabled="item?.chats && item?.chats.length == 0"
                         class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
                         @click="goToMessagePage(item)"
                       >
-                        View Messages
+                        Message
+                        {{
+                          item?.chats && item?.chats.length == 0
+                            ? ", (N/A)"
+                            : ""
+                        }}
+                      </button>
+                      <button
+                      v-if="tab == 'close'"
+                        :disabled="item?.chats && item?.chats.length == 0"
+                        class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
+                        @click="goToMessagePage(item)"
+                      >
+                        View Message
                         {{
                           item?.chats && item?.chats.length == 0
                             ? ", (N/A)"
@@ -440,7 +454,10 @@ ul#pills-tab {
   bottom: 0;
   width: 100%;
 }
+.card-cus{
+  box-shadow: 5px 5px 20px #00000017;
 
+}
 .descriptionText {
   overflow: hidden;
   text-overflow: ellipsis;

@@ -3,7 +3,8 @@
     class="border rounded d-flex justify-content-between text-white flex-column mb-3 col-md-7 m-auto  p-0"
     id="28"
   >
-    <div class="">
+  
+    <div class="card-cus">
       <div class="card-top p-3 bg-col">
         <div>
           <p class="badge" title="Area">
@@ -22,10 +23,10 @@
           </p>
         </div>
       </div>
-      <div class="p-3 bg-light">
+      <div class="p-3">
       <div class="card-body d-flex align-items-start justify-content-between">
         <p class="text-left text-black text-bold title pt-3 ">
-          {{ item?.title }}
+          {{ jobData?.title }}
         </p>
       </div>
       <div id="description" class="descriptionText text-black">
@@ -67,6 +68,9 @@ export default {
 </script>
 
 <style scoped>
+.card-cus{
+  box-shadow: 5px 5px 20px #00000017;
+}
 .smallFont {
   font-size: 16px;
   margin: 0;
