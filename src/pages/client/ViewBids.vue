@@ -266,7 +266,7 @@ export default {
     openDescription(text){
       this.$swal.fire({
         title: 'Description',
-        html: `<p>${text}</p>`,
+        html: `<p style="white-space: pre-line;">${text}</p>`,
         showCloseButton: true,
         showConfirmButton: false,
         customClass: {
@@ -274,12 +274,7 @@ export default {
         },
       });
     },
-    generateExcerpt(text) {
-      if (!text) return ''; // Handle cases where text is null or undefined
-      const words = text.split(' ');
-      const excerpt = words.slice(0, 15).join(' ');
-      return `${excerpt}...`;
-    },
+    
     async setStatus(status) {
       this.tab = status;
       this.$store.commit('set_pagination_page', 1);

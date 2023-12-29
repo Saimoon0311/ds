@@ -32,6 +32,9 @@ import "bootstrap";
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
+import { getToken } from 'firebase/messaging';
+import { messaging } from "@/config/firebaseConfig";
+
 /* add icons to the library */
 library.add(faUserSecret);
 
@@ -384,6 +387,9 @@ app.mixin({
           }
         }
       }
+
+      this.requestNotificationPermission();
+      
       this.$router.push({ path: path });
     },
 
@@ -589,7 +595,54 @@ app.mixin({
     //   });
     // },
 
+    // goToChatsPage() {      
+    //   this.$router.push({ path: "/messages-history" });
+    // },
 
+    async requestNotificationPermission() {
+        getToken(messaging)
+        .then(async (currentToken) => {
+          if (currentToken) {
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') {
+                // console.log('mess :: ' , currentToken);
+                // console.log('Notification permission granted. Token:', currentToken);
+                  api.post("/save-fcm-token", { currentToken }).then((res)=>{
+                    console.log('save token response : ' , res);
+                  }).catch((error) => {
+                    // this.$swal("", error?.response?.data?.error, "error");
+                    console.log("error while saving token : ", error);
+                  });
+              
+
+                // Send the token to your server for handling subscriptions
+            } else {
+                console.error('Notification permission denied.');
+            }
+          } else {
+            // Show permission request UI
+            console.log('No registration token available. Request permission to generate one.');
+            // ...
+          }
+        }).catch((err) => {
+          console.log('An error occurred while retrieving token. ', err);
+          // ...
+        });   
+  },
+
+    // add three dots after some words
+    generateExcerpt(text) {
+      if (!text) return ''; // Handle cases where text is null or undefined
+      if(text.length > 15){
+        const words = text.split(' ');
+        const excerpt = words.slice(0, 15).join(' ');
+        return `${excerpt}...`;
+      }else{
+        return text;
+      }
+    },
+
+    // check if string is number
     isNumericString(value) {
       // Regular expression to check if the string contains only digits or decimals
       var numericRegex = /^[0-9]+(\.[0-9]+)?$/;
@@ -916,7 +969,7 @@ app.mixin({
       this.$router.push({ path: "/forget-password" });
     },
 
-    submitLoginForm(formData, userType, dashboardUrl) {
+    async submitLoginForm(formData, userType, dashboardUrl) {
       try {
         formData.type = userType;
         api

@@ -27,11 +27,15 @@ const store = createStore({
     dataTab : null,
     clientComeFromProposal : null,
     // lawyerEligibleStatus : false,
+    noti : null,
   },
   mutations: {
     // SET_LAWYER_ELIGIBLE_STATUS(state,value){
     //   state.lawyerEligibleStatus = value
     // },
+    SET_NOTI(state,data){
+      state.noti = data
+    },
     SET_DATATAB(state,value){
       state.dataTab = value
     },

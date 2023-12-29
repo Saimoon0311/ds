@@ -120,8 +120,7 @@ export default {
         verifyOtp() {
             const otp = this.otpDigits.join("");
             if (otp.length > 0) {
-                console.log("Verifying OTP:", otp);
-
+                // console.log("Verifying OTP:", otp);
                 api
                     .post("/verify-otp", { otp: otp, email: this.otpEmail })
                     .then((res) => {

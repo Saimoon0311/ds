@@ -350,7 +350,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 // import { FieldValue } from 'firebase/firestore';
-import db from "@/config/firebaseConfig";
+import { db } from "@/config/firebaseConfig";
 
 export default {
   components: {

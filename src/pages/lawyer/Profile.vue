@@ -3,6 +3,7 @@
     <LawyerHeader />
     <div class="container">
       <h3 class="mt-3">Profile</h3>
+      <h1 v-if="firebaseNoti">{{ firebaseNoti?.title }}</h1>
       <p>
         Please complete this information so Simplawfy and clients can get to
         know you.
@@ -782,6 +783,10 @@
 import LawyerHeader from "./Header.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
 
+// import { messaging } from "@/config/firebaseConfig";
+// import { onMessage } from "firebase/messaging";
+
+
 // import Selectic from 'selectic';
 import api from "@/config/api.js";
 import $ from 'jquery';
@@ -815,7 +820,25 @@ export default {
     MainFooter
     // Selectic
   },
+  // watch: {
+  //   // Watch for changes in the 'noti' property in the Vuex store
+  //   '$store.state.noti': {
+  //     handler(newValue) {
+  //       if(newValue){
+  //          // Handle the changes, for example, display a notification
+  //         console.log('noti changed:', newValue);
+  //         this.$swal(newValue?.notification?.title, newValue?.notification?.body, 'success');
+  //       }
+  //     },
+  //     immediate: true, // Trigger the handler immediately when the component is created
+  //   },
+  // },
   computed: {
+
+    // firebaseNoti(){
+    //   return this.$store.state.noti;
+    // },
+  
     loginUser() {
       return this.$store.getters.loginUser;
     },
@@ -836,10 +859,18 @@ export default {
     this.updateFormProperties();
   },
   mounted() {
+    // this.checkMessages();
     this.fetchOptions();
     this.fetchOptions_locations();
   },
   methods: {
+    // checkMessages() {
+    //   console.log('Message received. -1');
+    //   onMessage(messaging, (payload) => {
+    //     console.log('Message received. ', payload);
+    //     // ...
+    //   })
+    // },
     changeConsultationType(value) {
       this.form.consultation_type = value;
     },
