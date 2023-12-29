@@ -68,7 +68,7 @@
       </div>
      
       <div class="row">
-        <h2 class="mainHeading">Chats</h2>
+        <h2 class="mainHeading">Messages</h2>
         <!-- Client View: Select Lawyer -->
 
         <!-- lawyer names start -->

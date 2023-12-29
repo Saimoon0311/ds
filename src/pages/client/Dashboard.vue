@@ -207,7 +207,7 @@
               </div>
             </div>
 
-            <h6 class="text-center" v-if="openJobs.length > 0 && currentPage == lastPage">
+            <h6 class="text-center" v-if="openJobs.length > 0 && isEndOfResult">
                 End of results   
             </h6>
            
@@ -273,6 +273,9 @@ export default {
   //   }
   // },
   computed: {
+    isEndOfResult(){
+      return this.$store.state.endOfResult;
+    },
     jobTabName() {
       return this.$store.state.dataTab;
     },
@@ -384,18 +387,7 @@ export default {
       await this.loadMore(null, true);
     },
 
-    goToViewProposals(data) {
-      let id = data?.id;
-      // this.$store.commit('SET_LOADMOREPREVDATA',{'currentPage' : this.currentPage, 'lastPage' : this.lastPage, 'openJobs' : this.openJobs});
-      // console.log('curr : ' , this.currentPage)
-      // console.log('last : ' , this.lastPage)
-      this.saveLoadMoreData();
-      this.$store.commit("SET_JOB_ID", id);
-      localStorage.setItem("jobId", id);
-      this.$store.commit("SET_DATATAB", this.tab);
-      this.saveJobInfo(data);
-      this.$router.push({ path: "/view-proposals" });
-    },
+    
     // async getJobs() {
     //   try {
     //     const response = await api.get(`/client/client-jobs`);

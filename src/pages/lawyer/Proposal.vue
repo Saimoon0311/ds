@@ -4,9 +4,9 @@
     <div class="container">
       <div class="row pt-4">
         <div class="col-md-6 col-sm-12">
-          <button class="btn btn-dark ">
+          <router-link to="/lawyer-dashboard" class="btn btn-dark ">
             Back
-          </button>
+          </router-link>
         </div>
         
       </div>
@@ -201,7 +201,7 @@
                           <tr class="border">
                             <!-- <th></th> -->
                             <th>Item</th>
-                            <th>Cost</th>
+                            <th>Cost1</th>
                             <!-- <th></th> -->
                             <th></th>
                           </tr>
@@ -213,7 +213,7 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                            <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -425,7 +425,7 @@
                           <tr class="border">
                             <!-- <th></th> -->
                             <th>Item</th>
-                            <th>Cost</th>
+                            <th>Cost2</th>
                             <!-- <th></th> -->
                             <th></th>
                           </tr>
@@ -437,7 +437,7 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                            <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -552,7 +552,7 @@
                       class="border"
                     >
                       <td>{{ row.itemDisbursement }}</td>
-                      <td>$ {{ row.costAud }}</td>
+                      <td>$ {{ formatNumber(row.costAud) }}</td>
                       <td style="width: 0px">
                         <button
                           type="button"
@@ -694,7 +694,7 @@
                           <tr class="border">
                             <!-- <th></th> -->
                             <th>Item</th>
-                            <th>Cost</th>
+                            <th>Cost3</th>
                             <!-- <th></th> -->
                             <th></th>
                           </tr>
@@ -706,7 +706,7 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                            <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -886,7 +886,7 @@
                           <tr class="border">
                             <!-- <th></th> -->
                             <th>Item</th>
-                            <th>Cost</th>
+                            <th>Cost4</th>
                             <!-- <th></th> -->
                             <th></th>
                           </tr>
@@ -898,7 +898,7 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                            <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white">Total (excluding GST): ${{
                               row.total }}
@@ -1074,9 +1074,9 @@
                           class="border extra-class table-mid show"
                         >
                           <td>{{ row.title }}</td>
-                          <td>$ {{ row.hourlyRate }}</td>
+                          <td>$ {{ formatNumber(row.hourlyRate) }}</td>
                           <td>{{ row.estimatedHours }}</td>
-                          <td>$ {{ row.hourlyRate * row.estimatedHours }}</td>
+                          <td>$ {{ formatNumber(row.hourlyRate * row.estimatedHours) }}</td>
 
                           <td>
                             <button
@@ -1287,7 +1287,7 @@
                         <tr class="border">
                           <!-- <th></th> -->
                           <th>Item</th>
-                          <th>Cost</th>
+                          <th>Cost5</th>
                           <!-- <th></th> -->
                           <th></th>
                         </tr>
@@ -1299,7 +1299,7 @@
                           class="border"
                         >
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                          <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                           <!-- <td class="text-center"> -->
                           <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -1488,7 +1488,7 @@
                         <tr class="border">
                           <!-- <th></th> -->
                           <th>Item</th>
-                          <th>Cost</th>
+                          <th>Cost6</th>
                           <!-- <th></th> -->
                           <th></th>
                         </tr>
@@ -1500,7 +1500,7 @@
                           class="border"
                         >
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                          <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                           <!-- <td class="text-center"> -->
                           <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -1647,7 +1647,7 @@
                       <tr class="border">
                         <!-- <th></th> -->
                         <th>Item</th>
-                        <th>Cost</th>
+                        <th>Cost7</th>
                         <!-- <th></th> -->
                         <th></th>
                       </tr>
@@ -1659,7 +1659,7 @@
                         class="border"
                       >
                         <td>{{ row.itemDisbursement }}</td>
-                        <td>$ {{ row.costAud }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                        <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
                         <!-- <td class="text-center"> -->
                         <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                           </p> -->

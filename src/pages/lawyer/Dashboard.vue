@@ -564,8 +564,7 @@
                  
                 </div>
               </div>
-
-              <h6 class="text-center" v-if="openJobs.length > 0 && currentPage == lastPage">
+              <h6 class="text-center" v-if="openJobs.length > 0 && isEndOfResult">
                 End of results   
               </h6>
             </div>
@@ -598,6 +597,9 @@ export default {
   },
 
   computed: {
+    isEndOfResult(){
+      return this.$store.state.endOfResult;
+    },
     jobTabName() {
       return this.$store.state.dataTab;
     },

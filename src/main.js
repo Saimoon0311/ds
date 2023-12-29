@@ -119,9 +119,15 @@ app.mixin({
     // convert numbers in currency format 
     formatNumber(number) {
       // Ensure that the input is a number
-      if (typeof number !== 'number') {
+      console.log('number to formate : ' , number);
+      // if (typeof number !== 'number') {
+      //   return number;
+      // }
+      if (!this.isNumericString(number)) {
         return number;
       }
+
+      number = parseFloat(number);
 
       // Use a custom function to format the number with space as a thousands separator
       const parts = number.toFixed(2).toString().split('.');
@@ -375,6 +381,19 @@ app.mixin({
         });
     },
 
+    goToViewProposals(data) {
+      let id = data?.id;
+      // this.$store.commit('SET_LOADMOREPREVDATA',{'currentPage' : this.currentPage, 'lastPage' : this.lastPage, 'openJobs' : this.openJobs});
+      // console.log('curr : ' , this.currentPage)
+      // console.log('last : ' , this.lastPage)
+      this.saveLoadMoreData();
+      this.$store.commit("SET_JOB_ID", id);
+      localStorage.setItem("jobId", id);
+      this.$store.commit("SET_DATATAB", this.tab);
+      this.saveJobInfo(data);
+      this.$router.push({ path: "/view-proposals" });
+    },
+
     // this function is to store user in state and localstorage after login then redirect to dashboard
     setUserAndRedirect(res, path) {
       console.log("single a : ", res?.data?.data);
@@ -424,12 +443,22 @@ app.mixin({
               key != "accessibility_requirements" &&
               key != "created_at" &&
               key != "chats" &&
-              key != "updated_at"
+              key != "updated_at" &&
+              key != "lawyer_chat" &&
+              key != "client_chat" &&
+              key != "owner" &&
+              key != "requirement" &&
+              key != "proposal"
             ) {
               let objKey = key;
               objKey = objKey.replace(/_/g, " ");
+              if(key == 'field'){
+                objKey = "Areas of Practice";
+              }
+              if(key == 'location'){
+                objKey = "State/territory";
+              }
               newData[objKey] = value;
-
               if(key == 'field' || key == 'location'){
                 newData[objKey] = value?.title;
               }
@@ -506,21 +535,16 @@ app.mixin({
             const value = data[key];
             if (
               value !== null &&
-              value != 0 &&
-              key != "id" &&
-              key != "admin_approval" &&
-              key != "otp_verified" &&
-              key != "area_insert" &&
-              key != "state_insert" &&
-              key != "is_subscribed_first" &&
-              key != "followup_email_status_two" &&
-              key != "api_token" &&
-              key != "created_at" &&
-              key != "type" && key != "status" && key != "hear_about_us" && key != 'approved_timestamp' &&
-              key != "updated_at"
+              value != 0 && (key == "first_name" || key == "last_name" || key == "job_title" || key == "law_firm" || key == "link" || key == "about")
             ) {
               let objKey = key;
               objKey = objKey.replace(/_/g, " ");
+              if(key == "link"){
+                objKey = "Website"
+              }
+              if(key == "about"){
+                objKey = "About me"
+              }
               newData[objKey] = value;
             }
           }
@@ -1060,6 +1084,7 @@ app.mixin({
     },
 
     async loadMore(status = null, reset = null) {
+      this.$store.commit('SET_ENDOFRESULT',false);
       console.log("check computed : ", this.loadMorePrevData);
       if (this.loadMorePrevData != null) {
         this.currentPage = this.loadMorePrevData.currentPage;
@@ -1106,6 +1131,9 @@ app.mixin({
       });
       let uniqueArray = Array.from(uniqueObjects.values());
       this.openJobs = uniqueArray;
+      if(this.currentPage == this.lastPage){
+        this.$store.commit('SET_ENDOFRESULT',true);
+      }
     },
 
     async fixLoadMoreAfterDeleteRecord(index, status = null) {

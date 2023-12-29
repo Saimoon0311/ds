@@ -35,6 +35,7 @@
       <div class="widthcn">
         <span class="spacer">
           <button
+            v-if="jobData?.requirement"
             :disabled="!jobData?.requirement"
             type="button"
             class="btn btn-sm custom-pad badge bg-dark"

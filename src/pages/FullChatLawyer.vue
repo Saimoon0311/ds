@@ -24,7 +24,7 @@
 
       <div class="row">
 
-        <h2 class="mainHeading">Chats</h2>
+        <h2 class="mainHeading">Messages</h2>
         
         <h4 v-if="client_data.length == 0" class="text-center">No chat found!</h4>
 
@@ -57,12 +57,14 @@
         <div v-if="this.clientSelected"
         :class="{ 'col-md-9': true, 'chatbox': true }"
         >
-          <div class="text-end mb-3">
+          <!-- <div class="text-end mb-3">
             <span
               class="close-button">
               <button class="btn btn-danger" @click="closeChatForAllMessages">x</button>
             </span>
-          </div>
+          </div> -->
+
+          <JobHeader :jobData="jobData" />
 
           <div class="row lawyer">
             <!-- <div v-if="chatStatus && jobId && userFirst && userSecond && jobTabName != 'close'" class="chatbox col-md-7 m-auto"> -->
@@ -121,6 +123,7 @@
   
 <script>
 
+import JobHeader from "../components/JobHeader";
 import MainFooter from "../components/global/MainFooter.vue";
 // import ClientHeader from "../pages/client/Header.vue";
 import LawyerHeader from "../pages/lawyer/Header.vue";
@@ -136,6 +139,7 @@ import { db } from '@/config/firebaseConfig';
 export default {
 
   components: {
+    JobHeader,
     MainFooter,
     // ClientHeader,
     LawyerHeader,
@@ -269,6 +273,7 @@ export default {
     },
 
     startChatForAllMessages(data,index) {
+      this.$store.commit("SET_JOB_DATA", data?.job);
       console.log('hit 1')
       this.userSelectedIndex = index;
       this.clientSelected = true;
