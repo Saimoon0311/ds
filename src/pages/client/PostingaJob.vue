@@ -2,393 +2,408 @@
   <div class="f-main">
     <ClientHeader />
     <div class="container">
-    <p class="h3 text-center mt-5">Post a Job</p>
-    <div class="container pb-seven">
-      <div class="row justify-content-center">
-        <form @submit.prevent="nextStep" class="col-md-9 border p-3 rounded mt-3">
-          <template v-if="currentStep === 0">
-            <p class="h4 text-center mb-3 mt-3">
-              Which area of law do you need assistance in?
-            </p>
-            <div>
-              <div data-v-2f14f9de="" class="d-flex flex-wrap justify-content-center mb-5" data-v-376ef8ab="">
-                <!-- class="m-2 text-decoration-none badge text-white fs-6 bubbles" -->
-                <a v-for="(area, index) in areas" :key="area.id" @click="setArea(index, area.id)" :class="[
-                  'm-2',
-                  'text-decoration-none',
-                  'badge',
-                  'text-white',
-                  'fs-6',
-                  'bubbles',
-                  { selected_bubble: selectedAreaIndex === index },
-                ]">
-                  {{ area.title }}
-                </a>
-
-                <a @click="setAreaFunc"
-                  class="m-2 text-decoration-none badge text-black fs-6 bubbles bubbles-other text-white" :class="[
+      <p class="h3 text-center mt-5">Post a Job</p>
+      <div class="container pb-seven">
+        <div class="row justify-content-center">
+          <form @submit.prevent="nextStep" class="col-md-9 border p-3 rounded mt-3">
+            <template v-if="currentStep === 0">
+              <p class="h4 text-center mb-3 mt-3">
+                Which area of law do you need assistance in?
+              </p>
+              <div>
+                <div data-v-2f14f9de="" class="d-flex flex-wrap justify-content-center mb-5" data-v-376ef8ab="">
+                  <!-- class="m-2 text-decoration-none badge text-white fs-6 bubbles" -->
+                  <a v-for="(area, index) in areas" :key="area.id" @click="setArea(index, area.id)" :class="[
                     'm-2',
                     'text-decoration-none',
                     'badge',
                     'text-white',
                     'fs-6',
                     'bubbles',
-                    'bubbles-other',
-                    { selected_bubble: otherAreaSelected },
-                  ]" data-v-2f14f9de="">
-                  Other (not listed here) / I don't know
-                </a>
+                    { selected_bubble: selectedAreaIndex === index },
+                  ]">
+                    {{ area.title }}
+                  </a>
+
+                  <a @click="setAreaFunc"
+                    class="m-2 text-decoration-none badge text-black fs-6 bubbles bubbles-other text-white" :class="[
+                      'm-2',
+                      'text-decoration-none',
+                      'badge',
+                      'text-white',
+                      'fs-6',
+                      'bubbles',
+                      'bubbles-other',
+                      { selected_bubble: otherAreaSelected },
+                    ]" data-v-2f14f9de="">
+                    Other (not listed here) / I don't know
+                  </a>
+                </div>
               </div>
-            </div>
-          </template>
+            </template>
 
-          <template v-if="currentStep === 1">
-            <p class="h4 text-center mb-3 mt-3">Job Description</p>
-            <div class="mb-3">
-              <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
-              <label>Area of Law:&nbsp; </label>
-              <p class="text-decoration-none badge text-white fs-6 bubbles area-bubble">
-                {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
-              </p>
-            </div>
-            <div class="mb-5">
-              <label for="title">Title<sup class="text-danger">*</sup></label>
-              <input name="title" id="title" type="text" class="form-control" required="" v-model="title"
-                @input="checkTitleCharacterLimit" :maxlength="maxTitleCharacters" />
-              <div v-if="characterCountTitle >= maxTitleCharacters" class="warning-text">
-                You have reached your character limit.
+            <template v-if="currentStep === 1">
+              <p class="h4 text-center mb-3 mt-3">Job Description</p>
+              <div class="mb-3">
+                <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
+                <label>Area of Law:&nbsp; </label>
+                <p class="text-decoration-none badge text-white fs-6 bubbles area-bubble">
+                  {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
+                </p>
               </div>
-              <div class="c-Count">
-                {{ characterCountTitle }} / {{ maxTitleCharacters }}
+              <div class="mb-5">
+                <label for="title">Title<sup class="text-danger">*</sup></label>
+                <input name="title" id="title" type="text" class="form-control" required="" v-model="title"
+                  @input="checkTitleCharacterLimit" :maxlength="maxTitleCharacters" />
+                <div v-if="characterCountTitle >= maxTitleCharacters" class="warning-text">
+                  You have reached your character limit.
+                </div>
+                <div class="c-Count">
+                  {{ characterCountTitle }} / {{ maxTitleCharacters }}
+                </div>
+                <br />
+
+                <label for="job">Why do you need a lawyer?
+                  <sup class="text-danger">*</sup></label>
+                <label class="short-des">(Please include any important upcoming dates, such as court
+                  dates.)</label>
+                <textarea name="job" id="job" type="textarea" class="form-control des-text" required=""
+                  v-model="description" @input="checkCharacterLimit" :maxlength="maxCharacters"></textarea>
+                <div v-if="characterCount >= maxCharacters" class="warning-text">
+                  You have reached your character limit.
+                </div>
+                <div class="c-Count">
+                  {{ characterCount }} / {{ maxCharacters }}
+                </div>
               </div>
-              <br />
+            </template>
 
-              <label for="job">Why do you need a lawyer?
-                <sup class="text-danger">*</sup></label>
-              <label class="short-des">(Please include any important upcoming dates, such as court
-                dates.)</label>
-              <textarea name="job" id="job" type="textarea" class="form-control des-text" required=""
-                v-model="description" @input="checkCharacterLimit" :maxlength="maxCharacters"></textarea>
-              <div v-if="characterCount >= maxCharacters" class="warning-text">
-                You have reached your character limit.
+            <template v-if="currentStep === 2">
+              <p class="h4 text-center">Location</p>
+              <div class="pb-5">
+                <label for="location">Where are you located?<sup class="text-danger">*</sup></label>
+                <select v-model="selectedLocationIndex" name="location" id="location" class="form-select" required="">
+                  <option value="" selected disabled>
+                    Please select an option
+                  </option>
+                  <option v-for="(location, index) in locations" :key="location.id" :value="index">
+                    {{ location.title }}
+                  </option>
+                </select>
+
+                <br />
+
+                <label for="city">Which city/suburb?<sup class="text-danger">*</sup></label>
+                <input v-model="city" name="city" id="city" type="text" class="form-control" required=""
+                  @input="checkCityCharacterLimit" :maxlength="maxCharactersCity" />
+                <div v-if="characterCountCity >= maxCharactersCity" class="warning-text">
+                  You have reached your character limit.
+                </div>
+                <!-- <div class="c-Count">{{ characterCountCity }} / {{ maxCharactersCity }}</div> -->
               </div>
-              <div class="c-Count">
-                {{ characterCount }} / {{ maxCharacters }}
+            </template>
+
+            <template v-if="currentStep === 3">
+              <p class="h4 text-center">Accessibility Requirements</p>
+              <div class="mb-3">
+                <label for="city" class="mb-3 d-block">Do you have any accessibility requirements, such as a disability
+                  or speaking a language other than English?</label>
+                <input type="radio" id="yes" name="requirements" value="1" v-model="requirementsOption" />
+                <label for="yes" class="req-label"> Yes</label><br />
+                <input type="radio" id="no" name="requirements" value="0" v-model="requirementsOption"
+                  @change="changeRequirementStatus" />
+                <label for="no" class="req-label mb-2"> No</label><br />
               </div>
-            </div>
-          </template>
+              <div v-if="requirementsOption == 1">
+                <label for="job" class=" mb-2">Please describe your accessibility requirement.</label>
 
-          <template v-if="currentStep === 2">
-            <p class="h4 text-center">Location</p>
-            <div class="pb-5">
-              <label for="location">Where are you located?<sup class="text-danger">*</sup></label>
-              <select v-model="selectedLocationIndex" name="location" id="location" class="form-select" required="">
-                <option value="" selected disabled>
-                  Please select an option
-                </option>
-                <option v-for="(location, index) in locations" :key="location.id" :value="index">
-                  {{ location.title }}
-                </option>
-              </select>
-
-              <br />
-
-              <label for="city">Which city/suburb?<sup class="text-danger">*</sup></label>
-              <input v-model="city" name="city" id="city" type="text" class="form-control" required=""
-                @input="checkCityCharacterLimit" :maxlength="maxCharactersCity" />
-              <div v-if="characterCountCity >= maxCharactersCity" class="warning-text">
-                You have reached your character limit.
-              </div>
-              <!-- <div class="c-Count">{{ characterCountCity }} / {{ maxCharactersCity }}</div> -->
-            </div>
-          </template>
-
-          <template v-if="currentStep === 3">
-            <p class="h4 text-center">Accessibility Requirements</p>
-            <div class="mb-3">
-              <label for="city" class="mb-3 d-block">Do you have any accessibility requirements, such as a disability
-                or speaking a language other than English?</label>
-              <input type="radio" id="yes" name="requirements" value="1" v-model="requirementsOption" />
-              <label for="yes" class="req-label"> Yes</label><br />
-              <input type="radio" id="no" name="requirements" value="0" v-model="requirementsOption"
-                @change="changeRequirementStatus" />
-              <label for="no" class="req-label mb-2"> No</label><br />
-            </div>
-            <div v-if="requirementsOption == 1">
-              <label for="job" class=" mb-2">Please describe your accessibility requirement.</label>
-
-              <div class="selectboxes">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="visual" v-model="VisualIsChecked"
-                    @change="resetVisual" />
-                  <label class="form-check-label" for="visual">
-                    Visual Impairment
-                  </label>
-                </div>
-
-                <div v-if="VisualIsChecked" class="mt-2 mb-2">
-                  <input v-model="visualOption" @input="checkVCharacterLimit" :maxlength="maxCharactersV"
-                    name="accessibility" id="" type="text" class=" form-control " placeholder="" />
-                  <div v-if="characterCountV >= maxCharactersV" class="warning-text">
-                    You have reached your character limit.
+                <div class="selectboxes">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="visual" v-model="VisualIsChecked"
+                      @change="resetVisual" />
+                    <label class="form-check-label" for="visual">
+                      Visual Impairment
+                    </label>
                   </div>
-                </div>
 
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="auditory" v-model="AuditoryIsChecked"
-                    @change="resetAuditory" />
-                  <label class="form-check-label" for="auditory">
-                    Auditory Impairment
-                  </label>
-                </div>
-
-                <div v-if="AuditoryIsChecked" class="mt-2 mb-2">
-                  <input v-model="auditoryOption" @input="checkAuditoryCharacterLimit" :maxlength="maxCharactersAuditory"
-                    name="accessibility" id="" type="text" class=" form-control " placeholder="" />
-                  <div v-if="characterCountAuditory >= maxCharactersAuditory" class="warning-text">
-                    You have reached your character limit.
+                  <div v-if="VisualIsChecked" class="mt-2 mb-2">
+                    <input v-model="visualOption" @input="checkVCharacterLimit" :maxlength="maxCharactersV"
+                      name="accessibility" id="" type="text" class=" form-control " placeholder="" />
+                    <div v-if="characterCountV >= maxCharactersV" class="warning-text">
+                      You have reached your character limit.
+                    </div>
                   </div>
-                </div>
 
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="physical" v-model="MobilityIsChecked"
-                    @change="resetMobility" />
-                  <label class="form-check-label" for="physical">
-                    Mobility/Physical Impairment
-                  </label>
-                </div>
-
-                <div v-if="MobilityIsChecked" class="mt-2 mb-2">
-                  <input v-model="mobilityOption" @input="checkMobilityCharacterLimit" :maxlength="maxCharactersMobility"
-                    name="accessibility" id="" type="text" class=" form-control " placeholder="" />
-                  <div v-if="characterCountMobility >= maxCharactersMobility" class="warning-text">
-                    You have reached your character limit.
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="auditory" v-model="AuditoryIsChecked"
+                      @change="resetAuditory" />
+                    <label class="form-check-label" for="auditory">
+                      Auditory Impairment
+                    </label>
                   </div>
-                </div>
 
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="learning" v-model="LearningIsChecked"  @change="resetLearning" />
-                  <label class="form-check-label" for="learning">
-                    Learning Impairment
-                  </label>
-                </div>
-
-                <div v-if="LearningIsChecked" class="mt-2 mb-2">
-                  <input v-model="learningOption" @input="checkLearningCharacterLimit" :maxlength="maxCharactersLearning"
-                    name="accessibility" id="" type="text" class=" form-control " placeholder="" />
-                  <div v-if="characterCountLearning >= maxCharactersLearning" class="warning-text">
-                    You have reached your character limit.
+                  <div v-if="AuditoryIsChecked" class="mt-2 mb-2">
+                    <input v-model="auditoryOption" @input="checkAuditoryCharacterLimit"
+                      :maxlength="maxCharactersAuditory" name="accessibility" id="" type="text" class=" form-control "
+                      placeholder="" />
+                    <div v-if="characterCountAuditory >= maxCharactersAuditory" class="warning-text">
+                      You have reached your character limit.
+                    </div>
                   </div>
-                </div>
 
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="intellectual"
-                    v-model="IntellectualIsChecked" @change="resetIntell" />
-                  <label class="form-check-label" for="intellectual">
-                    Intellectual Disability
-                  </label>
-                </div>
-
-                <div v-if="IntellectualIsChecked" class="mt-2 mb-2">
-                  <input v-model="intellectualOption" @input="checkIntellectualCharacterLimit"
-                    :maxlength="maxCharactersIntellectual" name="accessibility" id="" type="text" class="form-control "
-                    placeholder="" />
-                  <div v-if="characterCountIntellectual >= maxCharactersIntellectual" class="warning-text">
-                    You have reached your character limit.
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="physical" v-model="MobilityIsChecked"
+                      @change="resetMobility" />
+                    <label class="form-check-label" for="physical">
+                      Mobility/Physical Impairment
+                    </label>
                   </div>
-                </div>
 
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="psychiatric"
-                    v-model="PsychiatricIsChecked" @change="resetPsych" />
-                  <label class="form-check-label" for="psychiatric">
-                    Psychiatric Disability
-                  </label>
-                </div>
-
-                <div v-if="PsychiatricIsChecked" class="mt-2 mb-2">
-                  <input v-model="psychiatricOption" @input="checkPsychiatricCharacterLimit"
-                    :maxlength="maxCharactersPsychiatric" name="accessibility" id="" type="text" class="form-control "
-                    placeholder="" />
-                  <div v-if="characterCountPsychiatric >= maxCharactersPsychiatric" class="warning-text">
-                    You have reached your character limit.
+                  <div v-if="MobilityIsChecked" class="mt-2 mb-2">
+                    <input v-model="mobilityOption" @input="checkMobilityCharacterLimit"
+                      :maxlength="maxCharactersMobility" name="accessibility" id="" type="text" class=" form-control "
+                      placeholder="" />
+                    <div v-if="characterCountMobility >= maxCharactersMobility" class="warning-text">
+                      You have reached your character limit.
+                    </div>
                   </div>
-                </div>
 
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="medical" v-model="MedicalIsChecked" @change="resetMedical"/>
-                  <label class="form-check-label" for="medical">
-                    Medical Disability
-                  </label>
-                </div>
-
-                <div v-if="MedicalIsChecked" class="mt-2 mb-2">
-                  <input v-model="medicalOption" @input="checkMedicalCharacterLimit" :maxlength="maxCharactersMedical"
-                    name="accessibility" id="" type="text" class="form-control " placeholder="" />
-                  <div v-if="characterCountMedical >= maxCharactersMedical" class="warning-text">
-                    You have reached your character limit.
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="learning" v-model="LearningIsChecked"
+                      @change="resetLearning" />
+                    <label class="form-check-label" for="learning">
+                      Learning Impairment
+                    </label>
                   </div>
-                </div>
 
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="Othertext" v-model="isChecked" @change="resetOther" />
-                  <label class="form-check-label" for="Othertext">
-                    Other
-                  </label>
-                </div>
+                  <div v-if="LearningIsChecked" class="mt-2 mb-2">
+                    <input v-model="learningOption" @input="checkLearningCharacterLimit"
+                      :maxlength="maxCharactersLearning" name="accessibility" id="" type="text" class=" form-control "
+                      placeholder="" />
+                    <div v-if="characterCountLearning >= maxCharactersLearning" class="warning-text">
+                      You have reached your character limit.
+                    </div>
+                  </div>
 
-                <!-- <div class="form-check">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="intellectual"
+                      v-model="IntellectualIsChecked" @change="resetIntell" />
+                    <label class="form-check-label" for="intellectual">
+                      Intellectual Disability
+                    </label>
+                  </div>
+
+                  <div v-if="IntellectualIsChecked" class="mt-2 mb-2">
+                    <input v-model="intellectualOption" @input="checkIntellectualCharacterLimit"
+                      :maxlength="maxCharactersIntellectual" name="accessibility" id="" type="text" class="form-control "
+                      placeholder="" />
+                    <div v-if="characterCountIntellectual >= maxCharactersIntellectual" class="warning-text">
+                      You have reached your character limit.
+                    </div>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="psychiatric"
+                      v-model="PsychiatricIsChecked" @change="resetPsych" />
+                    <label class="form-check-label" for="psychiatric">
+                      Psychiatric Disability
+                    </label>
+                  </div>
+
+                  <div v-if="PsychiatricIsChecked" class="mt-2 mb-2">
+                    <input v-model="psychiatricOption" @input="checkPsychiatricCharacterLimit"
+                      :maxlength="maxCharactersPsychiatric" name="accessibility" id="" type="text" class="form-control "
+                      placeholder="" />
+                    <div v-if="characterCountPsychiatric >= maxCharactersPsychiatric" class="warning-text">
+                      You have reached your character limit.
+                    </div>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="medical" v-model="MedicalIsChecked"
+                      @change="resetMedical" />
+                    <label class="form-check-label" for="medical">
+                      Medical Disability
+                    </label>
+                  </div>
+
+                  <div v-if="MedicalIsChecked" class="mt-2 mb-2">
+                    <input v-model="medicalOption" @input="checkMedicalCharacterLimit" :maxlength="maxCharactersMedical"
+                      name="accessibility" id="" type="text" class="form-control " placeholder="" />
+                    <div v-if="characterCountMedical >= maxCharactersMedical" class="warning-text">
+                      You have reached your character limit.
+                    </div>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="Othertext" v-model="isChecked"
+                      @change="resetOther" />
+                    <label class="form-check-label" for="Othertext">
+                      Other
+                    </label>
+                  </div>
+
+                  <!-- <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="" id="language" />
                   <label class="form-check-label" for="language">
                     Speak a language other than English
                   </label>
                 </div> -->
 
-                <div v-if="isChecked" class="mt-2 mb-2">
-                  <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
-                    :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class=" form-control "
-                    placeholder="" />
-                  <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
-                    You have reached your character limit.
+                  <div v-if="isChecked" class="mt-2 mb-2">
+                    <input v-model="requirementsOptionDescription" @input="checkDesCharacterLimit"
+                      :maxlength="maxCharactersDes" name="accessibility" id="" type="text" class=" form-control "
+                      placeholder="" />
+                    <div v-if="characterCountDes >= maxCharactersDes" class="warning-text">
+                      You have reached your character limit.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="  form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="language" v-model="languageIsChecked"
+                    @change="resetLang" />
+                  <label class="form-check-label mb-2" for="language">
+                    Speak a language other than English
+                  </label>
+                </div>
+
+                <div class="pb-5">
+                  <select v-if="languageIsChecked" v-model="selectedLanguage" id="language" class="form-select">
+                    <option value="">Select a language</option>
+                    <option v-for="language in languages" :key="language" :value="language">
+                      {{ language }}
+                    </option>
+                  </select>
+
+                  <div v-if="selectedLanguage === 'Other' && languageIsChecked" class="mt-3">
+                    <!-- <label for="otherLanguage" class="pb-2">Other language:</label> -->
+                    <input type="text" v-model="otherLanguage" id="otherLanguage" class="form-control"
+                      @input="otherLanCharacterLimit" :maxlength="maxCharactersOtherLan" placeholder="" />
+                    <div v-if="otherLanCharacter >= maxCharactersOtherLan" class="warning-text">
+                      You have reached your character limit.
+                    </div>
                   </div>
                 </div>
               </div>
+            </template>
 
-              <div class="  form-check">
-                <input class="form-check-input" type="checkbox" value="" id="language" v-model="languageIsChecked" @change="resetLang" />
-                <label class="form-check-label mb-2" for="language">
-                  Speak a language other than English
-                </label>
-              </div>
+            <template v-if="currentStep === 4">
+              <div class="summ mb-3">
+                <p class="h4 text-center fw-bold mb-3 mt-2">Summary</p>
+                <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
+                <div class="sum-top mb-3 bg-dark">
+                  <p class="areas text-decoration-none badge text-white">
+                    {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
+                  </p>
 
-              <div class="pb-5">
-                <select v-if="languageIsChecked" v-model="selectedLanguage" id="language" class="form-select">
-                  <option value="">Select a language</option>
-                  <option v-for="language in languages" :key="language" :value="language">
-                    {{ language }}
-                  </option>
-                </select>
-
-                <div v-if="selectedLanguage === 'Other' && languageIsChecked" class="mt-3">
-                  <!-- <label for="otherLanguage" class="pb-2">Other language:</label> -->
-                  <input type="text" v-model="otherLanguage" id="otherLanguage" class="form-control"
-                    @input="otherLanCharacterLimit" :maxlength="maxCharactersOtherLan" placeholder="" />
-                  <div v-if="otherLanCharacter >= maxCharactersOtherLan" class="warning-text">
-                    You have reached your character limit.
-                  </div>
                 </div>
-              </div>
-            </div>
-          </template>
-
-          <template v-if="currentStep === 4">
-            <div class="summ mb-3">
-              <p class="h4 text-center fw-bold mb-3 mt-2">Summary</p>
-              <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
-              <div class="sum-top mb-3 bg-dark">
-                <p class="areas text-decoration-none badge text-white">
-                  {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
-                </p>
-                
-              </div>
-              <h4 class=" text-start title-font text-black mt-3 mb-3"><b>{{ title }}</b>
+                <h4 class=" text-start title-font text-black mt-3 mb-3"><b>{{ title }}</b>
                 </h4>
                 <p class="text-black descriptionText">{{ description }}</p>
-              <h4 class="mb-3 text-capitalize"><b>Location:</b> {{ city }}, {{ locations[selectedLocationIndex].title }}
-              </h4>
-              <!-- <h4><b>State/Territory</b></h4> -->
-              <!-- <h4></h4> -->
-              <!-- <h4>City</h4> -->
-              <!-- <h4>{{ city }}</h4> -->
-              <!-- <span v-if="requirementsOption">
+                <h4 class="mb-3 text-capitalize"><b>Location:</b> {{ city }}, {{ locations[selectedLocationIndex].title }}
+                </h4>
+                <!-- <h4><b>State/Territory</b></h4> -->
+                <!-- <h4></h4> -->
+                <!-- <h4>City</h4> -->
+                <!-- <h4>{{ city }}</h4> -->
+                <!-- <span v-if="requirementsOption">
                 <h4 class="d-inline"><b>Accessibility Requirements: </b></h4>
               </span> -->
 
-              <div v-if='this.visualOption != "" ||
-                this.auditoryOption != "" ||
-                this.mobilityOption != "" ||
-                this.learningOption != "" ||
-                this.intellectualOption != "" ||
-                this.psychiatricOption != "" ||
-                this.medicalOption != "" ||
-                this.requirementsOptionDescription != "" ||
-                this.otherLanguage != "" ||
-                this.selectedLanguage != ""' >
-                <div >
-              <h4 class="d-inline "><b>Accessibility Requirements</b></h4>      
+                <div v-if='this.VisualIsChecked ||
+                  this.AuditoryIsChecked ||
+                  this.MobilityIsChecked ||
+                  this.LearningIsChecked ||
+                  this.IntellectualIsChecked ||
+                  this.PsychiatricIsChecked ||
+                  this.MedicalIsChecked ||
+                  this.isChecked ||
+                  this.languageIsChecked'>
+                  <div>
+                    <h4 class="d-inline "><b>Accessibility Requirements</b></h4>
 
-                  <h4 class="d-inline mx-3 font-small" @click="toggleDiv">                
-                      View Details  
+                    <h4 class="d-inline mx-3 font-small" @click="toggleDiv">
+                      View Details
                       <!-- <i class="fa fa-chevron-down"></i>   -->
-                      <i :class="['fa', isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down']"></i>          
-                  </h4>
-                 
-                </div>
-                <div class="mt-3">
+                      <i :class="['fa', isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down']"></i>
+                    </h4>
+
+                  </div>
+                  <div class="mt-3">
                     <div class="accordion-body-show" v-if="isDivVisible">
                       <div v-if="VisualIsChecked">
-                        <p><i class="fa fa-check"></i> <b>Visual Impairment:</b>  {{ visualOption }}</p>
+                        <p><i class="fa fa-check"></i> <b>Visual Impairment</b>
+                          <span v-if="this.visualOption != ''"><b>:</b> {{ visualOption }}</span>
+                        </p>
                       </div>
 
                       <div v-if="AuditoryIsChecked">
-                        <!-- <p>Auditory Impairment : </p>
-                <p>{{ auditoryOption }}</p> -->
-                        <p><i class="fa fa-check"></i> <b>Auditory Impairment:</b>  {{ auditoryOption }}</p>
-
+                        <p><i class="fa fa-check"></i> <b>Auditory Impairment</b>
+                          <span v-if="this.auditoryOption != ''"><b>:</b> {{ auditoryOption }}</span>
+                        </p>
                       </div>
 
                       <div v-if="MobilityIsChecked">
-                        <!-- <p>Mobility/Physical Impairment : </p>
-                <p>{{ mobilityOption }}</p> -->
-                        <p><i class="fa fa-check"></i> <b>Obility/Physical Impairment:</b>  {{ mobilityOption }}</p>
+                        <p><i class="fa fa-check"></i> <b>Obility/Physical Impairment</b>
+                          <span v-if="this.mobilityOption != ''"><b>:</b> {{ mobilityOption }}</span>
+                        </p>
                       </div>
 
                       <div v-if="LearningIsChecked">
-                        <!-- <p>Learning Impairment : </p>
-                <p>{{ learningOption }}</p> -->
-                        <p><i class="fa fa-check"></i> <b>Learning Impairment:</b>  {{ learningOption }}</p>
+                        <p><i class="fa fa-check"></i> <b>Learning Impairment</b>
+                          <span v-if="this.learningOption != ''"><b>:</b> {{ learningOption }}</span>
+                        </p>
                       </div>
 
                       <div v-if="IntellectualIsChecked">
-                        <!-- <p>Intellectual Disability : </p>
-                <p>{{ intellectualOption }}</p> -->
-                        <p><i class="fa fa-check"></i> <b>Intellectual Disability:</b>  {{ intellectualOption }}</p>
+                        <p><i class="fa fa-check"></i> <b>Intellectual Disability</b>
+                          <span v-if="this.intellectualOption != ''"><b>:</b> {{ intellectualOption }}</span>
+                        </p>
                       </div>
 
                       <div v-if="PsychiatricIsChecked">
-                        <!-- <p>Psychiatric Disability : </p>
-                <p>{{ psychiatricOption }}</p> -->
-                        <p><i class="fa fa-check"></i> <b>Psychiatric Disability:</b>  {{ psychiatricOption }}</p>
+                        <p><i class="fa fa-check"></i> <b>Psychiatric Disability</b>
+                          <span v-if="this.psychiatricOption != ''"><b>:</b> {{ psychiatricOption }}</span>
+                        </p>
                       </div>
 
                       <div v-if="MedicalIsChecked">
                         <!-- <p>Medical Disability : </p>
-                <p>{{ medicalOption }}</p> -->
-                        <p><i class="fa fa-check"></i> <b>Medical Disability:</b>  {{ medicalOption }}</p>
+                        <p>{{ medicalOption }}</p> -->
+                        <p><i class="fa fa-check"></i> <b>Medical Disability</b>
+                          <span v-if="this.medicalOption != ''"><b>:</b> {{ medicalOption }}</span>
+                        </p>
                       </div>
 
                       <div v-if="isChecked">
-                        <p><i class="fa fa-check"></i> <b>Other:</b>  {{ requirementsOptionDescription }}</p>
+                        <p><i class="fa fa-check"></i> <b>Other</b>
+                          <span v-if="this.requirementsOptionDescription != ''"><b>:</b> {{ requirementsOptionDescription
+                          }}</span>
+                        </p>
                       </div>
 
                       <div v-if="languageIsChecked">
                         <!-- <p>Language : </p>
-                <p>{{ selectedLanguage }}</p> -->
-                        <p><i class="fa fa-check"></i> <b>Language:</b>  {{ selectedLanguage == 'Other' ? otherLanguage :
-                          selectedLanguage }}</p>
+                        <p>{{ selectedLanguage }}</p> -->
+                        <p><i class="fa fa-check"></i> <b>Language</b>
+                          <span v-if="this.selectedLanguage != ''"><b>:</b> {{ selectedLanguage == 'Other' ? otherLanguage
+                            : selectedLanguage }}</span>
+                          <span v-else><b>:</b> Language other than English</span>
+                        </p>
                       </div>
                     </div>
                   </div>
 
 
+                </div>
+                <!-- ---- -->
               </div>
-              <!-- ---- -->
-            </div>
-            <!-- <span v-if="requirementsOption">
+              <!-- <span v-if="requirementsOption">
               <h4>Accessibility Requirements Details</h4>
               <p>{{ requirementsOptionDescription }}</p>
             </span> -->
-            <!-- <label for="city" class="mb-3">Do you have any accessibility requirements, such as a disability or speaking a
+              <!-- <label for="city" class="mb-3">Do you have any accessibility requirements, such as a disability or speaking a
             language other
             than English?</label>
 
@@ -402,39 +417,39 @@
               class="form-control mb-5"
               placeholder="e.g. physical disability, mental disability, language (e.g. Mandarin, Arabic, Vietnamese, Spanish, etc)"></textarea>
           </div> -->
-          </template>
+            </template>
 
-          <div class="stepbtn">
-            <!-- Pagination Indicator -->
-            <span v-if="currentStep !== 4" class="pagination-indicator">
-              {{ currentStep + 1 }} of {{ totalSteps }}
-            </span>
+            <div class="stepbtn">
+              <!-- Pagination Indicator -->
+              <span v-if="currentStep !== 4" class="pagination-indicator">
+                {{ currentStep + 1 }} of {{ totalSteps }}
+              </span>
 
-            <div>
-              <button v-if="currentStep !== 0" type="button" class="btn border text-black mr" @click="prevStep">
-                Previous
-              </button>
-              <button v-if="currentStep !== 3 && currentStep !== 4" type="submit" class="btn btn-bg">
-                Next
-              </button>
+              <div>
+                <button v-if="currentStep !== 0" type="button" class="btn border text-black mr" @click="prevStep">
+                  Previous
+                </button>
+                <button v-if="currentStep !== 3 && currentStep !== 4" type="submit" class="btn btn-bg">
+                  Next
+                </button>
 
-              <button v-if="currentStep === 3" type="submit" class="btn btn-bg">
-                Summary
-              </button>
+                <button v-if="currentStep === 3" type="submit" class="btn btn-bg">
+                  Summary
+                </button>
 
-              <button v-if="currentStep === 4" @click="submitStepForm" type="button" class="btn btn-bg">
-                Submit
-              </button>
+                <button v-if="currentStep === 4" @click="submitStepForm" type="button" class="btn btn-bg">
+                  Submit
+                </button>
+              </div>
             </div>
-          </div>
 
-          <!-- <pre>{{ values }}</pre> -->
-        </form>
+            <!-- <pre>{{ values }}</pre> -->
+          </form>
+        </div>
       </div>
+
     </div>
-  
-  </div>
-  <div class="footer footer-ct">
+    <div class="footer footer-ct">
       <MainFooter />
     </div>
   </div>
@@ -599,8 +614,8 @@ export default {
       }
     },
     toggleDiv() {
-          this.isDivVisible = !this.isDivVisible;
-        },
+      this.isDivVisible = !this.isDivVisible;
+    },
     resetAuditory() {
       if (!this.AuditoryIsChecked) {
         this.auditoryOption = "";
@@ -714,6 +729,9 @@ export default {
         (this.requirementsOption = 0),
         (this.requirementsOptionDescription = "");
     },
+
+
+
     async submitStepForm() {
       const formData = {
         title: this.title,
@@ -722,18 +740,41 @@ export default {
         location_id: this.locations[this.selectedLocationIndex].id,
         city: this.city,
         accessibility_requirements: this.requirementsOption,
-        visual_impairment: this.visualOption,
-        auditory_impairment: this.auditoryOption,
-        mobility_impairment: this.mobilityOption,
-        learning_impairment: this.learningOption,
-        intellectual_disability: this.intellectualOption,
-        psychiatric_disability: this.psychiatricOption,
-        medical_disability: this.medicalOption,
-        other: this.requirementsOptionDescription,
-        language: this.selectedLanguage == 'Other' ? this.otherLanguage : this.selectedLanguage
+        visual_impairment: (this.VisualIsChecked && this.visualOption == "") ? 'Visual Impairment' : this.visualOption,
+        auditory_impairment: (this.AuditoryIsChecked && this.auditoryOption == "") ? 'Auditory Impairment' : this.auditoryOption,
+        mobility_impairment: (this.MobilityIsChecked && this.mobilityOption != "") ? 'Mobility/Physical Impairment' : this.mobilityOption,
+        learning_impairment: (this.LearningIsChecked && this.learningOption != "") ? 'Learning Impairment' : this.learningOption,
+        intellectual_disability: (this.IntellectualIsChecked && this.intellectualOption != "") ? 'Intellectual Disability' : this.intellectualOption,
+        psychiatric_disability: (this.PsychiatricIsChecked && this.psychiatricOption != "") ? 'Psychiatric Disability' : this.psychiatricOption,
+        medical_disability: (this.MedicalIsChecked && this.medicalOption != "") ? 'Medical Disability' : this.medicalOption,
+        other: this.requirementsOptionDescription != "" ? this.requirementsOptionDescription : 'Other',
 
-        // accessibility_requirements: this.requirementsOption,
+
+        // this.isChecked = false;
+        // this.languageIsChecked = false;
+        // this.VisualIsChecked = false;
+        // this.AuditoryIsChecked = false;
+        // this.MobilityIsChecked = false;
+        // this.LearningIsChecked = false;
+        // this.IntellectualIsChecked = false;
+        // this.PsychiatricIsChecked = false;
+        // this.MedicalIsChecked = false;
+
+        // language: this.selectedLanguage == 'Other' ? this.otherLanguage : this.selectedLanguage
       };
+
+
+      if (this.languageIsChecked) {
+        if (this.selectedLanguage == '') {
+          formData.language = "Language other than English";
+        } else if (this.selectedLanguage == 'Other') {
+          formData.language = this.otherLanguage;
+        } else {
+          formData.language = this.selectedLanguage;
+        }
+      }
+
+
       // if (this.requirementsOption == 1) {
       //   formData.requirements_description = this.requirementsOptionDescription;
       // }
@@ -871,17 +912,19 @@ export default {
 };
 </script>
 <style scoped>
-.sum-top .badge{
-    font-size: 14px;
-    font-weight: 400;
-    border: 1px solid rgba(255, 255, 255, 1);
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px;
-    margin: 0;
+.sum-top .badge {
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  margin: 0;
 }
-.summ .font-small{
+
+.summ .font-small {
   font-size: 13px !important;
 }
+
 .stepbtn {
   display: flex;
   justify-content: space-between;
@@ -896,7 +939,8 @@ export default {
   padding: 5px 25px;
   border-radius: 5px;
 }
-.btn-bg{
+
+.btn-bg {
   background: rgba(55, 59, 62, 1) !important;
   color: white !important;
 }
@@ -972,32 +1016,41 @@ export default {
 
 .summ h4 {
   font-size: 16px;
-}.summ .accordion-body-show div:first-child{
+}
+
+.summ .accordion-body-show div:first-child {
   margin: 0;
 }
+
 .summ .accordion-body-show div {
-    margin: 0 10px;
+  margin: 0 10px;
 }
+
 .summ .accordion-body-show p i {
-    border: 1px solid #5dc71d;
-    padding: 2.5px;
-    border-radius: 5px;
-    font-size: 12px;
-    margin-right: 5px;
-    color: #5dc71d;
+  border: 1px solid #5dc71d;
+  padding: 2.5px;
+  border-radius: 5px;
+  font-size: 12px;
+  margin-right: 5px;
+  color: #5dc71d;
 }
-.summ .accordion-body-show p{
+
+.summ .accordion-body-show p {
   margin: 0;
 }
-.summ .accordion-body-show div,.summ .accordion-body-show div p{
+
+.summ .accordion-body-show div,
+.summ .accordion-body-show div p {
   display: inline;
 }
-.summ .accordion-body-show{
+
+.summ .accordion-body-show {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
 
 }
+
 .line-break {
   line-break: anywhere;
 }

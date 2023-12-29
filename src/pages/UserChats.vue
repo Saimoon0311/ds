@@ -82,7 +82,7 @@
               @click="startChatForClient(data, index)"
               v-for="(data, index) in lawyer_data"
               :key="data.id"
-              class="bg-light"
+              :class="['bg-light', { 'active': (index == userSelectedIndex) ? true : false }]"
             >
               <span class="lawyer-name">
                 {{ data?.lawyer?.first_name }} {{ data?.lawyer?.last_name }}
@@ -119,7 +119,7 @@
           <JobHeader :jobData="jobData" />
       
 
-          <div class="text-end mb-3">
+          <!-- <div class="text-end mb-3">
             <span
               v-if="
                 userFirst?.type === 'client' &&
@@ -135,7 +135,7 @@
                 x
               </button>
             </span>
-          </div>
+          </div> -->
           <div v-if="messages.length > 0" class="chat-messages">
             <div v-for="message in messages" :key="message.id" class="message">
               <div
@@ -363,6 +363,7 @@ export default {
 
   data() {
     return {
+      userSelectedIndex : null,
       lawyerSelected: false,
       chatId: null,
       chats: null,
@@ -421,6 +422,9 @@ export default {
       if(!this.checkClientComeFromProposal){
         api2.get(`/client/get-lawyers-list-to-chat/${this.jobId}`).then((res) => {
         this.lawyer_data = res?.data;
+        if(this.lawyer_data.length > 0){
+          this.startChatForClient(this.lawyer_data[0], 0);
+        }
         console.log(this.lawyer_data);
       });
       }else{
@@ -497,6 +501,7 @@ export default {
     },
 
     startChatForClient(data, index) {
+      this.userSelectedIndex = index;
       this.lawyerSelected = true;
       this.$store.commit("SET_CHATSTATUS", "old");
       this.$store.commit("SET_USERTOCHAT", data?.lawyer);

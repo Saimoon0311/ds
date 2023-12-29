@@ -35,11 +35,11 @@
           <!-- <input class="form-control mb-4" type="text" placeholder="Search Client..." /> -->
           <input  class="form-control mb-4" v-model="searchClient" @input="filterItems" placeholder="Search...">
           <ul class="lawyer-list" v-if="client_data2.length > 0">
-            <li @click="startChatForAllMessages(data,index)" v-for="(data, index) in client_data2" :key="index"
-              :class="['bg-light', { 'active': (index == userSelectedIndex) ? true : false }]"
+            <li @click="startChatForAllMessages(data)" v-for="(data, index) in client_data2" :key="index"
+              :class="['bg-light', { 'active': (data?.id == userSelectedIndex) ? true : false }]"
               >
               <span class="lawyer-name" data-toggle="tooltip" data-placement="right" :title="data?.job?.title">
-                {{ data?.client?.first_name ?? data?.lawyer?.first_name }} {{ data?.client?.last_name ?? data?.lawyer?.first_name }} ({{ generateExcerpt(data?.job?.title) }})
+                {{ data?.client?.first_name ?? data?.lawyer?.first_name }} {{ data?.client?.last_name ?? data?.lawyer?.last_name }} | Job No: {{ data?.job?.identity }}
               </span>
               <!-- <span v-if="data?.client_seen == 0 ||
                 data?.client_seen == false ||
@@ -148,7 +148,9 @@ export default {
 
   data() {
     return {
+      alreadyMessages : false,
       userSelectedIndex : null,
+      userSelectedIndexBackup : null,
       searchClient: '',
       lawyerSelected: false,
       clientSelected: false,
@@ -197,16 +199,26 @@ export default {
         api2.get('/get-all-users-of-jobs').then((res) => {
           this.client_data = res?.data;
           this.client_data2 = this.client_data;
+
+          if(this.client_data2.length > 0){
+            this.startChatForAllMessages(this.client_data2[0]);
+          }
+
           console.log(' cleint data : ' , this.client_data);
         });
+ 
       this.loadMessages();
   },
   methods: {
 
     filterItems() {
       const query = this.searchClient.toLowerCase();
+      console.log(query);
+      console.log('item : ' , this.client_data);
       const arr = this.client_data.filter((item) => {
-        const fullName = `${item?.client?.first_name} ${item?.client?.last_name}`.toLowerCase();
+        const fullName = `${item?.client?.first_name ?? item?.lawyer?.first_name} ${item?.client?.last_name ?? item?.lawyer?.last_name}`.toLowerCase();
+        console.log('filter name : ' , fullName);
+        console.log('query name : ' , query);
         return fullName.includes(query);
       });
       this.client_data2 = arr;
@@ -272,7 +284,8 @@ export default {
       }
     },
 
-    startChatForAllMessages(data,index) {
+    startChatForAllMessages(data) {
+      const index = data?.id;
       this.$store.commit("SET_JOB_DATA", data?.job);
       console.log('hit 1')
       this.userSelectedIndex = index;
