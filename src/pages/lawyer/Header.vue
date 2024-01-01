@@ -53,6 +53,7 @@
                   >Messages</button> -->
 
                   <router-link
+                  v-if="loginUserData"
                   to="/messages-history"
                   class="nav-link fw-normal menuItem-active-link"
                   id="lawyers"
@@ -173,6 +174,9 @@ export default {
     noti_msg() {
       return this.$store.state.noti_count_msg;
     },
+    loginUserData() {
+      return this.$store.getters?.loginUser;
+    }
   },
   components: {},
   // methods: {

@@ -186,10 +186,10 @@ import CustomPagination from '@/components/CustomPagination';
 import api from "@/config/api";
 
 import {
-  // collection,
+  collection,
   onSnapshot,
 } from "firebase/firestore";
-// import db from "@/config/firebaseConfig";
+import db from "@/config/firebaseConfig";
 
 export default {
   name: "ClientDashboard",
@@ -224,8 +224,8 @@ export default {
   },
 
   created() {
-    console.log('under created 222 ', this.jobData?.notifications.length);
-    if (this.jobData?.notifications.length > 0) {
+    console.log('under created 222 ', this.jobData?.notifications?.length);
+    if (this.jobData?.notifications?.length > 0) {
       this.resetCount('job');
     }
   },
@@ -301,15 +301,15 @@ export default {
         console.log(proposal_id, lawyer, job_id, chat_id);
         // console.log(this.getJobChat(chat_id));
 
-        // const messagesRef = collection(db, "chats", chat_id, "messages");
-        // this.getJobChat(messagesRef)
-        //   .then((messages) => {
-        //     console.log('ms : ', messages);
-            this.changeStatus({ status, proposal_id, lawyer, job_id });
-          // })
-          // .catch((error) => {
-          //   console.error("Error fetching messages:", error);
-          // });
+        const messagesRef = collection(db, "chats", chat_id, "messages");
+        this.getJobChat(messagesRef)
+          .then((messages) => {
+            console.log('ms : ', messages);
+            this.changeStatus({ status, proposal_id, lawyer, job_id,messages });
+          })
+          .catch((error) => {
+            console.error("Error fetching messages:", error);
+          });
 
       } catch (error) {
         console.error("Error fetching options:", error);

@@ -200,7 +200,7 @@
                           <tr class="border">
                             <!-- <th></th> -->
                             <th>Item</th>
-                            <th>Cost1</th>
+                            <th>Cost</th>
                             <!-- <th></th> -->
                             <th></th>
                           </tr>
@@ -428,7 +428,7 @@
                           <tr class="border">
                             <!-- <th></th> -->
                             <th>Item</th>
-                            <th>Cost2</th>
+                            <th>Cost</th>
                             <!-- <th></th> -->
                             <th></th>
                           </tr>
@@ -695,7 +695,7 @@
                           <tr class="border">
                             <!-- <th></th> -->
                             <th>Item</th>
-                            <th>Cost3</th>
+                            <th>Cost</th>
                             <!-- <th></th> -->
                             <th></th>
                           </tr>
@@ -882,7 +882,7 @@
                           <tr class="border">
                             <!-- <th></th> -->
                             <th>Item</th>
-                            <th>Cost4</th>
+                            <th>Cost</th>
                             <!-- <th></th> -->
                             <th></th>
                           </tr>
@@ -895,10 +895,6 @@
                           >
                             <td>{{ row.itemDisbursement }}</td>
                             <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
-                            <td>
-                              $ {{ row.costAud
-                              }}{{ row.gst_not_applicable ? "*" : "" }}
-                            </td>
                             <!-- <td class="text-center"> -->
                             <td style="width: 0px">
                               <button
@@ -1287,7 +1283,7 @@
                         <tr class="border">
                           <!-- <th></th> -->
                           <th>Item</th>
-                          <th>Cost5</th>
+                          <th>Cost</th>
                           <!-- <th></th> -->
                           <th></th>
                         </tr>
@@ -1490,7 +1486,7 @@
                         <tr class="border">
                           <!-- <th></th> -->
                           <th>Item</th>
-                          <th>Cost6</th>
+                          <th>Cost</th>
                           <!-- <th></th> -->
                           <th></th>
                         </tr>
@@ -1647,7 +1643,7 @@
                       <tr class="border">
                         <!-- <th></th> -->
                         <th>Item</th>
-                        <th>Cost7</th>
+                        <th>Cost</th>
                         <!-- <th></th> -->
                         <th></th>
                       </tr>
