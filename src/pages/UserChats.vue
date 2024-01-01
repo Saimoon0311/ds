@@ -604,6 +604,20 @@ export default {
               ? this.userFirst?.id
               : this.userSecond?.id;
 
+          const payload = {
+            title : "New Message",
+            body : this.newMessage,
+            noti_status : "message",
+            sender_id : this.userFirst?.id,
+            receiver_id : this.userSecond?.id,
+          }
+
+          api2.post('/send-notification',payload).then((res) => {
+               console.log(res); 
+              }).catch((error)=>{
+                console.log(error);
+              });
+
           if (this.chatStatus == "new" && this.userFirst?.type == "lawyer") {
             api2
               .post("/save-chat-info", {
