@@ -273,15 +273,15 @@ ul.dropdown-menu.show {
 span.countmsg {
     border-radius: 50%;
     background: red;
-    width: 20px;
+    width: 15px;
     position: absolute;
-    height: 20px;
+    height: 15px;
     text-align: center;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 500;
     color: white;
     top: 0;
-    right: 0;
+    right: 1px;
 }
 .showonmonb {
   display: none;
