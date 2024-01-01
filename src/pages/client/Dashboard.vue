@@ -18,7 +18,7 @@
             <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
                 data-v-511b78bb=""
-                :class="{ 'nav-link': true, active: tab == 'open' }"
+                :class="{ 'nav-link': true, active: tab == 'open', 'count_btn' : true }"
                 id="pills-home-tab"
                 data-bs-toggle="pill"
                 data-bs-target="#pills-home"
@@ -29,12 +29,13 @@
                 @click="changeTab('open')"
               >
                 Open
+                <span class="countmsg" v-if="noti_job && noti_job > 0">{{ noti_job }}</span>
               </button>
             </li>
             <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
                 data-v-511b78bb=""
-                :class="{ 'nav-link': true, active: tab == 'close','count_btn' : true  }"
+                :class="{ 'nav-link': true, active: tab == 'close'  }"
                 id="pills-profile-tab"
                 data-bs-toggle="pill"
                 data-bs-target="#pills-profile"
@@ -46,7 +47,6 @@
                 @click="changeTab('close')"
               >
                 Closed
-                <span class="countmsg" v-if="noti_job && noti_job.length > 0">{{ noti_job }}</span>
               </button>
             </li>
           </ul>
@@ -111,7 +111,7 @@
                        </p>
                       </div>
                     </div>
-                    <div class="p-3">
+                    <!-- <div class="p-3">
                       <div
                         class="card-body d-flex align-items-start justify-content-between"
                       >
@@ -122,7 +122,42 @@
                       <div id="description" class="descriptionText text-black text-left">
                         {{ item?.description }}
                       </div>
-                    </div>
+                    </div> -->
+
+
+                    <div class="p-3">
+                            <div
+                              class="card-body d-flex align-items-start justify-content-between"
+                            >
+                              <p class="text-left text-black title">
+                                {{ item?.title }}
+                              </p>
+                              <span v-if="jobData">
+                                <div v-if="tab == 'open' && item?.notifications && item?.notifications.length > 0 && jobData?.id != item.id">
+                                  <p
+                                    class="badge border btn-danger rounded-pill tag"
+                                  >
+                                    {{ item?.notifications.length }} New Proposals 
+                                  </p>
+                                </div>
+                              </span>
+                              <span v-else>
+                                <div v-if="tab == 'open' && item?.notifications && item?.notifications.length > 0">
+                                  <p
+                                    class="badge border btn-danger rounded-pill tag"
+                                  >
+                                    {{ item?.notifications.length }} New Proposals 
+                                  </p>
+                                </div>
+                              </span>
+                            </div>
+                            <div
+                              id="description"
+                              class="descriptionText text-black"
+                            >
+                              {{ item?.description }}
+                            </div>
+                          </div>
 
                     <div class="widthcn">
                       <span class="spacer px-3">
@@ -274,7 +309,16 @@ export default {
   //   }
   // },
   computed: {
-    isEndOfResult(){
+    jobData() {
+      return this.$store.state.jobData;
+    },
+    noti_msg() {
+      return this.$store.state.noti_count_msg;
+    },
+    noti_job() {
+      return this.$store.state.noti_count_job;
+    },
+    isEndOfResult() {
       return this.$store.state.endOfResult;
     },
     jobTabName() {
@@ -388,7 +432,7 @@ export default {
       await this.loadMore(null, true);
     },
 
-    
+
     // async getJobs() {
     //   try {
     //     const response = await api.get(`/client/client-jobs`);
@@ -416,7 +460,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
   color: white;
   background-color: #000000;
 }
@@ -447,10 +491,12 @@ ul#pills-tab {
   bottom: 0;
   width: 100%;
 }
-.card-cus{
+
+.card-cus {
   box-shadow: 5px 5px 20px #00000017;
 
 }
+
 .descriptionText {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -483,36 +529,40 @@ p.badge {
   font-size: 14px;
 }
 
-.title{
-    font-size: 20px;
-    font-weight: 600;
-    text-transform: capitalize;
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: capitalize;
 }
 
 .smallFont {
   font-size: 12px;
   margin: 0 0 5px 0;
 }
-.card-top{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 5px 5px 0 0;
-    background: rgba(55, 59, 62, 1);
+
+.card-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px 5px 0 0;
+  background: rgba(55, 59, 62, 1);
 }
-p.badge{
-    font-size: 14px;
-    font-weight: 400;
-    border: 1px solid rgba(255, 255, 255, 1);
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px;
-    margin: 0;
+
+p.badge {
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  margin: 0;
 }
+
 .smallFont {
-    font-size: 16px;
-    margin: 0;
+  font-size: 16px;
+  margin: 0;
 }
+
 .descriptionText {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -539,24 +589,27 @@ p.badge{
   /* outline: 1px solid #292929; */
   border-radius: 10px;
 }
+
 .card-btn {
-    width: 32%;
-    height: 45px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
+  width: 32%;
+  height: 45px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
 }
+
 .spacer {
-    margin: 20px 0;
-    display: block;
-    border-top: 1px solid #c7c7c7;
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  margin: 20px 0;
+  display: block;
+  border-top: 1px solid #c7c7c7;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
 @media only screen and (max-width: 1400px) and (min-width: 992px) {
   .card-btn {
     width: 32%;
@@ -571,6 +624,7 @@ p.badge{
     font-size: 14px;
 
   }
+
   .smallFont {
     margin: 5px;
     font-size: 14px;
@@ -582,6 +636,7 @@ p.badge{
     width: 100%;
   }
 }
+
 @media only screen and (max-width: 767px) {
   .spacer {
     display: flex;
@@ -594,6 +649,7 @@ p.badge{
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {
+
   /* .btn {
     padding: 5px 0px;
     border-radius: 20px;
@@ -604,8 +660,9 @@ p.badge{
     margin-bottom: 10px;
     font-size: 12px;
   }
-  .p-3.card-top > div {
+
+  .p-3.card-top>div {
     text-align: start;
-}
+  }
 }
 </style>

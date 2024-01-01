@@ -36,8 +36,8 @@ const store = createStore({
     // SET_LAWYER_ELIGIBLE_STATUS(state,value){
     //   state.lawyerEligibleStatus = value
     // },
-
     SET_NOTI_COUNT_MSG(state,value){
+      console.log('under state : ',value);
       state.noti_count_msg = value;
     },
     SET_NOTI_COUNT_JOB(state,value){

@@ -32,7 +32,7 @@ import "bootstrap";
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
-import { getToken } from 'firebase/messaging';
+import { getToken } from "firebase/messaging";
 import { messaging } from "@/config/firebaseConfig";
 
 /* add icons to the library */
@@ -98,6 +98,12 @@ app.mixin({
   },
 
   computed: {
+    noti_job() {
+      return this.$store.state.noti_count_job;
+    },
+    noti_msg() {
+      return this.$store.state.noti_count_msg;
+    },
     loadMorePrevData() {
       return this.$store.state.loadMorePrevData;
     },
@@ -115,11 +121,10 @@ app.mixin({
   },
 
   methods: {
-
-    // convert numbers in currency format 
+    // convert numbers in currency format
     formatNumber(number) {
       // Ensure that the input is a number
-      console.log('number to formate : ' , number);
+      console.log("number to formate : ", number);
       // if (typeof number !== 'number') {
       //   return number;
       // }
@@ -130,20 +135,20 @@ app.mixin({
       number = parseFloat(number);
 
       // Use a custom function to format the number with space as a thousands separator
-      const parts = number.toFixed(2).toString().split('.');
-      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-      return parts.join('.');
+      const parts = number.toFixed(2).toString().split(".");
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      return parts.join(".");
     },
 
-    goToMessagePage(item = null,type = null,reset = false) {
-      if(item){
+    goToMessagePage(item = null, type = null, reset = false) {
+      if (item) {
         this.saveJobInfo(item);
         this.saveLoadMoreData();
 
         this.$store.commit("SET_JOBIDTOCHAT", item?.id);
         this.$store.commit("SET_DATATAB", this.tab);
 
-        if(type == 'lawyer'){
+        if (type == "lawyer") {
           this.$store.commit("SET_USERTOCHAT", item?.owner);
           if (item?.lawyer_chat == null) {
             this.$store.commit("SET_CHATSTATUS", "new");
@@ -152,10 +157,10 @@ app.mixin({
           }
         }
       }
-      
-      if(item == null){
-        console.log('else else else');
-        this.saveJobInfo(null,reset);
+
+      if (item == null) {
+        console.log("else else else");
+        this.saveJobInfo(null, reset);
         this.saveLoadMoreData(reset);
         this.$store.commit("SET_JOBIDTOCHAT", null);
         this.$store.commit("SET_DATATAB", null);
@@ -165,11 +170,11 @@ app.mixin({
       this.$router.push({ path: "/messages" });
     },
 
-    saveJobInfo(item = null,reset = false) {
-      if(reset){
+    saveJobInfo(item = null, reset = false) {
+      if (reset) {
         this.$store.commit("SET_JOB_DATA", null);
         localStorage.removeItem("jobData");
-      }else{
+      } else {
         this.$store.commit("SET_JOB_DATA", item);
         localStorage.setItem("jobData", JSON.stringify(item));
       }
@@ -177,16 +182,16 @@ app.mixin({
 
     // save load more pagination data
     saveLoadMoreData(reset = false) {
-      if(reset){
+      if (reset) {
         this.$store.commit("SET_LOADMOREPREVDATA", null);
-      }else{
+      } else {
         this.$store.commit("SET_LOADMOREPREVDATA", {
           currentPage: this.currentPage,
           lastPage: this.lastPage,
           openJobs: this.openJobs,
         });
       }
-      
+
       console.log("curr : ", this.currentPage);
       console.log("last : ", this.lastPage);
     },
@@ -307,39 +312,31 @@ app.mixin({
       this.$store.commit("SET_LOGIN_USER", userData);
     },
 
-
-    setUserStatus(result){
+    setUserStatus(result) {
       if (
-        result?.data?.subscription != null && 
-        (result?.data?.subscription?.subscription_status == 'trialing' || 
-        result?.data?.subscription?.subscription_status == 'active')
-      ) 
-      {
-          store.commit("SET_SUB_STATUS", "subscribed");
-          store.commit(
-            "SET_SUB_CANCEL_STATUS",
-            result?.data?.subscription?.is_cancel
-          );
-      }
-      else if(
-        result?.data?.subscription != null && 
-        result?.data?.subscription?.subscription_status != 'trialing' && 
-        result?.data?.subscription?.subscription_status != 'active'
-      )
-      {
+        result?.data?.subscription != null &&
+        (result?.data?.subscription?.subscription_status == "trialing" ||
+          result?.data?.subscription?.subscription_status == "active")
+      ) {
+        store.commit("SET_SUB_STATUS", "subscribed");
+        store.commit(
+          "SET_SUB_CANCEL_STATUS",
+          result?.data?.subscription?.is_cancel
+        );
+      } else if (
+        result?.data?.subscription != null &&
+        result?.data?.subscription?.subscription_status != "trialing" &&
+        result?.data?.subscription?.subscription_status != "active"
+      ) {
         store.commit("SET_SUB_STATUS", "incomplete");
-        store.commit("SET_SUB_CANCEL_STATUS",false);
-      }
-      else{
+        store.commit("SET_SUB_CANCEL_STATUS", false);
+      } else {
         store.commit("SET_SUB_STATUS", null);
-        store.commit("SET_SUB_CANCEL_STATUS",false);
+        store.commit("SET_SUB_CANCEL_STATUS", false);
       }
 
       if (result?.data?.data?.admin_approval == "approve") {
-        store.commit(
-          "SET_APPROVAL_STATUS",
-          result?.data?.data?.admin_approval
-        );
+        store.commit("SET_APPROVAL_STATUS", result?.data?.data?.admin_approval);
       }
 
       store.commit("SET_SUBSCRIPTION_DATA", result?.data?.subscription);
@@ -394,17 +391,45 @@ app.mixin({
       this.$router.push({ path: "/view-proposals" });
     },
 
+    // reset notification count
+    resetCount(type) {
+      let count;
+      if (this.noti_msg > 0 && type == "message") {
+        count = this.noti_msg;
+        this.$store.commit("SET_NOTI_COUNT_MSG", 0);
+        localStorage.setItem('noti_count_msg',0);
+      }
+      if(this.noti_job > 0 && type == "job"){
+        count = this.noti_job;
+        this.$store.commit("SET_NOTI_COUNT_JOB", 0);
+        localStorage.setItem('noti_count_job',0);
+      }
+      // console.log(this.noti_job);
+      if (count > 0) {
+        api2
+          .post("/notification-seen", {
+            noti_status: type,
+            count: count,
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
+
     // this function is to store user in state and localstorage after login then redirect to dashboard
     setUserAndRedirect(res, path) {
-      console.log("single a : ", res?.data?.data);
+      console.log("single a : ", res?.data);
       if (!localStorage.getItem("token")) {
         localStorage.setItem("token", res.data?.data?.api_token);
       }
-
-      this.$store.commit('SET_NOTI_COUNT_MSG',res?.data?.noti_msg);
-      localStorage.setItem('noti_count_msg',res?.data?.noti_msg);
-      this.$store.commit('SET_NOTI_COUNT_JOB',res?.data?.noti_job);
-      localStorage.setItem('noti_count_job',res?.data?.noti_job);
+      this.$store.commit("SET_NOTI_COUNT_MSG", res?.data?.noti_msg);
+      localStorage.setItem("noti_count_msg", res?.data?.noti_msg);
+      this.$store.commit("SET_NOTI_COUNT_JOB", res?.data?.noti_job);
+      localStorage.setItem("noti_count_job", res?.data?.noti_job);
 
       this.setUserInStateAndLocalStorage(res);
       this.$store.commit("SET_AUTHENTICATED", true);
@@ -427,11 +452,9 @@ app.mixin({
       }
 
       this.requestNotificationPermission();
-      
+
       this.$router.push({ path: path });
     },
-
-
 
     openJobDetailModal(data) {
       let newData = {};
@@ -458,14 +481,14 @@ app.mixin({
             ) {
               let objKey = key;
               objKey = objKey.replace(/_/g, " ");
-              if(key == 'field'){
+              if (key == "field") {
                 objKey = "Areas of Practice";
               }
-              if(key == 'location'){
+              if (key == "location") {
                 objKey = "State/territory";
               }
               newData[objKey] = value;
-              if(key == 'field' || key == 'location'){
+              if (key == "field" || key == "location") {
                 newData[objKey] = value?.title;
               }
             }
@@ -490,7 +513,6 @@ app.mixin({
         },
       });
     },
-
 
     openRequirementsModal(data) {
       let newData = {};
@@ -541,15 +563,21 @@ app.mixin({
             const value = data[key];
             if (
               value !== null &&
-              value != 0 && (key == "first_name" || key == "last_name" || key == "job_title" || key == "law_firm" || key == "link" || key == "about")
+              value != 0 &&
+              (key == "first_name" ||
+                key == "last_name" ||
+                key == "job_title" ||
+                key == "law_firm" ||
+                key == "link" ||
+                key == "about")
             ) {
               let objKey = key;
               objKey = objKey.replace(/_/g, " ");
-              if(key == "link"){
-                objKey = "Website"
+              if (key == "link") {
+                objKey = "Website";
               }
-              if(key == "about"){
-                objKey = "About me"
+              if (key == "about") {
+                objKey = "About me";
               }
               newData[objKey] = value;
             }
@@ -574,8 +602,6 @@ app.mixin({
         },
       });
     },
-
-   
 
     // openProposalDetailsModal(data) {
     //   console.log('proposal details : ' , data);
@@ -638,49 +664,54 @@ app.mixin({
     //   });
     // },
 
-    // goToChatsPage() {      
+    // goToChatsPage() {
     //   this.$router.push({ path: "/messages-history" });
     // },
 
     async requestNotificationPermission() {
-        getToken(messaging)
+      getToken(messaging)
         .then(async (currentToken) => {
           if (currentToken) {
             const permission = await Notification.requestPermission();
-            if (permission === 'granted') {
-                // console.log('mess :: ' , currentToken);
-                // console.log('Notification permission granted. Token:', currentToken);
-                  api.post("/save-fcm-token", { currentToken }).then((res)=>{
-                    console.log('save token response : ' , res);
-                  }).catch((error) => {
-                    // this.$swal("", error?.response?.data?.error, "error");
-                    console.log("error while saving token : ", error);
-                  });
-              
+            if (permission === "granted") {
+              // console.log('mess :: ' , currentToken);
+              // console.log('Notification permission granted. Token:', currentToken);
+              api
+                .post("/save-fcm-token", { currentToken })
+                .then((res) => {
+                  console.log("save token response : ", res);
+                })
+                .catch((error) => {
+                  // this.$swal("", error?.response?.data?.error, "error");
+                  console.log("error while saving token : ", error);
+                });
 
-                // Send the token to your server for handling subscriptions
+              // Send the token to your server for handling subscriptions
             } else {
-                console.error('Notification permission denied.');
+              console.error("Notification permission denied.");
             }
           } else {
             // Show permission request UI
-            console.log('No registration token available. Request permission to generate one.');
+            console.log(
+              "No registration token available. Request permission to generate one."
+            );
             // ...
           }
-        }).catch((err) => {
-          console.log('An error occurred while retrieving token. ', err);
+        })
+        .catch((err) => {
+          console.log("An error occurred while retrieving token. ", err);
           // ...
-        });   
-  },
+        });
+    },
 
     // add three dots after some words
     generateExcerpt(text) {
-      if (!text) return ''; // Handle cases where text is null or undefined
-      if(text.length > 15){
-        const words = text.split(' ');
-        const excerpt = words.slice(0, 15).join(' ');
+      if (!text) return ""; // Handle cases where text is null or undefined
+      if (text.length > 15) {
+        const words = text.split(" ");
+        const excerpt = words.slice(0, 15).join(" ");
         return `${excerpt}...`;
-      }else{
+      } else {
         return text;
       }
     },
@@ -689,7 +720,7 @@ app.mixin({
     isNumericString(value) {
       // Regular expression to check if the string contains only digits or decimals
       var numericRegex = /^[0-9]+(\.[0-9]+)?$/;
-    
+
       return numericRegex.test(value);
     },
 
@@ -726,8 +757,12 @@ app.mixin({
               key != "job_id" &&
               key != "user_id" &&
               key != "created_at" &&
-              key != "updated_at" && key != "show" && key != "description" && key != "lawyer" && key != "job"
-              && key != "status"
+              key != "updated_at" &&
+              key != "show" &&
+              key != "description" &&
+              key != "lawyer" &&
+              key != "job" &&
+              key != "status"
             ) {
               let objKey = key;
               objKey = objKey.replace(/_/g, " ");
@@ -742,7 +777,7 @@ app.mixin({
                 if (objKey == "lawyer" && value != null) {
                   newData["lawyer email"] = value?.email;
                 } else {
-                  value = (this.isNumericString(value)) ? '$'+value : value;  
+                  value = this.isNumericString(value) ? "$" + value : value;
                   newData[objKey] = value;
                 }
               }
@@ -772,7 +807,7 @@ app.mixin({
           disbursements
         );
       }
-      console.log('dis 1 : ' , disbursementsTable);
+      console.log("dis 1 : ", disbursementsTable);
       if (feeEarners.length > 0) {
         feeEarnersTable = this.createTableHtmlFeeEarners(
           "Fee Earners",
@@ -790,7 +825,7 @@ app.mixin({
       // Use dynamic HTML inside SweetAlert2 modal
 
       if (renderAsHtml) {
-        return [disbursementsTable,feeEarnersTable,specificTasksTable];
+        return [disbursementsTable, feeEarnersTable, specificTasksTable];
       } else {
         this.$swal.fire({
           title: "Proposal Details",
@@ -804,9 +839,6 @@ app.mixin({
       }
     },
 
-
-    
-
     createTableHtml(title, dataArray) {
       const total = dataArray.reduce(
         (total, row) => total + parseFloat(row.cost ?? row.costAud) || 0,
@@ -817,7 +849,9 @@ app.mixin({
           (item) => `
             <tr>
               <td class='border'>${item.task ?? item.itemDisbursement}</td> 
-              <td class='border'>$${this.formatNumber(item.cost ?? item.costAud)}</td>
+              <td class='border'>$${this.formatNumber(
+                item.cost ?? item.costAud
+              )}</td>
             </tr>
           `
         )
@@ -845,9 +879,6 @@ app.mixin({
       `;
     },
 
-
-    
-
     createTableHtmlFeeEarners(title, dataArray) {
       // const total = dataArray.reduce(
       //   (total, row) => total + parseFloat(row.hourlyRate * row.estimatedHours) || 0,
@@ -855,20 +886,24 @@ app.mixin({
       // );
       let grandTotal = 0;
       const tableContent = dataArray
-        .map(
-          (item) => {
-            const subTotal = (item.hourly_rate ?? item.hourlyRate) * (item.hours ?? item.estimatedHours);
-            grandTotal += subTotal;
-            return `
+        .map((item) => {
+          const subTotal =
+            (item.hourly_rate ?? item.hourlyRate) *
+            (item.hours ?? item.estimatedHours);
+          grandTotal += subTotal;
+          return `
             <tr>
-              <td class='border'>${item.title}</td> <!-- Replace with actual properties -->
-              <td class='border'>$${this.formatNumber(item.hourly_rate ?? item.hourlyRate)}</td>
+              <td class='border'>${
+                item.title
+              }</td> <!-- Replace with actual properties -->
+              <td class='border'>$${this.formatNumber(
+                item.hourly_rate ?? item.hourlyRate
+              )}</td>
               <td class='border'>${item.hours ?? item.estimatedHours}</td>
               <td class='border'>$${this.formatNumber(subTotal)}</td>
             </tr>
           `;
-          }
-        )
+        })
         .join("");
 
       return `
@@ -888,7 +923,9 @@ app.mixin({
           <tfoot>
             <tr>
               <td class='bg-dark text-white'>Total</td><td class='bg-dark'></td><td class='bg-dark'></td>
-              <td class='bg-dark text-white'>$${this.formatNumber(grandTotal)}</td>
+              <td class='bg-dark text-white'>$${this.formatNumber(
+                grandTotal
+              )}</td>
             </tr>
           </tfoot>
         </table>
@@ -1034,6 +1071,14 @@ app.mixin({
       localStorage.removeItem("token");
       this.$store.commit("SET_AUTHENTICATED", false);
       localStorage.removeItem("loginUser");
+
+      localStorage.removeItem("jobData");
+      localStorage.removeItem("noti_count_job");
+      localStorage.removeItem("noti_count_msg");
+      this.$store.commit('SET_JOB_DATA',null);
+      this.$store.commit('SET_NOTI_COUNT_MSG',0);
+      this.$store.commit('SET_NOTI_COUNT_JOB',0);
+
       this.$store.commit("SET_LOGIN_USER", null);
       this.$store.commit("SET_SUB_STATUS", null);
       this.$store.commit("SET_SUB_CANCEL_STATUS", false);
@@ -1086,7 +1131,7 @@ app.mixin({
     },
 
     async loadMore(status = null, reset = null) {
-      this.$store.commit('SET_ENDOFRESULT',false);
+      this.$store.commit("SET_ENDOFRESULT", false);
       console.log("check computed : ", this.loadMorePrevData);
       if (this.loadMorePrevData != null) {
         this.currentPage = this.loadMorePrevData.currentPage;
@@ -1133,8 +1178,8 @@ app.mixin({
       });
       let uniqueArray = Array.from(uniqueObjects.values());
       this.openJobs = uniqueArray;
-      if(this.currentPage == this.lastPage){
-        this.$store.commit('SET_ENDOFRESULT',true);
+      if (this.currentPage == this.lastPage) {
+        this.$store.commit("SET_ENDOFRESULT", true);
       }
     },
 
@@ -1175,9 +1220,9 @@ app.mixin({
     },
     async fetchData(url) {
       let response = null;
-      if(this.openJobs.length > 0){
+      if (this.openJobs.length > 0) {
         response = await api2.get(url);
-      }else{
+      } else {
         response = await api.get(url);
       }
       return response?.data;

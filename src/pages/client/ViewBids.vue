@@ -186,10 +186,10 @@ import CustomPagination from '@/components/CustomPagination';
 import api from "@/config/api";
 
 import {
-  collection,
+  // collection,
   onSnapshot,
 } from "firebase/firestore";
-import db from "@/config/firebaseConfig";
+// import db from "@/config/firebaseConfig";
 
 export default {
   name: "ClientDashboard",
@@ -197,9 +197,9 @@ export default {
     ClientHeader,
     CustomPagination
   },
-  data(){
-    return{
-      tab : null,
+  data() {
+    return {
+      tab: null,
     }
   },
   computed: {
@@ -222,6 +222,14 @@ export default {
     localStorage.removeItem('jobId');
     this.$store.commit('SET_JOB_ID', null);
   },
+
+  created() {
+    console.log('under created 222 ', this.jobData?.notifications.length);
+    if (this.jobData?.notifications.length > 0) {
+      this.resetCount('job');
+    }
+  },
+
   async mounted() {
     if (this.jobId == null || this.jobId == "") {
       this.$router.push({ path: '/client-dashboard' });
@@ -243,8 +251,9 @@ export default {
     // },
 
 
-    getJobChat(chat_id) {
-      const messagesRef = collection(db, "chats", chat_id, "messages");
+    getJobChat(messagesRef) {
+      // console.log('db ::: ' , db);
+
       return new Promise((resolve, reject) => {
         onSnapshot(messagesRef, (snapshot) => {
           const messages = snapshot.docs
@@ -255,20 +264,20 @@ export default {
           reject(error);
         });
       });
-    },   
+    },
 
 
     goToMessagePage(item) {
       console.log(item?.job?.client_chat?.chat_id);
       this.saveJobInfo(item?.job);
-      this.$store.commit("SET_JOBIDTOCHAT", item?.job?.id); 
+      this.$store.commit("SET_JOBIDTOCHAT", item?.job?.id);
       this.$store.commit("SET_CLIENTCOMEFROMPROPOSAL", true);
-      console.log('law : ' , item?.lawyer);
+      console.log('law : ', item?.lawyer);
       this.$store.commit("SET_USERTOCHAT", item?.lawyer);
-      this.$router.push({ path: "/messages" });  
+      this.$router.push({ path: "/messages" });
     },
 
-    openDescription(text){
+    openDescription(text) {
       this.$swal.fire({
         title: 'Description',
         html: `<p style="white-space: pre-line;">${text}</p>`,
@@ -279,7 +288,7 @@ export default {
         },
       });
     },
-    
+
     async setStatus(status) {
       this.tab = status;
       this.$store.commit('set_pagination_page', 1);
@@ -287,17 +296,24 @@ export default {
       await this.getPaginatedData();
     },
     handleAcceptBidAction(proposal_id, lawyer, job_id, chat_id) {
-      let status = "Accept";
-      console.log(proposal_id,lawyer,job_id,chat_id);
-      // console.log(this.getJobChat(chat_id));
-      this.getJobChat(chat_id)
-      .then((messages) => {
-        console.log(messages);
-        this.changeStatus({ status, proposal_id, lawyer, job_id, messages });
-      })
-      .catch((error) => {
-        console.error("Error fetching messages:", error);
-      });
+      try {
+        let status = "Accept";
+        console.log(proposal_id, lawyer, job_id, chat_id);
+        // console.log(this.getJobChat(chat_id));
+
+        // const messagesRef = collection(db, "chats", chat_id, "messages");
+        // this.getJobChat(messagesRef)
+        //   .then((messages) => {
+        //     console.log('ms : ', messages);
+            this.changeStatus({ status, proposal_id, lawyer, job_id });
+          // })
+          // .catch((error) => {
+          //   console.error("Error fetching messages:", error);
+          // });
+
+      } catch (error) {
+        console.error("Error fetching options:", error);
+      }
     },
     handleRejectBidAction(proposal_id, lawyer, job_id) {
       let status = "Reject";
@@ -317,22 +333,22 @@ export default {
           obj.lawyer_id = obj?.lawyer?.id;
           api.post('/client/change-proposal-status', obj).then(res => {
             // this.$swal('', `Proposal has been ${obj.status}ed successfully`, 'success').then(async () => {
-              let msg = "";
-              if(obj.status == "accept" || obj.status == "Accept"){
-                msg = `Congratulations on finding a lawyer!
+            let msg = "";
+            if (obj.status == "accept" || obj.status == "Accept") {
+              msg = `Congratulations on finding a lawyer!
                 We're so glad that you found a lawyer for your job '[${this.jobData?.title} - ${this.jobData?.identity}.]' through Simplawfy. 
                 Here are your lawyer's contact details so you can communicate with them directly:
                 [${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, ${obj?.lawyer?.email} and ${obj?.lawyer?.phone}]. 
 
                 You will receive an email shortly with all these details as well as the details of the proposal you accepted, the details of your job and any correspondence between you and your chosen Lawyer.`;
-              }else{
-                msg = `Proposal has been ${obj.status}ed successfully`;
-              }
+            } else {
+              msg = `Proposal has been ${obj.status}ed successfully`;
+            }
 
             this.$swal('', msg, 'success').then(async () => {
-              if(obj.status == "accept" || obj.status == "Accept"){
+              if (obj.status == "accept" || obj.status == "Accept") {
                 this.$router.push("/client-dashboard");
-              }else{
+              } else {
                 await this.getPaginatedData();
               }
             })
@@ -349,9 +365,10 @@ export default {
 </script>
 
 <style scoped>
-.font-small{
+.font-small {
   font-size: 12px;
 }
+
 ul#pills-tab {
   text-align: center;
   margin: 0 auto;
@@ -378,40 +395,47 @@ ul#pills-tab {
 .text-left {
   text-align: left;
 }
+
 .text-left .fw-bolder {
-    cursor: pointer;
+  cursor: pointer;
 }
-.fw-bold{
+
+.fw-bold {
   font-weight: 600 !important;
 }
-.table td{
+
+.table td {
   border: unset;
 }
 
 .table td.text-center {
-    vertical-align: middle;
+  vertical-align: middle;
 }
-.descriptionText{
+
+.descriptionText {
   overflow: hidden;
-    text-overflow: ellipsis;
-    min-height: 20px;
-    max-height: 100px;
-    /* line-break: anywhere; */
-    overflow-y: auto;
-    padding-right: 10px;
-    margin-right: 5px;
+  text-overflow: ellipsis;
+  min-height: 20px;
+  max-height: 100px;
+  /* line-break: anywhere; */
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-right: 5px;
 }
-.descriptionText::-webkit-scrollbar{
+
+.descriptionText::-webkit-scrollbar {
   width: 6px;
-    border-radius: 10px;
+  border-radius: 10px;
 }
+
 .descriptionText::-webkit-scrollbar-thumb {
-    background-color: #969696;
-    /* outline: 1px solid #292929; */
-    border-radius: 10px;
+  background-color: #969696;
+  /* outline: 1px solid #292929; */
+  border-radius: 10px;
 }
+
 .descriptionText::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
-    border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
+  border-radius: 10px;
 }
 </style>

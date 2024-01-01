@@ -2,7 +2,7 @@
   <div class="c-main">
   <ClientHeader />
   <div class="container">
-
+    <h3 class="mt-3 text-center">Profile</h3>
     <div
       class="modal fade first-name-modal"
       tabindex="-1"

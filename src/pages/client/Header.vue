@@ -59,7 +59,7 @@
                   id="lawyers"
                   aria-current="page"
                   >Messages
-                    <span class="countmsg" v-if="noti_msg && noti_msg.length > 0">{{ noti_msg }}</span>
+                    <span class="countmsg" v-if="noti_msg && noti_msg > 0">{{ noti_msg }}</span>
                   </router-link
                 >
 

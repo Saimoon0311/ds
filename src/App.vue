@@ -73,10 +73,14 @@ export default {
             timerProgressBar: true,
           });
 
-          if (newValue?.notification?.noit_status == "message") {
-            this.$store.commit('SET_NOTI_COUNT_MSG', this.noti_msg++);
+          const noti = JSON.parse(newValue?.data?.payload);
+          console.log(noti);
+          if (noti?.noti_status == "message") {
+            console.log('if');
+            this.$store.commit('SET_NOTI_COUNT_MSG', ++this.noti_msg);
           } else {
-            this.$store.commit('SET_NOTI_COUNT_JOB', this.noti_job++);
+            console.log('else');
+            this.$store.commit('SET_NOTI_COUNT_JOB', ++this.noti_job);
           }
 
         }
@@ -119,7 +123,7 @@ span.countmsg {
     font-size: 10px;
     font-weight: 500;
     color: white;
-    top: 0;
+    top: -5px;
     right: 1px;
 }
 .navbar-nav .left-menu a.nav-link {

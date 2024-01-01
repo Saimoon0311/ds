@@ -113,7 +113,7 @@
                 @click="changeTab('close')"
               >
                 Closed
-                <span class="countmsg" v-if="noti_job && noti_job.length > 0">{{ noti_job }}</span>
+                <span class="countmsg" v-if="noti_job && noti_job > 0">{{ noti_job }}</span>
               </button>
             </li>
             <!-- <li data-v-511b78bb="" class="nav-item" role="presentation">
@@ -598,6 +598,9 @@ export default {
   },
 
   computed: {
+    noti_job() {
+      return this.$store.state.noti_count_job;
+    },
     isEndOfResult(){
       return this.$store.state.endOfResult;
     },
@@ -722,6 +725,9 @@ export default {
       } else if (status == "close") {
         this.endpoint = "/lawyer/show-approve-jobs";
         await this.loadMore(null, true);
+
+        this.resetCount('job');
+        
       }
       // else if (status == "reject") {
       //   this.endpoint = '/lawyer/show-reject-jobs';

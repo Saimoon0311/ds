@@ -559,20 +559,20 @@ export default {
         return false;
       }
 
-      // if (this.messages.length > 0 && this.userFirst?.type == "lawyer") {
-      //   if (
-      //     this.messages.length == 1 &&
-      //     this.messages[0].sender_email == this.userFirst?.email
-      //   ) {
-      //     this.$swal(
-      //       "",
-      //       "You can not send message until client reply on your first messages, please wait for client reply",
-      //       "error"
-      //     );
-      //     this.newMessage = "";
-      //     return false;
-      //   }
-      // }
+      if (this.messages.length > 0 && this.userFirst?.type == "lawyer") {
+        if (
+          this.messages.length == 1 &&
+          this.messages[0].sender_email == this.userFirst?.email
+        ) {
+          this.$swal(
+            "",
+            "You can not send message until client reply on your first messages, please wait for client reply",
+            "error"
+          );
+          this.newMessage = "";
+          return false;
+        }
+      }
 
       // console.log(this.chatStatus);
       // console.log(this.userFirst?.type);
