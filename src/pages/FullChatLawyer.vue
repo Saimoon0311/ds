@@ -30,7 +30,7 @@
 
         <!-- client names start -->
         <div v-if="client_data.length > 0"
-          :class="{ 'col-md-3 p-2 rounded border': true}">
+          :class="{ 'col-md-3 p-2  rounded border': true}">
           <h4 class="d-block bg-dark text-white text-center py-2 rounded"> {{ userFirst.type == 'lawyer' ? 'Client' : 'Lawyer' }} </h4>
           <!-- <input class="form-control mb-4" type="text" placeholder="Search Client..." /> -->
           <input  class="form-control mb-4" v-model="searchClient" @input="filterItems" placeholder="Search...">
@@ -55,7 +55,7 @@
 
         <!-- all messages chat box -->
         <div v-if="this.clientSelected"
-        :class="{ 'col-md-9': true, 'chatbox': true }"
+        :class="{ 'col-md-9 p-0 border-0': true }"
         >
           <!-- <div class="text-end mb-3">
             <span
@@ -63,6 +63,7 @@
               <button class="btn btn-danger" @click="closeChatForAllMessages">x</button>
             </span>
           </div> -->
+          <div class="chatbox ms-1">
 
           <JobHeader :jobData="jobData" />
 
@@ -105,6 +106,7 @@
             </div>
           </div>
         </div>
+        </div>
         <!-- all messages chat box end -->
 
 
@@ -112,6 +114,8 @@
 
 
       </div>
+
+     
     </div>
 
     <div class="footer">
