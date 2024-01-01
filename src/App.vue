@@ -41,7 +41,12 @@ export default {
     if (this.$store.getters.replacePaymentMethod == null || this.$store.getters.replacePaymentMethod == "" || this.$store.getters.replacePaymentMethod == false) {
       this.$store.commit('SET_REPLACE_PAYMENT_METHOD', localStorage.getItem('replacePaymentMethod'));
     }
-
+    if (this.noti_msg == null || this.noti_msg == 0) {
+      this.$store.commit('SET_NOTI_COUNT_MSG', localStorage.getItem('noti_count_msg'));
+    }
+    if (this.noti_job == null || this.noti_job == 0) {
+      this.$store.commit('SET_NOTI_COUNT_JOB', localStorage.getItem('noti_count_job'));
+    }
     // console.log('app vue mes : ' , messaging);
     // messaging.onBackgroundMessage((payload) => {
     //     console.log('Message received:', payload);
@@ -58,15 +63,21 @@ export default {
           // this.$swal(newValue?.notification?.title, newValue?.notification?.body, 'success');
 
           this.$swal({
-          title: "New Notification",
-          text: newValue?.notification?.title,
-          icon: 'info',
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-        });
+            title: "New Notification",
+            text: newValue?.notification?.title,
+            icon: 'info',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+          });
+
+          if (newValue?.notification?.noit_status == "message") {
+            this.$store.commit('SET_NOTI_COUNT_MSG', this.noti_msg++);
+          } else {
+            this.$store.commit('SET_NOTI_COUNT_JOB', this.noti_job++);
+          }
 
         }
       },
@@ -75,7 +86,12 @@ export default {
   },
 
   computed: {
-
+    noti_msg() {
+      return this.$store.state.noti_count_msg;
+    },
+    noti_job() {
+      return this.$store.state.noti_count_job;
+    },
     firebaseNoti() {
       return this.$store.state.noti;
     },
@@ -87,6 +103,28 @@ export default {
 <style>
 @import "vue-select/dist/vue-select.css";
 
+
+.count_btn{
+  position: relative;
+}
+
+span.countmsg {
+    font-weight: bold !important;
+    border-radius: 50%;
+    background: red;
+    width: 15px;
+    position: absolute;
+    height: 15px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 500;
+    color: white;
+    top: 0;
+    right: 1px;
+}
+.navbar-nav .left-menu a.nav-link {
+  position: relative;
+}
 .forgetp {
   color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
   text-decoration: underline;

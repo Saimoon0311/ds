@@ -29,11 +29,20 @@ const store = createStore({
     // lawyerEligibleStatus : false,
     noti : null,
     endOfResult : false,
+    noti_count_job : 0,
+    noti_count_msg : 0,
   },
   mutations: {
     // SET_LAWYER_ELIGIBLE_STATUS(state,value){
     //   state.lawyerEligibleStatus = value
     // },
+
+    SET_NOTI_COUNT_MSG(state,value){
+      state.noti_count_msg = value;
+    },
+    SET_NOTI_COUNT_JOB(state,value){
+      state.noti_count_job = value;
+    },
     SET_ENDOFRESULT(state,value){
       state.endOfResult = value;
     },

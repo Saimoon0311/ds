@@ -34,7 +34,7 @@
             <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
                 data-v-511b78bb=""
-                :class="{ 'nav-link': true, active: tab == 'close' }"
+                :class="{ 'nav-link': true, active: tab == 'close','count_btn' : true  }"
                 id="pills-profile-tab"
                 data-bs-toggle="pill"
                 data-bs-target="#pills-profile"
@@ -46,6 +46,7 @@
                 @click="changeTab('close')"
               >
                 Closed
+                <span class="countmsg" v-if="noti_job && noti_job.length > 0">{{ noti_job }}</span>
               </button>
             </li>
           </ul>

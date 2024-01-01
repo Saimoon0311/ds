@@ -3,7 +3,7 @@
     <LawyerHeader />
     <div class="container">
       <h3 class="mt-3 text-center">Profile</h3>
-      <h1 v-if="firebaseNoti">{{ firebaseNoti?.title }}</h1>
+      <!-- <h1 v-if="firebaseNoti">{{ firebaseNoti?.title }}</h1> -->
       <p>
         Please complete this information so Simplawfy and clients can get to
         know you.

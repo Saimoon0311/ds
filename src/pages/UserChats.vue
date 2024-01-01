@@ -559,20 +559,20 @@ export default {
         return false;
       }
 
-      if (this.messages.length > 0 && this.userFirst?.type == "lawyer") {
-        if (
-          this.messages.length == 1 &&
-          this.messages[0].sender_email == this.userFirst?.email
-        ) {
-          this.$swal(
-            "",
-            "You can not send message until client reply on your first messages, please wait for client reply",
-            "error"
-          );
-          this.newMessage = "";
-          return false;
-        }
-      }
+      // if (this.messages.length > 0 && this.userFirst?.type == "lawyer") {
+      //   if (
+      //     this.messages.length == 1 &&
+      //     this.messages[0].sender_email == this.userFirst?.email
+      //   ) {
+      //     this.$swal(
+      //       "",
+      //       "You can not send message until client reply on your first messages, please wait for client reply",
+      //       "error"
+      //     );
+      //     this.newMessage = "";
+      //     return false;
+      //   }
+      // }
 
       // console.log(this.chatStatus);
       // console.log(this.userFirst?.type);
@@ -606,7 +606,6 @@ export default {
 
           const payload = {
             title : "New Message",
-            body : this.newMessage,
             noti_status : "message",
             sender_id : this.userFirst?.id,
             receiver_id : this.userSecond?.id,
@@ -628,6 +627,8 @@ export default {
               })
               .then(() => {
                 this.$store.commit("SET_CHATSTATUS", "old");
+              }).catch((error)=>{
+                console.log(error);
               });
           }
           if (this.chatStatus != "new" && this.userFirst?.type == "lawyer") {

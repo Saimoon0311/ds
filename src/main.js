@@ -400,6 +400,12 @@ app.mixin({
       if (!localStorage.getItem("token")) {
         localStorage.setItem("token", res.data?.data?.api_token);
       }
+
+      this.$store.commit('SET_NOTI_COUNT_MSG',res?.data?.noti_msg);
+      localStorage.setItem('noti_count_msg',res?.data?.noti_msg);
+      this.$store.commit('SET_NOTI_COUNT_JOB',res?.data?.noti_job);
+      localStorage.setItem('noti_count_job',res?.data?.noti_job);
+
       this.setUserInStateAndLocalStorage(res);
       this.$store.commit("SET_AUTHENTICATED", true);
       if (!path) {
@@ -969,16 +975,16 @@ app.mixin({
 
       let errorMessages = [];
 
-      if (error?.response.data?.errors) {
+      if (error?.response?.data?.errors) {
         // Iterate through the errors and collect them in an array
         for (const key in error.response.data.errors) {
           if (
             Object.prototype.hasOwnProperty.call(
-              error.response.data.errors,
+              error?.response?.data?.errors,
               key
             )
           ) {
-            const errorArray = error.response.data.errors[key];
+            const errorArray = error?.response?.data?.errors[key];
             errorMessages = errorMessages.concat(errorArray);
           }
         }

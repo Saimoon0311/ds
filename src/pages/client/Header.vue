@@ -45,12 +45,22 @@
                   @click="goToChatsPage()"
                   >Messages</button> -->
 
-                <router-link
+                <!-- <router-link
                   to="/messages-history"
                   class="nav-link fw-normal menuItem-active-link"
                   id="lawyers"
                   aria-current="page"
                   >Messages</router-link
+                > -->
+
+                <router-link
+                  to="/messages-history"
+                  class="nav-link fw-normal menuItem-active-link"
+                  id="lawyers"
+                  aria-current="page"
+                  >Messages
+                    <span class="countmsg" v-if="noti_msg && noti_msg.length > 0">{{ noti_msg }}</span>
+                  </router-link
                 >
 
                 <router-link
@@ -179,6 +189,11 @@
 export default {
   data() {
     return {};
+  },
+  computed:{
+    noti_msg() {
+      return this.$store.state.noti_count_msg;
+    }
   },
   components: {},
   methods: {},

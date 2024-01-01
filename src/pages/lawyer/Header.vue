@@ -58,7 +58,7 @@
                   id="lawyers"
                   aria-current="page"
                   >Messages
-                    <span class="countmsg">1</span>
+                    <span class="countmsg" v-if="noti_msg && noti_msg.length > 0">{{ noti_msg }}</span>
                   </router-link
                 >
 
@@ -169,6 +169,11 @@
 </template>
 <script>
 export default {
+  computed: {
+    noti_msg() {
+      return this.$store.state.noti_count_msg;
+    },
+  },
   components: {},
   // methods: {
   // },
@@ -269,19 +274,6 @@ ul.dropdown-menu.show {
 .lg-btn button {
   color: #000000a6 !important;
   font-weight: 400;
-}
-span.countmsg {
-    border-radius: 50%;
-    background: red;
-    width: 20px;
-    position: absolute;
-    height: 20px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 500;
-    color: white;
-    top: 0;
-    right: 0;
 }
 .showonmonb {
   display: none;
