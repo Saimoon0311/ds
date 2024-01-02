@@ -1,7 +1,7 @@
 <template lang="">
   <div>
     <ClientHeader />
-    <div class="container">
+    <div class="container client-proposal">
       <router-link
         class="btn btn-dark btn-sm my-3"
         title="back"
@@ -54,12 +54,12 @@
         <div data-v-511b78bb="" class="tab-content" id="pills-tabContent">
           <div
             data-v-511b78bb=""
-            class="tab-pane fade text-center active show"
+            class="tab-pane fade text-center active show table-over"
             id="pills-home"
             role="tabpanel"
             aria-labelledby="pills-home-tab"
           >
-            <table class="table  table-layout" id="bidsActive">
+            <table class="table table-layout" id="bidsActive">
               <thead class="">
                 <tr>
                   <th class="">Lawyer</th>
@@ -129,7 +129,7 @@
                   <!-- <td>Yes</td>
                   <td>No</td> -->
                   <td style="width:15%" v-if="tab == 'Open'">
-                    <div class="text-center" v-if="item?.status == 'Open'">
+                    <div class="text-center btn-wid" v-if="item?.status == 'Open'">
                      
                       <button
                         class="btn btn-dark text-white btn-sm border p-1 px-2 mb-1 w-75 rounded-pill"
@@ -423,6 +423,7 @@ ul#pills-tab {
   overflow-y: auto;
   padding-right: 10px;
   margin-right: 5px;
+  text-align: start;
 }
 
 .descriptionText::-webkit-scrollbar {
@@ -440,4 +441,24 @@ ul#pills-tab {
   box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
   border-radius: 10px;
 }
+
+
+@media only screen and (max-width: 600px) {
+table#bidsActive {
+    table-layout: auto;
+    white-space: nowrap;
+    width: 100%;
+}
+.table-over{
+  overflow-x: auto;
+}
+.w-75{
+  width: 100% !important;
+}
+.btn-wid{
+  display: flex;
+    flex-wrap: wrap;
+}
+}
+
 </style>

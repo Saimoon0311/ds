@@ -25,7 +25,7 @@
       </div>
       <div class="p-3">
       <div class="card-body d-flex align-items-start justify-content-between">
-        <p class="text-left text-black text-bold title pt-3 ">
+        <p class="text-left text-black  title pt-3 ">
           {{ jobData?.title }}
         </p>
       </div>
@@ -95,7 +95,7 @@ export default {
 }
 .title{
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 600 !important;
 }
 .descriptionText::-webkit-scrollbar {
   width: 6px;

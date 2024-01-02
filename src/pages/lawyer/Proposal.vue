@@ -2108,7 +2108,7 @@
 
         <div class="stepbtn mt-3">
           <span v-if="selectedOption == 'Pro'">
-            <span class="pagination-indicator"> {{ 2 }} of {{ 2 }} </span>
+            <span class="pagination-indicator"> {{ currentStep  }} of {{ 3 }} </span>
           </span>
           <span v-else>
             <span v-if="currentStep !== 5" class="pagination-indicator">
