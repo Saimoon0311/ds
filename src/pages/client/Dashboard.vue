@@ -572,6 +572,7 @@ p.badge {
   overflow-y: auto;
   padding-right: 10px;
   margin-right: 5px;
+  text-align: start;
 }
 
 .descriptionText::-webkit-scrollbar {

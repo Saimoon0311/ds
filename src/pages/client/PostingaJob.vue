@@ -292,24 +292,22 @@
               <div class="summ mb-3">
                 <p class="h4 text-center fw-bold mb-3 mt-2">Summary</p>
                 <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
+                <div class="card-cus">
+                  
+
                 <div class="sum-top mb-3 bg-dark">
                   <p class="areas text-decoration-none badge text-white">
                     {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
                   </p>
 
                 </div>
+                <div class="inner">
                 <h4 class=" text-start title-font text-black mt-3 mb-3"><b>{{ title }}</b>
                 </h4>
                 <p class="text-black descriptionText">{{ description }}</p>
                 <h4 class="mb-3 text-capitalize"><b>Location:</b> {{ city }}, {{ locations[selectedLocationIndex].title }}
                 </h4>
-                <!-- <h4><b>State/Territory</b></h4> -->
-                <!-- <h4></h4> -->
-                <!-- <h4>City</h4> -->
-                <!-- <h4>{{ city }}</h4> -->
-                <!-- <span v-if="requirementsOption">
-                <h4 class="d-inline"><b>Accessibility Requirements: </b></h4>
-              </span> -->
+              
 
                 <div v-if='this.VisualIsChecked ||
                   this.AuditoryIsChecked ||
@@ -397,26 +395,11 @@
 
 
                 </div>
-                <!-- ---- -->
               </div>
-              <!-- <span v-if="requirementsOption">
-              <h4>Accessibility Requirements Details</h4>
-              <p>{{ requirementsOptionDescription }}</p>
-            </span> -->
-              <!-- <label for="city" class="mb-3">Do you have any accessibility requirements, such as a disability or speaking a
-            language other
-            than English?</label>
-
-          <input type="radio" id="yes" name="requirements" value=1 v-model="requirementsOption">
-          <label for="yes" class="req-label"> Yes</label><br>
-          <input type="radio" id="no" name="requirements" value=0 v-model="requirementsOption">
-          <label for="no" class="req-label"> No</label><br>
-          <div v-if="requirementsOption == 1">
-            <label for="job" class="mt-2 mb-2">Please describe your accessibility requirement.</label>
-            <textarea v-model="requirementsOptionDescription" name="accessibility" id="" type="textarea"
-              class="form-control mb-5"
-              placeholder="e.g. physical disability, mental disability, language (e.g. Mandarin, Arabic, Vietnamese, Spanish, etc)"></textarea>
-          </div> -->
+               
+              </div>
+              </div>
+          
             </template>
 
             <div class="stepbtn">
@@ -920,6 +903,13 @@ export default {
   padding: 10px;
   margin: 0;
 }
+.card-cus {
+    box-shadow: 5px 5px 20px #00000017; 
+    border-radius: 0 0 10px 10px;   
+}
+.card-cus .inner{
+  padding: 0 15px 15px 15px;
+}
 
 .summ .font-small {
   font-size: 13px !important;
@@ -1083,7 +1073,7 @@ input[type="checkbox"]:checked {
 .sum-top {
   background-color: #373b3e !important;
   padding: 15px;
-  border-radius: 10px;
+  border-radius:10px 10px 0 0;
 }
 
 .title-font {
