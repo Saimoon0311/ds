@@ -301,6 +301,8 @@ export default {
         console.log(proposal_id, lawyer, job_id, chat_id);
         // console.log(this.getJobChat(chat_id));
 
+        console.log('accept bid job : ' , this.jobData);
+
         const messagesRef = collection(db, "chats", chat_id, "messages");
         this.getJobChat(messagesRef)
           .then((messages) => {
