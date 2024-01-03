@@ -53,7 +53,7 @@
               tabindex="-1"
               @click="setStatus('reject')"
             >
-              Approved or Reject
+              Approved or Rejected
             </button>
           </li>
         </ul>

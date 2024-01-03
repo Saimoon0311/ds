@@ -31,11 +31,20 @@ const store = createStore({
     endOfResult : false,
     noti_count_job : 0,
     noti_count_msg : 0,
+    isNotHeaderChat : null,
   },
   mutations: {
     // SET_LAWYER_ELIGIBLE_STATUS(state,value){
     //   state.lawyerEligibleStatus = value
     // },
+    SET_IS_NOT_HEADER_CHAT(state,value){
+      if(value) {
+        localStorage.setItem('isNotHeaderChat',value);
+      }else{
+        localStorage.removeItem('isNotHeaderChat');
+      }
+      state.isNotHeaderChat = value;
+    },
     SET_NOTI_COUNT_MSG(state,value){
       console.log('under state : ',value);
       state.noti_count_msg = value;
@@ -123,6 +132,7 @@ const store = createStore({
     // Your actions go here
   },
   getters: {
+    isNotHeaderChat : (state) => state.isNotHeaderChat,
     userType : (state) => state.userType,
     isAuthenticated: (state) => state.isAuthenticated,
     loginUser: (state) => state.loginUser,

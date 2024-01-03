@@ -26,7 +26,11 @@
 
         <h2 class="mainHeading">Messages</h2>
 
-        <h4 v-if="client_data.length == 0" class="text-center">No chat found!</h4>
+        <p v-if="client_data.length == 0" class="text-center">
+          Here is where you'll find all the messages a {{ userFirst?.type == "lawyer" ? 'client' : 'lawyer' }}
+          sends you or you send to a {{ userFirst?.type == "lawyer" ? 'client' : 'lawyer' }}. You currently have no
+          messages.
+        </p>
 
         <!-- client names start -->
         <div v-if="client_data.length > 0" :class="{ 'col-md-3 p-2  rounded border': true }">
@@ -71,10 +75,11 @@
               <!-- class="chatbox col-md-7 m-auto -->
               <div>
 
-        
+
                 <div v-if="chatStatus == 'new' && userFirst?.type == 'lawyer'" class="alert alert-danger" role="alert">
-                You can only send one message to the client if you need more information about the job in order to submit a proposal. If they respond to your message however, you will be able to communicate freely.
-              </div>
+                  You can only send one message to the client if you need more information about the job in order to
+                  submit a proposal. If they respond to your message however, you will be able to communicate freely.
+                </div>
 
 
                 <div class="text-right my-4">
@@ -175,9 +180,15 @@ export default {
   },
 
   created() {
+    if(!this.isNotHeaderChatComputed && this.jobTabName){
+      this.$store.commit('SET_DATATAB',null);
+    }
     this.resetCount('message');
   },
 
+  beforeUnmount() {
+    this.$store.commit("SET_IS_NOT_HEADER_CHAT", null);
+  },
 
   mounted() {
     this.scrollToBottom();
@@ -218,9 +229,23 @@ export default {
           // this.$store.commit('SET_JOB_DATA',res?.data?.job);
           // localStorage.setItem('jobData',JSON.stringify(res?.data?.job));
         }
-        console.log('maaz 2 : ', index);
+
+        if (index == 0) {
+          this.$store.commit("SET_JOB_DATA", this.client_data2[0]?.job);
+          this.$store.commit('SET_USERTOCHAT', this.userFirst?.type == 'lawyer' ? this.client_data2[0]?.client : this.client_data2[0]?.lawyer);
+          console.log('maaz 2 : ', this.userSecond);
+        }
         this.startChatForAllMessages(this.client_data2[index], false);
 
+      }
+
+      if (this.userFirst?.type == "lawyer" && this.isNotHeaderChatComputed && this.client_data2.length == 0) {
+        let obj = {
+          job: res?.data?.job,
+        }
+        obj[this.userSecond?.type] = this.userSecond;
+        this.client_data2.unshift(obj);
+        this.startChatForAllMessages(this.client_data2[0], false);
       }
 
       console.log(' cleint data : ', this.client_data);
@@ -232,6 +257,9 @@ export default {
 
 
   computed: {
+    isNotHeaderChatComputed() {
+      return this.$store.state.isNotHeaderChat;
+    },
     noti_msg() {
       return this.$store.state.noti_count_msg;
     },
@@ -352,10 +380,25 @@ export default {
     // this.$store.commit("SET_JOB_DATA", data?.job);
 
     startChatForAllMessages(data, changeJobData = true) {
+
+
+      if (this.userFirst?.type == "lawyer") {
+        console.log('t1 : ', data)
+        if (data?.job?.lawyer_chat == null) {
+          console.log('t2 : ')
+          this.$store.commit("SET_CHATSTATUS", "new");
+        } else {
+          console.log('t3 : ')
+          this.$store.commit("SET_CHATSTATUS", "old");
+        }
+      }
+
+      console.log("start chat for all messages");
       const index = data?.id;
       if (changeJobData) {
         this.$store.commit("SET_JOB_DATA", data?.job);
-        this.$store.commit('SET_USERTOCHAT', data?.client);
+        // this.$store.commit('SET_USERTOCHAT', data?.client);
+        this.$store.commit('SET_USERTOCHAT', this.userFirst?.type == 'lawyer' ? data?.client : data?.lawyer);
       }
       console.log('ddddd ttttt aaa  : ', data);
       this.myJobData = data?.job;
@@ -364,10 +407,10 @@ export default {
       this.clientSelected = true;
 
       this.chatId = data?.chat_id;
-      this.hideInput = data?.client?.is_closed;
+      this.hideInput = data?.is_closed;
       this.loadMessages();
 
-      console.log('hit 2  : ', this.userFirst?.type, this.showAllMessages, this.lawyerSelected)
+      console.log('hit 22222222222222222  : ', data);
     },
 
     closeChatForAllMessages() {
@@ -707,16 +750,19 @@ section.chatSection {
     font-size: 16px;
   }
 }
+
 @media screen and (max-width: 480px) {
   .chatbox {
     width: 100%;
     margin: 0 auto;
     margin-top: 10px;
     margin-left: 0 !important;
-}
-.badge, .smallFont{
-  padding: 6px;
-}
+  }
+
+  .badge,
+  .smallFont {
+    padding: 6px;
+  }
 }
 
 @media screen and (max-width: 350px) {

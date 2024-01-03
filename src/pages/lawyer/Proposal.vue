@@ -1848,7 +1848,7 @@
             <!-- <span v-if="selectedOption == 'Hourly'"> -->
             <div v-if="form.retainer_fee">
               <p>
-                <span> Retainer Fee with period:</span>
+                <span> Retainer fee:</span>
                 <span
                   >${{ formatNumber(parseFloat(form.retainer_fee)) }}/{{
                     form.retainer_period
