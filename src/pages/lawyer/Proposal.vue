@@ -1885,7 +1885,7 @@
             <div v-if="form.daily_rate">
               <p>
                 <span> Daily Rate:</span>
-                <span>{{ formatNumber(form.daily_rate) }}</span>
+                <span>${{ formatNumber(form.daily_rate) }}</span>
               </p>
             </div>
 
@@ -1985,7 +1985,7 @@
             <div v-if="form.law_practice_cost">
               <p>
                 <span> Law Practice Cost:</span>
-                <span>{{ formatNumber(form.law_practice_cost) }}</span>
+                <span>${{ formatNumber(form.law_practice_cost) }}</span>
               </p>
             </div>
 

@@ -271,9 +271,7 @@
                 class="alert alert-danger"
                 role="alert"
               >
-                You can send one message to the client if you need more
-                information about the job in order to submit a proposal. if
-                client reply you so you are free to chat with client.
+              You can only send one message to the client if you need more information about the job in order to submit a proposal. If they respond to your message however, you will be able to communicate freely.
               </div>
 
               <div class="text-right my-4"></div>
@@ -566,7 +564,7 @@ export default {
         ) {
           this.$swal(
             "",
-            "You can not send message until client reply on your first messages, please wait for client reply",
+            "You are only permitted to send one message initially. If the potential client responds to your message then you will be able to communicate freely.",
             "error"
           );
           this.newMessage = "";

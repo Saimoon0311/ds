@@ -14,21 +14,23 @@
           </p>
           &nbsp;
         </div>
-        
+
 
         <div class="d-flex align-items-center">
-          <div v-if="userFirst?.type == 'client'" >
-            <button @click="goToViewProposals(jobData)" class="btn btn-dark btn-sm">Proposals</button>
-          </div>
+        
+            <div v-if="userFirst?.type == 'client'">
+              <button @click="goToViewProposals(jobData)" class="btn btn-dark btn-sm">Proposals</button>
+            </div>
 
-          <div class="mx-1">
-            <button @click="openJobDetailModal(jobData)" class="btn btn-dark btn-sm">See Details</button>
+            <div class="mx-1">
+              <button @click="openJobDetailModal(jobData)" class="btn btn-dark btn-sm">Job Details</button>
+            </div>
+        
+          <div class="ms-2">
+            <p span class="smallFont m-0">
+              <b>Job No: </b>{{ jobData?.identity }}
+            </p>
           </div>
-          <div>
-          <p span class="smallFont m-0">
-            <b>Job No: </b>{{ jobData?.identity }}
-          </p>
-        </div>
 
         </div>
       </div>
@@ -178,5 +180,6 @@ export default {
     align-content: flex-start;
     flex-wrap: wrap;
   }
-}</style>
+}
+</style>
   

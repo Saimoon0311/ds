@@ -63,16 +63,18 @@
           </div> -->
           <div class="chatbox ms-1">
 
+            <!-- <JobHeader :jobData="jobData" /> -->
             <JobHeader :jobData="jobData" />
 
             <div class="row lawyer">
               <!-- <div v-if="chatStatus && jobId && userFirst && userSecond && jobTabName != 'close'" class="chatbox col-md-7 m-auto"> -->
               <!-- class="chatbox col-md-7 m-auto -->
               <div>
-                <!-- <div v-if="chatStatus == 'new'" class="alert alert-danger" role="alert">
-                You can send one message to the client if you need more information about the job in order to submit a
-                proposal. if client reply you so you are free to chat with client.
-              </div> -->
+
+        
+                <div v-if="chatStatus == 'new' && userFirst?.type == 'lawyer'" class="alert alert-danger" role="alert">
+                You can only send one message to the client if you need more information about the job in order to submit a proposal. If they respond to your message however, you will be able to communicate freely.
+              </div>
 
 
                 <div class="text-right my-4">
@@ -168,18 +170,71 @@ export default {
       showTypeError: false,
       is_client_reply: false,
       hideInput: false,
+      myJobData: null,
     };
   },
+
+  created() {
+    this.resetCount('message');
+  },
+
+
+  mounted() {
+    this.scrollToBottom();
+    console.log('f check start')
+    console.log('userFirst : ', this.userFirst);
+    console.log('userSecond : ', this.userSecond);
+    console.log('jobId : ', this.jobId);
+    console.log('jobData : ', this.jobData);
+    console.log('chatStatus : ', this.chatStatus);
+    console.log('chatId : ', this.chatId);
+    console.log('f check end')
+
+    const job = this.$route.query.job;
+    let endpoint = (typeof job === "undefined") ? '/get-all-users-of-jobs' : `/get-all-users-of-jobs/${job}`;
+    // show all messages
+    api2.get(endpoint).then((res) => {
+
+      this.client_data = res?.data?.users;
+      this.client_data2 = this.client_data;
+
+      if (this.client_data2.length > 0) {
+        let index = 0;
+        console.log('maaz : ', res?.data?.job);
+        if (res?.data?.job != null) {
+          this.myJobData = res?.data?.job;
+          console.log('check state job data : ', this.myJobData)
+          index = this.client_data2.findIndex(job => job.job_id === res?.data?.job.id);
+
+          if (index == -1) {
+            let obj = {
+              job: res?.data?.job,
+            }
+            obj[this.userSecond?.type] = this.userSecond;
+            this.client_data2.unshift(obj);
+          }
+
+
+          // this.$store.commit('SET_JOB_DATA',res?.data?.job);
+          // localStorage.setItem('jobData',JSON.stringify(res?.data?.job));
+        }
+        console.log('maaz 2 : ', index);
+        this.startChatForAllMessages(this.client_data2[index], false);
+
+      }
+
+      console.log(' cleint data : ', this.client_data);
+    }).catch((err) => {
+      console.log(err);
+    })
+    this.loadMessages();
+  },
+
 
   computed: {
     noti_msg() {
       return this.$store.state.noti_count_msg;
     },
-    jobData() {
-      // console.log('job data : ' , this.$store.state.jobData);
-      return this.$store.state.jobData;
-    },
-
     // lawyerEligibleStatus() {
     //   return this.$store.state.lawyerEligibleStatus;
     // },
@@ -190,6 +245,7 @@ export default {
       return this.$store.state.chatStatus;
     },
     jobId() {
+      // console.log('job data 1 : ' , this.$store.state.jobIdToChat);
       return this.$store.state.jobIdToChat;
     },
     userFirst() {
@@ -197,35 +253,18 @@ export default {
     },
     userSecond() {
       return this.$store.state.userToChat;
-    }
+    },
+    jobData() {
+      // console.log('job data 2 2 2 : ' , this.$store.state.jobData);
+      return this.$store.state.jobData;
+    },
   },
 
-  created() {
-    this.resetCount('message');
-  },
-
-  mounted() {
-    this.scrollToBottom();
-    // show all messages
-    api2.get('/get-all-users-of-jobs').then((res) => {
-      this.client_data = res?.data;
-      this.client_data2 = this.client_data;
-
-      if (this.client_data2.length > 0) {
-        this.startChatForAllMessages(this.client_data2[0]);
-      }
-
-      console.log(' cleint data : ', this.client_data);
-    }).catch((err) => {
-      console.log(err);
-    })
-
-    this.loadMessages();
-  },
   updated() {
     // Scroll to the bottom when the component is updated (e.g., when new messages are added)
     this.scrollToBottom();
   },
+
   methods: {
     scrollToBottom() {
       // Access the element using the $refs object
@@ -310,13 +349,20 @@ export default {
       }
     },
 
-    startChatForAllMessages(data) {
+    // this.$store.commit("SET_JOB_DATA", data?.job);
+
+    startChatForAllMessages(data, changeJobData = true) {
       const index = data?.id;
-      this.$store.commit("SET_JOB_DATA", data?.job);
+      if (changeJobData) {
+        this.$store.commit("SET_JOB_DATA", data?.job);
+        this.$store.commit('SET_USERTOCHAT', data?.client);
+      }
+      console.log('ddddd ttttt aaa  : ', data);
+      this.myJobData = data?.job;
       console.log('hit 1')
       this.userSelectedIndex = index;
       this.clientSelected = true;
-      this.$store.commit('SET_USERTOCHAT', data?.client);
+
       this.chatId = data?.chat_id;
       this.hideInput = data?.client?.is_closed;
       this.loadMessages();
@@ -346,6 +392,7 @@ export default {
       console.log('chat id 1::::: ', this.chatId);
       if (this.chatId == null) {
         this.chatId = (this.userFirst?.type == "lawyer") ? `${this.userFirst?.email}_${this.userSecond?.email}` : `${this.userSecond?.email}_${this.userFirst?.email}`;
+        this.chatId = `${this.chatId}_${this.jobId}`;
       }
       console.log('chat id 2::::: ', this.chatId);
       const messagesRef = collection(db, 'chats', this.chatId, 'messages');
@@ -371,7 +418,7 @@ export default {
           this.messages.length == 1 &&
           this.messages[0].sender_email == this.userFirst?.email
         ) {
-          this.$swal("", "You can not send message until client reply on your first messages, please wait for client reply", "error");
+          this.$swal("", "You are only permitted to send one message initially. If the potential client responds to your message then you will be able to communicate freely.", "error");
           this.newMessage = '';
           return false;
         }
@@ -400,19 +447,19 @@ export default {
         const lawyer_id = (this.userFirst?.type == "lawyer") ? this.userFirst?.id : this.userSecond?.id;
         const client_id = (this.userFirst?.type == "client") ? this.userFirst?.id : this.userSecond?.id;
 
+        console.log('dosra user : ', this.userSecond);
+        const payload = {
+          title: "New Message",
+          noti_status: "message",
+          sender_id: this.userFirst?.id,
+          receiver_id: this.userSecond?.id,
+        }
 
-          const payload = {
-            title : "New Message",
-            noti_status : "message",
-            sender_id : this.userFirst?.id,
-            receiver_id : this.userSecond?.id,
-          }
-
-          api2.post('/send-notification',payload).then((res) => {
-               console.log(res); 
-              }).catch((error)=>{
-                console.log(error);
-              });
+        api2.post('/send-notification', payload).then((res) => {
+          console.log(res);
+        }).catch((error) => {
+          console.log(error);
+        });
 
 
         if (this.chatStatus == "new" && this.userFirst?.type == "lawyer") {
