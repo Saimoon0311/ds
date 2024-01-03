@@ -1913,7 +1913,7 @@
               </p>
             </div>
 
-            <div v-if="form.fee_earners && selectedOption == 'Hourly'" class="mb-2">
+            <div v-if="rows3.length > 0 && form.fee_earners && selectedOption == 'Hourly'" class="mb-2">
               <div class="d-flex table-title">
                 <h5 style="text-align: left !important">Fee Earners:</h5>
                 <span @click="toggleDiv" class="summarytogicon mr-2">
@@ -1949,7 +1949,7 @@
               </p>
             </div>
 
-            <div class="mb-2">
+            <div class="mb-2" v-if="this.rows.length > 0">
               <div class="d-flex table-title">
                 <h5 style="text-align: left !important">
                   Itemised Disbursements:
@@ -2236,6 +2236,45 @@ export default {
       },
     };
   },
+
+  watch: {
+    'form.disbursement_amount': function(newVal) {
+      if (isNaN(newVal)) {
+        this.form.disbursement_amount = null;
+      }
+    },
+    'form.fixed_fee_amount': function(newVal) {
+      if (isNaN(newVal)) {
+        this.form.fixed_fee_amount = null;
+      }
+    },
+    'form.upfront_payment': function(newVal) {
+      if (isNaN(newVal)) {
+        this.form.upfront_payment = null;
+      }
+    },
+    'form.hourly_rate': function(newVal) {
+      if (isNaN(newVal)) {
+        this.form.hourly_rate = null;
+      }
+    },
+    'form.daily_rate': function(newVal) {
+      if (isNaN(newVal)) {
+        this.form.daily_rate = null;
+      }
+    },
+    'form.retainer_fee': function(newVal) {
+      if (isNaN(newVal)) {
+        this.form.retainer_fee = null;
+      }
+    },
+    'form.estimated_fee': function(newVal) {
+      if (isNaN(newVal)) {
+        this.form.estimated_fee = null;
+      }
+    },
+  },
+
   computed: {
     buttonText() {
       if (this.currentStep === 0 || this.currentStep === 1) {
@@ -2325,8 +2364,7 @@ export default {
 
   methods: {
     setTwoDigitsAfterDecimal(key) {
-      console.log("obj key : ", this.form[key]);
-
+      console.log('key : ' , key);
       if (isNaN(this.form[key])) {
         this.form[key] = null;
       } else {
@@ -2335,6 +2373,31 @@ export default {
     },
 
     calculateTotals() {
+      let grandTotal = 0;
+      if(this.selectedOption == "Hourly" && this.rows3.length > 0){
+        for (const item of this.rows3) {
+          const subTotal = (item.hourly_rate ?? item.hourlyRate) * (item.hours ?? item.estimatedHours);
+          grandTotal += subTotal;
+        }
+      }
+      if(this.selectedOption == "Item" && this.rows2.length > 0){
+        console.log('item by item  : ' , this.rows2);
+        for (const item of this.rows2) {
+          grandTotal += parseFloat(item.total);
+        }
+      }
+
+      let successTotal = 0;
+      if(this.selectedOption == "Success"){
+        successTotal = parseFloat(
+            parseFloat(this.form.estimated_fee) +
+              parseFloat(
+                (this.form.uplift_percentage / 100) * this.form.estimated_fee
+                )
+              )
+      }
+
+      console.log('item by item  2: ' , grandTotal);
       // <option disabled selected value="">Select an option</option>
       //           <option value="Fixed">Fixed fee</option>
       //           <option value="Hourly">Hourly rate</option>
@@ -2351,37 +2414,70 @@ export default {
         case "Fixed":
           console.log("under fixed");
           total =
-            parseFloat(this.form.fixed_fee_amount) +
-            parseFloat(this.form.disbursement_amount);
+            parseFloat(this.form.fixed_fee_amount) 
+            // +
+            // parseFloat(this.form.disbursement_amount);
           break;
         case "Hourly":
           total =
             this.form.fee_earners == "me"
-              ? parseFloat(this.form.hourly_rate) *
-                  parseFloat(this.form.hours) +
-                parseFloat(this.form.disbursement_amount)
-              : parseFloat(this.form.disbursement_amount);
+              ? parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours) 
+                //   +
+                // parseFloat(this.form.disbursement_amount)
+              : parseFloat(grandTotal);
           // arr = (this.form.fee_earners == 'me') ? [(parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)),parseFloat(this.form.disbursement_amount)] : [this.form.disbursement_amount];
           break;
         case "Daily":
           total =
-            parseFloat(this.form.daily_rate) * parseFloat(this.form.days) +
-            parseFloat(this.form.disbursement_amount);
+            parseFloat(this.form.daily_rate) * parseFloat(this.form.days) 
+            // +
+            // parseFloat(this.form.disbursement_amount);
           // arr = (this.form.fee_earners == 'me') ? [(parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)),parseFloat(this.form.disbursement_amount)] : [this.form.disbursement_amount];
           break;
         case "Item":
+          total = parseFloat(grandTotal);
+          break;
         case "Retainer":
         case "Success":
+          total = successTotal;
+          break;
         case "Pro":
-          total = parseFloat(this.form.disbursement_amount);
+          total = 0;
           break;
         default:
           break;
       }
 
-      this.totals["totalExcludingGst"] = this.getTotalWithOutGst(total);
-      this.totals["totalIncludingGst"] = total;
+      console.log('total : : : ' , total);
+      console.log('items : : : ' , this.rows);
+      // parseFloat(this.form.disbursement_amount)
+
+      // this.totals["totalExcludingGst"] = this.getTotalWithOutGst(total);
+      this.totals["totalExcludingGst"] = total;
       this.totals["gst"] = this.getGst(total);
+      console.log('t1 : ' , this.totals["totalExcludingGst"])
+      console.log('t2 : ' , this.totals["gst"])
+      this.totals["totalIncludingGst"] = total + this.totals["gst"];
+      console.log('t3 : ' , this.totals["totalIncludingGst"])
+
+      let disbursement = 0;
+      if(this.isNumericString(this.form.disbursement_amount)){
+        disbursement = parseFloat(this.form.disbursement_amount);
+      }
+      // check if gst applicable in any item of disbursements
+      if(this.rows.length > 0){
+        const gst_applicable_items = this.rows.filter(item => item.gst_not_applicable == "");
+
+        gst_applicable_items.forEach(item => {
+          const gstAmount = 0.1 * parseFloat(item.total);
+          disbursement += gstAmount;
+        });
+      }
+      if(this.isNumericString(this.form.disbursement_amount)){
+        console.log('t4 under if : ' , disbursement);
+        this.totals["totalIncludingGst"] += disbursement;
+      }
+      console.log('cons sole log : ' , this.totals);
     },
 
     // getTotalWithGst(...valuesArray){
@@ -2464,7 +2560,7 @@ export default {
     },
 
     resetForm() {
-      (this.form = {
+      this.form = {
         hours: null,
         hourly_rate: null,
         retainer_period: null,
@@ -2474,7 +2570,7 @@ export default {
         days: null,
         charge_type: null,
         fixed_fee_amount: null,
-        disbursement_amount: null,
+        disbursement_amount: this.form.disbursement_amount,
         law_practice_cost: null,
         fee_earners: "me",
         daily_rate: null,
@@ -2491,12 +2587,13 @@ export default {
         description: null,
         lawyer_id: null,
         job_id: null,
-      }),
-        (this.paySucc = "No"),
+      },
+      console.log('reset ' , this.form);
+        this.paySucc = "No",
         // this.newRow.itemDisbursement = "";
         // this.newRow.costAud = "";
         // this.newRow.gst_not_applicable = false;
-        (this.newRow2.itemDisbursement = "");
+        this.newRow2.itemDisbursement = "";
       this.newRow2.costAud = "";
       this.newRow3.title = "";
       this.newRow3.hourlyRate = "";
@@ -2576,6 +2673,19 @@ export default {
 
     addRow() {
       if (this.newRow.itemDisbursement && this.newRow.costAud) {
+
+        let total = this.rows.reduce((accumulator, currentItem) => {
+          return accumulator + parseFloat(currentItem.total);
+        }, 0);
+        
+        let value_to_check = this.newRow.costAud;
+        let total_to_check = value_to_check += total;
+
+        if(total_to_check > this.form.disbursement_amount){
+          alert("Disbursement's item cost should not greater than disbursement amount");
+          return false;
+        }
+
         this.rows.push({
           itemDisbursement: this.newRow.itemDisbursement,
           costAud: parseFloat(this.newRow.costAud).toFixed(2),
@@ -2741,6 +2851,13 @@ export default {
       this.option = value;
     },
     showElement(value) {
+      // if jus me
+      if(value == "Yes"){
+        this.rows3 = [];
+      }else{
+        this.form.hourly_rate = null;
+        this.form.hours = null;
+      }
       this.isVisible = value;
     },
     showDeadline(value) {

@@ -887,9 +887,7 @@ app.mixin({
       let grandTotal = 0;
       const tableContent = dataArray
         .map((item) => {
-          const subTotal =
-            (item.hourly_rate ?? item.hourlyRate) *
-            (item.hours ?? item.estimatedHours);
+          const subTotal = (item.hourly_rate ?? item.hourlyRate) * (item.hours ?? item.estimatedHours);
           grandTotal += subTotal;
           return `
             <tr>
