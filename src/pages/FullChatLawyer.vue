@@ -24,14 +24,14 @@
 
       <div class="row px-2">
 
-        <h2 class="mainHeading">Messages</h2>
+        <h3 class="mainHeading">Messages</h3>
 
-        <h4 v-if="client_data.length == 0" class="text-center">No chat found!</h4>
+        <h5 v-if="client_data.length == 0" class="text-center">No chat found!</h5>
 
         <!-- client names start -->
         <div v-if="client_data.length > 0" :class="{ 'col-md-3 p-2  rounded border': true }">
-          <h4 class="d-block bg-dark text-white text-center py-2 rounded"> {{ userFirst.type == 'lawyer' ? 'Client' :
-            'Lawyer' }} </h4>
+          <h5 class="d-block bg-dark text-white text-center py-2 rounded"> {{ userFirst.type == 'lawyer' ? 'Client' :
+            'Lawyer' }} </h5>
           <!-- <input class="form-control mb-4" type="text" placeholder="Search Client..." /> -->
           <input class="form-control mb-4" v-model="searchClient" @input="filterItems" placeholder="Search...">
           <ul class="lawyer-list" v-if="client_data2.length > 0">
