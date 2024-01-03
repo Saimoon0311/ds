@@ -105,12 +105,12 @@
                 </tr>
                 <tr v-else class="text-left border-bottom" v-for="(item,index) in data_paginated" :key="index">
                   <!-- <td>testing client (crinimal)</td> -->
-                  <td class="text-center" style="width:15%"> <p @click="openLawyerDetailsModal(item?.lawyer)" class="btn-dark rounded-pill btn text-capitalize fw-bold px-4 py-1">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</p></td>
+                  <td class="text-center" style="width:15%"> <p @click="openLawyerDetailsModal(item?.lawyer)" class="lawname btn-dark rounded-pill btn text-capitalize fw-bold px-4 py-1">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</p></td>
                   <!-- <td>{{ item?.charge_type }}</td> -->
                   <td class="text-center" style="width:30%">
                       
                    
-                      <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ chargeType(item?.charge_type) }}</p>
+                      <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ chargeType(item?.charge_type) }} <span data-toggle="tooltip" data-placement="top" title="How you will charge?"><i class="fas fa-info-circle"></i></span></p>
                       <p class="text-capitalize text-black fw-normal mb-1">{{ item?.fixed_fee_amount ? '$' + formatNumber(item?.fixed_fee_amount) : ''}}</p>
                       <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-0 font-small" @click="openProposalDetailsModal(item)">see more</p>
                     
@@ -133,7 +133,7 @@
                      
                       <button
                         class="btn btn-dark text-white btn-sm border p-1 px-2 mb-1 w-75 rounded-pill"
-                        @click="handleAcceptBidAction(item?.id,item?.lawyer,item?.job_id,item.job?.client_chat?.chat_id)"
+                        @click="handleAcceptBidAction(item?.id,item?.lawyer,item?.job_id,item.job?.client_chat?.chat_id,item?.job?.client_chat?.lawyer_id)"
                       >
                         Accept
                       </button>
@@ -146,10 +146,16 @@
                         </button>
                       </form>
                       <button
+                        :disabled="item?.job?.client_chat?.lawyer_id != item?.lawyer?.id"
                         class="btn btn-light btn-sm p-1 px-2 w-75 rounded-pill mb-1 border"
-                        @click="goToMessagePage(item)"
+                        @click="goToMessagePage(item?.job,'client')"
                       >
                         Message
+                        {{
+                          item?.job?.client_chat?.lawyer_id != item?.lawyer?.id
+                            ? ", (N/A)"
+                            : ""
+                        }}
                       </button>
                       <button
                         class="btn btn-danger btn-sm p-1 px-2 mb-1 w-75 rounded-pill"
@@ -189,7 +195,7 @@ import {
   collection,
   onSnapshot,
 } from "firebase/firestore";
-import db from "@/config/firebaseConfig";
+import { db } from '@/config/firebaseConfig';
 
 export default {
   name: "ClientDashboard",
@@ -266,15 +272,15 @@ export default {
     },
 
 
-    goToMessagePage(item) {
-      console.log(item?.job?.client_chat?.chat_id);
-      this.saveJobInfo(item?.job);
-      this.$store.commit("SET_JOBIDTOCHAT", item?.job?.id);
-      this.$store.commit("SET_CLIENTCOMEFROMPROPOSAL", true);
-      console.log('law : ', item?.lawyer);
-      this.$store.commit("SET_USERTOCHAT", item?.lawyer);
-      this.$router.push({ path: "/messages" });
-    },
+    // goToMessagePage(item) {
+    //   console.log(item?.job?.client_chat?.chat_id);
+    //   this.saveJobInfo(item?.job);
+    //   this.$store.commit("SET_JOBIDTOCHAT", item?.job?.id);
+    //   this.$store.commit("SET_CLIENTCOMEFROMPROPOSAL", true);
+    //   console.log('law : ', item?.lawyer);
+    //   this.$store.commit("SET_USERTOCHAT", item?.lawyer);
+    //   this.$router.push({ path: "/messages" });
+    // },
 
     openDescription(text) {
       this.$swal.fire({
@@ -294,23 +300,31 @@ export default {
       this.$store.commit('SET_ENDPOINT_FOR_PAGINATED_DATA', `/client/job-proposals/${this.jobId}/${status}`);
       await this.getPaginatedData();
     },
-    handleAcceptBidAction(proposal_id, lawyer, job_id, chat_id) {
+    handleAcceptBidAction(proposal_id, lawyer, job_id, chat_id, chat_lawyer_id) {
       try {
+        console.log('handle acccpt : ', chat_lawyer_id);
         let status = "Accept";
         console.log(proposal_id, lawyer, job_id, chat_id);
         // console.log(this.getJobChat(chat_id));
 
-        console.log('accept bid job : ' , this.jobData);
+        console.log('accept bid job : ', this.jobData);
 
-        const messagesRef = collection(db, "chats", chat_id, "messages");
-        this.getJobChat(messagesRef)
-          .then((messages) => {
-            console.log('ms : ', messages);
-            this.changeStatus({ status, proposal_id, lawyer, job_id,messages });
-          })
-          .catch((error) => {
-            console.error("Error fetching messages:", error);
-          });
+        // check if lawyer and client has chat on this job
+        if (lawyer?.id === chat_lawyer_id) {
+          console.log('f1 chat id, ' , db);
+          const messagesRef = collection(db, "chats", chat_id, "messages");
+          console.log('f2 message ref, ' , messagesRef);
+          this.getJobChat(messagesRef)
+            .then((messages) => {
+              console.log('ms : ', messages);
+              this.changeStatus({ status, proposal_id, lawyer, job_id, messages });
+            })
+            .catch((error) => {
+              console.error("Error fetching messages:", error);
+            });
+        } else {
+          this.changeStatus({ status, proposal_id, lawyer, job_id });
+        }
 
       } catch (error) {
         console.error("Error fetching options:", error);
@@ -335,7 +349,7 @@ export default {
           api.post('/client/change-proposal-status', obj).then(res => {
             // this.$swal('', `Proposal has been ${obj.status}ed successfully`, 'success').then(async () => {
             let msg = "";
-            if (obj.status == "accept" || obj.status == "Accept") {
+            if (obj.status.toLowerCase() == "accept") {
               msg = `Congratulations on finding a lawyer!
                 We're so glad that you found a lawyer for your job '[${this.jobData?.title} - ${this.jobData?.identity}.]' through Simplawfy. 
                 Here are your lawyer's contact details so you can communicate with them directly:
@@ -347,7 +361,7 @@ export default {
             }
 
             this.$swal('', msg, 'success').then(async () => {
-              if (obj.status == "accept" || obj.status == "Accept") {
+              if (obj.status.toLowerCase() == "accept") {
                 this.$router.push("/client-dashboard");
               } else {
                 await this.getPaginatedData();
@@ -366,6 +380,10 @@ export default {
 </script>
 
 <style scoped>
+.lawname {
+  font-size: 14px;
+}
+
 .font-small {
   font-size: 12px;
 }
@@ -443,21 +461,30 @@ ul#pills-tab {
 
 
 @media only screen and (max-width: 600px) {
-table#bidsActive {
+
+  table#bidsActive tr th:first-child,
+  table#bidsActive tr td:first-child {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+  }
+
+  table#bidsActive {
     table-layout: auto;
     white-space: nowrap;
     width: 100%;
-}
-.table-over{
-  overflow-x: auto;
-}
-.w-75{
-  width: 100% !important;
-}
-.btn-wid{
-  display: flex;
-    flex-wrap: wrap;
-}
-}
+  }
 
-</style>
+  .table-over {
+    overflow-x: auto;
+  }
+
+  .w-75 {
+    width: 100% !important;
+  }
+
+  .btn-wid {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}</style>

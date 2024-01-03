@@ -22,7 +22,7 @@
         </div>
       </div> -->
 
-      <div class="row">
+      <div class="row px-2">
 
         <h2 class="mainHeading">Messages</h2>
 
@@ -71,10 +71,10 @@
               <!-- class="chatbox col-md-7 m-auto -->
               <div>
 
-                <!-- sirf lawyer per jab status new ho to first messsage per  -->
-                <!-- <div v-if="chatStatus == 'new'" class="alert alert-danger" role="alert">
+        
+                <div v-if="chatStatus == 'new' && userFirst?.type == 'lawyer'" class="alert alert-danger" role="alert">
                 You can only send one message to the client if you need more information about the job in order to submit a proposal. If they respond to your message however, you will be able to communicate freely.
-              </div> -->
+              </div>
 
 
                 <div class="text-right my-4">
@@ -693,6 +693,17 @@ section.chatSection {
   h4 {
     font-size: 16px;
   }
+}
+@media screen and (max-width: 480px) {
+  .chatbox {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-left: 0 !important;
+}
+.badge, .smallFont{
+  padding: 6px;
+}
 }
 
 @media screen and (max-width: 350px) {

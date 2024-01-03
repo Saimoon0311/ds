@@ -17,6 +17,7 @@
           >
             <li data-v-511b78bb="" class="nav-item" role="presentation">
               <button
+                ref="tabOpenButton"
                 data-v-511b78bb=""
                 :class="{ 'nav-link': true, active: tab == 'open', 'count_btn' : true }"
                 id="pills-home-tab"
@@ -333,6 +334,9 @@ export default {
     await this.loadMore();
     // this.getNextUser();
     window.addEventListener('scroll', this.getNextUser);
+
+    const button = this.$refs.tabOpenButton;
+    button.click(); 
 
     // if(this.jobTabName){
     //   this.setTab(this.jobTabName);
