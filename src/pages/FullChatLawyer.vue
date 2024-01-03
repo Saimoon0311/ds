@@ -79,7 +79,7 @@
 
                 <div class="text-right my-4">
                 </div>
-                <div v-if="messages.length > 0" class="chat-messages">
+                <div v-if="messages.length > 0" class="chat-messages" ref="msgbox">
                   <div v-for="message in messages" :key="message.id" class="message">
                     <div
                       :class="{ 'own-message': message.sender_email !== loginUserEmail, 'against-msg': message.sender_email == loginUserEmail }">
@@ -180,7 +180,7 @@ export default {
 
 
   mounted() {
-
+    this.scrollToBottom();
     console.log('f check start')
     console.log('userFirst : ', this.userFirst);
     console.log('userSecond : ', this.userSecond);
@@ -260,8 +260,21 @@ export default {
     },
   },
 
+  updated() {
+    // Scroll to the bottom when the component is updated (e.g., when new messages are added)
+    this.scrollToBottom();
+  },
 
   methods: {
+    scrollToBottom() {
+      // Access the element using the $refs object
+      const msgbox = this.$refs.msgbox;
+
+      // Scroll to the bottom
+      if (msgbox) {
+        msgbox.scrollTop = msgbox.scrollHeight;
+      }
+    },
 
     filterItems() {
       const query = this.searchClient.toLowerCase();
