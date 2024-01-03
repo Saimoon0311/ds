@@ -105,12 +105,12 @@
                 </tr>
                 <tr v-else class="text-left border-bottom" v-for="(item,index) in data_paginated" :key="index">
                   <!-- <td>testing client (crinimal)</td> -->
-                  <td class="text-center" style="width:15%"> <p @click="openLawyerDetailsModal(item?.lawyer)" class="btn-dark rounded-pill btn text-capitalize fw-bold px-4 py-1">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</p></td>
+                  <td class="text-center" style="width:15%"> <p @click="openLawyerDetailsModal(item?.lawyer)" class="lawname btn-dark rounded-pill btn text-capitalize fw-bold px-4 py-1">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</p></td>
                   <!-- <td>{{ item?.charge_type }}</td> -->
                   <td class="text-center" style="width:30%">
                       
                    
-                      <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ item?.charge_type }}</p>
+                      <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ item?.charge_type }} <span data-toggle="tooltip" data-placement="top" title="How you will charge?"><i class="fas fa-info-circle"></i></span></p>
                       <p class="text-capitalize text-black fw-normal mb-1">{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</p>
                       <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-0 font-small" @click="openProposalDetailsModal(item)">see more</p>
                     
@@ -367,6 +367,9 @@ export default {
 </script>
 
 <style scoped>
+.lawname{
+  font-size: 14px;
+}
 .font-small {
   font-size: 12px;
 }
@@ -444,6 +447,11 @@ ul#pills-tab {
 
 
 @media only screen and (max-width: 600px) {
+  table#bidsActive tr th:first-child,table#bidsActive tr td:first-child {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+}
 table#bidsActive {
     table-layout: auto;
     white-space: nowrap;

@@ -22,7 +22,7 @@
         </div>
       </div> -->
 
-      <div class="row">
+      <div class="row px-2">
 
         <h2 class="mainHeading">Messages</h2>
 
@@ -645,6 +645,17 @@ section.chatSection {
   h4 {
     font-size: 16px;
   }
+}
+@media screen and (max-width: 480px) {
+  .chatbox {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-left: 0 !important;
+}
+.badge, .smallFont{
+  padding: 6px;
+}
 }
 
 @media screen and (max-width: 350px) {
