@@ -52,7 +52,7 @@
                   @click="goToChatsPage()"
                   >Messages</button> -->
 
-                  <router-link
+                <router-link
                   v-if="loginUserData"
                   to="/messages-history"
                   class="nav-link fw-normal menuItem-active-link"

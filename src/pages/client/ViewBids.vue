@@ -110,8 +110,8 @@
                   <td class="text-center" style="width:30%">
                       
                    
-                      <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ item?.charge_type }}</p>
-                      <p class="text-capitalize text-black fw-normal mb-1">{{ item?.fixed_fee_amount ? '$' + item?.fixed_fee_amount : ''}}</p>
+                      <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ chargeType(item?.charge_type) }}</p>
+                      <p class="text-capitalize text-black fw-normal mb-1">{{ item?.fixed_fee_amount ? '$' + formatNumber(item?.fixed_fee_amount) : ''}}</p>
                       <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-0 font-small" @click="openProposalDetailsModal(item)">see more</p>
                     
 
@@ -238,7 +238,6 @@ export default {
   },
 
   methods: {
-
     // getJobChat(chat_id){
     //   const messagesRef = collection(db, "chats", chat_id, "messages");
     //   let messages = [];

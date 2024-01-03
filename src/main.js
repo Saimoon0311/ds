@@ -167,7 +167,14 @@ app.mixin({
         this.$store.commit("SET_USERTOCHAT", null);
         this.$store.commit("SET_CHATSTATUS", null);
       }
-      this.$router.push({ path: "/messages" });
+      // this.$router.push({ path: "/messages" });
+      this.$router.push({ path: '/messages-history', query: { job: item?.id } });
+    },
+
+    getLastPartOfUrl(){
+      const currentUrl = window.location.href;
+      // Extract the last part of the URL (after the last slash)
+      return currentUrl.split('/').pop();
     },
 
     saveJobInfo(item = null, reset = false) {
@@ -175,6 +182,7 @@ app.mixin({
         this.$store.commit("SET_JOB_DATA", null);
         localStorage.removeItem("jobData");
       } else {
+        console.log('save jbo index , ' , item);
         this.$store.commit("SET_JOB_DATA", item);
         localStorage.setItem("jobData", JSON.stringify(item));
       }
@@ -377,6 +385,36 @@ app.mixin({
           console.log("getResults : ", error);
         });
     },
+
+    chargeType(type){
+      if (type) {
+          let selectedOptionForSummary = "";
+          switch (type) {
+            case "Fixed":
+              selectedOptionForSummary = "Fixed fee";
+              break;
+            case "Hourly":
+              selectedOptionForSummary = "Hourly rate";
+              break;
+            case "Daily":
+              selectedOptionForSummary = "Daily rate";
+              break;
+            case "Item":
+              selectedOptionForSummary = "Item by item for specific tasks";
+              break;
+            case "Retainer":
+              selectedOptionForSummary = "Retainer";
+              break;
+            case "Success":
+              selectedOptionForSummary = "Success fee";
+              break;
+            case "Pro":
+              selectedOptionForSummary = "Pro bono";
+              break;
+          }
+          return selectedOptionForSummary;
+        }
+      },
 
     goToViewProposals(data) {
       let id = data?.id;
@@ -776,8 +814,12 @@ app.mixin({
               } else {
                 if (objKey == "lawyer" && value != null) {
                   newData["lawyer email"] = value?.email;
-                } else {
-                  value = this.isNumericString(value) ? "$" + value : value;
+                }
+                else if(key == 'charge_type'){
+                  newData[objKey] = this.chargeType(value);
+                } 
+                else {
+                  value = this.isNumericString(value) ? "$" + this.formatNumber(value) : value;
                   newData[objKey] = value;
                 }
               }
