@@ -42,8 +42,14 @@
             <li @click="startChatForAllMessages(data)" v-for="(data, index) in client_data2" :key="index"
               :class="['bg-light', { 'active': (data?.id == userSelectedIndex) ? true : false }]">
               <span class="lawyer-name" data-toggle="tooltip" data-placement="right" :title="data?.job?.title">
-                {{ data?.client?.first_name ?? data?.lawyer?.first_name }} {{ data?.client?.last_name ??
-                  data?.lawyer?.last_name }} | Job No: {{ data?.job?.identity }}
+                {{ data?.client?.first_name ?? data?.lawyer?.first_name }}
+                <span v-if="userFirst?.type == 'client' && data?.job?.assigned_lawyer_id == data?.lawyer_id">
+                  {{ data?.client?.last_name ?? data?.lawyer?.last_name }}
+                </span>
+                <span v-if="userFirst?.type == 'lawyer' && data?.job?.assigned_lawyer_id == userFirst?.id">
+                  {{ data?.client?.last_name ?? data?.lawyer?.last_name }}
+                </span>  
+                | Job No: {{ data?.job?.identity }}
               </span>
               <!-- <span v-if="data?.client_seen == 0 ||
                 data?.client_seen == false ||
@@ -481,7 +487,7 @@ export default {
       const messagesRef = collection(db, 'chats', this.chatId, 'messages');
       console.log(messagesRef);
       addDoc(messagesRef, {
-        sender_name: `${this.userFirst?.first_name} ${this.userFirst?.last_name}`,
+        sender_name: `${this.userFirst?.first_name}`,
         sender_email: this.userFirst?.email,
         text: this.newMessage,
         timestamp: serverTimestamp(),

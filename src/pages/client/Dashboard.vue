@@ -214,7 +214,7 @@
                       <button 
                             v-if="tab == 'close' && item?.assigned_lawyer != null"
                             class="btn btn-danger btn-sm card-btn my-1 mx-1"
-                            @click="openLawyerDetailsModal(item?.assigned_lawyer)"
+                            @click="openLawyerDetailsModal(item?.assigned_lawyer,item?.assigned_lawyer_id ?? true)"
                           >
                           View Lawyer Details
                           </button>

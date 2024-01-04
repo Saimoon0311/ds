@@ -349,7 +349,10 @@
                                   <b>Posted by: </b>
                                   <span class="text-capitalize">
                                     {{ item?.owner?.first_name }}
-                                    {{ item?.owner?.last_name }} ({{
+                                    <span v-if="tab == 'close'">
+                                      {{ item?.proposal?.status.toLowerCase() == 'accept' ?? item?.owner?.last_name }}  
+                                    </span>
+                                    ({{
                                       item?.city
                                     }}) on
                                     {{ formatCreatedAt(item.created_at) }}
@@ -470,7 +473,7 @@
 
                         <button
                             class="btn btn-danger btn-sm card-btn my-1 mx-1"
-                            @click="openLawyerDetailsModal(item?.owner)">
+                            @click="openLawyerDetailsModal(item?.owner,item?.proposal?.status.toLowerCase() == 'accept')">
                           View Client Details
                         </button>
 

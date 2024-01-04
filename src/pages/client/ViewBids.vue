@@ -105,7 +105,7 @@
                 </tr>
                 <tr v-else class="text-left border-bottom" v-for="(item,index) in data_paginated" :key="index">
                   <!-- <td>testing client (crinimal)</td> -->
-                  <td class="text-center" style="width:15%"> <p @click="openLawyerDetailsModal(item?.lawyer)" class="lawname btn-dark rounded-pill btn text-capitalize fw-bold px-4 py-1">{{ item?.lawyer?.first_name }} {{ item?.lawyer?.last_name }}</p></td>
+                  <td class="text-center" style="width:15%"> <p @click="openLawyerDetailsModal(item?.lawyer,item?.status.toLowerCase() == 'accept')" class="lawname btn-dark rounded-pill btn text-capitalize fw-bold px-4 py-1">{{ item?.lawyer?.first_name }} {{ tab == 'Accept' ? item?.lawyer?.last_name : '' }}</p></td>
                   <!-- <td>{{ item?.charge_type }}</td> -->
                   <td class="text-center" style="width:30%">
                       

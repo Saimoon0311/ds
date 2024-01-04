@@ -594,31 +594,54 @@ app.mixin({
     },
 
     // for lawyer and client details both
-    openLawyerDetailsModal(data) {
+    openLawyerDetailsModal(data,showSecretInfo = false) {
       let newData = {};
       if (data && typeof data === "object") {
         for (const key in data) {
           if (Object.prototype.hasOwnProperty.call(data, key)) {
             const value = data[key];
-            if (
-              value !== null &&
-              value != 0 &&
-              (key == "first_name" ||
-                key == "last_name" ||
-                key == "job_title" ||
-                key == "law_firm" ||
-                key == "link" ||
-                key == "about")
-            ) {
-              let objKey = key;
-              objKey = objKey.replace(/_/g, " ");
-              if (key == "link") {
-                objKey = "Website";
+            if(showSecretInfo){
+              if (
+                value !== null &&
+                value != 0 &&
+                (key == "first_name" ||
+                  key == "last_name" ||
+                  key == "email" || key == "phone" ||
+                  key == "job_title" ||
+                  key == "law_firm" ||
+                  key == "link" ||
+                  key == "about")
+              ) {
+                let objKey = key;
+                objKey = objKey.replace(/_/g, " ");
+                if (key == "link") {
+                  objKey = "Website";
+                }
+                if (key == "about") {
+                  objKey = "About me";
+                }
+                newData[objKey] = value;
               }
-              if (key == "about") {
-                objKey = "About me";
+            }else{
+              if (
+                value !== null &&
+                value != 0 &&
+                (key == "first_name" ||
+                  key == "job_title" ||
+                  key == "law_firm" ||
+                  key == "link" ||
+                  key == "about")
+              ) {
+                let objKey = key;
+                objKey = objKey.replace(/_/g, " ");
+                if (key == "link") {
+                  objKey = "Website";
+                }
+                if (key == "about") {
+                  objKey = "About me";
+                }
+                newData[objKey] = value;
               }
-              newData[objKey] = value;
             }
           }
         }
@@ -742,6 +765,39 @@ app.mixin({
           // ...
         });
     },
+
+
+    // async requestNotificationPermission() {
+    //   try {
+    //     // Get the current FCM token
+    //     const currentToken = await getToken(messaging);
+    //     console.log('old token : ' , messaging);
+    
+    //     // Clear the existing token
+    //     await messaging.deleteToken(currentToken);
+    
+    //     // Request permission for notifications
+    //     const permission = await Notification.requestPermission();
+    
+    //     if (permission === "granted") {
+    //       // Get a new FCM token
+    //       const newToken = await getToken(messaging);
+    //       console.log('old token : ' , newToken)
+    //       // Save the new token to the server
+    //       api.post("/save-fcm-token", { currentToken: newToken })
+    //         .then((res) => {
+    //           console.log("save token response: ", res);
+    //         })
+    //         .catch((error) => {
+    //           console.log("error while saving token: ", error);
+    //         });
+    //     } else {
+    //       console.error("Notification permission denied.");
+    //     }
+    //   } catch (err) {
+    //     console.log("An error occurred while handling FCM token: ", err);
+    //   }
+    // },
 
     // add three dots after some words
     generateExcerpt(text) {
