@@ -65,7 +65,7 @@
               <button class="btn btn-danger" @click="closeChatForAllMessages">x</button>
             </span>
           </div> -->
-          <div class="chatbox ms-1">
+          <div class="chatbox ms-2">
 
             <!-- <JobHeader :jobData="jobData" /> -->
             <JobHeader :jobData="jobData" />
