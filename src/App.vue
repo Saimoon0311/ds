@@ -47,6 +47,9 @@ export default {
     if (this.noti_job == null || this.noti_job == 0) {
       this.$store.commit('SET_NOTI_COUNT_JOB', localStorage.getItem('noti_count_job'));
     }
+    if(this.$store.getters.isNotHeaderChat == null && localStorage.getItem('isNotHeaderChat')){
+      this.$store.commit('SET_IS_NOT_HEADER_CHAT',localStorage.getItem('isNotHeaderChat'));
+    }
     // console.log('app vue mes : ' , messaging);
     // messaging.onBackgroundMessage((payload) => {
     //     console.log('Message received:', payload);

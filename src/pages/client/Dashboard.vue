@@ -188,7 +188,7 @@
                       v-if="tab == 'open'"
                         :disabled="item?.chats && item?.chats.length == 0"
                         class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
-                        @click="goToMessagePage(item)"
+                        @click="goToMessagePage(item,'client')"
                       >
                         Message
                         {{
@@ -201,7 +201,7 @@
                       v-if="tab == 'close'"
                         :disabled="item?.chats && item?.chats.length == 0"
                         class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
-                        @click="goToMessagePage(item)"
+                        @click="goToMessagePage(item,'client')"
                       >
                         View Message
                         {{
@@ -400,21 +400,21 @@ export default {
     },
 
 
-    goToMessagePage(item) {
-      this.saveJobInfo(item);
-      this.saveLoadMoreData();
-      // this.$store.commit('SET_USERTOCHAT',item?.owner);
-      this.$store.commit("SET_JOBIDTOCHAT", item?.id);
+    // goToMessagePage(item) {
+    //   this.saveJobInfo(item);
+    //   this.saveLoadMoreData();
+    //   // this.$store.commit('SET_USERTOCHAT',item?.owner);
+    //   this.$store.commit("SET_JOBIDTOCHAT", item?.id);
 
-      // if(!item?.lawyer_chat){
-      //   this.$store.commit('SET_CHATSTATUS','new');
-      // }else{
-      //   this.$store.commit('SET_CHATSTATUS','old');
-      // }
-      // localStorage.setItem('userEmailToChat',userEmail);
-      this.$store.commit("SET_DATATAB", this.tab);
-      this.$router.push({ path: "/messages" });
-    },
+    //   // if(!item?.lawyer_chat){
+    //   //   this.$store.commit('SET_CHATSTATUS','new');
+    //   // }else{
+    //   //   this.$store.commit('SET_CHATSTATUS','old');
+    //   // }
+    //   // localStorage.setItem('userEmailToChat',userEmail);
+    //   this.$store.commit("SET_DATATAB", this.tab);
+    //   this.$router.push({ path: "/messages" });
+    // },
 
     async setTab(status) {
       this.tab = status;
@@ -654,6 +654,9 @@ p.badge {
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {
+  .card-btn {
+    width: 95%;
+}
 
   /* .btn {
     padding: 5px 0px;

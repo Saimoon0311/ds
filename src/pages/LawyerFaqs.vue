@@ -5,7 +5,7 @@
     <div class="WordSection1 container">
       <!-- ----------- -->
       <h3
-        class="mt-5 mb-5"
+        class="mt-3 mb-3"
         style="text-align: center"
       >
         FAQs
@@ -15,7 +15,7 @@
       
       <!--l faqs ---------- -->
 
-      <p class="mt-5 mb-3" style="font-size: 15px">
+      <p class="mt-3 mb-3" style="font-size: 15px">
             For the purposes of these FAQs, when we refer to ‘client’, we are
             referring to those using our platform to request legal services.
           </p>

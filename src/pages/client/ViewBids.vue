@@ -461,7 +461,14 @@ ul#pills-tab {
 
 
 @media only screen and (max-width: 600px) {
-
+  .descriptionText{
+     width: 100%;
+    text-wrap: wrap;
+    font-size: 14px;
+}
+  .lawname {
+  font-size: 12px;
+}
   table#bidsActive tr th:first-child,
   table#bidsActive tr td:first-child {
     position: -webkit-sticky;

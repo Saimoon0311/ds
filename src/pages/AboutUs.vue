@@ -10,13 +10,9 @@
       <GeneralHeader  />
     </div>
     <div class="WordSection1 container mt-4">
-      <p class="LNDocumentTitleShort" align="center" style="text-align: center">
-        
-        <span
-          style="font-size: 20pt;mso-bidi-font-size: 10.5pt;    font-family: 'Montserrat', sans-serif;mso-fareast-font-family: Calibri;text-transform: uppercase;mso-ansi-language: EN-AU;font-weight: 400:bold"
-          >About Us<o:p></o:p
-        ></span>
-      </p>
+      
+      <h3  class="mt-3 text-center text-uppercase">About Us</h3>
+
 
       <p
         class="LNNumberedHeading1"

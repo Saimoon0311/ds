@@ -2,10 +2,10 @@
   <div class="f-main">
     <ClientHeader />
     <div class="container">
-      <p class="h3 text-center mt-5">Post a Job</p>
+      <p class="h3 text-center mt-3">Post a Job</p>
       <div class="container pb-seven">
         <div class="row justify-content-center">
-          <form @submit.prevent="nextStep" class="col-md-9 border p-3 rounded mt-3">
+          <form @submit.prevent="nextStep" class="col-md-9 border p-3 rounded mt-2">
             <template v-if="currentStep === 0">
               <p class="h4 text-center mb-3 mt-3">
                 Which area of law do you need assistance in?

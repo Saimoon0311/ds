@@ -136,7 +136,7 @@
         </div>
       </div>
     </div>
-    <table class="table table-bordered mt-5 mb-3 table-striped">
+    <table class="table table-bordered mt-3 mb-3 table-striped">
       <tbody>
         <!-- Email -->
         <tr>

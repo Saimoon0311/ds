@@ -458,24 +458,21 @@
 
                         <button
                             @click="openProposalDetailsModal(item.proposal)"
-                            class="btn btn-dark border btn-sm card-btn my-1 mx-1"
-                          >
-                            View Proposal
-                          </button>
+                            class="btn btn-dark border btn-sm card-btn my-1 mx-1">
+                          View Proposal
+                        </button>
 
                         <button
                             class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
-                            @click="goToMessagePage(item,'lawyer')"
-                          >
+                            @click="goToMessagePage(item,'lawyer')">
                           View Message
-                          </button>
+                        </button>
 
-                          <button
+                        <button
                             class="btn btn-danger btn-sm card-btn my-1 mx-1"
-                            @click="openLawyerDetailsModal(item?.owner)"
-                          >
+                            @click="openLawyerDetailsModal(item?.owner)">
                           View Client Details
-                          </button>
+                        </button>
 
                          
 
@@ -626,6 +623,11 @@ export default {
     },
   },
   async created() {
+    console.log('job tab name : ' , this.jobTabName);
+    if(this.jobTabName){
+      this.tab = this.jobTabName;
+    }
+    // this.$store.commit('SET_DATATAB', this.tab);
     await this.loadMore();
     // this.getNextUser();
     window.addEventListener('scroll', this.getNextUser);
@@ -715,6 +717,7 @@ export default {
 
     async changeTab(status) {
       this.tab = status;
+      this.$store.commit('SET_DATATAB', this.tab);
       if (status == "open") {
         this.endpoint = "/lawyer/show-open-related-jobs";
         await this.loadMore(null, true);

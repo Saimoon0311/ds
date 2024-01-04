@@ -167,6 +167,7 @@ app.mixin({
         this.$store.commit("SET_USERTOCHAT", null);
         this.$store.commit("SET_CHATSTATUS", null);
       }
+      this.$store.commit('SET_IS_NOT_HEADER_CHAT',true);
       // this.$router.push({ path: "/messages" });
       this.$router.push({ path: '/messages-history', query: { job: item?.id } });
     },
@@ -809,7 +810,7 @@ app.mixin({
                 specificTasks = [...value];
               } else if (key == "disbursements") {
                 disbursements = [...value];
-              } else if (key == "fee_earners") {
+              } else if (key == "fee_earners" && value != 'me') {
                 feeEarners = [...value];
               } else {
                 if (objKey == "lawyer" && value != null) {
@@ -827,6 +828,9 @@ app.mixin({
           }
         }
       }
+
+      console.log("fee earners 1-1 : ", feeEarners);
+
       const mainHtmlContent = Object.entries(newData)
         .map(
           ([key, value]) =>
@@ -840,30 +844,35 @@ app.mixin({
       if (specificTasks.length > 0) {
         specificTasksTable = this.createTableHtml(
           "Specific Tasks",
-          specificTasks
+          specificTasks,
+          renderAsHtml
         );
       }
+      
       if (disbursements.length > 0) {
         disbursementsTable = this.createTableHtml(
           "Disbursements",
-          disbursements
+          disbursements,
+          renderAsHtml
         );
       }
-      console.log("dis 1 : ", disbursementsTable);
+      
       if (feeEarners.length > 0) {
+        console.log("fee earners : : ", feeEarners);
         feeEarnersTable = this.createTableHtmlFeeEarners(
           "Fee Earners",
-          feeEarners
+          feeEarners,
+          renderAsHtml
         );
       }
-
+      
       const swalHtmlContent = `
         <div class="table-wrap" style="text-align: left !important;">${mainHtmlContent}</div>
         ${specificTasksTable}
         ${disbursementsTable}
         ${feeEarnersTable}
       `;
-
+      console.log('dis bur sement : ' , swalHtmlContent);
       // Use dynamic HTML inside SweetAlert2 modal
 
       if (renderAsHtml) {
@@ -881,7 +890,7 @@ app.mixin({
       }
     },
 
-    createTableHtml(title, dataArray) {
+    createTableHtml(title, dataArray,renderAsHtml = false) {
       const total = dataArray.reduce(
         (total, row) => total + parseFloat(row.cost ?? row.costAud) || 0,
         0
@@ -900,7 +909,7 @@ app.mixin({
         .join("");
 
       return `
-        <div class="table-title"></div>
+        <div class="table-title">${!renderAsHtml ? title : ''}</div>
         <table class='table dynamicTable'>
           <thead>
             <tr class='border'>
@@ -921,7 +930,8 @@ app.mixin({
       `;
     },
 
-    createTableHtmlFeeEarners(title, dataArray) {
+    createTableHtmlFeeEarners(title, dataArray,renderAsHtml = false) {
+      console.log('fee1 : ' , dataArray);
       // const total = dataArray.reduce(
       //   (total, row) => total + parseFloat(row.hourlyRate * row.estimatedHours) || 0,
       //   0
@@ -947,7 +957,7 @@ app.mixin({
         .join("");
 
       return `
-        <div class="table-title"></div>
+        <div class="table-title">${!renderAsHtml ? title : ''}</div>
         <table class='table dynamicTable'>
           <thead>
             <tr>
