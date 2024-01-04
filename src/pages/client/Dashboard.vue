@@ -554,12 +554,13 @@ p.badge {
 }
 
 p.badge {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   border: 1px solid rgba(255, 255, 255, 1);
   background: rgba(255, 255, 255, 0.1);
-  padding: 10px;
+  padding: 0.25rem 0.5rem;
   margin: 0;
+  line-height: 1.5em;
 }
 
 .smallFont {
