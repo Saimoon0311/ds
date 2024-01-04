@@ -4,7 +4,7 @@
       <LawyerHeader />
     </div>
 
-    <div class="container mb my-4">
+    <div class="container mb mb-4 mt-3">
 
 
       <!-- <div class="row">
@@ -24,7 +24,7 @@
 
       <div class="row px-2">
 
-        <h3 class="mainHeading">Messages</h3>
+        <h3 class="mainHeading mb-3">Messages</h3>
 
         <p v-if="client_data.length == 0" class="text-center">
           Here is where you'll find all the messages a {{ userFirst?.type == "lawyer" ? 'client' : 'lawyer' }}
@@ -33,8 +33,8 @@
         </p>
 
         <!-- client names start -->
-        <div v-if="client_data.length > 0" :class="{ 'col-md-3 p-2  rounded border': true }">
-          <h5 class="d-block bg-dark text-white text-center py-2 rounded"> {{ userFirst.type == 'lawyer' ? 'Client' :
+        <div v-if="client_data.length > 0" :class="{ 'col-md-3 p-3 rounded border': true }">
+          <h5 class="d-block bg-col text-white text-center py-2"> {{ userFirst.type == 'lawyer' ? 'Client' :
             'Lawyer' }} </h5>
           <!-- <input class="form-control mb-4" type="text" placeholder="Search Client..." /> -->
           <input class="form-control mb-4" v-model="searchClient" @input="filterItems" placeholder="Search...">
@@ -65,7 +65,7 @@
               <button class="btn btn-danger" @click="closeChatForAllMessages">x</button>
             </span>
           </div> -->
-          <div class="chatbox ms-1">
+          <div class="chatbox ms-2">
 
             <!-- <JobHeader :jobData="jobData" /> -->
             <JobHeader :jobData="jobData" />
@@ -589,7 +589,10 @@ export default {
   margin-left: 10px; */
 
 }
-
+.bg-col {
+    background: #373b3e;
+    border-radius: 5px;
+}
 .chat-input {
   display: flex;
   gap: 10px;
@@ -633,8 +636,12 @@ export default {
 
 .lawyer .chat-messages .message .own-message {
   justify-content: start;
-
 }
+.lawyer .chat-messages .message .own-message .text, .lawyer .chat-messages .message .against-msg .text,.chat-messages .message .own-message .text,.chat-messages .message .against-msg .text{
+  max-width: 90%;
+  line-break: anywhere;
+}
+ 
 
 .lawyer .chat-messages .message .against-msg {
   display: flex;
@@ -752,6 +759,9 @@ section.chatSection {
 }
 
 @media screen and (max-width: 480px) {
+  /* .lawname{
+    font-size: 12px;
+  } */
   .chatbox {
     width: 100%;
     margin: 0 auto;

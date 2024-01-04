@@ -6,7 +6,7 @@
     <div class="WordSection1 container">
       <!-- ----------- -->
       <h3
-        class="mt-5 mb-5"
+        class="mt-3 mb-3"
         style="text-align: center"
       >
         FAQs

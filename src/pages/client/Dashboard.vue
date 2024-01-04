@@ -654,6 +654,9 @@ p.badge {
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {
+  .card-btn {
+    width: 95%;
+}
 
   /* .btn {
     padding: 5px 0px;

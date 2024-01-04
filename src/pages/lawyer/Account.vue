@@ -14,7 +14,7 @@
       </div>
 
 
-      <div v-else class="py-5">
+      <div v-else class="pb-5 pt-2">
         <!-- <div v-if="!userFields && !userLocations" class="border rounded bg-light p-3 d-flex flex-wrap">
           <p class="mx-auto my-0">Your profile is not completed . Click here to complete your
             <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
