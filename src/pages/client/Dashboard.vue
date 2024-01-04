@@ -638,7 +638,7 @@ p.badge {
 
 @media only screen and (max-width: 992px) {
   .card-btn {
-    width: 100%;
+    width: 95%;
   }
 }
 

@@ -19,11 +19,11 @@
         <div class="d-flex align-items-center">
         
             <div v-if="userFirst?.type == 'client'">
-              <button @click="goToViewProposals(jobData)" class="btn btn-dark btn-sm">Proposals</button>
+              <button @click="goToViewProposals(jobData)" class="btn btn-dark btn-sm toptag">Proposals</button>
             </div>
 
-            <div class="mx-1">
-              <button @click="openJobDetailModal(jobData)" class="btn btn-dark btn-sm">Job Details</button>
+            <div class="m-1">
+              <button @click="openJobDetailModal(jobData)" class="btn btn-dark btn-sm toptag">Job Details</button>
             </div>
         
           <div class="ms-2">
@@ -98,12 +98,13 @@ export default {
 }
 
 .badge {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   border: 1px solid rgba(255, 255, 255, 1);
   background: rgba(255, 255, 255, 0.1);
-  padding: 10px;
   margin: 0;
+  line-height: 1.5em;
+  padding: 0.25rem 0.5rem;
 }
 
 .card-top {
@@ -131,7 +132,7 @@ export default {
 
 @media only screen and (max-width: 1200px) {
 
-  .badge,
+ .toptag, .badge,
   .smallFont {
     font-size: 12px;
   }

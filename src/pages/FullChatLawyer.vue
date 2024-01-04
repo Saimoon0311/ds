@@ -4,7 +4,7 @@
       <LawyerHeader />
     </div>
 
-    <div class="container mb mb-4 mt-3">
+    <div class="container mb mb-4 mt-3 main-container">
 
 
       <!-- <div class="row">
@@ -731,7 +731,11 @@ section.chatSection {
     padding-bottom: 50px;
   }
 }
-
+@media screen and (max-width: 1200px) {
+.main-container{
+  max-width: 98%;
+}
+}
 @media screen and (max-width: 768px) {
 
   h4 {
@@ -749,8 +753,10 @@ section.chatSection {
   }
 
   .chatbox {
-    width: 94%;
-    margin: auto;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-left: 0 !important;
   }
 
   h4 {
