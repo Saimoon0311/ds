@@ -121,7 +121,7 @@
                   <li>
                     <button
                       @click="logout('login')"
-                      class="nav-link fw-normal menuItem-active-link"
+                      class="nav-link fw-normal text-black menuItem-active-link"
                       id="clients"
                       aria-current="page"
                     >
@@ -319,7 +319,7 @@ ul.showonmonb {
   .navbar-nav .left-menu {
     display: flex;
     align-items: baseline;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
   }
 
@@ -335,13 +335,21 @@ ul.showonmonb {
     width: 109px;
     text-align: left;
   }
+  .cstm-dropdown img {
+    width: 50px;
+    margin-top: 5px;
+}
 }
 
 @media only screen and (max-width: 991px) {
   .custom-dropdown {
     display: none;
   }
-
+  .navbar-nav .left-menu {
+   
+    flex-direction: column;
+  
+  }
   .showonmonb {
     display: block;
   }
