@@ -62,6 +62,7 @@ const app = createApp(App).component("font-awesome-icon", FontAwesomeIcon);
 app.mixin({
   data() {
     return {
+      baseUrl : process.env.NODE_ENV === 'production' ? 'https://virtualrealitycreators.com/law-backend/' : 'http://127.0.0.1:8000/',
       clear: false,
       searchQuery: "",
       searchQueryNumberPagination: "",
@@ -552,7 +553,7 @@ app.mixin({
       const htmlContent = Object.entries(newData)
         .map(
           ([key, value]) =>
-            `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div><br />`
+            `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`
         )
         .join("");
 
@@ -621,6 +622,7 @@ app.mixin({
                 value != 0 &&
                 (key == "first_name" ||
                   key == "last_name" ||
+                  key == "image" ||
                   key == "email" || key == "phone" ||
                   key == "job_title" ||
                   key == "law_firm" ||
@@ -635,7 +637,14 @@ app.mixin({
                 if (key == "about") {
                   objKey = "About me";
                 }
-                newData[objKey] = value;
+
+                // if (key == "image") {
+                //   newData[objKey] = `<div v-if="image" class="circular-container"><img :src="${this.createImage(value)}" alt="User Image" class="circular-image"></div>`;
+                // } else {
+                  newData[objKey] = value;
+                // }
+
+                // newData[objKey] = value;
               }
             }else{
               if (
@@ -655,7 +664,14 @@ app.mixin({
                 if (key == "about") {
                   objKey = "About me";
                 }
-                newData[objKey] = value;
+                
+
+                // if (key == "image") {
+                //   newData[objKey] = `<div v-if="image" class="circular-container"><img :src="${this.createImage(value)}" alt="User Image" class="circular-image"></div>`;
+                // } else {
+                  newData[objKey] = value;
+                // }
+
               }
             }
           }
@@ -663,10 +679,20 @@ app.mixin({
       }
       const htmlContent = Object.entries(newData)
         .map(
-          ([key, value]) =>
-            `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`
+          ([key, value]) => {
+            if(key == 'image' && value != null){
+              return `<div v-if="image" class="circular-container"><img :src="${this.createImage(value)}" alt="User Image" class="circular-image"></div>`;
+            }else{
+              return `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`;
+            }
+          }
         )
         .join("");
+
+      //   <div v-if="image" class="circular-container">
+      //   <img :src="image" alt="User Image" class="circular-image">
+      // </div>
+
 
       // Use dynamic HTML inside SweetAlert2 modal
       this.$swal.fire({
@@ -678,6 +704,11 @@ app.mixin({
           container: "my-swal-container", // You can define your custom class for styling
         },
       });
+    },
+
+
+    createImage(value){
+      return this.baseUrl + 'storage/images/' + value;
     },
 
     // openProposalDetailsModal(data) {

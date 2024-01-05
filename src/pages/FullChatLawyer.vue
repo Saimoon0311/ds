@@ -227,9 +227,11 @@ export default {
         console.log('maaz : ', res?.data?.job);
         if (res?.data?.job != null) {
           this.myJobData = res?.data?.job;
-          console.log('check state job data : ', this.myJobData)
+          console.log('check state job data 101: ', res?.data);
+          console.log('check state job data 102: ', this.client_data2);
+          console.log('check state job data 103: ', this.client_data2.findIndex(job => job.job_id === res?.data?.job.id));
           index = this.client_data2.findIndex(job => job.job_id === res?.data?.job.id);
-
+          console.log('maaz 10 : ', index)
           if (index == -1) {
             let obj = {
               job: res?.data?.job,

@@ -342,7 +342,7 @@
                                     {{ formatCreatedAt(item.created_at) }}
                                   </span>
                                 </p>
-                                
+
                                 <button
                                   v-if="item?.requirement"
                                   :disabled="!item?.requirement"
@@ -392,7 +392,7 @@
 
                           <button
                             @click="openProposalDetailsModal(item.proposal)"
-                            v-if="tab == 'pending' || tab == 'close'"
+                            v-if="tab == 'pending'"
                             class="btn btn-dark border btn-sm card-btn my-1 mx-1"
                           >
                             View Proposal
@@ -409,6 +409,7 @@
                           </button> -->
 
                           <button
+                            v-if="tab != 'close'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
                             @click="goToMessagePage(item,'lawyer')"
                           >

@@ -146,16 +146,11 @@
                         </button>
                       </form>
                       <button
-                        :disabled="item?.job?.client_chat?.lawyer_id != item?.lawyer?.id"
+                        :disabled="!disableMessageButton(item)"
                         class="btn btn-light btn-sm p-1 px-2 w-75 rounded-pill mb-1 border"
                         @click="goToMessagePage(item?.job,'client')"
                       >
-                        Message
-                        {{
-                          item?.job?.client_chat?.lawyer_id != item?.lawyer?.id
-                            ? ", (N/A)"
-                            : ""
-                        }}
+                        Message{{!disableMessageButton(item) ? ', (N/A)' : ''}}
                       </button>
                       <button
                         class="btn btn-danger btn-sm p-1 px-2 mb-1 w-75 rounded-pill"
@@ -244,6 +239,15 @@ export default {
   },
 
   methods: {
+    disableMessageButton(item){
+      console.log('lawyer id : ' ,item?.lawyer_id);
+      console.log('chats : ' , item?.job?.chats);
+      console.log('chats match : ' , item.job.chats.some(chat => chat.lawyer_id === item.lawyer_id));
+      if (item?.lawyer_id && item?.job?.chats) {
+        return item.job.chats.some(chat => chat.lawyer_id === item.lawyer_id);
+      }
+      return false; // Enable the button by default
+    },
     // getJobChat(chat_id){
     //   const messagesRef = collection(db, "chats", chat_id, "messages");
     //   let messages = [];
