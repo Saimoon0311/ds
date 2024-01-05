@@ -185,24 +185,21 @@
                         </details>
                       </td>
 
-                      <td class="text-end button-width">
-                        <div class="row">
-                          <div class="col-lg-6">
-                          <button @click="approve(item?.id,index)" class="btn btn-dark btn-sm">
+                      <td class="text-end">
+                        <div class="row justify-content-end">
+                          <div class="col-md-12 col-sm-12">
+                          <button @click="approve(item?.id,index)" class="btn btn-dark btn-sm m-1">
                             <i class="bi bi-check-lg"></i> Approve
                           </button>
-                      
-                          </div>
-                          <div class="col-lg-6">
                           <button
                           @click="reject(item?.id,index)"
-                            class="btn btn-light btn-sm"
+                            class="btn btn-light btn-sm m-1"
                             style="border: 1px solid black"
                           >
                             <i class="bi bi-x-lg"></i> Reject
                           </button>
-                      
                           </div>
+                         
                         </div>
                         
                         
