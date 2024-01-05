@@ -318,6 +318,7 @@ export default {
     return {
       schema,
       selectedOption: null,
+     
     };
   },
   computed: {
@@ -333,19 +334,18 @@ export default {
       }).catch((error)=>{
         console.log(error);
       });
-
       // alert("Thanks for reaching out. Simplawfy will be in touch with you soon.");
     },
-
-  },
+   
+  
+},
   components: {
     MainFooter,
     GeneralHeader,
     Form,
     Field,
     ClientHeader,
-    LawyerHeader
-
+    LawyerHeader,
   },
 
   name: "ContactUs",
