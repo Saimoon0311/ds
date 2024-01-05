@@ -592,7 +592,7 @@ app.mixin({
       const htmlContent = Object.entries(newData)
         .map(
           ([key, value]) =>
-            `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div><br />`
+            `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`
         )
         .join("");
 
