@@ -123,7 +123,7 @@
 
               <button type="submit">Search</button>
             </form> -->
-
+            <div class="table-responsive">
             <table class="table table-bordered table-striped">
               <tbody>
                 <tr>
@@ -177,6 +177,7 @@
               </tbody>
             </table>
           </div>
+        </div>
         </span>
 
         <!-- Change account password -->
