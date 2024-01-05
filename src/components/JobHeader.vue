@@ -21,6 +21,9 @@
             <div v-if="userFirst?.type == 'client'">
               <button @click="goToViewProposals(jobData)" class="btn btn-dark btn-sm toptag">Proposals</button>
             </div>
+            <!-- <div v-if="userFirst?.type == 'lawyer'">
+              <router-link to="/proposal" class="btn btn-dark btn-sm toptag">Submit a Proposal</router-link>
+            </div> -->
 
             <div class="m-1">
               <button @click="openJobDetailModal(jobData)" class="btn btn-dark btn-sm toptag">Job Details</button>

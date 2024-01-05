@@ -37,7 +37,7 @@
                 type="button"
                 name="fname-submit"
                 class="btn btn-dark my-3"
-                @click="updateProfile('first_name', '#Fname')"
+                @click="updateProfile('first_name', '#Fname','First name')"
               >
                 Save changes
               </button>
@@ -81,7 +81,7 @@
                 type="button"
                 name="lname-submit"
                 class="btn btn-dark my-3"
-                @click="updateProfile('last_name', '#Lname')"
+                @click="updateProfile('last_name', '#Lname','Last name')"
               >
                 Save changes
               </button>
@@ -127,7 +127,7 @@
                 type="button"
                 name="phone-submit"
                 class="btn btn-dark my-3"
-                @click="updateProfile('phone', '#Pnum')"
+                @click="updateProfile('phone', '#Pnum','Phone number')"
               >
                 Save changes
               </button>
@@ -417,7 +417,7 @@ export default {
         document.getElementById('password').value = "";
       }
     },
-    async updateProfile(keyName, modalId) {
+    async updateProfile(keyName, modalId, keyName2) {
       if (this.form[keyName] == null || this.form[keyName] == "") {
         return false;
       }
@@ -428,7 +428,7 @@ export default {
       try {
         api.post('/update-profile', formData).then(res => {
           this.closeModal(modalId);
-          this.$swal("", "Profile updated successfully", "success").then(() => {
+          this.$swal("", `${keyName2} updated successfully`, "success").then(() => {
             this.setUserInStateAndLocalStorage(res);
           });
         })

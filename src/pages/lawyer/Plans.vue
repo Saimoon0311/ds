@@ -21,7 +21,7 @@
         </div>
         <div class="card-body pb-0">
           <ul class="dotRem">
-            <li class="fw-bold"><i class="fa fa-check"></i> 60 Day Free Trial</li>
+            <li class="fw-bold" v-if="loginUser?.is_subscribed_first != true"><i class="fa fa-check"></i> 60 Day Free Trial</li>
             <li class="fw-bold"><i class="fa fa-check"></i> 1 User</li>
             <li class="fw-bold"><i class="fa fa-check"></i> Platform Access </li>
             <li class="fw-bold"><i class="fa fa-check"></i> Profile</li>
@@ -98,6 +98,9 @@ export default {
     // Selectic
   },
   computed: {
+    loginUser() {
+      return this.$store.state.loginUser;
+    },
   },
   created() {
   },

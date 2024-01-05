@@ -10,6 +10,14 @@
       </p>
 
       <!-- Photo -->
+      <!-- <div>
+      <img :src="this.image" class="rounded" alt="Profile Image">
+      </div> -->
+
+      <div v-if="image" class="circular-container">
+        <img :src="image" alt="User Image" class="circular-image">
+      </div>
+
       <div class="d-flex">
         <div>
           <form
@@ -74,7 +82,7 @@
                   type="button"
                   name="job-title-submit"
                   class="btn btn-dark my-3"
-                  @click="updateProfile('job_title','#Jobtitle')"
+                  @click="updateProfile('job_title','#Jobtitle','Job title')"
                 >
                   Save changes
                 </button>
@@ -118,7 +126,7 @@
                   type="button"
                   name="lawfirm-submit"
                   class="btn btn-dark my-3"
-                  @click="updateProfile('law_firm','#FirmName')"
+                  @click="updateProfile('law_firm','#FirmName','Law firm')"
                 >
                   Save changes
                 </button>
@@ -165,7 +173,7 @@
                   type="button"
                   name="website-submit"
                   class="btn btn-dark my-3"
-                  @click="updateProfile('link','#WebsiteModal')"
+                  @click="updateProfile('link','#WebsiteModal','Website')"
                 >
                   Save changes
                 </button>
@@ -213,7 +221,7 @@
                   type="button"
                   name="phone-submit"
                   class="btn btn-dark my-3"
-                  @click="updateProfile('phone','#PhoneModal')"
+                  @click="updateProfile('phone','#PhoneModal','Phone number')"
                 >
                   Save changes
                 </button>
@@ -235,7 +243,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
-                Edit Consultation Details
+                Free/Discounted Consultation
               </h5>
               <button
                 type="button"
@@ -269,7 +277,14 @@
 
 
           <div class="form-group m-2" id="freeFirstConsultationRadio">
-            <label>Consultation type:</label>
+            <!-- <label>Consultation type:</label> -->
+            <div class="form-check">
+              <input class="form-check-input" v-model="form.consultation_type" type="radio" name="freeFirstConsultationNo1"
+                id="freeFirstConsultationNo1" value="no" />
+              <label class="form-check-label" for="freeFirstConsultationNo1" @click="changeConsultationType('no')">
+                No
+              </label>
+            </div>
             <div class="form-check">
               <input class="form-check-input" v-model="form.consultation_type" type="radio" name="freeFirstConsultation"
                 id="freeFirstConsultationYes" value="free" checked="" />
@@ -288,7 +303,7 @@
 
           <div v-if="form.consultation_type === 'discounted'">
             <div class="form-group my-3" id="div-freeFirstConsultationFee">
-              <label for="freeFirstConsultationFee">Fee:<sup><code>*</code></sup></label>
+              <label for="freeFirstConsultationFee">Fee (including GST):<sup><code>*</code></sup></label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
                   <div class="input-group-text">$</div>
@@ -299,7 +314,7 @@
             </div>
           </div>
 
-          <div class="col-auto" id="div-freeFirstConsultationMinutes">
+          <div v-if="form.consultation_type != 'no'" class="col-auto" id="div-freeFirstConsultationMinutes">
               <label for="">Time limit:<sup><code>*</code></sup></label>
               <div class="input-group mb-2">
                 <input type="number" v-model="form.consultation_time" class="form-control"
@@ -314,7 +329,7 @@
                   type="button"
                   name="phone-submit"
                   class="btn btn-dark my-3"
-                  @click="updateProfile(['consultation_type','consultation_amount','consultation_time'],'#ConsultationModal')"
+                  @click="updateProfile(['consultation_type','consultation_amount','consultation_time'],'#ConsultationModal','Consultation details')"
                 >
                   Save changes
           </button>
@@ -352,18 +367,33 @@
             <div class="modal-body">
               <form action="profile.php" method="post"></form>
               <div class="form-group">
-                <input
+
+                
+            <label class="w-100">
+              <textarea
+                v-model="form.about"
+                id="additionalInfo"
+                name="additionalInfo"
+                class="form-control"
+                rows="4"
+                cols="100%"
+                required
+              ></textarea>
+            </label>
+          
+
+                <!-- <input
                   type="text"
                   name="about"
                   class="form-control"
                   id="about"
                   v-model="form.about"
-                />
+                /> -->
                 <button
                   type="button"
                   name="about-submit"
                   class="btn btn-dark my-3"
-                  @click="updateProfile('about','#AboutModal')"
+                  @click="updateProfile('about','#AboutModal','Description')"
                 >
                   Save changes
                 </button>
@@ -622,8 +652,9 @@
 
           <tr>
             <td class="d-flex align-items-center justify-content-between">
-              Consultation:
+              Free/Discounted Consultation:
               <button
+                @click="changeConsultationType('free')"
                 type="button"
                 class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#ConsultationModal"
@@ -635,14 +666,23 @@
             </td>
 
             <td>
-              <span v-if="loginUser?.consultation_type">
-                <b>Type : </b>{{ loginUser?.consultation_type }},
+              <!-- <span v-if="loginUser?.consultation_type">
+                <b>Type : </b>{{ capitalizeFirstLetter(loginUser?.consultation_type) }},
               </span>
               <span v-if="loginUser?.consultation_time">
                 <b>Time : </b>{{ loginUser?.consultation_time }},
               </span>
               <span v-if="loginUser?.consultation_amount">  
-                <b>Fee : </b>{{ loginUser?.consultation_amount }}
+                <b>Fee : </b>${{ loginUser?.consultation_amount }}
+              </span> -->
+              <span v-if="loginUser?.consultation_type && loginUser?.consultation_type == 'discounted'">
+              {{ capitalizeFirstLetter(loginUser?.consultation_type) }} - ${{ formatNumber(loginUser?.consultation_amount) }}/{{ loginUser?.consultation_time }}
+              </span>
+              <span v-if="loginUser?.consultation_type && loginUser?.consultation_type == 'free'">
+                {{ capitalizeFirstLetter(loginUser?.consultation_type) }} - {{ loginUser?.consultation_time }}
+              </span>
+              <span v-if="loginUser?.consultation_type && loginUser?.consultation_type == 'no'">
+                {{ capitalizeFirstLetter(loginUser?.consultation_type) }}
               </span>
               </td>
           </tr>
@@ -674,7 +714,7 @@
 
           <tr>
             <td class="d-flex align-items-center justify-content-between">
-              Mobile friendly:
+              Mobile-Friendly:
             </td>
 
             <td>
@@ -794,6 +834,8 @@ window.$ = window.jQuery = $;
 export default {
   data() {
     return {
+      baseUrl : 'http://127.0.0.1:8000/storage/images/',
+      image : null,
       form: {
         law_firm: null,
         link: null,
@@ -862,6 +904,9 @@ export default {
     // this.checkMessages();
     this.fetchOptions();
     this.fetchOptions_locations();
+    if(this.loginUser?.image){
+      this.image = this.baseUrl + this.loginUser?.image;
+    }
   },
   methods: {
     // checkMessages() {
@@ -872,6 +917,10 @@ export default {
     //   })
     // },
     changeConsultationType(value) {
+      if(value == 'no'){
+        this.form.consultation_time = null;
+        this.form.consultation_amount = null;
+      }
       this.form.consultation_type = value;
     },
 
@@ -930,7 +979,7 @@ export default {
       }
       try {
         api.post('/lawyer/update-fields', { "ids": this.selectedOptionIds }).then(() => {
-          this.$swal("", "Fields updated successfully", "success");
+          this.$swal("", "Areas of practice updated successfully", "success");
           this.fetchOptions();
           this.fetchUserData();
           this.closeModal('#AreaModal');
@@ -970,8 +1019,11 @@ export default {
       const formData = new FormData();
       formData.append('image', file);
       try {
-        api.post('/lawyer/upload-image', formData).then(() => {
-          this.$swal("", "Profile Image has been uploaded successfully", "success").then(() => {
+        api.post('/lawyer/upload-image', formData).then((res) => {
+          this.$swal("", "You have successfully uploaded your profile picture.", "success").then(() => {
+            this.image = this.baseUrl + res?.data?.image;
+            console.log(res);
+            console.log('loginUser : '  + res?.data?.image);
             fileInput.value = '';
           });
         })
@@ -1054,6 +1106,24 @@ export default {
 </script>
 
 <style scoped>
+
+.circular-container {
+  width: 100px; /* Set the width and height to control the size of the circular div */
+  height: 100px;
+  border-radius: 50%; /* Make it circular by setting border-radius to 50% */
+  overflow: hidden; /* Hide overflow content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0; /* Set a background color for the circular div */
+}
+
+.circular-image {
+  width: 100%; /* Make the image fill the circular div */
+  height: 100%;
+  border-radius: 50%; /* Match the border-radius of the container */
+  object-fit: cover; /* Ensure the image covers the container */
+}
 .form-check-input {
   border: 1px solid gray !important;
 }

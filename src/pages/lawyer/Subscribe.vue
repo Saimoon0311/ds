@@ -21,11 +21,17 @@
           
           <span class="d-block" v-if="!this.replacePaymentMethod">Subscribe</span><span class="d-block" v-else>Replace Payment Method</span>
         </h3>
-        <p v-if="!this.replacePaymentMethod " class=" mb-4">
-          Access the Simplawfy platform with a 60 day free trial, then for $39 per
-          month. You will not be charged until
-          <span id="trialEndingDate">{{ trialEndDate }}</span>.
-        </p>
+        <span v-if="!this.replacePaymentMethod">
+          <p v-if="loginUser?.is_subscribed_first != true" class=" mb-4">
+            Access the Simplawfy platform with a 60 day free trial, then for $39 per
+            month. You will not be charged until
+            <span id="trialEndingDate">{{ trialEndDate }}</span>.
+          </p>
+          <p v-else class=" mb-4">
+            Access the Simplawfy platform for $39 per month.
+          </p>
+        </span>
+        
        
 
         <div>
@@ -69,7 +75,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['replacePaymentMethod']),
+    ...mapState(['replacePaymentMethod','loginUser']),
 
     trialEndDate() {
       const currentDate = new Date();
@@ -123,7 +129,7 @@ export default {
               .then(res => {
                 // console.log('successfully login : ', res?.data?.data?.id)
                 if (this.replacePaymentMethod) {
-                  this.$swal('', 'Your payment method has been replaced successfully.', 'success').then(() => {
+                  this.$swal('', 'Your payment method has been successfully replaced.', 'success').then(() => {
                     this.$router.push({ path: '/lawyer-account' });
                   });
                 }

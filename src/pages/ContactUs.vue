@@ -236,8 +236,8 @@
                     <option value="I am unable to act for my client">
                       I am unable to act for my client
                     </option>
-                    <option value="I want to report an inappropriate Job">
-                      I want to report an inappropriate Job
+                    <option value="I want to report an inappropriate job">
+                      I want to report an inappropriate job
                     </option>
                     <option value="Other">Other</option>
                   </Field>
@@ -287,12 +287,13 @@ import LawyerHeader from "../pages/lawyer/Header.vue";
 
 import { Form, Field } from "vee-validate";
 import * as yup from "yup";
+import api from "@/config/api.js";
 
 export default {
   data() {
     const schema = yup.object().shape({
       fname: yup.string().required("Please enter your name."),
-      comment: yup.string().required("Please enter your comment."),
+      comment: yup.string().required("Please enter a message."),
       radio: yup
         .string()
         .required("Please select if you're a client or a lawyer."),
@@ -326,8 +327,14 @@ export default {
     }
   },
   methods: {
-    submitData() {
-      alert("data has been submitted.");
+    submitData(formData) {
+      api.post('/submit-contact-form',formData).then(()=>{
+        this.$swal('','Thanks for reaching out. Simplawfy will be in touch with you soon.','success');
+      }).catch((error)=>{
+        console.log(error);
+      });
+
+      // alert("Thanks for reaching out. Simplawfy will be in touch with you soon.");
     },
 
   },

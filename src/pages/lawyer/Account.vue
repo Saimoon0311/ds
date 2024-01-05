@@ -33,9 +33,10 @@
             <p>
               Subscription Status :
               <span v-if="subscriptionData?.subscription_status == 'trialing'">
-                <b>60 days free trail</b>
+                <b>60-Day Free Trial</b>
               </span>
-              <span v-else-if="subscriptionData?.subscription_status == 'active'">
+              <span class="m-2 text-decoration-none badge text-black fs-6 bubbles bubbles-other text-white" 
+              v-else-if="subscriptionData?.subscription_status == 'active'">
                 <b>Subscribed</b>
               </span>
               <span v-else>
@@ -54,7 +55,7 @@
                 <span v-if="subscriptionData?.plan == 'basic'"
                   ><b>$39.00/month</b></span
                 >
-                on {{ subscriptionData?.card_brand }} ----{{
+                on {{ capitalizeFirstLetter(subscriptionData?.card_brand) }} ----{{
                   subscriptionData?.card_last4
                 }}
                 Exp. {{ subscriptionData?.card_expiry }}
@@ -68,7 +69,49 @@
               Replace Payment Method
             </button>
 
-            <h4 class="my-3 mt-4">Receipts</h4>
+            <!-- receipts old place -->
+          </div>
+          <div class="mt-4">
+            <div v-if="subscriptionCancelStatus" class="text-center">
+              <p>You have cancelled your subscription. You can continue to access the Simplawfy platform until the
+              {{ subscriptionData?.current_period_end }}. You can 
+              <button
+                  class="forgetp"
+                  @click="resubscribe(subscriptionData?.plan)"
+                >
+                  resubscribe
+              </button>
+              at anytime.</p>
+              <!-- <p>
+                Your subscription will be cancelled from
+                {{ subscriptionData?.current_period_end }}. You can
+                <button
+                  class="forgetp"
+                  @click="resubscribe(subscriptionData?.plan)"
+                >
+                  resubscribe
+                </button>
+                at any time.
+              </p> -->
+            </div>
+            <button v-else-if="subscriptionStatus == 'subscribed' || subscriptionStatus == 'incomplete'"
+              class="btn btn-danger"
+              id="cancel-subscription"
+              @click="handleCancelSubscription"
+            >
+              Cancel Subscription
+            </button>
+            <span v-else>
+              You have not subscribed yet. 
+              <router-link to="/plans" class="btn btn-dark"
+                >Subscribe Now</router-link
+              >
+            </span>
+          </div>
+
+          <!-- Receipts new place -->
+          <div v-if="subscriptionData != null">
+            <h4 class="my-3 mt-4">Invoices</h4>
 
 
             <!-- <form @submit.prevent="searchReceipts">
@@ -87,23 +130,25 @@
                   <td>
                     <table
                       v-if="receipts.length > 0"
-                      class="table table-bordered table-striped mt-3"
+                      class="table table-bordered table-responsive table-striped mt-3"
                     >
                       <thead class="hd-receipt">
-                        <th>#</th>
+                        <!-- <th>#</th> -->
                         <th>Invoice ID</th>
+                        <th>Invoice Number</th>
                         <th>Amount Paid</th>
-                        <th>Date of issue</th>
+                        <th>Date of Issue</th>
                         <th>Action</th>
                       </thead>
                       <tbody>
                         <tr
-                          v-for="(receipt, index) in receipts"
+                          v-for="(receipt) in receipts"
                           :key="receipt.id"
                         >
-                          <td>{{ ++index }}</td>
+                          <!-- <td>{{ ++index }}</td> -->
                           <td>{{ receipt?.id }}</td>
-                          <td>{{ receipt?.amount_paid }}</td>
+                          <td>{{ receipt?.number }}</td>
+                          <td>$ {{ formatNumber(receipt?.amount_paid) }}</td>
                           <!-- <td>{{ new Date(receipt?.created * 1000).toLocaleDateString() }}</td> -->
                           <td>
                             {{
@@ -131,34 +176,6 @@
                 </tr>
               </tbody>
             </table>
-          </div>
-          <div>
-            <div v-if="subscriptionCancelStatus" class="text-center">
-              <p>
-                Your subscription will be cancelled from
-                {{ subscriptionData?.current_period_end }}. You can
-                <button
-                  class="forgetp"
-                  @click="resubscribe(subscriptionData?.plan)"
-                >
-                  resubscribe
-                </button>
-                at any time.
-              </p>
-            </div>
-            <button v-else-if="subscriptionStatus == 'subscribed' || subscriptionStatus == 'incomplete'"
-              class="btn btn-danger"
-              id="cancel-subscription"
-              @click="handleCancelSubscription"
-            >
-              Cancel Subscription
-            </button>
-            <span v-else>
-              You have not subscribed yet. 
-              <router-link to="/plans" class="btn btn-dark"
-                >Subscribe now</router-link
-              >
-            </span>
           </div>
         </span>
 
@@ -470,19 +487,21 @@ export default {
           const endpoint = `/lawyer/cancel-subscription`;
           const body = {};
           const title = '<span class="sadtoast">You have cancelled your subscription.</span>';
-          const msg = `Your subscription will be cancelled from ${this.subscriptionData?.current_period_end} You can resubscribe at any time.`;
+          // const msg = `Your subscription will be cancelled from ${this.subscriptionData?.current_period_end} You can resubscribe at any time.`;
+          const msg = `You have cancelled your subscription. You can continue to access the Simplawfy platform until the ${this.subscriptionData?.current_period_end}. You can resubscribe at anytime.`;
           this.updateReason(endpoint, body, title, msg, true);
         }
       });
     },
+
     deleteAccount() {
-      let text = "You won't be able to revert this.";
-      let text2 = "Yes, Delete Account";
-      if (this.subscriptionStatus == "subscribed") {
-        text =
-          "You won't be able to revert this. Deleting your account will also cancel your subscription.";
-        text2 = "Yes, Unsubscribe & Delete Account";
-      }
+      let text = "Once deleted, your account cannot be recovered and any active subscription will be cancelled.";
+      let text2 = "Delete Account";
+      // if (this.subscriptionStatus == "subscribed") {
+      //   text =
+      //     "Once deleted, your account cannot be recovered and any active subscription will be cancelled.";
+      //   text2 = "Delete Account";
+      // }
       this.$swal({
         title: "Are you sure?",
         text: text,
@@ -497,8 +516,8 @@ export default {
             .get("/delete-account")
             .then(() => {
               this.$swal(
-                "Deleted!",
-                "Your Account has been deleted.",
+                "",
+                "Your account has been deleted.",
                 "success"
               ).then(() => {
                 this.logoutProcess("login");
@@ -533,6 +552,17 @@ export default {
 };
 </script>
 <style scoped>
+
+
+.bubbles {
+  border-radius: 6px;
+  padding: 8px 11px;
+  margin: 8px 7px !important;
+  cursor: pointer;
+  background: black !important;
+  font-weight: 500;
+}
+
 .navbar-nav {
   display: flex;
   align-items: center;

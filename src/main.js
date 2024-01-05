@@ -211,7 +211,20 @@ app.mixin({
       this.$router.push("/login");
     },
 
-    async updateProfile(keyName, modalId = null) {
+    async updateProfile(keyName, modalId = null,keyName2 = "Profile") {
+      if(modalId == '#ConsultationModal' && Array.isArray(keyName)){
+        console.log(keyName.length)
+        if(keyName.length == 3){
+          console.log(keyName[0],keyName[2])
+          if(this.form[keyName[0]] == 'free' && this.form[keyName[2]] == null){
+            return false;
+          }
+          console.log(keyName[0],keyName[1],keyName[2])
+          if(this.form[keyName[0]] == 'discounted' && (this.form[keyName[1]] == null || this.form[keyName[2]] == null)){
+            return false;
+          }
+        }
+      } 
       let formDataObject = {};
       if (Array.isArray(keyName)) {
         keyName.forEach((element) => {
@@ -236,7 +249,7 @@ app.mixin({
           if (modalId) {
             this.closeModal(modalId);
           }
-          this.$swal("success", "Profile updated successfully", "").then(() => {
+          this.$swal("", `${keyName2} updated successfully`, "success").then(() => {
             // for multiple profiles edit from admin panel
             if (this.loginUserEmail != res?.data?.data?.email) {
               if (this.openJobs.length > 0) {
@@ -290,7 +303,7 @@ app.mixin({
     },
 
     setUserInStateAndLocalStorage(res, removeFromLocalStorage = true) {
-      console.log("new func : ", res?.data?.data?.link);
+      console.log("new func : ", res?.data?.data);
       const userData = {
         id: res?.data?.data?.id,
         first_name: res?.data?.data?.first_name,
@@ -301,9 +314,11 @@ app.mixin({
         job_title: res?.data?.data?.job_title,
         law_firm: res?.data?.data?.law_firm,
         link: res?.data?.data?.link,
+        is_subscribed_first : res?.data?.data?.is_subscribed_first,
         about: res?.data?.data?.about,
         area_insert: res?.data?.data?.area_insert,
         state_insert: res?.data?.data?.state_insert,
+        image: res?.data?.data?.image,
         consultation_type: res?.data?.data?.consultation_type,
         consultation_amount: res?.data?.data?.consultation_amount,
         consultation_time: res?.data?.data?.consultation_time,

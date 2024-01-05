@@ -45,7 +45,7 @@
           <div class="alert alert-danger text-center m-0 p-2">
             You have not subscribed yet.
             <router-link to="/plans" class="btn btn-dark text-white"
-              >Subscribe now</router-link
+              >Subscribe Now</router-link
             >
           </div>
         </div>
@@ -194,7 +194,7 @@
                   "
                   class="border rounded bg-light p-3 d-flex flex-wrap mb-2"
                 >
-                  <p class="mx-auto my-0">You have no pending jobs.</p>
+                  <p class="mx-auto my-0">You haven't submitted any proposals yet.</p>
                   
                 </div>
 
@@ -655,18 +655,18 @@ export default {
       try{
         this.$swal({
           title: "Are you sure?",
-          text: `Are you sure you want to delete rejected proposals.`,
+          text: `Are you sure you want to clear all rejected proposals?`,
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
-          confirmButtonText: `Yes, Delete`,
+          confirmButtonText: `Yes, Clear`,
         }).then((result) => {
           if (result.isConfirmed) {
             api.get('/lawyer/decline-rejected-proposals').then(()=>{
               this.$swal(
                         "",
-                        `Rejected Proposals Deleted Successfully`,
+                        `You have cleared all rejected proposals.`,
                         "success"
                       ).then(async () => {
                         this.loadMore(null,true);

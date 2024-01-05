@@ -182,7 +182,7 @@
                         class="btn btn-sm btn-dark card-btn my-1 mx-1 border"
                         @click="goToViewProposals(item)"
                       >
-                        View Proposal
+                        View Proposals
                       </button>
                       <button
                       v-if="tab == 'open'"
@@ -203,7 +203,7 @@
                         class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
                         @click="goToMessagePage(item,'client')"
                       >
-                        View Message
+                        View Messages
                         {{
                           item?.chats && item?.chats.length == 0
                             ? ", (N/A)"

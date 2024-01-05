@@ -58,7 +58,7 @@ export default {
         changePassword(formData) {
             api.post('/change-password', formData)
                 .then(() => {
-                    this.$swal('', 'Password has been changed successfully', 'success').then(() => {
+                    this.$swal('', 'You have successfully changed your password.', 'success').then(() => {
                         document.getElementById('prev_password').value = "";
                         document.getElementById('password').value = "";
                     });

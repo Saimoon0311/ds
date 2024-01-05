@@ -541,7 +541,7 @@
                   <thead>
                     <tr class="border">
                       <th>Item</th>
-                      <th>Fee (excluding GST)</th>
+                      <th>Fee</th>
                       <th></th>
                       <!-- <th>Total</th> -->
                     </tr>
@@ -2438,6 +2438,8 @@ export default {
           total = parseFloat(grandTotal);
           break;
         case "Retainer":
+          total = parseFloat(this.form.retainer_fee);
+          break;
         case "Success":
           total = successTotal;
           break;
@@ -2588,6 +2590,7 @@ export default {
         lawyer_id: null,
         job_id: null,
       },
+      this.isVisible = 'Yes';
       console.log('reset ' , this.form);
         this.paySucc = "No",
         // this.newRow.itemDisbursement = "";
@@ -2672,8 +2675,7 @@ export default {
     },
 
     addRow() {
-      if (this.newRow.itemDisbursement && this.newRow.costAud) {
-
+      if (this.newRow.itemDisbursement && (this.newRow.costAud || this.newRow.costAud == 0.00)) {
         let total = this.rows.reduce((accumulator, currentItem) => {
           return accumulator + parseFloat(currentItem.total);
         }, 0);

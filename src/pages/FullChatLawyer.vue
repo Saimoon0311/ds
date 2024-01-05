@@ -1,7 +1,10 @@
 <template>
   <section class="chatSection">
-    <div>
+    <div v-if="userFirst?.type == 'lawyer'">
       <LawyerHeader />
+    </div>
+    <div v-if="userFirst?.type == 'client'">
+      <ClientHeader />
     </div>
 
     <div class="container mb mb-4 mt-3 main-container">
@@ -143,6 +146,7 @@ import JobHeader from "../components/JobHeader";
 import MainFooter from "../components/global/MainFooter.vue";
 // import ClientHeader from "../pages/client/Header.vue";
 import LawyerHeader from "../pages/lawyer/Header.vue";
+import ClientHeader from "../pages/client/Header.vue";
 
 
 // import ShowJobDetails from "../components/ShowJobDetails";
@@ -159,6 +163,7 @@ export default {
     MainFooter,
     // ClientHeader,
     LawyerHeader,
+    ClientHeader,
     // ShowJobDetails
   },
 
@@ -186,6 +191,8 @@ export default {
   },
 
   created() {
+    console.log('job data on chat page : ' , this.jobTabName);
+    console.log('job data on chat page 2 : ' , 'abc');
     if(!this.isNotHeaderChatComputed && this.jobTabName){
       this.$store.commit('SET_DATATAB',null);
     }
@@ -289,7 +296,7 @@ export default {
       return this.$store.state.userToChat;
     },
     jobData() {
-      // console.log('job data 2 2 2 : ' , this.$store.state.jobData);
+      console.log('job data 2 2 2 : ' , this.$store.state.jobData);
       return this.$store.state.jobData;
     },
   },
