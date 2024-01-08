@@ -75,7 +75,7 @@
                 </p>
               </div>
 
-              <div v-else class="border rounded bg-light p-3 d-flex flex-wrap">
+              <div v-else class="d-flex flex-wrap">
                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 w-100">
                   <div class="input-group w-75">
                   <input
