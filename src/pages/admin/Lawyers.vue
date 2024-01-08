@@ -6,17 +6,6 @@
 
       <div class="container">
 
-
-        
-
-        <div>
-          <button @click="generateCsv('lawyer')">Generate and Download CSV</button>
-        </div>
-
-     
-
-      
-
       <!-- <p class="h4 m-3">Welcome, {{ userName }}</p> -->
       <div data-v-511b78bb="" class="container">
         <ul
@@ -80,38 +69,33 @@
               <div v-else class="border rounded bg-light p-3 d-flex flex-wrap">
                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 w-100">
                   <div class="input-group w-75">
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="searchQuery"
-                    @keyup.enter="search(pageStatus)"
-                    placeholder="Search..."
-                    aria-label="Recipient's username"
-                    aria-describedby="basic-addon2"
-                  />
-                  <button
-                    class="input-group-text btn custom-button"
-                    id="basic-addon2"
-                    @click="search(pageStatus)"
-                  >
-                    <i class="fa fa-search"></i>
-                  </button>
-                  <button
-                    class="input-group-text btn custom-button"
-                    id="basic-addon2"
-                    @click="clearSearch(pageStatus)"
-                  >
-                    <i class="fa fa-refresh"></i>
-                  </button>
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="searchQuery"
+                      @keyup.enter="search(pageStatus)"
+                      placeholder="Search..."
+                      aria-label="Recipient's username"
+                      aria-describedby="basic-addon2"
+                    />
+                    <button
+                      class="input-group-text btn custom-button"
+                      id="basic-addon2"
+                      @click="search(pageStatus)"
+                    >
+                      <i class="fa fa-search"></i>
+                    </button>
+                    <button
+                      class="input-group-text btn custom-button"
+                      id="basic-addon2"
+                      @click="clearSearch(pageStatus)"
+                    >
+                      <i class="fa fa-refresh"></i>
+                    </button>
                 </div>
-                <button class="btn btn-dark btn-sm m-1"><i class="fa fa-plus"></i> Generate CSV </button>
+                <button @click="generateCsv('lawyer')" class="btn btn-dark btn-sm m-1"><i class="fa fa-plus"></i> Generate CSV </button>
                 </div>
                 
-                 
-
-              
-               
-
                 <span
                   v-if="openJobs.length == 0 && searchQuery != ''"
                   class="text-center w-100"
@@ -910,6 +894,11 @@
                       </td>
 
                       <td class="text-end button-width">
+                        <div  class="mb-1">
+                           <button class="btn btn-dark btn-sm m-1" @click="changeAccountStatus(item?.id,item?.type,item?.status,pageStatus)">
+                            {{ item?.status == 'block' ? 'Unblock' : 'Block' }}
+                          </button>
+                        </div>
                         <div  class="mb-1">
                            {{ capitalizeFirstLetter(item?.admin_approval) }}<span v-if="item?.admin_approval == 'approve'">d</span>
                            <span v-if="item?.admin_approval == 'reject'">ed</span> at {{ formatCreatedAt(item.approved_timestamp) }}

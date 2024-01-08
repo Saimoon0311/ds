@@ -37,7 +37,7 @@
 
         <!-- client names start -->
         <div v-if="client_data.length > 0" :class="{ 'col-md-3 p-3 rounded border': true }">
-          <h5 class="d-block bg-col text-white text-center py-2"> {{ userFirst.type == 'lawyer' ? 'Client' :
+          <h5 class="d-block bg-col text-white text-center py-2"> {{ userFirst?.type == 'lawyer' ? 'Client' :
             'Lawyer' }} </h5>
           <!-- <input class="form-control mb-4" type="text" placeholder="Search Client..." /> -->
           <input class="form-control mb-4" v-model="searchClient" @input="filterItems" placeholder="Search...">
@@ -474,7 +474,7 @@ export default {
       if (this.messages.length > 0 && this.userFirst?.type == 'lawyer') {
         if (
           this.messages.length == 1 &&
-          this.messages[0].sender_email == this.userFirst?.email
+          this.messages[0]?.sender_email == this.userFirst?.email
         ) {
           this.$swal("", "You are only permitted to send one message initially. If the potential client responds to your message then you will be able to communicate freely.", "error");
           this.newMessage = '';
@@ -506,19 +506,7 @@ export default {
         const client_id = (this.userFirst?.type == "client") ? this.userFirst?.id : this.userSecond?.id;
 
         console.log('dosra user : ', this.userSecond);
-        const payload = {
-          title: "New Message",
-          noti_status: "message",
-          sender_id: this.userFirst?.id,
-          receiver_id: this.userSecond?.id,
-        }
-
-        api2.post('/send-notification', payload).then((res) => {
-          console.log(res);
-        }).catch((error) => {
-          console.log(error);
-        });
-
+        
 
         if (this.chatStatus == "new" && this.userFirst?.type == "lawyer") {
           api2.post('/save-chat-info', { "lawyer_id": lawyer_id, "client_id": client_id, "job_id": this.jobId, "chat_id": this.chatId }).then(() => {
@@ -535,6 +523,20 @@ export default {
         //   replyStatus = true;
         // }
         // api.post('/update-reply-status', { "id": this.chatId , "status" : replyStatus});
+
+        const payload = {
+          title: "New Message",
+          noti_status: "message",
+          sender_id: this.userFirst?.id,
+          receiver_id: this.userSecond?.id,
+          chat_id : this.chatId,
+        }
+
+        api2.post('/send-notification', payload).then((res) => {
+          console.log(res);
+        }).catch((error) => {
+          console.log(error);
+        });
 
         console.log('Document written with ID:', docRef.id);
       })

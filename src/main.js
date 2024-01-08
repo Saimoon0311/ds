@@ -35,7 +35,7 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import { getToken } from "firebase/messaging";
 import { messaging } from "@/config/firebaseConfig";
 
-import Papa from 'papaparse';
+import Papa from "papaparse";
 
 /* add icons to the library */
 library.add(faUserSecret);
@@ -64,7 +64,10 @@ const app = createApp(App).component("font-awesome-icon", FontAwesomeIcon);
 app.mixin({
   data() {
     return {
-      baseUrl : process.env.NODE_ENV === 'production' ? 'https://virtualrealitycreators.com/law-backend/' : 'http://127.0.0.1:8000/',
+      baseUrl:
+        process.env.NODE_ENV === "production"
+          ? "https://virtualrealitycreators.com/law-backend/"
+          : "http://127.0.0.1:8000/",
       clear: false,
       searchQuery: "",
       searchQueryNumberPagination: "",
@@ -124,29 +127,58 @@ app.mixin({
   },
 
   methods: {
-
-
-    generateCsv(type) {
-      api.get(`/admin/users-data/${type}`).then((res)=>{
-              const data = res?.data;
-              const csv = Papa.unparse(data);
-
-                // Create a Blob with the CSV data
-                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-
-                // Create a download link and trigger the download
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.setAttribute('download', `${type}s.csv`);
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-      }).catch((error)=>{
-        console.log(error);
-      })
+    changeAccountStatus(id,type,status,pageStatus) {
+        this.$swal({
+          title: "Are you sure?",
+          text: `Are you sure you want to ${status == 'block' ? 'unblock' : 'block'} this user ?`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: `Yes`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            api
+              .post("/admin/block-unblock-user", {id,type,status})
+              .then(() => {
+                this.$swal(
+                  "",
+                  `This user is now ${status == 'block' ? 'unblock' : 'block'}ed.`,
+                  "success"
+                ).then(async () => {
+                  await this.loadMore(pageStatus,true);
+                  // this.fixLoadMoreAfterDeleteRecord(index, this.pageStatus);
+                });
+              })
+              .catch((error) => {
+                console.log("error : ", error);
+              });
+          }
+        });
     },
 
+    generateCsv(type) {
+      api
+        .get(`/admin/users-data/${type}`)
+        .then((res) => {
+          const data = res?.data;
+          const csv = Papa.unparse(data);
 
+          // Create a Blob with the CSV data
+          const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+
+          // Create a download link and trigger the download
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.setAttribute("download", `${type}s.csv`);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
 
     // convert numbers in currency format
     formatNumber(number) {
@@ -194,15 +226,18 @@ app.mixin({
         this.$store.commit("SET_USERTOCHAT", null);
         this.$store.commit("SET_CHATSTATUS", null);
       }
-      this.$store.commit('SET_IS_NOT_HEADER_CHAT',true);
+      this.$store.commit("SET_IS_NOT_HEADER_CHAT", true);
       // this.$router.push({ path: "/messages" });
-      this.$router.push({ path: '/messages-history', query: { job: item?.id } });
+      this.$router.push({
+        path: "/messages-history",
+        query: { job: item?.id },
+      });
     },
 
-    getLastPartOfUrl(){
+    getLastPartOfUrl() {
       const currentUrl = window.location.href;
       // Extract the last part of the URL (after the last slash)
-      return currentUrl.split('/').pop();
+      return currentUrl.split("/").pop();
     },
 
     saveJobInfo(item = null, reset = false) {
@@ -210,7 +245,7 @@ app.mixin({
         this.$store.commit("SET_JOB_DATA", null);
         localStorage.removeItem("jobData");
       } else {
-        console.log('save jbo index , ' , item);
+        console.log("save jbo index , ", item);
         this.$store.commit("SET_JOB_DATA", item);
         localStorage.setItem("jobData", JSON.stringify(item));
       }
@@ -238,20 +273,26 @@ app.mixin({
       this.$router.push("/login");
     },
 
-    async updateProfile(keyName, modalId = null,keyName2 = "Profile") {
-      if(modalId == '#ConsultationModal' && Array.isArray(keyName)){
-        console.log(keyName.length)
-        if(keyName.length == 3){
-          console.log(keyName[0],keyName[2])
-          if(this.form[keyName[0]] == 'free' && this.form[keyName[2]] == null){
+    async updateProfile(keyName, modalId = null, keyName2 = "Profile") {
+      if (modalId == "#ConsultationModal" && Array.isArray(keyName)) {
+        console.log(keyName.length);
+        if (keyName.length == 3) {
+          console.log(keyName[0], keyName[2]);
+          if (
+            this.form[keyName[0]] == "free" &&
+            this.form[keyName[2]] == null
+          ) {
             return false;
           }
-          console.log(keyName[0],keyName[1],keyName[2])
-          if(this.form[keyName[0]] == 'discounted' && (this.form[keyName[1]] == null || this.form[keyName[2]] == null)){
+          console.log(keyName[0], keyName[1], keyName[2]);
+          if (
+            this.form[keyName[0]] == "discounted" &&
+            (this.form[keyName[1]] == null || this.form[keyName[2]] == null)
+          ) {
             return false;
           }
         }
-      } 
+      }
       let formDataObject = {};
       if (Array.isArray(keyName)) {
         keyName.forEach((element) => {
@@ -276,21 +317,23 @@ app.mixin({
           if (modalId) {
             this.closeModal(modalId);
           }
-          this.$swal("", `${keyName2} updated successfully`, "success").then(() => {
-            // for multiple profiles edit from admin panel
-            if (this.loginUserEmail != res?.data?.data?.email) {
-              if (this.openJobs.length > 0) {
-                const openJobsIndex = this.openJobs.findIndex(
-                  (user) => user.email === res?.data?.data?.email
-                );
-                if (openJobsIndex !== -1) {
-                  this.openJobs[openJobsIndex] = res?.data?.data;
+          this.$swal("", `${keyName2} updated successfully`, "success").then(
+            () => {
+              // for multiple profiles edit from admin panel
+              if (this.loginUserEmail != res?.data?.data?.email) {
+                if (this.openJobs.length > 0) {
+                  const openJobsIndex = this.openJobs.findIndex(
+                    (user) => user.email === res?.data?.data?.email
+                  );
+                  if (openJobsIndex !== -1) {
+                    this.openJobs[openJobsIndex] = res?.data?.data;
+                  }
                 }
+              } else {
+                this.setUserInStateAndLocalStorage(res);
               }
-            } else {
-              this.setUserInStateAndLocalStorage(res);
             }
-          });
+          );
         });
       } catch (error) {
         this.$swal("", error?.response?.data?.error, "error");
@@ -341,7 +384,7 @@ app.mixin({
         job_title: res?.data?.data?.job_title,
         law_firm: res?.data?.data?.law_firm,
         link: res?.data?.data?.link,
-        is_subscribed_first : res?.data?.data?.is_subscribed_first,
+        is_subscribed_first: res?.data?.data?.is_subscribed_first,
         about: res?.data?.data?.about,
         area_insert: res?.data?.data?.area_insert,
         state_insert: res?.data?.data?.state_insert,
@@ -429,35 +472,35 @@ app.mixin({
         });
     },
 
-    chargeType(type){
+    chargeType(type) {
       if (type) {
-          let selectedOptionForSummary = "";
-          switch (type) {
-            case "Fixed":
-              selectedOptionForSummary = "Fixed fee";
-              break;
-            case "Hourly":
-              selectedOptionForSummary = "Hourly rate";
-              break;
-            case "Daily":
-              selectedOptionForSummary = "Daily rate";
-              break;
-            case "Item":
-              selectedOptionForSummary = "Item by item for specific tasks";
-              break;
-            case "Retainer":
-              selectedOptionForSummary = "Retainer";
-              break;
-            case "Success":
-              selectedOptionForSummary = "Success fee";
-              break;
-            case "Pro":
-              selectedOptionForSummary = "Pro bono";
-              break;
-          }
-          return selectedOptionForSummary;
+        let selectedOptionForSummary = "";
+        switch (type) {
+          case "Fixed":
+            selectedOptionForSummary = "Fixed fee";
+            break;
+          case "Hourly":
+            selectedOptionForSummary = "Hourly rate";
+            break;
+          case "Daily":
+            selectedOptionForSummary = "Daily rate";
+            break;
+          case "Item":
+            selectedOptionForSummary = "Item by item for specific tasks";
+            break;
+          case "Retainer":
+            selectedOptionForSummary = "Retainer";
+            break;
+          case "Success":
+            selectedOptionForSummary = "Success fee";
+            break;
+          case "Pro":
+            selectedOptionForSummary = "Pro bono";
+            break;
         }
-      },
+        return selectedOptionForSummary;
+      }
+    },
 
     goToViewProposals(data) {
       let id = data?.id;
@@ -478,12 +521,12 @@ app.mixin({
       if (this.noti_msg > 0 && type == "message") {
         count = this.noti_msg;
         this.$store.commit("SET_NOTI_COUNT_MSG", 0);
-        localStorage.setItem('noti_count_msg',0);
+        localStorage.setItem("noti_count_msg", 0);
       }
-      if(this.noti_job > 0 && type == "job"){
+      if (this.noti_job > 0 && type == "job") {
         count = this.noti_job;
         this.$store.commit("SET_NOTI_COUNT_JOB", 0);
-        localStorage.setItem('noti_count_job',0);
+        localStorage.setItem("noti_count_job", 0);
       }
       // console.log(this.noti_job);
       if (count > 0) {
@@ -636,20 +679,21 @@ app.mixin({
     },
 
     // for lawyer and client details both
-    openLawyerDetailsModal(data,showSecretInfo = false) {
+    openLawyerDetailsModal(data, showSecretInfo = false) {
       let newData = {};
       if (data && typeof data === "object") {
         for (const key in data) {
           if (Object.prototype.hasOwnProperty.call(data, key)) {
             const value = data[key];
-            if(showSecretInfo){
+            if (showSecretInfo) {
               if (
                 value !== null &&
                 value != 0 &&
                 (key == "first_name" ||
                   key == "last_name" ||
                   key == "image" ||
-                  key == "email" || key == "phone" ||
+                  key == "email" ||
+                  key == "phone" ||
                   key == "job_title" ||
                   key == "law_firm" ||
                   key == "link" ||
@@ -667,12 +711,12 @@ app.mixin({
                 // if (key == "image") {
                 //   newData[objKey] = `<div v-if="image" class="circular-container"><img :src="${this.createImage(value)}" alt="User Image" class="circular-image"></div>`;
                 // } else {
-                  newData[objKey] = value;
+                newData[objKey] = value;
                 // }
 
                 // newData[objKey] = value;
               }
-            }else{
+            } else {
               if (
                 value !== null &&
                 value != 0 &&
@@ -690,35 +734,32 @@ app.mixin({
                 if (key == "about") {
                   objKey = "About me";
                 }
-                
 
                 // if (key == "image") {
                 //   newData[objKey] = `<div v-if="image" class="circular-container"><img :src="${this.createImage(value)}" alt="User Image" class="circular-image"></div>`;
                 // } else {
-                  newData[objKey] = value;
+                newData[objKey] = value;
                 // }
-
               }
             }
           }
         }
       }
       const htmlContent = Object.entries(newData)
-        .map(
-          ([key, value]) => {
-            if(key == 'image' && value != null){
-              return `<div v-if="image" class="circular-container"><img :src="${this.createImage(value)}" alt="User Image" class="circular-image"></div>`;
-            }else{
-              return `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`;
-            }
+        .map(([key, value]) => {
+          if (key == "image" && value != null) {
+            return `<div v-if="image" class="circular-container"><img :src="${this.createImage(
+              value
+            )}" alt="User Image" class="circular-image"></div>`;
+          } else {
+            return `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`;
           }
-        )
+        })
         .join("");
 
       //   <div v-if="image" class="circular-container">
       //   <img :src="image" alt="User Image" class="circular-image">
       // </div>
-
 
       // Use dynamic HTML inside SweetAlert2 modal
       this.$swal.fire({
@@ -732,9 +773,8 @@ app.mixin({
       });
     },
 
-
-    createImage(value){
-      return this.baseUrl + 'storage/images/' + value;
+    createImage(value) {
+      return this.baseUrl + "storage/images/" + value;
     },
 
     // openProposalDetailsModal(data) {
@@ -838,19 +878,18 @@ app.mixin({
         });
     },
 
-
     // async requestNotificationPermission() {
     //   try {
     //     // Get the current FCM token
     //     const currentToken = await getToken(messaging);
     //     console.log('old token : ' , messaging);
-    
+
     //     // Clear the existing token
     //     await messaging.deleteToken(currentToken);
-    
+
     //     // Request permission for notifications
     //     const permission = await Notification.requestPermission();
-    
+
     //     if (permission === "granted") {
     //       // Get a new FCM token
     //       const newToken = await getToken(messaging);
@@ -938,17 +977,17 @@ app.mixin({
                 specificTasks = [...value];
               } else if (key == "disbursements") {
                 disbursements = [...value];
-              } else if (key == "fee_earners" && value != 'me') {
+              } else if (key == "fee_earners" && value != "me") {
                 feeEarners = [...value];
               } else {
                 if (objKey == "lawyer" && value != null) {
                   newData["lawyer email"] = value?.email;
-                }
-                else if(key == 'charge_type'){
+                } else if (key == "charge_type") {
                   newData[objKey] = this.chargeType(value);
-                } 
-                else {
-                  value = this.isNumericString(value) ? "$" + this.formatNumber(value) : value;
+                } else {
+                  value = this.isNumericString(value)
+                    ? "$" + this.formatNumber(value)
+                    : value;
                   newData[objKey] = value;
                 }
               }
@@ -976,7 +1015,7 @@ app.mixin({
           renderAsHtml
         );
       }
-      
+
       if (disbursements.length > 0) {
         disbursementsTable = this.createTableHtml(
           "Disbursements",
@@ -984,7 +1023,7 @@ app.mixin({
           renderAsHtml
         );
       }
-      
+
       if (feeEarners.length > 0) {
         console.log("fee earners : : ", feeEarners);
         feeEarnersTable = this.createTableHtmlFeeEarners(
@@ -993,14 +1032,14 @@ app.mixin({
           renderAsHtml
         );
       }
-      
+
       const swalHtmlContent = `
         <div class="table-wrap" style="text-align: left !important;">${mainHtmlContent}</div>
         ${specificTasksTable}
         ${disbursementsTable}
         ${feeEarnersTable}
       `;
-      console.log('dis bur sement : ' , swalHtmlContent);
+      console.log("dis bur sement : ", swalHtmlContent);
       // Use dynamic HTML inside SweetAlert2 modal
 
       if (renderAsHtml) {
@@ -1018,7 +1057,7 @@ app.mixin({
       }
     },
 
-    createTableHtml(title, dataArray,renderAsHtml = false) {
+    createTableHtml(title, dataArray, renderAsHtml = false) {
       const total = dataArray.reduce(
         (total, row) => total + parseFloat(row.cost ?? row.costAud) || 0,
         0
@@ -1037,7 +1076,7 @@ app.mixin({
         .join("");
 
       return `
-        <div class="table-title">${!renderAsHtml ? title : ''}</div>
+        <div class="table-title">${!renderAsHtml ? title : ""}</div>
         <table class='table dynamicTable'>
           <thead>
             <tr class='border'>
@@ -1058,8 +1097,8 @@ app.mixin({
       `;
     },
 
-    createTableHtmlFeeEarners(title, dataArray,renderAsHtml = false) {
-      console.log('fee1 : ' , dataArray);
+    createTableHtmlFeeEarners(title, dataArray, renderAsHtml = false) {
+      console.log("fee1 : ", dataArray);
       // const total = dataArray.reduce(
       //   (total, row) => total + parseFloat(row.hourlyRate * row.estimatedHours) || 0,
       //   0
@@ -1067,7 +1106,9 @@ app.mixin({
       let grandTotal = 0;
       const tableContent = dataArray
         .map((item) => {
-          const subTotal = (item.hourly_rate ?? item.hourlyRate) * (item.hours ?? item.estimatedHours);
+          const subTotal =
+            (item.hourly_rate ?? item.hourlyRate) *
+            (item.hours ?? item.estimatedHours);
           grandTotal += subTotal;
           return `
             <tr>
@@ -1085,7 +1126,7 @@ app.mixin({
         .join("");
 
       return `
-        <div class="table-title">${!renderAsHtml ? title : ''}</div>
+        <div class="table-title">${!renderAsHtml ? title : ""}</div>
         <table class='table dynamicTable'>
           <thead>
             <tr>
@@ -1232,10 +1273,17 @@ app.mixin({
             this.setUserAndRedirect(res, dashboardUrl);
           })
           .catch((error) => {
-            // this.$swal("", error?.response?.data?.error, "error");
-            this.$swal("", "Incorrect email or password.", "error");
-            // alert("Invalid Credentials");
-            console.log("getResults : ", error);
+            if (error.response && error.response.status === 401) {
+              // Unauthorized (blocked)
+              this.$swal(
+                "",
+                "Account is blocked. Please contact support.",
+                "error"
+              );
+            } else {
+              // Other errors
+              this.$swal("", "Incorrect email or password.", "error");
+            }
           });
         console.log(formData);
       } catch (error) {
@@ -1253,9 +1301,9 @@ app.mixin({
       localStorage.removeItem("jobData");
       localStorage.removeItem("noti_count_job");
       localStorage.removeItem("noti_count_msg");
-      this.$store.commit('SET_JOB_DATA',null);
-      this.$store.commit('SET_NOTI_COUNT_MSG',0);
-      this.$store.commit('SET_NOTI_COUNT_JOB',0);
+      this.$store.commit("SET_JOB_DATA", null);
+      this.$store.commit("SET_NOTI_COUNT_MSG", 0);
+      this.$store.commit("SET_NOTI_COUNT_JOB", 0);
 
       this.$store.commit("SET_LOGIN_USER", null);
       this.$store.commit("SET_SUB_STATUS", null);

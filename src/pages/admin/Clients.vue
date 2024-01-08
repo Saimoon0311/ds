@@ -158,6 +158,13 @@
                           </table>
                         </details>
                       </td>
+                      <td class="text-end button-width">
+                        <div class="mb-1">
+                           <button class="btn btn-dark btn-sm m-1" @click="changeAccountStatus(item?.id,item?.type,item?.status,pageStatus)">
+                            {{ item?.status == 'block' ? 'Unblock' : 'Block' }}
+                          </button>
+                        </div>
+                      </td>
 
                       <!-- <td class="text-end button-width">
                         <div  class="mb-1">
