@@ -418,7 +418,7 @@ padding: 30px !important;
   }
 
   .homepage-circles a , .homepage-circles .btn {
-    font-size: 14px !important;
+    font-size: 13px !important;
   }
 
   main {
@@ -438,32 +438,49 @@ padding: 30px !important;
   }
 
 }
+@media screen and (max-width: 768px) {
+  .logo-sub-heading {
+    padding: 0px 30px;
+  }
+  .btn {
+    padding: 5px 15px 5px 15px !important;
+    font-size: 14px !important;  
+}
+}
 @media (min-width: 360px) and (max-width: 450px) {
   .homepage-circles {
-    width: 350px;
-    height: 350px;
+    width: 330px;
+    height: 330px;
+    padding: 15px;
   }
-
+  .btn {
+    padding: 3px 10px !important;
+    font-size: 13px !important;
+}
   .cstm-dropdown {
     margin-top: -20px;
     right: 0px;
   }
 }
 @media (min-width: 320px) and (max-width: 359px) {
+  .showhover p{
+    line-height: 1.5;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+  .btn {
+    padding: 3px 10px !important;
+    font-size: 13px !important;
+}
   .homepage-circles {
     width: 310px;
     height: 310px;
   }  
+  .homepage-circles a, .homepage-circles .btn {
+    font-size: 12px !important;
+}
 }
 
-@media screen and (max-width: 768px) {
-  .logo-sub-heading {
-    padding: 0px 30px;
-  }
-  .btn[data-v-34f07b43] {
-    padding: 5px 15px 5px 15px !important;
-    font-size: 14px !important;  
-}
-}
+
 
 </style>
