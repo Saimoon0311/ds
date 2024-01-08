@@ -15,6 +15,7 @@ import AdminLogin from "@/pages/admin/Login.vue";
 import AdminLawyer from "@/pages/admin/Lawyers.vue";
 import AdminJobs from "@/pages/admin/Jobs.vue";
 import AdminClients from "@/pages/admin/Clients.vue";
+import AdminMain from "@/pages/admin/AdminMain.vue";
 import clientDashboard from "@/pages/client/Dashboard.vue";
 // import SubscriptionComponent from "@/pages/client/Subscription.vue";
 import ForgetPassword from "@/pages/forms/ForgetPassword.vue";
@@ -331,6 +332,12 @@ const routes = [
   {
     path: "/client",
     component: AdminClients,
+    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true }
+  },
+  
+  {
+    path: "/adminmain",
+    component: AdminMain,
     meta: { requiresAuth: true, clientAndlawyerNotAllowed: true }
   },
 

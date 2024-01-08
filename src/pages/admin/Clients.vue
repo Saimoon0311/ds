@@ -65,7 +65,7 @@
                 </p>
               </div>
 
-              <div v-else class="border rounded bg-light p-3 d-flex flex-wrap">
+              <div v-else class="d-flex flex-wrap">
                 <div class="input-group mb-3">
                   <input
                     type="text"
