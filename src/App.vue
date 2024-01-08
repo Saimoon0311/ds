@@ -110,6 +110,26 @@ export default {
 <style>
 @import "vue-select/dist/vue-select.css";
 
+/* profile image circle  */
+.circular-container {
+  width: 100px; /* Set the width and height to control the size of the circular div */
+  height: 100px;
+  border-radius: 50%; /* Make it circular by setting border-radius to 50% */
+  overflow: hidden; /* Hide overflow content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0; /* Set a background color for the circular div */
+}
+
+.circular-image {
+  width: 100%; /* Make the image fill the circular div */
+  height: 100%;
+  border-radius: 50%; /* Match the border-radius of the container */
+  object-fit: cover; /* Ensure the image covers the container */
+}
+/* profile image circle end */
+
 
 .count_btn{
   position: relative;

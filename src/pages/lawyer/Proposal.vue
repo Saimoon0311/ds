@@ -2783,12 +2783,18 @@ export default {
     },
 
     nextStep() {
+      
+      // if upfront payment amount greater than total amount
+      if(this.selectedOption != "Pro" && this.paySucc == "Yes" && this.currentStep == 1){
+        this.calculateTotals();
+        if(this.form.upfront_payment > this.totals["totalExcludingGst"]){
+          alert("Upfront payment should not greater than total amount");
+          return;
+        }
+      }
+
       if (this.currentStep === 3) {
         this.submitStepForm();
-        // console.log(this.form);
-        // console.log("Done: ", JSON.stringify(values, null, 1));
-        // console.log('test', values);
-
         return;
       }
 
@@ -2817,7 +2823,7 @@ export default {
       }
     },
     proPrevStep() {
-      alert("asd", this.currentStep);
+      // alert("asd", this.currentStep);
       console.log("asdasd", this.currentStep);
       if (this.currentStep == 2) {
         this.currentStep = 0;

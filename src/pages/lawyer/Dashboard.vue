@@ -329,6 +329,20 @@
                           </div>
                             <div class="widthcn">
                               <span class="spacer px-3">
+                                <p class="smallFont text-black smallFont1">
+                                  <b>Posted by: </b>
+                                  <span class="text-capitalize">
+                                    {{ item?.owner?.first_name }}
+                                    <span v-if="tab == 'close'">
+                                      {{ item?.proposal?.status.toLowerCase() == 'accept' ?? item?.owner?.last_name }}  
+                                    </span>
+                                    ({{
+                                      item?.city
+                                    }}) on
+                                    {{ formatCreatedAt(item.created_at) }}
+                                  </span>
+                                </p>
+
                                 <button
                                   v-if="item?.requirement"
                                   :disabled="!item?.requirement"
@@ -345,19 +359,7 @@
                                     !item?.requirement ? ", (N/A)" : ""
                                   }}
                                 </button>
-                                <p class="smallFont text-black smallFont1">
-                                  <b>Posted by: </b>
-                                  <span class="text-capitalize">
-                                    {{ item?.owner?.first_name }}
-                                    <span v-if="tab == 'close'">
-                                      {{ item?.proposal?.status.toLowerCase() == 'accept' ?? item?.owner?.last_name }}  
-                                    </span>
-                                    ({{
-                                      item?.city
-                                    }}) on
-                                    {{ formatCreatedAt(item.created_at) }}
-                                  </span>
-                                </p>
+                                
                               </span>
                             </div>
                          
@@ -390,7 +392,7 @@
 
                           <button
                             @click="openProposalDetailsModal(item.proposal)"
-                            v-if="tab == 'pending' || tab == 'close'"
+                            v-if="tab == 'pending'"
                             class="btn btn-dark border btn-sm card-btn my-1 mx-1"
                           >
                             View Proposal
@@ -407,6 +409,7 @@
                           </button> -->
 
                           <button
+                            v-if="tab != 'close'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
                             @click="goToMessagePage(item,'lawyer')"
                           >

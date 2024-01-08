@@ -834,7 +834,7 @@ window.$ = window.jQuery = $;
 export default {
   data() {
     return {
-      baseUrl : 'http://127.0.0.1:8000/storage/images/',
+      // baseUrl : process.env.BACKEND_URL + 'storage/images/',
       image : null,
       form: {
         law_firm: null,
@@ -898,6 +898,7 @@ export default {
     },
   },
   created() {
+    console.log(process.env.BACKEND_URL);
     this.updateFormProperties();
   },
   mounted() {
@@ -905,7 +906,7 @@ export default {
     this.fetchOptions();
     this.fetchOptions_locations();
     if(this.loginUser?.image){
-      this.image = this.baseUrl + this.loginUser?.image;
+      this.image = this.baseUrl +'storage/images/'+ this.loginUser?.image;
     }
   },
   methods: {
@@ -1021,7 +1022,7 @@ export default {
       try {
         api.post('/lawyer/upload-image', formData).then((res) => {
           this.$swal("", "You have successfully uploaded your profile picture.", "success").then(() => {
-            this.image = this.baseUrl + res?.data?.image;
+            this.image = this.baseUrl +'storage/images/'+ res?.data?.image;
             console.log(res);
             console.log('loginUser : '  + res?.data?.image);
             fileInput.value = '';
@@ -1107,23 +1108,7 @@ export default {
 
 <style scoped>
 
-.circular-container {
-  width: 100px; /* Set the width and height to control the size of the circular div */
-  height: 100px;
-  border-radius: 50%; /* Make it circular by setting border-radius to 50% */
-  overflow: hidden; /* Hide overflow content */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f0f0f0; /* Set a background color for the circular div */
-}
 
-.circular-image {
-  width: 100%; /* Make the image fill the circular div */
-  height: 100%;
-  border-radius: 50%; /* Match the border-radius of the container */
-  object-fit: cover; /* Ensure the image covers the container */
-}
 .form-check-input {
   border: 1px solid gray !important;
 }
