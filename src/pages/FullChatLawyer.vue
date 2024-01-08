@@ -53,6 +53,9 @@
                   {{ data?.client?.last_name ?? data?.lawyer?.last_name }}
                 </span>  
                 | Job No: {{ data?.job?.identity }}
+                <span v-if="data?.is_closed">
+                  | Archived
+                </span>
               </span>
               <!-- <span v-if="data?.client_seen == 0 ||
                 data?.client_seen == false ||

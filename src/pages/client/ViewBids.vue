@@ -11,7 +11,7 @@
       <h4 class="text-center">Proposals</h4>
 
       <div data-v-511b78bb="" class="">
-        <ul
+        <!-- <ul
           data-v-511b78bb=""
           class="nav nav-pills mb-3 bg-light border p-2 py-3 rounded"
           id="pills-tab"
@@ -50,7 +50,7 @@
               Closed
             </button>
           </li>
-        </ul>
+        </ul> -->
         <div data-v-511b78bb="" class="tab-content" id="pills-tabContent">
           <div
             data-v-511b78bb=""

@@ -601,7 +601,8 @@ app.mixin({
               key != "client_chat" &&
               key != "owner" &&
               key != "requirement" &&
-              key != "proposal"
+              key != "proposal" &&
+              key != "assigned_lawyer_id"
             ) {
               let objKey = key;
               objKey = objKey.replace(/_/g, " ");
