@@ -9,7 +9,9 @@
 
         
 
-      
+        <div>
+          <button @click="generateCsv('lawyer')">Generate and Download CSV</button>
+        </div>
 
      
 

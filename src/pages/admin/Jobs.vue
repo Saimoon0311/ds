@@ -228,6 +228,14 @@
                 </form>
               </td>  -->
               <td>
+                <button v-if="tab == 'approved'"
+                  @click="reopenJob(item?.id)"
+                  type="button" 
+                  class="btn btn-sm btn-danger"
+                  data-bs-toggle="tooltip" data-bs-placement="right" title="Reopen job"
+                  >
+                  <i class="fa fa-undo"></i>
+                </button>
                 <button
                   data-v-7525850d=""
                   class="btn btn-sm btn-danger"
@@ -331,6 +339,7 @@ export default {
 
   data(){
     return {
+      tab : 'open',
       dataUrl : '/admin/show-open-jobs',
     }
   },
@@ -385,7 +394,7 @@ export default {
 
 
     changeTab(status){
-
+      this.tab = status;
       if(status == "open"){
         this.dataUrl = '/admin/show-open-jobs';
         this.getData('/admin/show-open-jobs');
@@ -403,6 +412,35 @@ export default {
         this.getData('/admin/show-no-field-jobs');
       }
       
+    },
+
+
+    reopenJob(id){
+      console.log(id);
+      this.$swal({
+        title: 'Are you sure?',
+        text: "You want to reopen this job ?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Reopen',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          api.get(`/admin/reopen-job/${id}`)
+            .then(() => {
+              this.$swal(
+                '',
+                'Job has been reopen successfully',
+                'success'
+              ).then(() => {
+                this.getPaginatedData();
+              });
+            }).catch((error) => {
+              this.$swal('', error?.response?.data?.error, 'error');
+            });
+        }
+      })
     },
 
 

@@ -35,6 +35,8 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import { getToken } from "firebase/messaging";
 import { messaging } from "@/config/firebaseConfig";
 
+import Papa from 'papaparse';
+
 /* add icons to the library */
 library.add(faUserSecret);
 
@@ -122,6 +124,30 @@ app.mixin({
   },
 
   methods: {
+
+
+    generateCsv(type) {
+      api.get(`/admin/users-data/${type}`).then((res)=>{
+              const data = res?.data;
+              const csv = Papa.unparse(data);
+
+                // Create a Blob with the CSV data
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+
+                // Create a download link and trigger the download
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.setAttribute('download', `${type}s.csv`);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+      }).catch((error)=>{
+        console.log(error);
+      })
+    },
+
+
+
     // convert numbers in currency format
     formatNumber(number) {
       // Ensure that the input is a number
