@@ -9,7 +9,7 @@
     <div v-else>
       <GeneralHeader  />
     </div>
-    <h3 class="text-center mt-3 pt-3 mb-5">HOW THE PLATFORM WORKS</h3>
+    <h3 class="text-center mt-3 pt-3 mb-5">How the Platform Works</h3>
     <ul class="nav nav-tabs mb-3 container how-tabs" id="ex1" role="tablist">
       <li class="nav-item" role="presentation">
         <a

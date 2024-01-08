@@ -78,7 +78,8 @@
               </div>
 
               <div v-else class="border rounded bg-light p-3 d-flex flex-wrap">
-                <div class="input-group mb-3">
+                <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 w-100">
+                  <div class="input-group w-75">
                   <input
                     type="text"
                     class="form-control"
@@ -103,6 +104,13 @@
                     <i class="fa fa-refresh"></i>
                   </button>
                 </div>
+                <button class="btn btn-dark btn-sm m-1"><i class="fa fa-plus"></i> Generate CSV </button>
+                </div>
+                
+                 
+
+              
+               
 
                 <span
                   v-if="openJobs.length == 0 && searchQuery != ''"
