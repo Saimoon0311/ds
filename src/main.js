@@ -116,6 +116,9 @@ app.mixin({
     loginUserEmail() {
       return this.$store.getters?.loginUser?.email;
     },
+    loginUserId() {
+      return this.$store.getters?.loginUser?.id;
+    },
 
     currentPaginationPage() {
       console.log("computed run");
@@ -324,7 +327,8 @@ app.mixin({
           this.$swal("", `${keyName2} updated successfully`, "success").then(
             () => {
               // for multiple profiles edit from admin panel
-              if (this.loginUserEmail != res?.data?.data?.email) {
+              if (this.loginUserId != res?.data?.data?.id) {
+              // if (this.loginUserEmail != res?.data?.data?.email) {
                 if (this.openJobs.length > 0) {
                   const openJobsIndex = this.openJobs.findIndex(
                     (user) => user.email === res?.data?.data?.email

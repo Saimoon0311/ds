@@ -83,9 +83,9 @@
                   type="button"
                   name="job-email-submit"
                   class="btn btn-dark my-3"
-                  @click="updateProfile('email','#emailModal','Email')"
+                  @click="sendUpdateEmail"
                 >
-                  Save changes
+                  Send update link on this email
                 </button>
               </div>
             </div>
@@ -261,7 +261,7 @@
                 <input
                   type="tel"
                   name="phone"
-                  maxlength="10"
+                  maxlength="20"
                   class="form-control"
                   id="phone"
                   v-model="form.phone"
@@ -567,7 +567,7 @@
         <tbody>
           <!--  Email -->
           <tr>
-            <td class="col-md-3">Email:
+            <td class="d-flex align-items-center justify-content-between">Email:
                 <button
                   type="button"
                   class="btn btn-dark btn-sm"
@@ -970,6 +970,16 @@ export default {
     }
   },
   methods: {
+
+    async sendUpdateEmail(){
+      try {
+        await api.post('/send-email-update-link',{"old_email":this?.loginUser?.email,"email" : this?.form?.email});
+        this.$swal("", "Link has been send to your new email address" , "success");  
+      } catch (error) {
+        console.error('Error fetching options:', error);
+      }
+    },
+  
     // checkMessages() {
     //   console.log('Message received. -1');
     //   onMessage(messaging, (payload) => {

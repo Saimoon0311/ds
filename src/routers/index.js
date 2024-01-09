@@ -20,6 +20,7 @@ import clientDashboard from "@/pages/client/Dashboard.vue";
 // import SubscriptionComponent from "@/pages/client/Subscription.vue";
 import ForgetPassword from "@/pages/forms/ForgetPassword.vue";
 import ResetPassword from "@/pages/forms/ResetPassword.vue";
+import UpdateEmail from "@/pages/forms/UpdateEmail.vue";
 
 import api from "../config/api.js";
 
@@ -380,6 +381,12 @@ const routes = [
   {
     path: "/reset-password/:email/:token",
     component: ResetPassword,
+    // beforeEnter: reverse_guard,
+  },
+
+  {
+    path: "/update-email/:email/:token",
+    component: UpdateEmail,
     // beforeEnter: reverse_guard,
   },
 
