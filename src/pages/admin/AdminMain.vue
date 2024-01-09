@@ -120,6 +120,28 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-3 col-sm-12">
+            <div class="admin-card p-3 mb-md-3 mb-sm-2 ">
+              <div
+                class="d-flex flex-wrap justify-content-between align-items-center"
+              >
+                <h6 class="text-black">Outstanding Jobs</h6>
+                <i
+                  class="fa fa-book rounded-circle p-2 bg-dark text-white"
+                ></i>
+              </div>
+              <p class="text-black m-0">20</p>
+            </div>
+            <div class="admin-card p-3 mb-md-3 mb-sm-2">
+              <div
+                class="d-flex flex-wrap justify-content-between align-items-center"
+              >
+                <h6 class="text-black">Proposals Total Worth</h6>
+                <i
+                  class="fa fa-money-bill rounded-circle p-2 bg-dark text-white"
+                ></i>
+              </div>
+              <p class="text-black m-0">$400 100.20</p>
+            </div>
             <div class="admin-card p-3 mb-md-3 mb-sm-2 bg-success">
               <div
                 class="d-flex flex-wrap justify-content-between align-items-center"
@@ -142,28 +164,7 @@
               </div>
               <p class="text-white m-0">{{ nonsubscribers }}</p>
             </div>
-            <div class="admin-card p-3 mb-md-3 mb-sm-2 ">
-              <div
-                class="d-flex flex-wrap justify-content-between align-items-center"
-              >
-                <h6 class="text-black">Outstanding Jobs</h6>
-                <i
-                  class="fa fa-book rounded-circle p-2 bg-dark text-white"
-                ></i>
-              </div>
-              <p class="text-black m-0">20</p>
-            </div>
-            <div class="admin-card p-3 mb-md-3 mb-sm-2">
-              <div
-                class="d-flex flex-wrap justify-content-between align-items-center"
-              >
-                <h6 class="text-black">Proposals Total Worth</h6>
-                <i
-                  class="fa fa-money-bill rounded-circle p-2 bg-dark text-white"
-                ></i>
-              </div>
-              <p class="text-black m-0">$ 400 100.20</p>
-            </div>
+            
           </div>
         </div>
 
