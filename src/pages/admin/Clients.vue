@@ -66,7 +66,7 @@
               </div>
 
               <div v-else class="d-flex flex-wrap ">
-              <div  class="d-flex flex-wrap align-items-center justify-content-between mb-3 w-100">
+              <div  class="d-flex flex-wrap align-items-center justify-content-between mb-3 w-100 pt-2">
                 <div class="input-group  w-75">
                   <input
                     type="text"

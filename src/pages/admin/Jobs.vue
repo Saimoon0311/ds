@@ -2,7 +2,7 @@
   <div class="l-pro-main">
     <AdminHeader />
 
-    <div class="container">
+    <div class="container my-md-4 my-sm-3">
       <!-- <div class="container"> -->
 
         
@@ -15,7 +15,7 @@
 
 
     <!-- after subscribe -->
-    <main class="container">
+    <main class="container ">
       <br />
       <!-- Table 1 Bids -->
       <!-- <h4 class=" mt-0">Proposals</h4> -->
