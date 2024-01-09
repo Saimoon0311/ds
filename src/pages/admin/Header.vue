@@ -29,14 +29,14 @@
             <div class="navbar-nav">
               <div class="left-menu">
                 <router-link
-                  to="/adminmain"
+                  to="/admin-dashboard"
                   class="nav-link fw-normal menuItem-active-link"
                   id="lawyers"
                   aria-current="page"
                   >Dashboard</router-link
                 >
                 <router-link
-                  to="/admin-dashboard"
+                  to="/lawyer"
                   class="nav-link fw-normal menuItem-active-link"
                   id="lawyers"
                   aria-current="page"

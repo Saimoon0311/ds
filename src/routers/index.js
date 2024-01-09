@@ -29,6 +29,7 @@ import PlatForm from "@/components/PlatForm.vue";
 // import ClientLoginForm from "@/pages/client/Login.vue";
 import ClientRegister from "@/pages/client/clientRegister.vue";
 import OTP from "@/pages/forms/OTP.vue";
+import OTPAdmin from "@/pages/forms/OTPAdmin.vue";
 import ClientAccount from "@/pages/client/Account.vue";
 
 import AdminAccount from "@/pages/admin/Account.vue";
@@ -225,6 +226,11 @@ const routes = [
     beforeEnter: reverse_guard,
   },
   {
+    path: "/otp-verification",
+    component: OTPAdmin,
+    // beforeEnter: reverse_guard,
+  },
+  {
     path: "/client-account",
     component: ClientAccount,
     meta: { requiresAuth: true, lawyerAndAdminNotAllowed: true },
@@ -307,6 +313,12 @@ const routes = [
 
   {
     path: "/admin-dashboard",
+    component: AdminMain,
+    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true }
+  },
+
+  {
+    path: "/lawyer",
     component: AdminLawyer,
     meta: { requiresAuth: true, clientAndlawyerNotAllowed: true }
   },
@@ -335,11 +347,7 @@ const routes = [
     meta: { requiresAuth: true, clientAndlawyerNotAllowed: true }
   },
   
-  {
-    path: "/adminmain",
-    component: AdminMain,
-    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true }
-  },
+ 
 
   {
     path: "/view-proposals",
@@ -460,6 +468,13 @@ router.beforeEach(async (to, from, next) => {
           // router.go(-1);
           console.log("lawyer access not allowed");
         } else {
+
+          if(result?.data?.data?.type == "admin" && !result?.data?.data?.otp_verified){
+            localStorage.removeItem("loginUser");
+            localStorage.removeItem("token");
+            next('/admin-login');
+          }
+
           console.log("cr", to);
           console.log("cr 2", from);
           

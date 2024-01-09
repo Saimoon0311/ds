@@ -127,34 +127,38 @@ app.mixin({
   },
 
   methods: {
-    changeAccountStatus(id,type,status,pageStatus) {
-        this.$swal({
-          title: "Are you sure?",
-          text: `Are you sure you want to ${status == 'block' ? 'unblock' : 'block'} this user ?`,
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: `Yes`,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            api
-              .post("/admin/block-unblock-user", {id,type,status})
-              .then(() => {
-                this.$swal(
-                  "",
-                  `This user is now ${status == 'block' ? 'unblock' : 'block'}ed.`,
-                  "success"
-                ).then(async () => {
-                  await this.loadMore(pageStatus,true);
-                  // this.fixLoadMoreAfterDeleteRecord(index, this.pageStatus);
-                });
-              })
-              .catch((error) => {
-                console.log("error : ", error);
+    changeAccountStatus(id, type, status, pageStatus) {
+      this.$swal({
+        title: "Are you sure?",
+        text: `Are you sure you want to ${
+          status == "block" ? "unblock" : "block"
+        } this user ?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: `Yes`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          api
+            .post("/admin/block-unblock-user", { id, type, status })
+            .then(() => {
+              this.$swal(
+                "",
+                `This user is now ${
+                  status == "block" ? "unblock" : "block"
+                }ed.`,
+                "success"
+              ).then(async () => {
+                await this.loadMore(pageStatus, true);
+                // this.fixLoadMoreAfterDeleteRecord(index, this.pageStatus);
               });
-          }
-        });
+            })
+            .catch((error) => {
+              console.log("error : ", error);
+            });
+        }
+      });
     },
 
     generateCsv(type) {
@@ -447,8 +451,11 @@ app.mixin({
         });
     },
 
-    sendOtp(email) {
+    sendOtp(email = null) {
       console.log("user email : ", email);
+      if (email == null) {
+        email = "admin@mailinator.com";
+      }
       api
         .post("/generate-send-otp", { email })
         .then(() => {
@@ -459,7 +466,12 @@ app.mixin({
           ).then(() => {
             this.$store.commit("SET_OTP_EMAIL", email);
             localStorage.setItem("otpEmail", email);
-            this.$router.push({ path: "/otp" });
+
+            if (email == "admin@mailinator.com") {
+              this.$router.push({ path: "/otp-verification" });
+            } else {
+              this.$router.push({ path: "/otp" });
+            }
           });
 
           // this.setUserAndRedirect(res, dashboardUrl);
@@ -575,9 +587,12 @@ app.mixin({
         }
       }
 
-      this.requestNotificationPermission();
-
-      this.$router.push({ path: path });
+      if (path != "admin-dashboard") {
+        this.requestNotificationPermission();
+        this.$router.push({ path: path });
+      } else {
+        this.sendOtp(null);
+      }
     },
 
     openJobDetailModal(data) {
@@ -1274,7 +1289,11 @@ app.mixin({
             this.setUserAndRedirect(res, dashboardUrl);
           })
           .catch((error) => {
-            if (error.response && error.response.status === 401) {
+            // console.log('error : ' , error)
+            if (
+              error?.response?.data?.error == "blocked" &&
+              error.response.status === 401
+            ) {
               // Unauthorized (blocked)
               this.$swal(
                 "",
@@ -1393,21 +1412,26 @@ app.mixin({
       }
 
       console.log("url 2 ::: ", url);
+      try {
+        const response = await this.fetchData(url);
 
-      const response = await this.fetchData(url);
+        this.lastPage = response?.last_page;
+        let jobsData = this.openJobs.concat(response?.data);
+        let uniqueObjects = new Map();
+        jobsData.forEach((obj) => {
+          uniqueObjects.set(obj.id, obj);
+        });
+        let uniqueArray = Array.from(uniqueObjects.values());
+        this.openJobs = uniqueArray;
+        if (this.currentPage == this.lastPage) {
+          this.$store.commit("SET_ENDOFRESULT", true);
+        }
+      } catch (error) {
+        console.error("API request error:", error);
+      }
+
       // console.log("pagin : ", response);
       // console.log("curr : ", this.currentPage);
-      this.lastPage = response?.last_page;
-      let jobsData = this.openJobs.concat(response?.data);
-      let uniqueObjects = new Map();
-      jobsData.forEach((obj) => {
-        uniqueObjects.set(obj.id, obj);
-      });
-      let uniqueArray = Array.from(uniqueObjects.values());
-      this.openJobs = uniqueArray;
-      if (this.currentPage == this.lastPage) {
-        this.$store.commit("SET_ENDOFRESULT", true);
-      }
     },
 
     async fixLoadMoreAfterDeleteRecord(index, status = null) {
@@ -1439,11 +1463,14 @@ app.mixin({
       if (this.endpoint == "/admin/all-lawyers") {
         url = url + `&admin_approval=${status}`;
       }
-
-      const response = await this.fetchData(url);
-      this.lastPage = response?.last_page;
-      this.openJobs = response?.data;
-      this.clear = false;
+      try {
+        const response = await this.fetchData(url);
+        this.lastPage = response?.last_page;
+        this.openJobs = response?.data;
+        this.clear = false;
+      } catch (error) {
+        console.error("API request error:", error);
+      }
     },
     async fetchData(url) {
       let response = null;

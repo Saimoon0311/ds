@@ -7,28 +7,28 @@
             <div class="col-md-6 col-lg-3 col-sm-12">
                 <div class="admin-card p-3 mb-sm-3 mb-lg-0 m-sm-0">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <h6 class="text-black">Total Login Today</h6>
+                        <h6 class="text-black">Total Revenue</h6>
                          <i class="fa fa-users rounded-circle p-2 bg-dark text-white"></i>   
                     </div>
-                    <p class="text-black m-0">30</p>
+                    <p class="text-black m-0">${{ this.formatNumber(revenue) }}</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3 col-sm-12">
                 <div class="admin-card p-3 mb-sm-3 mb-lg-0 m-sm-0">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <h6 class="text-black">Lawyer Count </h6>
+                        <h6 class="text-black">Total Lawyers </h6>
                          <i class="fa fa-scale-balanced rounded-circle p-2 bg-dark text-white"></i>   
                     </div>
-                    <p class="text-black m-0">10</p>
+                    <p class="text-black m-0">{{ lawyers }}</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3 col-sm-12">
                 <div class="admin-card p-3 mb-sm-3 mb-lg-0 m-sm-0">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <h6 class="text-black">Client Count </h6>
+                        <h6 class="text-black">Total Clients </h6>
                          <i class="fa fa-mug-hot rounded-circle p-2 bg-dark text-white"></i>   
                     </div>
-                    <p class="text-black m-0">20</p>
+                    <p class="text-black m-0">{{ clients }}</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3 col-sm-12">
@@ -37,7 +37,7 @@
                         <h6 class="text-black">Total Jobs </h6>
                          <i class="fa fa-book rounded-circle p-2 bg-dark text-white"></i>   
                     </div>
-                    <p class="text-black m-0">100</p>
+                    <p class="text-black m-0">{{ jobs }}</p>
                 </div>
             </div>
         </div>
@@ -143,20 +143,21 @@
                         <h6 class="text-white">Subscribed Users </h6>
                          <i class="fa fa-users rounded-circle p-2 bg-white text-black"></i>   
                     </div>
-                    <p class="text-white m-0">55</p>
+                    <p class="text-white m-0">{{ subscribers }}</p>
                 </div>
                     </div>
                     <div class="col-md-12 col-lg-6 col-sm-12">  
                         <div class="admin-card p-3 mb-sm-3 mb-2 m-sm-0 bg-danger">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <h6 class="text-white">Unsubscribe Users </h6>
+                        <h6 class="text-white">Free Users </h6>
                          <i class="fa fa-users rounded-circle p-2 bg-white text-black"></i>   
                     </div>
-                    <p class="text-white m-0">55</p>
+                    <p class="text-white m-0">{{ nonsubscribers }}</p>
                 </div>
                     </div>
                 </div>        
                 <apexcharts  :options="lineChartOptions" :series="lineseries"></apexcharts>
+            
             </div>
         </div>
        
@@ -211,34 +212,44 @@ export default {
 
   data() {
     return {
-        chartOptions: {
-          chart: {
-            // id: 'vuechart-example',
-            // id
-          },
-          xaxis: {
-            categories: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August'],
-          },
+      revenue: null,
+      lawyers: null,
+      clients: null,
+      subscribers: null,
+      nonsubscribers: null,
+      cancelSubscription: null,
+      jobs: null,
+      proposals: null,
+      subscription_percent : null,
+      cancelations_percent : null,
+      chartOptions: {
+        chart: {
+          // id: 'vuechart-example',
+          // id
         },
-        
-        series: [{
-          name: 'series-1',
-          data: [30, 40, 45, 50, 49, 60, 70, 81]
-        }],
-        lineseries: [{
-            name: "Desktops",
-            data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-        }],
-        pieseries: [44, 55, 13, 43, 22],
-        pieChartOptions: {            
-          chart: {
+        xaxis: {
+          categories: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August'],
+        },
+      },
+
+      series: [{
+        name: 'series-1',
+        data: [30, 40, 45, 50, 49, 60, 70, 81]
+      }],
+      lineseries: [{
+        name: "Revenue",
+        data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+      }],
+      pieseries: [44, 55, 13, 43, 22],
+      pieChartOptions: {
+        chart: {
           width: 360,
           type: 'pie',
         },
         labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-      
-        },
-        lineChartOptions: {
+
+      },
+      lineChartOptions: {
         chart: {
           height: 350,
           type: 'line',
@@ -265,8 +276,8 @@ export default {
         xaxis: {
           categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
         }
-        },
-        
+      },
+
       pageStatus: "pending",
       // openJobs: [],
       endpoint: "/admin/all-lawyers",
@@ -316,20 +327,44 @@ export default {
   },
   async created() {
     await this.loadMore(this.pageStatus);
+    this.getData();
   },
 
   methods: {
+    getData() {
+      api.get('/admin/dashboard-data').then((res) => {
+        console.log('dashboard data : ', res?.data);
+
+        this.revenue = res?.data?.revenue;
+        this.lawyers = res?.data?.lawyers;
+        this.clients = res?.data?.clients;
+        this.subscribers = res?.data?.subscribers;
+        this.nonsubscribers = res?.data?.nonsubscribers;
+        this.cancelSubscription = res?.data?.cancelSubscription;
+
+        const sub_data_total =  this.subscribers + this.cancelSubscription;
+        this.subscription_percent =  this.subscribers / sub_data_total * 100;
+        this.cancelations_percent =  this.cancelSubscription / sub_data_total * 100;
+
+        this.jobs = res?.data?.jobs;
+        this.proposals = res?.data?.proposals;
+
+
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
     updateChart() {
-        const max = 90;
-        const min = 20;
-        const newData = this.series[0].data.map(() => {
-          return Math.floor(Math.random() * (max - min + 1)) + min
-        })
-        // In the same way, update the series option
-        this.series = [{
-          data: newData
-        }]
-      },
+      const max = 90;
+      const min = 20;
+      const newData = this.series[0].data.map(() => {
+        return Math.floor(Math.random() * (max - min + 1)) + min
+      })
+      // In the same way, update the series option
+      this.series = [{
+        data: newData
+      }]
+    },
     setModalData(keyName, value, user_id) {
       // if (Array.isArray(keyName)) {
       //   keyName.forEach(element => {
@@ -571,14 +606,18 @@ export default {
 };
 </script>
 <style scoped>
-h6{
-    font-weight: 500;
+h6 {
+  font-weight: 500;
 }
-.admin-card, .vue-apexcharts, table {
-    border-radius: 5px 5px;
-    /* background: rgba(55, 59, 62, 1); */
-    box-shadow: 5px 5px 20px #00000017;
+
+.admin-card,
+.vue-apexcharts,
+table {
+  border-radius: 5px 5px;
+  /* background: rgba(55, 59, 62, 1); */
+  box-shadow: 5px 5px 20px #00000017;
 }
+
 ul#pills-tab {
   text-align: center;
   margin: 0 auto;
@@ -604,7 +643,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
   color: white;
   background-color: #000000;
 }

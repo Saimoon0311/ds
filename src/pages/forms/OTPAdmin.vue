@@ -22,7 +22,7 @@
                             </button>
                         </div>
 
-                        <a href="javascript:;" @click="sendOtpAgain(this.otpEmail)" class="text-white">Resend</a>
+                        <a href="javascript:;" @click="sendOtpAgain()" class="text-white">Resend</a>
                     </div>
                 </div>
             </div>
@@ -62,24 +62,29 @@ export default {
         };
     },
     beforeUnmount() {
+        // localStorage.removeItem('loginUser');
+        console.log('otp verify : ', this.otpVerified);
         if (!this.otpVerified) {
-            api
-                .get(`/delete-unverified-account/${this.otpEmail}`)
-                .then(() => {
-                    console.log("deleted");
-                })
-                .catch((error) => console.log("getResults : ", error));
+            this.logoutProcess('admin-login');
         }
     },
+
+    // beforeRouteLeave(to, from, next) {
+    //     this.routeLeaveWithOutOtpVerify(next);
+    // },
+
+    // beforeRouteLeave(to, from, next) {
+    //     console.log('chk : ', this.otpVerified);
+    //     if (!this.otpVerified) {
+    //         // this.logoutProcess('admin-login',false);
+    //         next({ path: "/otp-verification" });
+    //     } else {
+    //         next();
+    //     }
+    // },
+
     computed: {
         otpEmail() {
-            // const otp = this.$store.state.otpEmail;
-            // if(otp == null || otp == ""){
-            //     if (!localStorage.hasOwnProperty(otpEmail) || localStorage[otpEmail] == null || localStorage[otpEmail] == '') {
-
-            //     }
-            // }
-            // if((this.$store.otpEmail == null || this.$store.otpEmail == "") && localStorage.getItem('otpEmail'))
             return this.$store.state.otpEmail;
         },
     },
@@ -88,8 +93,17 @@ export default {
         nextTick(() => this.$refs.digitInputs[0]?.focus());
     },
     methods: {
-        sendOtpAgain(email) {
-            this.sendOtp(email);
+
+        // routeLeaveWithOutOtpVerify(next) {
+        //     if (!this.otpVerified) {
+        //         next({ path: 'otp-verification' });
+        //     } else {
+        //         next();
+        //     }
+        // },
+
+        sendOtpAgain() {
+            this.sendOtp();
             this.otpDigits = ["", "", "", "", "", ""];
         },
         handlePaste(index, event) {
@@ -120,33 +134,14 @@ export default {
         verifyOtp() {
             const otp = this.otpDigits.join("");
             if (otp.length > 0) {
-                // console.log("Verifying OTP:", otp);
                 api
                     .post("/verify-otp", { otp: otp, email: this.otpEmail })
                     .then((res) => {
                         console.log(res.data);
-                        let dashboardUrl = null;
-                        if (res?.data?.data?.type == "lawyer") {
-                            dashboardUrl = "lawyer-profile";
-                        } else if (res?.data?.data?.type == "client") {
-                            dashboardUrl = "client-dashboard";
-                        } else if (res?.data?.data?.type == "admin") {
-                            dashboardUrl = "admin-dashboard";
-                        }
+                        let path = "admin-dashboard";
                         this.otpVerified = true;
-
-                        if (dashboardUrl == "lawyer-profile") {
-                            this.$swal({
-                                text: "Thank you for signing up. Please complete your profile.",
-                                icon: "success",
-                                confirmButtonText: "Complete Your Profile",
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    this.setUserAndRedirect(res, dashboardUrl);
-                                }
-                            });
-                        }
-                        this.setUserAndRedirect(res, dashboardUrl);
+                        this.$router.push(path);
+                        // this.setUserAndRedirect(res?.data?.data, dashboardUrl);
                     })
                     .catch(() => {
                         this.$swal("", "Invalid otp or may be expire", "error");
