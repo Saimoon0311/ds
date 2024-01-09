@@ -1,11 +1,11 @@
 <template lang="">
   <div class="hello">
     <AdminHeader />
-    <div class="main">
+    <div class="main pb-4">
       <div class="container">
-        <div class="row pt-md-4 pt-sm-3">
+        <div class="row pt-3">
             <div class="col-md-6 col-lg-3 col-sm-12">
-                <div class="admin-card p-3 mb-sm-3 mb-lg-0 m-sm-0">
+                <div class="admin-card p-3 mb-2 ">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         <h6 class="text-black">Total Login Today</h6>
                          <i class="fa fa-users rounded-circle p-2 bg-dark text-white"></i>   
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-lg-3 col-sm-12">
-                <div class="admin-card p-3 mb-sm-3 mb-lg-0 m-sm-0">
+                <div class="admin-card p-3 mb-2 ">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         <h6 class="text-black">Lawyer Count </h6>
                          <i class="fa fa-scale-balanced rounded-circle p-2 bg-dark text-white"></i>   
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-lg-3 col-sm-12">
-                <div class="admin-card p-3 mb-sm-3 mb-lg-0 m-sm-0">
+                <div class="admin-card p-3 mb-2 ">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         <h6 class="text-black">Client Count </h6>
                          <i class="fa fa-mug-hot rounded-circle p-2 bg-dark text-white"></i>   
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-lg-3 col-sm-12">
-                <div class="admin-card p-3 mb-sm-3 mb-lg-0 m-sm-0">
+                <div class="admin-card p-3 mb-2 ">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         <h6 class="text-black">Total Jobs </h6>
                          <i class="fa fa-book rounded-circle p-2 bg-dark text-white"></i>   
@@ -138,7 +138,7 @@
             <div class="col-md-8 col-sm-12">
                 <div class="row">
                     <div class="col-md-12 col-lg-6 col-sm-12">
-                        <div class="admin-card p-3 mb-sm-3 mb-2 m-sm-0 bg-success">
+                        <div class="admin-card p-3  mb-2  bg-success">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         <h6 class="text-white">Subscribed Users </h6>
                          <i class="fa fa-users rounded-circle p-2 bg-white text-black"></i>   
@@ -147,7 +147,7 @@
                 </div>
                     </div>
                     <div class="col-md-12 col-lg-6 col-sm-12">  
-                        <div class="admin-card p-3 mb-sm-3 mb-2 m-sm-0 bg-danger">
+                        <div class="admin-card p-3  mb-2  bg-danger">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         <h6 class="text-white">Unsubscribe Users </h6>
                          <i class="fa fa-users rounded-circle p-2 bg-white text-black"></i>   
@@ -155,8 +155,10 @@
                     <p class="text-white m-0">55</p>
                 </div>
                     </div>
-                </div>        
-                <apexcharts  :options="lineChartOptions" :series="lineseries"></apexcharts>
+                </div> 
+                <div class="mt-2">
+                  <apexcharts  :options="lineChartOptions" :series="lineseries"></apexcharts>
+                </div>       
             </div>
         </div>
        
@@ -253,7 +255,7 @@ export default {
           curve: 'straight'
         },
         title: {
-          text: 'Monthly revenue',
+          text: 'Monthly Revenue',
           align: 'left'
         },
         grid: {
@@ -628,4 +630,8 @@ ul#pills-tab {
   bottom: 0;
   width: 100%;
 }
+table th {
+    font-weight: 600;
+}
+
 </style>
