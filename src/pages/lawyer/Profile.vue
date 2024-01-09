@@ -44,6 +44,55 @@
         </div>
       </div>
 
+
+
+      <div
+        class="modal fade edit-email-modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="mySmallModalLabel"
+        aria-hidden="true"
+        id="emailModal"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Email</h5>
+              <button
+                type="button"
+                class="close btn btn-dark"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <!-- <form action="profile.php" method="post"></form> -->
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="email"
+                  maxlength="200"
+                  class="form-control"
+                  id="email"
+                  v-model="form.email"
+                />
+                <button
+                  type="button"
+                  name="job-email-submit"
+                  class="btn btn-dark my-3"
+                  @click="updateProfile('email','#emailModal','Email')"
+                >
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
      
       <div
         class="modal fade edit-job-title-modal"
@@ -518,7 +567,17 @@
         <tbody>
           <!--  Email -->
           <tr>
-            <td class="col-md-3">Email:</td>
+            <td class="col-md-3">Email:
+                <button
+                  type="button"
+                  class="btn btn-dark btn-sm"
+                  data-target=".edit-email-modal"
+                  title="Edit"
+                  data-bs-toggle="modal" data-bs-target="#emailModal"
+                >
+                  <i class="fa fa-pencil"></i>
+                </button>
+            </td>
             <td>{{ loginUser?.email }}</td>
           </tr>
 
@@ -837,6 +896,7 @@ export default {
       // baseUrl : process.env.BACKEND_URL + 'storage/images/',
       image : null,
       form: {
+        email : null,
         law_firm: null,
         link: null,
         phone: null,
@@ -930,6 +990,7 @@ export default {
       if (userData) {
         this.form.law_firm = userData.law_firm;
         this.form.link = userData.link;
+        this.form.email = userData.email;
         this.form.phone = userData.phone;
         this.form.about = userData.about;
         this.form.job_title = userData.job_title;

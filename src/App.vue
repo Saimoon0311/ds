@@ -66,8 +66,8 @@ export default {
           // this.$swal(newValue?.notification?.title, newValue?.notification?.body, 'success');
 
           this.$swal({
-            title: "New Notification",
-            text: newValue?.notification?.title,
+            title: newValue?.notification?.title,
+            text: "",
             icon: 'info',
             toast: true,
             position: 'top-end',

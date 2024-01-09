@@ -452,7 +452,8 @@ export default {
     loadMessages() {
       console.log('chat id 1::::: ', this.chatId);
       if (this.chatId == null) {
-        this.chatId = (this.userFirst?.type == "lawyer") ? `${this.userFirst?.email}_${this.userSecond?.email}` : `${this.userSecond?.email}_${this.userFirst?.email}`;
+        // this.chatId = (this.userFirst?.type == "lawyer") ? `${this.userFirst?.email}_${this.userSecond?.email}` : `${this.userSecond?.email}_${this.userFirst?.email}`;
+        this.chatId = (this.userFirst?.type == "lawyer") ? `${this.userFirst?.id}_${this.userSecond?.id}` : `${this.userSecond?.id}_${this.userFirst?.id}`;
         this.chatId = `${this.chatId}_${this.jobId}`;
       }
       console.log('chat id 2::::: ', this.chatId);
