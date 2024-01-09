@@ -231,14 +231,14 @@
                 <button v-if="tab == 'approved'"
                   @click="reopenJob(item?.id)"
                   type="button" 
-                  class="btn btn-sm btn-danger"
+                  class="btn btn-sm btn-danger border-0 mx-1 py-1 px-2"
                   data-bs-toggle="tooltip" data-bs-placement="right" title="Reopen job"
                   >
-                  <i class="fa fa-undo"></i>
+                  <i class="fa fa-undo fs-small"></i>
                 </button>
                 <button
                   data-v-7525850d=""
-                  class="btn btn-sm btn-danger"
+                  class="btn btn-sm btn-danger border-0 py-1 px-2"
                   style="background-color: black !important"
                   @click="deleteJob(item?.id)"
                 >
@@ -261,7 +261,7 @@
         </table>
       </div>
       <!-- for pagination -->
-      <CustomPagination v-if="data_paginated != null && data_paginated.length > 0" />
+      <CustomPagination v-if="data_paginated != null && data_paginated.length > 0" class="test-page" />
       <!-- for pagination -->
 
     </main>
@@ -534,5 +534,23 @@ ul#pills-tab[data-v-511b78bb] {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+@media only screen and (max-width: 767px) {
+  ul#pills-tab {
+    width: auto !important;
+    max-width: 100%;
+}
+}
+@media only screen and (max-width: 600px) {
+  ul#pills-tab {
+    width: auto !important;
+    max-width: 100%;
+}
+button.px-2 {
+    font-size: 12px;
+}
+.test-page{ 
+    padding-bottom: 30px;
+}
 }
 </style>

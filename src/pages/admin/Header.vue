@@ -75,7 +75,7 @@
 
                 <button
                   @click="logout('admin-login')"
-                  class="nav-link float-right logOutBtn active link"
+                  class="nav-link float-right logOutBtn active link fw-normal"
                   id="clients"
                   aria-current="page"
                   >Logout</button>
@@ -163,8 +163,8 @@ export default {
 .lg-btn button,
 .lg-btn .link {
 
-  color: #000000a6 !important;
-  font-weight: 400;
+  color: #000000 !important;
+  font-weight: 500;
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {
