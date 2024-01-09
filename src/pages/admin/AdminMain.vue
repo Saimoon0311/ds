@@ -4,44 +4,199 @@
     <div class="main pb-4">
       <div class="container">
         <div class="row pt-3">
-            <div class="col-md-6 col-lg-3 col-sm-12">
-                <div class="admin-card p-3 mb-2 ">
+          <div class="col-md-6 col-lg-3 col-sm-12">
+            <div class="admin-card p-3 mb-2">
+              <div
+                class="d-flex flex-wrap justify-content-between align-items-center"
+              >
+                <h6 class="text-black">Total Revenue</h6>
+                <i
+                  class="fa fa-money-bill rounded-circle p-2 bg-dark text-white"
+                ></i>
+              </div>
+              <p class="text-black m-0">${{ this.formatNumber(revenue) }}</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 col-sm-12">
+            <div class="admin-card p-3 mb-2">
+              <div
+                class="d-flex flex-wrap justify-content-between align-items-center"
+              >
+                <h6 class="text-black">Total Lawyers</h6>
+                <i
+                  class="fa fa-scale-balanced rounded-circle p-2 bg-dark text-white"
+                ></i>
+              </div>
+              <p class="text-black m-0">{{ lawyers }}</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 col-sm-12">
+            <div class="admin-card p-3 mb-2">
+              <div
+                class="d-flex flex-wrap justify-content-between align-items-center"
+              >
+                <h6 class="text-black">Total Clients</h6>
+                <i
+                  class="fa fa-mug-hot rounded-circle p-2 bg-dark text-white"
+                ></i>
+              </div>
+              <p class="text-black m-0">{{ clients }}</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 col-sm-12">
+            <div class="admin-card p-3 mb-2">
+              <div
+                class="d-flex flex-wrap justify-content-between align-items-center"
+              >
+                <h6 class="text-black">Total Jobs</h6>
+                <i class="fa fa-book rounded-circle p-2 bg-dark text-white"></i>
+              </div>
+              <p class="text-black m-0">{{ jobs }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-md-6 col-lg-3 col-sm-12">
+            <h5 class="mt-md-2 mb-md-4 mt-sm-2 mb-sm-3">Daily Signups</h5>
+            <div class="table-responsive">
+
+            
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Adam Jay</td>
+                  <td>adam@mailinator.com</td>
+                </tr>
+                <tr>
+                  <td>Adam Jay</td>
+                  <td>adam@mailinator.com</td>
+                </tr>
+                <tr>
+                  <td>Adam Jay</td>
+                  <td>adam@mailinator.com</td>
+                </tr>
+                <tr>
+                  <td>Adam Jay</td>
+                  <td>adam@mailinator.com</td>
+                </tr>
+                <tr>
+                  <td>Adam Jay</td>
+                  <td>adam@mailinator.com</td>
+                </tr>
+                <tr>
+                  <td>Adam Jay</td>
+                  <td>adam@mailinator.com</td>
+                </tr>
+                <tr>
+                  <td>Adam Jay</td>
+                  <td>adam@mailinator.com</td>
+                </tr>
+                <tr>
+                  <td>Adam Jay</td>
+                  <td>adam@mailinator.com</td>
+                </tr>
+                <tr>
+                  <td>Adam Jay</td>
+                  <td>adam@mailinator.com</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-12">
+            <div class="mb-2">
+              <!-- <apexcharts  :options="lineChartOptions" :series="lineseries"></apexcharts> -->
+              <apexcharts
+                :options="pieChartOptions"
+                :series="pieseries"
+              ></apexcharts>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 col-sm-12">
+            <div class="admin-card p-3 mb-md-3 mb-sm-2 bg-success">
+              <div
+                class="d-flex flex-wrap justify-content-between align-items-center"
+              >
+                <h6 class="text-white">Subscribed Users</h6>
+                <i
+                  class="fa fa-users rounded-circle p-2 bg-white text-black"
+                ></i>
+              </div>
+              <p class="text-white m-0">{{ subscribers }}</p>
+            </div>
+            <div class="admin-card p-3 mb-md-3 mb-sm-2 bg-danger">
+              <div
+                class="d-flex flex-wrap justify-content-between align-items-center"
+              >
+                <h6 class="text-white">Free Users</h6>
+                <i
+                  class="fa fa-users rounded-circle p-2 bg-white text-black"
+                ></i>
+              </div>
+              <p class="text-white m-0">{{ nonsubscribers }}</p>
+            </div>
+            <div class="admin-card p-3 mb-md-3 mb-sm-2 ">
+              <div
+                class="d-flex flex-wrap justify-content-between align-items-center"
+              >
+                <h6 class="text-black">Outstanding Jobs</h6>
+                <i
+                  class="fa fa-book rounded-circle p-2 bg-dark text-white"
+                ></i>
+              </div>
+              <p class="text-black m-0">20</p>
+            </div>
+            <div class="admin-card p-3 mb-md-3 mb-sm-2">
+              <div
+                class="d-flex flex-wrap justify-content-between align-items-center"
+              >
+                <h6 class="text-black">Proposals Total Worth</h6>
+                <i
+                  class="fa fa-money-bill rounded-circle p-2 bg-dark text-white"
+                ></i>
+              </div>
+              <p class="text-black m-0">$ 400 100.20</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="row mt-3">
+            <div class="col-md-3 col-sm-12 d-flex flex-column justify-content-end">
+                <div class="admin-card p-3 mb-sm-3 mb-2 m-sm-0 bg-success">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <h6 class="text-black">Total Revenue</h6>
+                        <h6 class="text-white">Subscribed Users </h6>
                          <i class="fa fa-users rounded-circle p-2 bg-dark text-white"></i>   
                     </div>
-                    <p class="text-black m-0">${{ this.formatNumber(revenue) }}</p>
+                    <p class="text-white m-0">55</p>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3 col-sm-12">
-                <div class="admin-card p-3 mb-2 ">
+                <div class="admin-card p-3 mb-sm-3 mb-lg-0 m-sm-0 bg-danger">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <h6 class="text-black">Total Lawyers </h6>
-                         <i class="fa fa-scale-balanced rounded-circle p-2 bg-dark text-white"></i>   
+                        <h6 class="text-white">Unsubscribe Users </h6>
+                         <i class="fa fa-users rounded-circle p-2 bg-dark text-white"></i>   
                     </div>
-                    <p class="text-black m-0">{{ lawyers }}</p>
+                    <p class="text-white m-0">100</p>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 col-sm-12">
-                <div class="admin-card p-3 mb-2 ">
-                    <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <h6 class="text-black">Total Clients </h6>
-                         <i class="fa fa-mug-hot rounded-circle p-2 bg-dark text-white"></i>   
-                    </div>
-                    <p class="text-black m-0">{{ clients }}</p>
-                </div>
+            <div class="col-md-1 col-sm-12">
             </div>
-            <div class="col-md-6 col-lg-3 col-sm-12">
-                <div class="admin-card p-3 mb-2 ">
-                    <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <h6 class="text-black">Total Jobs </h6>
-                         <i class="fa fa-book rounded-circle p-2 bg-dark text-white"></i>   
-                    </div>
-                    <p class="text-black m-0">{{ jobs }}</p>
-                </div>
+           
+            <div class="col-md-4 col-sm-12">
+                <apexcharts width="100%" type="bar" :options="chartOptions" :series="series"></apexcharts>
             </div>
-        </div>
-        <div class="row mt-3">
+            <div class="col-md-4 col-sm-12">
+                <apexcharts  :options="pieChartOptions" :series="pieseries"></apexcharts>
+                <apexcharts  :options="lineChartOptions" :series="lineseries"></apexcharts>
+            </div>
+        </div> -->
+
+        <!-- <div class="row mt-3">
             <div class="col-md-4 col-sm-12 ">
                 <h5 class="mt-md-4 mb-md-4 mt-sm-2 mb-sm-3">Blocked Users</h5>
                 <table  class="table table-striped">
@@ -157,39 +312,7 @@
                     </div>
                 </div> 
                 <div class="mt-2">
-                  <apexcharts  :options="lineChartOptions" :series="lineseries"></apexcharts>
-                </div>       
-            </div>
-        </div>
-       
-        <!-- <div class="row mt-3">
-            <div class="col-md-3 col-sm-12 d-flex flex-column justify-content-end">
-                <div class="admin-card p-3 mb-sm-3 mb-2 m-sm-0 bg-success">
-                    <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <h6 class="text-white">Subscribed Users </h6>
-                         <i class="fa fa-users rounded-circle p-2 bg-dark text-white"></i>   
-                    </div>
-                    <p class="text-white m-0">55</p>
-                </div>
-                <div class="admin-card p-3 mb-sm-3 mb-lg-0 m-sm-0 bg-danger">
-                    <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <h6 class="text-white">Unsubscribe Users </h6>
-                         <i class="fa fa-users rounded-circle p-2 bg-dark text-white"></i>   
-                    </div>
-                    <p class="text-white m-0">100</p>
-                </div>
-            </div>
-            <div class="col-md-1 col-sm-12">
-            </div>
-           
-            <div class="col-md-4 col-sm-12">
-                <apexcharts width="100%" type="bar" :options="chartOptions" :series="series"></apexcharts>
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <apexcharts  :options="pieChartOptions" :series="pieseries"></apexcharts>
-                <apexcharts  :options="lineChartOptions" :series="lineseries"></apexcharts>
-            </div>
-        </div> -->
+               -->
       </div>
     </div>
     <div class="footer">
@@ -229,54 +352,76 @@ export default {
           // id
         },
         xaxis: {
-          categories: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August'],
+          categories: [
+            "Jan",
+            "Feb",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+          ],
         },
       },
 
-      series: [{
-        name: 'series-1',
-        data: [30, 40, 45, 50, 49, 60, 70, 81]
-      }],
-      lineseries: [{
-        name: "Revenue",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-      }],
+      series: [
+        {
+          name: "series-1",
+          data: [30, 40, 45, 50, 49, 60, 70, 81],
+        },
+      ],
+      lineseries: [
+        {
+          name: "Revenue",
+          data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+        },
+      ],
       pieseries: [44, 55, 13, 43, 22],
       pieChartOptions: {
         chart: {
-          width: 360,
-          type: 'pie',
+          width: 300,
+          type: "pie",
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-
+        labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
       },
       lineChartOptions: {
         chart: {
           height: 350,
-          type: 'line',
+          type: "line",
           zoom: {
-            enabled: false
-          }
+            enabled: false,
+          },
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         stroke: {
-          curve: 'straight'
+          curve: "straight",
         },
         title: {
-          text: 'Monthly Revenue',
-          align: 'left'
+          text: "Monthly Revenue",
+          align: "left",
         },
         grid: {
           row: {
-            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-            opacity: 0.5
+            colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+            opacity: 0.5,
           },
         },
         xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-        }
+          categories: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+          ],
+        },
       },
 
       pageStatus: "pending",
@@ -333,38 +478,42 @@ export default {
 
   methods: {
     getData() {
-      api.get('/admin/dashboard-data').then((res) => {
-        console.log('dashboard data : ', res?.data);
+      api
+        .get("/admin/dashboard-data")
+        .then((res) => {
+          console.log("dashboard data : ", res?.data);
 
-        this.revenue = res?.data?.revenue;
-        this.lawyers = res?.data?.lawyers;
-        this.clients = res?.data?.clients;
-        this.subscribers = res?.data?.subscribers;
-        this.nonsubscribers = res?.data?.nonsubscribers;
-        this.cancelSubscription = res?.data?.cancelSubscription;
+          this.revenue = res?.data?.revenue;
+          this.lawyers = res?.data?.lawyers;
+          this.clients = res?.data?.clients;
+          this.subscribers = res?.data?.subscribers;
+          this.nonsubscribers = res?.data?.nonsubscribers;
+          this.cancelSubscription = res?.data?.cancelSubscription;
 
-        const sub_data_total = this.subscribers + this.cancelSubscription;
-        this.subscription_percent = this.subscribers / sub_data_total * 100;
-        this.cancelations_percent = this.cancelSubscription / sub_data_total * 100;
+          const sub_data_total = this.subscribers + this.cancelSubscription;
+          this.subscription_percent = (this.subscribers / sub_data_total) * 100;
+          this.cancelations_percent =
+            (this.cancelSubscription / sub_data_total) * 100;
 
-        this.jobs = res?.data?.jobs;
-        this.proposals = res?.data?.proposals;
-
-
-      }).catch((error) => {
-        console.log(error);
-      });
+          this.jobs = res?.data?.jobs;
+          this.proposals = res?.data?.proposals;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     updateChart() {
       const max = 90;
       const min = 20;
       const newData = this.series[0].data.map(() => {
-        return Math.floor(Math.random() * (max - min + 1)) + min
-      })
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      });
       // In the same way, update the series option
-      this.series = [{
-        data: newData
-      }]
+      this.series = [
+        {
+          data: newData,
+        },
+      ];
     },
     setModalData(keyName, value, user_id) {
       // if (Array.isArray(keyName)) {
@@ -644,7 +793,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
+.nav-pills .show > .nav-link {
   color: white;
   background-color: #000000;
 }
@@ -671,5 +820,16 @@ ul#pills-tab {
 
 table th {
   font-weight: 600;
+}
+@media only screen and (max-width: 1199px) and (min-width: 767px)  {
+h6{
+  font-size: 13px;
+}
+i.fa{
+  font-size: 12px;
+}
+td, th {
+    font-size: 14px;
+}
 }
 </style>
