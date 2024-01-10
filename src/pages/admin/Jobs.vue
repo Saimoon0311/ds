@@ -478,8 +478,25 @@ export default {
 </script>
 <style scoped>
 
-ul#pills-tab[data-v-511b78bb] {
+ul#pills-tab {
   width: 600px !important;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: white;
+    background-color: #000000;
+}
+ul#pills-tab {
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    width: 330px;
+}
+.nav-pills .nav-link, .nav-link:focus, .nav-link:hover {
+    color: #000000;
 }
 .navbar-nav {
   display: flex;
