@@ -1949,7 +1949,7 @@
               </p>
             </div>
 
-            <div class="mb-2" v-if="this.rows.length > 0">
+            <div class="mb-2" v-if="rows.length > 0">
               <div class="d-flex table-title">
                 <h5 style="text-align: left !important">
                   Itemised Disbursements:
