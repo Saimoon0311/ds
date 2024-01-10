@@ -1351,10 +1351,30 @@ app.mixin({
           .get("/logout")
           .then(() => {
             this.logoutProcess(redirectUrl, redirection);
+            this.deleteIndexedDB();
           })
           .catch((error) => console.log("getResults : ", error));
       } catch (error) {
         console.error("API request error:", error);
+      }
+    },
+
+    deleteIndexedDB() {
+      // const databaseName1 = "firebase-heartbeat-database"
+      // const databaseName2 = "firebase-installations-database"
+      const databaseName3 = "firebase-messaging-database";
+      try {
+        // indexedDB.deleteDatabase(databaseName1);
+        // indexedDB.deleteDatabase(databaseName2);
+        indexedDB.deleteDatabase(databaseName3);
+        // deleteRequest.onsuccess = () => {
+        //   console.log("Database deleted successfully");
+        // };
+        // deleteRequest.onerror = (event) => {
+        //   console.error("Error deleting database", event);
+        // };
+      } catch (error) {
+        console.error("An error occurred:", error);
       }
     },
 

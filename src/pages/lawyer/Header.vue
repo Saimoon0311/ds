@@ -172,6 +172,7 @@
 export default {
   computed: {
     noti_msg() {
+      console.log('no : ' , this.$store.state.noti_count_msg);
       return this.$store.state.noti_count_msg;
     },
     loginUserData() {
