@@ -6,7 +6,9 @@
 <script>
 import LoadingIndicator from '@/components/LoadingIndicator.vue';
 import { messaging } from "@/config/firebaseConfig";
+// import { onMessage, isSupported } from "firebase/messaging";
 import { onMessage } from "firebase/messaging";
+// import { onBackgroundMessage } from "firebase/messaging/sw";
 
 
 export default {
@@ -15,11 +17,32 @@ export default {
     LoadingIndicator
   },
   created() {
+    // if (isSupported()) {
+      onMessage(messaging, (payload) => {
+        console.log('Message received. ', payload);
+        this.$store.commit('SET_NOTI', payload);
+      });
 
-    onMessage(messaging, (payload) => {
-      console.log('Message received. ', payload);
-      this.$store.commit('SET_NOTI', payload);
-    });
+      // onBackgroundMessage(messaging, (payload) => {
+      //   console.log('Message received 2. ', payload);
+      //   this.$store.commit('SET_NOTI', payload);
+      // });
+
+
+      // if ('serviceWorker' in navigator) {
+      //   navigator.serviceWorker.getRegistration().then((registration) => {
+      //     // Set up a listener for background messages
+      //     messaging.onBackgroundMessage((payload) => {
+      //       console.log('Background message received. ', payload);
+
+      //       // Dispatch a custom event to notify the Vue app about the background message
+      //       const event = new CustomEvent('background-message', { detail: payload });
+      //       registration.active.postMessage(event);
+      //     });
+      //   });
+      // }
+
+    // }
 
     if (this.$store.getters.loginUser == null || this.$store.getters.loginUser == "") {
       const loginUser = JSON.parse(localStorage.getItem('loginUser'));
@@ -47,8 +70,8 @@ export default {
     if (this.noti_job == null || this.noti_job == 0) {
       this.$store.commit('SET_NOTI_COUNT_JOB', localStorage.getItem('noti_count_job'));
     }
-    if(this.$store.getters.isNotHeaderChat == null && localStorage.getItem('isNotHeaderChat')){
-      this.$store.commit('SET_IS_NOT_HEADER_CHAT',localStorage.getItem('isNotHeaderChat'));
+    if (this.$store.getters.isNotHeaderChat == null && localStorage.getItem('isNotHeaderChat')) {
+      this.$store.commit('SET_IS_NOT_HEADER_CHAT', localStorage.getItem('isNotHeaderChat'));
     }
     // console.log('app vue mes : ' , messaging);
     // messaging.onBackgroundMessage((payload) => {
@@ -112,46 +135,56 @@ export default {
 
 /* profile image circle  */
 .circular-container {
-  width: 100px; /* Set the width and height to control the size of the circular div */
+  width: 100px;
+  /* Set the width and height to control the size of the circular div */
   height: 100px;
-  border-radius: 50%; /* Make it circular by setting border-radius to 50% */
-  overflow: hidden; /* Hide overflow content */
+  border-radius: 50%;
+  /* Make it circular by setting border-radius to 50% */
+  overflow: hidden;
+  /* Hide overflow content */
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f0f0f0; /* Set a background color for the circular div */
+  background-color: #f0f0f0;
+  /* Set a background color for the circular div */
 }
 
 .circular-image {
-  width: 100%; /* Make the image fill the circular div */
+  width: 100%;
+  /* Make the image fill the circular div */
   height: 100%;
-  border-radius: 50%; /* Match the border-radius of the container */
-  object-fit: cover; /* Ensure the image covers the container */
+  border-radius: 50%;
+  /* Match the border-radius of the container */
+  object-fit: cover;
+  /* Ensure the image covers the container */
 }
+
 /* profile image circle end */
 
 
-.count_btn{
+.count_btn {
   position: relative;
 }
 
 span.countmsg {
-    font-weight: bold !important;
-    border-radius: 50%;
-    background: red;
-    width: 15px;
-    position: absolute;
-    height: 15px;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 500;
-    color: white;
-    top: -5px;
-    right: 1px;
+  font-weight: bold !important;
+  border-radius: 50%;
+  background: red;
+  width: 15px;
+  position: absolute;
+  height: 15px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 500;
+  color: white;
+  top: -5px;
+  right: 1px;
 }
+
 .navbar-nav .left-menu a.nav-link {
   position: relative;
 }
+
 .forgetp {
   color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
   text-decoration: underline;
@@ -168,5 +201,4 @@ span.countmsg {
 .dynamicTable th,
 .dynamicTable td {
   font-size: 1rem;
-}
-</style>
+}</style>

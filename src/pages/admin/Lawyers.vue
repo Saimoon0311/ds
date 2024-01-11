@@ -213,7 +213,7 @@
             role="tabpanel"
             aria-labelledby="pills-profile-tab"
           >
-            <div>
+            <div class="d-flex flex-wrap ">
               <div
                 v-if="openJobs.length == 0 && searchQuery == ''"
                 class="border rounded bg-light p-3 d-flex flex-wrap"
@@ -223,8 +223,9 @@
                 </p>
               </div>
 
-              <div v-else class="border rounded bg-light p-3 d-flex flex-wrap">
-                <div class="input-group mb-3">
+              <div v-else class="d-flex flex-wrap align-items-center justify-content-between mb-3 w-100 pt-2">
+                
+                <div class="input-group w-75">
                   <input
                     type="text"
                     class="form-control"
@@ -250,13 +251,15 @@
                   </button>
                 </div>
 
+                <button @click="generateCsv('lawyer')" class="btn btn-dark btn-sm m-1"><i class="fa fa-plus"></i> Generate CSV </button>
+
                 <span
                   v-if="openJobs.length == 0 && searchQuery != ''"
                   class="text-center w-100"
                   >No pending lawyer requests found!</span>
 
 
-                  <table v-else class="table table-striped">
+                  <table v-else class="table table-striped mt-3">
                   <tbody>
                     <tr  v-for="(item, index) in openJobs" :key="index">
                       <td>

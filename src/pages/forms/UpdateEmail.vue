@@ -136,7 +136,11 @@ export default {
                             // this.$store.commit('SET_USER_TYPE', res?.data?.type);
                             // localStorage.setItem('userType', res?.data?.type);
                             this.setUserInStateAndLocalStorage(res);
-                            this.$router.push('/lawyer-profile');
+                            if(res?.data?.type == "lawyer"){
+                                this.$router.push('/lawyer-profile');
+                            }else{
+                                this.$router.push('/client-account');
+                            }
                         });
                     })
                     .catch(error => console.log("getResults : ", error));

@@ -140,7 +140,17 @@
       <tbody>
         <!-- Email -->
         <tr>
-          <td class="col-md-3">Email</td>
+          <td class="d-flex align-items-center justify-content-between">Email:
+            <button
+                  type="button"
+                  class="btn btn-dark btn-sm"
+                  data-target=".edit-email-modal"
+                  title="Edit"
+                  data-bs-toggle="modal" data-bs-target="#emailModal"
+                >
+                  <i class="fa fa-pencil"></i>
+                </button>
+          </td>
           <td>{{ loginUser?.email }}</td>
         </tr>
 
@@ -211,6 +221,55 @@
         </tr>
       </tbody>
     </table>
+
+
+    <div
+        class="modal fade edit-email-modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="mySmallModalLabel"
+        aria-hidden="true"
+        id="emailModal"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Email</h5>
+              <button
+                type="button"
+                class="close btn btn-dark"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <!-- <form action="profile.php" method="post"></form> -->
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="email"
+                  maxlength="200"
+                  class="form-control"
+                  id="email"
+                  v-model="email"
+                />
+                <button
+                  type="button"
+                  name="job-email-submit"
+                  class="btn btn-dark my-3"
+                  @click="sendUpdateEmail"
+                >
+                  Send update link on this email
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
     <!-- Change password -->
     <div>
@@ -365,6 +424,7 @@ export default {
         last_name: null,
         phone: null,
       },
+      email : null,
     }
   },
   computed: {
@@ -376,6 +436,16 @@ export default {
     this.updateFormProperties();
   },
   methods: {
+
+    async sendUpdateEmail(){
+      try {
+        await api.post('/send-email-update-link',{"old_email":this?.loginUser?.email,"email" : this.email});
+        this.$swal("", "Link has been send to your new email address" , "success");  
+      } catch (error) {
+        console.error('Error fetching options:', error);
+      }
+    },
+
     deleteAccount() {
       let text = "You won't be able to revert this.";
       let text2 = "Yes, Delete Account";
@@ -411,6 +481,7 @@ export default {
         this.form.first_name = userData.first_name;
         this.form.last_name = userData.last_name;
         this.form.phone = userData.phone;
+        this.email = userData.email;
       }
       if (notCreated) {
         document.getElementById('prev_password').value = "";

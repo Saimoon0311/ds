@@ -51,7 +51,7 @@
                 </span>
                 <span v-if="userFirst?.type == 'lawyer' && data?.job?.assigned_lawyer_id == userFirst?.id">
                   {{ data?.client?.last_name ?? data?.lawyer?.last_name }}
-                </span>  
+                </span>
                 | Job No: {{ data?.job?.identity }}
                 <span v-if="data?.is_closed">
                   | Archived
@@ -194,10 +194,10 @@ export default {
   },
 
   created() {
-    console.log('job data on chat page : ' , this.jobTabName);
-    console.log('job data on chat page 2 : ' , 'abc');
-    if(!this.isNotHeaderChatComputed && this.jobTabName){
-      this.$store.commit('SET_DATATAB',null);
+    console.log('job data on chat page : ', this.jobTabName);
+    console.log('job data on chat page 2 : ', 'abc');
+    if (!this.isNotHeaderChatComputed && this.jobTabName) {
+      this.$store.commit('SET_DATATAB', null);
     }
     this.resetCount('message');
   },
@@ -274,12 +274,41 @@ export default {
   },
 
 
+  watch: {
+    // Watch for changes in the 'noti' property in the Vuex store
+    '$store.state.noti': {
+      handler(newValue) {
+        if (newValue) {
+          // Handle the changes, for example, display a notification
+          console.log('noti changed 2 :', newValue);
+          console.log('data : ', this.client_data);
+          console.log('data 2 : ', this.client_data2);
+          // this.$swal(newValue?.notification?.title, newValue?.notification?.body, 'success');
+
+          const noti = JSON.parse(newValue?.data?.payload);
+          console.log(noti);
+
+          this.moveObjectToTop(this.client_data2, noti?.chat_id)
+          console.log(this.client_data2);
+
+        }
+      },
+      immediate: true, // Trigger the handler immediately when the component is created
+    },
+  },
+
+
   computed: {
     isNotHeaderChatComputed() {
       return this.$store.state.isNotHeaderChat;
     },
     noti_msg() {
+      console.log('pay payp pya 1: ', this.$store.state.noti_count_msg);
       return this.$store.state.noti_count_msg;
+    },
+    notificationPayload() {
+      console.log('pay payp pya 2: ', this.$store.state.noti);
+      return this.$store.state.noti;
     },
     // lawyerEligibleStatus() {
     //   return this.$store.state.lawyerEligibleStatus;
@@ -301,7 +330,7 @@ export default {
       return this.$store.state.userToChat;
     },
     jobData() {
-      console.log('job data 2 2 2 : ' , this.$store.state.jobData);
+      console.log('job data 2 2 2 : ', this.$store.state.jobData);
       return this.$store.state.jobData;
     },
   },
@@ -312,6 +341,19 @@ export default {
   },
 
   methods: {
+
+    moveObjectToTop(array, chatId) {
+      const index = array.findIndex(obj => obj.chat_id === chatId);
+
+      if (index !== -1) {
+        // Remove the object from its current position
+        const removedObject = array.splice(index, 1)[0];
+
+        // Add the removed object to the beginning of the array
+        array.unshift(removedObject);
+      }
+    },
+
     scrollToBottom() {
       // Access the element using the $refs object
       const msgbox = this.$refs.msgbox;
@@ -510,7 +552,7 @@ export default {
         const client_id = (this.userFirst?.type == "client") ? this.userFirst?.id : this.userSecond?.id;
 
         console.log('dosra user : ', this.userSecond);
-        
+
 
         if (this.chatStatus == "new" && this.userFirst?.type == "lawyer") {
           api2.post('/save-chat-info', { "lawyer_id": lawyer_id, "client_id": client_id, "job_id": this.jobId, "chat_id": this.chatId }).then(() => {
@@ -533,7 +575,7 @@ export default {
           noti_status: "message",
           sender_id: this.userFirst?.id,
           receiver_id: this.userSecond?.id,
-          chat_id : this.chatId,
+          chat_id: this.chatId,
         }
 
         api2.post('/send-notification', payload).then((res) => {
@@ -610,10 +652,12 @@ export default {
   margin-left: 10px; */
 
 }
+
 .bg-col {
-    background: #373b3e;
-    border-radius: 5px;
+  background: #373b3e;
+  border-radius: 5px;
 }
+
 .chat-input {
   display: flex;
   gap: 10px;
@@ -658,11 +702,15 @@ export default {
 .lawyer .chat-messages .message .own-message {
   justify-content: start;
 }
-.lawyer .chat-messages .message .own-message .text, .lawyer .chat-messages .message .against-msg .text,.chat-messages .message .own-message .text,.chat-messages .message .against-msg .text{
+
+.lawyer .chat-messages .message .own-message .text,
+.lawyer .chat-messages .message .against-msg .text,
+.chat-messages .message .own-message .text,
+.chat-messages .message .against-msg .text {
   max-width: 90%;
   line-break: anywhere;
 }
- 
+
 
 .lawyer .chat-messages .message .against-msg {
   display: flex;
@@ -752,11 +800,13 @@ section.chatSection {
     padding-bottom: 50px;
   }
 }
+
 @media screen and (max-width: 1200px) {
-.main-container{
-  max-width: 98%;
+  .main-container {
+    max-width: 98%;
+  }
 }
-}
+
 @media screen and (max-width: 768px) {
 
   h4 {
@@ -786,6 +836,7 @@ section.chatSection {
 }
 
 @media screen and (max-width: 480px) {
+
   /* .lawname{
     font-size: 12px;
   } */
@@ -811,5 +862,4 @@ section.chatSection {
     width: -webkit-fill-available;
 
   }
-}
-</style>
+}</style>
