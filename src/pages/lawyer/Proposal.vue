@@ -1020,6 +1020,8 @@
                       </label>
                       <br />
                       <br />
+                     
+                      
                       <label class="w-100 text-start">
                         Estimated number of hours:<sup><code>*</code></sup>
                         <input
@@ -1031,7 +1033,19 @@
                         />
                       </label>
                       <br />
-                      <br />
+                     
+                      <div class="form-check text-start mt-3">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          v-model="newRow.gst_not_applicable"
+                          :value="true"
+                          id="GST"
+                        />
+                        <label class="form-check-label" for="GST">
+                          GST Not Applicable
+                        </label>
+                      </div>
                       <button
                         v-if="editRow != null"
                         type="button"
@@ -2684,7 +2698,7 @@ export default {
         let total_to_check = value_to_check += total;
 
         if(total_to_check > this.form.disbursement_amount){
-          alert("Disbursement's item cost should not greater than disbursement amount");
+          alert("The total for your itemised disbursements does not match the total of disbursements. Please amend.");
           return false;
         }
 

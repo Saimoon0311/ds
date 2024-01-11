@@ -1179,7 +1179,9 @@ export default {
 
 <style scoped>
 
-
+tbody tr:nth-child(odd) {
+    background: #f2f2f2;
+}
 .form-check-input {
   border: 1px solid gray !important;
 }

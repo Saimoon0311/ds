@@ -91,7 +91,7 @@
                 Receive their contact details and engage with them externally.</p>
             </div>
           </div>
-          <div class="col">
+          <!-- <div class="col">
             <div class="box05">5</div>
             <div class="subbox03">
               <div class="boxheading">Rate</div>
@@ -99,7 +99,7 @@
              <p>Review the service of your lawyer on the platform for future
               clients to see.</p>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -182,7 +182,7 @@
               </p>
             </div>
           </div>
-          <div class="col">
+          <!-- <div class="col">
             <div class="box05">7</div>
             <div class="subbox03">
               <div class="boxheading">Be rated</div>
@@ -192,7 +192,7 @@
                 to see.
               </p>
             </div>
-          </div>
+          </div> -->
         </section>
       </div>
   <p class="text-center  pt-3 small-para"> *At no point in time can you revise your proposal or see the proposals of other lawyers. Your proposal remains confidential between you and the potential client.</p>
