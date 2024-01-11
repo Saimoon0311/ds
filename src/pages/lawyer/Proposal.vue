@@ -2698,7 +2698,8 @@ export default {
         let total_to_check = value_to_check += total;
 
         if(total_to_check > this.form.disbursement_amount){
-          alert("The total for your itemised disbursements does not match the total of disbursements. Please amend.");
+          this.$swal("", "The total for your itemised disbursements does not match the total of disbursements. Please amend.", "error");
+          // alert("The total for your itemised disbursements does not match the total of disbursements. Please amend.");
           return false;
         }
 
@@ -2802,7 +2803,8 @@ export default {
       if(this.selectedOption != "Pro" && this.paySucc == "Yes" && this.currentStep == 1){
         this.calculateTotals();
         if(this.form.upfront_payment > this.totals["totalExcludingGst"]){
-          alert("Upfront payment should not greater than total amount");
+          this.$swal("", "Your upfront payment cannot exceed your quoted fees. Please amend.", "error");
+          // alert("Upfront payment should not greater than total amount");
           return;
         }
       }
