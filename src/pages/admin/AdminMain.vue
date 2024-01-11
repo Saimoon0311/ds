@@ -70,41 +70,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(index,user) in todaySignup" :key="index">
+                <tr v-for="(user,index) in todaySignup" :key="index">
                   <td>{{ user?.first_name }} {{ user?.last_name}}</td>
                   <td>{{ user?.email }}</td>
-                </tr>
-                <tr>
-                  <td>Adam Jay</td>
-                  <td>adam@mailinator.com</td>
-                </tr>
-                <tr>
-                  <td>Adam Jay</td>
-                  <td>adam@mailinator.com</td>
-                </tr>
-                <tr>
-                  <td>Adam Jay</td>
-                  <td>adam@mailinator.com</td>
-                </tr>
-                <tr>
-                  <td>Adam Jay</td>
-                  <td>adam@mailinator.com</td>
-                </tr>
-                <tr>
-                  <td>Adam Jay</td>
-                  <td>adam@mailinator.com</td>
-                </tr>
-                <tr>
-                  <td>Adam Jay</td>
-                  <td>adam@mailinator.com</td>
-                </tr>
-                <tr>
-                  <td>Adam Jay</td>
-                  <td>adam@mailinator.com</td>
-                </tr>
-                <tr>
-                  <td>Adam Jay</td>
-                  <td>adam@mailinator.com</td>
                 </tr>
               </tbody>
             </table>
