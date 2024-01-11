@@ -62,7 +62,7 @@
             <div class="table-responsive">
 
             
-            <table class="table table-striped">
+            <table class="table table-striped" v-if="todaySignup.length > 0">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -70,9 +70,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Adam Jay</td>
-                  <td>adam@mailinator.com</td>
+                <tr v-for="(index,user) in todaySignup" :key="index">
+                  <td>{{ user?.first_name }} {{ user?.last_name}}</td>
+                  <td>{{ user?.email }}</td>
                 </tr>
                 <tr>
                   <td>Adam Jay</td>
@@ -108,6 +108,8 @@
                 </tr>
               </tbody>
             </table>
+            <p v-else>No Record Found!</p>
+        
           </div>
           </div>
           <div class="col-md-6 col-lg-6 col-sm-12">
@@ -129,7 +131,7 @@
                   class="fa fa-book rounded-circle p-2 bg-dark text-white"
                 ></i>
               </div>
-              <p class="text-black m-0">20</p>
+              <p class="text-black m-0">{{ outstandingJobs }}</p>
             </div>
             <div class="admin-card p-3 mb-md-3 mb-sm-2">
               <div
@@ -140,7 +142,7 @@
                   class="fa fa-money-bill rounded-circle p-2 bg-dark text-white"
                 ></i>
               </div>
-              <p class="text-black m-0">$400 100.20</p>
+              <p class="text-black m-0">${{ this.formatNumber(proposals) }}</p>
             </div>
             <div class="admin-card p-3 mb-md-3 mb-sm-2 bg-success">
               <div
@@ -347,6 +349,7 @@ export default {
       proposals: null,
       subscription_percent: null,
       cancelations_percent: null,
+      todaySignup : [],
       chartOptions: {
         chart: {
           // id: 'vuechart-example',
@@ -378,14 +381,16 @@ export default {
           data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
         },
       ],
-      pieseries: [44, 55, 13, 43, 22],
+
+      pieseries: [0, 0, 0],
       pieChartOptions: {
         chart: {
           width: 300,
           type: "pie",
         },
-        labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+        labels: ["Subscribed Users", "Unsubscribed Users","Free Users"],
       },
+
       lineChartOptions: {
         chart: {
           height: 350,
@@ -490,12 +495,21 @@ export default {
           this.subscribers = res?.data?.subscribers;
           this.nonsubscribers = res?.data?.nonsubscribers;
           this.cancelSubscription = res?.data?.cancelSubscription;
-
-          const sub_data_total = this.subscribers + this.cancelSubscription;
+          this.todaySignup = res?.data?.todaySignup;
+          const sub_data_total = this.subscribers + this.cancelSubscription + this.nonsubscribers;
+          
           this.subscription_percent = (this.subscribers / sub_data_total) * 100;
           this.cancelations_percent =
             (this.cancelSubscription / sub_data_total) * 100;
+            this.subscription_percent = (this.subscribers / sub_data_total) * 100;
 
+          this.pieseries[0] = this.subscription_percent;
+          this.pieseries[1] = this.cancelations_percent;
+          this.pieseries[2] = this.nonsubscribers;
+
+          console.log('pei pie : ' , this.pieseries);
+          console.log(sub_data_total);
+          
           this.jobs = res?.data?.jobs;
           this.proposals = res?.data?.proposals;
         })

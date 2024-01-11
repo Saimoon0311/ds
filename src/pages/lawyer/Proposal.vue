@@ -457,7 +457,7 @@
                               </button>
                             </td>
                           </tr>
-                          <tr>
+                          <tr class="border-0">
                             <td class="p-1"></td>
                           </tr>
                           <tr class="bg-dark text-white border-0">
@@ -568,7 +568,7 @@
                         }}</p>
                       </td> -->
                     </tr>
-                    <tr>
+                    <tr class="border-0">
                       <td class="p-1"></td>
                     </tr>
                     <tr class="bg-dark text-white border-0">
@@ -725,7 +725,7 @@
                             </td>
                           </tr>
 
-                          <tr>
+                          <tr class="border-0">
                             <td class="p-1"></td>
                           </tr>
                           <tr class="bg-dark text-white border-0">
@@ -906,7 +906,7 @@
                               </button>
                             </td>
                           </tr>
-                          <tr>
+                          <tr class="border-0">
                             <td class="p-1"></td>
                           </tr>
                           <tr class="bg-dark text-white border-0">
@@ -987,6 +987,7 @@
                     <fieldset
                       class="border p-2 my-2 bg-light text-center"
                       style="margin: auto"
+                      v-if="divEarnerAddVisible"
                     >
                       <legend
                         class="w-auto"
@@ -1064,7 +1065,9 @@
                       </button>
                     </fieldset>
 
-                    <div class="table-responsive">
+                  </div>
+
+                  <div class="table-responsive">
                       <table
                         class="table table-bordered mb-3 hourlycost"
                         id="additionalFeeEarnersTable"
@@ -1107,7 +1110,7 @@
                               </button>
                             </td>
                           </tr>
-                          <tr>
+                          <tr class="border-0">
                             <td class="p-1"></td>
                           </tr>
                           <tr
@@ -1131,8 +1134,7 @@
                           </tr>
                         </tbody>
                       </table>
-                    </div>
-                  </div>
+                    </div> 
                 </div>
               </div>
 
@@ -1326,7 +1328,7 @@
                             </button>
                           </td>
                         </tr>
-                        <tr>
+                        <tr class="border-0">
                           <td class="p-1"></td>
                         </tr>
                         <tr class="bg-dark text-white border-0">
@@ -1527,7 +1529,7 @@
                             </button>
                           </td>
                         </tr>
-                        <tr>
+                        <tr class="border-0">
                           <td class="p-1"></td>
                         </tr>
                         <tr class="bg-dark text-white border-0">
@@ -1686,7 +1688,7 @@
                           </button>
                         </td>
                       </tr>
-                      <tr>
+                      <tr class="border-0">
                         <td class="p-1"></td>
                       </tr>
                       <tr class="bg-dark text-white border-0">
@@ -2241,6 +2243,7 @@ export default {
       team: "Yes",
       divItemiseVisible: false,
       divEarnerVisible: false,
+      divEarnerAddVisible: false,
       input1: null,
 
       totals: {
@@ -2743,6 +2746,7 @@ export default {
         this.newRow3.title = "";
         this.newRow3.hourlyRate = "";
         this.newRow3.estimatedHours = "";
+        this.divEarnerAddVisible = false;
       }
     },
 
@@ -2850,6 +2854,7 @@ export default {
       this.divItemiseVisible = !this.divItemiseVisible;
     },
     showEarner() {
+      this.divEarnerAddVisible = true;
       this.divEarnerVisible = !this.divEarnerVisible;
     },
 

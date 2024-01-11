@@ -469,12 +469,14 @@
                         </button>
 
                         <button
+                            v-if="item?.proposal?.status != 'Reject' && item?.proposal?.status != 'reject'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
                             @click="goToMessagePage(item,'lawyer')">
                           View Message
                         </button>
 
                         <button
+                            v-if="item?.proposal?.status != 'Reject' && item?.proposal?.status != 'reject'"
                             class="btn btn-danger btn-sm card-btn my-1 mx-1"
                             @click="openLawyerDetailsModal(item?.owner,item?.proposal?.status.toLowerCase() == 'accept')">
                           View Client Details
