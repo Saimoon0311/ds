@@ -389,6 +389,7 @@ app.mixin({
         email: res?.data?.data?.email,
         type: res?.data?.data?.type,
         phone: res?.data?.data?.phone,
+        address: res?.data?.data?.address,
         job_title: res?.data?.data?.job_title,
         law_firm: res?.data?.data?.law_firm,
         link: res?.data?.data?.link,
@@ -713,6 +714,7 @@ app.mixin({
                   key == "last_name" ||
                   key == "image" ||
                   key == "email" ||
+                  key == "address" ||
                   key == "phone" ||
                   key == "job_title" ||
                   key == "law_firm" ||
@@ -867,6 +869,8 @@ app.mixin({
         .then(async (currentToken) => {
           if (currentToken) {
             const permission = await Notification.requestPermission();
+            console.log('check notification 1 permission : ' , permission)
+            console.log('check notification 2 token : ' , currentToken)
             if (permission === "granted") {
               // console.log('mess :: ' , currentToken);
               // console.log('Notification permission granted. Token:', currentToken);
@@ -1346,12 +1350,21 @@ app.mixin({
     },
 
     logout(redirectUrl, redirection = true) {
+    // logout() {
+      console.log('error');
+      const deleteRequest = indexedDB.deleteDatabase("firebase-messaging-database");
+      deleteRequest.onsuccess = () => {
+        console.log("Database deleted successfully");
+      };
+      deleteRequest.onerror = (event) => {
+        console.error("Error deleting database", event);
+      };
       try {
         api
           .get("/logout")
           .then(() => {
+            // this.deleteIndexedDB();
             this.logoutProcess(redirectUrl, redirection);
-            this.deleteIndexedDB();
           })
           .catch((error) => console.log("getResults : ", error));
       } catch (error) {
@@ -1366,13 +1379,13 @@ app.mixin({
       try {
         // indexedDB.deleteDatabase(databaseName1);
         // indexedDB.deleteDatabase(databaseName2);
-        indexedDB.deleteDatabase(databaseName3);
-        // deleteRequest.onsuccess = () => {
-        //   console.log("Database deleted successfully");
-        // };
-        // deleteRequest.onerror = (event) => {
-        //   console.error("Error deleting database", event);
-        // };
+        const deleteRequest = indexedDB.deleteDatabase(databaseName3);
+        deleteRequest.onsuccess = () => {
+          console.log("Database deleted successfully");
+        };
+        deleteRequest.onerror = (event) => {
+          console.error("Error deleting database", event);
+        };
       } catch (error) {
         console.error("An error occurred:", error);
       }

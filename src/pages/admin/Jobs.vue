@@ -74,7 +74,7 @@
               tabindex="-1"
               @click="changeTab('approved')"
             >
-              Approved
+              Closed
             </button>
           </li>
           <li data-v-511b78bb="" class="nav-item" role="presentation">
@@ -109,7 +109,7 @@
               tabindex="-1"
               @click="changeTab('withoutarea')"
             >
-              Without Area
+            Others/Unknown
             </button>
           </li>
         </ul>
@@ -244,6 +244,79 @@
                 >
                   <i  class="fa fa-trash"></i>
                 </button>
+
+
+                <button
+                v-if="tab == 'withoutarea'"
+                                    type="button"
+                                    class="btn btn-sm btn-danger border-0 py-1 px-2 mx-1"
+                                    style="background-color: black !important"
+                                    :data-target="`.edit-job-title-modal${index}`"
+                                    title="Edit"
+                                    data-bs-toggle="modal" :data-bs-target="`#Jobtitle${index}`"
+                                    
+                                    >
+                                    <i class="fa fa-pencil"></i>
+                                  </button>
+                                  
+                                  <!-- @click="setModalData('job_title',item?.job_title,item?.id)" -->
+
+<div
+                                    :class="`modal fade edit-job-title-modal${index}`"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="mySmallModalLabel"
+                                    aria-hidden="true"
+                                    :id="`Jobtitle${index}`"
+                                    >
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Assign Area of Law</h5>
+                                          <button
+                                            type="button"
+                                            class="close btn btn-dark"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                          >
+                                            <span aria-hidden="true">×</span>
+                                          </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                        
+                                          <div>
+                                            <div data-v-2f14f9de="" class="d-flex flex-wrap justify-content-center mb-5" data-v-376ef8ab="">
+                                              <!-- class="m-2 text-decoration-none badge text-white fs-6 bubbles" -->
+                                              <a v-for="(area, index) in areas" :key="area.id" @click="setArea(index, area.id)" :class="[
+                                                'm-2',
+                                                'text-decoration-none',
+                                                'badge',
+                                                'text-white',
+                                                'fs-6',
+                                                'bubbles',
+                                                { selected_bubble: areaIndex === index },
+                                              ]">
+                                                {{ area.title }}
+                                              </a>
+                                            </div>
+                                          </div>
+
+                                       
+                                          <button
+                                              type="button"
+                                              name="job-title-submit"
+                                              class="btn btn-dark my-3"
+                                              @click="updateArea(item?.id,`#Jobtitle${index}`)"
+                                            >
+                                              Save changes
+                                            </button>
+                                         
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
               </td>
             </tr>
             <!-- <tr>
@@ -330,6 +403,10 @@ import AdminHeader from "./Header.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
 
 import api from '@/config/api';
+
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+
 export default {
   components: {
     AdminHeader,
@@ -339,6 +416,9 @@ export default {
 
   data(){
     return {
+      areas : null,
+      area : null,
+      areaIndex : null,
       tab : 'open',
       dataUrl : '/admin/show-open-jobs',
     }
@@ -365,21 +445,56 @@ export default {
   async mounted() {
     // for pagination
     this.getData();
+    this.fetchAreas();
     // for pagination
   },
   methods: {
+
+    closeModal(modalId) {
+      $(modalId).modal('hide');
+    },
+
+    async fetchAreas() {
+      try {
+        const response = await api.get("/get-active-fields");
+        this.areas = response?.data?.allFields;
+      } catch (error) {
+        console.error("Error fetching options:", error);
+      }
+    },
+
+    setArea(index, id) {
+      this.area = id;
+      this.areaIndex = index;
+    },
+
+    updateArea(job_id,modalId){
+      console.log(modalId);
+      if(job_id && this.area){
+        api.post(`/admin/set-job-area`,{"area_id":this.area,"job_id":job_id}).then(() => {
+          // console.log(res);
+          // console.log(modalId);
+          this.closeModal(modalId);
+          this.getData()
+          // this.getPaginatedData();
+        }).catch(error => {
+          console.log(error)
+        });
+      }
+    },
+    
 
     async getData(endpoint = null){
       this.$store.commit('SET_ENDPOINT_FOR_PAGINATED_DATA', endpoint ?? this.dataUrl);
       await this.getPaginatedData();
     },
-    withdrawProposal(id) {
-      api.get(`/lawyer/withdraw-proposal/${id}`).then(() => {
-        this.getPaginatedData();
-      }).catch(error => {
-        console.log(error)
-      });
-    },
+    // withdrawProposal(id) {
+    //   api.get(`/lawyer/withdraw-proposal/${id}`).then(() => {
+    //     this.getPaginatedData();
+    //   }).catch(error => {
+    //     console.log(error)
+    //   });
+    // },
 
     async clearSearchNumberPaginationData() {
       if (this.searchQueryNumberPagination == "") return false;
@@ -477,6 +592,27 @@ export default {
 };
 </script>
 <style scoped>
+
+
+
+.bubbles {
+  border-radius: 6px;
+  padding: 8px 11px;
+  margin: 8px 7px !important;
+  cursor: pointer;
+  background: black !important;
+  font-weight: 500;
+}
+
+.bubbles:hover {
+  background: #363636;
+}
+
+.selected_bubble {
+  background: #4e4e4e !important;
+  color: rgb(255, 255, 255) !important;
+  box-shadow: 0px 4px 15px #00000082;
+}
 
 ul#pills-tab {
   width: 600px !important;

@@ -233,6 +233,54 @@
       </div>
 
       <div
+        class="modal fade address-modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="mySmallModalLabel"
+        aria-hidden="true"
+        id="addressModal"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Address
+              </h5>
+              <button
+                type="button"
+                class="close btn btn-dark"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="address"
+                  class="form-control"
+                  id="address"
+                  v-model="form.address"
+                />
+                <button
+                  type="button"
+                  name="address-submit"
+                  class="btn btn-dark my-3"
+                  @click="updateProfile('address','#addressModal','Address')"
+                >
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div
         class="modal fade edit-phone-modal"
         tabindex="-1"
         role="dialog"
@@ -329,21 +377,21 @@
             <!-- <label>Consultation type:</label> -->
             <div class="form-check">
               <input class="form-check-input" v-model="form.consultation_type" type="radio" name="freeFirstConsultationNo1"
-                id="freeFirstConsultationNo1" value="no" />
+                id="freeFirstConsultationNo1" value="no" :checked="form.consultation_type == 'no'" />
               <label class="form-check-label" for="freeFirstConsultationNo1" @click="changeConsultationType('no')">
                 No
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" v-model="form.consultation_type" type="radio" name="freeFirstConsultation"
-                id="freeFirstConsultationYes" value="free" checked="" />
+                id="freeFirstConsultationYes" value="free" :checked="form.consultation_type == 'free'" />
               <label class="form-check-label" for="freeFirstConsultationYes" @click="changeConsultationType('free')">
                 Free
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" v-model="form.consultation_type" name="freeFirstConsultation"
-                id="freeFirstConsultationNo" value="discounted" />
+                id="freeFirstConsultationNo" value="discounted" :checked="form.consultation_type == 'discounted'" />
               <label class="form-check-label" for="freeFirstConsultationNo" @click="changeConsultationType('discounted')">
                 Discounted
               </label>
@@ -661,6 +709,28 @@
             </td>
           </tr>
 
+
+          <tr>
+            <td class="d-flex align-items-center justify-content-between">
+              Address:
+              <button
+                type="button"
+                class="btn btn-dark btn-sm"
+                data-bs-toggle="modal" data-bs-target="#addressModal"
+                data-target=".address-modal"
+                title="Edit"
+              >
+                <i class="fa fa-pencil"></i>
+              </button>
+            </td>
+            <!-- Modal -->
+
+            <!-- Modal ends here -->
+            <td>
+              {{ loginUser?.address }}
+            </td>
+          </tr>
+
           <!-- Phone -->
           <tr>
             <td class="d-flex align-items-center justify-content-between">
@@ -713,7 +783,7 @@
             <td class="d-flex align-items-center justify-content-between">
               Free/Discounted Consultation:
               <button
-                @click="changeConsultationType('free')"
+                @click="changeConsultationType(form.consultation_type)"
                 type="button"
                 class="btn btn-dark btn-sm"
                 data-bs-toggle="modal" data-bs-target="#ConsultationModal"
@@ -735,10 +805,10 @@
                 <b>Fee : </b>${{ loginUser?.consultation_amount }}
               </span> -->
               <span v-if="loginUser?.consultation_type && loginUser?.consultation_type == 'discounted'">
-              {{ capitalizeFirstLetter(loginUser?.consultation_type) }} - ${{ formatNumber(loginUser?.consultation_amount) }}/{{ loginUser?.consultation_time }}
+              {{ capitalizeFirstLetter(loginUser?.consultation_type) }} - ${{ formatNumber(loginUser?.consultation_amount) }}/{{ loginUser?.consultation_time }} mins
               </span>
               <span v-if="loginUser?.consultation_type && loginUser?.consultation_type == 'free'">
-                {{ capitalizeFirstLetter(loginUser?.consultation_type) }} - {{ loginUser?.consultation_time }}
+                {{ capitalizeFirstLetter(loginUser?.consultation_type) }} - {{ loginUser?.consultation_time }} mins
               </span>
               <span v-if="loginUser?.consultation_type && loginUser?.consultation_type == 'no'">
                 {{ capitalizeFirstLetter(loginUser?.consultation_type) }}
@@ -901,6 +971,7 @@ export default {
         link: null,
         phone: null,
         about: null,
+        address : null,
         job_title: null,
         consultation_type: "free",
         consultation_time: null,
@@ -1002,10 +1073,15 @@ export default {
         this.form.link = userData.link;
         this.form.email = userData.email;
         this.form.phone = userData.phone;
+        this.form.address = userData.address;
         this.form.about = userData.about;
         this.form.job_title = userData.job_title;
 
         this.form.remote_consultation = userData.remote_consultation;
+        this.form.consultation_type = userData.consultation_type;
+
+        this.form.consultation_amount = userData.consultation_amount;
+        this.form.consultation_time = userData.consultation_time;
         this.form.mobile_friendly = userData.mobile_friendly;
       }
     },

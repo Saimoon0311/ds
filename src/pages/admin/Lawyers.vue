@@ -44,7 +44,24 @@
               tabindex="-1"
               @click="setStatus('reject')"
             >
-              Approved or Rejected
+              Approved
+            </button>
+          </li>
+          <li data-v-511b78bb="" class="nav-item" role="presentation">
+            <button
+              data-v-511b78bb=""
+              class="nav-link"
+              id="pills-profile-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-profile"
+              type="button"
+              role="tab"
+              aria-controls="pills-profile"
+              aria-selected="false"
+              tabindex="-1"
+              @click="setStatus('reject2')"
+            >
+              Rejected
             </button>
           </li>
         </ul>
@@ -144,6 +161,10 @@
                               <tr>
                                 <td class="fw-normal">Phone</td>
                                 <td>{{ item?.phone }}</td>
+                              </tr>
+                              <tr>
+                                <td class="fw-normal">Address</td>
+                                <td>{{ item?.address }}</td>
                               </tr>
                               <tr>
                                 <td class="fw-normal">Website</td>
@@ -477,6 +498,71 @@
 
                                 </td>
                                 <td>{{ item?.phone }}</td>
+                              </tr>
+                              <tr>
+                                <td class="fw-normal d-flex align-items-center justify-content-between">Address
+                                  <button
+                                    type="button"
+                                    class="btn btn-dark btn-sm"
+                                    data-bs-toggle="modal" :data-bs-target="`#AddressModal${index}`"
+                                    :data-target="`.edit-address-modal${index}`"
+                                    title="Edit"
+                                    @click="setModalData('address',item?.address,item?.id)"
+                                  >
+                                    <i class="fa fa-pencil"></i>
+                                  </button>
+
+                                  <div
+                                    :class="`modal fade edit-address-modal${index}`"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="mySmallModalLabel"
+                                    aria-hidden="true"
+                                    :id="`AddressModal${index}`"
+                                  >
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">
+                                            Edit address
+                                          </h5>
+                                          <button
+                                            type="button"
+                                            class="close btn btn-dark"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                            
+                                          >
+                                            <span aria-hidden="true">×</span>
+                                          </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                          <div class="form-group">
+                                            <input
+                                              type="tel"
+                                              name="address"
+                                              maxlength="10"
+                                              class="form-control"
+                                              id="address"
+                                              v-model="form.address"
+                                            />
+                                            <button
+                                              type="button"
+                                              name="address-submit"
+                                              class="btn btn-dark my-3"
+                                              @click="updateProfile('address',`#AddressModal${index}`)"
+                                            >
+                                              Save changes
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </td>
+                                <td>{{ item?.address }}</td>
                               </tr>
                               <tr>
                                 <td class="fw-normal d-flex align-items-center justify-content-between">Website
@@ -1036,6 +1122,7 @@ export default {
         law_firm: null,
         link: null,
         phone: null,
+        address: null,
         about: null,
         job_title: null,
         consultation_type: "free",
@@ -1404,7 +1491,7 @@ ul#pills-tab {
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  width: 330px;
+  width: 430px;
 }
 
 /* .hello {} */

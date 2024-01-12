@@ -534,6 +534,7 @@ router.beforeEach(async (to, from, next) => {
               email: result?.data?.data?.email,
               type: result?.data?.data?.type,
               phone: result?.data?.data?.phone,
+              address: result?.data?.data?.address,
               is_subscribed_first : result?.data?.data?.is_subscribed_first,
               image : result?.data?.data?.image,
               job_title: result?.data?.data?.job_title,

@@ -134,7 +134,7 @@
                     >
                       <thead class="hd-receipt">
                         <!-- <th>#</th> -->
-                        <th>Invoice ID</th>
+                        <!-- <th>Invoice ID</th> -->
                         <th>Invoice Number</th>
                         <th>Amount Paid</th>
                         <th>Date of Issue</th>
@@ -146,9 +146,9 @@
                           :key="receipt.id"
                         >
                           <!-- <td>{{ ++index }}</td> -->
-                          <td>{{ receipt?.id }}</td>
+                          <!-- <td>{{ receipt?.id }}</td> -->
                           <td>{{ receipt?.number }}</td>
-                          <td>$ {{ formatNumber(receipt?.amount_paid) }}</td>
+                          <td>$ {{ formatNumber(receipt?.amount_paid / 100.0) }}</td>
                           <!-- <td>{{ new Date(receipt?.created * 1000).toLocaleDateString() }}</td> -->
                           <td>
                             {{
