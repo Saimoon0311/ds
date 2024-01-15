@@ -327,7 +327,7 @@
                               {{ item?.description }}
                             </div>
                           </div>
-                            <div class="widthcn">
+                            <div class="widthcn px-3">
                               <span class="spacer px-3">
                                 <p class="smallFont text-black smallFont1">
                                   <b>Posted by: </b>

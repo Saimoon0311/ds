@@ -547,7 +547,7 @@
               :option-id="opt => opt.id"
               /> -->
 
-              <v-select v-model="selectedOptionIds" :options="options" label="title" multiple></v-select>
+              <v-select v-model="selectedOptionIds" :options="options" :close-on-select="false" label="title" multiple></v-select>
 
               <button @click="saveSelectedFields" class="btn btn-dark my-3">Save changes</button>
               <!-- <form
