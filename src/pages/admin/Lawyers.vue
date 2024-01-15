@@ -195,6 +195,10 @@
                                 </td>
                                 <td v-else></td>
                               </tr>
+                              <tr>
+                                <td class="fw-normal d-flex align-items-center justify-content-between">Hear about us</td>
+                                <td>{{ item?.hear_about_us }}</td>
+                              </tr>
                             </tbody>
                           </table>
                         </details>
@@ -976,6 +980,10 @@
                                     </span>
                                   </div>
                                 </td>
+                              </tr>
+                              <tr>
+                                <td class="fw-normal d-flex align-items-center justify-content-between">Hear about us</td>
+                                <td>{{ item?.hear_about_us }}</td>
                               </tr>
                             </tbody>
                           </table>

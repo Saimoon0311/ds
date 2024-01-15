@@ -141,7 +141,7 @@
                         class="w-auto"
                         style="float: none; padding: inherit; font-size: 1rem"
                       >
-                        Itemise Disbursements1
+                        Itemise Disbursements<!-- 1 -->
                       </legend>
                       <label class="w-100 text-start">
                         Item:<sup><code>*</code></sup>
@@ -369,7 +369,7 @@
                         class="w-auto"
                         style="float: none; padding: inherit; font-size: 1rem"
                       >
-                        Itemise Disbursements2
+                        Itemise Disbursements<!-- 2 -->
                       </legend>
                       <label class="w-100 text-start">
                         Item:<sup><code>*</code></sup>
@@ -636,7 +636,7 @@
                         class="w-auto"
                         style="float: none; padding: inherit; font-size: 1rem"
                       >
-                        Itemise Disbursements3
+                        Itemise Disbursements<!-- 3 -->
                       </legend>
                       <label class="w-100 text-start">
                         Item:<sup><code>*</code></sup>
@@ -821,7 +821,7 @@
                         class="w-auto"
                         style="float: none; padding: inherit; font-size: 1rem"
                       >
-                        Itemise Disbursements4
+                        Itemise Disbursements<!-- 4 -->
                       </legend>
                       <label class="w-100 text-start">
                         Item:<sup><code>*</code></sup>
@@ -1240,7 +1240,7 @@
                         class="w-auto"
                         style="float: none; padding: inherit; font-size: 1rem"
                       >
-                        Itemise Disbursements5
+                        Itemise Disbursements<!-- 5 -->
                       </legend>
                       <label class="w-100 text-start">
                         Item:<sup><code>*</code></sup>
@@ -1443,7 +1443,7 @@
                         class="w-auto"
                         style="float: none; padding: inherit; font-size: 1rem"
                       >
-                        Itemise Disbursements6
+                        Itemise Disbursements<!-- 6 -->
                       </legend>
                       <label class="w-100 text-start">
                         Item:<sup><code>*</code></sup>
@@ -1600,7 +1600,7 @@
                       class="w-auto"
                       style="float: none; padding: inherit; font-size: 1rem"
                     >
-                      Itemise Disbursements7
+                      Itemise Disbursements<!-- 7 -->
                     </legend>
                     <label class="w-100 text-start">
                       Item:<sup><code>*</code></sup>
@@ -1949,13 +1949,13 @@
                 <div v-html="summaryHtmlItemByItemTasks"></div>
               </div>
             </div>
-
+            <!-- here -->
             <div v-if="form.disbursement_amount">
               <p>
-                <span> Estimated amount for disbursements: </span>
+                <span> Estimated amount for disbursements:</span>
                 <span
                   >${{
-                    formatNumber(parseFloat(form.disbursement_amount))
+                    grandTotal > 0 ? formatNumber(parseFloat(grandTotal)) : formatNumber(parseFloat(form.disbursement_amount))
                   }}</span
                 >
               </p>
@@ -2494,18 +2494,26 @@ export default {
       console.log('items : : : ' , this.rows);
       // parseFloat(this.form.disbursement_amount)
 
-      // this.totals["totalExcludingGst"] = this.getTotalWithOutGst(total);
-      this.totals["totalExcludingGst"] = total;
-      this.totals["gst"] = this.getGst(total);
-      console.log('t1 : ' , this.totals["totalExcludingGst"])
-      console.log('t2 : ' , this.totals["gst"])
-      this.totals["totalIncludingGst"] = total + this.totals["gst"];
-      console.log('t3 : ' , this.totals["totalIncludingGst"])
-
       let disbursement = 0;
       if(this.isNumericString(this.form.disbursement_amount)){
         disbursement = parseFloat(this.form.disbursement_amount);
+      }else{
+        disbursement = 0;
       }
+
+      // this.totals["totalExcludingGst"] = this.getTotalWithOutGst(total);
+      total = this.grandTotal > 0 ? parseFloat(this.grandTotal) + total : disbursement + total; 
+      this.totals["totalExcludingGst"] = total;
+      this.totals["gst"] = this.getGst(total,disbursement);
+      console.log('t1 : ' , this.totals["totalExcludingGst"])
+      console.log('t2 : ' , this.totals["gst"])
+      this.totals["totalIncludingGst"] = this.totals["totalExcludingGst"] + this.totals["gst"];
+      console.log('t3 : ' , this.totals["totalIncludingGst"])
+
+      // let disbursement = 0;
+      // if(this.isNumericString(this.form.disbursement_amount)){
+      //   disbursement = parseFloat(this.form.disbursement_amount);
+      // }
       // check if gst applicable in any item of disbursements
       if(this.rows.length > 0){
         const gst_applicable_items = this.rows.filter(item => item.gst_not_applicable == "");
@@ -2515,10 +2523,10 @@ export default {
           disbursement += gstAmount;
         });
       }
-      if(this.isNumericString(this.form.disbursement_amount)){
-        console.log('t4 under if : ' , disbursement);
-        this.totals["totalIncludingGst"] += disbursement;
-      }
+      // if(this.isNumericString(this.form.disbursement_amount)){
+      //   console.log('t4 under if : ' , disbursement);
+        // this.totals["totalIncludingGst"] += disbursement;
+      // }
       console.log('cons sole log : ' , this.totals);
     },
 
@@ -2546,8 +2554,48 @@ export default {
       return parseFloat(totalBeforeFix);
     },
 
-    getGst(total) {
-      let gst = total * 0.1;
+    // getGst(total) {
+    //   if(this.grandTotal > 0){
+    //     total = this.rows.reduce((total, row) => {
+    //       // Check if gst_not_applicable is false before adding the cost
+    //       if (!row.gst_not_applicable) {
+    //         return total + (parseFloat(row.costAud) || 0);
+    //       }
+    //       return total;
+    //     },0);
+    //     let amount1 = total - form.disbursement_amount;
+    //     let amount2 = form.disbursement_amount;
+    //   }else{
+    //     let amount1 = total - form.disbursement_amount;
+    //     let amount2 = form.disbursement_amount;
+    //   }
+    //   let gst1 = total * 0.1;
+    //   let gst2 = total * 0.1;
+    //   return parseFloat(gst);
+    // },
+
+    getGst(total,disbursement) {
+      let gst1 = 0;
+      let gst2 = 0;
+      if(this.grandTotal > 0){
+        const disbursementTotalForGst = this.rows.reduce((total, row) => {
+          // Check if gst_not_applicable is false before adding the cost
+          if (!row.gst_not_applicable) {
+            return total + (parseFloat(row.costAud) || 0);
+          }
+          return total;
+        },0);
+        let val = total - this.grandTotal;
+        gst1 = val * 0.1;
+        gst2 = disbursementTotalForGst * 0.1;
+      }else{
+        let val = total - disbursement;
+        gst1 = val * 0.1;
+        gst2 = disbursement * 0.1;
+      }
+      // let gst1 = total * 0.1;
+      // let gst2 = total * 0.1;
+      let gst = gst1 + gst2;
       return parseFloat(gst);
     },
 
@@ -2720,18 +2768,18 @@ export default {
 
     addRow() {
       if (this.newRow.itemDisbursement && (this.newRow.costAud || this.newRow.costAud == 0.00)) {
-        let total = this.rows.reduce((accumulator, currentItem) => {
-          return accumulator + parseFloat(currentItem.total);
-        }, 0);
+        // let total = this.rows.reduce((accumulator, currentItem) => {
+        //   return accumulator + parseFloat(currentItem.total);
+        // }, 0);
         
-        let value_to_check = this.newRow.costAud;
-        let total_to_check = value_to_check += total;
+        // let value_to_check = this.newRow.costAud;
+        // let total_to_check = value_to_check += total;
 
-        if(total_to_check > this.form.disbursement_amount){
-          this.$swal("", "The total for your itemised disbursements does not match the total of disbursements. Please amend.", "error");
-          // alert("The total for your itemised disbursements does not match the total of disbursements. Please amend.");
-          return false;
-        }
+        // if(total_to_check > this.form.disbursement_amount){
+        //   this.$swal("", "The total for your itemised disbursements does not match the total of disbursements. Please amend.", "error");
+        //   // alert("The total for your itemised disbursements does not match the total of disbursements. Please amend.");
+        //   return false;
+        // }
 
         this.rows.push({
           itemDisbursement: this.newRow.itemDisbursement,

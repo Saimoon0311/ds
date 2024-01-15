@@ -34,6 +34,7 @@ import "sweetalert2/dist/sweetalert2.min.css";
 
 import { getToken } from "firebase/messaging";
 import { messaging } from "@/config/firebaseConfig";
+import { deleteToken } from 'firebase/messaging';
 
 import Papa from "papaparse";
 
@@ -864,6 +865,56 @@ app.mixin({
     //   this.$router.push({ path: "/messages-history" });
     // },
 
+
+
+
+    // async requestNotificationPermission() {
+    //   // const messaging = firebase.messaging();
+    
+    //   try {
+    //     // Get the current FCM token
+    //     const currentToken = await messaging.getToken();
+        
+    //     // Handle token refresh events
+    //     messaging.onTokenRefresh(() => {
+    //       messaging.getToken()
+    //         .then((refreshedToken) => {
+    //           console.log('Token refreshed:', refreshedToken);
+    //           // Handle refreshed token (e.g., update server or application state)
+    //         })
+    //         .catch((err) => {
+    //           console.error('Unable to retrieve refreshed token:', err);
+    //         });
+    //     });
+    
+    //     if (currentToken) {
+    //       const permission = await Notification.requestPermission();
+    //       console.log('Check notification permission:', permission);
+    //       console.log('Current FCM token:', currentToken);
+    
+    //       if (permission === 'granted') {
+    //         // Send the token to your server for handling subscriptions
+    //         api.post('/save-fcm-token', { currentToken })
+    //           .then((res) => {
+    //             console.log('Save token response:', res);
+    //           })
+    //           .catch((error) => {
+    //             console.log('Error while saving token:', error);
+    //           });
+    //       } else {
+    //         console.error('Notification permission denied.');
+    //       }
+    //     } else {
+    //       console.log('No registration token available. Request permission to generate one.');
+    //       // ...
+    //     }
+    //   } catch (err) {
+    //     console.log('An error occurred while retrieving token:', err);
+    //     // ...
+    //   }
+    // },
+
+
     async requestNotificationPermission() {
       getToken(messaging)
         .then(async (currentToken) => {
@@ -1349,16 +1400,46 @@ app.mixin({
       }
     },
 
-    logout(redirectUrl, redirection = true) {
+    async logout(redirectUrl, redirection = true) {
     // logout() {
-      console.log('error');
-      const deleteRequest = indexedDB.deleteDatabase("firebase-messaging-database");
-      deleteRequest.onsuccess = () => {
-        console.log("Database deleted successfully");
-      };
-      deleteRequest.onerror = (event) => {
-        console.error("Error deleting database", event);
-      };
+    // logout() {
+      deleteToken(messaging).then((res) => {
+        console.log('res , ' , res);
+      })
+      .catch(function (error) {
+        console.error('Error deleting FCM token:', error);
+      });
+     
+
+
+      // getToken(messaging)
+      //   .then(async (currentToken) => {
+      //     if (currentToken) {
+      //       console.log('token : ' , currentToken);
+      //       messaging.unsubscribeFromTopic(currentToken)
+      //       .then((response) => {
+      //         console.log('Successfully unsubscribed from topic:', response);
+      //       })
+      //       .catch((error) => {
+      //         console.log('Error unsubscribing from topic:', error);
+      //       });
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     console.log('Error token :', error);
+      //   });
+
+      // const registrationTokens = ['abc'];
+
+      // 
+
+      // const deleteRequest = indexedDB.deleteDatabase("firebase-messaging-database");
+      // deleteRequest.onsuccess = () => {
+      //   console.log("Database deleted successfully");
+      // };
+      // deleteRequest.onerror = (event) => {
+      //   console.error("Error deleting database", event);
+      // };
       try {
         api
           .get("/logout")

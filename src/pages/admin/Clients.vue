@@ -158,6 +158,11 @@
                                 <td>{{ item?.about }}</td>
                               </tr>
 
+                              <tr>
+                                <td class="fw-normal">Hear about us</td>
+                                <td>{{ item?.hear_about_us }}</td>
+                              </tr>
+
                             </tbody>
                           </table>
                         </details>
