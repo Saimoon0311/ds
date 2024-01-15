@@ -302,7 +302,8 @@
                                             </div>
                                           </div>
 
-                                       
+                                          <div class="text-center">
+
                                           <button
                                               type="button"
                                               name="job-title-submit"
@@ -311,7 +312,7 @@
                                             >
                                               Save changes
                                             </button>
-                                         
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
@@ -598,12 +599,14 @@ export default {
 .bubbles {
   border-radius: 6px;
   padding: 8px 11px;
-  margin: 8px 7px !important;
+  margin: 5px !important;
   cursor: pointer;
   background: black !important;
   font-weight: 500;
 }
-
+.btn-check:focus+.btn, .btn:focus{
+  box-shadow: none;
+}
 .bubbles:hover {
   background: #363636;
 }

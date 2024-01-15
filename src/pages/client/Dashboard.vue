@@ -160,7 +160,7 @@
                             </div>
                           </div>
 
-                    <div class="widthcn">
+                    <div class="widthcn px-3">
                       <span class="spacer px-3">
                         <p class="smallFont text-black">
                           <b>Posted on: </b> {{ formatCreatedAt(item.created_at) }}

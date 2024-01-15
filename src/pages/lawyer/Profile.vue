@@ -74,7 +74,7 @@
                 <input
                   type="text"
                   name="email"
-                  maxlength="200"
+                  maxlength="50"
                   class="form-control"
                   id="email"
                   v-model="form.email"
@@ -122,7 +122,7 @@
                 <input
                   type="text"
                   name="job-title"
-                  maxlength="200"
+                  maxlength="50"
                   class="form-control"
                   id="phone"
                   v-model="form.job_title"
@@ -169,6 +169,7 @@
                   name="lawfirm"
                   class="form-control"
                   id="lawfirm"
+                  maxlength="50"
                   v-model="form.law_firm"
                 />
                 <button
@@ -216,6 +217,7 @@
                   name="website"
                   class="form-control"
                   id="website"
+                  maxlength="50"
                   v-model="form.link"
                 />
                 <button
@@ -260,6 +262,7 @@
               <div class="form-group">
                 <input
                   type="text"
+                  maxlength="50"
                   name="address"
                   class="form-control"
                   id="address"
@@ -309,7 +312,7 @@
                 <input
                   type="tel"
                   name="phone"
-                  maxlength="20"
+                  maxlength="15"
                   class="form-control"
                   id="phone"
                   v-model="form.phone"
@@ -475,6 +478,7 @@
                 rows="4"
                 cols="100%"
                 required
+                maxlength="500"
               ></textarea>
             </label>
           
@@ -543,7 +547,7 @@
               :option-id="opt => opt.id"
               /> -->
 
-              <v-select v-model="selectedOptionIds" :options="options" label="title" multiple></v-select>
+              <v-select v-model="selectedOptionIds" :options="options" :close-on-select="false" label="title" multiple></v-select>
 
               <button @click="saveSelectedFields" class="btn btn-dark my-3">Save changes</button>
               <!-- <form
@@ -773,7 +777,7 @@
             <!-- Modal ends here -->
 
             <td>
-              {{ limitedAbout }}
+              <span class="descriptionText"> {{ limitedAbout }}</span>
             </td>
           </tr>
 
@@ -1019,7 +1023,7 @@ export default {
     limitedAbout() {
       if (this.loginUser && this.loginUser.about) {
         const words = this.loginUser.about.split(' ');
-        const limit = 10; // Adjust this to the desired word limit
+        const limit = 500; // Adjust this to the desired word limit
         if (words.length <= limit) {
           return this.loginUser.about;
         }
@@ -1254,7 +1258,32 @@ export default {
 </script>
 
 <style scoped>
+.descriptionText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 100px;
+  /* line-break: anywhere; */
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-right: 5px;
+  display: inline-block;
+}
 
+.descriptionText::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 10px;
+}
+
+.descriptionText::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
+  border-radius: 10px;
+}
+
+.descriptionText::-webkit-scrollbar-thumb {
+  background-color: rgba(217, 217, 217, 1);
+  /* outline: 1px solid #292929; */
+  border-radius: 10px;
+}
 tbody tr:nth-child(odd) {
     background: #f2f2f2;
 }

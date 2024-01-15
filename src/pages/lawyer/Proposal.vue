@@ -1821,6 +1821,7 @@
                 rows="4"
                 cols="100%"
                 required
+                maxlength="2500"
               ></textarea>
             </label>
             <br />
