@@ -1175,6 +1175,9 @@ app.mixin({
               <td class='bg-dark text-white'>Total</td>
               <td class='bg-dark text-white'>$${this.formatNumber(total)}</td>
             </tr>
+            <tr>
+            <td class="border-0">gst not applicable*</td>
+            </tr>
           </tfoot>
         </table>
       `;

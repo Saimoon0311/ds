@@ -262,7 +262,7 @@
               <div class="form-group">
                 <input
                   type="text"
-                  maxlength="50"
+                  maxlength="150"
                   name="address"
                   class="form-control"
                   id="address"
