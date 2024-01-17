@@ -379,22 +379,22 @@
           <div class="form-group m-2" id="freeFirstConsultationRadio">
             <!-- <label>Consultation type:</label> -->
             <div class="form-check">
-              <input class="form-check-input" v-model="form.consultation_type" type="radio" name="freeFirstConsultationNo1"
-                id="freeFirstConsultationNo1" value="no" :checked="form.consultation_type == 'no'" />
+              <input class="form-check-input" v-model="form.consultation_type2" type="radio" name="freeFirstConsultationNo1"
+                id="freeFirstConsultationNo1" value="no" :checked="form.consultation_type2 == 'no'" />
               <label class="form-check-label" for="freeFirstConsultationNo1" @click="changeConsultationType('no')">
                 No
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" v-model="form.consultation_type" type="radio" name="freeFirstConsultation"
-                id="freeFirstConsultationYes" value="free" :checked="form.consultation_type == 'free'" />
+              <input class="form-check-input" v-model="form.consultation_type2" type="radio" name="freeFirstConsultation"
+                id="freeFirstConsultationYes" value="free" :checked="form.consultation_type2 == 'free'" />
               <label class="form-check-label" for="freeFirstConsultationYes" @click="changeConsultationType('free')">
                 Free
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" v-model="form.consultation_type" name="freeFirstConsultation"
-                id="freeFirstConsultationNo" value="discounted" :checked="form.consultation_type == 'discounted'" />
+              <input class="form-check-input" type="radio" v-model="form.consultation_type2" name="freeFirstConsultation"
+                id="freeFirstConsultationNo" value="discounted" :checked="form.consultation_type2 == 'discounted'" />
               <label class="form-check-label" for="freeFirstConsultationNo" @click="changeConsultationType('discounted')">
                 Discounted
               </label>
@@ -408,16 +408,16 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text">$</div>
                 </div>
-                <input type="number" min="1" class="form-control" v-model="form.consultation_amount" name="freeFirstConsultationFee"
+                <input type="number" min="1" class="form-control" v-model="form.consultation_amount2" name="freeFirstConsultationFee"
                   id="freeFirstConsultationFee" />
               </div>
             </div>
           </div>
 
-          <div v-if="form.consultation_type != 'no'" class="col-auto" id="div-freeFirstConsultationMinutes">
+          <div v-if="form.consultation_type2 != 'no'" class="col-auto" id="div-freeFirstConsultationMinutes">
               <label for="">Time limit:<sup><code>*</code></sup></label>
               <div class="input-group mb-2">
-                <input type="number" v-model="form.consultation_time" class="form-control"
+                <input type="number" v-model="form.consultation_time2" class="form-control"
                   name="freeFirstConsultationMinutes" id="freeFirstConsultationMinutes" placeholder="E.g. 60" />
                 <div class="input-group-prepend">
                   <div class="input-group-text">minutes</div>
@@ -429,7 +429,7 @@
                   type="button"
                   name="phone-submit"
                   class="btn btn-dark my-3"
-                  @click="updateProfile(['consultation_type','consultation_amount','consultation_time'],'#ConsultationModal','Consultation details')"
+                  @click="updateProfile(['consultation_type2','consultation_amount2','consultation_time2'],'#ConsultationModal','Consultation details')"
                 >
                   Save changes
           </button>
@@ -592,7 +592,7 @@
             <div class="modal-body w-100">
               <!-- <Selectic className="mselect  "  placeholder="Nothing Selected" multiple :options="['New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','Australian Capital Territory','Northern Territory']" v-model="selection"/> -->
 
-              <v-select v-model="selectedOptionIds_locations" :options="options_locations" label="title" multiple></v-select>
+              <v-select v-model="selectedOptionIds_locations" :options="options_locations" :close-on-select="false" label="title" multiple></v-select>
 
               <button @click="saveSelectedLocations" class="btn btn-dark my-3">Save changes</button>
 
@@ -980,6 +980,11 @@ export default {
         consultation_type: "free",
         consultation_time: null,
         consultation_amount: null,
+
+        consultation_type2: "free",
+        consultation_time2: null,
+        consultation_amount2: null,
+
         remote_consultation: false,
         mobile_friendly: false,
       },
@@ -1068,6 +1073,10 @@ export default {
         this.form.consultation_amount = null;
       }
       this.form.consultation_type = value;
+
+      this.form.consultation_type2 = this.form.consultation_type;
+      this.form.consultation_time2 = this.form.consultation_time;
+      this.form.consultation_amount2 = this.form.consultation_amount;
     },
 
     updateFormProperties() {
@@ -1087,6 +1096,11 @@ export default {
         this.form.consultation_amount = userData.consultation_amount;
         this.form.consultation_time = userData.consultation_time;
         this.form.mobile_friendly = userData.mobile_friendly;
+
+        this.form.consultation_type2 = userData.consultation_type;
+        this.form.consultation_amount2 = userData.consultation_amount;
+        this.form.consultation_time2 = userData.consultation_time;
+
       }
     },
 

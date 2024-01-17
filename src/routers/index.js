@@ -5,7 +5,6 @@ import NeedLawyer from "@/pages/forms/NeedLawyer.vue";
 // import FindClient from "@/pages/forms/FindClient.vue";
 import LoginForm from "@/pages/forms/LoginForm.vue";
 
-
 import UserChats from "@/pages/UserChats.vue";
 
 import FullChatLawyer from "@/pages/FullChatLawyer.vue";
@@ -85,7 +84,7 @@ function reverse_guard(to, from, next) {
         next("/lawyer-dashboard");
       } else if (userData.type === "client") {
         next("/client-dashboard");
-      } else if(userData.type === "admin"){
+      } else if (userData.type === "admin") {
         next("/admin-dashboard");
       } else {
         // Handle other cases or roles as needed
@@ -138,7 +137,6 @@ function reverse_guard(to, from, next) {
 // }
 
 const routes = [
-
   {
     path: "/login",
     component: LawyerLoginForm,
@@ -151,7 +149,6 @@ const routes = [
   //   component: LawyerLoginForm,
   //   beforeEnter: reverse_guard,
   // },
-
 
   {
     path: "/messages",
@@ -315,13 +312,13 @@ const routes = [
   {
     path: "/admin-dashboard",
     component: AdminMain,
-    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true }
+    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true },
   },
 
   {
     path: "/lawyer",
     component: AdminLawyer,
-    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true }
+    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true },
   },
 
   {
@@ -339,16 +336,14 @@ const routes = [
   {
     path: "/job",
     component: AdminJobs,
-    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true }
+    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true },
   },
 
   {
     path: "/client",
     component: AdminClients,
-    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true }
+    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true },
   },
-  
- 
 
   {
     path: "/view-proposals",
@@ -456,13 +451,24 @@ router.beforeEach(async (to, from, next) => {
         console.log("match try");
         let result = await api.get("/verify");
         console.log("user all data ::: ", result?.data);
-        if(to.meta.clientAndlawyerNotAllowed && result?.data?.data?.type != "admin"){
-          console.log('client and lawyer not allowed');
-          const redirectUrl =  (result?.data?.data?.type == "lawyer") ? "/lawyer-dashboard" : "client-dashboard";
+        if (
+          to.meta.clientAndlawyerNotAllowed &&
+          result?.data?.data?.type != "admin"
+        ) {
+          console.log("client and lawyer not allowed");
+          const redirectUrl =
+            result?.data?.data?.type == "lawyer"
+              ? "/lawyer-dashboard"
+              : "client-dashboard";
           next(redirectUrl);
-        }
-        else if (to.meta.clientAndAdminNotAllowed && result.data.data.type != "lawyer") {
-          const redirectUrl =  (result?.data?.data?.type == "client") ? "/client-dashboard" : "/admin-dashboard";
+        } else if (
+          to.meta.clientAndAdminNotAllowed &&
+          result.data.data.type != "lawyer"
+        ) {
+          const redirectUrl =
+            result?.data?.data?.type == "client"
+              ? "/client-dashboard"
+              : "/admin-dashboard";
           next(redirectUrl);
           // router.go(-1);
           console.log("client access not allowed");
@@ -470,51 +476,62 @@ router.beforeEach(async (to, from, next) => {
           to.meta.lawyerAndAdminNotAllowed &&
           result.data.data.type != "client"
         ) {
-          const redirectUrl =  (result?.data?.data?.type == "lawyer") ? "/lawyer-dashboard" : "/admin-dashboard";
+          const redirectUrl =
+            result?.data?.data?.type == "lawyer"
+              ? "/lawyer-dashboard"
+              : "/admin-dashboard";
           next(redirectUrl);
           // router.go(-1);
           console.log("lawyer access not allowed");
         } else {
-
-          if(result?.data?.data?.type == "admin" && !result?.data?.data?.otp_verified){
+          if (
+            result?.data?.data?.type == "admin" &&
+            !result?.data?.data?.otp_verified
+          ) {
             localStorage.removeItem("loginUser");
             localStorage.removeItem("token");
-            next('/admin-login');
+            next("/admin-login");
+          }
+
+          if (
+            result?.data?.data?.type == "lawyer" ||
+            result?.data?.data?.type == "client"
+          ) {
+            store.commit("SET_NOTI_COUNT_MSG", result?.data?.noti_msg);
+            localStorage.setItem("noti_count_msg", result?.data?.noti_msg);
+            store.commit("SET_NOTI_COUNT_JOB", result?.data?.noti_job);
+            localStorage.setItem("noti_count_job", result?.data?.noti_job);
           }
 
           console.log("cr", to);
           console.log("cr 2", from);
-          
+
           if (
-            result?.data?.subscription != null && 
-            (result?.data?.subscription?.subscription_status == 'trialing' || 
-            result?.data?.subscription?.subscription_status == 'active')
-          ) 
-          {
-              store.commit("SET_SUB_STATUS", "subscribed");
-              store.commit(
-                "SET_SUB_CANCEL_STATUS",
-                result?.data?.subscription?.is_cancel
-              );
+            result?.data?.subscription != null &&
+            (result?.data?.subscription?.subscription_status == "trialing" ||
+              result?.data?.subscription?.subscription_status == "active")
+          ) {
+            store.commit("SET_SUB_STATUS", "subscribed");
+            store.commit(
+              "SET_SUB_CANCEL_STATUS",
+              result?.data?.subscription?.is_cancel
+            );
             // const current_date = new Date();
             // const current_period_end = new Date(result?.data?.subscription?.current_period_end);
             // if(result?.data?.subscription.is_cancel && current_period_end >= current_date){
             //   store.commit("SET_SUB_STATUS", null);
             //   store.commit("SET_SUB_CANCEL_STATUS",false);
-            // }            
-          }
-          else if(
-            result?.data?.subscription != null && 
-            result?.data?.subscription?.subscription_status != 'trialing' && 
-            result?.data?.subscription?.subscription_status != 'active'
-          )
-          {
+            // }
+          } else if (
+            result?.data?.subscription != null &&
+            result?.data?.subscription?.subscription_status != "trialing" &&
+            result?.data?.subscription?.subscription_status != "active"
+          ) {
             store.commit("SET_SUB_STATUS", "incomplete");
-            store.commit("SET_SUB_CANCEL_STATUS",false);
-          }
-          else{
+            store.commit("SET_SUB_CANCEL_STATUS", false);
+          } else {
             store.commit("SET_SUB_STATUS", null);
-            store.commit("SET_SUB_CANCEL_STATUS",false);
+            store.commit("SET_SUB_CANCEL_STATUS", false);
           }
 
           if (result?.data?.data?.admin_approval == "approve") {
@@ -535,8 +552,8 @@ router.beforeEach(async (to, from, next) => {
               type: result?.data?.data?.type,
               phone: result?.data?.data?.phone,
               address: result?.data?.data?.address,
-              is_subscribed_first : result?.data?.data?.is_subscribed_first,
-              image : result?.data?.data?.image,
+              is_subscribed_first: result?.data?.data?.is_subscribed_first,
+              image: result?.data?.data?.image,
               job_title: result?.data?.data?.job_title,
               law_firm: result?.data?.data?.law_firm,
               link: result?.data?.data?.link,
@@ -552,7 +569,7 @@ router.beforeEach(async (to, from, next) => {
         localStorage.removeItem("loginUser");
         localStorage.removeItem("token");
         console.log("error from before : ", e);
-        next({ path: '/' })
+        next({ path: "/" });
       }
     }
   } else {

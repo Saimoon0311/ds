@@ -282,7 +282,15 @@ app.mixin({
     },
 
     async updateProfile(keyName, modalId = null, keyName2 = "Profile") {
+      console.log('response after update 1' , keyName);
       if (modalId == "#ConsultationModal" && Array.isArray(keyName)) {
+        
+        this.form.consultation_type = this.form.consultation_type2;
+        this.form.consultation_amount = this.form.consultation_amount2;
+        this.form.consultation_time = this.form.consultation_time2;
+
+        keyName = ['consultation_type','consultation_amount','consultation_time'];
+
         console.log(keyName.length);
         if (keyName.length == 3) {
           console.log(keyName[0], keyName[2]);

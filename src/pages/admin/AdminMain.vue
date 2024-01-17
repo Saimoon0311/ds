@@ -307,6 +307,7 @@ export default {
 
   data() {
     return {
+      outstandingJobs : 0,
       revenue: null,
       lawyers: null,
       clients: null,
@@ -456,7 +457,7 @@ export default {
         .get("/admin/dashboard-data")
         .then((res) => {
           console.log("dashboard data : ", res?.data);
-
+          this.outstandingJobs= res?.data?.outstandingJobs;
           this.revenue = res?.data?.revenue;
           this.lawyers = res?.data?.lawyers;
           this.clients = res?.data?.clients;
