@@ -293,113 +293,116 @@
                 <p class="h4 text-center fw-bold mb-3 mt-2">Summary</p>
                 <!-- <h4 class="d-inline"><b>Area of Law:</b></h4> -->
                 <div class="card-cus">
-                  
 
-                <div class="sum-top mb-3 bg-dark">
-                  <p class="areas text-decoration-none badge text-white">
-                    {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
-                  </p>
 
-                </div>
-                <div class="inner">
-                <h4 class=" text-start title-font text-black mt-3 mb-3"><b>{{ title }}</b>
-                </h4>
-                <p class="text-black descriptionText">{{ description }}</p>
-                <h4 class="mb-3 text-capitalize"><b>Location:</b> {{ city }}, {{ locations[selectedLocationIndex].title }}
-                </h4>
-              
-
-                <div v-if='this.VisualIsChecked ||
-                  this.AuditoryIsChecked ||
-                  this.MobilityIsChecked ||
-                  this.LearningIsChecked ||
-                  this.IntellectualIsChecked ||
-                  this.PsychiatricIsChecked ||
-                  this.MedicalIsChecked ||
-                  this.isChecked ||
-                  this.languageIsChecked'>
-                  <div>
-                    <h4 class="d-inline "><b>Accessibility Requirements</b></h4>
-
-                    <h4 class="d-inline mx-3 font-small" @click="toggleDiv">
-                      View Details
-                      <!-- <i class="fa fa-chevron-down"></i>   -->
-                      <i :class="['fa', isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down']"></i>
-                    </h4>
+                  <div class="sum-top mb-3 bg-dark">
+                    <p class="areas text-decoration-none badge text-white">
+                      {{ otherAreaSelected ? "Other (not listed here) / I don't know" : areas[selectedAreaIndex].title }}
+                    </p>
 
                   </div>
-                  <div class="mt-3">
-                    <div class="accordion-body-show" v-if="isDivVisible">
-                      <div v-if="VisualIsChecked">
-                        <p><i class="fa fa-check"></i> <b>Visual Impairment</b>
-                          <span v-if="this.visualOption != ''"><b>:</b> {{ visualOption }}</span>
-                        </p>
-                      </div>
+                  <div class="inner">
+                    <h4 class=" text-start title-font text-black mt-3 mb-3"><b>{{ title }}</b>
+                    </h4>
+                    <p class="text-black descriptionText">{{ description }}</p>
+                    <h4 class="mb-3 text-capitalize"><b>Location:</b> {{ city }}, {{
+                      locations[selectedLocationIndex].title }}
+                    </h4>
 
-                      <div v-if="AuditoryIsChecked">
-                        <p><i class="fa fa-check"></i> <b>Auditory Impairment</b>
-                          <span v-if="this.auditoryOption != ''"><b>:</b> {{ auditoryOption }}</span>
-                        </p>
-                      </div>
 
-                      <div v-if="MobilityIsChecked">
-                        <p><i class="fa fa-check"></i> <b>Obility/Physical Impairment</b>
-                          <span v-if="this.mobilityOption != ''"><b>:</b> {{ mobilityOption }}</span>
-                        </p>
-                      </div>
+                    <div v-if='this.VisualIsChecked ||
+                      this.AuditoryIsChecked ||
+                      this.MobilityIsChecked ||
+                      this.LearningIsChecked ||
+                      this.IntellectualIsChecked ||
+                      this.PsychiatricIsChecked ||
+                      this.MedicalIsChecked ||
+                      this.isChecked ||
+                      this.languageIsChecked'>
+                      <div>
+                        <h4 class="d-inline "><b>Accessibility Requirements</b></h4>
 
-                      <div v-if="LearningIsChecked">
-                        <p><i class="fa fa-check"></i> <b>Learning Impairment</b>
-                          <span v-if="this.learningOption != ''"><b>:</b> {{ learningOption }}</span>
-                        </p>
-                      </div>
+                        <h4 class="d-inline mx-3 font-small" @click="toggleDiv">
+                          View Details
+                          <!-- <i class="fa fa-chevron-down"></i>   -->
+                          <i :class="['fa', isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down']"></i>
+                        </h4>
 
-                      <div v-if="IntellectualIsChecked">
-                        <p><i class="fa fa-check"></i> <b>Intellectual Disability</b>
-                          <span v-if="this.intellectualOption != ''"><b>:</b> {{ intellectualOption }}</span>
-                        </p>
                       </div>
+                      <div class="mt-3">
+                        <div class="accordion-body-show" v-if="isDivVisible">
+                          <div v-if="VisualIsChecked">
+                            <p><i class="fa fa-check"></i> <b>Visual Impairment</b>
+                              <span v-if="this.visualOption != ''"><b>:</b> {{ visualOption }}</span>
+                            </p>
+                          </div>
 
-                      <div v-if="PsychiatricIsChecked">
-                        <p><i class="fa fa-check"></i> <b>Psychiatric Disability</b>
-                          <span v-if="this.psychiatricOption != ''"><b>:</b> {{ psychiatricOption }}</span>
-                        </p>
-                      </div>
+                          <div v-if="AuditoryIsChecked">
+                            <p><i class="fa fa-check"></i> <b>Auditory Impairment</b>
+                              <span v-if="this.auditoryOption != ''"><b>:</b> {{ auditoryOption }}</span>
+                            </p>
+                          </div>
 
-                      <div v-if="MedicalIsChecked">
-                        <!-- <p>Medical Disability : </p>
+                          <div v-if="MobilityIsChecked">
+                            <p><i class="fa fa-check"></i> <b>Obility/Physical Impairment</b>
+                              <span v-if="this.mobilityOption != ''"><b>:</b> {{ mobilityOption }}</span>
+                            </p>
+                          </div>
+
+                          <div v-if="LearningIsChecked">
+                            <p><i class="fa fa-check"></i> <b>Learning Impairment</b>
+                              <span v-if="this.learningOption != ''"><b>:</b> {{ learningOption }}</span>
+                            </p>
+                          </div>
+
+                          <div v-if="IntellectualIsChecked">
+                            <p><i class="fa fa-check"></i> <b>Intellectual Disability</b>
+                              <span v-if="this.intellectualOption != ''"><b>:</b> {{ intellectualOption }}</span>
+                            </p>
+                          </div>
+
+                          <div v-if="PsychiatricIsChecked">
+                            <p><i class="fa fa-check"></i> <b>Psychiatric Disability</b>
+                              <span v-if="this.psychiatricOption != ''"><b>:</b> {{ psychiatricOption }}</span>
+                            </p>
+                          </div>
+
+                          <div v-if="MedicalIsChecked">
+                            <!-- <p>Medical Disability : </p>
                         <p>{{ medicalOption }}</p> -->
-                        <p><i class="fa fa-check"></i> <b>Medical Disability</b>
-                          <span v-if="this.medicalOption != ''"><b>:</b> {{ medicalOption }}</span>
-                        </p>
-                      </div>
+                            <p><i class="fa fa-check"></i> <b>Medical Disability</b>
+                              <span v-if="this.medicalOption != ''"><b>:</b> {{ medicalOption }}</span>
+                            </p>
+                          </div>
 
-                      <div v-if="isChecked">
-                        <p><i class="fa fa-check"></i> <b>Other</b>
-                          <span v-if="this.requirementsOptionDescription != ''"><b>:</b> {{ requirementsOptionDescription
-                          }}</span>
-                        </p>
-                      </div>
+                          <div v-if="isChecked">
+                            <p><i class="fa fa-check"></i> <b>Other</b>
+                              <span v-if="this.requirementsOptionDescription != ''"><b>:</b> {{
+                                requirementsOptionDescription
+                              }}</span>
+                            </p>
+                          </div>
 
-                      <div v-if="languageIsChecked">
-                        <!-- <p>Language : </p>
+                          <div v-if="languageIsChecked">
+                            <!-- <p>Language : </p>
                         <p>{{ selectedLanguage }}</p> -->
-                        <p><i class="fa fa-check"></i> <b>Language</b>
-                          <span v-if="this.selectedLanguage != ''"><b>:</b> {{ selectedLanguage == 'Other' ? otherLanguage
-                            : selectedLanguage }}</span>
-                          <span v-else><b>:</b> Language other than English</span>
-                        </p>
+                            <p><i class="fa fa-check"></i> <b>Language</b>
+                              <span v-if="this.selectedLanguage != ''"><b>:</b> {{ selectedLanguage == 'Other' ?
+                                otherLanguage
+                                : selectedLanguage }}</span>
+                              <span v-else><b>:</b> Language other than English</span>
+                            </p>
+                          </div>
+                        </div>
                       </div>
+
+
                     </div>
                   </div>
 
-
                 </div>
               </div>
-               
-              </div>
-              </div>
-          
+
             </template>
 
             <div class="stepbtn">
@@ -716,22 +719,36 @@ export default {
 
 
     async submitStepForm() {
-      const formData = {
+      let formData = {
         title: this.title,
         description: this.description,
         field_id: this.selectedArea,
         location_id: this.locations[this.selectedLocationIndex].id,
         city: this.city,
-        accessibility_requirements: this.requirementsOption,
-        visual_impairment: (this.VisualIsChecked && this.visualOption == "") ? 'Visual Impairment' : this.visualOption,
-        auditory_impairment: (this.AuditoryIsChecked && this.auditoryOption == "") ? 'Auditory Impairment' : this.auditoryOption,
-        mobility_impairment: (this.MobilityIsChecked && this.mobilityOption != "") ? 'Mobility/Physical Impairment' : this.mobilityOption,
-        learning_impairment: (this.LearningIsChecked && this.learningOption != "") ? 'Learning Impairment' : this.learningOption,
-        intellectual_disability: (this.IntellectualIsChecked && this.intellectualOption != "") ? 'Intellectual Disability' : this.intellectualOption,
-        psychiatric_disability: (this.PsychiatricIsChecked && this.psychiatricOption != "") ? 'Psychiatric Disability' : this.psychiatricOption,
-        medical_disability: (this.MedicalIsChecked && this.medicalOption != "") ? 'Medical Disability' : this.medicalOption,
-        other: this.requirementsOptionDescription != "" ? this.requirementsOptionDescription : 'Other',
 
+        // visual_impairment: (this.VisualIsChecked && this.visualOption == "") ? 'Visual Impairment' : this.visualOption,
+        // auditory_impairment: (this.AuditoryIsChecked && this.auditoryOption == "") ? 'Auditory Impairment' : this.auditoryOption,
+        // mobility_impairment: (this.MobilityIsChecked && this.mobilityOption == "") ? 'Mobility/Physical Impairment' : this.mobilityOption,
+        // learning_impairment: (this.LearningIsChecked && this.learningOption == "") ? 'Learning Impairment' : this.learningOption,
+        // intellectual_disability: (this.IntellectualIsChecked && this.intellectualOption == "") ? 'Intellectual Disability' : this.intellectualOption,
+        // psychiatric_disability: (this.PsychiatricIsChecked && this.psychiatricOption == "") ? 'Psychiatric Disability' : this.psychiatricOption,
+        // medical_disability: (this.MedicalIsChecked && this.medicalOption == "") ? 'Medical Disability' : this.medicalOption,
+        // other: (this.isChecked && this.requirementsOptionDescription != "") ? this.requirementsOptionDescription : 'Other',
+
+
+        // visual_impairment: this.VisualIsChecked ? 'Visual Impairment' : '',
+        // visual_impairment: this.visualOption != "" ? this.visualOption,
+
+
+
+
+        // auditory_impairment: (this.AuditoryIsChecked && this.auditoryOption == "") ? 'Auditory Impairment' : this.auditoryOption,
+        // mobility_impairment: (this.MobilityIsChecked && this.mobilityOption == "") ? 'Mobility/Physical Impairment' : this.mobilityOption,
+        // learning_impairment: (this.LearningIsChecked && this.learningOption == "") ? 'Learning Impairment' : this.learningOption,
+        // intellectual_disability: (this.IntellectualIsChecked && this.intellectualOption == "") ? 'Intellectual Disability' : this.intellectualOption,
+        // psychiatric_disability: (this.PsychiatricIsChecked && this.psychiatricOption == "") ? 'Psychiatric Disability' : this.psychiatricOption,
+        // medical_disability: (this.MedicalIsChecked && this.medicalOption == "") ? 'Medical Disability' : this.medicalOption,
+        // other: (this.isChecked && this.requirementsOptionDescription != "") ? this.requirementsOptionDescription : 'Other',
 
         // this.isChecked = false;
         // this.languageIsChecked = false;
@@ -746,17 +763,90 @@ export default {
         // language: this.selectedLanguage == 'Other' ? this.otherLanguage : this.selectedLanguage
       };
 
+      let is_accessibility_requirement_selected = 0;
 
-      if (this.languageIsChecked) {
-        if (this.selectedLanguage == '') {
-          formData.language = "Language other than English";
-        } else if (this.selectedLanguage == 'Other') {
-          formData.language = this.otherLanguage;
-        } else {
-          formData.language = this.selectedLanguage;
+      if (this.requirementsOption == 1) {
+        if (this.VisualIsChecked && this.visualOption == "") {
+          is_accessibility_requirement_selected = 1;
+          formData.visual_impairment = "Visual Impairment";
+        } else if (this.VisualIsChecked && this.visualOption != "") {
+          is_accessibility_requirement_selected = 1;
+          formData.visual_impairment = this.visualOption;
         }
-      }
 
+        if (this.MobilityIsChecked && this.mobilityOption == "") {
+          is_accessibility_requirement_selected = 1;
+          formData.mobility_impairment = "Mobility/Physical Impairment";
+        } else if (this.MobilityIsChecked && this.mobilityOption != "") {
+          is_accessibility_requirement_selected = 1;
+          formData.mobility_impairment = this.mobilityOption;
+        }
+
+
+        if (this.AuditoryIsChecked && this.auditoryOption == "") {
+          is_accessibility_requirement_selected = 1;
+          formData.auditory_impairment = "Auditory Impairment";
+        } else if (this.AuditoryIsChecked && this.auditoryOption != "") {
+          is_accessibility_requirement_selected = 1;
+          formData.auditory_impairment = this.auditoryOption;
+        }
+
+        if (this.LearningIsChecked && this.learningOption == "") {
+          is_accessibility_requirement_selected = 1;
+          formData.learning_impairment = "Learning Impairment";
+        } else if (this.LearningIsChecked && this.learningOption != "") {
+          is_accessibility_requirement_selected = 1;
+          formData.learning_impairment = this.learningOption;
+        }
+
+
+
+        if (this.IntellectualIsChecked && this.intellectualOption == "") {
+          is_accessibility_requirement_selected = 1;
+          formData.intellectual_disability = "Intellectual Disability";
+        } else if (this.IntellectualIsChecked && this.intellectualOption != "") {
+          is_accessibility_requirement_selected = 1;
+          formData.intellectual_disability = this.intellectualOption;
+        }
+
+        if (this.PsychiatricIsChecked && this.psychiatricOption == "") {
+          is_accessibility_requirement_selected = 1;
+          formData.psychiatric_disability = "Psychiatric Disability";
+        } else if (this.PsychiatricIsChecked && this.psychiatricOption != "") {
+          is_accessibility_requirement_selected = 1;
+          formData.psychiatric_disability = this.psychiatricOption;
+        }
+
+        if (this.MedicalIsChecked && this.medicalOption == "") {
+          is_accessibility_requirement_selected = 1;
+          formData.medical_disability = "Medical Disability";
+        } else if (this.MedicalIsChecked && this.medicalOption != "") {
+          is_accessibility_requirement_selected = 1;
+          formData.medical_disability = this.medicalOption;
+        }
+
+        if (this.isChecked && this.requirementsOptionDescription == "") {
+          is_accessibility_requirement_selected = 1;
+          formData.other = "Other";
+        } else if (this.isChecked && this.requirementsOptionDescription != "") {
+          is_accessibility_requirement_selected = 1;
+          formData.other = this.requirementsOptionDescription;
+        }
+
+
+        if (this.languageIsChecked) {
+          is_accessibility_requirement_selected = 1;
+          if (this.selectedLanguage == '') {
+            formData.language = "Language other than English";
+          } else if (this.selectedLanguage == 'Other') {
+            formData.language = this.otherLanguage;
+          } else {
+            formData.language = this.selectedLanguage;
+          }
+        }
+
+        formData.accessibility_requirements = is_accessibility_requirement_selected;
+      }
 
       // if (this.requirementsOption == 1) {
       //   formData.requirements_description = this.requirementsOptionDescription;
@@ -903,11 +993,13 @@ export default {
   padding: 10px;
   margin: 0;
 }
+
 .card-cus {
-    box-shadow: 5px 5px 20px #00000017; 
-    border-radius: 0 0 10px 10px;   
+  box-shadow: 5px 5px 20px #00000017;
+  border-radius: 0 0 10px 10px;
 }
-.card-cus .inner{
+
+.card-cus .inner {
   padding: 0 15px 15px 15px;
 }
 
@@ -1006,12 +1098,14 @@ export default {
 
 .summ h4 {
   font-size: 16px;
-}.summ .accordion-body-show div:last-child{
+}
+
+.summ .accordion-body-show div:last-child {
   margin: 0;
 }
 
 .summ .accordion-body-show div {
-    margin-right:10px;
+  margin-right: 10px;
 }
 
 .summ .accordion-body-show p i {
@@ -1073,7 +1167,7 @@ input[type="checkbox"]:checked {
 .sum-top {
   background-color: #373b3e !important;
   padding: 15px;
-  border-radius:10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
 }
 
 .title-font {
@@ -1145,5 +1239,4 @@ input[type="checkbox"]:checked {
 
 #accordionPanelsStayOpenExample .accordion-button.collapsed {
   padding-bottom: 12px;
-}
-</style>
+}</style>
