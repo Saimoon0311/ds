@@ -161,7 +161,7 @@
                           </div>
 
                     <div class="widthcn px-3">
-                      <span class="spacer px-3">
+                      <span class="spacer ">
                         <p class="smallFont text-black">
                           <b>Posted on: </b> {{ formatCreatedAt(item.created_at) }}
                         </p>
@@ -170,7 +170,7 @@
                     <!-- <p><b>City/suburb:</b> {{ item?.city }}</p> -->
 
                     <div
-                      class="d-flex flex-lg-row justify-content-center align-items-center flex-sm-column flex-wrap"
+                      class="d-flex flex-lg-row justify-content-center align-items-center flex-sm-column flex-wrap px-md-0 px-2"
                       style="min-width: 125px"
                     >
                       <!-- <router-link
@@ -182,7 +182,7 @@
                         class="btn btn-sm btn-dark card-btn my-1 mx-1 border"
                         @click="goToViewProposals(item)"
                       >
-                        View Proposals
+                        View Proposal
                       </button>
                       <button
                       v-if="tab == 'open'"
@@ -271,7 +271,7 @@
             id="containerActive"
           >
             <div class="d-flex justify-content-center align-items-center w-100">
-              <span class="text-center p-2">No Close Job Found</span>
+              <span class="text-center p-2">You haven't accepted any proposals yet.</span>
             </div>
           </div>
         </div>

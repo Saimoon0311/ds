@@ -8,8 +8,12 @@
             placeholder="Old password" />
         <span class="invalid-feedback">{{ errors.prev_password }}</span>
 
-        <Field type="password" id="password" :class="['form-control', { 'is-invalid': errors['password'] }]" name="password"
+        <Field type="password" id="password" :class="['form-control', 'mb-2' , { 'is-invalid': errors['password'] }]" name="password"
             placeholder="New password" />
+        <span class="invalid-feedback">{{ errors.password }}</span>
+
+        <Field type="password" id="password" :class="['form-control', { 'is-invalid': errors['password'] }]" name="password"
+            placeholder="Repeat new password" />
         <span class="invalid-feedback">{{ errors.password }}</span>
 
         <button type="submit" name="password-submit" class="btn btn-dark my-3">

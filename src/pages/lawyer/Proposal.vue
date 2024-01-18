@@ -1833,7 +1833,7 @@
             <h4 class="h4 text-center fw-bold mb-3 mt-2">Summary</h4>
 
             <div v-if="selectedOptionForSummary" class="text-center">
-              <p class="topcharge topcharge1 text-center">
+              <p class="topcharge topcharge1 text-center font-set">
                  How you will charge. 
               </p>
               <p class="topcharge text-center">
@@ -1919,7 +1919,7 @@
 
             <div v-if="form.fee_earners && selectedOption == 'Hourly'">
               <p>
-                <span> Fee earners working on this matter:</span>
+                <span class="text-trans"> Fee earners working on this matter:</span>
                 <span>{{
                   form.fee_earners == "team" ? "I'm part of a team" : "Just me"
                 }}</span>
@@ -2111,8 +2111,8 @@
             </div>
 
             <div v-if="form.description" class="sumdesc">
-              <p class="text-center">
-                <b> What you will do.</b>
+              <p class="text-center font-set">
+               What you will do.
               </p>
               <p class="descriptionText" style="white-space: pre-line">
                 {{ form.description }}
@@ -3027,6 +3027,10 @@ export default {
   align-items: center;
   justify-content: flex-start;
   text-transform: capitalize;
+}
+.font-set {
+    font-weight: 800 !important;
+    text-transform: none !important;
 }
 .text-trans{
   text-transform: none !important;

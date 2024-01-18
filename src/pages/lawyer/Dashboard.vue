@@ -328,7 +328,7 @@
                             </div>
                           </div>
                             <div class="widthcn px-3">
-                              <span class="spacer px-3">
+                              <span class="spacer">
                                 <p class="smallFont text-black smallFont1">
                                   <b>Posted by: </b>
                                   <span class="text-capitalize">
@@ -379,7 +379,7 @@
                         </div>
                         <div
                           v-if="item.status != 'close'"
-                          class="d-flex flex-lg-row justify-content-center align-items-center flex-sm-column flex-wrap"
+                          class="d-flex flex-lg-row justify-content-center align-items-center flex-sm-column flex-wrap px-md-0 px-2"
                           style="min-width: 150px"
                         >
                           <button

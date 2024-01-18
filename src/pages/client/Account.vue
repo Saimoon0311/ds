@@ -234,7 +234,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Edit Email</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Email</h5>
               <button
                 type="button"
                 class="close btn btn-dark"
@@ -262,7 +262,7 @@
                   class="btn btn-dark my-3"
                   @click="sendUpdateEmail"
                 >
-                  Send update link on this email
+                Send Verification Link
                 </button>
               </div>
             </div>
@@ -368,7 +368,7 @@
         </div>
       </div>
       <!-- Modal ends here -->
-      <h3 class="mt-4">Delete Account</h3>
+      <h4 class="mt-4">Delete Account</h4>
         <button @click="deleteAccount" class="btn btn-danger">
           <i class="bi bi-trash-fill"></i> Delete Account
         </button>
@@ -440,14 +440,14 @@ export default {
     async sendUpdateEmail(){
       try {
         await api.post('/send-email-update-link',{"old_email":this?.loginUser?.email,"email" : this.email});
-        this.$swal("", "Link has been send to your new email address" , "success");  
+        this.$swal("", "Please check your new email address for your verification link." , "success");  
       } catch (error) {
         console.error('Error fetching options:', error);
       }
     },
 
     deleteAccount() {
-      let text = "You won't be able to revert this.";
+      let text = "Once deleted, your account cannot be recovered.";
       let text2 = "Yes, Delete Account";
 
       this.$swal({

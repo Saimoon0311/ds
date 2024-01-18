@@ -30,14 +30,93 @@
         <span v-else>
           <div v-if="subscriptionData != null" >
             <h4 class="my-3 mt-4">Subscription</h4>
-            <p>
+            <div class="subscriptioncard rounded ">
+              <div class="header p-3">
+                <span v-if="subscriptionData?.subscription_status == 'trialing'" class="badge">
+                60-Day Free Trial
+              </span>
+              <span class="badge" 
+              v-else-if="subscriptionData?.subscription_status == 'active'">
+                Subscribed
+              </span>
+              <span v-else>
+              {{ subscriptionData?.subscription_status }}
+              </span>
+              </div>
+              <div class="body p-3">
+                <span
+                class=""
+                v-if="
+                  subscriptionData?.subscription_status == 'active' ||
+                  subscriptionData?.subscription_status == 'trialing' ||
+                  subscriptionData?.subscription_status == 'past due'
+                "
+              >
+                Next bill due <b>{{ subscriptionData?.current_period_end }}</b>
+                <br />
+                <span v-if="subscriptionData?.plan == 'basic'"
+                  ><b>$39.00/month</b></span
+                >
+                on {{ capitalizeFirstLetter(subscriptionData?.card_brand) }} ----{{
+                  subscriptionData?.card_last4
+                }}
+                Exp. {{ subscriptionData?.card_expiry }}
+              </span>
+              <div class="d-flex justify-content-start align-items-center mt-2 flex-wrap">
+                <button
+              class="btn btn-md btn-dark"
+              @click="replacePaymentMethod(subscriptionData?.plan)"
+            >
+              Replace Payment Method
+            </button>
+            <div class="">
+            <div v-if="subscriptionCancelStatus" class="text-center">
+              <p class="m-0 text-start pt-1">You have cancelled your subscription. You can continue to access the Simplawfy platform until the
+              {{ subscriptionData?.current_period_end }}. You can 
+              <button
+                  class="forgetp"
+                  @click="resubscribe(subscriptionData?.plan)"
+                >
+                  resubscribe
+              </button>
+              at anytime.</p>
+              <!-- <p>
+                Your subscription will be cancelled from
+                {{ subscriptionData?.current_period_end }}. You can
+                <button
+                  class="forgetp"
+                  @click="resubscribe(subscriptionData?.plan)"
+                >
+                  resubscribe
+                </button>
+                at any time.
+              </p> -->
+            </div>
+            <button v-else-if="subscriptionStatus == 'subscribed' || subscriptionStatus == 'incomplete'"
+              class="btn btn-danger btn-md mx-1"
+              id="cancel-subscription"
+              @click="handleCancelSubscription"
+            >
+              Cancel Subscription
+            </button>
+            <span v-else>
+              You have not subscribed yet. 
+              <router-link to="/plans" class="btn btn-dark"
+                >Subscribe Now</router-link
+              >
+            </span>
+          </div>
+              </div>
+              </div>
+            </div>
+            <!-- <p>
               Subscription Status :
               <span v-if="subscriptionData?.subscription_status == 'trialing'">
                 <b>60-Day Free Trial</b>
               </span>
               <span class="m-2 text-decoration-none badge text-black fs-6 bubbles bubbles-other text-white" 
               v-else-if="subscriptionData?.subscription_status == 'active'">
-                <b>Subscribed</b>
+                <b>Subscribe</b>
               </span>
               <span v-else>
                 <b>{{ subscriptionData?.subscription_status }}</b>
@@ -60,18 +139,17 @@
                 }}
                 Exp. {{ subscriptionData?.card_expiry }}
               </span>
-            </p>
-
-            <button
+            </p> -->
+            <!-- <button
               class="btn btn-sm btn-dark mb-2"
               @click="replacePaymentMethod(subscriptionData?.plan)"
             >
               Replace Payment Method
-            </button>
+            </button> -->
 
             <!-- receipts old place -->
           </div>
-          <div class="mt-4">
+          <!-- <div class="mt-4">
             <div v-if="subscriptionCancelStatus" class="text-center">
               <p>You have cancelled your subscription. You can continue to access the Simplawfy platform until the
               {{ subscriptionData?.current_period_end }}. You can 
@@ -82,7 +160,7 @@
                   resubscribe
               </button>
               at anytime.</p>
-              <!-- <p>
+               <p>
                 Your subscription will be cancelled from
                 {{ subscriptionData?.current_period_end }}. You can
                 <button
@@ -93,7 +171,7 @@
                 </button>
                 at any time.
               </p> -->
-            </div>
+            <!-- </div>
             <button v-else-if="subscriptionStatus == 'subscribed' || subscriptionStatus == 'incomplete'"
               class="btn btn-danger"
               id="cancel-subscription"
@@ -107,7 +185,7 @@
                 >Subscribe Now</router-link
               >
             </span>
-          </div>
+          </div> --> 
 
           <!-- Receipts new place -->
           <div v-if="subscriptionData != null">
@@ -553,8 +631,15 @@ export default {
 };
 </script>
 <style scoped>
-
-
+.subscriptioncard {
+    box-shadow: 5px 5px 20px #00000017;
+    width: max-content;
+    max-width: 100%;
+}
+.header {
+    border-radius: 5px 5px 0 0;
+    background: rgba(55, 59, 62, 1);
+}
 .bubbles {
   border-radius: 6px;
   padding: 8px 11px;
@@ -625,5 +710,14 @@ export default {
 
 .forgetp {
   color: #000
+}
+.badge {
+    font-size: 0.875rem;
+    line-height: 1.5em;
+    font-weight: 400;
+    border: 1px solid rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.5rem;
+    margin: 0;
 }
 </style>

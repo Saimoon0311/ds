@@ -262,7 +262,7 @@
               <div class="form-group">
                 <input
                   type="text"
-                  maxlength="150"
+                  maxlength="200"
                   name="address"
                   class="form-control"
                   id="address"
@@ -404,25 +404,23 @@
           <div v-if="form.consultation_type === 'discounted'">
             <div class="form-group my-3" id="div-freeFirstConsultationFee">
               <label for="freeFirstConsultationFee">Fee (including GST):<sup><code>*</code></sup></label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">$</div>
-                </div>
-                <input type="number" min="1" class="form-control" v-model="form.consultation_amount2" name="freeFirstConsultationFee"
+              <div class="mb-2">
+                <span class="position-absolute d-span"> $</span>                
+                <input type="number" min="1" class="form-control d-input" v-model="form.consultation_amount2" name="freeFirstConsultationFee"
                   id="freeFirstConsultationFee" />
               </div>
             </div>
           </div>
 
-          <div v-if="form.consultation_type2 != 'no'" class="col-auto" id="div-freeFirstConsultationMinutes">
+          <div v-if="form.consultation_type2 != 'no'" class="" id="div-freeFirstConsultationMinutes">
+            <div class="form-group">
               <label for="">Time limit:<sup><code>*</code></sup></label>
-              <div class="input-group mb-2">
-                <input type="number" v-model="form.consultation_time2" class="form-control"
+              <div class="mb-2 position-relative">
+                <input type="number" v-model="form.consultation_time2" class="form-control d-input-min"
                   name="freeFirstConsultationMinutes" id="freeFirstConsultationMinutes" placeholder="E.g. 60" />
-                <div class="input-group-prepend">
-                  <div class="input-group-text">minutes</div>
-                </div>
+                  <span class="position-absolute d-span min-span">minutes</span>
               </div>
+          </div>
           </div>
 
           <button
@@ -494,7 +492,7 @@
                   type="button"
                   name="about-submit"
                   class="btn btn-dark my-3"
-                  @click="updateProfile('about','#AboutModal','Description')"
+                  @click="updateProfile('about','#AboutModal','About me')"
                 >
                   Save changes
                 </button>
@@ -547,12 +545,13 @@
               :option-id="opt => opt.id"
               /> -->
 
-              <v-select v-model="selectedOptionIds" :options="options" :close-on-select="false" label="title" multiple></v-select>
+              <v-select v-model="selectedOptionIds" :options="options" :close-on-select="false" label="title" multiple class="multiselect"></v-select>
 
               <button @click="saveSelectedFields" class="btn btn-dark my-3">Save changes</button>
               <!-- <form
                 @submit="submitForm"
                 id="form-bs-select-1"
+                
               ></form>
               <input
                 type="submit"
@@ -614,7 +613,9 @@
 
       <!-- <MultiSelectPrime v-model="selectedOptionIds" :options="options" filter optionLabel="name" placeholder="Select Cities"
     :maxSelectedLabels="3" class="w-full md:w-20rem" /> -->
+        <div class="table-responsive">
 
+        
       <table class="table table-bordered mt-3 table-striped">
         <tbody>
           <!--  Email -->
@@ -942,6 +943,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
       <p class="text-center">
         Your entries are automatically saved, so you can logout when you're
         ready
@@ -1054,7 +1056,7 @@ export default {
     async sendUpdateEmail(){
       try {
         await api.post('/send-email-update-link',{"old_email":this?.loginUser?.email,"email" : this?.form?.email});
-        this.$swal("", "Link has been send to your new email address" , "success");  
+        this.$swal("", "Please check your new email address for your verification link." , "success");  
       } catch (error) {
         console.error('Error fetching options:', error);
       }
@@ -1272,11 +1274,12 @@ export default {
 </script>
 
 <style scoped>
+
 .descriptionText {
   overflow: hidden;
   text-overflow: ellipsis;
   height: 100px;
-  /* line-break: anywhere; */
+  line-break: anywhere;
   overflow-y: auto;
   padding-right: 10px;
   margin-right: 5px;
@@ -1300,6 +1303,15 @@ export default {
 }
 tbody tr:nth-child(odd) {
     background: #f2f2f2;
+}
+tbody tr{
+  border: 1px solid #dee2e6;
+}
+tbody tr td{
+  border-width: 0;
+}
+tbody tr td:last-child {
+  border-left: 1px solid #dee2e6;
 }
 .form-check-input {
   border: 1px solid gray !important;
@@ -1374,5 +1386,23 @@ tbody tr:nth-child(odd) {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+.d-span{
+    line-height: 39px !important;
+    padding: 0px 13px;
+}
+.d-span-min{
+
+}
+.d-input {
+    padding-left: 25px;
+    line-height: 26px !important;
+}
+.d-input-min{
+  padding-left: 10px;
+}
+.min-span{
+  top: 0;
+  right: 0;
 }
 </style>
