@@ -154,7 +154,7 @@ import ClientHeader from "../pages/client/Header.vue";
 
 // import ShowJobDetails from "../components/ShowJobDetails";
 
-import api2 from "@/config/api";
+import api2 from "@/config/api2";
 import { collection, addDoc, serverTimestamp, onSnapshot } from 'firebase/firestore';
 // import { FieldValue } from 'firebase/firestore';
 import { db } from '@/config/firebaseConfig';
@@ -501,6 +501,7 @@ export default {
       console.log('chat id 2::::: ', this.chatId);
       const messagesRef = collection(db, 'chats', this.chatId, 'messages');
       console.log('chat id 3::::: ', messagesRef);
+      console.log('chat id 3 3::::: ', this.messages)
       onSnapshot(messagesRef, (snapshot) => {
         console.log('snap :::: ', snapshot);
         this.messages = snapshot.docs.map(doc => doc.data()).sort((a, b) => a.timestamp - b.timestamp);
