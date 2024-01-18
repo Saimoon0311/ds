@@ -34,7 +34,7 @@ import "sweetalert2/dist/sweetalert2.min.css";
 
 import { getToken } from "firebase/messaging";
 import { messaging } from "@/config/firebaseConfig";
-import { deleteToken } from 'firebase/messaging';
+import { deleteToken } from "firebase/messaging";
 
 import Papa from "papaparse";
 
@@ -282,14 +282,17 @@ app.mixin({
     },
 
     async updateProfile(keyName, modalId = null, keyName2 = "Profile") {
-      console.log('response after update 1' , keyName);
+      console.log("response after update 1", keyName);
       if (modalId == "#ConsultationModal" && Array.isArray(keyName)) {
-        
         this.form.consultation_type = this.form.consultation_type2;
         this.form.consultation_amount = this.form.consultation_amount2;
         this.form.consultation_time = this.form.consultation_time2;
 
-        keyName = ['consultation_type','consultation_amount','consultation_time'];
+        keyName = [
+          "consultation_type",
+          "consultation_amount",
+          "consultation_time",
+        ];
 
         console.log(keyName.length);
         if (keyName.length == 3) {
@@ -337,7 +340,7 @@ app.mixin({
             () => {
               // for multiple profiles edit from admin panel
               if (this.loginUserId != res?.data?.data?.id) {
-              // if (this.loginUserEmail != res?.data?.data?.email) {
+                // if (this.loginUserEmail != res?.data?.data?.email) {
                 if (this.openJobs.length > 0) {
                   const openJobsIndex = this.openJobs.findIndex(
                     (user) => user.email === res?.data?.data?.email
@@ -873,16 +876,13 @@ app.mixin({
     //   this.$router.push({ path: "/messages-history" });
     // },
 
-
-
-
     // async requestNotificationPermission() {
     //   // const messaging = firebase.messaging();
-    
+
     //   try {
     //     // Get the current FCM token
     //     const currentToken = await messaging.getToken();
-        
+
     //     // Handle token refresh events
     //     messaging.onTokenRefresh(() => {
     //       messaging.getToken()
@@ -894,12 +894,12 @@ app.mixin({
     //           console.error('Unable to retrieve refreshed token:', err);
     //         });
     //     });
-    
+
     //     if (currentToken) {
     //       const permission = await Notification.requestPermission();
     //       console.log('Check notification permission:', permission);
     //       console.log('Current FCM token:', currentToken);
-    
+
     //       if (permission === 'granted') {
     //         // Send the token to your server for handling subscriptions
     //         api.post('/save-fcm-token', { currentToken })
@@ -922,43 +922,56 @@ app.mixin({
     //   }
     // },
 
-
     async requestNotificationPermission() {
-      getToken(messaging)
-        .then(async (currentToken) => {
-          if (currentToken) {
-            const permission = await Notification.requestPermission();
-            console.log('check notification 1 permission : ' , permission)
-            console.log('check notification 2 token : ' , currentToken)
-            if (permission === "granted") {
-              // console.log('mess :: ' , currentToken);
-              // console.log('Notification permission granted. Token:', currentToken);
-              api
-                .post("/save-fcm-token", { currentToken })
-                .then((res) => {
-                  console.log("save token response : ", res);
-                })
-                .catch((error) => {
-                  // this.$swal("", error?.response?.data?.error, "error");
-                  console.log("error while saving token : ", error);
-                });
-
-              // Send the token to your server for handling subscriptions
-            } else {
-              console.error("Notification permission denied.");
-            }
-          } else {
-            // Show permission request UI
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/firebase-messaging-sw.js")
+          .then((registration) => {
             console.log(
-              "No registration token available. Request permission to generate one."
+              "Service Worker registered with scope:",
+              registration.scope
             );
-            // ...
-          }
-        })
-        .catch((err) => {
-          console.log("An error occurred while retrieving token. ", err);
-          // ...
-        });
+
+            getToken(messaging)
+              .then(async (currentToken) => {
+                if (currentToken) {
+                  const permission = await Notification.requestPermission();
+                  console.log("check notification 1 permission : ", permission);
+                  console.log("check notification 2 token : ", currentToken);
+                  if (permission === "granted") {
+                    // console.log('mess :: ' , currentToken);
+                    // console.log('Notification permission granted. Token:', currentToken);
+                    api
+                      .post("/save-fcm-token", { currentToken })
+                      .then((res) => {
+                        console.log("save token response : ", res);
+                      })
+                      .catch((error) => {
+                        // this.$swal("", error?.response?.data?.error, "error");
+                        console.log("error while saving token : ", error);
+                      });
+
+                    // Send the token to your server for handling subscriptions
+                  } else {
+                    console.error("Notification permission denied.");
+                  }
+                } else {
+                  // Show permission request UI
+                  console.log(
+                    "No registration token available. Request permission to generate one."
+                  );
+                  // ...
+                }
+              })
+              .catch((err) => {
+                console.log("An error occurred while retrieving token. ", err);
+                // ...
+              });
+          })
+          .catch((error) => {
+            console.error("Error registering Service Worker:", error);
+          });
+      }
     },
 
     // async requestNotificationPermission() {
@@ -1141,6 +1154,7 @@ app.mixin({
     },
 
     createTableHtml(title, dataArray, renderAsHtml = false) {
+      console.log("create table dis : ", dataArray);
       const total = dataArray.reduce(
         (total, row) => total + parseFloat(row.cost ?? row.costAud) || 0,
         0
@@ -1152,7 +1166,7 @@ app.mixin({
               <td class='border'>${item.task ?? item.itemDisbursement}</td> 
               <td class='border'>$${this.formatNumber(
                 item.cost ?? item.costAud
-              )}</td>
+              )}${item.gst_not_applicable ? "*" : ""}</td>
             </tr>
           `
         )
@@ -1175,8 +1189,8 @@ app.mixin({
               <td class='bg-dark text-white'>Total</td>
               <td class='bg-dark text-white'>$${this.formatNumber(total)}</td>
             </tr>
-            <tr>
-            <td class="border-0">gst not applicable*</td>
+            <tr v-if="title == 'Disbursements'">
+              <td class="border-0"><small>*GST Not Applicable</small></td>
             </tr>
           </tfoot>
         </table>
@@ -1412,16 +1426,15 @@ app.mixin({
     },
 
     async logout(redirectUrl, redirection = true) {
-    // logout() {
-    // logout() {
-      deleteToken(messaging).then((res) => {
-        console.log('res , ' , res);
-      })
-      .catch(function (error) {
-        console.error('Error deleting FCM token:', error);
-      });
-     
-
+      // logout() {
+      // logout() {
+      deleteToken(messaging)
+        .then((res) => {
+          console.log("res , ", res);
+        })
+        .catch(function (error) {
+          console.error("Error deleting FCM token:", error);
+        });
 
       // getToken(messaging)
       //   .then(async (currentToken) => {
@@ -1442,7 +1455,7 @@ app.mixin({
 
       // const registrationTokens = ['abc'];
 
-      // 
+      //
 
       // const deleteRequest = indexedDB.deleteDatabase("firebase-messaging-database");
       // deleteRequest.onsuccess = () => {

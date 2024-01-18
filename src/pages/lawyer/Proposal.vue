@@ -3215,10 +3215,10 @@ td {
   border: 0;
 }
 
-.gstStyle {
+/* .gstStyle {
   font-size: 12px;
   color: #000000;
-}
+} */
 
 /* @media only screen and (max-width: 385px) {} */
 /* .extra-class{

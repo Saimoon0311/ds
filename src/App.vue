@@ -133,6 +133,12 @@ export default {
 <style>
 @import "vue-select/dist/vue-select.css";
 
+
+.gstStyle {
+  font-size: 12px;
+  color: #000000;
+}
+
 /* profile image circle  */
 .circular-container {
   width: 100px;
