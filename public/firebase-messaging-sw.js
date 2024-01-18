@@ -13,49 +13,17 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
-messaging.onBackgroundMessage((payload) => {
-    console.log(
-      '[firebase-messaging-sw.js] Received background message ',
-      payload
-    );
-    // Customize notification here
-    const notificationTitle = 'Background Message Title';
-    const notificationOptions = {
-      body: 'Background Message body.',
-      icon: '/firebase-logo.png'
-    };
-
-    self.registration.showNotification(notificationTitle, notificationOptions);
-  });
-
-
-
-// self.addEventListener('push', (event) => {
-//   const payload = event.data.json();
-//   console.log('[firebase-messaging-sw.js] Received background message ', payload);
-
-//   const notificationTitle = 'Background Message Title';
-//   const notificationOptions = {
+// messaging.onBackgroundMessage((payload) => {
+//     console.log(
+//       '[firebase-messaging-sw.js] Received background message ',
+//       payload
+//     );
+//     // Customize notification here
+//     const notificationTitle = 'Background Message Title';
+//     const notificationOptions = {
 //       body: 'Background Message body.',
 //       icon: '/firebase-logo.png'
-//   };
+//     };
 
-//   event.waitUntil(
-//       self.registration.showNotification(notificationTitle, notificationOptions)
-//   );
-
-//   // Post a message to the client (your Vue.js app)
-//   self.clients.matchAll().then(clients => {
-//       clients.forEach(client => {
-//           client.postMessage({
-//               type: 'background-message',
-//               payload: payload
-//           });
-//       });
+//     self.registration.showNotification(notificationTitle, notificationOptions);
 //   });
-// });
-
-// self.addEventListener('notificationclick', (event) => {
-//   // Handle notification click event here
-//   console.log('[firebase-messaging-sw.js] Notification clicked', event);
-// });

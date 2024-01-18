@@ -101,7 +101,7 @@
                     <div
                       :class="{ 'own-message': message.sender_email !== loginUserEmail, 'against-msg': message.sender_email == loginUserEmail }">
                       <div class="text">
-                        <small class="lawyer-name">{{ message.sender_name }}:</small> <small>{{
+                        <small class="lawyer-name">{{ message.sender_name }} : </small> <small>{{
                           humanReadableDate(message?.timestamp) }}</small>
                         <div>
                           {{ message.text }}
