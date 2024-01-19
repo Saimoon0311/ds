@@ -64,6 +64,23 @@
               Rejected
             </button>
           </li>
+          <li data-v-511b78bb="" class="nav-item" role="presentation">
+            <button
+              data-v-511b78bb=""
+              class="nav-link"
+              id="pills-profile-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-profile"
+              type="button"
+              role="tab"
+              aria-controls="pills-profile"
+              aria-selected="false"
+              tabindex="-1"
+              @click="setStatus('verify')"
+            >
+              Need Verification
+            </button>
+          </li>
         </ul>
         <div data-v-511b78bb="" class="tab-content" id="pills-tabContent">
           <div
@@ -75,7 +92,7 @@
           >
             <div>
               <div
-                v-if="openJobs.length == 0 && searchQuery == ''"
+                v-if="openJobs?.length == 0 && searchQuery == ''"
                 class="border rounded bg-light p-3 d-flex flex-wrap"
               >
                 <p class="mx-auto my-0">
@@ -114,7 +131,7 @@
                 </div>
                 
                 <span
-                  v-if="openJobs.length == 0 && searchQuery != ''"
+                  v-if="openJobs?.length == 0 && searchQuery != ''"
                   class="text-center w-100"
                   >No pending lawyer requests found!</span>
 
@@ -181,16 +198,16 @@
 
                               <tr>
                                 <td class="fw-normal">Expertise</td>
-                                <td v-if="item?.fields.length > 0">
-                                  <span v-for="(field, fieldIndex) in item?.fields" :key="fieldIndex" >{{ field?.title}} <span v-if="fieldIndex < item?.fields.length - 1">, </span></span>
+                                <td v-if="item?.fields?.length > 0">
+                                  <span v-for="(field, fieldIndex) in item?.fields" :key="fieldIndex" >{{ field?.title}} <span v-if="fieldIndex < item?.fields?.length - 1">, </span></span>
                                   
                                 </td>
                                 <td v-else></td>
                               </tr>
                               <tr>
                                 <td class="fw-normal">Location</td>
-                                <td v-if="item?.locations.length > 0">
-                                  <span v-for="(location, locationIndex) in item?.locations" :key="locationIndex" >{{ location?.title}} <span v-if="locationIndex < item?.locations.length - 1">, </span></span>
+                                <td v-if="item?.locations?.length > 0">
+                                  <span v-for="(location, locationIndex) in item?.locations" :key="locationIndex" >{{ location?.title}} <span v-if="locationIndex < item?.locations?.length - 1">, </span></span>
                                   
                                 </td>
                                 <td v-else></td>
@@ -240,7 +257,7 @@
           >
             <div class="d-flex flex-wrap ">
               <div
-                v-if="openJobs.length == 0 && searchQuery == ''"
+                v-if="openJobs?.length == 0 && searchQuery == ''"
                 class="border rounded bg-light p-3 d-flex flex-wrap"
               >
                 <p class="mx-auto my-0">
@@ -279,7 +296,7 @@
                 <button @click="generateCsv('lawyer')" class="btn btn-dark btn-sm m-1"><i class="fa fa-plus"></i> Generate CSV </button>
 
                 <span
-                  v-if="openJobs.length == 0 && searchQuery != ''"
+                  v-if="openJobs?.length == 0 && searchQuery != ''"
                   class="text-center w-100"
                   >No pending lawyer requests found!</span>
 
@@ -902,15 +919,15 @@
                                     </div>
                                   </div>
                                 </td>
-                                <!-- <td v-if="item?.fields.length > 0">
-                                  <span v-for="(field, fieldIndex) in item?.fields" :key="fieldIndex" >{{ field?.title}} <span v-if="fieldIndex < item?.fields.length - 1">, </span></span>
+                                <!-- <td v-if="item?.fields?.length > 0">
+                                  <span v-for="(field, fieldIndex) in item?.fields" :key="fieldIndex" >{{ field?.title}} <span v-if="fieldIndex < item?.fields?.length - 1">, </span></span>
                                 </td>
                                 <td v-else></td> -->
 
                                 <td>
-                                  <div v-if="item?.fields.length > 0">
+                                  <div v-if="item?.fields?.length > 0">
                                     <span v-for="(field, fieldIndex) in item?.fields" :key="fieldIndex">
-                                      {{ field.title }}<span v-if="fieldIndex < item?.fields.length - 1">, </span>
+                                      {{ field.title }}<span v-if="fieldIndex < item?.fields?.length - 1">, </span>
                                     </span>
                                   </div>
                                 </td>
@@ -969,14 +986,14 @@
 
 
                                 </td>
-                                <!-- <td v-if="item?.locations.length > 0">
-                                  <span v-for="(location, locationIndex) in item?.locations" :key="locationIndex" >{{ location?.title}} <span v-if="locationIndex < item?.locations.length - 1">, </span></span>
+                                <!-- <td v-if="item?.locations?.length > 0">
+                                  <span v-for="(location, locationIndex) in item?.locations" :key="locationIndex" >{{ location?.title}} <span v-if="locationIndex < item?.locations?.length - 1">, </span></span>
                                 </td> -->
                                 <!-- <td v-else></td> -->
                                 <td>
-                                  <div v-if="item?.locations.length > 0">
+                                  <div v-if="item?.locations?.length > 0">
                                     <span v-for="(location, locationIndex) in item?.locations" :key="locationIndex">
-                                      {{ location.title }}<span v-if="locationIndex < item?.locations.length - 1">, </span>
+                                      {{ location.title }}<span v-if="locationIndex < item?.locations?.length - 1">, </span>
                                     </span>
                                   </div>
                                 </td>
@@ -1089,7 +1106,7 @@
               </div>
             </div> 
           </div>
-          <div v-if="openJobs.length > 0 && currentPage != lastPage"
+          <div v-if="openJobs?.length > 0 && currentPage != lastPage"
                     class="text-center mt-3">
                     <button id="loadMoreButton" class="btn custom-button" @click="loadMore(pageStatus)">
                       Load More
@@ -1190,7 +1207,7 @@ export default {
   //     if (
   //       window.innerHeight + window.scrollY >=
   //       document.body.offsetHeight - scrollThreshold &&
-  //       this.openJobs.length > 0 && this.currentPage != this.lastPage
+  //       this.openJobs?.length > 0 && this.currentPage != this.lastPage
   //     ) {
   //       document.getElementById('loadMoreButton').click();
   //       console.log('handle 3 : ' , this.currentPage);
@@ -1260,14 +1277,14 @@ export default {
     // fields
     saveSelectedFields(user_id, index) {
       console.log('Selected Option IDs:', this.selectedOptionIds);
-      if (this.selectedOptionIds.length == 0) {
+      if (this.selectedOptionIds?.length == 0) {
         return false;
       }
       try {
         api.post('/admin/update-fields', { "user_id": user_id, "ids": this.selectedOptionIds, "is_admin": true }).then((res) => {
           this.$swal("", "Fields updated successfully", "success");
           this.closeModal(`#AreaModal${index}`);
-          if (this.openJobs.length > 0) {
+          if (this.openJobs?.length > 0) {
             const openJobsIndex = this.openJobs.findIndex(
               (user) => user.email === res?.data?.data?.email
             );
@@ -1291,7 +1308,7 @@ export default {
     // locations
     saveSelectedLocations(user_id, index) {
       console.log('Selected Option IDs:', this.selectedOptionIds_locations);
-      if (this.selectedOptionIds_locations.length == 0) {
+      if (this.selectedOptionIds_locations?.length == 0) {
         return false;
       }
       try {
@@ -1301,7 +1318,7 @@ export default {
           // this.fetchUserData();
           this.closeModal(`#StateModal${index}`);
           console.log('loc ::::: ', this.openJobs);
-          if (this.openJobs.length > 0) {
+          if (this.openJobs?.length > 0) {
             console.log('index ::::: ', this.openJobs);
             console.log('index ::::: ', res);
             const openJobsIndex = this.openJobs.findIndex(
@@ -1323,6 +1340,7 @@ export default {
     async setStatus(status) {
       this.pageStatus = status;
       await this.loadMore(status, true)
+      console.log('run run run ' , this.openJobs);
     },
     approve(id, index) {
       try {

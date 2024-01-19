@@ -93,6 +93,102 @@
         </div>
       </div>
 
+
+      <div
+        class="modal fade edit-first-name-modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="mySmallModalLabel"
+        aria-hidden="true"
+        id="firstName"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit First Name</h5>
+              <button
+                type="button"
+                class="close btn btn-dark"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <!-- <form action="profile.php" method="post"></form> -->
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="first-name"
+                  maxlength="50"
+                  class="form-control"
+                  id="firstname"
+                  v-model="form.first_name_verify"
+                />
+                <button
+                  type="button"
+                  name="job-title-submit"
+                  class="btn btn-dark my-3"
+                  @click="updateProfile('first_name_verify','#firstName','First Name')"
+                >
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div
+        class="modal fade edit-last-name-modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="mySmallModalLabel"
+        aria-hidden="true"
+        id="lastName"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Last Name</h5>
+              <button
+                type="button"
+                class="close btn btn-dark"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <!-- <form action="profile.php" method="post"></form> -->
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="last-name"
+                  maxlength="50"
+                  class="form-control"
+                  id="lastname"
+                  v-model="form.last_name_verify"
+                />
+                <button
+                  type="button"
+                  name="job-title-submit"
+                  class="btn btn-dark my-3"
+                  @click="updateProfile('last_name_verify','#lastName','Last Name')"
+                >
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
      
       <div
         class="modal fade edit-job-title-modal"
@@ -636,13 +732,35 @@
 
           <!-- First Name -->
           <tr>
-            <td class="col-md-3">First Name:</td>
+            <td class="d-flex align-items-center justify-content-between">
+              First Name:
+              <button
+                type="button"
+                class="btn btn-dark btn-sm"
+                data-target=".edit-first-name-modal"
+                title="Edit"
+                data-bs-toggle="modal" data-bs-target="#firstName"
+              >
+                <i class="fa fa-pencil"></i>
+              </button>
+            </td>
             <td>{{ loginUser?.first_name }}</td>
           </tr>
 
           <!-- Last Name -->
           <tr>
-            <td class="col-md-3">Last Name:</td>
+            <td class="d-flex align-items-center justify-content-between">
+              Last Name:
+              <button
+                type="button"
+                class="btn btn-dark btn-sm"
+                data-target=".edit-last-name-modal"
+                title="Edit"
+                data-bs-toggle="modal" data-bs-target="#lastName"
+              >
+                <i class="fa fa-pencil"></i>
+              </button>
+            </td>
             <td>{{ loginUser?.last_name }}</td>
           </tr>
 
@@ -868,11 +986,11 @@
 
 
           <!-- Areas of Practice -->
+          <!-- v-if="!loginUser?.area_insert" -->
           <tr>
             <td class="d-flex align-items-center justify-content-between">
               Areas of Practice:
               <button
-                v-if="!loginUser?.area_insert"
                 type="button"
                 @click="setModal('fields')"
                 class="btn btn-dark btn-sm"
@@ -910,11 +1028,11 @@
           </tr>
 
           <!-- State/Territory -->
+          <!-- v-if="!loginUser?.state_insert" -->
           <tr>
             <td class="d-flex align-items-center justify-content-between">
               State/territory:
               <button
-              v-if="!loginUser?.state_insert"
               @click="setModal('locations')"
                 type="button"
                 class="btn btn-dark btn-sm"
@@ -972,6 +1090,8 @@ export default {
       // baseUrl : process.env.BACKEND_URL + 'storage/images/',
       image : null,
       form: {
+        first_name_verify : null,
+        last_name_verify : null,
         email : null,
         law_firm: null,
         link: null,
@@ -1084,6 +1204,8 @@ export default {
     updateFormProperties() {
       const userData = this.loginUser;
       if (userData) {
+        this.form.first_name_verify = userData.first_name;
+        this.form.last_name_verify = userData.last_name;
         this.form.law_firm = userData.law_firm;
         this.form.link = userData.link;
         this.form.email = userData.email;
