@@ -3,9 +3,12 @@
     <LawyerHeader />
     <div class="container">
       <div class="text-center">
-        <h3  class="mt-3 text-center">Account</h3>
+        <h3 class="mt-3 text-center">Account</h3>
+        <h5 class="mt-2 text-center">Details</h5>
       </div>
       <div v-if="isLoading" class="loading-indicator"></div>
+
+     
 
       <div v-if="adminApproval != 'approve'">
         <p class="h5 m-3 text-center">
@@ -342,6 +345,7 @@
 import LawyerHeader from "./Header.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
 import ChangePasswordForm from "@/components/ChangePasswordForm.vue";
+
 import { mapState } from "vuex";
 // import * as yup from "yup";
 // import { Form, Field } from 'vee-validate';
@@ -353,6 +357,7 @@ export default {
     // Form,
     // Field,
     ChangePasswordForm,
+  
   },
   data() {
     // const schema = yup.object().shape({

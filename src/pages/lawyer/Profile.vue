@@ -18,31 +18,7 @@
         <img :src="image" alt="User Image" class="circular-image">
       </div>
 
-      <div class="d-flex">
-        <div>
-          <form
-            @submit.prevent="uploadImage"
-          >
-            <label for="photo">Photo:</label>
-            <input
-              type="file"
-              id="photo"
-              name="profile_picture"
-              class="form-control"
-              accept="image/*"
-              ref="fileInput"
-              required
-            />
-            <input
-              type="submit"
-              class="btn btn-dark mt-2"
-              name="photo-submit"
-              value="Upload"
-            />
-          </form>
-          
-        </div>
-      </div>
+      <ProfileImage />
 
 
 
@@ -957,6 +933,7 @@
 <script>
 import LawyerHeader from "./Header.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
+import ProfileImage from "../../components/ProfileImage.vue";
 
 // import { messaging } from "@/config/firebaseConfig";
 // import { onMessage } from "firebase/messaging";
@@ -1001,7 +978,8 @@ export default {
   },
   components: {
     LawyerHeader,
-    MainFooter
+    MainFooter,
+    ProfileImage
     // Selectic
   },
   // watch: {
