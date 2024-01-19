@@ -3,6 +3,9 @@
   <ClientHeader />
   <div class="container">
     <h3 class="mt-3 text-center">Account</h3>
+    <h5 class="mt-2 text-center">Details</h5>
+
+    <ProfileImage />
     <div
       class="modal fade first-name-modal"
       tabindex="-1"
@@ -382,6 +385,8 @@
 <script>
 import ClientHeader from "./Header.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
+import ProfileImage from "../../components/ProfileImage.vue";
+
 
 import * as yup from "yup";
 import { Form, Field } from 'vee-validate';
@@ -393,7 +398,7 @@ import ChangePasswordForm from "@/components/ChangePasswordForm.vue";
 export default {
   name: "ClientAccount",
   components: {
-    ClientHeader, Form, Field, ChangePasswordForm, MainFooter
+    ClientHeader, Form, Field, ChangePasswordForm, MainFooter,ProfileImage
   },
   data() {
     const schema = yup.object().shape({
