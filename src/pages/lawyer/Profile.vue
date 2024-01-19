@@ -57,7 +57,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Edit Email</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Email</h5>
               <button
                 type="button"
                 class="close btn btn-dark"
@@ -85,7 +85,7 @@
                   class="btn btn-dark my-3"
                   @click="sendUpdateEmail"
                 >
-                  Send update link on this email
+                  Send Verification Link
                 </button>
               </div>
             </div>

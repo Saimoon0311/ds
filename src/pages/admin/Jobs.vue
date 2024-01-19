@@ -147,9 +147,9 @@
             <tr>
               <th>Job no</th>
               <th class="col-2">Title</th>
-              <th>Area of Practice</th>
-              <th>Location</th>
-              <th>City</th>
+              <th v-if="tab != 'withoutarea'">Area of Practice</th>
+              <th>State/territory</th>
+              <th>City/suburb</th>
               <!-- <th>Proposed Work</th> -->
               <!-- <th>Deadline achievable?</th>
               <th>Free/discounted first consultation?</th> -->
@@ -197,7 +197,7 @@
                   {{ item?.title }}
                 <!-- </a> -->
               </td>
-              <td data-v-7525850d="">{{ item?.field?.title }}</td>
+              <td v-if="tab != 'withoutarea'" data-v-7525850d="">{{ item?.field?.title }}</td>
               <td data-v-7525850d="">{{ item?.location?.title }}</td>
               <td data-v-7525850d="">{{ item?.city }}</td>
 
@@ -244,12 +244,20 @@
                 >
                   <i  class="fa fa-trash"></i>
                 </button>
+                <button
+                  v-if="tab == 'open' || tab == 'overdue' || tab == 'withoutarea'"
+                  class="btn btn-sm btn-danger border-0 mx-1 py-1 px-2"
+                  style="background-color: black !important"
+                  @click="openJobDetailModal(item,tab == 'withoutarea' ? true : false)"
+                >
+                  <i  class="fa fa-eye"></i>
+                </button>
 
 
                 <button
-                v-if="tab == 'withoutarea'"
+                                    v-if="tab == 'withoutarea'"
                                     type="button"
-                                    class="btn btn-sm btn-danger border-0 py-1 px-2 mx-1"
+                                    class="btn btn-sm btn-danger border-0 py-1 px-2"
                                     style="background-color: black !important"
                                     :data-target="`.edit-job-title-modal${index}`"
                                     title="Edit"
@@ -261,7 +269,7 @@
                                   
                                   <!-- @click="setModalData('job_title',item?.job_title,item?.id)" -->
 
-<div
+                                  <div
                                     :class="`modal fade edit-job-title-modal${index}`"
                                     tabindex="-1"
                                     role="dialog"
@@ -510,6 +518,8 @@ export default {
 
 
     changeTab(status){
+      this.$store.commit('SET_PAGINATION_LAST',null);
+      this.$store.commit('set_pagination_page',1);
       this.tab = status;
       if(status == "open"){
         this.dataUrl = '/admin/show-open-jobs';

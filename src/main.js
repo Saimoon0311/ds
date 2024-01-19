@@ -612,29 +612,37 @@ app.mixin({
       }
     },
 
-    openJobDetailModal(data) {
+    openJobDetailModal(data, removeArea = false) {
       let newData = {};
       if (data && typeof data === "object") {
         for (const key in data) {
           if (Object.prototype.hasOwnProperty.call(data, key)) {
-            const value = data[key];
+            let value = data[key];
             if (
               value !== null &&
-              key != "id" &&
-              key != "field_id" &&
-              key != "location_id" &&
-              key != "status" &&
-              key != "owner_id" &&
-              key != "accessibility_requirements" &&
-              key != "created_at" &&
-              key != "chats" &&
-              key != "updated_at" &&
-              key != "lawyer_chat" &&
-              key != "client_chat" &&
-              key != "owner" &&
-              key != "requirement" &&
-              key != "proposal" &&
-              key != "assigned_lawyer_id"
+              typeof value !== undefined &&
+              // key != "id" &&
+              // key != "field_id" &&
+              // key != "location_id" &&
+              // key != "status" &&
+              // key != "owner_id" &&
+              // key != "accessibility_requirements" &&
+              // key != "created_at" &&
+              // key != "chats" &&
+              // key != "updated_at" &&
+              // key != "lawyer_chat" &&
+              // key != "client_chat" &&
+              // key != "owner" &&
+              // key != "requirement" &&
+              // key != "proposal" && key != "proposals" &&
+              // key != "assigned_lawyer_id" && key != "assigned_lawyer"
+              (key == "title" ||
+                key == "description" ||
+                key == "field" ||
+                key == "location" ||
+                key == "city" ||
+                key == "identity" ||
+                key == "owner")
             ) {
               let objKey = key;
               objKey = objKey.replace(/_/g, " ");
@@ -644,12 +652,25 @@ app.mixin({
               if (key == "location") {
                 objKey = "State/territory";
               }
+              if (key == "city") {
+                objKey = "City/suburb";
+              }
+              if (key == "identity") {
+                objKey = "Job no";
+              }
+              if (key == "owner") {
+                objKey = "Client details";
+                value = `<b>Name : </b>${value?.first_name} ${value?.last_name}, <b>Email : </b>${value?.email}`;
+              }
               newData[objKey] = value;
               if (key == "field" || key == "location") {
                 newData[objKey] = value?.title;
               }
             }
           }
+        }
+        if (removeArea) {
+          delete newData["Areas of Practice"];
         }
       }
       const htmlContent = Object.entries(newData)
@@ -711,27 +732,58 @@ app.mixin({
       });
     },
 
+    checkObjKeyValue(obj, key) {
+      return obj[key] !== null && obj[key] !== undefined && obj[key] !== 0;
+    },
+
+    moveKeyToIndex(obj, keyToMove, targetIndex) {
+      const entries = Object.entries(obj);
+
+      // Find the index of the key to move
+      const currentIndex = entries.findIndex(([key]) => key === keyToMove);
+
+      // If the key is found, remove it from the array
+      if (currentIndex !== -1) {
+        const [removed] = entries.splice(currentIndex, 1);
+
+        // Insert the removed key-value pair at the target index
+        entries.splice(targetIndex, 0, removed);
+      }
+
+      // Create a new object from the modified entries
+      const newObj = Object.fromEntries(entries);
+      return newObj;
+    },
+
     // for lawyer and client details both
     openLawyerDetailsModal(data, showSecretInfo = false) {
+      console.log("lawyer data : ", data);
+
+      // key == "consultation_type" ||
+      // key == "consultation_time" || key == "consultation_amount"
+
       let newData = {};
       if (data && typeof data === "object") {
         for (const key in data) {
           if (Object.prototype.hasOwnProperty.call(data, key)) {
-            const value = data[key];
+            let value = data[key];
             if (showSecretInfo) {
               if (
                 value !== null &&
                 value != 0 &&
-                (key == "first_name" ||
-                  key == "last_name" ||
-                  key == "image" ||
-                  key == "email" ||
+                // key == "first_name" ||
+                // key == "last_name" ||
+                (key == "image" ||
+                key == "job_title" || 
+                key == "email" ||
                   key == "address" ||
                   key == "phone" ||
+                  key == "link" ||
                   key == "job_title" ||
                   key == "law_firm" ||
-                  key == "link" ||
-                  key == "about")
+                  key == "about" ||
+                  key == "remote_consultation" ||
+                  key == "mobile_friendly")
               ) {
                 let objKey = key;
                 objKey = objKey.replace(/_/g, " ");
@@ -741,14 +793,15 @@ app.mixin({
                 if (key == "about") {
                   objKey = "About me";
                 }
-
-                // if (key == "image") {
-                //   newData[objKey] = `<div v-if="image" class="circular-container"><img :src="${this.createImage(value)}" alt="User Image" class="circular-image"></div>`;
-                // } else {
+                if (key == "remote_consultation") {
+                  objKey = "<i class='fa fa-check-square fa1'></i>";
+                  value = "<b>Remote Consultations</b>";
+                }
+                if (key == "mobile_friendly") {
+                  objKey = "<i class='fa fa-check-square fa2'></i>";
+                  value = "<b>Mobile-Friendly</b>";
+                }
                 newData[objKey] = value;
-                // }
-
-                // newData[objKey] = value;
               }
             } else {
               if (
@@ -768,25 +821,104 @@ app.mixin({
                 if (key == "about") {
                   objKey = "About me";
                 }
-
-                // if (key == "image") {
-                //   newData[objKey] = `<div v-if="image" class="circular-container"><img :src="${this.createImage(value)}" alt="User Image" class="circular-image"></div>`;
-                // } else {
                 newData[objKey] = value;
-                // }
               }
             }
           }
         }
       }
+      // let job_firm = "";
+      let title = "";
+      if (showSecretInfo) {
+        title = `${this.capitalizeFirstLetter(
+          data?.first_name
+        )} ${this.capitalizeFirstLetter(data?.last_name)}`;
+
+        // if type lawyer than show consultation info
+        if (data?.type == "lawyer") {
+          console.log('check cehck : ' , data);
+
+
+          // if (data?.job_title != null && data?.law_firm != null){
+          //   job_firm = `${data?.job_title} at ${data?.law_firm}`;
+          //   console.log('111111 : ' , job_firm);
+          // }else if(data?.job_title != null){
+          //   console.log('222222');
+          //   job_firm = `${data?.job_title}`;
+          // }else if(data?.law_firm != null){
+          //   console.log('33333');
+          //   job_firm `${data?.law_firm}`;
+          // }
+         
+
+          let consultation_content = "";
+
+          if (
+            this.checkObjKeyValue(data, "consultation_type") &&
+            data?.consultation_type &&
+            data?.consultation_type == "discounted"
+          ) {
+            consultation_content = `<span>
+                  ${this.capitalizeFirstLetter(
+                    data?.consultation_type
+                  )} - $${this.formatNumber(data?.consultation_amount)}/${
+              data?.consultation_time
+            } mins
+                </span>`;
+          }
+
+          if (
+            this.checkObjKeyValue(data, "consultation_amount") &&
+            data?.consultation_type &&
+            data?.consultation_type == "free"
+          ) {
+            consultation_content = ` <span>
+                  ${this.capitalizeFirstLetter(data?.consultation_type)} - ${
+              data?.consultation_time
+            } mins
+                </span>`;
+          }
+
+          if (
+            this.checkObjKeyValue(data, "consultation_time") &&
+            data?.consultation_type &&
+            data?.consultation_type == "no"
+          ) {
+            consultation_content = ` <span>
+                  ${this.capitalizeFirstLetter(data?.consultation_type)}
+                </span>`;
+          }
+
+          newData["Initial Consultation"] = consultation_content;
+
+          newData = this.moveKeyToIndex(newData, "image", 0);
+          newData = this.moveKeyToIndex(newData, "Initial Consultation", -2);
+        }
+      } else {
+        title = `${this.capitalizeFirstLetter(data?.type)} Details`;
+      }
+
+      console.log("new new data data : ", newData);
+
       const htmlContent = Object.entries(newData)
         .map(([key, value]) => {
           if (key == "image" && value != null) {
-            return `<div v-if="image" class="circular-container"><img :src="${this.createImage(
+            return `<div v-if="image" class="circular-container"><img src="${this.createImage(
               value
             )}" alt="User Image" class="circular-image"></div>`;
-          } else {
-            return `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`;
+          }
+          // else if(key == "job_title" && job_firm != ''){
+          //   return `<div>${job_firm} aaaaa</div>`;
+          // }
+          else {
+            return `<div class="wrapper" v-if="value != null">
+            <h6><b style="text-transform: capitalize;">${key}
+            ${
+              value == "<b>Mobile-Friendly</b>" ||
+              value == "<b>Remote Consultations</b>"
+                ? ""
+                : ":"
+            } </b><span>${value}</span></h6></div>`;
           }
         })
         .join("");
@@ -797,7 +929,7 @@ app.mixin({
 
       // Use dynamic HTML inside SweetAlert2 modal
       this.$swal.fire({
-        title: `${this.capitalizeFirstLetter(data?.type)} Details`,
+        title: title,
         html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
         showCloseButton: true,
         showConfirmButton: false,

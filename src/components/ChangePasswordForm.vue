@@ -8,13 +8,13 @@
             placeholder="Old password" />
         <span class="invalid-feedback">{{ errors.prev_password }}</span>
 
-        <Field type="password" id="password" :class="['form-control', 'mb-2' , { 'is-invalid': errors['password'] }]" name="password"
-            placeholder="New password" />
+        <Field type="password" id="password" :class="['form-control', 'mb-2', { 'is-invalid': errors['password'] }]"
+            name="password" placeholder="New password" />
         <span class="invalid-feedback">{{ errors.password }}</span>
 
-        <Field type="password" id="password" :class="['form-control', { 'is-invalid': errors['password'] }]" name="password"
-            placeholder="Repeat new password" />
-        <span class="invalid-feedback">{{ errors.password }}</span>
+        <Field type="password" id="password2" :class="['form-control', { 'is-invalid': errors['password2'] }]"
+            name="password2" placeholder="Repeat new password" />
+        <span class="invalid-feedback">{{ errors.password2 }}</span>
 
         <button type="submit" name="password-submit" class="btn btn-dark my-3">
             Save Changes
@@ -53,6 +53,11 @@ export default {
                     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                     'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
                 ),
+
+            password2: yup
+                .string()
+                .required('Please re-enter your password.')
+                .oneOf([yup.ref('password'), null], 'Password must match.'),
         });
         return {
             schema,
@@ -65,6 +70,7 @@ export default {
                     this.$swal('', 'You have successfully changed your password.', 'success').then(() => {
                         document.getElementById('prev_password').value = "";
                         document.getElementById('password').value = "";
+                        document.getElementById('password2').value = "";
                     });
                 })
                 .catch(error => {
