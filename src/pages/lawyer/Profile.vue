@@ -613,11 +613,11 @@
               <!-- <Selectic className="mselect"  placeholder="Nothing Selected" multiple 
               :options="options"
               v-model="selectedOptionIds"
-              :option-label="opt => opt.text"
+              :option-label="opt => opt.text" 
               :option-id="opt => opt.id"
               /> -->
 
-              <v-select v-model="selectedOptionIds" :options="options" :close-on-select="false" label="title" multiple class="multiselect"></v-select>
+              <v-select v-model="selectedOptionIds" :options="options" :close-on-select="false" label="title"  multiple class="multiselect"></v-select>
 
               <button @click="saveSelectedFields" class="btn btn-dark my-3">{{ loginUser?.area_insert && loginUser?.admin_approval == 'approve' ? 'Submit for Verification' : 'Save changes' }}</button>
               <!-- <form
