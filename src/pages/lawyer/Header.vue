@@ -23,8 +23,8 @@
             aria-label="Toggle navigation"
           >
             <img src="../../assets/images/bar.png" alt="" />
-
-            <!-- <span class="navbar-toggler-icon"></span> -->
+            <span class="countmsg header-count" v-if="noti_msg && noti_msg > 0">{{ noti_msg }}</span>
+            <!-- <span class="countmsg header-count">1</span> -->
           </button>
           
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -378,5 +378,14 @@ ul.showonmonb {
   .cstm-dropdown img {
     margin-top: 0;
   }
+}
+span.header-count{
+  top: 10px;
+    right: 4px;
+    line-height: 1.2;
+    font-size: 12px;
+}
+.cstm-dropdown{
+  position: relative;
 }
 </style>
