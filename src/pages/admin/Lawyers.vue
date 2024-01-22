@@ -78,11 +78,12 @@
               tabindex="-1"
               @click="setStatus('verify')"
             >
-              Need Verification
+              For Verification
             </button>
           </li>
         </ul>
         <div data-v-511b78bb="" class="tab-content" id="pills-tabContent">
+          <!-- pending tab start  -->
           <div
             data-v-511b78bb=""
             class="tab-pane fade active show"
@@ -248,6 +249,9 @@
               </div>
             </div>
           </div>
+          <!-- pending tab end -->
+
+          <!-- approved rejected and verification tab start -->
           <div
             data-v-511b78bb=""
             class="tab-pane fade"
@@ -255,13 +259,19 @@
             role="tabpanel"
             aria-labelledby="pills-profile-tab"
           >
-            <div class="d-flex flex-wrap ">
+            <div class="d-flex flex-wrap justify-content-center">
               <div
                 v-if="openJobs?.length == 0 && searchQuery == ''"
                 class="border rounded bg-light p-3 d-flex flex-wrap"
               >
-                <p class="mx-auto my-0">
-                  No pending lawyer requests found!
+                <p v-if="pageStatus == 'reject'" class="mx-auto my-0">
+                  No approved lawyers found!
+                </p>
+                <p v-if="pageStatus == 'reject2'" class="mx-auto my-0">
+                  No rejected lawyers found!
+                </p>
+                <p v-if="pageStatus == 'verify'" class="mx-auto my-0">
+                  No verification requests found!
                 </p>
               </div>
 
@@ -311,7 +321,7 @@
                             more
                           </summary>
                           <table class="table table-striped">
-                            <tbody>
+                            <tbody v-if="pageStatus != 'verify'">
                               <tr>
                                 <td class="fw-normal">Profile</td>
                                 <td>
@@ -1003,32 +1013,106 @@
                                 <td>{{ item?.hear_about_us }}</td>
                               </tr>
                             </tbody>
+                            <tbody v-else style="vertical-align: middle;">
+                              <tr>
+                                
+                                  <th></th>
+                                  <th>Current</th>
+                                  <th>New</th>
+                                  <th></th>
+                              </tr>
+                              <!-- <tr>
+                                <td class="fw-normal">Profile</td>
+                                <td> -->
+                                  <!-- <img
+                                  src=""
+                                  alt="profile picture"
+                                  width="100"
+                                  height="100"
+                                /> -->
+                                <!-- </td>
+                              </tr> -->
+                              <tr v-if="item?.first_name_verify != null && item?.first_name_verify != ''">
+                                <td><b>First Name</b></td>
+                                <td >{{ item?.first_name }}</td>
+                                <td>{{ item?.first_name_verify }}</td>
+                                <td>
+                                  <button class="btn btn-dark btn-sm" @click="verifyData(index,item?.id,'first_name')">
+                                    Verify
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr v-if="item?.last_name_verify != null && item?.last_name_verify != ''">
+                                <td><b>Last Name</b></td>
+                                <td >{{ item?.last_name }}</td>
+                                <td>{{ item?.last_name_verify }}</td>
+                                <td>
+                                  <button class="btn btn-dark btn-sm" @click="verifyData(index,item?.id,'last_name')">
+                                    Verify
+                                  </button>
+                                </td>
+                              </tr>
+                             
+                              <tr v-if="item?.fields_verify.length > 0">
+                                <td ><b>Expertise</b></td>
+                                <td>
+                                  <div v-if="item?.fields?.length > 0">
+                                    <span v-for="(field, fieldIndex) in item?.fields" :key="fieldIndex">
+                                      {{ field.title }}<span v-if="fieldIndex < item?.fields?.length - 1">, </span>
+                                    </span>
+                                  </div>
+                                </td>
+                                <td>
+                                  <div v-if="item?.fields_verify?.length > 0">
+                                    <span v-for="(field, fieldIndex) in item?.fields_verify" :key="fieldIndex">
+                                      {{ field.title }}<span v-if="fieldIndex < item?.fields_verify?.length - 1">, </span>
+                                    </span>
+                                  </div>
+                                </td>
+                                <td>
+                                  <button class="btn btn-dark btn-sm" @click="verifyData(index,item?.id,'fields')">
+                                    Verify
+                                  </button>
+                                </td>
+                              </tr>
+
+                              <tr v-if="item?.locations_verify.length > 0">
+                                <td><b>Location</b>
+                                </td>
+                                <td>
+                                  <div v-if="item?.locations?.length > 0">
+                                    <span v-for="(location, locationIndex) in item?.locations" :key="locationIndex">
+                                      {{ location.title }}<span v-if="locationIndex < item?.locations?.length - 1">, </span>
+                                    </span>
+                                  </div>
+                                </td>
+                                <td>
+                                  <div v-if="item?.locations_verify?.length > 0">
+                                    <span v-for="(location, locationIndex) in item?.locations_verify" :key="locationIndex">
+                                      {{ location.title }}<span v-if="locationIndex < item?.locations_verify?.length - 1">, </span>
+                                    </span>
+                                  </div>
+                                </td>
+                                <td>
+                                  <button class="btn btn-dark btn-sm" @click="verifyData(index,item?.id,'locations')">
+                                    Verify
+                                  </button>
+                                </td>
+                              </tr>
+                            </tbody>
                           </table>
                         </details>
                       </td>
 
                       <td class="text-end button-width">
                         <div  class="mb-1">
-                           <button class="btn btn-dark btn-sm m-1" @click="changeAccountStatus(item?.id,item?.type,item?.status,pageStatus)">
+                           <button class="btn btn-dark btn-sm m-1" v-if="pageStatus == 'reject'" @click="changeAccountStatus(item?.id,item?.type,item?.status,pageStatus)">
                             {{ item?.status == 'block' ? 'Unblock' : 'Block' }}
                           </button>
                         </div>
-                        <div  class="mb-1">
+                        <!-- <div  class="mb-1">
                            {{ capitalizeFirstLetter(item?.admin_approval) }}<span v-if="item?.admin_approval == 'approve'">d</span>
                            <span v-if="item?.admin_approval == 'reject'">ed</span> at {{ formatCreatedAt(item.approved_timestamp) }}
-                        </div>
-                        <!-- <div >
-                          <input
-                            class="d-none"
-                            name="reject_id"
-                            value="23"
-                          /><button
-                          @click="reject(item?.id,index)"
-                            class="btn btn-light"
-                            style="border: 1px solid black"
-                          >
-                            <i class="bi bi-x-lg"></i> Reject
-                          </button>
                         </div> -->
                       </td>
 
@@ -1106,6 +1190,7 @@
               </div>
             </div> 
           </div>
+          <!-- approved rejected and verification tab end -->
           <div v-if="openJobs?.length > 0 && currentPage != lastPage"
                     class="text-center mt-3">
                     <button id="loadMoreButton" class="btn custom-button" @click="loadMore(pageStatus)">
@@ -1220,6 +1305,50 @@ export default {
   // },
 
   methods: {
+
+    verifyData(index, id, type) {
+      this.$swal({
+        title: "Are you sure?",
+        text: `Are you sure you want to verify this data ?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: `Yes, Verify`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          api.post('/admin/verify-data', { id, type })
+            .then(() => {
+              this.$swal(
+                "",
+                `Data has been verified.`,
+                "success"
+              ).then(async () => {
+                // this.fixLoadMoreAfterDeleteRecord(null, this.pageStatus);
+                
+                await this.loadMore(this.pageStatus,true);
+                
+                // const dt = this.openJobs[index];
+
+                // if(
+                //   (dt['first_name_verify'] == null || dt['first_name_verify'] == '') &&
+                //   (dt['last_name_verify'] == null || dt['last_name_verify'] == '') &&
+                //   (dt['fields_verify']?.length == 0 || dt['fields_verify'] == null) &&
+                //   (dt['locations_verify']?.length == 0 || dt['locations_verify'] == null)
+                // ){
+                //   this.openJobs.splice(index,1);
+                // }
+
+              });
+            })
+            .catch((error) => {
+              console.log("error : ", error);
+            });
+        }
+      }).catch((error) => {
+        console.log("error : ", error);
+      });
+    },
 
     setModalData(keyName, value, user_id) {
 
@@ -1340,7 +1469,7 @@ export default {
     async setStatus(status) {
       this.pageStatus = status;
       await this.loadMore(status, true)
-      console.log('run run run ' , this.openJobs);
+      console.log('run run run ', this.openJobs);
     },
     approve(id, index) {
       try {
@@ -1517,7 +1646,7 @@ ul#pills-tab {
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  width: 430px;
+  width: 630px;
 }
 
 /* .hello {} */

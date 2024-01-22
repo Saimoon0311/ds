@@ -133,7 +133,7 @@
                       {{ chargeType(item?.charge_type) }}
                       <span
                         
-                        @click="openModal"
+                        @click="openModal(item?.charge_type)"
                       >
                         <i class="fas fa-info-circle"></i>
                       </span>
@@ -143,7 +143,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header charge-modal">
-           <h6>How you will charge?</h6>
+           <h6>{{ charge_defination }}</h6>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeModal">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -264,6 +264,7 @@ export default {
   },
   data() {
     return {
+      charge_defination : "",
       tab: null,
     };
   },
@@ -303,9 +304,34 @@ export default {
   },
 
   methods: {
-    openModal() {
+    openModal(charge_type) {
       // Show Bootstrap Modal
-      $(this.$refs.myModal).modal('show');
+      if(charge_type){
+      switch (charge_type) {
+          case "Fixed":
+            this.charge_defination = "The lawyer is prepared to charge you this fixed amount for the work. You should not have to pay more than this.";
+            break;
+          case "Hourly":
+            this.charge_defination = "The lawyer charges an hourly rate (often billed in 6 minute increments) based on the actual time spent working on your matter. If there is a team of lawyers, they may have different hourly rates, depending on their level of experience. The fee estimate is based on a calculation of the total hours the job is expected to take multiplied by the hourly rate. It is not a fixed quote — the final legal costs may be more or less depending on how the matter progresses and the actual time taken. This is the most common way in which lawyers charge.";
+            break;
+          case "Daily":
+            this.charge_defination = "The lawyer charges a rate per day of work.";
+            break;
+          case "Item":
+            this.charge_defination = "The lawyer is estimating the legal cost by breaking down a large, complex or unpredictable matter into smaller stages i.e. milestones";
+            break;
+          case "Retainer":
+            this.charge_defination = "The lawyer is available to work for you as you need them, for a set fee per time period. This may be subject to some limitations (e.g. number of hours per month) and a notice period where you wish to terminate the engagement.";
+            break;
+          case "Success":
+            this.charge_defination = "In cases where the lawyer’s costs are conditional on a successful outcome (eg. a ‘no win, no fee’ arrangement), the lawyer can charge a success fee (also called an uplift fee) where they achieve that successful outcome (eg. winning a court case or a settlement in the client’s favour). This fee is up to a maximum of 25% and is paid on top of the lawyer’s usual legal costs. This is in recognition of the risk the lawyer has taken of not getting paid for their work if the matter was unsuccessful. This billing method is more common in personal injury matters.";
+            break;
+          case "Pro":
+            this.charge_defination = "The lawyer is prepared to take on your matter for free. You will not have to pay any legal costs.";
+            break;
+        }
+        $(this.$refs.myModal).modal('show');
+      }      
     },
     closeModal() {
       // Hide Bootstrap Modal

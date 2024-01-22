@@ -109,7 +109,7 @@
                   class="btn btn-dark my-3"
                   @click="updateProfile('first_name_verify','#firstName','First Name')"
                 >
-                  Save changes
+                  {{ loginUser?.admin_approval == 'approve' ? 'Submit for Verification' : 'Save changes' }}
                 </button>
               </div>
             </div>
@@ -157,7 +157,7 @@
                   class="btn btn-dark my-3"
                   @click="updateProfile('last_name_verify','#lastName','Last Name')"
                 >
-                  Save changes
+                {{ loginUser?.admin_approval == 'approve' ? 'Submit for Verification' : 'Save changes' }}
                 </button>
               </div>
             </div>
@@ -619,7 +619,7 @@
 
               <v-select v-model="selectedOptionIds" :options="options" :close-on-select="false" label="title" multiple class="multiselect"></v-select>
 
-              <button @click="saveSelectedFields" class="btn btn-dark my-3">Save changes</button>
+              <button @click="saveSelectedFields" class="btn btn-dark my-3">{{ loginUser?.area_insert && loginUser?.admin_approval == 'approve' ? 'Submit for Verification' : 'Save changes' }}</button>
               <!-- <form
                 @submit="submitForm"
                 id="form-bs-select-1"
@@ -665,7 +665,7 @@
 
               <v-select v-model="selectedOptionIds_locations" :options="options_locations" :close-on-select="false" label="title" multiple></v-select>
 
-              <button @click="saveSelectedLocations" class="btn btn-dark my-3">Save changes</button>
+              <button @click="saveSelectedLocations" class="btn btn-dark my-3">{{ loginUser?.state_insert && loginUser?.admin_approval == "approve" ? 'Submit for Verification' : 'Save changes' }}</button>
 
               <!-- <form
                 action="profile.php"
@@ -1247,7 +1247,13 @@ export default {
       }
       try {
         api.post('/lawyer/update-fields', { "ids": this.selectedOptionIds }).then(() => {
-          this.$swal("", "Areas of practice updated successfully", "success");
+          let msg = "";
+          if(this.loginUser?.area_insert && this.loginUser?.admin_approval == "approve"){
+            msg = 'Areas of practice will be updated after admin verification';
+          }else{
+            msg = 'Areas of practice updated successfully';
+          }
+          this.$swal("", msg, "success");
           this.fetchOptions();
           this.fetchUserData();
           this.closeModal('#AreaModal');
@@ -1267,7 +1273,14 @@ export default {
       }
       try {
         api.post('/lawyer/update-locations', { "ids": this.selectedOptionIds_locations }).then(() => {
-          this.$swal("", "Locations updated successfully", "success");
+          // this.$swal("", "Locations updated successfully", "success");
+          let msg = "";
+          if(this.loginUser?.state_insert && this.loginUser?.admin_approval == "approve"){
+            msg = 'Locations will be updated after admin verification';
+          }else{
+            msg = 'Locations updated successfully';
+          }
+          this.$swal("", msg, "success");
           this.fetchOptions_locations();
           this.fetchUserData();
           this.closeModal('#StateModal');

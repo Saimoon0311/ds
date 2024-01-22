@@ -120,6 +120,9 @@ app.mixin({
     loginUserId() {
       return this.$store.getters?.loginUser?.id;
     },
+    loginUser() {
+      return this.$store.getters?.loginUser;
+    },
 
     currentPaginationPage() {
       console.log("computed run");
@@ -336,7 +339,20 @@ app.mixin({
           if (modalId) {
             this.closeModal(modalId);
           }
-          this.$swal("", `${keyName2} updated successfully`, "success").then(
+
+          let msg = null;
+          if(keyName == "first_name_verify" && this.loginUser?.admin_approval == 'approve'){
+              msg = `First Name will be updated after admin verification`;
+          }
+          else if(keyName == "last_name_verify" && this.loginUser?.admin_approval == 'approve'){
+              msg = `Last Name will be updated after admin verification`;
+          }else{
+             msg = `${keyName2} updated successfully`;
+          }
+          
+          
+
+          this.$swal("", msg, "success").then(
             () => {
               // for multiple profiles edit from admin panel
               if (this.loginUserId != res?.data?.data?.id) {
@@ -414,10 +430,11 @@ app.mixin({
         consultation_amount: res?.data?.data?.consultation_amount,
         consultation_time: res?.data?.data?.consultation_time,
         remote_consultation:
-          res?.data?.data?.remote_consultation == 1 ? true : false,
+        res?.data?.data?.remote_consultation == 1 ? true : false,
         mobile_friendly: res?.data?.data?.mobile_friendly == 1 ? true : false,
         fields: res?.data?.data?.fields,
         locations: res?.data?.data?.locations,
+        admin_approval: res?.data?.data?.admin_approval,
       };
 
       if (localStorage.getItem("loginUser") && removeFromLocalStorage) {
@@ -1650,7 +1667,7 @@ app.mixin({
       console.log("curr search : ", this.currentPage);
     },
 
-    async loadMore(status = null, reset = null) {
+    async loadMore(status = null, reset = null,increment_page = true) {
       this.$store.commit("SET_ENDOFRESULT", false);
       console.log("check computed : ", this.loadMorePrevData);
       if (this.loadMorePrevData != null) {
@@ -1672,7 +1689,9 @@ app.mixin({
         this.openJobs = [];
         this.lastPage = null;
       }
-      this.currentPage++;
+      if(increment_page){
+        this.currentPage++;
+      }
       let url = null;
       if (this.searchQuery != "") {
         url = `${this.endpoint}?query=${this.searchQuery}&page=${this.currentPage}`;
@@ -1709,12 +1728,18 @@ app.mixin({
     },
 
     async fixLoadMoreAfterDeleteRecord(index, status = null) {
-      this.openJobs.splice(index, 1);
+      if(index != null){
+        this.openJobs.splice(index, 1);
+      }
+      console.log('before first if', this.currentPage , this.lastPage);
       if (this.currentPage < this.lastPage) {
+        console.log('under first if');
         this.currentPage--;
         if (status) {
+          console.log('under nested if');
           await this.loadMore(status);
         } else {
+          console.log('under nested else');
           await this.loadMore();
         }
       }

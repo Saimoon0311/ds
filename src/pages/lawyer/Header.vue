@@ -26,6 +26,7 @@
 
             <!-- <span class="navbar-toggler-icon"></span> -->
           </button>
+          
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <div class="left-menu">
@@ -170,6 +171,12 @@
 </template>
 <script>
 export default {
+  data(){
+    return {
+      isMobileScreen : false,
+      screenWidth: window.innerWidth,
+    }
+  },
   computed: {
     noti_msg() {
       console.log('no : ' , this.$store.state.noti_count_msg);
@@ -180,8 +187,33 @@ export default {
     }
   },
   components: {},
-  // methods: {
-  // },
+
+  mounted() {
+    // Run the function initially
+    this.runFunctionIfMobile();
+
+    // Add an event listener to update dimensions and run the function on window resize
+    window.addEventListener('resize', this.updateDimensions);
+  },
+
+  beforeUnmount(){
+    window.removeEventListener('resize', this.updateDimensions);
+  },
+
+  methods: {
+    updateDimensions() {
+      console.log('reun');
+      this.screenWidth = window.innerWidth;
+      this.runFunctionIfMobile();
+    },
+
+    runFunctionIfMobile() {
+      if (window.innerWidth <= 991) {
+        this.isMobileScreen = true;
+        console.log('Running function for mobile ' , this.isMobileScreen);
+      }
+    },
+  },
   name: "LawyerHeader",
 };
 </script>

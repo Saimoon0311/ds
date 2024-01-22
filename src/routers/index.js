@@ -544,32 +544,66 @@ router.beforeEach(async (to, from, next) => {
             store.commit("SET_SUBSCRIPTION_DATA", result?.data?.subscription);
           }
 
-          if (localStorage.getItem("loginUser") === null) {
-            const userData = {
-              first_name: result?.data?.data?.first_name,
-              last_name: result?.data?.data?.last_name,
-              email: result?.data?.data?.email,
-              type: result?.data?.data?.type,
-              phone: result?.data?.data?.phone,
-              address: result?.data?.data?.address,
-              is_subscribed_first: result?.data?.data?.is_subscribed_first,
-              image: result?.data?.data?.image,
-              job_title: result?.data?.data?.job_title,
-              law_firm: result?.data?.data?.law_firm,
-              link: result?.data?.data?.link,
-              about: result?.data?.data?.about,
-            };
-            localStorage.setItem("loginUser", JSON.stringify(userData));
-            this.$store.commit("SET_LOGIN_USER", userData);
-          }
+          // if (localStorage.getItem("loginUser") === null) {
+
+          // first_name: result?.data?.data?.first_name,
+            // last_name: result?.data?.data?.last_name,
+            // email: result?.data?.data?.email,
+            // type: result?.data?.data?.type,
+            // phone: result?.data?.data?.phone,
+            // address: result?.data?.data?.address,
+            // is_subscribed_first: result?.data?.data?.is_subscribed_first,
+            // image: result?.data?.data?.image,
+            // job_title: result?.data?.data?.job_title,
+            // law_firm: result?.data?.data?.law_firm,
+            // link: result?.data?.data?.link,
+            // about: result?.data?.data?.about,
+            // area_insert : result?.data?.data?.area_insert,
+            // state_insert : result?.data?.data?.state_insert,
+
+
+          const userData = {
+            
+            id: result?.data?.data?.id,
+            first_name: result?.data?.data?.first_name,
+            last_name: result?.data?.data?.last_name,
+            email: result?.data?.data?.email,
+            type: result?.data?.data?.type,
+            phone: result?.data?.data?.phone,
+            address: result?.data?.data?.address,
+            job_title: result?.data?.data?.job_title,
+            law_firm: result?.data?.data?.law_firm,
+            link: result?.data?.data?.link,
+            is_subscribed_first: result?.data?.data?.is_subscribed_first,
+            about: result?.data?.data?.about,
+            area_insert: result?.data?.data?.area_insert,
+            state_insert: result?.data?.data?.state_insert,
+            image: result?.data?.data?.image,
+            consultation_type: result?.data?.data?.consultation_type,
+            consultation_amount: result?.data?.data?.consultation_amount,
+            consultation_time: result?.data?.data?.consultation_time,
+            remote_consultation:
+              result?.data?.data?.remote_consultation == 1 ? true : false,
+            mobile_friendly:
+              result?.data?.data?.mobile_friendly == 1 ? true : false,
+            fields: result?.data?.data?.fields,
+            locations: result?.data?.data?.locations,
+            admin_approval: result?.data?.data?.admin_approval,
+          };
+          console.log('my daata : ' , userData);
+          // setUserInStateAndLocalStorage
+          localStorage.setItem("loginUser", JSON.stringify(userData));
+          store.commit("SET_LOGIN_USER", userData);
+          // }
 
           next();
         }
       } catch (e) {
-        localStorage.removeItem("loginUser");
-        localStorage.removeItem("token");
-        console.log("error from before : ", e);
-        next({ path: "/" });
+        console.log("error from before Each", e);
+        // localStorage.removeItem("loginUser");
+        // localStorage.removeItem("token");
+        // console.log("error from before : ", e);
+        // next({ path: "/" });
       }
     }
   } else {
