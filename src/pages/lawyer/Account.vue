@@ -96,7 +96,7 @@
               </p> -->
             </div>
             <button v-else-if="subscriptionStatus == 'subscribed' || subscriptionStatus == 'incomplete'"
-              class="btn btn-danger btn-md mx-1"
+              class="btn btn-danger btn-md mt-1 mt-md-0 mx-0 mx-md-1"
               id="cancel-subscription"
               @click="handleCancelSubscription"
             >
@@ -192,7 +192,7 @@
 
           <!-- Receipts new place -->
           <div v-if="subscriptionData != null">
-            <h4 class="my-3 mt-4">Invoices</h4>
+            <h4 class="mt-3 mb-1 mb-md-3 mt-4">Invoices</h4>
 
 
             <!-- <form @submit.prevent="searchReceipts">
@@ -205,13 +205,10 @@
               <button type="submit">Search</button>
             </form> -->
             <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-              <tbody>
-                <tr>
-                  <td>
+           
                     <table
                       v-if="receipts.length > 0"
-                      class="table table-bordered table-responsive table-striped mt-3"
+                      class="table table-bordered table-striped mt-3"
                     >
                       <thead class="hd-receipt">
                         <!-- <th>#</th> -->
@@ -253,10 +250,7 @@
                       </tbody>
                     </table>
                     <p v-else>No invoices found.</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                 
           </div>
         </div>
         </span>
@@ -724,5 +718,14 @@ export default {
     background: rgba(255, 255, 255, 0.1);
     padding: 0.25rem 0.5rem;
     margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+.table-responsive table {
+    width: max-content;
+}
+.hd-receipt th {
+  padding: 5px;
+}
 }
 </style>
