@@ -764,7 +764,7 @@ export default {
       };
 
       let is_accessibility_requirement_selected = 0;
-
+      formData.accessibility_requirements = 0;
       if (this.requirementsOption == 1) {
         if (this.VisualIsChecked && this.visualOption == "") {
           is_accessibility_requirement_selected = 1;

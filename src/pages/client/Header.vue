@@ -23,7 +23,7 @@
             aria-label="Toggle navigation"
           >
             <img src="../../assets/images/bar.png" alt="" />
-
+            <span class="countmsg header-count" v-if="noti_msg && noti_msg > 0">{{ noti_msg }}</span>
             <!-- <span class="navbar-toggler-icon"></span> -->
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -191,6 +191,18 @@ export default {
   data() {
     return {};
   },
+
+  mounted() {
+    // Run the function initially
+    this.runFunctionIfMobile();
+
+    // Add an event listener to update dimensions and run the function on window resize
+    window.addEventListener('resize', this.updateDimensions);
+  },
+
+  beforeUnmount(){
+    window.removeEventListener('resize', this.updateDimensions);
+  },
   computed:{
     noti_msg() {
       return this.$store.state.noti_count_msg;
@@ -200,7 +212,20 @@ export default {
     }
   },
   components: {},
-  methods: {},
+  methods: {
+    updateDimensions() {
+      console.log('reun');
+      this.screenWidth = window.innerWidth;
+      this.runFunctionIfMobile();
+    },
+
+    runFunctionIfMobile() {
+      if (window.innerWidth <= 991) {
+        this.isMobileScreen = true;
+        console.log('Running function for mobile ' , this.isMobileScreen);
+      }
+    },
+  },
   name: "ClientHeader",
 };
 </script>
@@ -342,6 +367,14 @@ ul.showonmonb {
 }
 
 @media only screen and (max-width: 991px) {
+
+  span.header-count{
+  top: 10px !important;
+    right: 4px !important;
+    line-height: 1.2;
+    font-size: 12px;
+}
+
   .custom-dropdown {
     display: none;
   }

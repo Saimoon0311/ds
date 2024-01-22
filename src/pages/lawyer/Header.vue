@@ -359,6 +359,13 @@ ul.showonmonb {
 }
 
 @media only screen and (max-width: 991px) {
+  span.header-count{
+  top: 10px !important;
+    right: 4px !important;
+    line-height: 1.2;
+    font-size: 12px;
+}
+
   .custom-dropdown {
     display: none;
   }
@@ -379,13 +386,5 @@ ul.showonmonb {
     margin-top: 0;
   }
 }
-span.header-count{
-  top: 10px;
-    right: 4px;
-    line-height: 1.2;
-    font-size: 12px;
-}
-.cstm-dropdown{
-  position: relative;
-}
+
 </style>
