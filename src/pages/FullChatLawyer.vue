@@ -42,7 +42,7 @@
           <!-- <input class="form-control mb-4" type="text" placeholder="Search Client..." /> -->
           <input class="form-control mb-4" v-model="searchClient" @input="filterItems" placeholder="Search...">
           <ul class="lawyer-list" v-if="client_data2.length > 0">
-            <li @click="startChatForAllMessages(data)" v-for="(data, index) in client_data2" :key="index"
+            <li @click="startChatForAllMessages(data, true, index)" v-for="(data, index) in client_data2" :key="index"
               :class="['bg-light', { 'active': (data?.id == userSelectedIndex) ? true : false }]">
               <span class="lawyer-name" data-toggle="tooltip" data-placement="right" :title="data?.job?.title">
                 {{ data?.client?.first_name ?? data?.lawyer?.first_name }}
@@ -56,11 +56,18 @@
                 <span v-if="data?.is_closed">
                   | Archived
                 </span>
+
               </span>
-              <!-- <span v-if="data?.client_seen == 0 ||
+
+              <span v-if="loginUser?.type == 'client' && (data?.client_seen == 0 ||
                 data?.client_seen == false ||
-                data?.client_seen == null" class="badge bg-dark mx-1">New Message</span>
-              <span v-else></span> -->
+                data?.client_seen == null)" class="badge bg-dark mx-1">New Message</span>
+
+              <span v-if="loginUser?.type == 'lawyer' && (data?.lawyer_seen == 0 ||
+                data?.lawyer_seen == false ||
+                data?.lawyer_seen == null)" class="badge bg-dark mx-1">New Message</span>
+
+
             </li>
           </ul>
         </div>
@@ -217,59 +224,7 @@ export default {
     console.log('chatId : ', this.chatId);
     console.log('f check end')
 
-    const job = this.$route.query.job;
-    let endpoint = (typeof job === "undefined") ? '/get-all-users-of-jobs' : `/get-all-users-of-jobs/${job}`;
-    // show all messages
-    api2.get(endpoint).then((res) => {
-
-      this.client_data = res?.data?.users;
-      this.client_data2 = this.client_data;
-
-      if (this.client_data2.length > 0) {
-        let index = 0;
-        console.log('maaz : ', res?.data?.job);
-        if (res?.data?.job != null) {
-          this.myJobData = res?.data?.job;
-          console.log('check state job data 101: ', res?.data);
-          console.log('check state job data 102: ', this.client_data2);
-          console.log('check state job data 103: ', this.client_data2.findIndex(job => job.job_id === res?.data?.job.id));
-          index = this.client_data2.findIndex(job => job.job_id === res?.data?.job.id);
-          console.log('maaz 10 : ', index)
-          if (index == -1) {
-            let obj = {
-              job: res?.data?.job,
-            }
-            obj[this.userSecond?.type] = this.userSecond;
-            this.client_data2.unshift(obj);
-          }
-
-
-          // this.$store.commit('SET_JOB_DATA',res?.data?.job);
-          // localStorage.setItem('jobData',JSON.stringify(res?.data?.job));
-        }
-
-        if (index == 0) {
-          this.$store.commit("SET_JOB_DATA", this.client_data2[0]?.job);
-          this.$store.commit('SET_USERTOCHAT', this.userFirst?.type == 'lawyer' ? this.client_data2[0]?.client : this.client_data2[0]?.lawyer);
-          console.log('maaz 2 : ', this.userSecond);
-        }
-        this.startChatForAllMessages(this.client_data2[index], false);
-
-      }
-
-      if (this.userFirst?.type == "lawyer" && this.isNotHeaderChatComputed && this.client_data2.length == 0) {
-        let obj = {
-          job: res?.data?.job,
-        }
-        obj[this.userSecond?.type] = this.userSecond;
-        this.client_data2.unshift(obj);
-        this.startChatForAllMessages(this.client_data2[0], false);
-      }
-
-      console.log(' cleint data : ', this.client_data);
-    }).catch((err) => {
-      console.log(err);
-    })
+    this.fetchChatMembers();
     this.loadMessages();
   },
 
@@ -285,11 +240,14 @@ export default {
           console.log('data 2 : ', this.client_data2);
           // this.$swal(newValue?.notification?.title, newValue?.notification?.body, 'success');
 
-          const noti = JSON.parse(newValue?.data?.payload);
-          console.log(noti);
+          // const noti = JSON.parse(newValue?.data?.payload);
+          // console.log(noti);
 
-          this.moveObjectToTop(this.client_data2, noti?.chat_id)
-          console.log(this.client_data2);
+          // this.moveObjectToTop(this.client_data2, noti?.chat_id)
+          // console.log(this.client_data2);
+          console.log('sel index before load : ', this.userSelectedIndex);
+          this.fetchChatMembers(false);
+
 
         }
       },
@@ -341,6 +299,80 @@ export default {
   },
 
   methods: {
+
+    fetchChatMembers(startChat = true) {
+      const job = this.$route.query.job;
+      let endpoint = (typeof job === "undefined") ? '/get-all-users-of-jobs' : `/get-all-users-of-jobs/${job}`;
+      // show all messages
+      api2.get(endpoint).then((res) => {
+
+        this.client_data = res?.data?.users;
+        this.client_data2 = this.client_data;
+
+        if (this.client_data2.length > 0) {
+          let index = 0;
+          console.log('maaz : ', res?.data?.job);
+          if (res?.data?.job != null) {
+            this.myJobData = res?.data?.job;
+            console.log('check state job data 101: ', res?.data);
+            console.log('check state job data 102: ', this.client_data2);
+            console.log('check state job data 103: ', this.client_data2.findIndex(job => job.job_id === res?.data?.job.id));
+            index = this.client_data2.findIndex(job => job.job_id === res?.data?.job.id);
+            console.log('maaz 10 : ', index)
+            if (index == -1) {
+              let obj = {
+                job: res?.data?.job,
+              }
+              obj[this.userSecond?.type] = this.userSecond;
+              this.client_data2.unshift(obj);
+            }
+
+
+            // this.$store.commit('SET_JOB_DATA',res?.data?.job);
+            // localStorage.setItem('jobData',JSON.stringify(res?.data?.job));
+          }
+
+          if (index == 0) {
+            this.$store.commit("SET_JOB_DATA", this.client_data2[0]?.job);
+            this.$store.commit('SET_USERTOCHAT', this.userFirst?.type == 'lawyer' ? this.client_data2[0]?.client : this.client_data2[0]?.lawyer);
+            console.log('maaz 2 : ', this.userSecond);
+          }
+          console.log('is start chat :1 ' , startChat);
+          if (startChat) {
+            console.log('is start chat :1 under if' , startChat);
+            this.startChatForAllMessages(this.client_data2[index], false, 0);
+          }
+        }
+
+        if (this.userFirst?.type == "lawyer" && this.isNotHeaderChatComputed && this.client_data2.length == 0) {
+          let obj = {
+            job: res?.data?.job,
+          }
+          obj[this.userSecond?.type] = this.userSecond;
+          this.client_data2.unshift(obj);
+          console.log('is start chat :2' , startChat);
+          if (startChat) {
+            console.log('is start chat :2 under if' , startChat);
+            this.startChatForAllMessages(this.client_data2[0], false, 0);
+          }
+        }
+
+        console.log('in de x : ', this.client_data);
+        console.log('in de x 2 : ', this.client_data.filter((item) => item?.id == this.userSelectedIndex));
+        const selectedJobIndex = this.client_data.findIndex(item => item.id === this.userSelectedIndex)
+        const selectedJob = this.client_data.filter((item) => item?.id == this.userSelectedIndex)
+
+        const checkSeen = (this.loginUser?.type == "client") ? selectedJob[0]?.client_seen : selectedJob[0]?.lawyer_seen;
+
+        if (selectedJob && selectedJob.length > 0 && !checkSeen && selectedJobIndex >= 0) {
+          this.userSeenStatusUpdate(selectedJob[0], selectedJobIndex);
+        }
+
+        console.log(' cleint data : ', this.client_data);
+      }).catch((err) => {
+        console.log(err);
+      })
+    },
 
     moveObjectToTop(array, chatId) {
       const index = array.findIndex(obj => obj.chat_id === chatId);
@@ -439,7 +471,7 @@ export default {
 
     // this.$store.commit("SET_JOB_DATA", data?.job);
 
-    startChatForAllMessages(data, changeJobData = true) {
+    startChatForAllMessages(data, changeJobData = true, rowIndex = null) {
 
 
       if (this.userFirst?.type == "lawyer") {
@@ -469,6 +501,15 @@ export default {
       this.chatId = data?.chat_id;
       this.hideInput = data?.is_closed;
       this.loadMessages();
+      console.log('seen : ', data?.client_seen);
+      console.log('indeex : ', rowIndex);
+
+      const checkSeen = (this.loginUser?.type == "client") ? data?.client_seen : data?.lawyer_seen;
+
+      if (!checkSeen && rowIndex != null) {
+        console.log('under');
+        this.userSeenStatusUpdate(data, rowIndex);
+      }
 
       console.log('hit 22222222222222222  : ', data);
     },
@@ -483,9 +524,12 @@ export default {
 
 
 
-    clientSeenStatusUpdate(data, index) {
-      api2.post('/update-seen-status', { "id": data?.id, "status": true }).then(() => {
-        this.lawyer_data[index].client_seen = 1;
+    userSeenStatusUpdate(data, index) {
+      const type = this.loginUser?.type;
+      api2.post('/update-seen-status', { "id": data?.id, "status": true, type }).then(() => {
+        // console.log(this.lawyer_data)
+        console.log(index)
+        type == "client" ? this.client_data[index].client_seen = 1 : this.client_data[index].lawyer_seen = 1;
       }).catch((err) => {
         console.log(err);
       })
@@ -503,7 +547,9 @@ export default {
       console.log('chat id 3::::: ', messagesRef);
       console.log('chat id 3 3::::: ', this.messages)
       onSnapshot(messagesRef, (snapshot) => {
+        console.log('che dt id : ',  this.chatId);
         console.log('snap :::: ', snapshot);
+        console.log('load run');
         this.messages = snapshot.docs.map(doc => doc.data()).sort((a, b) => a.timestamp - b.timestamp);
       });
       console.log('chat id 4::::: ', this.messages);
@@ -562,9 +608,10 @@ export default {
             console.log(err);
           })
         }
-        if (this.chatStatus != "new" && this.userFirst?.type == "lawyer") {
-          api2.post('/update-seen-status', { "id": this.chatId, "status": false });
-        }
+        // if (this.chatStatus != "new" && this.userFirst?.type == "lawyer") {
+        //   const type = this.loginUser?.type;
+        //   api2.post('/update-seen-status', { "id": this.chatId, "status": false, type });
+        // }
         // let replyStatus = false;
         // if(this.userFirst?.type == "client") {
         //   replyStatus = true;
@@ -863,4 +910,5 @@ section.chatSection {
     width: -webkit-fill-available;
 
   }
-}</style>
+}
+</style>

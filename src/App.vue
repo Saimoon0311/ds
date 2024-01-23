@@ -18,29 +18,29 @@ export default {
   },
   created() {
     // if (isSupported()) {
-      onMessage(messaging, (payload) => {
-        console.log('Message received. ', payload);
-        this.$store.commit('SET_NOTI', payload);
-      });
+    onMessage(messaging, (payload) => {
+      console.log('Message received. ', payload);
+      this.$store.commit('SET_NOTI', payload);
+    });
 
-      // onBackgroundMessage(messaging, (payload) => {
-      //   console.log('Message received 2. ', payload);
-      //   this.$store.commit('SET_NOTI', payload);
-      // });
+    // onBackgroundMessage(messaging, (payload) => {
+    //   console.log('Message received 2. ', payload);
+    //   this.$store.commit('SET_NOTI', payload);
+    // });
 
 
-      // if ('serviceWorker' in navigator) {
-      //   navigator.serviceWorker.getRegistration().then((registration) => {
-      //     // Set up a listener for background messages
-      //     messaging.onBackgroundMessage((payload) => {
-      //       console.log('Background message received. ', payload);
+    // if ('serviceWorker' in navigator) {
+    //   navigator.serviceWorker.getRegistration().then((registration) => {
+    //     // Set up a listener for background messages
+    //     messaging.onBackgroundMessage((payload) => {
+    //       console.log('Background message received. ', payload);
 
-      //       // Dispatch a custom event to notify the Vue app about the background message
-      //       const event = new CustomEvent('background-message', { detail: payload });
-      //       registration.active.postMessage(event);
-      //     });
-      //   });
-      // }
+    //       // Dispatch a custom event to notify the Vue app about the background message
+    //       const event = new CustomEvent('background-message', { detail: payload });
+    //       registration.active.postMessage(event);
+    //     });
+    //   });
+    // }
 
     // }
 
@@ -103,7 +103,10 @@ export default {
           console.log(noti);
           if (noti?.noti_status == "message") {
             console.log('if');
-            this.$store.commit('SET_NOTI_COUNT_MSG', ++this.noti_msg);
+            const page = this.getLastPartOfUrl();
+            if (page != "messages-history") {
+              this.$store.commit('SET_NOTI_COUNT_MSG', ++this.noti_msg);
+            }
           } else {
             console.log('else');
             this.$store.commit('SET_NOTI_COUNT_JOB', ++this.noti_job);
@@ -207,4 +210,5 @@ span.countmsg {
 .dynamicTable th,
 .dynamicTable td {
   font-size: 1rem;
-}</style>
+}
+</style>
