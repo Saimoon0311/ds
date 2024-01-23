@@ -225,7 +225,8 @@ export default {
     console.log('f check end')
 
     this.fetchChatMembers();
-    this.loadMessages();
+    console.log('load run run run')
+    this.loadMessages(true);
   },
 
 
@@ -337,9 +338,9 @@ export default {
             this.$store.commit('SET_USERTOCHAT', this.userFirst?.type == 'lawyer' ? this.client_data2[0]?.client : this.client_data2[0]?.lawyer);
             console.log('maaz 2 : ', this.userSecond);
           }
-          console.log('is start chat :1 ' , startChat);
+          console.log('is start chat :1 ', startChat);
           if (startChat) {
-            console.log('is start chat :1 under if' , startChat);
+            console.log('is start chat :1 under if', startChat);
             this.startChatForAllMessages(this.client_data2[index], false, 0);
           }
         }
@@ -350,9 +351,9 @@ export default {
           }
           obj[this.userSecond?.type] = this.userSecond;
           this.client_data2.unshift(obj);
-          console.log('is start chat :2' , startChat);
+          console.log('is start chat :2', startChat);
           if (startChat) {
-            console.log('is start chat :2 under if' , startChat);
+            console.log('is start chat :2 under if', startChat);
             this.startChatForAllMessages(this.client_data2[0], false, 0);
           }
         }
@@ -500,7 +501,8 @@ export default {
 
       this.chatId = data?.chat_id;
       this.hideInput = data?.is_closed;
-      this.loadMessages();
+      console.log('load run run run')
+      this.loadMessages(true);
       console.log('seen : ', data?.client_seen);
       console.log('indeex : ', rowIndex);
 
@@ -535,7 +537,7 @@ export default {
       })
     },
 
-    loadMessages() {
+    loadMessages(runSnapshot) {
       console.log('chat id 1::::: ', this.chatId);
       if (this.chatId == null) {
         // this.chatId = (this.userFirst?.type == "lawyer") ? `${this.userFirst?.email}_${this.userSecond?.email}` : `${this.userSecond?.email}_${this.userFirst?.email}`;
@@ -546,12 +548,23 @@ export default {
       const messagesRef = collection(db, 'chats', this.chatId, 'messages');
       console.log('chat id 3::::: ', messagesRef);
       console.log('chat id 3 3::::: ', this.messages)
-      onSnapshot(messagesRef, (snapshot) => {
-        console.log('che dt id : ',  this.chatId);
-        console.log('snap :::: ', snapshot);
-        console.log('load run');
-        this.messages = snapshot.docs.map(doc => doc.data()).sort((a, b) => a.timestamp - b.timestamp);
-      });
+
+      // Store the unsubscribe function
+      if (this.messageUnsubscribe) {
+        this.messageUnsubscribe();
+      }
+
+      if (runSnapshot) {
+        this.messageUnsubscribe = onSnapshot(messagesRef, (snapshot) => {
+          console.log('che dt id : ', this.chatId);
+          console.log('snap :::: ', snapshot);
+          console.log('load run ', runSnapshot);
+
+          this.messages = snapshot.docs.map(doc => doc.data()).sort((a, b) => a.timestamp - b.timestamp);
+
+        });
+      }
+
       console.log('chat id 4::::: ', this.messages);
     },
     sendMessage() {
