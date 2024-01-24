@@ -18,7 +18,34 @@
         <img :src="image" alt="User Image" class="circular-image" />
       </div>
 
-      <ProfileImage />
+      <!-- <ProfileImage /> -->
+
+      <div class="d-flex">
+        <div>
+          <form
+            @submit.prevent="uploadImage"
+          >
+            <label for="photo">Photo:</label>
+            <input
+              type="file"
+              id="photo"
+              name="profile_picture"
+              class="form-control"
+              accept="image/*"
+              ref="fileInput"
+              required
+            />
+            <input
+              type="submit"
+              class="btn btn-dark mt-2"
+              name="photo-submit"
+              value="Upload"
+            />
+          </form>
+          
+        </div>
+      </div>
+
 
       <div
         class="modal fade edit-email-modal"
@@ -1206,7 +1233,7 @@
 <script>
 import LawyerHeader from "./Header.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
-import ProfileImage from "../../components/ProfileImage.vue";
+// import ProfileImage from "../../components/ProfileImage.vue";
 
 // import { messaging } from "@/config/firebaseConfig";
 // import { onMessage } from "firebase/messaging";
@@ -1253,7 +1280,7 @@ export default {
   components: {
     LawyerHeader,
     MainFooter,
-    ProfileImage,
+    // ProfileImage,
     // Selectic
   },
   // watch: {
@@ -1468,32 +1495,6 @@ export default {
       }
     },
 
-    async uploadImage() {
-      const fileInput = this.$refs.fileInput;
-      const file = fileInput.files[0];
-      if (!file) {
-        return;
-      }
-      const formData = new FormData();
-      formData.append("image", file);
-      try {
-        api.post("/lawyer/upload-image", formData).then((res) => {
-          this.$swal(
-            "",
-            "You have successfully uploaded your profile picture.",
-            "success"
-          ).then(() => {
-            this.image = this.baseUrl + "storage/images/" + res?.data?.image;
-            console.log(res);
-            console.log("loginUser : " + res?.data?.image);
-            fileInput.value = "";
-          });
-        });
-      } catch (error) {
-        this.$swal("", error?.response?.data?.error, "error");
-        // console.error('Error uploading image', error);
-      }
-    },
 
     // async updateProfile(keyName, modalId = null) {
     //   let formDataArray = [];

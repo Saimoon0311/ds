@@ -103,10 +103,15 @@ export default {
           console.log(noti);
           if (noti?.noti_status == "message") {
             console.log('if');
-            const page = this.getLastPartOfUrl();
-            if (page != "messages-history") {
+            // const page = this.getLastPartOfUrl();
+            const currentUrl = window.location.href;
+            if (!currentUrl.includes("messages-history")) {
               this.$store.commit('SET_NOTI_COUNT_MSG', ++this.noti_msg);
             }
+
+            // if (page != "messages-history") {
+            //   this.$store.commit('SET_NOTI_COUNT_MSG', ++this.noti_msg);
+            // }
           } else {
             console.log('else');
             this.$store.commit('SET_NOTI_COUNT_JOB', ++this.noti_job);

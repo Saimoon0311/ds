@@ -134,6 +134,34 @@ app.mixin({
   },
 
   methods: {
+
+    async uploadImage() {
+      const fileInput = this.$refs.fileInput;
+      const file = fileInput.files[0];
+      if (!file) {
+        return;
+      }
+      const formData = new FormData();
+      formData.append("image", file);
+      try {
+        api.post("/upload-image", formData).then((res) => {
+          this.$swal(
+            "",
+            "You have successfully uploaded your profile picture.",
+            "success"
+          ).then(() => {
+            this.image = this.baseUrl + "storage/images/" + res?.data?.image;
+            console.log(res);
+            console.log("loginUser : " + res?.data?.image);
+            fileInput.value = "";
+          });
+        });
+      } catch (error) {
+        this.$swal("", error?.response?.data?.error, "error");
+        // console.error('Error uploading image', error);
+      }
+    },
+    
     changeAccountStatus(id, type, status, pageStatus) {
       this.$swal({
         title: "Are you sure?",

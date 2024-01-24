@@ -5,7 +5,37 @@
     <h3 class="mt-3 text-center">Account</h3>
     <h5 class="mt-2 text-center">Details</h5>
 
-    <ProfileImage />
+    <div v-if="image" class="circular-container">
+        <img :src="image" alt="User Image" class="circular-image" />
+      </div>
+
+      <div class="d-flex">
+        <div>
+          <form
+            @submit.prevent="uploadImage"
+          >
+            <label for="photo">Photo:</label>
+            <input
+              type="file"
+              id="photo"
+              name="profile_picture"
+              class="form-control"
+              accept="image/*"
+              ref="fileInput"
+              required
+            />
+            <input
+              type="submit"
+              class="btn btn-dark mt-2"
+              name="photo-submit"
+              value="Upload"
+            />
+          </form>
+          
+        </div>
+      </div>
+
+    <!-- <ProfileImage /> -->
     <div
       class="modal fade first-name-modal"
       tabindex="-1"
@@ -385,7 +415,7 @@
 <script>
 import ClientHeader from "./Header.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
-import ProfileImage from "../../components/ProfileImage.vue";
+// import ProfileImage from "../../components/ProfileImage.vue";
 
 
 import * as yup from "yup";
@@ -398,7 +428,8 @@ import ChangePasswordForm from "@/components/ChangePasswordForm.vue";
 export default {
   name: "ClientAccount",
   components: {
-    ClientHeader, Form, Field, ChangePasswordForm, MainFooter,ProfileImage
+    ClientHeader, Form, Field, ChangePasswordForm, MainFooter,
+    // ProfileImage
   },
   data() {
     const schema = yup.object().shape({
@@ -423,6 +454,7 @@ export default {
         ),
     });
     return {
+      image : null,
       schema,
       form: {
         first_name: null,
@@ -439,6 +471,11 @@ export default {
   },
   created() {
     this.updateFormProperties();
+  },
+  mounted(){
+    if (this.loginUser?.image) {
+      this.image = this.baseUrl + "storage/images/" + this.loginUser?.image;
+    }
   },
   methods: {
 
