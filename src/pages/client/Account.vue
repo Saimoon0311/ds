@@ -5,37 +5,8 @@
     <h3 class="mt-3 text-center">Account</h3>
     <h5 class="mt-2 text-center">Details</h5>
 
-    <div v-if="image" class="circular-container mb-3">
-        <img :src="image" alt="User Image" class="circular-image" />
-      </div>
+   
 
-      <div class="d-flex">
-        <div class="pb-2">
-          <form
-            @submit.prevent="uploadImage"
-          >
-            <!-- <label for="photo">Photo:</label> -->
-            <input
-              type="file"
-              id="photo"
-              name="profile_picture"
-              class="form-control"
-              accept="image/*"
-              ref="fileInput"
-              required
-            />
-            <input
-              type="submit"
-              class="btn btn-dark mt-2"
-              name="photo-submit"
-              value="Upload"
-            />
-          </form>
-          
-        </div>
-      </div>
-
-    <!-- <ProfileImage /> -->
     <div
       class="modal fade first-name-modal"
       tabindex="-1"
@@ -454,7 +425,6 @@ export default {
         ),
     });
     return {
-      image : null,
       schema,
       form: {
         first_name: null,
@@ -471,11 +441,6 @@ export default {
   },
   created() {
     this.updateFormProperties();
-  },
-  mounted(){
-    if (this.loginUser?.image) {
-      this.image = this.baseUrl + "storage/images/" + this.loginUser?.image;
-    }
   },
   methods: {
 

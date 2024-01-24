@@ -334,7 +334,7 @@
                                   <span class="text-capitalize">
                                     {{ item?.owner?.first_name }}
                                     <span v-if="tab == 'close'">
-                                      {{ item?.proposal?.status.toLowerCase() == 'accept' ?? item?.owner?.last_name }}  
+                                      {{ item?.proposal?.status.toLowerCase() == 'accept' ? item?.owner?.last_name : '' }}  
                                     </span>
                                     ({{
                                       item?.city

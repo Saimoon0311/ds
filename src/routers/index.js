@@ -589,6 +589,7 @@ router.beforeEach(async (to, from, next) => {
             fields: result?.data?.data?.fields,
             locations: result?.data?.data?.locations,
             admin_approval: result?.data?.data?.admin_approval,
+            suburb: result?.data?.data?.suburb
           };
           console.log('my daata : ' , userData);
           // setUserInStateAndLocalStorage

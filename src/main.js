@@ -463,6 +463,7 @@ app.mixin({
         fields: res?.data?.data?.fields,
         locations: res?.data?.data?.locations,
         admin_approval: res?.data?.data?.admin_approval,
+        suburb: res?.data?.data?.suburb
       };
 
       if (localStorage.getItem("loginUser") && removeFromLocalStorage) {
@@ -826,7 +827,7 @@ app.mixin({
                   key == "link" ||
                   key == "job_title" ||
                   key == "law_firm" ||
-                  key == "about" ||
+                  key == "suburb" ||
                   key == "remote_consultation" ||
                   key == "mobile_friendly")
               ) {
@@ -834,9 +835,6 @@ app.mixin({
                 objKey = objKey.replace(/_/g, " ");
                 if (key == "link") {
                   objKey = "Website";
-                }
-                if (key == "about") {
-                  objKey = "About me";
                 }
                 if (key == "remote_consultation") {
                   objKey = "<i class='fa fa-check-square fa1'></i>";
@@ -855,16 +853,13 @@ app.mixin({
                 (key == "first_name" ||
                   key == "job_title" ||
                   key == "law_firm" ||
-                  key == "link" ||
-                  key == "about")
+                  key == "link"
+                  )
               ) {
                 let objKey = key;
                 objKey = objKey.replace(/_/g, " ");
                 if (key == "link") {
                   objKey = "Website";
-                }
-                if (key == "about") {
-                  objKey = "About me";
                 }
                 newData[objKey] = value;
               }
@@ -935,9 +930,15 @@ app.mixin({
           }
 
           newData["Initial Consultation"] = consultation_content;
+          console.log('this data : ' , newData);
 
           newData = this.moveKeyToIndex(newData, "image", 0);
-          newData = this.moveKeyToIndex(newData, "Initial Consultation", -2);
+          // newData = this.moveKeyToIndex(newData, "address", -2);
+          // newData = this.moveKeyToIndex(newData, "suburb", -4);
+          // newData = this.moveKeyToIndex(newData, "Initial Consultation", -1);
+          
+          console.log('this data : ' , newData);
+
         }
       } else {
         title = `${this.capitalizeFirstLetter(data?.type)} Details`;
@@ -975,7 +976,7 @@ app.mixin({
       // Use dynamic HTML inside SweetAlert2 modal
       this.$swal.fire({
         title: title,
-        html: `<div class="table-wrap d-flex justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
+        html: `<div class="table-wrap ${data?.type == "lawyer" ? 'd-flex' : ''} justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
         showCloseButton: true,
         showConfirmButton: false,
         customClass: {
