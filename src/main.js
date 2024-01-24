@@ -161,7 +161,7 @@ app.mixin({
         // console.error('Error uploading image', error);
       }
     },
-    
+
     changeAccountStatus(id, type, status, pageStatus) {
       this.$swal({
         title: "Are you sure?",
@@ -948,9 +948,9 @@ app.mixin({
       const htmlContent = Object.entries(newData)
         .map(([key, value]) => {
           if (key == "image" && value != null) {
-            return `<div v-if="image" class="circular-container me-2 "><img src="${this.createImage(
+            return `<div v-if="image" class="circular-container popup-image me-2 "><img src="${this.createImage(
               value
-            )}" alt="User Image" class="circular-image img-fluid"></div><div>`;
+            )}" alt="User Image" class="circular-image"></div><div>`;
           }
           // else if(key == "job_title" && job_firm != ''){
           //   return `<div>${job_firm} aaaaa</div>`;
@@ -975,7 +975,7 @@ app.mixin({
       // Use dynamic HTML inside SweetAlert2 modal
       this.$swal.fire({
         title: title,
-        html: `<div class="table-wrap d-flex justify-content-center align-items-center" style="text-align:left !important;">${htmlContent}</div></div>`,
+        html: `<div class="table-wrap d-flex justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
         showCloseButton: true,
         showConfirmButton: false,
         customClass: {

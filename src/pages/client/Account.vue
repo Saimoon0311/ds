@@ -6,7 +6,7 @@
     <h5 class="mt-2 text-center">Details</h5>
 
     <div v-if="image" class="circular-container mb-3">
-        <img :src="image" alt="User Image" class="circular-image img-fluid" />
+        <img :src="image" alt="User Image" class="circular-image" />
       </div>
 
       <div class="d-flex">

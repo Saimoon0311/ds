@@ -15,7 +15,7 @@
       </div> -->
 
       <div v-if="image" class="circular-container mb-3">
-        <img :src="image" alt="User Image" class="circular-image img-fluid" />
+        <img :src="image" alt="User Image" class="circular-image " />
       </div>
 
       <!-- <ProfileImage /> -->
