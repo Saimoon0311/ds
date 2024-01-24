@@ -5,16 +5,16 @@
     <h3 class="mt-3 text-center">Account</h3>
     <h5 class="mt-2 text-center">Details</h5>
 
-    <div v-if="image" class="circular-container">
-        <img :src="image" alt="User Image" class="circular-image" />
+    <div v-if="image" class="circular-container mb-3">
+        <img :src="image" alt="User Image" class="circular-image img-fluid" />
       </div>
 
       <div class="d-flex">
-        <div>
+        <div class="pb-2">
           <form
             @submit.prevent="uploadImage"
           >
-            <label for="photo">Photo:</label>
+            <!-- <label for="photo">Photo:</label> -->
             <input
               type="file"
               id="photo"

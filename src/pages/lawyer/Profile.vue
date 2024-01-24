@@ -14,18 +14,18 @@
       <img :src="this.image" class="rounded" alt="Profile Image">
       </div> -->
 
-      <div v-if="image" class="circular-container">
-        <img :src="image" alt="User Image" class="circular-image" />
+      <div v-if="image" class="circular-container mb-3">
+        <img :src="image" alt="User Image" class="circular-image img-fluid" />
       </div>
 
       <!-- <ProfileImage /> -->
 
       <div class="d-flex">
-        <div>
+        <div class="">
           <form
             @submit.prevent="uploadImage"
           >
-            <label for="photo">Photo:</label>
+            <!-- <label for="photo">Photo:</label> -->
             <input
               type="file"
               id="photo"
