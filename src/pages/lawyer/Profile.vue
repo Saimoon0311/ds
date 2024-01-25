@@ -394,6 +394,53 @@
       </div>
 
       <div
+        class="modal fade suburb-modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="mySmallModalLabel"
+        aria-hidden="true"
+        id="suburbModal"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Suburb</h5>
+              <button
+                type="button"
+                class="close btn btn-dark"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <div class="form-group">
+                <input
+                  type="text"
+                  maxlength="200"
+                  name="suburb"
+                  class="form-control"
+                  id="suburb"
+                  v-model="form.suburb"
+                />
+                <button
+                  type="button"
+                  name="suburb-submit"
+                  class="btn btn-dark my-3"
+                  @click="updateProfile('suburb', '#suburbModal', 'Suburb')"
+                >
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div
         class="modal fade edit-phone-modal"
         tabindex="-1"
         role="dialog"
@@ -569,7 +616,7 @@
               >
                 <div class="form-group">
                   <label for=""
-                    >Time limit:<sup><code>*</code></sup></label
+                    >Time limit2:<sup><code>*</code></sup></label
                   >
                   <div class="mb-2 position-relative">
                     <input
@@ -956,6 +1003,30 @@
                 {{ loginUser?.address }}
               </td>
             </tr>
+
+
+            <tr>
+              <td class="d-flex align-items-center justify-content-between">
+                Suburb:
+                <button
+                  type="button"
+                  class="btn btn-dark btn-sm"
+                  data-bs-toggle="modal"
+                  data-bs-target="#suburbModal"
+                  data-target=".suburb-modal"
+                  title="Edit"
+                >
+                  <i class="fa fa-pencil"></i>
+                </button>
+              </td>
+              <!-- Modal -->
+
+              <!-- Modal ends here -->
+              <td>
+                {{ loginUser?.suburb }}
+              </td>
+            </tr>
+
 
             <!-- Phone -->
             <tr>

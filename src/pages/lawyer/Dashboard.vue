@@ -334,7 +334,7 @@
                                   <span class="text-capitalize">
                                     {{ item?.owner?.first_name }}
                                     <span v-if="tab == 'close'">
-                                      {{ item?.proposal?.status.toLowerCase() == 'accept' ?? item?.owner?.last_name }}  
+                                      {{ item?.proposal?.status.toLowerCase() == 'accept' ? item?.owner?.last_name : '' }}  
                                     </span>
                                     ({{
                                       item?.city
@@ -588,6 +588,7 @@ import LawyerHeader from "./Header.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
 
 import api from "@/config/api";
+import api2 from "@/config/api2";
 export default {
   components: {
     LawyerHeader,
@@ -603,10 +604,13 @@ export default {
   },
 
   computed: {
+    accepted_unseen_proposals() {
+      return this.$store.state.acceptedUnseenProposals;
+    },
     noti_job() {
       return this.$store.state.noti_count_job;
     },
-    isEndOfResult(){
+    isEndOfResult() {
       return this.$store.state.endOfResult;
     },
     jobTabName() {
@@ -631,8 +635,8 @@ export default {
     },
   },
   async created() {
-    console.log('job tab name : ' , this.jobTabName);
-    if(this.jobTabName){
+    console.log('job tab name : ', this.jobTabName);
+    if (this.jobTabName) {
       this.tab = this.jobTabName;
     }
     // this.$store.commit('SET_DATATAB', this.tab);
@@ -645,9 +649,11 @@ export default {
     // }
   },
 
-  // mounted(){
-  //   this.getNextUser();
-  // },
+  mounted() {
+    // this.getNextUser();
+    console.log('accepted unseen proposals : ', this.accepted_unseen_proposals);
+    this.proposalAcceptMessage(0);
+  },
 
   beforeUnmount() {
     // Remove the scroll event listener before the component is destroyed
@@ -656,8 +662,74 @@ export default {
 
   methods: {
 
-    deleteAllRejected(){
-      try{
+    // async proposalAcceptMessage() {
+    //   this.accepted_unseen_proposals.forEach((element,index) => {
+    //     console.log('foreach loop index' , index)
+    //     let msg = `We're pleased to inform you that your proposal has been accepted for the job 
+    //     'I want to get a partner visa - ${element?.job?.identity}.' by 
+    //     ${element?.job?.owner?.first_name} ${element?.job?.owner?.last_name} through Simplawfy.
+    //      You will receive an email shortly with their contact details. 
+    //      You can also view their details in the Closed tab on your Dashboard."`;
+
+    //     await this.$swal.fire({
+    //       title: "Congratulations, a client has accepted your proposal!",
+    //       html: msg,
+    //       showCloseButton: true,
+    //       showConfirmButton: false,
+    //       customClass: {
+    //         container: "my-swal-container", // You can define your custom class for styling
+    //       },
+    //     });
+    //   });
+    // },
+
+    proposalAcceptMessage(index) {
+      // Create a promise for each SweetAlert
+      if (this.accepted_unseen_proposals.length > 0) {
+        if (index < this.accepted_unseen_proposals.length) {
+          const element = this.accepted_unseen_proposals[index];
+
+          let msg = `We're pleased to inform you that your proposal has been accepted for the job 
+        'I want to get a partner visa - ${element?.job?.identity}.' by 
+        ${element?.job?.owner?.first_name} ${element?.job?.owner?.last_name} through Simplawfy.
+        You will receive an email shortly with their contact details. 
+        You can also view their details in the Closed tab on your Dashboard."`;
+
+          this.$swal.fire({
+            title: "Congratulations, a client has accepted your proposal!",
+            html: msg,
+            showCloseButton: true,
+            showConfirmButton: false,
+            customClass: {
+              container: "my-swal-container", // You can define your custom class for styling
+            },
+          }).then(() => {
+            // Recursively show the next proposal alert
+            this.proposalAcceptMessage(index + 1);
+          });
+        }
+        else {
+          // All popups are closed, hit the API with proposal IDs
+          const proposalIds = this.accepted_unseen_proposals.map(element => element.id);
+          this.acceptedProposalMessageSeen(proposalIds);
+        }
+      }
+
+    },
+
+    acceptedProposalMessageSeen(ids) {
+      api2.post('/lawyer/accepted-proposal-msg-seen', { ids }).then(response => {
+        // Handle the response if needed
+        console.log('acceptedProposalMessageSeen API response:', response);
+      })
+      .catch(error => {
+        // Handle errors
+        console.error('API error:', error);
+      });
+    },
+
+    deleteAllRejected() {
+      try {
         this.$swal({
           title: "Are you sure?",
           text: `Are you sure you want to clear all rejected proposals?`,
@@ -668,14 +740,14 @@ export default {
           confirmButtonText: `Yes, Clear`,
         }).then((result) => {
           if (result.isConfirmed) {
-            api.get('/lawyer/decline-rejected-proposals').then(()=>{
+            api.get('/lawyer/decline-rejected-proposals').then(() => {
               this.$swal(
-                        "",
-                        `You have cleared all rejected proposals.`,
-                        "success"
-                      ).then(async () => {
-                        this.loadMore(null,true);
-                      });
+                "",
+                `You have cleared all rejected proposals.`,
+                "success"
+              ).then(async () => {
+                this.loadMore(null, true);
+              });
             });
           }
         })
@@ -695,7 +767,7 @@ export default {
           }
         }
       }
-      
+
     },
 
     // getNextUser() {
@@ -709,7 +781,7 @@ export default {
     //     }
     //   }
     // },
-    
+
 
     async setTab(status) {
       this.tab = status
@@ -738,7 +810,7 @@ export default {
         await this.loadMore(null, true);
 
         this.resetCount('job');
-        
+
       }
       // else if (status == "reject") {
       //   this.endpoint = '/lawyer/show-reject-jobs';
@@ -922,9 +994,11 @@ ul#pills-tab {
 .nav-link:hover {
   color: #000000;
 }
-.card-cus{
+
+.card-cus {
   box-shadow: 5px 5px 20px #00000017;
 }
+
 .smallFont {
   font-size: 16px;
   margin: 0;
@@ -1046,9 +1120,11 @@ p.badge {
   font-weight: 600;
   text-transform: capitalize;
 }
-.search-field{
+
+.search-field {
   width: 50%;
 }
+
 @media only screen and (max-width: 1400px) and (min-width: 992px) {
   .card-btn {
     width: 32%;
@@ -1063,9 +1139,11 @@ p.badge {
     font-size: 14px;
 
   }
-  .search-field{
-  width: 100%;
-}
+
+  .search-field {
+    width: 100%;
+  }
+
   .smallFont {
     margin: 5px;
     font-size: 14px;
@@ -1110,4 +1188,5 @@ p.badge {
     padding: 5px;
     font-size: 13px;
   }
-}</style>
+}
+</style>

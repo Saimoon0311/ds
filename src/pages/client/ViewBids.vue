@@ -456,9 +456,15 @@ export default {
       this.changeStatus({ status, proposal_id, lawyer, job_id });
     },
     changeStatus(obj) {
+      let question = "";
+      if(obj?.status?.toLowerCase() == "accept"){
+        question = "Are you sure you want to accept this proposal? All other proposals will be automatically rejected.";
+      }else if(obj?.status.toLowerCase() == "reject"){
+         question = 'Are you sure you want to reject this proposal? This cannot be undone.'
+      }
       this.$swal({
         title: "Are you sure?",
-        text: `Are you sure you want to ${obj.status} this proposal`,
+        text: question,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -472,24 +478,38 @@ export default {
             .then((res) => {
               // this.$swal('', `Proposal has been ${obj.status}ed successfully`, 'success').then(async () => {
               let msg = "";
-              if (obj.status.toLowerCase() == "accept") {
-                msg = `Congratulations on finding a lawyer!
-                We're so glad that you found a lawyer for your job '[${this.jobData?.title} - ${this.jobData?.identity}.]' through Simplawfy. 
-                Here are your lawyer's contact details so you can communicate with them directly:
-                [${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, ${obj?.lawyer?.email} and ${obj?.lawyer?.phone}]. 
+              if (obj?.status?.toLowerCase() == "accept") {
+                // msg = `Congratulations on finding a lawyer!
+                // msg = `We're so glad that you found a lawyer for your job '[${this.jobData?.title} - ${this.jobData?.identity}.]' through Simplawfy. 
+                // Here are your lawyer's contact details so you can communicate with them directly:
+                // [${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, ${obj?.lawyer?.email} and ${obj?.lawyer?.phone}]. 
+                // You will receive an email shortly with all these details as well as the details of the proposal you accepted, the details of your job and any correspondence between you and your chosen Lawyer.`;
 
-                You will receive an email shortly with all these details as well as the details of the proposal you accepted, the details of your job and any correspondence between you and your chosen Lawyer.`;
+                msg = `We're so glad that you found a lawyer, ${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, through Simplawfy. You will receive an email shortly with their details. You can also view them in the Closed tab on your Dashboard.`;
+
               } else {
                 msg = `Proposal has been ${obj.status}ed successfully`;
               }
 
-              this.$swal("", msg, "success").then(async () => {
+              this.$swal("Congratulations on finding a lawyer!", msg, "success").then(async () => {
                 if (obj.status.toLowerCase() == "accept") {
                   this.$router.push("/client-dashboard");
                 } else {
                   await this.getPaginatedData();
                 }
               });
+
+        //       this.$swal.fire({
+        //   title: "Congratulations on finding a lawyer!",
+        //   html: msg,
+        //   showCloseButton: true,
+        //   showConfirmButton: false,
+        //   customClass: {
+        //     container: "my-swal-container", // You can define your custom class for styling
+        //   },
+        // });
+
+
               console.log("response : ", res);
             })
             .catch((error) => {
