@@ -57,6 +57,13 @@
                   >Jobs</router-link
                 >
                 <router-link
+                  to="/proposals"
+                  class="nav-link fw-normal menuItem-active-link"
+                  id="jobs"
+                  aria-current="page"
+                  >Proposals</router-link
+                >
+                <router-link
                   to="/admin-account"
                   class="nav-link fw-normal menuItem-active-link"
                   id="account"
