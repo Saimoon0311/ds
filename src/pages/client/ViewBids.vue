@@ -183,7 +183,7 @@
                       v-if="item?.status == 'Open'"
                     >
                       <button
-                        class="btn btn-dark text-white btn-sm border p-1 px-2 mb-1 w-75 rounded-pill"
+                        class="btn btn-dark softblue text-white btn-sm border p-1 px-2 mb-1 w-75 rounded-pill"
                         @click="
                           handleAcceptBidAction(
                             item?.id,

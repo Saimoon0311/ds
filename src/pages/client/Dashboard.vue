@@ -179,7 +179,15 @@
                     >View Proposals</router-link
                   > -->
                       <button
-                        class="btn btn-sm btn-dark card-btn my-1 mx-1 border"
+                      v-if="tab == 'open'"
+                        class="btn btn-sm btn-dark softblue card-btn my-1 mx-1 border"
+                        @click="goToViewProposals(item)"
+                      >
+                        View Proposals
+                      </button>
+                      <button
+                      v-if="tab == 'close'"
+                        class="btn btn-sm btn-dark softblue card-btn my-1 mx-1 border"
                         @click="goToViewProposals(item)"
                       >
                         View Proposal
@@ -213,7 +221,7 @@
 
                       <button 
                             v-if="tab == 'close' && item?.assigned_lawyer != null"
-                            class="btn btn-danger btn-sm card-btn my-1 mx-1"
+                            class="btn softblue text-white btn-sm card-btn my-1 mx-1"
                             @click="openLawyerDetailsModal(item?.assigned_lawyer,item?.assigned_lawyer_id ?? true)"
                           >
                           View Lawyer Details

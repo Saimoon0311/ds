@@ -385,7 +385,7 @@
                           <button
                             @click="submitProposal(item)"
                             v-if="tab == 'open'"
-                            class="btn btn-dark btn-sm card-btn my-1 mx-1 border"
+                            class="btn btn-dark softblue btn-sm card-btn my-1 mx-1 border"
                           >
                             Submit a Proposal
                           </button>
@@ -393,7 +393,7 @@
                           <button
                             @click="openProposalDetailsModal(item.proposal)"
                             v-if="tab == 'pending'"
-                            class="btn btn-dark border btn-sm card-btn my-1 mx-1"
+                            class="btn btn-dark border btn-sm card-btn my-1 mx-1 softblue"
                           >
                             View Proposal
                           </button>
@@ -477,7 +477,7 @@
 
                         <button
                             v-if="item?.proposal?.status != 'Reject' && item?.proposal?.status != 'reject'"
-                            class="btn btn-danger btn-sm card-btn my-1 mx-1"
+                            class="btn btn-danger btn-sm card-btn my-1 mx-1 softblue text-white"
                             @click="openLawyerDetailsModal(item?.owner,item?.proposal?.status.toLowerCase() == 'accept')">
                           View Client Details
                         </button>
