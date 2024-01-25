@@ -134,7 +134,6 @@ app.mixin({
   },
 
   methods: {
-
     async uploadImage() {
       const fileInput = this.$refs.fileInput;
       const file = fileInput.files[0];
@@ -369,35 +368,36 @@ app.mixin({
           }
 
           let msg = null;
-          if(keyName == "first_name_verify" && this.loginUser?.admin_approval == 'approve'){
-              msg = `First Name will be updated after admin verification`;
+          if (
+            keyName == "first_name_verify" &&
+            this.loginUser?.admin_approval == "approve"
+          ) {
+            msg = `Thanks for submitting your details. They'll be updated pending verification.`;
+          } else if (
+            keyName == "last_name_verify" &&
+            this.loginUser?.admin_approval == "approve"
+          ) {
+            msg = `Thanks for submitting your details. They'll be updated pending verification.`;
+          } else {
+            msg = `${keyName2} updated successfully`;
           }
-          else if(keyName == "last_name_verify" && this.loginUser?.admin_approval == 'approve'){
-              msg = `Last Name will be updated after admin verification`;
-          }else{
-             msg = `${keyName2} updated successfully`;
-          }
-          
-          
 
-          this.$swal("", msg, "success").then(
-            () => {
-              // for multiple profiles edit from admin panel
-              if (this.loginUserId != res?.data?.data?.id) {
-                // if (this.loginUserEmail != res?.data?.data?.email) {
-                if (this.openJobs.length > 0) {
-                  const openJobsIndex = this.openJobs.findIndex(
-                    (user) => user.email === res?.data?.data?.email
-                  );
-                  if (openJobsIndex !== -1) {
-                    this.openJobs[openJobsIndex] = res?.data?.data;
-                  }
+          this.$swal("", msg, "success").then(() => {
+            // for multiple profiles edit from admin panel
+            if (this.loginUserId != res?.data?.data?.id) {
+              // if (this.loginUserEmail != res?.data?.data?.email) {
+              if (this.openJobs.length > 0) {
+                const openJobsIndex = this.openJobs.findIndex(
+                  (user) => user.email === res?.data?.data?.email
+                );
+                if (openJobsIndex !== -1) {
+                  this.openJobs[openJobsIndex] = res?.data?.data;
                 }
-              } else {
-                this.setUserInStateAndLocalStorage(res);
               }
+            } else {
+              this.setUserInStateAndLocalStorage(res);
             }
-          );
+          });
         });
       } catch (error) {
         this.$swal("", error?.response?.data?.error, "error");
@@ -458,12 +458,12 @@ app.mixin({
         consultation_amount: res?.data?.data?.consultation_amount,
         consultation_time: res?.data?.data?.consultation_time,
         remote_consultation:
-        res?.data?.data?.remote_consultation == 1 ? true : false,
+          res?.data?.data?.remote_consultation == 1 ? true : false,
         mobile_friendly: res?.data?.data?.mobile_friendly == 1 ? true : false,
         fields: res?.data?.data?.fields,
         locations: res?.data?.data?.locations,
         admin_approval: res?.data?.data?.admin_approval,
-        suburb: res?.data?.data?.suburb
+        suburb: res?.data?.data?.suburb,
       };
 
       if (localStorage.getItem("loginUser") && removeFromLocalStorage) {
@@ -630,8 +630,11 @@ app.mixin({
       this.$store.commit("SET_NOTI_COUNT_JOB", res?.data?.noti_job);
       localStorage.setItem("noti_count_job", res?.data?.noti_job);
 
-      if(res?.data?.data?.type == "lawyer"){
-        this.$store.commit('SET_ACCEPTED_UNSEEN_PROPOSALS',res?.data?.proposals);
+      if (res?.data?.data?.type == "lawyer") {
+        this.$store.commit(
+          "SET_ACCEPTED_UNSEEN_PROPOSALS",
+          res?.data?.proposals
+        );
       }
 
       this.setUserInStateAndLocalStorage(res);
@@ -708,9 +711,10 @@ app.mixin({
               if (key == "identity") {
                 objKey = "Job no";
               }
+              
               if (key == "owner") {
                 objKey = "Client details";
-                value = `<b>Name : </b>${value?.first_name} ${value?.last_name}, <b>Email : </b>${value?.email}`;
+                value = `<b>Name : </b>${value?.first_name} ${value?.last_name}, <b>Email : </b>${value?.email}, <b>Phone : </b>${value?.phone}`;
               }
               newData[objKey] = value;
               if (key == "field" || key == "location") {
@@ -824,8 +828,8 @@ app.mixin({
                 // key == "first_name" ||
                 // key == "last_name" ||
                 (key == "image" ||
-                key == "job_title" || 
-                key == "email" ||
+                  key == "job_title" ||
+                  key == "email" ||
                   key == "address" ||
                   key == "phone" ||
                   key == "link" ||
@@ -857,8 +861,7 @@ app.mixin({
                 (key == "first_name" ||
                   key == "job_title" ||
                   key == "law_firm" ||
-                  key == "link"
-                  )
+                  key == "link")
               ) {
                 let objKey = key;
                 objKey = objKey.replace(/_/g, " ");
@@ -879,9 +882,14 @@ app.mixin({
         )} ${this.capitalizeFirstLetter(data?.last_name)}`;
 
         // if type lawyer than show consultation info
-        if (data?.type == "lawyer") {
-          console.log('check cehck : ' , data);
 
+        newData = this.moveKeyToIndex(newData, "image", 0);
+          // newData = this.moveKeyToIndex(newData, "address", -2);
+          // newData = this.moveKeyToIndex(newData, "suburb", -4);
+
+          console.log("check cehck 1 : ", data);
+        if (data?.type == "lawyer" && (data?.consultation_type.toLowerCase() == 'discounted' || data?.consultation_type.toLowerCase() == 'free')) {
+          console.log("check cehck : ", data);
 
           // if (data?.job_title != null && data?.law_firm != null){
           //   job_firm = `${data?.job_title} at ${data?.law_firm}`;
@@ -893,7 +901,6 @@ app.mixin({
           //   console.log('33333');
           //   job_firm `${data?.law_firm}`;
           // }
-         
 
           let consultation_content = "";
 
@@ -912,7 +919,6 @@ app.mixin({
           }
 
           if (
-            this.checkObjKeyValue(data, "consultation_amount") &&
             data?.consultation_type &&
             data?.consultation_type == "free"
           ) {
@@ -923,26 +929,22 @@ app.mixin({
                 </span>`;
           }
 
-          if (
-            this.checkObjKeyValue(data, "consultation_time") &&
-            data?.consultation_type &&
-            data?.consultation_type == "no"
-          ) {
-            consultation_content = ` <span>
-                  ${this.capitalizeFirstLetter(data?.consultation_type)}
-                </span>`;
-          }
+          // if (
+          //   this.checkObjKeyValue(data, "consultation_time") &&
+          //   data?.consultation_type &&
+          //   data?.consultation_type == "no"
+          // ) {
+          //   consultation_content = ` <span>
+          //         ${this.capitalizeFirstLetter(data?.consultation_type)}
+          //       </span>`;
+          // }
 
           newData["Initial Consultation"] = consultation_content;
-          console.log('this data : ' , newData);
-
-          newData = this.moveKeyToIndex(newData, "image", 0);
-          // newData = this.moveKeyToIndex(newData, "address", -2);
-          // newData = this.moveKeyToIndex(newData, "suburb", -4);
+          console.log("this data : ", newData);
           // newData = this.moveKeyToIndex(newData, "Initial Consultation", -1);
           
-          console.log('this data : ' , newData);
 
+          console.log("this data : ", newData);
         }
       } else {
         title = `${this.capitalizeFirstLetter(data?.type)} Details`;
@@ -968,7 +970,7 @@ app.mixin({
               value == "<b>Remote Consultations</b>"
                 ? ""
                 : ":"
-            } </b><span>${value}</span></h6></div>` ;
+            } </b><span>${value}</span></h6></div>`;
           }
         })
         .join("");
@@ -980,13 +982,76 @@ app.mixin({
       // Use dynamic HTML inside SweetAlert2 modal
       this.$swal.fire({
         title: title,
-        html: `<div class="table-wrap ${data?.type == "lawyer" ? 'd-flex' : ''} justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
+        html: `<div class="table-wrap ${
+          data?.type == "lawyer" ? "d-flex" : ""
+        } justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
         showCloseButton: true,
         showConfirmButton: false,
         customClass: {
           container: "my-swal-container", // You can define your custom class for styling
         },
       });
+    },
+
+    openFeeEstimateModal(charge_type) {
+      if (charge_type) {
+        let charge_heading = "";
+        let charge_defination = "";
+        switch (charge_type) {
+          case "Fixed":
+            charge_heading = "Fixed Fee";
+            charge_defination =
+              "The lawyer is prepared to charge you this fixed amount for the work. You should not have to pay more than ";
+            break;
+          case "Hourly":
+            charge_heading = "Hourly Rate";
+            charge_defination =
+              "The lawyer charges an hourly rate (often billed in 6 minute increments) based on the actual time spent working on your matter. If there is a team of lawyers, they may have different hourly rates, depending on their level of experience. The fee estimate is based on a calculation of the total hours the job is expected to take multiplied by the hourly rate. It is not a fixed quote — the final legal costs may be more or less depending on how the matter progresses and the actual time taken. This is the most common way in which lawyers charge.";
+            break;
+          case "Daily":
+            charge_heading = "Daily Rate";
+            charge_defination = "The lawyer charges a rate per day of work.";
+            break;
+          case "Item":
+            charge_heading = "Item by Item For Specific Tasks";
+            charge_defination =
+              "The lawyer is estimating the legal cost by breaking down a large, complex or unpredictable matter into smaller stages i.e. milestones";
+            break;
+          case "Retainer":
+            charge_heading = "Retainer";
+            charge_defination =
+              "The lawyer is available to work for you as you need them, for a set fee per time period. This may be subject to some limitations (e.g. number of hours per month) and a notice period where you wish to terminate the engagement.";
+            break;
+          case "Success":
+            charge_heading = "Success Fee";
+            charge_defination =
+              "In cases where the lawyer’s costs are conditional on a successful outcome (eg. a ‘no win, no fee’ arrangement), the lawyer can charge a success fee (also called an uplift fee) where they achieve that successful outcome (eg. winning a court case or a settlement in the client’s favour). This fee is up to a maximum of 25% and is paid on top of the lawyer’s usual legal costs. This is in recognition of the risk the lawyer has taken of not getting paid for their work if the matter was unsuccessful. This billing method is more common in personal injury matters.";
+            break;
+          case "Pro":
+            charge_heading = "Pro Bono";
+            charge_defination =
+              "The lawyer is prepared to take on your matter for free. You will not have to pay any legal costs.";
+            break;
+        }
+
+        // const htmlContent = Object.entries(data)
+        //   .map(
+        //     ([key, value]) =>
+        //       `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`
+        //   )
+        //   .join("");
+
+        // Use dynamic HTML inside SweetAlert2 modal
+        this.$swal.fire({
+          title: charge_heading,
+          html: `<div class="table-wrap" style="text-align:left !important;">${charge_defination}</div>`,
+          showCloseButton: true,
+          showConfirmButton: false,
+          customClass: {
+            container: "my-swal-container", // You can define your custom class for styling
+          },
+        });
+      }
     },
 
     createImage(value) {
@@ -1246,7 +1311,8 @@ app.mixin({
               key != "description" &&
               key != "lawyer" &&
               key != "job" &&
-              key != "status"
+              key != "status" &&
+              key != "is_owner_seen"
             ) {
               let objKey = key;
               objKey = objKey.replace(/_/g, " ");
@@ -1355,7 +1421,7 @@ app.mixin({
         .join("");
 
       return `
-        <div class="table-title">${!renderAsHtml ? title : ""}</div>
+        <div class="table-title text-start fw-bold mb-1">${!renderAsHtml ? title : ""}</div>
         <table class='table dynamicTable'>
           <thead>
             <tr class='border'>
@@ -1372,7 +1438,7 @@ app.mixin({
               <td class='bg-dark text-white'>$${this.formatNumber(total)}</td>
             </tr>
             <tr v-if="title == 'Disbursements'">
-              <td class="border-0"><small>*GST Not Applicable</small></td>
+              <td class="border-0"><small>*GST not applicable on this item on this item</small></td>
             </tr>
           </tfoot>
         </table>
@@ -1408,7 +1474,7 @@ app.mixin({
         .join("");
 
       return `
-        <div class="table-title">${!renderAsHtml ? title : ""}</div>
+        <div class="table-title text-start fw-bold mb-1">${!renderAsHtml ? title : ""}</div>
         <table class='table dynamicTable'>
           <thead>
             <tr>
@@ -1700,7 +1766,7 @@ app.mixin({
       console.log("curr search : ", this.currentPage);
     },
 
-    async loadMore(status = null, reset = null,increment_page = true) {
+    async loadMore(status = null, reset = null, increment_page = true) {
       this.$store.commit("SET_ENDOFRESULT", false);
       console.log("check computed : ", this.loadMorePrevData);
       if (this.loadMorePrevData != null) {
@@ -1722,7 +1788,7 @@ app.mixin({
         this.openJobs = [];
         this.lastPage = null;
       }
-      if(increment_page){
+      if (increment_page) {
         this.currentPage++;
       }
       let url = null;
@@ -1761,18 +1827,18 @@ app.mixin({
     },
 
     async fixLoadMoreAfterDeleteRecord(index, status = null) {
-      if(index != null){
+      if (index != null) {
         this.openJobs.splice(index, 1);
       }
-      console.log('before first if', this.currentPage , this.lastPage);
+      console.log("before first if", this.currentPage, this.lastPage);
       if (this.currentPage < this.lastPage) {
-        console.log('under first if');
+        console.log("under first if");
         this.currentPage--;
         if (status) {
-          console.log('under nested if');
+          console.log("under nested if");
           await this.loadMore(status);
         } else {
-          console.log('under nested else');
+          console.log("under nested else");
           await this.loadMore();
         }
       }
@@ -1818,7 +1884,7 @@ app.mixin({
 
     // date time format function start
 
-    formatCreatedAt(created_at,showTimeZone = false) {
+    formatCreatedAt(created_at, showTimeZone = false) {
       const date = new Date(created_at);
       const day = date.getDate();
       const month = date.getMonth() + 1; // Months are zero-based
@@ -1835,15 +1901,14 @@ app.mixin({
       // Ensure leading zeros for single-digit day, month, hours, and minutes
       const formattedDay = day < 10 ? "0" + day : day;
       const formattedMonth = month < 10 ? "0" + month : month;
-      
-      
+
       // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      
-      if(showTimeZone){
+
+      if (showTimeZone) {
         const formattedHours = hours < 10 ? "0" + hours : hours;
         const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
         return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period} AEST`;
-      }else{
+      } else {
         return `${formattedDay}/${formattedMonth}/${year}`;
       }
     },

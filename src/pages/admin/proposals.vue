@@ -181,6 +181,8 @@
                     </dl>
                   </th>
 
+                  <th>Job No</th>
+
                   <th>Proposed work</th>
 
                   <th>Actions</th>
@@ -190,7 +192,7 @@
               <tbody>
                 <tr v-if="data_paginated == null || data_paginated.length == 0">
                   <td colspan="8" class="text-center">
-                    No active Proposals are available.
+                    No Data Found
                   </td>
                 </tr>
                 <tr
@@ -223,13 +225,13 @@
                       {{ chargeType(item?.charge_type) }}
                       <span
                         
-                        @click="openModal(item?.charge_type)"
+                        @click="openFeeEstimateModal(item?.charge_type)"
                       >
                         <i class="fas fa-info-circle"></i>
                       </span>
                     </p>
 
-                  <div class="modal" tabindex="-1" role="dialog" ref="myModal">
+                  <!-- <div class="modal" tabindex="-1" role="dialog" ref="myModal">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header charge-modal">
@@ -241,7 +243,7 @@
                                 
                       </div>
                     </div>
-                  </div>
+                  </div> -->
 
                     <p class="text-capitalize text-black fw-normal mb-1">
                       {{
@@ -256,6 +258,10 @@
                     >
                       see more
                     </p>
+                  </td>
+
+                  <td class="text-center">
+                    <p class="mb-1 descriptionText">{{ item?.job?.identity }}</p>
                   </td>
 
                   <!-- <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td> -->
@@ -274,6 +280,7 @@
                     >
                       
                       <button
+                      @click="deleteProposal(item?.id)"
                         class="btn btn-danger btn-sm p-1 px-2 mb-1 w-75 rounded-pill"
                       >
                         Delete
@@ -326,7 +333,7 @@ export default {
 
   data(){
     return {
-      charge_defination : "",
+      // charge_defination : "",
       areas : null,
       area : null,
       areaIndex : null,
@@ -360,46 +367,21 @@ export default {
     this.fetchAreas();
     // for pagination
   },
+
+  beforeUnmount(){
+    this.$store.commit('SET_PAGINATION_LAST',null);
+    this.$store.commit('set_pagination_page',1);
+  },
+
   methods: {
-
-    openModal(charge_type) {
-      // Show Bootstrap Modal
-      if(charge_type){
-      switch (charge_type) {
-          case "Fixed":
-            this.charge_defination = "The lawyer is prepared to charge you this fixed amount for the work. You should not have to pay more than this.";
-            break;
-          case "Hourly":
-            this.charge_defination = "The lawyer charges an hourly rate (often billed in 6 minute increments) based on the actual time spent working on your matter. If there is a team of lawyers, they may have different hourly rates, depending on their level of experience. The fee estimate is based on a calculation of the total hours the job is expected to take multiplied by the hourly rate. It is not a fixed quote — the final legal costs may be more or less depending on how the matter progresses and the actual time taken. This is the most common way in which lawyers charge.";
-            break;
-          case "Daily":
-            this.charge_defination = "The lawyer charges a rate per day of work.";
-            break;
-          case "Item":
-            this.charge_defination = "The lawyer is estimating the legal cost by breaking down a large, complex or unpredictable matter into smaller stages i.e. milestones";
-            break;
-          case "Retainer":
-            this.charge_defination = "The lawyer is available to work for you as you need them, for a set fee per time period. This may be subject to some limitations (e.g. number of hours per month) and a notice period where you wish to terminate the engagement.";
-            break;
-          case "Success":
-            this.charge_defination = "In cases where the lawyer’s costs are conditional on a successful outcome (eg. a ‘no win, no fee’ arrangement), the lawyer can charge a success fee (also called an uplift fee) where they achieve that successful outcome (eg. winning a court case or a settlement in the client’s favour). This fee is up to a maximum of 25% and is paid on top of the lawyer’s usual legal costs. This is in recognition of the risk the lawyer has taken of not getting paid for their work if the matter was unsuccessful. This billing method is more common in personal injury matters.";
-            break;
-          case "Pro":
-            this.charge_defination = "The lawyer is prepared to take on your matter for free. You will not have to pay any legal costs.";
-            break;
-        }
-        $(this.$refs.myModal).modal('show');
-      }      
-    },
-
     closeModal(modalId) {
       $(modalId).modal('hide');
     },
 
-    closeModal2() {
-      // Hide Bootstrap Modal
-      $(this.$refs.myModal).modal('hide');
-    },
+    // closeModal2() {
+    //   // Hide Bootstrap Modal
+    //   $(this.$refs.myModal).modal('hide');
+    // },
 
     async fetchAreas() {
       try {
@@ -415,20 +397,7 @@ export default {
       this.areaIndex = index;
     },
 
-    updateArea(job_id,modalId){
-      console.log(modalId);
-      if(job_id && this.area){
-        api.post(`/admin/set-job-area`,{"area_id":this.area,"job_id":job_id}).then(() => {
-          // console.log(res);
-          // console.log(modalId);
-          this.closeModal(modalId);
-          this.getData()
-          // this.getPaginatedData();
-        }).catch(error => {
-          console.log(error)
-        });
-      }
-    },
+   
     
 
     async getData(endpoint = null){
@@ -480,23 +449,23 @@ export default {
     },
 
 
-    reopenJob(id){
+    deleteProposal(id){
       console.log(id);
       this.$swal({
         title: 'Are you sure?',
-        text: "You want to reopen this job ?",
+        text: "You want to delete this proposal ?",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Reopen',
+        confirmButtonText: 'Yes, Delete',
       }).then((result) => {
         if (result.isConfirmed) {
-          api.get(`/admin/reopen-job/${id}`)
+          api.delete(`/admin/delete-proposal/${id}`)
             .then(() => {
               this.$swal(
                 '',
-                'Job has been reopen successfully',
+                'Proposal has been deleted successfully',
                 'success'
               ).then(() => {
                 this.getPaginatedData();
@@ -510,33 +479,33 @@ export default {
 
 
 
-    deleteJob(id){
-      console.log(id);
-      this.$swal({
-        title: 'Are you sure?',
-        text: "You want to delete this job ?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Delete',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          api.delete(`/admin/delete-job/${id}`)
-            .then(() => {
-              this.$swal(
-                'Deleted!',
-                'Job has been deleted.',
-                'success'
-              ).then(() => {
-                this.getPaginatedData();
-              });
-            }).catch((error) => {
-              this.$swal('', error?.response?.data?.error, 'error');
-            });
-        }
-      })
-    }
+    // deleteJob(id){
+    //   console.log(id);
+    //   this.$swal({
+    //     title: 'Are you sure?',
+    //     text: "You want to delete this job ?",
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonColor: '#3085d6',
+    //     cancelButtonColor: '#d33',
+    //     confirmButtonText: 'Yes, Delete',
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       api.delete(`/admin/delete-job/${id}`)
+    //         .then(() => {
+    //           this.$swal(
+    //             'Deleted!',
+    //             'Job has been deleted.',
+    //             'success'
+    //           ).then(() => {
+    //             this.getPaginatedData();
+    //           });
+    //         }).catch((error) => {
+    //           this.$swal('', error?.response?.data?.error, 'error');
+    //         });
+    //     }
+    //   })
+    // }
   },
   name: "AdminLawyer",
 };

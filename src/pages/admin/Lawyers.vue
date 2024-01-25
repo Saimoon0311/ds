@@ -97,7 +97,7 @@
                 class="border rounded bg-light p-3 d-flex flex-wrap"
               >
                 <p class="mx-auto my-0">
-                 No pending lawyer requests found!
+                 No pending lawyer requests found2!
                 </p>
               </div>
 
@@ -134,7 +134,7 @@
                 <span
                   v-if="openJobs?.length == 0 && searchQuery != ''"
                   class="text-center w-100"
-                  >No pending lawyer requests found!</span>
+                  >No pending lawyer requests found3!</span>
 
 
                   <table v-else class="table table-striped">
@@ -308,7 +308,17 @@
                 <span
                   v-if="openJobs?.length == 0 && searchQuery != ''"
                   class="text-center w-100"
-                  >No pending lawyer requests found!</span>
+                  >
+                  <span v-if="pageStatus == 'reject'">  
+                    No approved lawyers found.
+                  </span>
+                  <span v-else-if="pageStatus == 'reject2'">  
+                    No rejected lawyers found.
+                  </span>
+                  <span v-else-if="pageStatus == 'verify'">  
+                    No verification requests found.
+                  </span>
+                </span>
 
 
                   <table v-else class="table table-striped mt-3">

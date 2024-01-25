@@ -179,7 +179,7 @@
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
-                          GST not applicable on this item
+                          GST not applicable on this item on this item
                         </label>
                       </div>
                       <br />
@@ -216,7 +216,7 @@
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
-                            <!-- <input type="checkbox" name="gst not applicable"> -->
+                            <!-- <input type="checkbox" name="GST not applicable on this item"> -->
                             <!-- <i class="fa fa-check"></i>
                           </td> -->
                             <td style="width: 0px">
@@ -245,7 +245,7 @@
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
-                            <td class="gstStyle p-0">*GST Not Applicable</td>
+                            <td class="gstStyle p-0">*GST not applicable on this item on this item</td>
                           </tr>
                         </tbody>
                       </table>
@@ -407,7 +407,7 @@
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
-                          GST not applicable on this item
+                          GST not applicable on this item on this item
                         </label>
                       </div>
                       <br />
@@ -444,7 +444,7 @@
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
-                            <!-- <input type="checkbox" name="gst not applicable"> -->
+                            <!-- <input type="checkbox" name="GST not applicable on this item"> -->
                             <!-- <i class="fa fa-check"></i>
                           </td> -->
                             <td style="width: 0px">
@@ -472,7 +472,7 @@
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
-                            <td class="gstStyle p-0">*GST Not Applicable</td>
+                            <td class="gstStyle p-0">*GST not applicable on this item on this item</td>
                           </tr>
                         </tbody>
                       </table>
@@ -584,7 +584,7 @@
                     </tr>
                     <!-- <tr class="border-0 p-0">
                       <td class="gstStyle p-0">
-                        *GST Not Applicable
+                        *GST not applicable on this item
                       </td>
                     </tr> -->
                   </tbody>
@@ -674,7 +674,7 @@
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
-                          GST not applicable on this item
+                          GST not applicable on this item on this item
                         </label>
                       </div>
                       <br />
@@ -711,7 +711,7 @@
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
-                            <!-- <input type="checkbox" name="gst not applicable"> -->
+                            <!-- <input type="checkbox" name="GST not applicable on this item"> -->
                             <!-- <i class="fa fa-check"></i>
                           </td> -->
                             <td style="width: 0px">
@@ -740,7 +740,7 @@
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
-                            <td class="gstStyle p-0">*GST Not Applicable</td>
+                            <td class="gstStyle p-0">*GST not applicable on this item</td>
                           </tr>
                         </tbody>
                       </table>
@@ -861,7 +861,7 @@
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
-                          GST not applicable on this item
+                          GST not applicable on this item on this item
                         </label>
                       </div>
                       <br />
@@ -921,7 +921,7 @@
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
-                            <td class="gstStyle p-0">*GST Not Applicable</td>
+                            <td class="gstStyle p-0">*GST not applicable on this item</td>
                           </tr>
                         </tbody>
                       </table>
@@ -1044,7 +1044,7 @@
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
-                          GST Not Applicable
+                          GST not applicable on this item
                         </label>
                       </div> -->
                       <button
@@ -1130,7 +1130,7 @@
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <!-- <tr class="border-0 p-0">
-                            <td class="gstStyle p-0">*GST Not Applicable</td>
+                            <td class="gstStyle p-0">*GST not applicable on this item</td>
                           </tr> -->
                         </tbody>
                       </table>
@@ -1278,7 +1278,7 @@
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
-                          GST not applicable on this item
+                          GST not applicable on this item on this item
                         </label>
                       </div>
                       <br />
@@ -1315,7 +1315,7 @@
                           <!-- <td class="text-center"> -->
                           <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
-                          <!-- <input type="checkbox" name="gst not applicable"> -->
+                          <!-- <input type="checkbox" name="GST not applicable on this item"> -->
                           <!-- <i class="fa fa-check"></i>
                           </td> -->
                           <td style="width: 0px">
@@ -1343,7 +1343,7 @@
                           <td class="bg-transparent p-0 b-round-end"></td>
                         </tr>
                         <tr class="border-0 p-0">
-                          <td class="gstStyle p-0">*GST Not Applicable</td>
+                          <td class="gstStyle p-0">*GST not applicable on this item</td>
                         </tr>
                       </tbody>
                     </table>
@@ -1481,7 +1481,7 @@
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
-                          GST not applicable on this item
+                          GST not applicable on this item on this item
                         </label>
                       </div>
                       <br />
@@ -1540,7 +1540,7 @@
                           <td class="bg-transparent p-0 b-round-end"></td>
                         </tr>
                         <tr class="border-0 p-0">
-                          <td class="gstStyle p-0">*GST Not Applicable</td>
+                          <td class="gstStyle p-0">*GST not applicable on this item</td>
                         </tr>
                       </tbody>
                     </table>
@@ -1638,7 +1638,7 @@
                         id="GST"
                       />
                       <label class="form-check-label" for="GST">
-                        GST not applicable on this item
+                        GST not applicable on this item on this item
                       </label>
                     </div>
                     <br />
@@ -1671,7 +1671,7 @@
                         <!-- <td class="text-center"> -->
                         <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                           </p> -->
-                        <!-- <input type="checkbox" name="gst not applicable"> -->
+                        <!-- <input type="checkbox" name="GST not applicable on this item"> -->
                         <!-- <i class="fa fa-check"></i>
                         </td> -->
                         <td style="width: 0px">
@@ -1699,7 +1699,7 @@
                         <td class="bg-transparent p-0 b-round-end"></td>
                       </tr>
                       <tr class="border-0 p-0">
-                        <td class="gstStyle p-0">*GST Not Applicable</td>
+                        <td class="gstStyle p-0">*GST not applicable on this item</td>
                       </tr>
                     </tbody>
                   </table>

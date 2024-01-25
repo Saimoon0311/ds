@@ -6,13 +6,15 @@
         style="border-bottom: 1px solid lightgrey"
       >
         <div class="container-fluid">
-          <a class="navbar-brand" href="">
+            <router-link
+            class="navbar-brand"
+                  to="/lawyer-dashboard">
             <img
               src="../../assets/images/admin-logo.png"
               class="logo-small"
               alt="logo"
             />
-          </a>
+          </router-link>
           <button
             class="navbar-toggler cstm-dropdown"
             type="button"
@@ -171,15 +173,15 @@
 </template>
 <script>
 export default {
-  data(){
+  data() {
     return {
-      isMobileScreen : false,
+      isMobileScreen: false,
       screenWidth: window.innerWidth,
     }
   },
   computed: {
     noti_msg() {
-      console.log('no : ' , this.$store.state.noti_count_msg);
+      console.log('no : ', this.$store.state.noti_count_msg);
       return this.$store.state.noti_count_msg;
     },
     loginUserData() {
@@ -196,7 +198,7 @@ export default {
     window.addEventListener('resize', this.updateDimensions);
   },
 
-  beforeUnmount(){
+  beforeUnmount() {
     window.removeEventListener('resize', this.updateDimensions);
   },
 
@@ -210,7 +212,7 @@ export default {
     runFunctionIfMobile() {
       if (window.innerWidth <= 991) {
         this.isMobileScreen = true;
-        console.log('Running function for mobile ' , this.isMobileScreen);
+        console.log('Running function for mobile ', this.isMobileScreen);
       }
     },
   },
@@ -312,6 +314,7 @@ ul.dropdown-menu.show {
   color: #000000a6 !important;
   font-weight: 400;
 }
+
 .showonmonb {
   display: none;
 }
@@ -352,26 +355,29 @@ ul.showonmonb {
     width: 109px;
     text-align: left;
   }
+
   .cstm-dropdown img {
     width: 50px;
     margin-top: 5px;
-}
+  }
 }
 
 @media only screen and (max-width: 991px) {
-  span.header-count{
-  top: 10px !important;
+  span.header-count {
+    top: 10px !important;
     right: 4px !important;
     line-height: 1.2;
     font-size: 12px;
-}
+  }
 
   .custom-dropdown {
     display: none;
   }
+
   .navbar-nav .left-menu {
-     flex-direction: column;   
+    flex-direction: column;
   }
+
   .showonmonb {
     display: block;
   }
@@ -385,6 +391,4 @@ ul.showonmonb {
   .cstm-dropdown img {
     margin-top: 0;
   }
-}
-
-</style>
+}</style>
