@@ -154,7 +154,7 @@ export default {
   height: 100px;
   border-radius: 50%;
   /* Make it circular by setting border-radius to 50% */
-  overflow: hidden;
+  /* overflow: hidden; */
   /* Hide overflow content */
   display: flex;
   align-items: center;
