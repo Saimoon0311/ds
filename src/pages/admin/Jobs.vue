@@ -205,7 +205,7 @@
               <!-- <td data-v-7525850d="">{{ item?.description }}</td> -->
               <!-- <td data-v-7525850d="">Yes</td>
               <td data-v-7525850d="">Yes - $100 for 30 minutes</td> -->
-              <td>{{ formatCreatedAt(item?.created_at) }}</td>
+              <td>{{ formatCreatedAt(item?.created_at,true) }}</td>
               <!-- <td data-v-7525850d=""><p data-v-7525850d="">{{ item?.status }}</p></td>
                 -->
               <!-- <td data-v-7525850d="">

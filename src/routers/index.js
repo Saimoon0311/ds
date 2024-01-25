@@ -13,6 +13,8 @@ import FullChatLawyer from "@/pages/FullChatLawyer.vue";
 import AdminLogin from "@/pages/admin/Login.vue";
 import AdminLawyer from "@/pages/admin/Lawyers.vue";
 import AdminJobs from "@/pages/admin/Jobs.vue";
+import AdminProposals from "@/pages/admin/proposals.vue";
+
 import AdminClients from "@/pages/admin/Clients.vue";
 import AdminMain from "@/pages/admin/AdminMain.vue";
 import clientDashboard from "@/pages/client/Dashboard.vue";
@@ -304,6 +306,12 @@ const routes = [
   // },
 
   {
+    path: "/proposals",
+    component: AdminProposals,
+    meta: { requiresAuth: true, clientAndlawyerNotAllowed: true },
+  },
+
+  {
     path: "/admin-account",
     component: AdminAccount,
     meta: { requiresAuth: true, clientAndlawyerNotAllowed: true },
@@ -338,6 +346,8 @@ const routes = [
     component: AdminJobs,
     meta: { requiresAuth: true, clientAndlawyerNotAllowed: true },
   },
+
+  
 
   {
     path: "/client",

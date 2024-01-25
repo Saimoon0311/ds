@@ -1818,14 +1818,14 @@ app.mixin({
 
     // date time format function start
 
-    formatCreatedAt(created_at) {
+    formatCreatedAt(created_at,showTimeZone = false) {
       const date = new Date(created_at);
       const day = date.getDate();
       const month = date.getMonth() + 1; // Months are zero-based
       const year = date.getFullYear().toString().slice(-2); // Get the last 2 digits of the year
       let hours = date.getHours();
-      // const minutes = date.getMinutes();
-      // const period = hours < 12 ? "am" : "pm";
+      const minutes = date.getMinutes();
+      const period = hours < 12 ? "am" : "pm";
 
       // Adjust hours to 12-hour format
       if (hours > 12) {
@@ -1835,11 +1835,17 @@ app.mixin({
       // Ensure leading zeros for single-digit day, month, hours, and minutes
       const formattedDay = day < 10 ? "0" + day : day;
       const formattedMonth = month < 10 ? "0" + month : month;
-      // const formattedHours = hours < 10 ? "0" + hours : hours;
-      // const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+      
+      
       // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      return `${formattedDay}/${formattedMonth}/${year}`;
-      // return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period} AEST`;
+      
+      if(showTimeZone){
+        const formattedHours = hours < 10 ? "0" + hours : hours;
+        const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+        return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}${period} AEST`;
+      }else{
+        return `${formattedDay}/${formattedMonth}/${year}`;
+      }
     },
 
     // date time format function end
