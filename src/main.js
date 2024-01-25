@@ -630,6 +630,10 @@ app.mixin({
       this.$store.commit("SET_NOTI_COUNT_JOB", res?.data?.noti_job);
       localStorage.setItem("noti_count_job", res?.data?.noti_job);
 
+      if(res?.data?.data?.type == "lawyer"){
+        this.$store.commit('SET_ACCEPTED_UNSEEN_PROPOSALS',res?.data?.proposals);
+      }
+
       this.setUserInStateAndLocalStorage(res);
       this.$store.commit("SET_AUTHENTICATED", true);
       if (!path) {

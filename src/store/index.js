@@ -32,8 +32,12 @@ const store = createStore({
     noti_count_job : 0,
     noti_count_msg : 0,
     isNotHeaderChat : null,
+    acceptedUnseenProposals : [],
   },
   mutations: {
+    SET_ACCEPTED_UNSEEN_PROPOSALS(state,data){
+      state.acceptedUnseenProposals = data;
+    },
     // SET_LAWYER_ELIGIBLE_STATUS(state,value){
     //   state.lawyerEligibleStatus = value
     // },
