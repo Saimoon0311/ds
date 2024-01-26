@@ -616,7 +616,7 @@
               >
                 <div class="form-group">
                   <label for=""
-                    >Time limit2:<sup><code>*</code></sup></label
+                    >Time limit:<sup><code>*</code></sup></label
                   >
                   <div class="mb-2 position-relative">
                     <input

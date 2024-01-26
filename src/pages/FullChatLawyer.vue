@@ -310,8 +310,8 @@ export default {
         this.client_data = res?.data?.users;
         this.client_data2 = this.client_data;
 
+        let index = 0;
         if (this.client_data2.length > 0) {
-          let index = 0;
           console.log('maaz : ', res?.data?.job);
           if (res?.data?.job != null) {
             this.myJobData = res?.data?.job;
@@ -320,11 +320,14 @@ export default {
             console.log('check state job data 103: ', this.client_data2.findIndex(job => job.job_id === res?.data?.job.id));
             index = this.client_data2.findIndex(job => job.job_id === res?.data?.job.id);
             console.log('maaz 10 : ', index)
+            // add object for new chats
             if (index == -1) {
               let obj = {
                 job: res?.data?.job,
+                client_seen: 1
               }
               obj[this.userSecond?.type] = this.userSecond;
+              // add user in user list with job id if chat is new
               this.client_data2.unshift(obj);
             }
 
@@ -344,6 +347,22 @@ export default {
             this.startChatForAllMessages(this.client_data2[index], false, 0);
           }
         }
+
+        // if no message exists and client come from proposal
+        // start
+        if (this.client_data2.length == 0 && res?.data?.job != null) {
+          let obj = {
+            job: res?.data?.job,
+            client_seen: 1
+          }
+          obj[this.userSecond?.type] = this.userSecond;
+          // add user in user list with job id if chat is new
+          this.client_data2.unshift(obj);
+          if (startChat) {
+            this.startChatForAllMessages(this.client_data2[0], false, 0);
+          }
+        }
+        // end
 
         if (this.userFirst?.type == "lawyer" && this.isNotHeaderChatComputed && this.client_data2.length == 0) {
           let obj = {
@@ -365,7 +384,7 @@ export default {
 
         const checkSeen = (this.loginUser?.type == "client") ? selectedJob[0]?.client_seen : selectedJob[0]?.lawyer_seen;
 
-        if (selectedJob && selectedJob.length > 0 && !checkSeen && selectedJobIndex >= 0) {
+        if (selectedJob && selectedJob.length > 0 && !checkSeen && selectedJobIndex >= 0 && index != -1) {
           this.userSeenStatusUpdate(selectedJob[0], selectedJobIndex);
         }
 
@@ -614,7 +633,9 @@ export default {
         console.log('dosra user : ', this.userSecond);
 
 
-        if (this.chatStatus == "new" && this.userFirst?.type == "lawyer") {
+        // if (this.chatStatus == "new" && this.userFirst?.type == "lawyer") {
+        console.log(' cht status : ', this.chatStatus);
+        if (this.chatStatus == "new") {
           api2.post('/save-chat-info', { "lawyer_id": lawyer_id, "client_id": client_id, "job_id": this.jobId, "chat_id": this.chatId }).then(() => {
             this.$store.commit('SET_CHATSTATUS', 'old');
           }).catch((err) => {

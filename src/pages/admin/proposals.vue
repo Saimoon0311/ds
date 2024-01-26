@@ -207,7 +207,7 @@
                       @click="
                         openLawyerDetailsModal(
                           item?.lawyer,
-                          item?.status.toLowerCase() == 'accept'
+                          true
                         )
                       "
                       class="lawname btn-dark rounded-pill btn text-capitalize fw-bold px-4 py-1"
@@ -246,9 +246,15 @@
                   </div> -->
 
                     <p class="text-capitalize text-black fw-normal mb-1">
-                      {{
+                      <!-- {{
                         item?.fixed_fee_amount
                           ? "$" + formatNumber(item?.fixed_fee_amount)
+                          : ""
+                      }} -->
+
+                      {{
+                        item?.total_with_gst
+                          ? "$" + formatNumber(item?.total_with_gst)
                           : ""
                       }}
                     </p>
@@ -280,6 +286,7 @@
                     >
                       
                       <button
+                      v-if="item?.status != 'accept' && item?.status != 'Accept'"
                       @click="deleteProposal(item?.id)"
                         class="btn btn-danger btn-sm p-1 px-2 mb-1 w-75 rounded-pill"
                       >

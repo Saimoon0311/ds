@@ -244,9 +244,10 @@ app.mixin({
 
         this.$store.commit("SET_JOBIDTOCHAT", item?.id);
         this.$store.commit("SET_DATATAB", this.tab);
-
+        
         if (type == "lawyer") {
           this.$store.commit("SET_USERTOCHAT", item?.owner);
+          console.log('lawyer chat status : ' , item)
           if (item?.lawyer_chat == null) {
             this.$store.commit("SET_CHATSTATUS", "new");
           } else {
@@ -711,7 +712,7 @@ app.mixin({
               if (key == "identity") {
                 objKey = "Job no";
               }
-              
+
               if (key == "owner") {
                 objKey = "Client details";
                 value = `<b>Name : </b>${value?.first_name} ${value?.last_name}, <b>Email : </b>${value?.email}, <b>Phone : </b>${value?.phone}`;
@@ -809,181 +810,312 @@ app.mixin({
       return newObj;
     },
 
+    // openLawyerDetailsModal(data, showSecretInfo = false) {
+    //   console.log("lawyer data : ", data);
+
+    //   // key == "consultation_type" ||
+    //   // key == "consultation_time" || key == "consultation_amount"
+
+    //   let newData = {};
+    //   if (data && typeof data === "object") {
+    //     for (const key in data) {
+    //       if (Object.prototype.hasOwnProperty.call(data, key)) {
+    //         let value = data[key];
+    //         if (showSecretInfo) {
+    //           if (
+    //             value !== null &&
+    //             value != 0 &&
+    //             // key == "first_name" ||
+    //             // key == "last_name" ||
+    //             (key == "image" ||
+    //               key == "job_title" ||
+    //               key == "email" ||
+    //               key == "address" ||
+    //               key == "phone" ||
+    //               key == "link" ||
+    //               key == "job_title" ||
+    //               key == "law_firm" ||
+    //               key == "suburb" ||
+    //               key == "remote_consultation" ||
+    //               key == "mobile_friendly")
+    //           ) {
+    //             let objKey = key;
+    //             objKey = objKey.replace(/_/g, " ");
+    //             if (key == "link") {
+    //               objKey = "Website";
+    //             }
+    //             if (key == "remote_consultation") {
+    //               objKey = "<i class='fa fa-check-square fa1'></i>";
+    //               value = "<b>Remote Consultations</b>";
+    //             }
+    //             if (key == "mobile_friendly") {
+    //               objKey = "<i class='fa fa-check-square fa2'></i>";
+    //               value = "<b>Mobile-Friendly</b>";
+    //             }
+    //             newData[objKey] = value;
+    //           }
+    //         } else {
+    //           if (
+    //             value !== null &&
+    //             value != 0 &&
+    //             (key == "first_name" ||
+    //               key == "job_title" ||
+    //               key == "law_firm" ||
+    //               key == "link")
+    //           ) {
+    //             let objKey = key;
+    //             objKey = objKey.replace(/_/g, " ");
+    //             if (key == "link") {
+    //               objKey = "Website";
+    //             }
+    //             newData[objKey] = value;
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    //   // let job_firm = "";
+    //   let title = "";
+    //   if (showSecretInfo) {
+    //     title = `${this.capitalizeFirstLetter(
+    //       data?.first_name
+    //     )} ${this.capitalizeFirstLetter(data?.last_name)}`;
+
+    //     // if type lawyer than show consultation info
+
+    //     newData = this.moveKeyToIndex(newData, "image", 0);
+    //       // newData = this.moveKeyToIndex(newData, "address", -2);
+    //       // newData = this.moveKeyToIndex(newData, "suburb", -4);
+
+    //       console.log("check cehck 1 : ", data);
+    //     if (data?.type == "lawyer" && (data?.consultation_type.toLowerCase() == 'discounted' || data?.consultation_type.toLowerCase() == 'free')) {
+    //       console.log("check cehck : ", data);
+
+    //       // if (data?.job_title != null && data?.law_firm != null){
+    //       //   job_firm = `${data?.job_title} at ${data?.law_firm}`;
+    //       //   console.log('111111 : ' , job_firm);
+    //       // }else if(data?.job_title != null){
+    //       //   console.log('222222');
+    //       //   job_firm = `${data?.job_title}`;
+    //       // }else if(data?.law_firm != null){
+    //       //   console.log('33333');
+    //       //   job_firm `${data?.law_firm}`;
+    //       // }
+
+    //       let consultation_content = "";
+
+    //       if (
+    //         this.checkObjKeyValue(data, "consultation_type") &&
+    //         data?.consultation_type &&
+    //         data?.consultation_type == "discounted"
+    //       ) {
+    //         consultation_content = `<span>
+    //               ${this.capitalizeFirstLetter(
+    //                 data?.consultation_type
+    //               )} - $${this.formatNumber(data?.consultation_amount)}/${
+    //           data?.consultation_time
+    //         } mins
+    //             </span>`;
+    //       }
+
+    //       if (
+    //         data?.consultation_type &&
+    //         data?.consultation_type == "free"
+    //       ) {
+    //         consultation_content = ` <span>
+    //               ${this.capitalizeFirstLetter(data?.consultation_type)} - ${
+    //           data?.consultation_time
+    //         } mins
+    //             </span>`;
+    //       }
+
+    //       // if (
+    //       //   this.checkObjKeyValue(data, "consultation_time") &&
+    //       //   data?.consultation_type &&
+    //       //   data?.consultation_type == "no"
+    //       // ) {
+    //       //   consultation_content = ` <span>
+    //       //         ${this.capitalizeFirstLetter(data?.consultation_type)}
+    //       //       </span>`;
+    //       // }
+
+    //       newData["Initial Consultation"] = consultation_content;
+    //       console.log("this data : ", newData);
+    //       // newData = this.moveKeyToIndex(newData, "Initial Consultation", -1);
+
+    //       console.log("this data : ", newData);
+    //     }
+    //   } else {
+    //     title = `${this.capitalizeFirstLetter(data?.type)} Details`;
+    //   }
+
+    //   console.log("new new data data : ", newData);
+
+    //   const htmlContent = Object.entries(newData)
+    //     .map(([key, value]) => {
+    //       if (key == "image" && value != null) {
+    //         return `<div v-if="image" class="circular-container popup-image me-2 "><img src="${this.createImage(
+    //           value
+    //         )}" alt="User Image" class="circular-image"></div><div>`;
+    //       }
+    //       // else if(key == "job_title" && job_firm != ''){
+    //       //   return `<div>${job_firm} aaaaa</div>`;
+    //       // }
+    //       else {
+    //         return `<div class="wrapper" v-if="value != null">
+    //         <h6><b style="text-transform: capitalize;">${key}
+    //         ${
+    //           value == "<b>Mobile-Friendly</b>" ||
+    //           value == "<b>Remote Consultations</b>"
+    //             ? ""
+    //             : ":"
+    //         } </b><span>${value}</span></h6></div>`;
+    //       }
+    //     })
+    //     .join("");
+
+    //   //   <div v-if="image" class="circular-container">
+    //   //   <img :src="image" alt="User Image" class="circular-image">
+    //   // </div>
+
+    //   // Use dynamic HTML inside SweetAlert2 modal
+    //   this.$swal.fire({
+    //     title: title,
+    //     html: `<div class="table-wrap ${
+    //       data?.type == "lawyer" ? "d-flex" : ""
+    //     } justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
+    //     showCloseButton: true,
+    //     showConfirmButton: false,
+    //     customClass: {
+    //       container: "my-swal-container", // You can define your custom class for styling
+    //     },
+    //   });
+    // },
+
     // for lawyer and client details both
     openLawyerDetailsModal(data, showSecretInfo = false) {
-      console.log("lawyer data : ", data);
-
-      // key == "consultation_type" ||
-      // key == "consultation_time" || key == "consultation_amount"
-
-      let newData = {};
-      if (data && typeof data === "object") {
-        for (const key in data) {
-          if (Object.prototype.hasOwnProperty.call(data, key)) {
-            let value = data[key];
-            if (showSecretInfo) {
-              if (
-                value !== null &&
-                value != 0 &&
-                // key == "first_name" ||
-                // key == "last_name" ||
-                (key == "image" ||
-                  key == "job_title" ||
-                  key == "email" ||
-                  key == "address" ||
-                  key == "phone" ||
-                  key == "link" ||
-                  key == "job_title" ||
-                  key == "law_firm" ||
-                  key == "suburb" ||
-                  key == "remote_consultation" ||
-                  key == "mobile_friendly")
-              ) {
-                let objKey = key;
-                objKey = objKey.replace(/_/g, " ");
-                if (key == "link") {
-                  objKey = "Website";
-                }
-                if (key == "remote_consultation") {
-                  objKey = "<i class='fa fa-check-square fa1'></i>";
-                  value = "<b>Remote Consultations</b>";
-                }
-                if (key == "mobile_friendly") {
-                  objKey = "<i class='fa fa-check-square fa2'></i>";
-                  value = "<b>Mobile-Friendly</b>";
-                }
-                newData[objKey] = value;
-              }
-            } else {
-              if (
-                value !== null &&
-                value != 0 &&
-                (key == "first_name" ||
-                  key == "job_title" ||
-                  key == "law_firm" ||
-                  key == "link")
-              ) {
-                let objKey = key;
-                objKey = objKey.replace(/_/g, " ");
-                if (key == "link") {
-                  objKey = "Website";
-                }
-                newData[objKey] = value;
-              }
-            }
-          }
-        }
+      console.log(data);
+      console.log(showSecretInfo);
+      let image = "";
+      if (data?.image != "" && data?.image != "" && data?.type == 'lawyer' && showSecretInfo) {
+        image = `<div v-if="image" class="circular-container popup-image me-2 "><img src="${this.createImage(
+          data?.image
+        )}" alt="Image not uploaded" class="circular-image"></div>`;
       }
-      // let job_firm = "";
+
       let title = "";
       if (showSecretInfo) {
-        title = `${this.capitalizeFirstLetter(
-          data?.first_name
-        )} ${this.capitalizeFirstLetter(data?.last_name)}`;
-
-        // if type lawyer than show consultation info
-
-        newData = this.moveKeyToIndex(newData, "image", 0);
-          // newData = this.moveKeyToIndex(newData, "address", -2);
-          // newData = this.moveKeyToIndex(newData, "suburb", -4);
-
-          console.log("check cehck 1 : ", data);
-        if (data?.type == "lawyer" && (data?.consultation_type.toLowerCase() == 'discounted' || data?.consultation_type.toLowerCase() == 'free')) {
-          console.log("check cehck : ", data);
-
-          // if (data?.job_title != null && data?.law_firm != null){
-          //   job_firm = `${data?.job_title} at ${data?.law_firm}`;
-          //   console.log('111111 : ' , job_firm);
-          // }else if(data?.job_title != null){
-          //   console.log('222222');
-          //   job_firm = `${data?.job_title}`;
-          // }else if(data?.law_firm != null){
-          //   console.log('33333');
-          //   job_firm `${data?.law_firm}`;
-          // }
-
-          let consultation_content = "";
-
-          if (
-            this.checkObjKeyValue(data, "consultation_type") &&
-            data?.consultation_type &&
-            data?.consultation_type == "discounted"
-          ) {
-            consultation_content = `<span>
-                  ${this.capitalizeFirstLetter(
-                    data?.consultation_type
-                  )} - $${this.formatNumber(data?.consultation_amount)}/${
-              data?.consultation_time
-            } mins
-                </span>`;
-          }
-
-          if (
-            data?.consultation_type &&
-            data?.consultation_type == "free"
-          ) {
-            consultation_content = ` <span>
-                  ${this.capitalizeFirstLetter(data?.consultation_type)} - ${
-              data?.consultation_time
-            } mins
-                </span>`;
-          }
-
-          // if (
-          //   this.checkObjKeyValue(data, "consultation_time") &&
-          //   data?.consultation_type &&
-          //   data?.consultation_type == "no"
-          // ) {
-          //   consultation_content = ` <span>
-          //         ${this.capitalizeFirstLetter(data?.consultation_type)}
-          //       </span>`;
-          // }
-
-          newData["Initial Consultation"] = consultation_content;
-          console.log("this data : ", newData);
-          // newData = this.moveKeyToIndex(newData, "Initial Consultation", -1);
-          
-
-          console.log("this data : ", newData);
-        }
-      } else {
-        title = `${this.capitalizeFirstLetter(data?.type)} Details`;
+        title = `${this.capitalizeFirstLetter(data?.first_name)} ${this.capitalizeFirstLetter(data?.last_name)}`;
+      }else{
+        title = `${this.capitalizeFirstLetter(data?.first_name)}`;
       }
 
-      console.log("new new data data : ", newData);
+      let htmlContent = `${image}`;
 
-      const htmlContent = Object.entries(newData)
-        .map(([key, value]) => {
-          if (key == "image" && value != null) {
-            return `<div v-if="image" class="circular-container popup-image me-2 "><img src="${this.createImage(
-              value
-            )}" alt="User Image" class="circular-image"></div><div>`;
-          }
-          // else if(key == "job_title" && job_firm != ''){
-          //   return `<div>${job_firm} aaaaa</div>`;
-          // }
-          else {
-            return `<div class="wrapper" v-if="value != null">
-            <h6><b style="text-transform: capitalize;">${key}
-            ${
-              value == "<b>Mobile-Friendly</b>" ||
-              value == "<b>Remote Consultations</b>"
-                ? ""
-                : ":"
-            } </b><span>${value}</span></h6></div>`;
-          }
-        })
-        .join("");
+      let consultation_content = "";
+      if (
+        data?.type == "lawyer" && showSecretInfo &&
+        (data?.consultation_type.toLowerCase() == "discounted" ||
+          data?.consultation_type.toLowerCase() == "free")
+      ) {
+        if (
+          this.checkObjKeyValue(data, "consultation_type") &&
+          data?.consultation_type &&
+          data?.consultation_type == "discounted"
+        ) {
+          consultation_content = `<span>
+                      ${this.capitalizeFirstLetter(
+                        data?.consultation_type
+                      )} - $${this.formatNumber(data?.consultation_amount)}/${
+            data?.consultation_time
+          } mins
+                    </span>`;
+        }
 
-      //   <div v-if="image" class="circular-container">
-      //   <img :src="image" alt="User Image" class="circular-image">
-      // </div>
+        if (data?.consultation_type && data?.consultation_type == "free") {
+          consultation_content = ` <span>
+                      ${this.capitalizeFirstLetter(
+                        data?.consultation_type
+                      )} - ${data?.consultation_time} mins
+                    </span>`;
+        }
+      }
+      htmlContent += `<div>`;
+      if (data?.first_name != null && data?.first_name != "" && !showSecretInfo) {
+        htmlContent += `
+            <div class="wrapper">
+              <h6><b style="text-transform: capitalize;">Name
+              : </b><span>${data?.first_name}</span></h6>
+            </div>`;
+      }
+      if (data?.email != null && data?.email != "" && showSecretInfo) {
+        htmlContent += `
+            <div class="wrapper">
+              <h6><b style="text-transform: capitalize;">email
+              : </b><span>${data?.email}</span></h6>
+            </div>`;
+      }
+      if (data?.phone != null && data?.phone != "" && showSecretInfo) {
+        htmlContent += ` <div class="wrapper">
+        <h6><b style="text-transform: capitalize;">phone
+        : </b><span>${data?.phone}</span></h6>
+      </div>`;
+      }
+      if (data?.job_title != null && data?.job_title != "") {
+        htmlContent += ` <div class="wrapper">
+        <h6><b style="text-transform: capitalize;">job title
+        : </b><span>${data?.job_title}</span></h6>
+      </div>`;
+      }
+      if (data?.law_firm != null && data?.law_firm != "") {
+        htmlContent += `<div class="wrapper">
+        <h6><b style="text-transform: capitalize;">law firm
+        : </b><span>${data?.law_firm}</span></h6>
+      </div>`;
+      }
+      if (data?.link != null && data?.link != "") {
+        htmlContent += `<div class="wrapper">
+        <h6><b style="text-transform: capitalize;">Website
+        : </b><span>${data?.link}</span></h6>
+      </div>`;
+      }
+      if (data?.address != null && data?.address != "" && showSecretInfo) {
+        htmlContent += ` <div class="wrapper" >
+        <h6><b style="text-transform: capitalize;">address
+        : </b><span>${data?.address}</span></h6>
+      </div>`;
+      }
+      if (data?.suburb != null && data?.suburb != "") {
+        htmlContent += ` <div class="wrapper" >
+        <h6><b style="text-transform: capitalize;">suburb
+        : </b><span>${data?.suburb}</span></h6>
+      </div>`;
+      }
+      if (consultation_content != null && consultation_content != "" && showSecretInfo) {
+        htmlContent += ` <div class="wrapper" >
+        <h6><b style="text-transform: capitalize;">Initial Consultation
+        : </b><span>${consultation_content}</span></h6>
+      </div>`;
+      }
+      if (data?.remote_consultation && showSecretInfo) {
+        htmlContent += ` <div class="wrapper">
+        <h6><b style="text-transform: capitalize;"><i class="fa fa-check-square fa1"></i>
+            </b><span><b>Remote Consultations</b></span>
+        </h6>
+      </div>`;
+      }
+      if (data?.mobile_friendly && showSecretInfo) {
+        htmlContent += ` <div class="wrapper">
+        <h6><b style="text-transform: capitalize;"><i class="fa fa-check-square fa2"></i>
+            </b><span><b>Mobile-Friendly</b></span></h6></div>`;
+      }
 
-      // Use dynamic HTML inside SweetAlert2 modal
+      htmlContent += `</div>`;
+
       this.$swal.fire({
-        title: title,
+        title: showSecretInfo ? title : `${data?.type} Details`,
         html: `<div class="table-wrap ${
-          data?.type == "lawyer" ? "d-flex" : ""
+          data?.type == "lawyer" && showSecretInfo ? "d-flex" : ""
         } justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
         showCloseButton: true,
         showConfirmButton: false,
@@ -1421,7 +1553,9 @@ app.mixin({
         .join("");
 
       return `
-        <div class="table-title text-start fw-bold mb-1">${!renderAsHtml ? title : ""}</div>
+        <div class="table-title text-start fw-bold mb-1">${
+          !renderAsHtml ? title : ""
+        }</div>
         <table class='table dynamicTable'>
           <thead>
             <tr class='border'>
@@ -1474,7 +1608,9 @@ app.mixin({
         .join("");
 
       return `
-        <div class="table-title text-start fw-bold mb-1">${!renderAsHtml ? title : ""}</div>
+        <div class="table-title text-start fw-bold mb-1">${
+          !renderAsHtml ? title : ""
+        }</div>
         <table class='table dynamicTable'>
           <thead>
             <tr>

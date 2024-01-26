@@ -154,8 +154,8 @@
                     </div> -->
                     <p class="text-capitalize text-black fw-normal mb-1">
                       {{
-                        item?.fixed_fee_amount
-                          ? "$" + formatNumber(item?.fixed_fee_amount)
+                        item?.total_with_gst
+                          ? "$" + formatNumber(item?.total_with_gst)
                           : ""
                       }}
                     </p>
@@ -204,14 +204,15 @@
                           <i class="bi bi-check-lg"></i> Accept
                         </button>
                       </form>
+                      <!-- :disabled="!disableMessageButton(item)" -->
                       <button
-                        :disabled="!disableMessageButton(item)"
                         class="btn btn-light btn-sm p-1 px-2 w-75 rounded-pill mb-1 border"
-                        @click="goToMessagePage(item?.job, 'client')"
+                        @click="goToMessagePage2(item)"
                       >
-                        Message{{
+                        Message
+                        <!-- {{
                           !disableMessageButton(item) ? ", (N/A)" : ""
-                        }}
+                        }} -->
                       </button>
                       <button
                         class="btn btn-danger btn-sm p-1 px-2 mb-1 w-75 rounded-pill"
@@ -304,6 +305,43 @@ export default {
   },
 
   methods: {
+
+    goToMessagePage2(item = null) {
+      if (item) {
+        console.log('item mm mm : ' , item);
+        this.saveJobInfo(item?.job);
+        // this.saveLoadMoreData();
+
+        this.$store.commit("SET_JOBIDTOCHAT", item?.job?.id);
+        // this.$store.commit("SET_DATATAB", this.tab);
+        
+      
+          this.$store.commit("SET_USERTOCHAT", item?.lawyer);
+          if (item?.lawyer_chat == null) {
+            this.$store.commit("SET_CHATSTATUS", "new");
+          } else {
+            this.$store.commit("SET_CHATSTATUS", "old");
+          }
+      
+      }
+
+      // if (item == null) {
+      //   console.log("else else else");
+      //   this.saveJobInfo(null, reset);
+      //   this.saveLoadMoreData(reset);
+      //   this.$store.commit("SET_JOBIDTOCHAT", null);
+      //   this.$store.commit("SET_DATATAB", null);
+      //   this.$store.commit("SET_USERTOCHAT", null);
+      //   this.$store.commit("SET_CHATSTATUS", null);
+      // }
+      this.$store.commit("SET_IS_NOT_HEADER_CHAT", true);
+      
+      this.$router.push({
+        path: "/messages-history",
+        query: { job: item?.job?.id },
+      });
+    },
+
     // openModal(charge_type) {
     //   // Show Bootstrap Modal
     //   if(charge_type){

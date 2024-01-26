@@ -718,6 +718,7 @@ export default {
           // All popups are closed, hit the API with proposal IDs
           const proposalIds = this.accepted_unseen_proposals.map(element => element.id);
           this.acceptedProposalMessageSeen(proposalIds);
+          this.$store.commit('SET_ACCEPTED_UNSEEN_PROPOSALS',[]);
         }
       }
 
