@@ -237,6 +237,7 @@
                   <i class="fa fa-undo fs-small"></i>
                 </button>
                 <button
+                  v-if="tab == 'open' || tab == 'withoutarea'"
                   data-v-7525850d=""
                   class="btn btn-sm btn-danger border-0 py-1 px-2"
                   style="background-color: black !important"
@@ -245,7 +246,7 @@
                   <i  class="fa fa-trash"></i>
                 </button>
                 <button
-                  v-if="tab == 'open' || tab == 'overdue' || tab == 'withoutarea'"
+                  v-if="tab == 'open' || tab == 'pending'  || tab == 'overdue' || tab == 'withoutarea'"
                   class="btn btn-sm btn-danger border-0 mx-1 py-1 px-2"
                   style="background-color: black !important"
                   @click="openJobDetailModal(item,tab == 'withoutarea' ? true : false)"

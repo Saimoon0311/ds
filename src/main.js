@@ -1015,6 +1015,7 @@ app.mixin({
       let consultation_content = "";
       if (
         data?.type == "lawyer" && showSecretInfo &&
+        data?.consultation_type != null &&
         (data?.consultation_type.toLowerCase() == "discounted" ||
           data?.consultation_type.toLowerCase() == "free")
       ) {

@@ -152,6 +152,7 @@
         <table class="table table-layout" id="bidsActive">
               <thead class="">
                 <tr>
+                  <!-- <th class="">ID</th> -->
                   <th class="">Lawyer</th>
 
                   <th>
@@ -201,7 +202,7 @@
                   v-for="(item, index) in data_paginated"
                   :key="index"
                 >
-                  <!-- <td>testing client (crinimal)</td> -->
+                  <!-- <td>{{ item?.id }}</td> -->
                   <td class="text-center" style="width: 15%">
                     <p
                       @click="
