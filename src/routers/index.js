@@ -69,6 +69,8 @@ import ClientFaqs from "@/pages/ClientFaqs.vue";
 import LawyerFaqs from "@/pages/LawyerFaqs.vue";
 import NotFound from "@/components/NotFound.vue";
 import WizardForm from "../pages/WizardForm.vue";
+import NewLanding from "../pages/NewLanding.vue";
+import InquiryPg from "../pages/InquiryPg.vue";
 
 import store from "../store";
 
@@ -403,7 +405,14 @@ const routes = [
     path: "/how-simplawfy-works",
     component: HowSimplawfyWorks,
   },
-
+  {
+    path: "/lp",
+    component: InquiryPg,
+  },
+  {
+    path: "/new",
+    component: NewLanding,
+  },
   {
     path: "/client-faqs",
     component: ClientFaqs,
