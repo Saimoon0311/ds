@@ -6,13 +6,13 @@
         style="border-bottom: 1px solid lightgrey"
       >
         <div class="container-fluid">
-          <a class="navbar-brand" href="">
+          <router-link class="navbar-brand" to="/admin-dashboard">
             <img
               src="../../assets/images/admin-logo.png"
               class="logo-small"
               alt="logo"
             />
-          </a>
+          </router-link>
           <button
             class="navbar-toggler cstm-dropdown"
             type="button"

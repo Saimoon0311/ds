@@ -190,7 +190,7 @@
                         class="btn btn-sm btn-dark softblue card-btn my-1 mx-1 border"
                         @click="goToViewProposals(item)"
                       >
-                        View Proposal
+                        View Proposal{{ this.tab == 'open' ? 's' : ''}}
                       </button>
                       <button
                       v-if="tab == 'open'"

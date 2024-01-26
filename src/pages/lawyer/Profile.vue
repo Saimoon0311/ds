@@ -1512,7 +1512,7 @@ export default {
               this.loginUser?.admin_approval == "approve"
             ) {
               msg =
-                "Areas of practice will be updated after admin verification";
+                "Thanks for submitting your details. They'll be updated pending verification.";
             } else {
               msg = "Areas of practice updated successfully";
             }
@@ -1548,7 +1548,7 @@ export default {
               this.loginUser?.state_insert &&
               this.loginUser?.admin_approval == "approve"
             ) {
-              msg = "Locations will be updated after admin verification";
+              msg = "Thanks for submitting your details. They'll be updated pending verification.";
             } else {
               msg = "Locations updated successfully";
             }

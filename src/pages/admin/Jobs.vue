@@ -457,6 +457,12 @@ export default {
     this.fetchAreas();
     // for pagination
   },
+
+  beforeUnmount(){
+    this.$store.commit('SET_PAGINATION_LAST',null);
+    this.$store.commit('set_pagination_page',1);
+  },
+
   methods: {
 
     closeModal(modalId) {
