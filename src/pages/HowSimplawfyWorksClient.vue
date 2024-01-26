@@ -53,8 +53,7 @@
   
  
  
-  <div class="container-fluid pt-5"  >
-  
+  <div class="container-fluid pt-5"  >  
       <div class="mainbox">
         <div class="row">
           <div class="col">
@@ -385,6 +384,9 @@ p {
 }
 
 @media only screen and (max-width: 767px) {
+  .how-tabs a{
+        padding: 10px 30px;
+    }
   .col {
     width: 50%;
     flex: none;
