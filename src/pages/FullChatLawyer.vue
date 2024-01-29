@@ -59,14 +59,15 @@
 
               </span>
 
-              <span v-if="loginUser?.type == 'client' && (data?.client_seen == 0 ||
-                data?.client_seen == false ||
-                data?.client_seen == null)" class="badge bg-dark mx-1">New Message</span>
+              <span v-if="messages.length > 0 && data?.id !== userSelectedIndex">
+                <span v-if="loginUser?.type == 'client' && (data?.client_seen == 0 ||
+                  data?.client_seen == false ||
+                  data?.client_seen == null)" class="badge bg-dark mx-1">New Message</span>
 
-              <span v-if="loginUser?.type == 'lawyer' && (data?.lawyer_seen == 0 ||
-                data?.lawyer_seen == false ||
-                data?.lawyer_seen == null)" class="badge bg-dark mx-1">New Message</span>
-
+                <span v-if="loginUser?.type == 'lawyer' && (data?.lawyer_seen == 0 ||
+                  data?.lawyer_seen == false ||
+                  data?.lawyer_seen == null)" class="badge bg-dark mx-1">New Message</span>
+              </span>
 
             </li>
           </ul>
@@ -93,8 +94,6 @@
               <!-- <div v-if="chatStatus && jobId && userFirst && userSecond && jobTabName != 'close'" class="chatbox col-md-7 m-auto"> -->
               <!-- class="chatbox col-md-7 m-auto -->
               <div>
-
-
                 <div v-if="chatStatus == 'new' && userFirst?.type == 'lawyer'" class="alert alert-danger" role="alert">
                   You can only send one message to the client if you need more information about the job in order to
                   submit a proposal. If they respond to your message however, you will be able to communicate freely.
@@ -185,6 +184,7 @@ export default {
       searchClient: '',
       lawyerSelected: false,
       clientSelected: false,
+      lawyerMessageExist: false,
       chatId: null,
       chats: null,
       chat: null,
@@ -236,13 +236,21 @@ export default {
       handler(newValue) {
         if (newValue) {
           // Handle the changes, for example, display a notification
-          console.log('noti changed 2 :', newValue);
+          console.log('noti changed 2 3 4 5 6 7:', newValue);
           console.log('data : ', this.client_data);
           console.log('data 2 : ', this.client_data2);
           // this.$swal(newValue?.notification?.title, newValue?.notification?.body, 'success');
 
-          // const noti = JSON.parse(newValue?.data?.payload);
-          // console.log(noti);
+          // if lawyer message exist in chat and recieve message from client as a replay
+          if (this.userFirst?.type == 'lawyer') {
+            const noti = JSON.parse(newValue?.data?.payload);
+            console.log(noti?.sender_id);
+            const userFirstMessageExist = this.messages.some(msg => msg.sender_email === this.userFirst?.email);
+            if (userFirstMessageExist && noti?.sender_id == this.userSecond?.id) {
+              this.$store.commit("SET_CHATSTATUS", "old");
+            }
+          }
+
 
           // this.moveObjectToTop(this.client_data2, noti?.chat_id)
           // console.log(this.client_data2);
@@ -489,21 +497,112 @@ export default {
       }
     },
 
+    // new or old 
+    checkChatStatusForLawyer() {
+      // if (this.messages.length > 0) {
+      // const lastMessage = this.messages[this.messages.length - 1];
+      // const emailInLastMessage = this.messages.length > 0 && lastMessage.sender_email === this.userFirst?.email;
+      // const emailInOtherMessages = this.messages.slice(0, -1).some(message => message.sender_email === this.userFirst?.email);
+      // console.log('lastMessage : ', lastMessage);
+      // console.log('emailInLastMessage : ', emailInLastMessage);
+      // console.log('emailInOtherMessages : ', emailInOtherMessages);
+
+
+
+      const userFirstEmail = this.userFirst?.email;
+      const userSecondEmail = this.userSecond?.email;
+      const indexOfUserFirst = this.messages.findIndex(message => message.sender_email === userFirstEmail);
+
+      console.log('c 1 : ', this.messages);
+      console.log('c 2 : ', userFirstEmail);
+      console.log('c 3 : ', indexOfUserFirst);
+
+      if (indexOfUserFirst !== -1) {
+        this.lawyerMessageExist = true;
+        // Check if userSecond?.email exists after the first occurrence of userFirst?.email
+        const userSecondExistsAfterUserFirst = this.messages
+          .slice(indexOfUserFirst + 1)
+          .some(message => message.sender_email === userSecondEmail);
+
+        if (userSecondExistsAfterUserFirst) {
+          console.log('old if if if');
+          this.$store.commit("SET_CHATSTATUS", "old");
+        } else {
+          console.log('new if if if');
+          console.log(`${userSecondEmail} does not exist after the first occurrence of ${userFirstEmail}.`);
+          this.$store.commit("SET_CHATSTATUS", "new");
+        }
+      } else {
+        console.log('else if if if');
+        console.log(`${userFirstEmail} not found in messages.`);
+        this.$store.commit("SET_CHATSTATUS", "new");
+      }
+
+
+      // if (emailInOtherMessages && !emailInLastMessage) {
+      //   this.$store.commit("SET_CHATSTATUS", "old");
+      // }else{
+      //   this.$store.commit("SET_CHATSTATUS", "new");
+      // } 
+
+      // else if (!emailNotInOtherMessages && emailInLastMessage) {
+      //   this.$store.commit("SET_CHATSTATUS", "new");
+      // } else {
+      //   console.log(`${this.userFirst?.email} either does not exist in the last message or is present in other messages.`);
+      //   this.$store.commit("SET_CHATSTATUS", "old");
+      // }
+      // }
+      // else{
+      //   this.$store.commit("SET_CHATSTATUS", "new");
+      // }
+    },
+
+
+    // checkChatStatusForLawyer() {
+    //   const userFirstEmail = this.userFirst?.email;
+    //   const userSecondEmail = this.userSecond?.email;
+
+    //   const indexOfUserFirst = this.messages.findIndex(message => message.sender_email === userFirstEmail);
+
+    //   if (indexOfUserFirst !== -1 && indexOfUserFirst < this.messages.length - 1) {
+    //     // Check if userSecond?.email exists after the first occurrence of userFirst?.email
+    //     const userSecondExistsAfterUserFirst = this.messages
+    //       .slice(indexOfUserFirst + 1)
+    //       .some(message => message.sender_email === userSecondEmail);
+
+    //     if (userSecondExistsAfterUserFirst) {
+    //       console.log(`${userSecondEmail} exists after the first occurrence of ${userFirstEmail}.`);
+    //       this.$store.commit("SET_CHATSTATUS", "new");
+    //     } else {
+    //       console.log(`${userSecondEmail} does not exist after the first occurrence of ${userFirstEmail}.`);
+    //       this.$store.commit("SET_CHATSTATUS", "old");
+    //     }
+    //   } else {
+    //     console.log(`${userFirstEmail} not found or is the last message.`);
+    //     this.$store.commit("SET_CHATSTATUS", "new");
+    //   }
+    // },
+
+
     // this.$store.commit("SET_JOB_DATA", data?.job);
 
     startChatForAllMessages(data, changeJobData = true, rowIndex = null) {
 
+      console.log('user 1 data : ', this.userFirst);
+      console.log('user 2 data : ', this.userSecond);
 
-      if (this.userFirst?.type == "lawyer") {
-        console.log('t1 : ', data)
-        if (data?.job?.lawyer_chat == null) {
-          console.log('t2 : ')
-          this.$store.commit("SET_CHATSTATUS", "new");
-        } else {
-          console.log('t3 : ')
-          this.$store.commit("SET_CHATSTATUS", "old");
-        }
-      }
+      // if (this.userFirst?.type == "lawyer") {
+      //   this.checkChatStatusForLawyer();
+      //   // console.log('messages show : ', this.messages);
+      //   // console.log('t1 : ', data)
+      //   // if (data?.job?.lawyer_chat == null) {
+      //   //   console.log('t2 : ')
+      //   //   this.$store.commit("SET_CHATSTATUS", "new");
+      //   // } else {
+      //   //   console.log('t3 : ')
+      //   //   this.$store.commit("SET_CHATSTATUS", "old");
+      //   // }
+      // }
 
       console.log("start chat for all messages");
       const index = data?.id;
@@ -546,6 +645,9 @@ export default {
 
 
     userSeenStatusUpdate(data, index) {
+      // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+      // console.log(this.messages);
+      // if (this.messages.length > 0) {
       const type = this.loginUser?.type;
       api2.post('/update-seen-status', { "id": data?.id, "status": true, type }).then(() => {
         // console.log(this.lawyer_data)
@@ -554,6 +656,7 @@ export default {
       }).catch((err) => {
         console.log(err);
       })
+      // }
     },
 
     loadMessages(runSnapshot) {
@@ -579,13 +682,41 @@ export default {
           console.log('snap :::: ', snapshot);
           console.log('load run ', runSnapshot);
 
-          this.messages = snapshot.docs.map(doc => doc.data()).sort((a, b) => a.timestamp - b.timestamp);
-
+          // this.messages = snapshot.docs.map(doc => doc.data()).sort((a, b) => a.timestamp - b.timestamp);
+          this.getMessages(messagesRef)
+            .then((messages) => {
+              this.messages = messages;
+              if (this.userFirst?.type == "lawyer") {
+                this.checkChatStatusForLawyer();
+              }
+            }).catch((err) => console.log(err));
         });
       }
 
-      console.log('chat id 4::::: ', this.messages);
+      console.log('chat id 4::::: 4', this.messages);
+
     },
+
+
+    getMessages(messagesRef) {
+      // console.log('db ::: ' , db);
+      return new Promise((resolve, reject) => {
+        onSnapshot(
+          messagesRef,
+          (snapshot) => {
+            const messages = snapshot.docs
+              .map((doc) => doc.data())
+              .sort((a, b) => a.timestamp - b.timestamp);
+            resolve(messages);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    },
+
+
     sendMessage() {
       console.log(addDoc);
       console.log(serverTimestamp);
@@ -596,15 +727,15 @@ export default {
         return false;
       }
 
-      if (this.messages.length > 0 && this.userFirst?.type == 'lawyer') {
-        if (
-          this.messages.length == 1 &&
-          this.messages[0]?.sender_email == this.userFirst?.email
-        ) {
-          this.$swal("", "You are only permitted to send one message initially. If the potential client responds to your message then you will be able to communicate freely.", "error");
-          this.newMessage = '';
-          return false;
-        }
+      if (this.messages.length > 0 && this.userFirst?.type == 'lawyer' && this.chatStatus == "new" && this.lawyerMessageExist) {
+        // if (
+        // this.messages.length == 1 &&
+        // this.messages[0]?.sender_email == this.userFirst?.email
+        // ) {
+        this.$swal("", "You are only permitted to send one message initially. If the potential client responds to your message then you will be able to communicate freely.", "error");
+        this.newMessage = '';
+        return false;
+        // }
       }
 
       // console.log(this.chatStatus);
@@ -627,21 +758,14 @@ export default {
         timestamp: serverTimestamp(),
       }).then((docRef) => {
         console.log(this.userFirst);
-        const lawyer_id = (this.userFirst?.type == "lawyer") ? this.userFirst?.id : this.userSecond?.id;
-        const client_id = (this.userFirst?.type == "client") ? this.userFirst?.id : this.userSecond?.id;
+
 
         console.log('dosra user : ', this.userSecond);
 
 
         // if (this.chatStatus == "new" && this.userFirst?.type == "lawyer") {
         console.log(' cht status : ', this.chatStatus);
-        if (this.chatStatus == "new") {
-          api2.post('/save-chat-info', { "lawyer_id": lawyer_id, "client_id": client_id, "job_id": this.jobId, "chat_id": this.chatId }).then(() => {
-            this.$store.commit('SET_CHATSTATUS', 'old');
-          }).catch((err) => {
-            console.log(err);
-          })
-        }
+        this.saveChatInDB();
         // if (this.chatStatus != "new" && this.userFirst?.type == "lawyer") {
         //   const type = this.loginUser?.type;
         //   api2.post('/update-seen-status', { "id": this.chatId, "status": false, type });
@@ -673,6 +797,36 @@ export default {
         });
       this.newMessage = '';
     },
+
+    saveChatInDB() {
+      const lawyer_id = (this.userFirst?.type == "lawyer") ? this.userFirst?.id : this.userSecond?.id;
+      const client_id = (this.userFirst?.type == "client") ? this.userFirst?.id : this.userSecond?.id;
+      if (this.chatStatus == "new" || (this.userFirst?.type == 'client' && this.messages.length == 1)) {
+        api2.post('/save-chat-info', { "type": this.userFirst?.type, "lawyer_id": lawyer_id, "client_id": client_id, "job_id": this.jobId, "chat_id": this.chatId }).then(() => {
+          // this.$store.commit('SET_CHATSTATUS', 'old');
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
+
+      // update client seen status and send email to lawyer about client first time reply on his message 
+      // this.messages.length > 1
+      if (this.userFirst?.type == 'client') {
+        // .slice(0, -1);
+        const messagesExceptLast = this.messages;
+        const lawyerMessageExist = messagesExceptLast.some(msg => msg.sender_email == this.userSecond?.email);
+        if (lawyerMessageExist) {
+          api2.post('/update-reply-status', { "id": this.chatId, "status": 1 }).then(() => {
+            // this.$store.commit('SET_CHATSTATUS', 'old');
+          }).catch((err) => {
+            console.log(err);
+          })
+        }
+      }
+
+
+
+    }
 
   },
 };

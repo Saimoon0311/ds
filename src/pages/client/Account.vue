@@ -3,10 +3,7 @@
   <ClientHeader />
   <div class="container">
     <h3 class="mt-3 text-center">Account</h3>
-    <h5 class="mt-2 text-center">Details</h5>
-
-   
-
+  
     <div
       class="modal fade first-name-modal"
       tabindex="-1"
@@ -140,6 +137,9 @@
         </div>
       </div>
     </div>
+
+    <h4 class="mt-4">Details</h4>
+
     <table class="table table-bordered mt-3 mb-3 table-striped">
       <tbody>
         <!-- Email -->
@@ -259,6 +259,7 @@
                   class="form-control"
                   id="email"
                   v-model="email"
+                  placeholder="Enter new email for verification"
                 />
                 <button
                   type="button"
@@ -372,6 +373,7 @@
         </div>
       </div>
       <!-- Modal ends here -->
+    
       <h4 class="mt-4">Delete Account</h4>
         <button @click="deleteAccount" class="btn btn-danger">
           <i class="bi bi-trash-fill"></i> Delete Account
@@ -431,7 +433,7 @@ export default {
         last_name: null,
         phone: null,
       },
-      email : null,
+      email: null,
     }
   },
   computed: {
@@ -444,12 +446,21 @@ export default {
   },
   methods: {
 
-    async sendUpdateEmail(){
+    async sendUpdateEmail() {
       try {
-        await api.post('/send-email-update-link',{"old_email":this?.loginUser?.email,"email" : this.email});
-        this.$swal("", "Please check your new email address for your verification link." , "success");  
+        await api.post('/send-email-update-link', { "old_email": this?.loginUser?.email, "email": this.email });
+        this.$swal("", "Please check your new email address for your verification link.", "success");
       } catch (error) {
-        console.error('Error fetching options:', error);
+        if (error.response && error.response.status === 422) {
+          // Handle validation error (status 422)
+          this.$swal(
+            "Error",
+            "Validation error: " + error.response.data.message,
+            "error"
+          );
+        } else {
+          console.error("Error fetching options:", error);
+        }
       }
     },
 
@@ -488,7 +499,7 @@ export default {
         this.form.first_name = userData.first_name;
         this.form.last_name = userData.last_name;
         this.form.phone = userData.phone;
-        this.email = userData.email;
+        // this.email = userData.email;
       }
       if (notCreated) {
         document.getElementById('prev_password').value = "";

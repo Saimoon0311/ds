@@ -7,12 +7,17 @@
             <div class="center-main col-md-7 reset-p">
                 <div v-if="!tokenExpired" class="bg-dark text-white text-center m-3 p-3" style="border-radius: 10px">
                     <p class="m-4 fs-3 ">Update Email</p>
-                    <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema" v-slot="{errors}">
+                    <!-- v-slot="{errors}" -->
+                    <!-- <Form @submit="submitData" class="p-2 px-md-5 m-md-3" :validation-schema="schema"> -->
+                    <div class="p-2 px-md-5 m-md-3">
                         <div class="d-flex flex-row align-items-center mb-4 align-baseline">
-                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                            <!-- <i class="fas fa-lock fa-lg me-3 fa-fw"></i> -->
+                            <!-- <p>Current Email</p> -->
                             <div class="form-outline flex-fill mb-0">
-                                <Field type="email"  class="form-control" name="email" placeholder="Current Email" :class="{'is-invalid' : errors.email}" />
-                                <span class="invalid-feedback">{{errors.email}}</span>
+                                <p>Current Email</p>
+                                <!-- :class="{'is-invalid' : errors.email}" -->
+                                <input type="email" v-model="email"  class="form-control" name="email" :readonly="{is_readonly : true}" placeholder="Curr0ent Email"  />
+                                <!-- <span class="invalid-feedback">{{errors.email}}</span> -->
                             </div>
                         </div>
 
@@ -25,21 +30,25 @@
                         </div> -->
 
                         <div class="d-flex flex-row align-items-center mb-4 align-baseline">
-                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                            <!-- <i class="fas fa-lock fa-lg me-3 fa-fw"></i> -->
+                            
                             <div class="form-outline flex-fill mb-0">
-                                <Field type="email"  class="form-control" name="new_email" placeholder="New Email" :class="{'is-invalid' : errors.new_email}" />
-                                <span class="invalid-feedback">{{errors.new_email}}</span>
+                                <p>New Email</p>
+                                <!-- :class="{'is-invalid' : errors.new_email}" -->
+                                <input type="email" v-model="new_email"  class="form-control" name="new_email"  :readonly="{is_readonly : true}"  placeholder="New Email"  />
+                                <!-- <span class="invalid-feedback">{{errors.new_email}}</span> -->
                             </div>
                         </div>
 
                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                            <button class="btn btn-outline-light btn-lg px-5">Submit</button>
+                            <router-link to="/lawyer-profile" class="btn btn-outline-light btn-lg px-5">Back</router-link>
+                            <button @click="submitData" class="btn btn-outline-light btn-lg px-5">Submit</button>
                         </div>
                         <!-- <p class="mb-0">Don't have an account?
                             <br>
                             <router-link to="/find-client">Sign Up</router-link>
                         </p> -->
-                    </Form>
+                    </div>
                 </div>
                 <h2 v-else class="text-center">This temporary link has expired. <router-link to="/forget-password" class="btn btn-dark text-white">Reset your password</router-link> </h2>
             </div>
@@ -57,7 +66,7 @@ import GeneralHeader from "../../pages/GeneralHeader.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
 
 
-import { Form, Field } from 'vee-validate';
+// import { Form  } from 'vee-validate';
 import * as yup from "yup";
 export default {
     data() {
@@ -89,8 +98,11 @@ export default {
                 ),
         });
         return {
+            is_readonly : true,
             email: null,
             new_email: null,
+            email2: null,
+            new_email2: null,
             token: null,
             tokenExpired: false,
             schema
@@ -100,13 +112,13 @@ export default {
         // MainHeader,
         GeneralHeader,
         MainFooter,
-        Form,
-        Field,
+        // Form,
+        // Field,
         // MainFooter
     },
     created() {
         // this.checkLogin();
-        this.email = this.$route.params.email;
+        // this.email = this.$route.params.email;
         this.token = this.$route.params.token;
         this.checkToken();
     },
@@ -117,18 +129,25 @@ export default {
         checkToken() {
             api.get(`/check-forget-token/${this.token}`)
                 .then(response => {
-                    this.tokenExpired = response.data.expired;
+                    this.tokenExpired = response?.data?.expired;
+                    this.email = response?.data?.email;
+                    this.new_email = response?.data?.new_email;
+                    this.email2 = response?.data?.email;
+                    this.new_email2 = response?.data?.new_email;
                 })
                 .catch(error => {
                     console.error('Error checking token expiry', error);
                 });
         },
-        submitData(formData) {
+        submitData() {
             try {
-                console.log('form data : ' , formData)
-                formData.email = this.email;
-                // formData.new_email = this.new_email;
-                formData.token = this.token;
+                // console.log('form data : ' , formData)
+                // formData.email = this.email;
+                // // formData.new_email = this.new_email;
+                // formData.token = this.token;
+                const formData = {
+                    email : this.email2,token: this.token, new_email:this.new_email2
+                }
                 api.post('/update-email', formData)
                     .then(res => {
                         console.log('update-email : ' , res);
@@ -143,7 +162,10 @@ export default {
                             }
                         });
                     })
-                    .catch(error => console.log("getResults : ", error));
+                    .catch(error => {
+                        console.log("getResults : ", error)
+                        this.showBackendErrors(error);
+                    });
                 console.log(formData);
             } catch (error) {
                 console.error('API request error:', error);

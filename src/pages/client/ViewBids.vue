@@ -317,11 +317,11 @@ export default {
         
       
           this.$store.commit("SET_USERTOCHAT", item?.lawyer);
-          if (item?.lawyer_chat == null) {
-            this.$store.commit("SET_CHATSTATUS", "new");
-          } else {
-            this.$store.commit("SET_CHATSTATUS", "old");
-          }
+          // if (item?.lawyer_chat == null) {
+          //   this.$store.commit("SET_CHATSTATUS", "new");
+          // } else {
+          //   this.$store.commit("SET_CHATSTATUS", "old");
+          // }
       
       }
 

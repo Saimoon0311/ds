@@ -36,7 +36,7 @@
         <span class="spacer">
           <p class="smallFont text-black">
               <b>Posted by: </b>{{ jobData?.owner?.first_name }}
-              {{ jobData?.owner?.last_name }}
+              <!-- {{ jobData?.owner?.last_name }} -->
               <span class="text-capitalize">({{ jobData?.city }})</span>
               on {{ formatCreatedAt(jobData?.created_at) }} 
             </p>

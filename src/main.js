@@ -244,15 +244,15 @@ app.mixin({
 
         this.$store.commit("SET_JOBIDTOCHAT", item?.id);
         this.$store.commit("SET_DATATAB", this.tab);
-        
+        console.log(type);
         if (type == "lawyer") {
           this.$store.commit("SET_USERTOCHAT", item?.owner);
-          console.log('lawyer chat status : ' , item)
-          if (item?.lawyer_chat == null) {
-            this.$store.commit("SET_CHATSTATUS", "new");
-          } else {
-            this.$store.commit("SET_CHATSTATUS", "old");
-          }
+          // console.log('lawyer chat status : ' , item)
+          // if (item?.lawyer_chat == null) {
+          //   this.$store.commit("SET_CHATSTATUS", "new");
+          // } else {
+          //   this.$store.commit("SET_CHATSTATUS", "old");
+          // }
         }
       }
 

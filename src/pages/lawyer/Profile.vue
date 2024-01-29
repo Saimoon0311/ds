@@ -79,6 +79,7 @@
                   class="form-control"
                   id="email"
                   v-model="form.email"
+                  placeholder="Enter new email for verification"
                 />
                 <button
                   type="button"
@@ -1413,7 +1414,16 @@ export default {
           "success"
         );
       } catch (error) {
-        console.error("Error fetching options:", error);
+        if (error.response && error.response.status === 422) {
+          // Handle validation error (status 422)
+          this.$swal(
+            "Error",
+            "Validation error: " + error.response.data.message,
+            "error"
+          );
+        } else {
+          console.error("Error fetching options:", error);
+        }
       }
     },
 
@@ -1443,7 +1453,7 @@ export default {
         this.form.last_name_verify = userData.last_name;
         this.form.law_firm = userData.law_firm;
         this.form.link = userData.link;
-        this.form.email = userData.email;
+        // this.form.email = userData.email;
         this.form.phone = userData.phone;
         this.form.address = userData.address;
         this.form.about = userData.about;
@@ -1636,11 +1646,12 @@ export default {
 
 
 <style scoped>
-.form-radio{
+.form-radio {
   display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
+  flex-wrap: wrap;
+  align-items: center;
 }
+
 .descriptionText {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1667,18 +1678,23 @@ export default {
   /* outline: 1px solid #292929; */
   border-radius: 10px;
 }
+
 tbody tr:nth-child(odd) {
   background: #f2f2f2;
 }
+
 tbody tr {
   border: 1px solid #dee2e6;
 }
+
 tbody tr td {
   border-width: 0;
 }
+
 tbody tr td:last-child {
   border-left: 1px solid #dee2e6;
 }
+
 .form-check-input {
   border: 1px solid gray !important;
 }
@@ -1753,21 +1769,24 @@ tbody tr td:last-child {
   bottom: 0;
   width: 100%;
 }
+
 .d-span {
   line-height: 39px !important;
   padding: 0px 13px;
 }
-.d-span-min {
-}
+
+.d-span-min {}
+
 .d-input {
   padding-left: 25px;
   line-height: 26px !important;
 }
+
 .d-input-min {
   padding-left: 10px;
 }
+
 .min-span {
   top: 0;
   right: 0;
-}
-</style>
+}</style>

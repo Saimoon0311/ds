@@ -4,7 +4,7 @@
     <div class="container">
       <div class="text-center">
         <h3 class="mt-3 text-center">Account</h3>
-        <h5 class="mt-2 text-center">Details</h5>
+        <!-- <h5 class="mt-2 text-center">Details</h5> -->
       </div>
       <div v-if="isLoading" class="loading-indicator"></div>
 
