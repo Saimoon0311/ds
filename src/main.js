@@ -997,7 +997,12 @@ app.mixin({
       console.log(data);
       console.log(showSecretInfo);
       let image = "";
-      if (data?.image != "" && data?.image != "" && data?.type == 'lawyer' && showSecretInfo) {
+      if (
+        data?.image != "" &&
+        data?.image != "" &&
+        data?.type == "lawyer" &&
+        showSecretInfo
+      ) {
         image = `<div v-if="image" class="circular-container popup-image me-2 "><img src="${this.createImage(
           data?.image
         )}" alt="Image not uploaded" class="circular-image"></div>`;
@@ -1005,8 +1010,10 @@ app.mixin({
 
       let title = "";
       if (showSecretInfo) {
-        title = `${this.capitalizeFirstLetter(data?.first_name)} ${this.capitalizeFirstLetter(data?.last_name)}`;
-      }else{
+        title = `${this.capitalizeFirstLetter(
+          data?.first_name
+        )} ${this.capitalizeFirstLetter(data?.last_name)}`;
+      } else {
         title = `${this.capitalizeFirstLetter(data?.first_name)}`;
       }
 
@@ -1014,7 +1021,8 @@ app.mixin({
 
       let consultation_content = "";
       if (
-        data?.type == "lawyer" && showSecretInfo &&
+        data?.type == "lawyer" &&
+        showSecretInfo &&
         data?.consultation_type != null &&
         (data?.consultation_type.toLowerCase() == "discounted" ||
           data?.consultation_type.toLowerCase() == "free")
@@ -1042,7 +1050,11 @@ app.mixin({
         }
       }
       htmlContent += `<div>`;
-      if (data?.first_name != null && data?.first_name != "" && !showSecretInfo) {
+      if (
+        data?.first_name != null &&
+        data?.first_name != "" &&
+        !showSecretInfo
+      ) {
         htmlContent += `
             <div class="wrapper">
               <h6><b style="text-transform: capitalize;">Name
@@ -1092,7 +1104,11 @@ app.mixin({
         : </b><span>${data?.suburb}</span></h6>
       </div>`;
       }
-      if (consultation_content != null && consultation_content != "" && showSecretInfo) {
+      if (
+        consultation_content != null &&
+        consultation_content != "" &&
+        showSecretInfo
+      ) {
         htmlContent += ` <div class="wrapper" >
         <h6><b style="text-transform: capitalize;">Initial Consultation
         : </b><span>${consultation_content}</span></h6>
@@ -1439,6 +1455,7 @@ app.mixin({
               key != "job_id" &&
               key != "user_id" &&
               key != "created_at" &&
+              key != "reject_reason" &&
               key != "updated_at" &&
               key != "show" &&
               key != "description" &&
@@ -1711,6 +1728,7 @@ app.mixin({
       }
     },
 
+   
     showBackendErrors(error) {
       // console.log("my : ", error?.response.data?.errors.email);
 
@@ -1766,7 +1784,7 @@ app.mixin({
               // Unauthorized (blocked)
               this.$swal(
                 "",
-                "Account is blocked. Please contact support.",
+                "Your account is suspended. Please contact Simplawfy.",
                 "error"
               );
             } else {

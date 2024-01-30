@@ -218,7 +218,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Edit Job Title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Job Title</h5>
               <button
                 type="button"
                 class="close btn btn-dark"
@@ -453,7 +453,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
-                Edit phone number
+                Phone Number
               </h5>
               <button
                 type="button"
@@ -731,7 +731,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
-                Areas of practice
+                Select the areas of law you practice in
               </h5>
               <button
                 type="button"
@@ -1368,6 +1368,26 @@ export default {
   //     immediate: true, // Trigger the handler immediately when the component is created
   //   },
   // },
+
+
+  watch: {
+    'form.consultation_amount2': function (newVal) {
+      if(newVal == 0){
+        this.form.consultation_amount2 = 1;
+      }
+      if(isNaN(newVal) || newVal < 1){
+        this.form.consultation_amount2 = null;
+      }
+    },
+    'form.consultation_time2': function (newVal) {
+      if(newVal == 0){
+        this.form.consultation_time2 = 1;
+      }
+      if(isNaN(newVal) || newVal < 1){
+        this.form.consultation_time2 = null;
+      }
+    },
+  },
   computed: {
     // firebaseNoti(){
     //   return this.$store.state.noti;
@@ -1789,4 +1809,5 @@ tbody tr td:last-child {
 .min-span {
   top: 0;
   right: 0;
-}</style>
+}
+</style>

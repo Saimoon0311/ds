@@ -105,7 +105,7 @@
               <div
                 class="d-flex flex-wrap justify-content-between align-items-center"
               >
-                <h6 class="text-black">Proposals Total Worth</h6>
+                <h6 class="text-black">Global Merchandise Value (GMV)</h6>
                 <i
                   class="fa fa-money-bill rounded-circle p-2 bg-dark text-white"
                 ></i>

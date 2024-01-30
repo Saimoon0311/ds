@@ -481,8 +481,8 @@ export default {
           api.get('/delete-account')
             .then(() => {
               this.$swal(
-                'Deleted!',
-                'Your Account has been deleted.',
+                '',
+                'Your account has been deleted.',
                 'success'
               ).then(() => {
                 this.logoutProcess('login');

@@ -64,7 +64,7 @@
               v-if="selectedOption === 'Daily'"
             >
               <div>
-                <label> Daily rate (excluding GST): </label>
+                <label> Daily rate (excluding GST):<sup><code>*</code></sup></label>
                 <div>
                   <span class="position-absolute d-span"> $</span>
                   <input
@@ -77,12 +77,13 @@
                     pattern="[0-9]*[.,]?[0-9]*"
                     v-on:blur="setTwoDigitsAfterDecimal('daily_rate')"
                     placeholder=""
+                    required
                   />
                 </div>
               </div>
 
               <div class="form-group mt-3">
-                <label> Estimated number of days: </label>
+                <label> Estimated number of days:<sup><code>*</code></sup></label>
                 <div>
                   <!-- <span class="position-absolute d-span"> $</span> -->
                   <input
@@ -93,6 +94,7 @@
                     class="form-control d-input"
                     min="1"
                     placeholder=""
+                    required
                   />
                 </div>
               </div>
@@ -262,7 +264,7 @@
               v-if="selectedOption === 'Retainer'"
             >
               <div>
-                <label>Retainer fee (excluding GST): </label>
+                <label>Retainer fee (excluding GST):<sup><code>*</code></sup></label>
                 <div>
                   <span class="position-absolute d-span"> $</span>
                   <!-- daily rate already used -->
@@ -276,12 +278,13 @@
                     pattern="[0-9]*[.,]?[0-9]*"
                     v-on:blur="setTwoDigitsAfterDecimal('retainer_fee')"
                     placeholder=""
+                    required
                   />
                 </div>
               </div>
               <div class="disbursement-fields">
                 <div class="form-group mt-3">
-                  <label> Retainer period: </label>
+                  <label> Retainer period:<sup><code>*</code></sup></label>
                   <div class="mb-3">
                     <!-- <input
                       type="text"
@@ -297,6 +300,7 @@
                       class="form-control"
                       id="fixedFeeAmount"
                       name="fixedFeeAmount"
+                      required
                     >
                       <option value="week">Weekly</option>
                       <option value="fortnight">Fortnightly</option>
@@ -1358,7 +1362,7 @@
               id="success-fee"
               v-if="selectedOption === 'Success'"
             >
-              <label>Estimated fee amount (excluding GST):</label>
+              <label>Estimated fee amount (excluding GST):<sup><code>*</code></sup></label>
               <div>
                 <span class="position-absolute d-span"> $</span>
                 <input
@@ -1368,6 +1372,7 @@
                   name="estimated_fee"
                   class="form-control d-input"
                   pattern="[0-9]*[.,]?[0-9]*"
+                  required
                 />
               </div>
               <br />
@@ -1376,12 +1381,13 @@
                 >Uplift percentage (%):<sup><code>*</code></sup></label
               >
               <input
-                type="number"
+                type="text"
                 v-model="form.uplift_percentage"
                 id="upliftPercentage"
                 name="upliftPercentage"
                 class="form-control"
                 @input="limitNumber"
+                pattern="[0-9]*[.,]?[0-9]*"
                 required
               />
 
@@ -1815,6 +1821,7 @@
               >
               <textarea
                 v-model="form.description"
+                @input="convertToTitleCase(form.description)"
                 id="additionalInfo"
                 name="additionalInfo"
                 class="form-control"
@@ -1889,18 +1896,20 @@
             </div>
             <!-- </span> -->
 
-            <div v-if="form.days">
-              <p>
-                <span> Days:</span> <span>{{ form.days }}</span>
-              </p>
-            </div>
-
             <div v-if="form.daily_rate">
               <p>
                 <span> Daily Rate:</span>
                 <span>${{ formatNumber(form.daily_rate) }}</span>
               </p>
             </div>
+            
+            <div v-if="form.days">
+              <p>
+                <span> Days:</span> <span>{{ form.days }}</span>
+              </p>
+            </div>
+
+            
 
             <div v-if="form.charge_type">
               <p>
@@ -2296,6 +2305,11 @@ export default {
         this.form.estimated_fee = null;
       }
     },
+    'form.uplift_percentage': function(newVal) {
+      if (isNaN(newVal)) {
+        this.form.uplift_percentage = null;
+      }
+    },
   },
 
   computed: {
@@ -2388,6 +2402,50 @@ export default {
 
   methods: {
 
+    convertToTitleCase(paragraph) {
+      console.log(paragraph);
+      const stopWords = [
+        "a",
+        "an",
+        "the",
+        "and",
+        "but",
+        "or",
+        "nor",
+        "for",
+        "so",
+        "yet",
+        "on",
+        "in",
+        "at",
+        "by",
+        "from",
+        "over",
+        "with",
+        "to",
+        "into",
+        "of",
+      ];
+
+      // Split the paragraph into an array of words
+      let words = paragraph.split(" ");
+
+      // Capitalize the first letter of each non-stop word
+      for (let i = 0; i < words.length; i++) {
+        let word = words[i].toLowerCase();
+        if (i === 0 || !stopWords.includes(word)) {
+          words[i] = word.charAt(0).toUpperCase() + word.slice(1);
+        }
+      }
+
+      // Join the words back into a single string
+      let titleCaseParagraph = words.join(" ");
+      this.form.description = titleCaseParagraph;
+
+      // return titleCaseParagraph;
+    },
+
+
     getPreviousFeeEarners(){
       api.get('/lawyer/last-fee-earners').then((res)=>{
         console.log('last fee earners : ' , res?.data);
@@ -2416,7 +2474,7 @@ export default {
     calculateTotals() {
       let grandTotal = 0;
       if(this.selectedOption == "Hourly" && this.rows3.length > 0){
-        for (const item of this.rows3) {
+        for (const item of this.rows3) {        
           const subTotal = (item.hourly_rate ?? item.hourlyRate) * (item.hours ?? item.estimatedHours);
           grandTotal += subTotal;
         }
@@ -2977,7 +3035,7 @@ export default {
             this.rows3.push({
               title: item?.title,
               hourlyRate: parseFloat(item?.hourly_rate).toFixed(2),
-              estimatedHours: item?.hours,
+              estimatedHours: 1,
             });
           });
         }

@@ -97,7 +97,7 @@
                 class="border rounded bg-light p-3 d-flex flex-wrap"
               >
                 <p class="mx-auto my-0">
-                 No pending lawyer requests found2!
+                 No pending lawyer requests found!
                 </p>
               </div>
 
@@ -134,7 +134,7 @@
                 <span
                   v-if="openJobs?.length == 0 && searchQuery != ''"
                   class="text-center w-100"
-                  >No pending lawyer requests found3!</span>
+                  >No pending lawyer requests found!</span>
 
 
                   <table v-else class="table table-striped">

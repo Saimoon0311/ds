@@ -109,7 +109,7 @@
               tabindex="-1"
               @click="changeTab('withoutarea')"
             >
-            Others/Unknown
+            Other/Unknown
             </button>
           </li>
         </ul>
