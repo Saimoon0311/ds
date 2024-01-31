@@ -15,7 +15,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">First Name</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Edit First Name</h5>
             <button
               type="button"
               class="close btn btn-dark"
@@ -32,15 +32,18 @@
                 name="fname"
                 class="form-control"
                 id="fname"
-                v-model="form.first_name"
+                v-model="form.first_name_verify"
               />
               <button
                 type="button"
                 name="fname-submit"
                 class="btn btn-dark my-3"
-                @click="updateProfile('first_name', '#Fname','First name')"
+                @click="updateProfile(
+                  'first_name_verify',
+                  '#Fname',
+                  'First Name')"
               >
-                Save changes
+                Submit for Verification
               </button>
             </div>
           </div>
@@ -59,7 +62,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Last Name</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Edit Last Name</h5>
             <button
               type="button"
               class="close btn btn-dark"
@@ -76,15 +79,15 @@
                 name="lname"
                 class="form-control"
                 id="lname"
-                v-model="form.last_name"
+                v-model="form.last_name_verify"
               />
               <button
                 type="button"
                 name="lname-submit"
                 class="btn btn-dark my-3"
-                @click="updateProfile('last_name', '#Lname','Last name')"
+                @click="updateProfile('last_name_verify', '#Lname','Last name')"
               >
-                Save changes
+                Submit for Verification
               </button>
             </div>
           </div>
@@ -429,6 +432,8 @@ export default {
     return {
       schema,
       form: {
+        first_name_verify: null,
+        last_name_verify: null,
         first_name: null,
         last_name: null,
         phone: null,
@@ -445,6 +450,40 @@ export default {
     this.updateFormProperties();
   },
   methods: {
+
+
+    async updateProfile(keyName, modalId, keyName2) {
+      if (this.form[keyName] == null || this.form[keyName] == "") {
+        return false;
+      }
+      const formData = {
+        [keyName]: this.form[keyName]
+      }
+      console.log('jjkk :::: ', formData);
+      try {
+        api.post('/update-profile', formData).then(res => {
+          this.closeModal(modalId);
+
+          let msg = null;
+
+          if (keyName == "first_name_verify") {
+            msg = `Thanks for submitting your details. They'll be updated pending verification.`;
+          } else if (keyName == "last_name_verify") {
+            msg = `Thanks for submitting your details. They'll be updated pending verification.`;
+          } else {
+            msg = `${keyName2} updated successfully`;
+          }
+
+          this.$swal("", msg, "success").then(() => {
+            this.setUserInStateAndLocalStorage(res);
+          });
+        })
+      } catch (error) {
+        this.$swal("", error?.response?.data?.error, "error")
+        // console.error('Error uploading image', error);
+      }
+    },
+
 
     async sendUpdateEmail() {
       try {
@@ -496,8 +535,10 @@ export default {
     updateFormProperties(notCreated) {
       const userData = this.loginUser;
       if (userData) {
-        this.form.first_name = userData.first_name;
-        this.form.last_name = userData.last_name;
+        this.form.first_name_verify = userData.first_name;
+        this.form.last_name_verify = userData.last_name;
+        // this.form.first_name = userData.first_name;
+        // this.form.last_name = userData.last_name;
         this.form.phone = userData.phone;
         // this.email = userData.email;
       }
@@ -506,26 +547,7 @@ export default {
         document.getElementById('password').value = "";
       }
     },
-    async updateProfile(keyName, modalId, keyName2) {
-      if (this.form[keyName] == null || this.form[keyName] == "") {
-        return false;
-      }
-      const formData = {
-        [keyName]: this.form[keyName]
-      }
-      console.log('jjkk :::: ', formData);
-      try {
-        api.post('/update-profile', formData).then(res => {
-          this.closeModal(modalId);
-          this.$swal("", `${keyName2} updated successfully`, "success").then(() => {
-            this.setUserInStateAndLocalStorage(res);
-          });
-        })
-      } catch (error) {
-        this.$swal("", error?.response?.data?.error, "error")
-        // console.error('Error uploading image', error);
-      }
-    },
+
 
     changePassword(formData) {
       api.post('/change-password', formData)

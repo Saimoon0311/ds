@@ -483,6 +483,7 @@ export default {
       totalSteps: 4,
       isDivVisible: false,
       areas: [],
+      last_requirements: null,
       locations: [],
       selectedLanguage: "",
       otherLanguage: "",
@@ -835,11 +836,10 @@ export default {
 
 
         if (this.languageIsChecked) {
+          console.log('other lagn :::: ' , this.selectedLanguage);
           is_accessibility_requirement_selected = 1;
           if (this.selectedLanguage == '') {
             formData.language = "Language other than English";
-          } else if (this.selectedLanguage == 'Other') {
-            formData.language = this.otherLanguage;
           } else {
             formData.language = this.selectedLanguage;
           }
@@ -960,10 +960,101 @@ export default {
       try {
         const response = await api.get("/get-active-fields");
         this.areas = response?.data?.allFields;
+        this.last_requirements = response?.data?.last_requirements;
+        this.setAccRequirements();
       } catch (error) {
         console.error("Error fetching options:", error);
       }
     },
+
+    setAccRequirements() {
+      if (this.last_requirements != null) {
+        const data = this.last_requirements;
+        this.requirementsOption = 1;
+        if (data.visual_impairment != null && data.visual_impairment != "") {
+          if (data?.visual_impairment == 'Visual Impairment') {
+            this.VisualIsChecked = true;
+          } else {
+            this.VisualIsChecked = true;
+            this.visualOption = data?.visual_impairment;
+          }
+        }
+        if (data.auditory_impairment != null && data.auditory_impairment != "") {
+          if (data?.auditory_impairment == 'Auditory Impairment') {
+            this.AuditoryIsChecked = true;
+          } else {
+            this.AuditoryIsChecked = true;
+            this.auditoryOption = data?.auditory_impairment;
+          }
+        }
+        if (data.mobility_impairment != null && data.mobility_impairment != "") {
+          if (data?.mobility_impairment == 'Mobility/Physical Impairment') {
+            this.MobilityIsChecked = true;
+          } else {
+            this.MobilityIsChecked = true;
+            this.mobilityOption = data?.mobility_impairment;
+          }
+        }
+        if (data.learning_impairment != null && data.learning_impairment != "") {
+          if (data?.learning_impairment == 'Learning Impairment') {
+            this.LearningIsChecked = true;
+          } else {
+            this.LearningIsChecked = true;
+            this.learningOption = data?.learning_impairment;
+          }
+        }
+        if (data.intellectual_disability != null && data.intellectual_disability != "") {
+          if (data?.intellectual_disability == 'Intellectual Disability') {
+            this.IntellectualIsChecked = true;
+          } else {
+            this.IntellectualIsChecked = true;
+            this.intellectualOption = data?.intellectual_disability;
+          }
+        }
+        if (data.psychiatric_disability != null && data.psychiatric_disability != "") {
+          if (data?.psychiatric_disability == 'Psychiatric Disability') {
+            this.PsychiatricIsChecked = true;
+          } else {
+            this.PsychiatricIsChecked = true;
+            this.psychiatricOption = data?.psychiatric_disability;
+          }
+        }
+        if (data.medical_disability != null && data.medical_disability != "") {
+          if (data?.medical_disability == 'Medical Disability') {
+            this.MedicalIsChecked = true;
+          } else {
+            this.MedicalIsChecked = true;
+            this.medicalOption = data?.medical_disability;
+          }
+        }
+        if (data.other != null && data.other != "") {
+          if (data?.other == 'Other') {
+            this.isChecked = true;
+          } else {
+            this.isChecked = true;
+            this.requirementsOptionDescription = data?.other;
+          }
+        }
+
+
+
+        if (data.language != null && data.language != "") {
+          if (data?.language == 'Language other than English') {
+            this.languageIsChecked = true;
+          }
+          else if (data?.language == 'Other') {
+            this.languageIsChecked = true;
+            this.selectedLanguage = 'Other';
+            this.otherLanguage = data?.language;
+          }
+          else {
+            this.languageIsChecked = true;
+            this.selectedLanguage = data?.language;
+          }
+        }
+      }
+    },
+
     async fetchLocations() {
       try {
         const response = await api.get("/get-active-locations");
@@ -1239,4 +1330,5 @@ input[type="checkbox"]:checked {
 
 #accordionPanelsStayOpenExample .accordion-button.collapsed {
   padding-bottom: 12px;
-}</style>
+}
+</style>

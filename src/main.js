@@ -369,14 +369,15 @@ app.mixin({
           }
 
           let msg = null;
+
           if (
-            keyName == "first_name_verify" &&
             this.loginUser?.admin_approval == "approve"
+            && keyName == "first_name_verify"
           ) {
             msg = `Thanks for submitting your details. They'll be updated pending verification.`;
           } else if (
-            keyName == "last_name_verify" &&
             this.loginUser?.admin_approval == "approve"
+            && keyName == "last_name_verify"
           ) {
             msg = `Thanks for submitting your details. They'll be updated pending verification.`;
           } else {
@@ -1905,7 +1906,7 @@ app.mixin({
       console.log(status);
       if (this.searchQuery == "") return false;
       let obj = { query: this.searchQuery };
-      if (this.endpoint == "/admin/all-lawyers") {
+      if (this.endpoint == "/admin/all-lawyers" || this.endpoint == "/admin/all-clients") {
         obj.admin_approval = status;
       }
       // if (status) obj.admin_approval = status;
@@ -1954,7 +1955,7 @@ app.mixin({
       }
       console.log("url ::: ", url);
 
-      if (this.endpoint == "/admin/all-lawyers") {
+      if (this.endpoint == "/admin/all-lawyers" || this.endpoint == "/admin/all-clients") {
         url = url + `&admin_approval=${status}`;
       }
 
@@ -2013,7 +2014,7 @@ app.mixin({
       // if (status) {
       //   url = url + `&admin_approval=${status}`;
       // }
-      if (this.endpoint == "/admin/all-lawyers") {
+      if (this.endpoint == "/admin/all-lawyers" || this.endpoint == "/admin/all-clients") {
         url = url + `&admin_approval=${status}`;
       }
       try {

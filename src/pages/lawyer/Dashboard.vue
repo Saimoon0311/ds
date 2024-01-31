@@ -691,8 +691,13 @@ export default {
 
     proposalAcceptMessage(index) {
       // Create a promise for each SweetAlert
-      if (this.accepted_unseen_proposals.length > 0) {
-        if (index < this.accepted_unseen_proposals.length) {
+
+      if (typeof this.acceptedProposalMessageSeen === 'undefined') {
+        return false;
+      }
+
+      if (this.accepted_unseen_proposals?.length > 0) {
+        if (index < this.accepted_unseen_proposals?.length) {
           const element = this.accepted_unseen_proposals[index];
 
           let msg = `We're pleased to inform you that your proposal has been accepted for the job 
@@ -718,7 +723,7 @@ export default {
           // All popups are closed, hit the API with proposal IDs
           const proposalIds = this.accepted_unseen_proposals.map(element => element.id);
           this.acceptedProposalMessageSeen(proposalIds);
-          this.$store.commit('SET_ACCEPTED_UNSEEN_PROPOSALS',[]);
+          this.$store.commit('SET_ACCEPTED_UNSEEN_PROPOSALS', []);
         }
       }
 
@@ -729,10 +734,10 @@ export default {
         // Handle the response if needed
         console.log('acceptedProposalMessageSeen API response:', response);
       })
-      .catch(error => {
-        // Handle errors
-        console.error('API error:', error);
-      });
+        .catch(error => {
+          // Handle errors
+          console.error('API error:', error);
+        });
     },
 
     deleteAllRejected() {
