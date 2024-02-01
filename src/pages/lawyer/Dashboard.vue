@@ -704,7 +704,7 @@ export default {
         'I want to get a partner visa - ${element?.job?.identity}.' by 
         ${element?.job?.owner?.first_name} ${element?.job?.owner?.last_name} through Simplawfy.
         You will receive an email shortly with their contact details. 
-        You can also view their details in the Closed tab on your Dashboard."`;
+        You can also view their details in the Closed tab on your Dashboard.`;
 
           this.$swal.fire({
             title: "Congratulations, a client has accepted your proposal!",

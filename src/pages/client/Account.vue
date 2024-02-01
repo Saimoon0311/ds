@@ -165,7 +165,7 @@
         <tr>
           <td class="d-flex align-items-center justify-content-between">
             First Name
-            <button
+            <!-- <button
               type="button"
               class="btn btn-dark btn-sm"
               data-bs-toggle="modal" data-bs-target="#Fname"
@@ -173,7 +173,7 @@
               @click="updateFormProperties"
             >
               <i class="fa fa-pencil"></i>
-            </button>
+            </button> -->
           </td>
 
           <!-- Modal -->
@@ -187,7 +187,7 @@
         <tr>
           <td class="d-flex align-items-center justify-content-between">
             Last Name
-            <button
+            <!-- <button
               type="button"
               class="btn btn-dark btn-sm"
               data-bs-toggle="modal" data-bs-target="#Lname"
@@ -195,7 +195,7 @@
               @click="updateFormProperties"
             >
               <i class="fa fa-pencil"></i>
-            </button>
+            </button> -->
           </td>
 
           <!-- Modal -->
