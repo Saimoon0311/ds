@@ -107,7 +107,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
-                Edit First Name
+                First Name
               </h5>
               <button
                 type="button"
@@ -165,7 +165,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Edit Last Name</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Last Name</h5>
               <button
                 type="button"
                 class="close btn btn-dark"
@@ -881,7 +881,7 @@
             <tr>
               <td class="d-flex align-items-center justify-content-between width-set">
                 First Name:
-                <!-- <button
+                <button
                   type="button"
                   class="btn btn-dark btn-sm"
                   data-target=".edit-first-name-modal"
@@ -890,7 +890,7 @@
                   data-bs-target="#firstName"
                 >
                   <i class="fa fa-pencil"></i>
-                </button> -->
+                </button>
               </td>
               <td>{{ loginUser?.first_name }}</td>
             </tr>
@@ -899,7 +899,7 @@
             <tr>
               <td class="d-flex align-items-center justify-content-between width-set">
                 Last Name:
-                <!-- <button
+                <button
                   type="button"
                   class="btn btn-dark btn-sm"
                   data-target=".edit-last-name-modal"
@@ -908,7 +908,7 @@
                   data-bs-target="#lastName"
                 >
                   <i class="fa fa-pencil"></i>
-                </button> -->
+                </button>
               </td>
               <td>{{ loginUser?.last_name }}</td>
             </tr>
@@ -1477,6 +1477,7 @@ export default {
         // this.form.email = userData.email;
         this.form.phone = userData.phone;
         this.form.address = userData.address;
+        this.form.suburb = userData.suburb;
         this.form.about = userData.about;
         this.form.job_title = userData.job_title;
 

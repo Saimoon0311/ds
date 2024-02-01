@@ -201,6 +201,9 @@
                                   <button class="btn btn-dark btn-sm" @click="verifyData(index,item?.id,'first_name')">
                                     Verify
                                   </button>
+                                  <button class="btn btn-dark btn-sm" @click="declineVerification(index,item?.id,'first_name')">
+                                    Decline
+                                  </button>
                                 </td>
                               </tr>
                               <tr v-if="item?.last_name_verify != null && item?.last_name_verify != ''">
@@ -210,6 +213,9 @@
                                 <td>
                                   <button class="btn btn-dark btn-sm" @click="verifyData(index,item?.id,'last_name')">
                                     Verify
+                                  </button>
+                                  <button class="btn btn-dark btn-sm" @click="declineVerification(index,item?.id,'last_name')">
+                                    Decline
                                   </button>
                                 </td>
                               </tr>
@@ -363,6 +369,37 @@ export default {
 
 
   methods: {
+
+    declineVerification(index, id, type) {
+      this.$swal({
+        title: "Are you sure?",
+        text: `Are you sure you want to decline this verification ?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: `Yes, Decline`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          api.post('/admin/decline-verification', { id, type })
+            .then(() => {
+              this.$swal(
+                "",
+                `Verification has been declined.`,
+                "success"
+              ).then(async () => {
+                await this.loadMore(this.pageStatus,true);
+              });
+            })
+            .catch((error) => {
+              console.log("error : ", error);
+            });
+        }
+      }).catch((error) => {
+        console.log("error : ", error);
+      });
+    },
+
     verifyData(index, id, type) {
       this.$swal({
         title: "Are you sure?",
