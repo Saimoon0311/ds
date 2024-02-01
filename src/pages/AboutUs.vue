@@ -47,7 +47,7 @@
             class="img-fluid about-img rounded-circle w-100 object-fit-cover"
           />
         </div>
-        <div class="col-md-9 col-sm-12 pt-3 pb-3">
+        <div class="col-md-9 col-sm-12 pt-3 pb-3 text-justify">
           <p>
             Simplawfy was created by husband-and-wife duo, Sean and Jess Gomes,
             who believe access to quality legal services is a fundamental right.
@@ -78,12 +78,12 @@
             class="btn-inner mt-5 pt-3 d-flex justify-content-evenly align-items-center flex-wrap"
           >
             <router-link
-              to="/lawyer-login"
+              to="/login"
               class="btn btn-dark softblue text-white rounded-pill m-1 m-md-0"
               >Find a Lawyer Now</router-link
             >
             <router-link
-              to="/lawyer-login"
+              to="/login"
               class="btn btn-dark softblue text-white rounded-pill m-1 m-md-0"
               >Find Clients Now</router-link
             >
@@ -120,6 +120,9 @@ export default {
 };
 </script>
 <style scoped>
+.text-justify{
+  text-align: justify;
+}
 .btn-inner a {
   width: 220px;
 }

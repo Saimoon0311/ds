@@ -1,15 +1,14 @@
 <template lang="">
-   <section class="mt-5 lp-main">
+   <section class="lp-main">
         <div class="container">
             <div class="row justify-content-center ">
                 <div class="col-md-8 col-lg-6 col-sm-12 text-center">
                     <img src="../assets/images/new-main.png" alt="" class="img-fluid logo-lp">
                     <p class="my-5">Simplawfy® is an independent legal marketplace platform connecting individuals and businesses with legal professionals moving in different circles.</p>
-                    <router-link
-                    to="/lawyer-login"
-                    class="btn btn-dark softblue text-white rounded-pill "
-                    >Find Clients Now</router-link
-                  >                  
+                    <a
+                    href="mailto:info@makinglawsimple.com.au"
+                    class="btn btn-dark softblue text-white rounded-pill enq"
+                    >Enquire Today</a>                  
                 </div>
                 
             </div>
@@ -43,7 +42,10 @@
   };
   </script>
   <style scoped>
-  .container{
+.enq{
+  width: 220px;
+}
+.container{
     min-height: inherit;
   }
  .row {
@@ -55,7 +57,7 @@
   }
   .lp-main{
     position: relative;
-    padding-bottom: 60px;
+    /* padding-bottom: 60px; */
     min-height: 100vh;
   }
   .logo-lp {
@@ -309,6 +311,11 @@
     }
   }
   @media only screen and (max-width: 767px) {
+    .lp-main{
+
+    padding-bottom: 60px;
+  
+  }
     .lp-main{
       min-height: 90vh;
     }

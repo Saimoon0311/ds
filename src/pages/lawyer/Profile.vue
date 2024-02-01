@@ -858,9 +858,10 @@
       <div class="table-responsive">
         <table class="table table-bordered mt-3 table-striped">
           <tbody>
+           
             <!--  Email -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="d-flex align-items-center justify-content-between width-set">
                 Email:
                 <button
                   type="button"
@@ -878,9 +879,9 @@
 
             <!-- First Name -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="d-flex align-items-center justify-content-between width-set">
                 First Name:
-                <button
+                <!-- <button
                   type="button"
                   class="btn btn-dark btn-sm"
                   data-target=".edit-first-name-modal"
@@ -889,16 +890,16 @@
                   data-bs-target="#firstName"
                 >
                   <i class="fa fa-pencil"></i>
-                </button>
+                </button> -->
               </td>
               <td>{{ loginUser?.first_name }}</td>
             </tr>
 
             <!-- Last Name -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="d-flex align-items-center justify-content-between width-set">
                 Last Name:
-                <button
+                <!-- <button
                   type="button"
                   class="btn btn-dark btn-sm"
                   data-target=".edit-last-name-modal"
@@ -907,14 +908,14 @@
                   data-bs-target="#lastName"
                 >
                   <i class="fa fa-pencil"></i>
-                </button>
+                </button> -->
               </td>
               <td>{{ loginUser?.last_name }}</td>
             </tr>
 
             <!-- Job Title -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="d-flex align-items-center justify-content-between width-set">
                 Job Title:
                 <button
                   type="button"
@@ -939,7 +940,7 @@
 
             <!-- LawFirm name -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="d-flex align-items-center justify-content-between width-set">
                 Law Firm Name:
                 <button
                   type="button"
@@ -962,7 +963,7 @@
 
             <!-- Link to Website -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="d-flex align-items-center justify-content-between width-set">
                 Link to Website:
                 <button
                   type="button"
@@ -984,7 +985,7 @@
             </tr>
 
             <tr>
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="d-flex align-items-center justify-content-between width-set">
                 Address:
                 <button
                   type="button"
@@ -1007,7 +1008,7 @@
 
 
             <tr>
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="d-flex align-items-center justify-content-between width-set">
                 Suburb:
                 <button
                   type="button"
@@ -1031,7 +1032,7 @@
 
             <!-- Phone -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="d-flex align-items-center justify-content-between width-set">
                 Phone:
                 <button
                   type="button"
@@ -1054,7 +1055,7 @@
 
             <!-- About Me -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="d-flex align-items-center justify-content-between width-set">
                 About Me:
                 <button
                   type="button"
@@ -1078,7 +1079,7 @@
             </tr>
 
             <tr>
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="d-flex align-items-center justify-content-between width-set">
                 Free/Discounted Consultation:
                 <button
                   @click="changeConsultationType(form.consultation_type)"
@@ -1205,7 +1206,7 @@
             <!-- Areas of Practice -->
             <!-- v-if="!loginUser?.area_insert" -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="d-flex align-items-center justify-content-between width-set">
                 Areas of Practice:
                 <button
                   type="button"
@@ -1253,7 +1254,7 @@
             <!-- State/Territory -->
             <!-- v-if="!loginUser?.state_insert" -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="d-flex align-items-center justify-content-between width-set">
                 State/territory:
                 <button
                   @click="setModal('locations')"
@@ -1666,6 +1667,14 @@ export default {
 
 
 <style scoped>
+table
+    {
+        table-layout: fixed;
+        word-break: break-all;
+        border-collapse: collapse;
+        width:100%;
+    }
+
 .form-radio {
   display: inline-flex;
   flex-wrap: wrap;
@@ -1811,6 +1820,12 @@ tbody tr td:last-child {
   right: 0;
 }
 @media only screen and (max-width: 767px) {
+  table {
+    table-layout: inherit;
+    word-break: auto-phrase;
+    border-collapse: collapse;
+    width: 100%;
+}
 .mob-set {
     flex-wrap: wrap;
 }

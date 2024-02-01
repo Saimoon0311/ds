@@ -181,7 +181,7 @@
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
-                          GST not applicable on this item on this item
+                          GST not applicable on this item
                         </label>
                       </div>
                       <br />
@@ -247,7 +247,7 @@
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
-                            <td class="gstStyle p-0">*GST not applicable on this item on this item</td>
+                            <td class="gstStyle p-0">*GST not applicable on this item</td>
                           </tr>
                         </tbody>
                       </table>
@@ -411,7 +411,7 @@
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
-                          GST not applicable on this item on this item
+                          GST not applicable on this item
                         </label>
                       </div>
                       <br />
@@ -476,7 +476,7 @@
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
-                            <td class="gstStyle p-0">*GST not applicable on this item on this item</td>
+                            <td class="gstStyle p-0">*GST not applicable on this item</td>
                           </tr>
                         </tbody>
                       </table>
@@ -678,7 +678,7 @@
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
-                          GST not applicable on this item on this item
+                          GST not applicable on this item
                         </label>
                       </div>
                       <br />
@@ -865,7 +865,7 @@
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
-                          GST not applicable on this item on this item
+                          GST not applicable on this item
                         </label>
                       </div>
                       <br />
@@ -1282,7 +1282,7 @@
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
-                          GST not applicable on this item on this item
+                          GST not applicable on this item
                         </label>
                       </div>
                       <br />
@@ -1487,7 +1487,7 @@
                           id="GST"
                         />
                         <label class="form-check-label" for="GST">
-                          GST not applicable on this item on this item
+                          GST not applicable on this item
                         </label>
                       </div>
                       <br />
@@ -1644,7 +1644,7 @@
                         id="GST"
                       />
                       <label class="form-check-label" for="GST">
-                        GST not applicable on this item on this item
+                        GST not applicable on this item
                       </label>
                     </div>
                     <br />

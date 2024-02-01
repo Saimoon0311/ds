@@ -181,8 +181,7 @@
                         clients need and value
                       </li>
                       <li>
-                        Accessibility is based on contacts within the legal
-                        industry, money available and...
+                        Accessibility is limited by any legal contacts, time and money the client has at their disposal to find the right lawyer for them
                       </li>
                     </ul>
                   </div>
@@ -263,7 +262,7 @@ export default {
   margin: 10px;
   text-align: center;
   border-radius: 50px;
-  padding: 30px 10px;
+  padding: 50px 10px;
   color: white !important;
 }
 .parabox p {
@@ -284,6 +283,7 @@ p.img-bottom {
   background: black !important;
   position: relative;
   margin-left: auto;
+  font-weight: 500;
 }
 .new-logo {
   width: 400px;
@@ -486,6 +486,9 @@ ul {
   }
 }
 @media only screen and (max-width: 767px) {
+  .parabox{
+    padding: 30px 10px;
+  }
     .row-flip {
     display: flex;
     flex-direction: column-reverse;
