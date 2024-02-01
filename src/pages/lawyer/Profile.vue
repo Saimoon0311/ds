@@ -1137,7 +1137,7 @@
 
             <tr>
               <td colspan="2">
-                <div class="w-100 align-items-center d-flex">
+                <div class="w-100 align-items-center d-flex mob-set">
 
                 
                 <div class="d-flex align-items-center">
@@ -1809,5 +1809,10 @@ tbody tr td:last-child {
 .min-span {
   top: 0;
   right: 0;
+}
+@media only screen and (max-width: 767px) {
+.mob-set {
+    flex-wrap: wrap;
+}
 }
 </style>

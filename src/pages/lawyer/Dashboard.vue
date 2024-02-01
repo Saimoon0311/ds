@@ -178,9 +178,9 @@
                   openJobs.length > 0 &&
                   tab == 'close'
                 "
-                class="d-flex flex-wrap mb-2 justify-content-end"
+                class="d-flex flex-wrap mb-2 justify-content-center justify-content-md-end me-0 me-md-3"
                 >
-                  <button @click="deleteAllRejected" class="btn btn-danger btn-sm my-1 mx-1">
+                  <button @click="deleteAllRejected" class="btn btn-danger btn-sm my-1 mx-1 ">
                     Clear All Rejected Proposals
                   </button>
                 </div>

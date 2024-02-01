@@ -168,7 +168,7 @@
                   </td>
 
                   <!-- <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td> -->
-                  <td class="text-center" style="width: 40%">
+                  <td class="text-center" style="width: 40%; vertical-align: top;">
                     <!-- <p class="mb-1">{{ item?.description }}</p> -->
                     <!-- <p class="mb-1">{{ generateExcerpt(item?.description) }} <span class=" text-black fw-bolder" @click="openDescription(item?.description)"> See more</span></p> -->
                     <p class="mb-1 descriptionText">{{ item?.description }}</p>

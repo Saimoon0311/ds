@@ -188,6 +188,14 @@ text#SvgjsText5030 {
 }
 
 @media only screen and (max-width: 767px) {
+  div:where(.swal2-container) button:where(.swal2-close) {   
+    right: 2px;
+    top: 2px;
+    font-size: 0.8rem !important;
+  }
+.my-swal-container .swal2-title {
+    font-size: 20px !important;
+}
 .input-group.w-75{
   width: 100%;
 }
@@ -201,6 +209,9 @@ text#SvgjsText5030 {
 }
 .softblue:focus{
   box-shadow: none !important;
+}
+div:where(.swal2-container) div:where(.swal2-popup){
+  padding: 0 !important;
 }
   </style>
   <body>

@@ -23,6 +23,9 @@
               lawyer.
             </p>
             <p>Simply make one enquiry and wait for lawyers to come to you.</p>
+            <div class="text-center">
+              <router-link to="/how-simplawfy-works" class="text-dark fs-5 p-2 btn btn-dark text-white">How Simplawfy Works</router-link>
+            </div>
             <div class="d-flex align-items-center justify-content-center mt-two">
               <button @click="goToLoginPage('client')" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</button>
               <!-- <router-link to="/client-login" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</router-link> -->
@@ -49,6 +52,9 @@
               Simply subscribe for an opportunity to find clients in your
               practice area without leaving your desk.
             </p>
+            <div class="text-center">
+              <router-link to="/how-simplawfy-works" class="text-white fs-5 p-2 btn btn-light text-black">How Simplawfy Works</router-link>
+            </div>
             <div class="d-flex align-items-center justify-content-center mt-two">
               <button @click="goToLoginPage('lawyer')" class="ext-white fs-5 p-2 btn btn-light text-black">Sign
                 in</button>
@@ -72,6 +78,9 @@
               lawyer.
             </p>
             <p>Simply make one enquiry and wait for lawyers to come to you.</p>
+            <div class="text-center">
+              <router-link to="/how-simplawfy-works" class="text-dark fs-5 p-2 btn btn-dark text-white">How Simplawfy Works</router-link>
+            </div>
             <div class="d-flex align-items-center justify-content-center mt-two">
               <button @click="goToLoginPage('client')" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</button>
               <!-- <router-link to="/client-login" class="text-dark fs-5 p-2 btn btn-dark text-white">Sign in</router-link> -->
@@ -98,6 +107,9 @@
               Simply subscribe for an opportunity to find clients in your
               practice area without leaving your desk.
             </p>
+            <div class="text-center">
+              <router-link to="/how-simplawfy-works" class="text-white fs-5 p-2 btn btn-light text-black">How Simplawfy Works</router-link>
+            </div>
             <div class="d-flex align-items-center justify-content-center mt-two">
               <button @click="goToLoginPage('lawyer')" class="ext-white fs-5 p-2 btn btn-light text-black">Sign
                 in</button>
@@ -414,7 +426,7 @@ padding: 30px !important;
   }
 
   .mt-two {
-    margin-top: 1rem !important;
+    margin-top: 0.5rem !important;
   }
 
   .homepage-circles a , .homepage-circles .btn {
@@ -449,8 +461,8 @@ padding: 30px !important;
 }
 @media (min-width: 360px) and (max-width: 450px) {
   .homepage-circles {
-    width: 330px;
-    height: 330px;
+    width: 350px;
+    height: 350px;
     padding: 15px;
   }
   .btn {
@@ -466,11 +478,11 @@ padding: 30px !important;
   .showhover p{
     line-height: 1.5;
     margin-bottom: 8px;
-    font-size: 12px;
+    font-size: 11.5px;
 }
   .btn {
     padding: 3px 10px !important;
-    font-size: 13px !important;
+    font-size: 12px !important;
 }
   .homepage-circles {
     width: 310px;

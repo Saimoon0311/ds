@@ -77,7 +77,7 @@
               <p class="m-0 text-start pt-1">You have cancelled your subscription. You can continue to access the Simplawfy platform until the
               {{ subscriptionData?.current_period_end }}. You can 
               <button
-                  class="forgetp"
+                  class=" btn btn-dark" 
                   @click="resubscribe(subscriptionData?.plan)"
                 >
                   resubscribe
@@ -204,11 +204,11 @@
 
               <button type="submit">Search</button>
             </form> -->
-            <div class="table-responsive">
+            <div class="table-responsive p-3 border bg-light ">
            
                     <table
                       v-if="receipts.length > 0"
-                      class="table table-bordered table-striped mt-3"
+                      class="table table-bordered table-light mt-3 "
                     >
                       <thead class="hd-receipt">
                         <!-- <th>#</th> -->
