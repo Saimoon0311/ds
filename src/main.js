@@ -199,23 +199,27 @@ app.mixin({
       api
         .get(`/admin/users-data/${type}`)
         .then((res) => {
-          const data = res?.data;
-          const csv = Papa.unparse(data);
-
-          // Create a Blob with the CSV data
-          const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-
-          // Create a download link and trigger the download
-          const link = document.createElement("a");
-          link.href = URL.createObjectURL(blob);
-          link.setAttribute("download", `${type}s.csv`);
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+          this.createCsv(res, type);
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+
+    createCsv(res, type) {
+      const data = res?.data;
+      const csv = Papa.unparse(data);
+
+      // Create a Blob with the CSV data
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+
+      // Create a download link and trigger the download
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute("download", `${type}s.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     },
 
     // convert numbers in currency format
@@ -371,13 +375,13 @@ app.mixin({
           let msg = null;
 
           if (
-            this.loginUser?.admin_approval == "approve"
-            && keyName == "first_name_verify"
+            this.loginUser?.admin_approval == "approve" &&
+            keyName == "first_name_verify"
           ) {
             msg = `Thanks for submitting your details. They'll be updated pending verification.`;
           } else if (
-            this.loginUser?.admin_approval == "approve"
-            && keyName == "last_name_verify"
+            this.loginUser?.admin_approval == "approve" &&
+            keyName == "last_name_verify"
           ) {
             msg = `Thanks for submitting your details. They'll be updated pending verification.`;
           } else {
@@ -1729,7 +1733,6 @@ app.mixin({
       }
     },
 
-   
     showBackendErrors(error) {
       // console.log("my : ", error?.response.data?.errors.email);
 
@@ -1906,7 +1909,10 @@ app.mixin({
       console.log(status);
       if (this.searchQuery == "") return false;
       let obj = { query: this.searchQuery };
-      if (this.endpoint == "/admin/all-lawyers" || this.endpoint == "/admin/all-clients") {
+      if (
+        this.endpoint == "/admin/all-lawyers" ||
+        this.endpoint == "/admin/all-clients"
+      ) {
         obj.admin_approval = status;
       }
       // if (status) obj.admin_approval = status;
@@ -1955,7 +1961,10 @@ app.mixin({
       }
       console.log("url ::: ", url);
 
-      if (this.endpoint == "/admin/all-lawyers" || this.endpoint == "/admin/all-clients") {
+      if (
+        this.endpoint == "/admin/all-lawyers" ||
+        this.endpoint == "/admin/all-clients"
+      ) {
         url = url + `&admin_approval=${status}`;
       }
 
@@ -2014,7 +2023,10 @@ app.mixin({
       // if (status) {
       //   url = url + `&admin_approval=${status}`;
       // }
-      if (this.endpoint == "/admin/all-lawyers" || this.endpoint == "/admin/all-clients") {
+      if (
+        this.endpoint == "/admin/all-lawyers" ||
+        this.endpoint == "/admin/all-clients"
+      ) {
         url = url + `&admin_approval=${status}`;
       }
       try {

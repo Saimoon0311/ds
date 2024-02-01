@@ -125,7 +125,7 @@
                 class="form-control"
                 id="phone"
                 v-model="form.phone"
-                maxlength="10"
+                maxlength="15"
               />
               <button
                 type="button"

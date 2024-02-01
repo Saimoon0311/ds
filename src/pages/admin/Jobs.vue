@@ -114,8 +114,8 @@
           </li>
         </ul>
 
-
-    <div class="input-group mb-3">
+        <div  class="d-flex flex-wrap align-items-center justify-content-between mb-3 w-100 pt-2">
+    <div class="input-group w-75">
     <input
       type="text"
       class="form-control"
@@ -141,6 +141,8 @@
     </button>
   </div>
 
+  <button @click="generateJobsCsv()" class="btn btn-dark btn-sm m-1"><i class="fa fa-plus"></i> Generate CSV </button>
+</div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped ">
           <thead>
@@ -424,13 +426,13 @@ export default {
     MainFooter
   },
 
-  data(){
+  data() {
     return {
-      areas : null,
-      area : null,
-      areaIndex : null,
-      tab : 'open',
-      dataUrl : '/admin/show-open-jobs',
+      areas: null,
+      area: null,
+      areaIndex: null,
+      tab: 'open',
+      dataUrl: '/admin/show-open-jobs',
     }
   },
 
@@ -459,12 +461,23 @@ export default {
     // for pagination
   },
 
-  beforeUnmount(){
-    this.$store.commit('SET_PAGINATION_LAST',null);
-    this.$store.commit('set_pagination_page',1);
+  beforeUnmount() {
+    this.$store.commit('SET_PAGINATION_LAST', null);
+    this.$store.commit('set_pagination_page', 1);
   },
 
   methods: {
+
+    generateJobsCsv() {
+      api
+        .get(`/admin/jobs-data`)
+        .then((res) => {
+          this.createCsv(res, "job");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
 
     closeModal(modalId) {
       $(modalId).modal('hide');
@@ -484,10 +497,10 @@ export default {
       this.areaIndex = index;
     },
 
-    updateArea(job_id,modalId){
+    updateArea(job_id, modalId) {
       console.log(modalId);
-      if(job_id && this.area){
-        api.post(`/admin/set-job-area`,{"area_id":this.area,"job_id":job_id}).then(() => {
+      if (job_id && this.area) {
+        api.post(`/admin/set-job-area`, { "area_id": this.area, "job_id": job_id }).then(() => {
           // console.log(res);
           // console.log(modalId);
           this.closeModal(modalId);
@@ -498,9 +511,9 @@ export default {
         });
       }
     },
-    
 
-    async getData(endpoint = null){
+
+    async getData(endpoint = null) {
       this.$store.commit('SET_ENDPOINT_FOR_PAGINATED_DATA', endpoint ?? this.dataUrl);
       await this.getPaginatedData();
     },
@@ -524,31 +537,31 @@ export default {
     },
 
 
-    changeTab(status){
-      this.$store.commit('SET_PAGINATION_LAST',null);
-      this.$store.commit('set_pagination_page',1);
+    changeTab(status) {
+      this.$store.commit('SET_PAGINATION_LAST', null);
+      this.$store.commit('set_pagination_page', 1);
       this.tab = status;
-      if(status == "open"){
+      if (status == "open") {
         this.dataUrl = '/admin/show-open-jobs';
         this.getData('/admin/show-open-jobs');
-      }else if(status == "pending"){
+      } else if (status == "pending") {
         this.dataUrl = '/admin/show-pending-jobs';
         this.getData('/admin/show-pending-jobs');
-      }else if(status == "approved"){
+      } else if (status == "approved") {
         this.dataUrl = '/admin/show-approved-jobs';
         this.getData('/admin/show-approved-jobs');
-      }else if(status == "overdue"){
+      } else if (status == "overdue") {
         this.dataUrl = '/admin/show-overdue-jobs';
         this.getData('/admin/show-overdue-jobs');
-      }else if(status == "withoutarea"){
+      } else if (status == "withoutarea") {
         this.dataUrl = '/admin/show-no-field-jobs';
         this.getData('/admin/show-no-field-jobs');
       }
-      
+
     },
 
 
-    reopenJob(id){
+    reopenJob(id) {
       console.log(id);
       this.$swal({
         title: 'Are you sure?',
@@ -578,7 +591,7 @@ export default {
 
 
 
-    deleteJob(id){
+    deleteJob(id) {
       console.log(id);
       this.$swal({
         title: 'Are you sure?',
@@ -610,9 +623,6 @@ export default {
 };
 </script>
 <style scoped>
-
-
-
 .bubbles {
   border-radius: 6px;
   padding: 8px 11px;
@@ -621,9 +631,12 @@ export default {
   background: black !important;
   font-weight: 500;
 }
-.btn-check:focus+.btn, .btn:focus{
+
+.btn-check:focus+.btn,
+.btn:focus {
   box-shadow: none;
 }
+
 .bubbles:hover {
   background: #363636;
 }
@@ -637,23 +650,30 @@ export default {
 ul#pills-tab {
   width: 600px !important;
 }
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: white;
-    background-color: #000000;
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: white;
+  background-color: #000000;
 }
+
 ul#pills-tab {
-    text-align: center;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    width: 330px;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  width: 330px;
 }
-.nav-pills .nav-link, .nav-link:focus, .nav-link:hover {
-    color: #000000;
+
+.nav-pills .nav-link,
+.nav-link:focus,
+.nav-link:hover {
+  color: #000000;
 }
+
 .navbar-nav {
   display: flex;
   align-items: center;
@@ -708,22 +728,26 @@ ul#pills-tab {
   bottom: 0;
   width: 100%;
 }
+
 @media only screen and (max-width: 767px) {
   ul#pills-tab {
     width: auto !important;
     max-width: 100%;
+  }
 }
-}
+
 @media only screen and (max-width: 600px) {
   ul#pills-tab {
     width: auto !important;
     max-width: 100%;
-}
-button.px-2 {
+  }
+
+  button.px-2 {
     font-size: 12px;
-}
-.test-page{ 
+  }
+
+  .test-page {
     padding-bottom: 30px;
-}
+  }
 }
 </style>
