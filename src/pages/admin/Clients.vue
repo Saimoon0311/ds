@@ -198,7 +198,7 @@
                                 <td >{{ item?.first_name }}</td>
                                 <td>{{ item?.first_name_verify }}</td>
                                 <td>
-                                  <button class="btn btn-dark btn-sm" @click="verifyData(index,item?.id,'first_name')">
+                                  <button class="btn btn-dark btn-sm mx-1" @click="verifyData(index,item?.id,'first_name')">
                                     Verify
                                   </button>
                                   <button class="btn btn-dark btn-sm" @click="declineVerification(index,item?.id,'first_name')">
