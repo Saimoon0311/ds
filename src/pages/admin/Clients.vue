@@ -211,7 +211,7 @@
                                 <td >{{ item?.last_name }}</td>
                                 <td>{{ item?.last_name_verify }}</td>
                                 <td>
-                                  <button class="btn btn-dark btn-sm" @click="verifyData(index,item?.id,'last_name')">
+                                  <button class="btn btn-dark btn-sm mx-1" @click="verifyData(index,item?.id,'last_name')">
                                     Verify
                                   </button>
                                   <button class="btn btn-dark btn-sm" @click="declineVerification(index,item?.id,'last_name')">
