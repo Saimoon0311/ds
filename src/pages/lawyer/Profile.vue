@@ -85,7 +85,7 @@
                   type="button"
                   name="job-email-submit"
                   class="btn btn-dark my-3"
-                  @click="sendUpdateEmail"
+                  @click="sendUpdateEmail('emailModal')"
                 >
                   Send Verification Link
                 </button>
@@ -1373,18 +1373,18 @@ export default {
 
   watch: {
     'form.consultation_amount2': function (newVal) {
-      if(newVal == 0){
+      if (newVal == 0) {
         this.form.consultation_amount2 = 1;
       }
-      if(isNaN(newVal) || newVal < 1){
+      if (isNaN(newVal) || newVal < 1) {
         this.form.consultation_amount2 = null;
       }
     },
     'form.consultation_time2': function (newVal) {
-      if(newVal == 0){
+      if (newVal == 0) {
         this.form.consultation_time2 = 1;
       }
-      if(isNaN(newVal) || newVal < 1){
+      if (isNaN(newVal) || newVal < 1) {
         this.form.consultation_time2 = null;
       }
     },
@@ -1423,7 +1423,7 @@ export default {
     }
   },
   methods: {
-    async sendUpdateEmail() {
+    async sendUpdateEmail(modalId = null) {
       try {
         await api.post("/send-email-update-link", {
           old_email: this?.loginUser?.email,
@@ -1434,6 +1434,9 @@ export default {
           "Please check your new email address for your verification link.",
           "success"
         );
+        if (modalId) {
+          this.closeModal(modalId);
+        }
       } catch (error) {
         if (error.response && error.response.status === 422) {
           // Handle validation error (status 422)
@@ -1668,13 +1671,12 @@ export default {
 
 
 <style scoped>
-table
-    {
-        table-layout: fixed;
-        word-break: break-all;
-        border-collapse: collapse;
-        width:100%;
-    }
+table {
+  table-layout: fixed;
+  word-break: break-all;
+  border-collapse: collapse;
+  width: 100%;
+}
 
 .form-radio {
   display: inline-flex;
@@ -1820,15 +1822,17 @@ tbody tr td:last-child {
   top: 0;
   right: 0;
 }
+
 @media only screen and (max-width: 767px) {
   table {
     table-layout: inherit;
     word-break: auto-phrase;
     border-collapse: collapse;
     width: 100%;
-}
-.mob-set {
+  }
+
+  .mob-set {
     flex-wrap: wrap;
-}
+  }
 }
 </style>

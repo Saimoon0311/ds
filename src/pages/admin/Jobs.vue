@@ -258,7 +258,7 @@
 
 
                 <button
-                                    v-if="tab == 'withoutarea'"
+                                    v-if="tab == 'withoutarea' || tab == 'open'"
                                     type="button"
                                     class="btn btn-sm btn-danger border-0 py-1 px-2"
                                     style="background-color: black !important"
@@ -299,7 +299,8 @@
                                           <div>
                                             <div data-v-2f14f9de="" class="d-flex flex-wrap justify-content-center mb-5" data-v-376ef8ab="">
                                               <!-- class="m-2 text-decoration-none badge text-white fs-6 bubbles" -->
-                                              <a v-for="(area, index) in areas" :key="area.id" @click="setArea(index, area.id)" :class="[
+                                              <a v-for="(area, index) in areas" :key="area.id" @click="setArea(index, area.id)" 
+                                              :class="[
                                                 'm-2',
                                                 'text-decoration-none',
                                                 'badge',
@@ -308,7 +309,7 @@
                                                 'bubbles',
                                                 { selected_bubble: areaIndex === index },
                                               ]">
-                                                {{ area.title }}
+                                                {{ area?.id != item?.field?.id ? area.title : '' }}
                                               </a>
                                             </div>
                                           </div>
@@ -505,6 +506,13 @@ export default {
           // console.log(modalId);
           this.closeModal(modalId);
           this.getData()
+
+          this.$swal(
+            '',
+            'Area of law assigned successfully',
+            'success'
+          )
+
           // this.getPaginatedData();
         }).catch(error => {
           console.log(error)

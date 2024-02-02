@@ -1816,12 +1816,12 @@
           <!-- Additional information -->
           <div class="form-group">
             <label class="w-100"
-              >Tell the potential client what you will do for them:<sup
+              >Tell the Potential Client What You Will Do for Them:<sup
                 ><code>*</code></sup
               >
+              <!-- @input="convertToTitleCase(form.description)" -->
               <textarea
                 v-model="form.description"
-                @input="convertToTitleCase(form.description)"
                 id="additionalInfo"
                 name="additionalInfo"
                 class="form-control"
@@ -2121,7 +2121,7 @@
 
             <div v-if="form.description" class="sumdesc">
               <p class="text-center font-set">
-               What you will do.
+                What You Will Do.
               </p>
               <p class="descriptionText" style="white-space: pre-line">
                 {{ form.description }}

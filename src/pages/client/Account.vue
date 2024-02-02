@@ -165,7 +165,7 @@
         <tr>
           <td class="d-flex align-items-center justify-content-between">
             First Name
-            <!-- <button
+            <button
               type="button"
               class="btn btn-dark btn-sm"
               data-bs-toggle="modal" data-bs-target="#Fname"
@@ -173,7 +173,7 @@
               @click="updateFormProperties"
             >
               <i class="fa fa-pencil"></i>
-            </button> -->
+            </button>
           </td>
 
           <!-- Modal -->
@@ -187,7 +187,7 @@
         <tr>
           <td class="d-flex align-items-center justify-content-between">
             Last Name
-            <!-- <button
+            <button
               type="button"
               class="btn btn-dark btn-sm"
               data-bs-toggle="modal" data-bs-target="#Lname"
@@ -195,7 +195,7 @@
               @click="updateFormProperties"
             >
               <i class="fa fa-pencil"></i>
-            </button> -->
+            </button>
           </td>
 
           <!-- Modal -->
@@ -268,7 +268,7 @@
                   type="button"
                   name="job-email-submit"
                   class="btn btn-dark my-3"
-                  @click="sendUpdateEmail"
+                  @click="sendUpdateEmail('emailModal')"
                 >
                 Send Verification Link
                 </button>
@@ -485,10 +485,13 @@ export default {
     },
 
 
-    async sendUpdateEmail() {
+    async sendUpdateEmail(modalId = null) {
       try {
         await api.post('/send-email-update-link', { "old_email": this?.loginUser?.email, "email": this.email });
         this.$swal("", "Please check your new email address for your verification link.", "success");
+        if (modalId) {
+          this.closeModal(modalId);
+        }
       } catch (error) {
         if (error.response && error.response.status === 422) {
           // Handle validation error (status 422)

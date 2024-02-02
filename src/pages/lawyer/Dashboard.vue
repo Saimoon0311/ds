@@ -707,6 +707,7 @@ export default {
         You can also view their details in the Closed tab on your Dashboard.`;
 
           this.$swal.fire({
+            icon: 'success',
             title: "Congratulations, a client has accepted your proposal!",
             html: msg,
             showCloseButton: true,
