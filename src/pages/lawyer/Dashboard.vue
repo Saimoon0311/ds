@@ -1038,6 +1038,7 @@ ul#pills-tab {
   overflow-y: auto;
   padding-right: 10px;
   margin-right: 5px;
+  white-space: pre-line;
 }
 
 .descriptionText::-webkit-scrollbar {

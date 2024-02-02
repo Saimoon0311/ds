@@ -129,11 +129,12 @@
                     <!-- <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ chargeType(item?.charge_type) }} <span data-toggle="tooltip" data-placement="top" title="How you will charge?"><i class="fas fa-info-circle"></i></span></p> -->
                     <p
                       class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small"
+                      @mouseover="openFeeEstimateModal(item?.charge_type)"
                     >
                       {{ chargeType(item?.charge_type) }}
                       <span
                         
-                        @click="openFeeEstimateModal(item?.charge_type)"
+                     
                       >
                         <i class="fas fa-info-circle"></i>
                       </span>
@@ -622,6 +623,8 @@ ul#pills-tab {
   padding-right: 10px;
   margin-right: 5px;
   text-align: start;
+  white-space: normal;
+    word-break: break-word;
 }
 .charge-modal {
     border-bottom: 0;
@@ -637,27 +640,29 @@ ul#pills-tab {
     line-height: 1;
     font-weight: 600;
 }
-.descriptionText::-webkit-scrollbar {
+.descriptionText::-webkit-scrollbar , span.class-para::-webkit-scrollbar {
   width: 6px;
   border-radius: 10px;
 }
 
-.descriptionText::-webkit-scrollbar-thumb {
+.descriptionText::-webkit-scrollbar-thumb , span.class-para::-webkit-scrollbar-thumb {
   background-color: #969696;
   /* outline: 1px solid #292929; */
   border-radius: 10px;
 }
 
-.descriptionText::-webkit-scrollbar-track {
+.descriptionText::-webkit-scrollbar-track , span.class-para::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
   border-radius: 10px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 767px) {
   .descriptionText {
     width: 100%;
-    text-wrap: wrap;
+    white-space: normal;
+word-break: break-word;
     font-size: 14px;
+    padding-right: 2px;
   }
   .lawname {
     font-size: 12px;

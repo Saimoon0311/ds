@@ -244,6 +244,7 @@
                             <td class="bg-transparent text-white p-0 px-2">
                               $ {{ formatNumber(grandTotal) }}
                             </td>
+                            <!-- <td class="bg-transparent p-0 "></td> -->
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
@@ -473,6 +474,7 @@
                             <td class="bg-transparent text-white p-0 px-2">
                               $ {{ formatNumber(grandTotal) }}
                             </td>
+                            <!-- <td class="bg-transparent p-0 "></td> -->
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
@@ -584,6 +586,7 @@
                       <td class="bg-transparent text-white p-0 px-2">
                         $ {{ formatNumber(grandTotal2) }}
                       </td>
+                      <!-- <td class="bg-transparent p-0 "></td> -->
                       <td class="bg-transparent p-0 b-round-end"></td>
                     </tr>
                     <!-- <tr class="border-0 p-0">
@@ -741,6 +744,7 @@
                             <td class="bg-transparent text-white p-0 px-2">
                               $ {{ formatNumber(grandTotal) }}
                             </td>
+                            <!-- <td class="bg-transparent p-0 "></td> -->
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
@@ -922,6 +926,7 @@
                             <td class="bg-transparent text-white p-0 px-2">
                               $ {{ formatNumber(grandTotal) }}
                             </td>
+                            <!-- <td class="bg-transparent p-0 "></td> -->
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
@@ -1128,10 +1133,11 @@
                             </td>
                             <!-- <td class="bg-transparent p-0"></td>
                           <td class="bg-transparent p-0"></td> -->
-                            <td class="bg-transparent text-white p-0 px-2">
+                            <td class="bg-transparent text-white p-0 px-2" colspan="3">
                               $ {{ formatNumber(grandTotal3) }}
                             </td>
-                            <td class="bg-transparent p-0 b-round-end"></td>
+                            <!-- <td class="bg-transparent p-0 "></td> -->
+                            <td class="bg-transparent p-0 b-round-end" ></td>
                           </tr>
                           <!-- <tr class="border-0 p-0">
                             <td class="gstStyle p-0">*GST not applicable on this item</td>
@@ -1344,6 +1350,7 @@
                           <td class="bg-transparent text-white p-0 px-2">
                             $ {{ formatNumber(grandTotal) }}
                           </td>
+                          <!-- <td class="bg-transparent p-0 "></td> -->
                           <td class="bg-transparent p-0 b-round-end"></td>
                         </tr>
                         <tr class="border-0 p-0">
@@ -1543,6 +1550,7 @@
                           <td class="bg-transparent text-white p-0 px-2">
                             $ {{ formatNumber(grandTotal) }}
                           </td>
+                          <!-- <td class="bg-transparent p-0 "></td> -->
                           <td class="bg-transparent p-0 b-round-end"></td>
                         </tr>
                         <tr class="border-0 p-0">
@@ -1702,6 +1710,7 @@
                         <td class="bg-transparent text-white p-0 px-2">
                           $ {{ formatNumber(grandTotal) }}
                         </td>
+                        <!-- <td class="bg-transparent p-0 "></td> -->
                         <td class="bg-transparent p-0 b-round-end"></td>
                       </tr>
                       <tr class="border-0 p-0">
@@ -1960,6 +1969,20 @@
               </div>
             </div>
             <!-- here -->
+            <div v-if="form.estimated_fee">
+              <p>
+                <span> Estimated Fee:</span>
+                <span>${{ formatNumber(form.estimated_fee) }}</span>
+              </p>
+            </div>
+            <div v-if="form.uplift_percentage">
+              <p>
+                <span> Uplift Percentage:</span>
+                <span>{{ form.uplift_percentage }}</span>
+              </p>
+            </div>
+
+            
             <div v-if="form.disbursement_amount">
               <p>
                 <span> Estimated amount for disbursements:</span>
@@ -1990,19 +2013,7 @@
                         <p> <span> Upfront Payment Status:</span>  <span>{{ form.upfront_payment_status }}</span></p>
                       </div> -->
 
-            <div
-              v-if="
-                form.upfront_payment &&
-                form.upfront_payment_status.toLowerCase() == 'yes'
-              "
-            >
-              <p>
-                <span> Upfront payment:</span>
-                <span
-                  >${{ formatNumber(parseFloat(form.upfront_payment)) }}</span
-                >
-              </p>
-            </div>
+         
 
             <div v-if="form.law_practice_cost">
               <p>
@@ -2011,19 +2022,7 @@
               </p>
             </div>
 
-            <div v-if="form.uplift_percentage">
-              <p>
-                <span> Uplift Percentage:</span>
-                <span>{{ form.uplift_percentage }}</span>
-              </p>
-            </div>
-
-            <div v-if="form.estimated_fee">
-              <p>
-                <span> Estimated Fee:</span>
-                <span>${{ formatNumber(form.estimated_fee) }}</span>
-              </p>
-            </div>
+           
 
             <span
               v-if="
@@ -2057,6 +2056,13 @@
                 </p>
               </div>
             </span>
+
+            <div v-if="form.success_fee_term">
+              <p>
+                <span> Success Fee Terms:</span>
+                <span class="descriptionText" style="white-space: pre-line">{{ form.success_fee_term }}</span>
+              </p>
+            </div>
 
             
 
@@ -2094,6 +2100,19 @@
               </p>
             </div>
 
+            <div
+              v-if="
+                form.upfront_payment &&
+                form.upfront_payment_status.toLowerCase() == 'yes'
+              "
+            >
+              <p>
+                <span> Upfront payment:</span>
+                <span
+                  >${{ formatNumber(parseFloat(form.upfront_payment)) }}</span
+                >
+              </p>
+            </div>
             
             <div>
               <p v-if="!isNaN(totals?.totalExcludingGst)">
@@ -2112,12 +2131,7 @@
               </p>
             </div>
 
-            <div v-if="form.success_fee_term">
-              <p>
-                <span> Success Fee Term:</span>
-                <span class="descriptionText" style="white-space: pre-line">{{ form.success_fee_term }}</span>
-              </p>
-            </div>
+          
 
             <div v-if="form.description" class="sumdesc">
               <p class="text-center font-set">
@@ -3234,6 +3248,7 @@ input[type="radio"]:checked {
 
 #addFeeEarnersRow td {
   line-height: 34px;
+  word-break: break-all;
 }
 
 /* #addFeeEarnersRow td:last-child {
@@ -3329,7 +3344,7 @@ td {
 .hourlycost {
   display: table;
   width: 100%;
-  table-layout: fixed;
+  /* table-layout: fixed; */
 }
 .hourlycost tbody tr,
 .hourlycost td,
@@ -3353,6 +3368,16 @@ td {
   }
 }
 @media only screen and (max-width: 767px) {
+  .hourlycost tbody tr,
+.hourlycost td,
+.hourlycost th {
+  width: 100%;
+}
+  .hourlycost {
+  /* display: table;
+  width: 100%; */
+  table-layout: fixed;
+}
   form#mainForm {
     width: unset;
   }

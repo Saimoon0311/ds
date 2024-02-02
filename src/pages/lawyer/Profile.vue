@@ -861,7 +861,7 @@
            
             <!--  Email -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between width-set">
+              <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 Email:
                 <button
                   type="button"
@@ -874,12 +874,12 @@
                   <i class="fa fa-pencil"></i>
                 </button>
               </td>
-              <td>{{ loginUser?.email }}</td>
+              <td colspan="3">{{ loginUser?.email }}</td>
             </tr>
 
             <!-- First Name -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between width-set">
+              <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 First Name:
                 <button
                   type="button"
@@ -892,12 +892,12 @@
                   <i class="fa fa-pencil"></i>
                 </button>
               </td>
-              <td>{{ loginUser?.first_name }}</td>
+              <td colspan="3">{{ loginUser?.first_name }}</td>
             </tr>
 
             <!-- Last Name -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between width-set">
+              <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 Last Name:
                 <button
                   type="button"
@@ -910,12 +910,12 @@
                   <i class="fa fa-pencil"></i>
                 </button>
               </td>
-              <td>{{ loginUser?.last_name }}</td>
+              <td colspan="3">{{ loginUser?.last_name }}</td>
             </tr>
 
             <!-- Job Title -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between width-set">
+              <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 Job Title:
                 <button
                   type="button"
@@ -933,14 +933,14 @@
 
               <!-- Modal ends here -->
 
-              <td>
+              <td colspan="3">
                 {{ loginUser?.job_title }}
               </td>
             </tr>
 
             <!-- LawFirm name -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between width-set">
+              <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 Law Firm Name:
                 <button
                   type="button"
@@ -956,14 +956,14 @@
               <!-- Modal -->
 
               <!-- Modal ends here -->
-              <td>
+              <td colspan="3">
                 {{ loginUser?.law_firm }}
               </td>
             </tr>
 
             <!-- Link to Website -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between width-set">
+              <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 Link to Website:
                 <button
                   type="button"
@@ -979,13 +979,13 @@
               <!-- Modal -->
 
               <!-- Modal ends here -->
-              <td>
+              <td colspan="3">
                 {{ loginUser?.link }}
               </td>
             </tr>
 
             <tr>
-              <td class="d-flex align-items-center justify-content-between width-set">
+              <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 Address:
                 <button
                   type="button"
@@ -1001,14 +1001,14 @@
               <!-- Modal -->
 
               <!-- Modal ends here -->
-              <td>
+              <td colspan="3">
                 {{ loginUser?.address }}
               </td>
             </tr>
 
 
             <tr>
-              <td class="d-flex align-items-center justify-content-between width-set">
+              <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 Suburb:
                 <button
                   type="button"
@@ -1024,7 +1024,7 @@
               <!-- Modal -->
 
               <!-- Modal ends here -->
-              <td>
+              <td colspan="3">
                 {{ loginUser?.suburb }}
               </td>
             </tr>
@@ -1032,7 +1032,7 @@
 
             <!-- Phone -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between width-set">
+              <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 Phone:
                 <button
                   type="button"
@@ -1050,12 +1050,12 @@
 
               <!-- Modal ends here -->
 
-              <td>{{ loginUser?.phone }}</td>
+              <td colspan="3">{{ loginUser?.phone }}</td>
             </tr>
 
             <!-- About Me -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between width-set">
+              <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 About Me:
                 <button
                   type="button"
@@ -1073,13 +1073,13 @@
 
               <!-- Modal ends here -->
 
-              <td>
+              <td colspan="3">
                 <span class="descriptionText"> {{ limitedAbout }}</span>
               </td>
             </tr>
 
             <tr>
-              <td class="d-flex align-items-center justify-content-between width-set">
+              <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 Free/Discounted Consultation:
                 <button
                   @click="changeConsultationType(form.consultation_type)"
@@ -1094,7 +1094,7 @@
                 </button>
               </td>
 
-              <td>
+              <td colspan="3">
                 <!-- <span v-if="loginUser?.consultation_type">
                 <b>Type : </b>{{ capitalizeFirstLetter(loginUser?.consultation_type) }},
               </span>
@@ -1137,7 +1137,7 @@
             </tr>
 
             <tr>
-              <td colspan="2">
+              <td colspan="3">
                 <div class="w-100 align-items-center d-flex mob-set">
 
                 
@@ -1206,7 +1206,7 @@
             <!-- Areas of Practice -->
             <!-- v-if="!loginUser?.area_insert" -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between width-set">
+              <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 Areas of Practice:
                 <button
                   type="button"
@@ -1225,7 +1225,7 @@
 
               <!-- Field Modal ends here -->
 
-              <td>
+              <td colspan="3">
                 <!-- <MultiSelectPrime 
               v-model="selectedOptionIds" 
               :options="options" filter 
@@ -1254,7 +1254,7 @@
             <!-- State/Territory -->
             <!-- v-if="!loginUser?.state_insert" -->
             <tr>
-              <td class="d-flex align-items-center justify-content-between width-set">
+              <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 State/territory:
                 <button
                   @click="setModal('locations')"
@@ -1273,7 +1273,7 @@
 
               <!-- Location Modal ends here -->
 
-              <td>
+              <td colspan="3">
                 <div v-if="selectedOptionIdsShow_locations.length > 0">
                   <span
                     v-for="(item, index) in selectedOptionIdsShow_locations"
