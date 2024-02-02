@@ -192,7 +192,7 @@
 
           <!-- Receipts new place -->
           <div v-if="subscriptionData != null">
-            <h4 class="mt-3 mb-1 mb-md-3 mt-4">Invoices</h4>
+            <h4 class="mt-5 mb-1 mb-md-2">Invoices</h4>
 
 
             <!-- <form @submit.prevent="searchReceipts">
@@ -204,11 +204,11 @@
 
               <button type="submit">Search</button>
             </form> -->
-            <div class="table-responsive p-3 border bg-light ">
+            <div class="table-responsive">
            
                     <table
                       v-if="receipts.length > 0"
-                      class="table table-bordered table-light mt-3 "
+                      class="table invoice-table table-striped mt-3 "
                     >
                       <thead class="hd-receipt">
                         <!-- <th>#</th> -->
@@ -635,9 +635,21 @@ export default {
     width: max-content;
     max-width: 100%;
 }
+.invoice-table{
+  box-shadow: 5px 5px 10px #00000017;
+
+}
 .header {
     border-radius: 5px 5px 0 0;
     background: rgba(55, 59, 62, 1);
+}
+thead.hd-receipt th {
+    padding: 10px;
+    background: #373b3e;
+    color: white;
+}
+thead.hd-receipt{
+  border-radius: 10px 10px 0 0;
 }
 .bubbles {
   border-radius: 6px;
@@ -667,6 +679,14 @@ export default {
   border: 1px solid white;
   border-radius: 50%;
 }
+.invoice-table .hd-receipt th:first-child {
+    border-radius: 10px 0 0 0;
+}
+
+.invoice-table .hd-receipt th:last-child{
+  border-radius: 0 10px 0 0 ;
+} 
+
 
 .navActive {
   background: rgb(0, 0, 0);

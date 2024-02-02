@@ -3,7 +3,7 @@
     <GeneralHeader />
 
     <div class="d-flex flex-wrap justify-content-center align-items-center flex-column">
-      <div class="mb-5 mt-5 text-center ">
+      <div class="mb-3 mt-5 text-center ">
         <p class="logo-sub-heading">
           An Australian legal marketplace making law simple by helping you find
           a lawyer or promote your law firm.

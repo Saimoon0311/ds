@@ -40,7 +40,7 @@
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <div class="d-flex justify-content-evenly mx-4 mb-3 mb-lg-4">
                             <router-link to="/lawyer-profile" class="btn btn-outline-light btn-lg px-5">Back</router-link>
                             <button @click="submitData" class="btn btn-outline-light btn-lg px-5">Submit</button>
                         </div>
@@ -186,7 +186,9 @@ export default {
 .footer {
     position: absolute;
     bottom: 0;
+    top: 100%;
     width: 100%;
+    padding-top: 20px;
 }
 
 .align-baseline {

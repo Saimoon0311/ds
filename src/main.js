@@ -1499,8 +1499,10 @@ app.mixin({
 
       const mainHtmlContent = Object.entries(newData)
         .map(
-          ([key, value]) =>
-            `<div class="wrapper mb-3" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}:</b> <span>${value}</span></h6></div>`
+          ([key, value]) => {
+            const paraClass = key == 'success fee term' ? 'class-para' : 'class-def';
+            return `<div class="wrapper mb-3" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}:</b> <span  class="${paraClass}">${value}</span></h6></div>`
+          }
         )
         .join("");
 
@@ -1533,7 +1535,7 @@ app.mixin({
       }
 
       const swalHtmlContent = `
-        <div class="table-wrap pb-0" style="text-align: left !important;">${mainHtmlContent}</div>
+        <div class="table-wrap pb-0 proposed-work" >${mainHtmlContent}</div>
         ${specificTasksTable}
         ${disbursementsTable}
         ${feeEarnersTable}
