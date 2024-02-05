@@ -137,6 +137,7 @@ export default {
 .about-main {
   position: relative;
   padding-bottom: 60px;
+  min-height: 100vh;
 }
 .probox {
   width: 40%;

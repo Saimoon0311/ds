@@ -54,8 +54,9 @@ export default {
 }
 
 .logo-small {
-  width: 175px;
-  height: 50px;
+  width: 185px;
+    height: 40px;
+    object-fit: contain;
 }
 
 .law-img {
