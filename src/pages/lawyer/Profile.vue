@@ -1824,6 +1824,9 @@ tbody tr td:last-child {
 }
 
 @media only screen and (max-width: 767px) {
+  table tr td:nth-child(2){
+    width: 60%
+}
   table {
     table-layout: inherit;
     word-break: auto-phrase;
