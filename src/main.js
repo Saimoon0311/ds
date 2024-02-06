@@ -1100,15 +1100,24 @@ app.mixin({
       if (data?.address != null && data?.address != "" && showSecretInfo) {
         htmlContent += ` <div class="wrapper" >
         <h6><b style="text-transform: capitalize;">address
-        : </b><span>${data?.address}</span></h6>
-      </div>`;
+        : </b><span>${data?.address}</span>`;
       }
+
+      // if (data?.suburb != null && data?.suburb != "") {
+      //   htmlContent += ` <div class="wrapper" >
+      //   <h6><b style="text-transform: capitalize;">suburb
+      //   : </b><span>${data?.suburb}</span></h6>
+      // </div>`;
+      // }
+
       if (data?.suburb != null && data?.suburb != "") {
-        htmlContent += ` <div class="wrapper" >
-        <h6><b style="text-transform: capitalize;">suburb
-        : </b><span>${data?.suburb}</span></h6>
-      </div>`;
+        htmlContent += `<span>, ${data?.suburb}</span>`;
       }
+
+      if (data?.address != null && data?.address != "" && showSecretInfo) {
+        htmlContent += `</h6></div>`;
+      }
+
       if (
         consultation_content != null &&
         consultation_content != "" &&

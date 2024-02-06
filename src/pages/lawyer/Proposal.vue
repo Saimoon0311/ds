@@ -2137,7 +2137,7 @@
               <p class="text-center font-set">
                 What You Will Do.
               </p>
-              <p class="descriptionText" style="white-space: pre-line">
+              <p class="descriptionText" style="white-space: pre-line; text-transform:none;">
                 {{ form.description }}
               </p>
             </div>
