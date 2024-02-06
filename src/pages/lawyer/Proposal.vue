@@ -1517,7 +1517,7 @@
                           <th>Item</th>
                           <th>Cost</th>
                           <th></th>
-                          <th></th>
+                          <!-- <th></th> -->
                         </tr>
                       </thead>
                       <tbody id="addFeeEarnersRow">
@@ -1981,49 +1981,29 @@
                 <span>{{ form.uplift_percentage }}</span>
               </p>
             </div>
+            <div v-if="form.success_fee_term">
+              <!-- <p class="fee">
+                <span> Success Fee Terms:</span>
+                
+              </p> -->
 
-            
-            <div v-if="form.disbursement_amount">
-              <p>
-                <span> Estimated amount for disbursements:</span>
-                <span
-                  >${{
-                    grandTotal > 0 ? formatNumber(parseFloat(grandTotal)) : formatNumber(parseFloat(form.disbursement_amount))
-                  }}</span
-                >
-              </p>
-            </div>
-
-            <div class="mb-2" v-if="rows.length > 0">
+              <div class=" mb-3">
               <div class="d-flex table-title">
                 <h5 style="text-align: left !important">
-                  Itemised Disbursements:
+                  Success Fee Terms:
                 </h5>
-                <span @click="toggleDiv2" class="summarytogicon mr-2">
-                  <i :class="['fas', isDivVisible2 ? 'fa-chevron-up' : 'fa-chevron-down',]"></i>
-                
+                <span @click="toggleDiv3" class="summarytogicon mr-2">
+                  <i :class="['fas', isDivVisible3 ? 'fa-chevron-up' : 'fa-chevron-down',]"></i>                
                 </span>
               </div>
-              <div v-if="isDivVisible2">
-                <div v-html="summaryHtmlDisbursement"></div>
+              <div v-if="isDivVisible3">
+                <span class="descriptionText" style="white-space: pre-line">{{ form.success_fee_term }}</span>
               </div>
+
+
+              </div>
+
             </div>
-
-            <!-- <div v-if="form.upfront_payment_status">
-                        <p> <span> Upfront Payment Status:</span>  <span>{{ form.upfront_payment_status }}</span></p>
-                      </div> -->
-
-         
-
-            <div v-if="form.law_practice_cost">
-              <p>
-                <span> Law Practice Cost:</span>
-                <span>${{ formatNumber(form.law_practice_cost) }}</span>
-              </p>
-            </div>
-
-           
-
             <span
               v-if="
                 selectedOption == 'Success' &&
@@ -2057,12 +2037,49 @@
               </div>
             </span>
 
-            <div v-if="form.success_fee_term">
+            
+
+            <div v-if="form.disbursement_amount">
               <p>
-                <span> Success Fee Terms:</span>
-                <span class="descriptionText" style="white-space: pre-line">{{ form.success_fee_term }}</span>
+                <span> Estimated amount for disbursements:</span>
+                <span
+                  >${{
+                    grandTotal > 0 ? formatNumber(parseFloat(grandTotal)) : formatNumber(parseFloat(form.disbursement_amount))
+                  }}</span
+                >
               </p>
             </div>
+
+            <div class="mb-2" v-if="rows.length > 0">
+              <div class="d-flex table-title">
+                <h5 style="text-align: left !important">
+                  Itemised Disbursements:
+                </h5>
+                <span @click="toggleDiv2" class="summarytogicon mr-2">
+                  <i :class="['fas', isDivVisible2 ? 'fa-chevron-up' : 'fa-chevron-down',]"></i>                
+                </span>
+              </div>
+              <div v-if="isDivVisible2">
+                <div v-html="summaryHtmlDisbursement"></div>
+              </div>
+            </div>
+
+            <!-- <div v-if="form.upfront_payment_status">
+                        <p> <span> Upfront Payment Status:</span>  <span>{{ form.upfront_payment_status }}</span></p>
+                      </div> -->
+
+         
+
+            <div v-if="form.law_practice_cost">
+              <p>
+                <span> Law Practice Cost:</span>
+                <span>${{ formatNumber(form.law_practice_cost) }}</span>
+              </p>
+            </div>
+
+           
+
+           
 
             
 
@@ -2203,6 +2220,7 @@ export default {
       isDivVisible: false,
       isDivVisible1: false,
       isDivVisible2: false,
+      isDivVisible3: false,
       editRow: null,
       summaryHtmlDisbursement: null,
       summaryHtmlItemByItemTasks: null,
@@ -2900,16 +2918,20 @@ export default {
     },
 
     toggleDiv() {
-      console.log("div vis : ", this.isDivVisible);
+      
       this.isDivVisible = !this.isDivVisible;
     },
     toggleDiv1() {
-      console.log("div vis : ", this.isDivVisible);
+     
       this.isDivVisible1 = !this.isDivVisible1;
     },
     toggleDiv2() {
-      console.log("div vis : ", this.isDivVisible);
+      // console.log("div vis : ", this.isDivVisible);
       this.isDivVisible2 = !this.isDivVisible2;
+    },
+    toggleDiv3() {
+   
+      this.isDivVisible3 = !this.isDivVisible3;
     },
 
     removeRow(index) {
@@ -3100,6 +3122,14 @@ export default {
   justify-content:space-between;
   text-transform: capitalize;
 }
+.summ div p.fee {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    text-transform: capitalize;
+    flex-direction: column;
+}
 .font-set {
     font-weight: 800 !important;
     text-transform: none !important;
@@ -3177,6 +3207,7 @@ export default {
   overflow-y: auto;
   padding-right: 10px;
   margin-right: 5px;
+  display: block;
 }
 
 .descriptionText::-webkit-scrollbar {
