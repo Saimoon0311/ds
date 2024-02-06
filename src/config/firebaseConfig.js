@@ -35,5 +35,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 const messaging = getMessaging(firebaseApp);
 const db = getFirestore(firebaseApp);
 
+// const db = null;
+// const messaging = null;
 
 export { db , messaging };
