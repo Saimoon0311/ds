@@ -192,7 +192,7 @@
 
           <!-- Receipts new place -->
           <div v-if="subscriptionData != null">
-            <h4 class="mt-5 mb-1 mb-md-2">Invoices</h4>
+            <h4 class="mt-5 mb-2 mb-md-3">Invoices</h4>
 
 
             <!-- <form @submit.prevent="searchReceipts">
@@ -208,7 +208,7 @@
            
                     <table
                       v-if="receipts.length > 0"
-                      class="table invoice-table table-striped mt-3 "
+                      class="table invoice-table table-striped "
                     >
                       <thead class="hd-receipt">
                         <!-- <th>#</th> -->
@@ -681,18 +681,18 @@ thead.hd-receipt{
   border-radius: 50%;
 }
 .invoice-table .hd-receipt th:first-child {
-    border-radius: 10px 0 0 0;
+    border-radius: 5px 0 0 0;
 }
 
 .invoice-table .hd-receipt th:last-child{
-  border-radius: 0 10px 0 0 ;
+  border-radius: 0 5px 0 0 ;
 } 
 
 
 .navActive {
   background: rgb(0, 0, 0);
   border: 1px solid rgb(0, 0, 0);
-  border-radius: 10px;
+  border-radius: 5px;
   color: white;
 }
 
@@ -739,6 +739,40 @@ thead.hd-receipt{
     background: rgba(255, 255, 255, 0.1);
     padding: 0.25rem 0.5rem;
     margin: 0;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+  } 
+.table-responsive{
+  max-height: 180px; /* Set a max height for the table container */
+    overflow-y: auto;
+}
+.table-responsive thead th{
+  position: sticky;
+  -webkit-position: sticky;
+  top: 0;
+}
+.table-responsive tbody tr {
+    /* display: table; */
+    width: 100%;
+    /* table-layout: fixed; */
+  }
+
+.table-responsive::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
+  border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: rgba(217, 217, 217, 1);
+  /* outline: 1px solid #292929; */
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 767px) {
