@@ -484,7 +484,7 @@
                         <button
                             v-if="item?.proposal?.status != 'Reject' && item?.proposal?.status != 'reject'"
                             class="btn btn-danger btn-sm card-btn my-1 mx-1 softblue text-white"
-                            @click="openLawyerDetailsModal(item?.owner,item?.proposal?.status.toLowerCase() == 'accept')">
+                            @click="openProposalDetailsModalPopup(item?.owner,item?.proposal?.status.toLowerCase() == 'accept')">
                           View Client Details
                         </button>
 
@@ -1139,6 +1139,8 @@ p.badge {
 .search-field {
   width: 50%;
 }
+
+
 
 @media only screen and (max-width: 1400px) and (min-width: 992px) {
   .card-btn {

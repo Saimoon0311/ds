@@ -1825,7 +1825,7 @@
           <!-- Additional information -->
           <div class="form-group">
             <label class="w-100"
-              >Tell the Potential Client What You Will Do for Them:<sup
+              >Tell the potential client what you will do for them:<sup
                 ><code>*</code></sup
               >
               <!-- @input="convertToTitleCase(form.description)" -->

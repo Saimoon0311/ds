@@ -998,163 +998,169 @@ app.mixin({
     // },
 
     // for lawyer and client details both
-    openLawyerDetailsModal(data, showSecretInfo = false) {
-      console.log(data);
-      console.log(showSecretInfo);
-      let image = "";
-      if (
-        data?.image != "" &&
-        data?.image != "" &&
-        data?.type == "lawyer" &&
-        showSecretInfo
-      ) {
-        image = `<div v-if="image" class="circular-container popup-image me-2 "><img src="${this.createImage(
-          data?.image
-        )}" alt="Image not uploaded" class="circular-image"></div>`;
-      }
+    // openLawyerDetailsModal(data, showSecretInfo = false) {
+    //   console.log(data);
+    //   console.log(showSecretInfo);
+    //   let image = "";
+    //   if (
+    //     data?.image != "" &&
+    //     data?.image != "" &&
+    //     data?.type == "lawyer" &&
+    //     showSecretInfo
+    //   ) {
+    //     image = `<div v-if="image" class="circular-container popup-image me-2 "><img src="${this.createImage(
+    //       data?.image
+    //     )}" alt="Image not uploaded" class="circular-image"></div>`;
+    //   }
 
-      let title = "";
-      if (showSecretInfo) {
-        title = `${this.capitalizeFirstLetter(
-          data?.first_name
-        )} ${this.capitalizeFirstLetter(data?.last_name)}`;
-      } else {
-        title = `${this.capitalizeFirstLetter(data?.first_name)}`;
-      }
+    //   let title = "";
+    //   if (showSecretInfo) {
+    //     title = `${this.capitalizeFirstLetter(
+    //       data?.first_name
+    //     )} ${this.capitalizeFirstLetter(data?.last_name)}`;
+    //   } else {
+    //     title = `${this.capitalizeFirstLetter(data?.first_name)}`;
+    //   }
 
-      let htmlContent = `${image}`;
+    //   let htmlContent = `${image}`;
 
-      let consultation_content = "";
-      if (
-        data?.type == "lawyer" &&
-        showSecretInfo &&
-        data?.consultation_type != null &&
-        (data?.consultation_type.toLowerCase() == "discounted" ||
-          data?.consultation_type.toLowerCase() == "free")
-      ) {
-        if (
-          this.checkObjKeyValue(data, "consultation_type") &&
-          data?.consultation_type &&
-          data?.consultation_type == "discounted"
-        ) {
-          consultation_content = `<span>
-                      ${this.capitalizeFirstLetter(
-                        data?.consultation_type
-                      )} - $${this.formatNumber(data?.consultation_amount)}/${
-            data?.consultation_time
-          } mins
-                    </span>`;
-        }
+    //   let consultation_content = "";
+    //   if (
+    //     data?.type == "lawyer" &&
+    //     showSecretInfo &&
+    //     data?.consultation_type != null &&
+    //     (data?.consultation_type.toLowerCase() == "discounted" ||
+    //       data?.consultation_type.toLowerCase() == "free")
+    //   ) {
+    //     if (
+    //       this.checkObjKeyValue(data, "consultation_type") &&
+    //       data?.consultation_type &&
+    //       data?.consultation_type == "discounted"
+    //     ) {
+    //       consultation_content = `<span>
+    //                   ${this.capitalizeFirstLetter(
+    //                     data?.consultation_type
+    //                   )} - $${this.formatNumber(data?.consultation_amount)}/${
+    //         data?.consultation_time
+    //       } mins
+    //                 </span>`;
+    //     }
 
-        if (data?.consultation_type && data?.consultation_type == "free") {
-          consultation_content = ` <span>
-                      ${this.capitalizeFirstLetter(
-                        data?.consultation_type
-                      )} - ${data?.consultation_time} mins
-                    </span>`;
-        }
-      }
-      htmlContent += `<div>`;
-      if (
-        data?.first_name != null &&
-        data?.first_name != "" &&
-        !showSecretInfo
-      ) {
-        htmlContent += `
-            <div class="wrapper">
-              <h6><b style="text-transform: capitalize;">Name
-              : </b><span>${data?.first_name}</span></h6>
-            </div>`;
-      }
-      if (data?.email != null && data?.email != "" && showSecretInfo) {
-        htmlContent += `
-            <div class="wrapper">
-              <h6><b style="text-transform: capitalize;">email
-              : </b><span>${data?.email}</span></h6>
-            </div>`;
-      }
-      if (data?.phone != null && data?.phone != "" && showSecretInfo) {
-        htmlContent += ` <div class="wrapper">
-        <h6><b style="text-transform: capitalize;">phone
-        : </b><span>${data?.phone}</span></h6>
-      </div>`;
-      }
-      if (data?.job_title != null && data?.job_title != "") {
-        htmlContent += ` <div class="wrapper">
-        <h6><b style="text-transform: capitalize;">job title
-        : </b><span>${data?.job_title}</span></h6>
-      </div>`;
-      }
-      if (data?.law_firm != null && data?.law_firm != "") {
-        htmlContent += `<div class="wrapper">
-        <h6><b style="text-transform: capitalize;">law firm
-        : </b><span>${data?.law_firm}</span></h6>
-      </div>`;
-      }
-      if (data?.link != null && data?.link != "") {
-        htmlContent += `<div class="wrapper">
-        <h6><b style="text-transform: capitalize;">Website
-        : </b><span>${data?.link}</span></h6>
-      </div>`;
-      }
-      if (data?.address != null && data?.address != "" && showSecretInfo) {
-        htmlContent += ` <div class="wrapper" >
-        <h6><b style="text-transform: capitalize;">address
-        : </b><span>${data?.address}</span>`;
-      }
+    //     if (data?.consultation_type && data?.consultation_type == "free") {
+    //       consultation_content = ` <span>
+    //                   ${this.capitalizeFirstLetter(
+    //                     data?.consultation_type
+    //                   )} - ${data?.consultation_time} mins
+    //                 </span>`;
+    //     }
+    //   }
+    //   htmlContent += `<div>`;
+    //   if (
+    //     data?.first_name != null &&
+    //     data?.first_name != "" &&
+    //     !showSecretInfo
+    //   ) {
+    //     htmlContent += `
+    //         <div class="wrapper">
+    //           <h6><b style="text-transform: capitalize;">Name
+    //           : </b><span>${data?.first_name}</span></h6>
+    //         </div>`;
+    //   }
+    //   if (data?.email != null && data?.email != "" && showSecretInfo) {
+    //     htmlContent += `
+    //         <div class="wrapper">
+    //           <h6><b style="text-transform: capitalize;">email
+    //           : </b><span>${data?.email}</span></h6>
+    //         </div>`;
+    //   }
+    //   if (data?.phone != null && data?.phone != "" && showSecretInfo) {
+    //     htmlContent += ` <div class="wrapper">
+    //     <h6><b style="text-transform: capitalize;">phone
+    //     : </b><span>${data?.phone}</span></h6>
+    //   </div>`;
+    //   }
+    //   if (data?.job_title != null && data?.job_title != "") {
+    //     htmlContent += ` <div class="wrapper">
+    //     <h6><b style="text-transform: capitalize;">job title
+    //     : </b><span>${data?.job_title}</span></h6>
+    //   </div>`;
+    //   }
+    //   if (data?.law_firm != null && data?.law_firm != "") {
+    //     htmlContent += `<div class="wrapper">
+    //     <h6><b style="text-transform: capitalize;">law firm
+    //     : </b><span>${data?.law_firm}</span></h6>
+    //   </div>`;
+    //   }
+    //   if (data?.link != null && data?.link != "") {
+    //     htmlContent += `<div class="wrapper">
+    //     <h6><b style="text-transform: capitalize;">Website
+    //     : </b><span>${data?.link}</span></h6>
+    //   </div>`;
+    //   }
+    //   if (data?.address != null && data?.address != "" && showSecretInfo) {
+    //     htmlContent += ` <div class="wrapper" >
+    //     <h6><b style="text-transform: capitalize;">address
+    //     : </b><span>${data?.address}</span>`;
+    //   }
 
-      // if (data?.suburb != null && data?.suburb != "") {
-      //   htmlContent += ` <div class="wrapper" >
-      //   <h6><b style="text-transform: capitalize;">suburb
-      //   : </b><span>${data?.suburb}</span></h6>
-      // </div>`;
-      // }
+    //   // if (data?.suburb != null && data?.suburb != "") {
+    //   //   htmlContent += ` <div class="wrapper" >
+    //   //   <h6><b style="text-transform: capitalize;">suburb
+    //   //   : </b><span>${data?.suburb}</span></h6>
+    //   // </div>`;
+    //   // }
 
-      if (data?.suburb != null && data?.suburb != "" && showSecretInfo) {
-        htmlContent += `<span>, ${data?.suburb}</span>`;
-      }
+    //   if (data?.suburb != null && data?.suburb != "" && showSecretInfo) {
+    //     htmlContent += `<span>, ${data?.suburb}</span>`;
+    //   }
 
-      if (data?.address != null && data?.address != "" && showSecretInfo) {
-        htmlContent += `</h6></div>`;
-      }
+    //   if (data?.address != null && data?.address != "" && showSecretInfo) {
+    //     htmlContent += `</h6></div>`;
+    //   }
 
-      if (
-        consultation_content != null &&
-        consultation_content != "" &&
-        showSecretInfo
-      ) {
-        htmlContent += ` <div class="wrapper" >
-        <h6><b style="text-transform: capitalize;">Initial Consultation
-        : </b><span>${consultation_content}</span></h6>
-      </div>`;
-      }
-      if (data?.remote_consultation && showSecretInfo) {
-        htmlContent += ` <div class="wrapper">
-        <h6><b style="text-transform: capitalize;"><i class="fa fa-check-square fa1"></i>
-            </b><span><b>Remote Consultations</b></span>
-        </h6>
-      </div>`;
-      }
-      if (data?.mobile_friendly && showSecretInfo) {
-        htmlContent += ` <div class="wrapper">
-        <h6><b style="text-transform: capitalize;"><i class="fa fa-check-square fa2"></i>
-            </b><span><b>Mobile-Friendly</b></span></h6></div>`;
-      }
+    //   if (
+    //     consultation_content != null &&
+    //     consultation_content != "" &&
+    //     showSecretInfo
+    //   ) {
+    //     htmlContent += ` <div class="wrapper" >
+    //     <h6><b style="text-transform: capitalize;">Initial Consultation
+    //     : </b><span>${consultation_content}</span></h6>
+    //   </div>`;
+    //   }
+    //   if (data?.remote_consultation && showSecretInfo) {
+    //     htmlContent += ` <div class="wrapper">
+    //     <h6><b style="text-transform: capitalize;"><i class="fa fa-check-square fa1"></i>
+    //         </b><span><b>Remote Consultations</b></span>
+    //     </h6>
+    //   </div>`;
+    //   }
+    //   if (data?.mobile_friendly && showSecretInfo) {
+    //     htmlContent += ` <div class="wrapper">
+    //     <h6><b style="text-transform: capitalize;"><i class="fa fa-check-square fa2"></i>
+    //         </b><span><b>Mobile-Friendly</b></span></h6></div>`;
+    //   }
 
-      htmlContent += `</div>`;
+    //   htmlContent += `</div>`;
 
-      this.$swal.fire({
-        title: showSecretInfo ? title : `${data?.type} Details`,
-        html: `<div class="table-wrap ${
-          data?.type == "lawyer" && showSecretInfo ? "d-flex" : ""
-        } justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
-        showCloseButton: true,
-        showConfirmButton: false,
-        customClass: {
-          container: "my-swal-container", // You can define your custom class for styling
-        },
-      });
-    },
+    //   this.$swal.fire({
+    //     title: showSecretInfo ? title : `${data?.type} Details`,
+    //     html: `<div class="table-wrap ${
+    //       data?.type == "lawyer" && showSecretInfo ? "d-flex" : ""
+    //     } justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
+    //     showCloseButton: true,
+    //     showConfirmButton: false,
+    //     customClass: {
+    //       container: "my-swal-container", // You can define your custom class for styling
+    //     },
+    //   });
+    // },
+
+
+    /// commit not working putting it after copying ///
+
+
+  
 
     openFeeEstimateModal(charge_type) {
       if (charge_type) {
@@ -1624,9 +1630,9 @@ app.mixin({
           typeof data?.charge_type != undefined &&
           data?.charge_type != null
         ) {
-          mainHtmlContent += `<div data-v-90ff912e="" class="text-center">
-          <p data-v-90ff912e="" class="topcharge topcharge1 text-center font-set"> How you will charge. </p>
-          <p data-v-90ff912e="" class="topcharge text-center"><span data-v-90ff912e="" class="btn-sm btn-dark btn rounded btn-charge py-1 px-3 text-center fs-6">
+          mainHtmlContent += `<div  class="text-center">
+          <p  class="topcharge topcharge1 text-center font-set"> How you will charge. </p>
+          <p  class="topcharge text-center"><span  class="btn-sm btn-dark btn rounded btn-charge py-1 px-3 text-center fs-6">
           ${this.chargeType(data?.charge_type)}
           </span></p>
           </div>
@@ -1638,16 +1644,16 @@ app.mixin({
           typeof data?.fixed_fee_amount != undefined &&
           data?.fixed_fee_amount != null
         ) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> Fixed fee amount:</span><span data-v-90ff912e="">$${this.formatNumber(
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span > Fixed fee amount:</span><span >$${this.formatNumber(
               data?.fixed_fee_amount
             )}</span></p>
           </div>`;
         }
 
         if (typeof data?.hours != undefined && data?.hours != null) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> Hours:</span><span data-v-90ff912e="">${data?.hours}</span></p>
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span > Hours:</span><span >${data?.hours}</span></p>
           </div>`;
         }
 
@@ -1655,8 +1661,8 @@ app.mixin({
           typeof data?.hourly_rate != undefined &&
           data?.hourly_rate != null
         ) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> Hourly Rate:</span><span data-v-90ff912e="">$${this.formatNumber(
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span > Hourly Rate:</span><span >$${this.formatNumber(
               data?.hourly_rate
             )}</span></p>
           </div>`;
@@ -1667,8 +1673,8 @@ app.mixin({
           typeof data?.charge_type != undefined &&
           data?.charge_type == "Hourly"
         ) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> Fee earners working on this matter:</span><span data-v-90ff912e="">${
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span > Fee earners working on this matter:</span><span >${
               data?.fee_earners?.length > 0 ? "I'm part of a team" : "Just me"
             }</span></p>
           </div>`;
@@ -1697,8 +1703,8 @@ app.mixin({
           data?.daily_rate != null
           && data?.charge_type == 'Daily'
         ) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> Daily Rate:</span><span data-v-90ff912e="">$${this.formatNumber(
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span > Daily Rate:</span><span >$${this.formatNumber(
               data?.daily_rate
             )}</span></p>
           </div>`;
@@ -1709,8 +1715,8 @@ app.mixin({
           data?.days != null
           && data?.charge_type == 'Daily'
         ) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> Days:</span><span data-v-90ff912e="">${data?.days}</span></p>
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span > Days:</span><span >${data?.days}</span></p>
           </div>`;
         }
 
@@ -1738,8 +1744,8 @@ app.mixin({
           data?.retainer_period != null &&
           data?.charge_type == 'Retainer'
         ) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> Retainer fee:</span><span data-v-90ff912e="">$${this.formatNumber(data?.retainer_fee)}/${data?.retainer_period}</span></p>
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span > Retainer fee:</span><span >$${this.formatNumber(data?.retainer_fee)}/${data?.retainer_period}</span></p>
           </div>`;
         }
 
@@ -1747,8 +1753,8 @@ app.mixin({
           typeof data?.retainer_limitation != undefined &&
           data?.retainer_limitation != null && data?.charge_type == 'Retainer'
         ) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> Retainer Limitation:</span><span data-v-90ff912e="">${data?.retainer_limitation}</span></p>
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span > Retainer Limitation:</span><span >${data?.retainer_limitation}</span></p>
           </div>`;
         }
 
@@ -1756,8 +1762,8 @@ app.mixin({
           typeof data?.notice_period != undefined &&
           data?.notice_period != null && data?.charge_type == 'Retainer'
         ) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> Notice Period:</span><span data-v-90ff912e="">${data?.notice_period}</span></p>
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span > Notice Period:</span><span >${data?.notice_period}</span></p>
           </div>`;
         }
 
@@ -1766,8 +1772,8 @@ app.mixin({
           typeof data?.estimated_fee != undefined &&
           data?.estimated_fee != null && data?.charge_type == 'Success'
         ) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> Estimated Fee:</span><span data-v-90ff912e="">$${this.formatNumber(data?.estimated_fee)}</span></p>
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span > Estimated Fee:</span><span >$${this.formatNumber(data?.estimated_fee)}</span></p>
           </div>`;
         }
 
@@ -1775,8 +1781,8 @@ app.mixin({
           typeof data?.uplift_percentage != undefined &&
           data?.uplift_percentage != null && data?.charge_type == 'Success'
         ) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> Uplift Percentage:</span><span data-v-90ff912e="">${data?.uplift_percentage}</span></p>
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span > Uplift Percentage:</span><span >${data?.uplift_percentage}</span></p>
           </div>`;
         }
 
@@ -1786,11 +1792,11 @@ app.mixin({
           typeof data?.uplift_percentage != undefined &&
           data?.uplift_percentage != null && data?.charge_type == 'Success'
         ) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> If the case is not successful:</span><span data-v-90ff912e="">$0.00</span></p>
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span > If the case is not successful:</span><span >$0.00</span></p>
           </div>
-          <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> If the case is successful:</span><span data-v-90ff912e="">
+          <div class="flex-class">
+            <p ><span > If the case is successful:</span><span >
             $${
               this.formatNumber(
                 parseFloat(
@@ -1812,8 +1818,8 @@ app.mixin({
           typeof data?.disbursement_amount != undefined &&
           data?.disbursement_amount != null
         ) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e=""> Estimated amount for disbursements:</span><span data-v-90ff912e="">$${this.formatNumber(
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span > Estimated amount for disbursements:</span><span >$${this.formatNumber(
               data?.disbursement_amount
             )}</span></p>
           </div>`;
@@ -1837,35 +1843,35 @@ app.mixin({
           typeof data?.upfront_payment != undefined &&
           data?.upfront_payment != null
         ) {
-          mainHtmlContent += ` <div data-v-90ff912e="">
-            <p data-v-90ff912e=""><span data-v-90ff912e="">  Upfront payment:</span><span data-v-90ff912e="">$${this.formatNumber(
+          mainHtmlContent += ` <div class="flex-class">
+            <p ><span >  Upfront payment:</span><span >$${this.formatNumber(
               data?.upfront_payment
             )}</span></p>
           </div>`;
         }
 
-        mainHtmlContent += `<div data-v-90ff912e="">`;
+        mainHtmlContent += `<div >`;
 
         if (
           typeof data?.total_without_gst != undefined &&
           data?.total_without_gst != null
         ) {
-          mainHtmlContent += `<p data-v-90ff912e="">
-          <span data-v-90ff912e="" class="text-trans">
+          mainHtmlContent += `<p class="flex-class">
+          <span  class="text-trans">
             Total (excluding GST):
           </span>
-          <span data-v-90ff912e="">$${this.formatNumber(
+          <span >$${this.formatNumber(
             data?.total_without_gst
           )}</span>
         </p>`;
         }
 
         if (typeof data?.gst != undefined && data?.gst != null) {
-          mainHtmlContent += `<p data-v-90ff912e="">
-          <span data-v-90ff912e="" class="text-trans">
+          mainHtmlContent += `<p class="flex-class">
+          <span  class="text-trans">
             GST:
           </span>
-          <span data-v-90ff912e="">$${this.formatNumber(data?.gst)}</span>
+          <span >$${this.formatNumber(data?.gst)}</span>
         </p>`;
         }
 
@@ -1873,11 +1879,11 @@ app.mixin({
           typeof data?.total_with_gst != undefined &&
           data?.total_with_gst != null
         ) {
-          mainHtmlContent += `<p data-v-90ff912e="">
-          <span data-v-90ff912e="" class="text-trans">
+          mainHtmlContent += `<p class="flex-class set-bg p-2 rounded bg-dark text-white">
+          <span  class="text-trans">
             Total (including GST):
           </span>
-          <span data-v-90ff912e="">$${this.formatNumber(
+          <span >$${this.formatNumber(
             data?.total_with_gst
           )}</span>
         </p>`;
