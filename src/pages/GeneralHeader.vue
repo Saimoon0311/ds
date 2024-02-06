@@ -1,7 +1,7 @@
 <template lang="">
   <div class="text-center pt-4 container mobile-layout">
     <router-link to="/" class="main-logo">
-      <img src="../assets/images/logo.jpeg" class="img-fluid" />
+      <img src="../assets/images/new-logo.png" class="img-fluid" />
     </router-link>
     <div class="dropdown cstm-dropdown">
       <button

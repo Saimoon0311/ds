@@ -10,7 +10,7 @@
           to="/client-dashboard"
           >
             <img
-              src="../../assets/images/admin-logo.png"
+              src="../../assets/images/new-logo.png"
               class="logo-small"
               alt="logo"
             />
@@ -249,8 +249,9 @@ export default {
 }
 
 .logo-small {
-  width: 175px;
-  height: 40px;
+  width: 185px;
+    height: 40px;
+    object-fit: contain;
 }
 
 .law-img {

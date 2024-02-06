@@ -1740,8 +1740,9 @@ tbody tr td:last-child {
 }
 
 .logo-small {
-  width: 175px;
-  height: 50px;
+  width: 185px;
+    height: 40px;
+    object-fit: contain;
 }
 
 .law-img {
@@ -1824,6 +1825,9 @@ tbody tr td:last-child {
 }
 
 @media only screen and (max-width: 767px) {
+  table tr td:nth-child(2){
+    width: 60%
+}
   table {
     table-layout: inherit;
     word-break: auto-phrase;
