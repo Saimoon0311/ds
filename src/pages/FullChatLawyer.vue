@@ -1051,6 +1051,11 @@ section.chatSection {
 }
 
 @media screen and (max-width: 767px) {
+  ul.lawyer-list {
+    max-height: 200px;
+    overflow-y: scroll;
+    margin: 0;
+}
   .footer {
     position: relative;
   }
