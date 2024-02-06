@@ -391,7 +391,7 @@
                           </button>
 
                           <button
-                            @click="openProposalDetailsModal(item.proposal)"
+                            @click="openProposalDetailsModalPopup(item.proposal)"
                             v-if="tab == 'pending'"
                             class="btn btn-dark border btn-sm card-btn my-1 mx-1 softblue"
                           >
@@ -463,7 +463,7 @@
                         >
 
                         <button
-                            @click="openProposalDetailsModal(item.proposal)"
+                            @click="openProposalDetailsModalPopup(item.proposal)"
                             class="btn btn-dark border btn-sm card-btn my-1 mx-1">
                           View Proposal
                         </button>

@@ -1110,7 +1110,7 @@ app.mixin({
       // </div>`;
       // }
 
-      if (data?.suburb != null && data?.suburb != "") {
+      if (data?.suburb != null && data?.suburb != "" && showSecretInfo) {
         htmlContent += `<span>, ${data?.suburb}</span>`;
       }
 
@@ -1507,12 +1507,11 @@ app.mixin({
       console.log("fee earners 1-1 : ", feeEarners);
 
       const mainHtmlContent = Object.entries(newData)
-        .map(
-          ([key, value]) => {
-            const paraClass = key == 'success fee term' ? 'class-para' : 'class-def';
-            return `<div class="wrapper mb-3" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}:</b> <span  class="${paraClass}">${value}</span></h6></div>`
-          }
-        )
+        .map(([key, value]) => {
+          const paraClass =
+            key == "success fee term" ? "class-para" : "class-def";
+          return `<div class="wrapper mb-3" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}:</b> <span  class="${paraClass}">${value}</span></h6></div>`;
+        })
         .join("");
 
       let specificTasksTable = "<span></span>";
@@ -1567,6 +1566,381 @@ app.mixin({
       }
     },
 
+    openProposalDetailsModalPopup(data, renderAsHtml = false) {
+      // let newData = {};
+      // let specificTasks = [];
+      // let disbursements = [];
+      // let feeEarners = [];
+
+      let mainHtmlContent = "";
+      if (data && typeof data === "object") {
+        // for (const key in data) {
+        //   if (Object.prototype.hasOwnProperty.call(data, key)) {
+        //     let value = data[key];
+        //     if (
+        //       value !== null &&
+        //       key != "id" &&
+        //       key != "lawyer_id" &&
+        //       key != "job_id" &&
+        //       key != "user_id" &&
+        //       key != "created_at" &&
+        //       key != "reject_reason" &&
+        //       key != "updated_at" &&
+        //       key != "show" &&
+        //       key != "description" &&
+        //       key != "lawyer" &&
+        //       key != "job" &&
+        //       key != "status" &&
+        //       key != "is_owner_seen"
+        //     ) {
+        //       let objKey = key;
+        //       objKey = objKey.replace(/_/g, " ");
+
+        //       if (key == "specific_tasks") {
+        //         specificTasks = [...value];
+        //       } else if (key == "disbursements") {
+        //         disbursements = [...value];
+        //       } else if (key == "fee_earners" && value != "me") {
+        //         feeEarners = [...value];
+        //       } else {
+        //         if (objKey == "lawyer" && value != null) {
+        //           newData["lawyer email"] = value?.email;
+        //         } else if (key == "charge_type") {
+        //           newData[objKey] = this.chargeType(value);
+        //         } else {
+        //           value = this.isNumericString(value)
+        //             ? "$" + this.formatNumber(value)
+        //             : value;
+        //           newData[objKey] = value;
+        //         }
+        //       }
+        //     }
+        //   }
+        // }
+
+
+
+        if (
+          typeof data?.charge_type != undefined &&
+          data?.charge_type != null
+        ) {
+          mainHtmlContent += `<div data-v-90ff912e="" class="text-center">
+          <p data-v-90ff912e="" class="topcharge topcharge1 text-center font-set"> How you will charge. </p>
+          <p data-v-90ff912e="" class="topcharge text-center"><span data-v-90ff912e="" class="btn-sm btn-dark btn rounded btn-charge py-1 px-3 text-center fs-6">
+          ${this.chargeType(data?.charge_type)}
+          </span></p>
+          </div>
+          `;
+        }
+
+
+        if (
+          typeof data?.fixed_fee_amount != undefined &&
+          data?.fixed_fee_amount != null
+        ) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> Fixed fee amount:</span><span data-v-90ff912e="">$${this.formatNumber(
+              data?.fixed_fee_amount
+            )}</span></p>
+          </div>`;
+        }
+
+        if (typeof data?.hours != undefined && data?.hours != null) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> Hours:</span><span data-v-90ff912e="">${data?.hours}</span></p>
+          </div>`;
+        }
+
+        if (
+          typeof data?.hourly_rate != undefined &&
+          data?.hourly_rate != null
+        ) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> Hourly Rate:</span><span data-v-90ff912e="">$${this.formatNumber(
+              data?.hourly_rate
+            )}</span></p>
+          </div>`;
+        }
+
+        if (
+          typeof data?.fee_earners != undefined &&
+          typeof data?.charge_type != undefined &&
+          data?.charge_type == "Hourly"
+        ) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> Fee earners working on this matter:</span><span data-v-90ff912e="">${
+              data?.fee_earners?.length > 0 ? "I'm part of a team" : "Just me"
+            }</span></p>
+          </div>`;
+        }
+
+        console.log('data 101 : ' , data);
+        if (
+          typeof data?.charge_type != undefined &&
+          data?.charge_type == "Hourly" &&
+          typeof data?.fee_earners != undefined &&
+          data?.fee_earners.length > 0
+        ) {
+          let feeEarnersTable = "<span></span>";
+          feeEarnersTable = this.createTableHtmlFeeEarners(
+                "Fee Earners",
+                data?.fee_earners,
+                renderAsHtml
+              );
+
+          mainHtmlContent += feeEarnersTable;
+        }
+
+
+        if (
+          typeof data?.daily_rate != undefined &&
+          data?.daily_rate != null
+          && data?.charge_type == 'Daily'
+        ) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> Daily Rate:</span><span data-v-90ff912e="">$${this.formatNumber(
+              data?.daily_rate
+            )}</span></p>
+          </div>`;
+        }
+
+        if (
+          typeof data?.days != undefined &&
+          data?.days != null
+          && data?.charge_type == 'Daily'
+        ) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> Days:</span><span data-v-90ff912e="">${data?.days}</span></p>
+          </div>`;
+        }
+
+
+        if (
+          typeof data?.charge_type != undefined &&
+          data?.charge_type == "Item" &&
+          typeof data?.specific_tasks != undefined &&
+          data?.specific_tasks.length > 0
+        ) {
+          let specificTasksTable = "<span></span>";
+          specificTasksTable = this.createTableHtml(
+                "Specific Tasks",
+                data?.specific_tasks,
+                renderAsHtml
+              );
+
+          mainHtmlContent += specificTasksTable;
+        }
+
+        if (
+          typeof data?.retainer_fee != undefined &&
+          data?.retainer_fee != null && 
+          typeof data?.retainer_period != undefined &&
+          data?.retainer_period != null &&
+          data?.charge_type == 'Retainer'
+        ) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> Retainer fee:</span><span data-v-90ff912e="">$${this.formatNumber(data?.retainer_fee)}/${data?.retainer_period}</span></p>
+          </div>`;
+        }
+
+        if (
+          typeof data?.retainer_limitation != undefined &&
+          data?.retainer_limitation != null && data?.charge_type == 'Retainer'
+        ) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> Retainer Limitation:</span><span data-v-90ff912e="">${data?.retainer_limitation}</span></p>
+          </div>`;
+        }
+
+        if (
+          typeof data?.notice_period != undefined &&
+          data?.notice_period != null && data?.charge_type == 'Retainer'
+        ) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> Notice Period:</span><span data-v-90ff912e="">${data?.notice_period}</span></p>
+          </div>`;
+        }
+
+
+        if (
+          typeof data?.estimated_fee != undefined &&
+          data?.estimated_fee != null && data?.charge_type == 'Success'
+        ) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> Estimated Fee:</span><span data-v-90ff912e="">$${this.formatNumber(data?.estimated_fee)}</span></p>
+          </div>`;
+        }
+
+        if (
+          typeof data?.uplift_percentage != undefined &&
+          data?.uplift_percentage != null && data?.charge_type == 'Success'
+        ) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> Uplift Percentage:</span><span data-v-90ff912e="">${data?.uplift_percentage}</span></p>
+          </div>`;
+        }
+
+        if (
+          typeof data?.estimated_fee != undefined &&
+          data?.estimated_fee != null &&
+          typeof data?.uplift_percentage != undefined &&
+          data?.uplift_percentage != null && data?.charge_type == 'Success'
+        ) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> If the case is not successful:</span><span data-v-90ff912e="">$0.00</span></p>
+          </div>
+          <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> If the case is successful:</span><span data-v-90ff912e="">
+            $${
+              this.formatNumber(
+                parseFloat(
+                  parseFloat(data?.estimated_fee) +
+                    parseFloat(
+                      (data?.uplift_percentage / 100) *
+                        data?.estimated_fee
+                    )
+                )
+              )
+            }
+            </span></p>
+          </div>
+          `;
+        }
+
+
+        if (
+          typeof data?.disbursement_amount != undefined &&
+          data?.disbursement_amount != null
+        ) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e=""> Estimated amount for disbursements:</span><span data-v-90ff912e="">$${this.formatNumber(
+              data?.disbursement_amount
+            )}</span></p>
+          </div>`;
+        }
+
+        if (
+          typeof data?.disbursements != undefined &&
+          data?.disbursements?.length > 0
+        ) {
+          let disbursementsTable = "<span></span>";
+          disbursementsTable = this.createTableHtml(
+            "Disbursements",
+            data?.disbursements,
+            renderAsHtml
+          );
+          mainHtmlContent += disbursementsTable;
+          console.log(disbursementsTable);
+        }
+
+        if (
+          typeof data?.upfront_payment != undefined &&
+          data?.upfront_payment != null
+        ) {
+          mainHtmlContent += ` <div data-v-90ff912e="">
+            <p data-v-90ff912e=""><span data-v-90ff912e="">  Upfront payment:</span><span data-v-90ff912e="">$${this.formatNumber(
+              data?.upfront_payment
+            )}</span></p>
+          </div>`;
+        }
+
+        mainHtmlContent += `<div data-v-90ff912e="">`;
+
+        if (
+          typeof data?.total_without_gst != undefined &&
+          data?.total_without_gst != null
+        ) {
+          mainHtmlContent += `<p data-v-90ff912e="">
+          <span data-v-90ff912e="" class="text-trans">
+            Total (excluding GST):
+          </span>
+          <span data-v-90ff912e="">$${this.formatNumber(
+            data?.total_without_gst
+          )}</span>
+        </p>`;
+        }
+
+        if (typeof data?.gst != undefined && data?.gst != null) {
+          mainHtmlContent += `<p data-v-90ff912e="">
+          <span data-v-90ff912e="" class="text-trans">
+            GST:
+          </span>
+          <span data-v-90ff912e="">$${this.formatNumber(data?.gst)}</span>
+        </p>`;
+        }
+
+        if (
+          typeof data?.total_with_gst != undefined &&
+          data?.total_with_gst != null
+        ) {
+          mainHtmlContent += `<p data-v-90ff912e="">
+          <span data-v-90ff912e="" class="text-trans">
+            Total (including GST):
+          </span>
+          <span data-v-90ff912e="">$${this.formatNumber(
+            data?.total_with_gst
+          )}</span>
+        </p>`;
+        }
+        mainHtmlContent += `</div>`;
+      }
+
+      // console.log("fee earners 1-1 : ", feeEarners);
+
+      // const mainHtmlContent = Object.entries(newData)
+      //   .map(
+      //     ([key, value]) => {
+      //       const paraClass = key == 'success fee term' ? 'class-para' : 'class-def';
+      //       return `<div class="wrapper mb-3" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}:</b> <span  class="${paraClass}">${value}</span></h6></div>`
+      //     }
+      //   )
+      //   .join("");
+
+      // let specificTasksTable = "<span></span>";
+      // let disbursementsTable = "<span></span>";
+      // let feeEarnersTable = "<span></span>";
+      // if (specificTasks.length > 0) {
+      //   specificTasksTable = this.createTableHtml(
+      //     "Specific Tasks",
+      //     specificTasks,
+      //     renderAsHtml
+      //   );
+      // }
+
+      // if (disbursements.length > 0) {
+      //   disbursementsTable = this.createTableHtml(
+      //     "Disbursements",
+      //     disbursements,
+      //     renderAsHtml
+      //   );
+      // }
+
+      // if (feeEarners.length > 0) {
+      //   console.log("fee earners : : ", feeEarners);
+      //   feeEarnersTable = this.createTableHtmlFeeEarners(
+      //     "Fee Earners",
+      //     feeEarners,
+      //     renderAsHtml
+      //   );
+      // }
+
+      const swalHtmlContent = `
+        <div class="table-wrap pb-0 proposed-work" >${mainHtmlContent}</div>
+      `;
+      console.log("dis bur sement : ", swalHtmlContent);
+      // Use dynamic HTML inside SweetAlert2 modal
+
+      this.$swal.fire({
+        title: "Proposal Details",
+        html: swalHtmlContent,
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+          container: "my-swal-container", // You can define your custom class for styling
+        },
+      });
+    },
+
     createTableHtml(title, dataArray, renderAsHtml = false) {
       console.log("create table dis : ", dataArray);
       const total = dataArray.reduce(
@@ -1593,7 +1967,7 @@ app.mixin({
         <table class='table dynamicTable'>
           <thead>
             <tr class='border'>
-              <th class='border'>Task</th>
+              <th class='border'>Item</th>
               <th class='border'>Cost</th>
             </tr>
           </thead>
