@@ -1156,11 +1156,172 @@ app.mixin({
     //   });
     // },
 
-
     /// commit not working putting it after copying ///
 
+    openLawyerDetailsModal(data, showSecretInfo = false) {
+      console.log(data);
+      console.log(showSecretInfo);
+      let image = "";
+      if (
+        data?.image != "" &&
+        data?.image != "" &&
+        data?.type == "lawyer" &&
+        showSecretInfo
+      ) {
+        image = `<div v-if="image" class="circular-container popup-image me-2 "><img src="${this.createImage(
+          data?.image
+        )}" alt="Image not uploaded" class="circular-image"></div>`;
+      }
 
-  
+      let title = "";
+      if (showSecretInfo) {
+        title = `${this.capitalizeFirstLetter(
+          data?.first_name
+        )} ${this.capitalizeFirstLetter(data?.last_name)}`;
+      } else {
+        title = `${this.capitalizeFirstLetter(data?.first_name)}`;
+      }
+
+      let htmlContent = `${image}`;
+
+      let consultation_content = "";
+      if (
+        data?.type == "lawyer" &&
+        showSecretInfo &&
+        data?.consultation_type != null &&
+        (data?.consultation_type.toLowerCase() == "discounted" ||
+          data?.consultation_type.toLowerCase() == "free")
+      ) {
+        if (
+          this.checkObjKeyValue(data, "consultation_type") &&
+          data?.consultation_type &&
+          data?.consultation_type == "discounted"
+        ) {
+          consultation_content = `<span>
+                      ${this.capitalizeFirstLetter(
+                        data?.consultation_type
+                      )} - $${this.formatNumber(data?.consultation_amount)}/${
+            data?.consultation_time
+          } mins
+                    </span>`;
+        }
+
+        if (data?.consultation_type && data?.consultation_type == "free") {
+          consultation_content = ` <span>
+                      ${this.capitalizeFirstLetter(
+                        data?.consultation_type
+                      )} - ${data?.consultation_time} mins
+                    </span>`;
+        }
+      }
+      htmlContent += `<div>`;
+      if (
+        data?.first_name != null &&
+        data?.first_name != "" &&
+        !showSecretInfo
+      ) {
+        htmlContent += `
+            <div class="wrapper">
+              <h6><b style="text-transform: capitalize;">Name
+              : </b><span>${data?.first_name}</span></h6>
+            </div>`;
+      }
+      if (data?.email != null && data?.email != "" && showSecretInfo) {
+        htmlContent += `
+            <div class="wrapper">
+              <h6><b style="text-transform: capitalize;">email
+              : </b><span>${data?.email}</span></h6>
+            </div>`;
+      }
+      if (data?.phone != null && data?.phone != "" && showSecretInfo) {
+        htmlContent += ` <div class="wrapper">
+        <h6><b style="text-transform: capitalize;">phone
+        : </b><span>${data?.phone}</span></h6>
+      </div>`;
+      }
+      if (data?.job_title != null && data?.job_title != "") {
+        htmlContent += ` <div class="wrapper">
+        <h6><b style="text-transform: capitalize;">job title
+        : </b><span>${data?.job_title}</span></h6>
+      </div>`;
+      }
+      if (data?.law_firm != null && data?.law_firm != "") {
+        htmlContent += `<div class="wrapper">
+        <h6><b style="text-transform: capitalize;">law firm
+        : </b><span>${data?.law_firm}</span></h6>
+      </div>`;
+      }
+      if (data?.link != null && data?.link != "") {
+        htmlContent += `<div class="wrapper">
+        <h6><b style="text-transform: capitalize;">Website
+        : </b><span>${data?.link}</span></h6>
+      </div>`;
+      }
+
+      if (data?.address != null && data?.address != "" && showSecretInfo) {
+        htmlContent += ` <div class="wrapper" >
+            <h6><b style="text-transform: capitalize;">address
+            : </b><span>${data?.address}</span>`;
+      }
+
+      if (data?.suburb != null && data?.suburb != "" && showSecretInfo) {
+        htmlContent += `<span>, ${data?.suburb}</span>`;
+      }
+
+      if (data?.address != null && data?.address != "" && showSecretInfo) {
+        htmlContent += `</h6></div>`;
+      }
+
+      if (
+        (data?.address == null ||
+        data?.address == "") 
+        && 
+        (data?.suburb != null &&
+        data?.suburb != "")
+      ) {
+        htmlContent += ` <div class="wrapper" >
+            <h6><b style="text-transform: capitalize;">suburb
+            : </b><span>${data?.suburb}</span></h6>
+          </div>`;
+      }
+
+      if (
+        consultation_content != null &&
+        consultation_content != "" &&
+        showSecretInfo
+      ) {
+        htmlContent += ` <div class="wrapper" >
+        <h6><b style="text-transform: capitalize;">Initial Consultation
+        : </b><span>${consultation_content}</span></h6>
+      </div>`;
+      }
+      if (data?.remote_consultation && showSecretInfo) {
+        htmlContent += ` <div class="wrapper">
+        <h6><b style="text-transform: capitalize;"><i class="fa fa-check-square fa1"></i>
+            </b><span><b>Remote Consultations</b></span>
+        </h6>
+      </div>`;
+      }
+      if (data?.mobile_friendly && showSecretInfo) {
+        htmlContent += ` <div class="wrapper">
+        <h6><b style="text-transform: capitalize;"><i class="fa fa-check-square fa2"></i>
+            </b><span><b>Mobile-Friendly</b></span></h6></div>`;
+      }
+
+      htmlContent += `</div>`;
+
+      this.$swal.fire({
+        title: showSecretInfo ? title : `${data?.type} Details`,
+        html: `<div class="table-wrap ${
+          data?.type == "lawyer" && showSecretInfo ? "d-flex" : ""
+        } justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+          container: "my-swal-container", // You can define your custom class for styling
+        },
+      });
+    },
 
     openFeeEstimateModal(charge_type) {
       if (charge_type) {
@@ -1624,8 +1785,6 @@ app.mixin({
         //   }
         // }
 
-
-
         if (
           typeof data?.charge_type != undefined &&
           data?.charge_type != null
@@ -1638,7 +1797,6 @@ app.mixin({
           </div>
           `;
         }
-
 
         if (
           typeof data?.fixed_fee_amount != undefined &&
@@ -1680,7 +1838,7 @@ app.mixin({
           </div>`;
         }
 
-        console.log('data 101 : ' , data);
+        console.log("data 101 : ", data);
         if (
           typeof data?.charge_type != undefined &&
           data?.charge_type == "Hourly" &&
@@ -1689,19 +1847,18 @@ app.mixin({
         ) {
           let feeEarnersTable = "<span></span>";
           feeEarnersTable = this.createTableHtmlFeeEarners(
-                "Fee Earners",
-                data?.fee_earners,
-                renderAsHtml
-              );
+            "Fee Earners",
+            data?.fee_earners,
+            renderAsHtml
+          );
 
           mainHtmlContent += feeEarnersTable;
         }
 
-
         if (
           typeof data?.daily_rate != undefined &&
-          data?.daily_rate != null
-          && data?.charge_type == 'Daily'
+          data?.daily_rate != null &&
+          data?.charge_type == "Daily"
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Daily Rate:</span><span >$${this.formatNumber(
@@ -1712,14 +1869,13 @@ app.mixin({
 
         if (
           typeof data?.days != undefined &&
-          data?.days != null
-          && data?.charge_type == 'Daily'
+          data?.days != null &&
+          data?.charge_type == "Daily"
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Days:</span><span >${data?.days}</span></p>
           </div>`;
         }
-
 
         if (
           typeof data?.charge_type != undefined &&
@@ -1729,29 +1885,32 @@ app.mixin({
         ) {
           let specificTasksTable = "<span></span>";
           specificTasksTable = this.createTableHtml(
-                "Specific Tasks",
-                data?.specific_tasks,
-                renderAsHtml
-              );
+            "Specific Tasks",
+            data?.specific_tasks,
+            renderAsHtml
+          );
 
           mainHtmlContent += specificTasksTable;
         }
 
         if (
           typeof data?.retainer_fee != undefined &&
-          data?.retainer_fee != null && 
+          data?.retainer_fee != null &&
           typeof data?.retainer_period != undefined &&
           data?.retainer_period != null &&
-          data?.charge_type == 'Retainer'
+          data?.charge_type == "Retainer"
         ) {
           mainHtmlContent += ` <div class="flex-class">
-            <p ><span > Retainer fee:</span><span >$${this.formatNumber(data?.retainer_fee)}/${data?.retainer_period}</span></p>
+            <p ><span > Retainer fee:</span><span >$${this.formatNumber(
+              data?.retainer_fee
+            )}/${data?.retainer_period}</span></p>
           </div>`;
         }
 
         if (
           typeof data?.retainer_limitation != undefined &&
-          data?.retainer_limitation != null && data?.charge_type == 'Retainer'
+          data?.retainer_limitation != null &&
+          data?.charge_type == "Retainer"
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Retainer Limitation:</span><span >${data?.retainer_limitation}</span></p>
@@ -1760,26 +1919,30 @@ app.mixin({
 
         if (
           typeof data?.notice_period != undefined &&
-          data?.notice_period != null && data?.charge_type == 'Retainer'
+          data?.notice_period != null &&
+          data?.charge_type == "Retainer"
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Notice Period:</span><span >${data?.notice_period}</span></p>
           </div>`;
         }
 
-
         if (
           typeof data?.estimated_fee != undefined &&
-          data?.estimated_fee != null && data?.charge_type == 'Success'
+          data?.estimated_fee != null &&
+          data?.charge_type == "Success"
         ) {
           mainHtmlContent += ` <div class="flex-class">
-            <p ><span > Estimated Fee:</span><span >$${this.formatNumber(data?.estimated_fee)}</span></p>
+            <p ><span > Estimated Fee:</span><span >$${this.formatNumber(
+              data?.estimated_fee
+            )}</span></p>
           </div>`;
         }
 
         if (
           typeof data?.uplift_percentage != undefined &&
-          data?.uplift_percentage != null && data?.charge_type == 'Success'
+          data?.uplift_percentage != null &&
+          data?.charge_type == "Success"
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Uplift Percentage:</span><span >${data?.uplift_percentage}</span></p>
@@ -1790,29 +1953,26 @@ app.mixin({
           typeof data?.estimated_fee != undefined &&
           data?.estimated_fee != null &&
           typeof data?.uplift_percentage != undefined &&
-          data?.uplift_percentage != null && data?.charge_type == 'Success'
+          data?.uplift_percentage != null &&
+          data?.charge_type == "Success"
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > If the case is not successful:</span><span >$0.00</span></p>
           </div>
           <div class="flex-class">
             <p ><span > If the case is successful:</span><span >
-            $${
-              this.formatNumber(
-                parseFloat(
-                  parseFloat(data?.estimated_fee) +
-                    parseFloat(
-                      (data?.uplift_percentage / 100) *
-                        data?.estimated_fee
-                    )
-                )
+            $${this.formatNumber(
+              parseFloat(
+                parseFloat(data?.estimated_fee) +
+                  parseFloat(
+                    (data?.uplift_percentage / 100) * data?.estimated_fee
+                  )
               )
-            }
+            )}
             </span></p>
           </div>
           `;
         }
-
 
         if (
           typeof data?.disbursement_amount != undefined &&
@@ -1860,9 +2020,7 @@ app.mixin({
           <span  class="text-trans">
             Total (excluding GST):
           </span>
-          <span >$${this.formatNumber(
-            data?.total_without_gst
-          )}</span>
+          <span >$${this.formatNumber(data?.total_without_gst)}</span>
         </p>`;
         }
 
@@ -1883,9 +2041,7 @@ app.mixin({
           <span  class="text-trans">
             Total (including GST):
           </span>
-          <span >$${this.formatNumber(
-            data?.total_with_gst
-          )}</span>
+          <span >$${this.formatNumber(data?.total_with_gst)}</span>
         </p>`;
         }
         mainHtmlContent += `</div>`;
@@ -1986,7 +2142,7 @@ app.mixin({
               <td class='bg-dark text-white'>$${this.formatNumber(total)}</td>
             </tr>
             <tr v-if="title == 'Disbursements'">
-              <td class="border-0"><small>*GST not applicable on this item on this item</small></td>
+              <td class="border-0"><small>*GST not applicable on this item</small></td>
             </tr>
           </tfoot>
         </table>

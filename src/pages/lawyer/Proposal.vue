@@ -1957,16 +1957,19 @@
             </div>
 
             <div v-if="selectedOption == 'item' || selectedOption == 'Item'" class="mb-2">
-              <div class="d-flex table-title">
+              <!-- <div class="d-flex table-title"> -->
+              <div class="table-title">
+
                 <h5 style="text-align: left !important">Specific Tasks:</h5>
-                <span @click="toggleDiv1" class="summarytogicon mr-2">
+                <div v-html="summaryHtmlItemByItemTasks"></div>
+                <!-- <span @click="toggleDiv1" class="summarytogicon mr-2">
                   <i :class="['fas', isDivVisible1 ? 'fa-chevron-up' : 'fa-chevron-down',]"></i>
                  
-              </span>
+              </span> -->
               </div>
-              <div v-if="isDivVisible1">
+              <!-- <div v-if="isDivVisible1">
                 <div v-html="summaryHtmlItemByItemTasks"></div>
-              </div>
+              </div> -->
             </div>
             <!-- here -->
             <div v-if="form.estimated_fee">

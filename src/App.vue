@@ -212,6 +212,10 @@ span.countmsg {
   z-index: 1 !important;
 }
 
+.dynamicTable{
+  text-align: initial;
+}
+
 .dynamicTable th,
 .dynamicTable td {
   font-size: 1rem;
