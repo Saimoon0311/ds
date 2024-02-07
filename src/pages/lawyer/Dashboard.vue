@@ -219,7 +219,7 @@
 
               <div
                 v-else
-                class=" px-2 py-3 d-flex flex-wrap align-center justify-content-center"
+                class=" px-0 px-md-2 py-3 d-flex flex-wrap align-center justify-content-center"
               >
                 <div class="input-group mb-3 search-field">
                   <input
