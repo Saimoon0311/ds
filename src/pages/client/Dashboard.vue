@@ -84,7 +84,7 @@
                 <span class="text-center w-100">No record found!</span>
               </div>
 
-              <div class="row p-3">
+              <div class="row py-3 px-2 px-md-3">
                 <div
                   v-for="(item, index) in openJobs"
                   :key="index"
