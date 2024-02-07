@@ -1794,6 +1794,7 @@ app.mixin({
           typeof data?.charge_type != undefined &&
           data?.charge_type == "Hourly" &&
           typeof data?.fee_earners != undefined &&
+          data?.fee_earners != null &&
           data?.fee_earners.length > 0
         ) {
           let feeEarnersTable = "<span></span>";
@@ -1832,6 +1833,7 @@ app.mixin({
           typeof data?.charge_type != undefined &&
           data?.charge_type == "Item" &&
           typeof data?.specific_tasks != undefined &&
+          data?.specific_tasks != null &&
           data?.specific_tasks.length > 0
         ) {
           let specificTasksTable = "<span></span>";
@@ -1938,6 +1940,7 @@ app.mixin({
 
         if (
           typeof data?.disbursements != undefined &&
+          data?.disbursements != null &&
           data?.disbursements?.length > 0
         ) {
           let disbursementsTable = "<span></span>";
@@ -2022,7 +2025,7 @@ app.mixin({
       if (!Array.isArray(dataArray)) {
         return;
       }
-      
+
       const total = dataArray.reduce(
         (total, row) => total + parseFloat(row.cost ?? row.costAud) || 0,
         0
