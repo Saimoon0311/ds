@@ -484,7 +484,7 @@
                         <button
                             v-if="item?.proposal?.status != 'Reject' && item?.proposal?.status != 'reject'"
                             class="btn btn-danger btn-sm card-btn my-1 mx-1 softblue text-white"
-                            @click="openProposalDetailsModalPopup(item?.owner,item?.proposal?.status.toLowerCase() == 'accept')">
+                            @click="openLawyerDetailsModal(item?.owner,item?.proposal?.status.toLowerCase() == 'accept')">
                           View Client Details
                         </button>
 

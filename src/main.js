@@ -1311,7 +1311,7 @@ app.mixin({
       htmlContent += `</div>`;
 
       this.$swal.fire({
-        title: showSecretInfo ? title : `${data?.type} Details`,
+        title: showSecretInfo ? title : `${this.capitalizeFirstLetter(data?.type)} Details`,
         html: `<div class="table-wrap ${
           data?.type == "lawyer" && showSecretInfo ? "d-flex" : ""
         } justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
@@ -1734,57 +1734,8 @@ app.mixin({
     },
 
     openProposalDetailsModalPopup(data, renderAsHtml = false) {
-      // let newData = {};
-      // let specificTasks = [];
-      // let disbursements = [];
-      // let feeEarners = [];
-
       let mainHtmlContent = "";
       if (data && typeof data === "object") {
-        // for (const key in data) {
-        //   if (Object.prototype.hasOwnProperty.call(data, key)) {
-        //     let value = data[key];
-        //     if (
-        //       value !== null &&
-        //       key != "id" &&
-        //       key != "lawyer_id" &&
-        //       key != "job_id" &&
-        //       key != "user_id" &&
-        //       key != "created_at" &&
-        //       key != "reject_reason" &&
-        //       key != "updated_at" &&
-        //       key != "show" &&
-        //       key != "description" &&
-        //       key != "lawyer" &&
-        //       key != "job" &&
-        //       key != "status" &&
-        //       key != "is_owner_seen"
-        //     ) {
-        //       let objKey = key;
-        //       objKey = objKey.replace(/_/g, " ");
-
-        //       if (key == "specific_tasks") {
-        //         specificTasks = [...value];
-        //       } else if (key == "disbursements") {
-        //         disbursements = [...value];
-        //       } else if (key == "fee_earners" && value != "me") {
-        //         feeEarners = [...value];
-        //       } else {
-        //         if (objKey == "lawyer" && value != null) {
-        //           newData["lawyer email"] = value?.email;
-        //         } else if (key == "charge_type") {
-        //           newData[objKey] = this.chargeType(value);
-        //         } else {
-        //           value = this.isNumericString(value)
-        //             ? "$" + this.formatNumber(value)
-        //             : value;
-        //           newData[objKey] = value;
-        //         }
-        //       }
-        //     }
-        //   }
-        // }
-
         if (
           typeof data?.charge_type != undefined &&
           data?.charge_type != null
@@ -2047,44 +1998,6 @@ app.mixin({
         mainHtmlContent += `</div>`;
       }
 
-      // console.log("fee earners 1-1 : ", feeEarners);
-
-      // const mainHtmlContent = Object.entries(newData)
-      //   .map(
-      //     ([key, value]) => {
-      //       const paraClass = key == 'success fee term' ? 'class-para' : 'class-def';
-      //       return `<div class="wrapper mb-3" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}:</b> <span  class="${paraClass}">${value}</span></h6></div>`
-      //     }
-      //   )
-      //   .join("");
-
-      // let specificTasksTable = "<span></span>";
-      // let disbursementsTable = "<span></span>";
-      // let feeEarnersTable = "<span></span>";
-      // if (specificTasks.length > 0) {
-      //   specificTasksTable = this.createTableHtml(
-      //     "Specific Tasks",
-      //     specificTasks,
-      //     renderAsHtml
-      //   );
-      // }
-
-      // if (disbursements.length > 0) {
-      //   disbursementsTable = this.createTableHtml(
-      //     "Disbursements",
-      //     disbursements,
-      //     renderAsHtml
-      //   );
-      // }
-
-      // if (feeEarners.length > 0) {
-      //   console.log("fee earners : : ", feeEarners);
-      //   feeEarnersTable = this.createTableHtmlFeeEarners(
-      //     "Fee Earners",
-      //     feeEarners,
-      //     renderAsHtml
-      //   );
-      // }
 
       const swalHtmlContent = `
         <div class="table-wrap pb-0 proposed-work" >${mainHtmlContent}</div>
@@ -2105,6 +2018,11 @@ app.mixin({
 
     createTableHtml(title, dataArray, renderAsHtml = false) {
       console.log("create table dis : ", dataArray);
+
+      if (!Array.isArray(dataArray)) {
+        return;
+      }
+      
       const total = dataArray.reduce(
         (total, row) => total + parseFloat(row.cost ?? row.costAud) || 0,
         0
@@ -2155,6 +2073,9 @@ app.mixin({
       //   (total, row) => total + parseFloat(row.hourlyRate * row.estimatedHours) || 0,
       //   0
       // );
+      if (!Array.isArray(dataArray)) {
+        return;
+      }
       let grandTotal = 0;
       const tableContent = dataArray
         .map((item) => {
