@@ -1981,7 +1981,7 @@
             <div v-if="form.uplift_percentage">
               <p>
                 <span> Uplift Percentage:</span>
-                <span>{{ form.uplift_percentage }}</span>
+                <span>{{ form.uplift_percentage }}%</span>
               </p>
             </div>
             <div v-if="form.success_fee_term">
@@ -2155,7 +2155,7 @@
 
             <div v-if="form.description" class="sumdesc">
               <p class="text-center font-set">
-                What You Will Do.
+                What you will do.
               </p>
               <p class="descriptionText" style="white-space: pre-line; text-transform:none;">
                 {{ form.description }}

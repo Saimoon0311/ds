@@ -473,7 +473,7 @@
                             v-if="item?.proposal?.status != 'Reject' && item?.proposal?.status != 'reject'"
                             class="btn btn-dark btn-sm card-btn my-1 mx-1 opacity-75"
                             @click="goToMessagePage(item,'lawyer')">
-                          View Message
+                          View Messages
                         {{
                           item?.chats && item?.chats.length == 0
                             ? ", (N/A)"

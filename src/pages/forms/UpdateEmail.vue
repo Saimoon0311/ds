@@ -151,7 +151,7 @@ export default {
                 api.post('/update-email', formData)
                     .then(res => {
                         console.log('update-email : ' , res);
-                        this.$swal('', 'Your Email has now been changed.', 'success').then(() => {
+                        this.$swal('', 'Your email has now been changed.', 'success').then(() => {
                             // this.$store.commit('SET_USER_TYPE', res?.data?.type);
                             // localStorage.setItem('userType', res?.data?.type);
                             this.setUserInStateAndLocalStorage(res);

@@ -78,12 +78,12 @@
             class="btn-inner mt-5 pt-3 d-flex justify-content-evenly align-items-center flex-wrap"
           >
             <router-link
-              to="/login"
+              to="/client-register"
               class="btn btn-dark softblue text-white rounded-pill m-1 m-md-0"
               >Find a Lawyer Now</router-link
             >
             <router-link
-              to="/login"
+              to="/lawyer-register"
               class="btn btn-dark softblue text-white rounded-pill m-1 m-md-0"
               >Find Clients Now</router-link
             >

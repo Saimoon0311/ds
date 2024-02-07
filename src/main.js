@@ -671,7 +671,7 @@ app.mixin({
       }
     },
 
-    openJobDetailModal(data, removeArea = false) {
+    openJobDetailModal(data, removeArea = false, showOnwerDetails = false) {
       let newData = {};
       if (data && typeof data === "object") {
         for (const key in data) {
@@ -719,8 +719,12 @@ app.mixin({
               }
 
               if (key == "owner") {
-                objKey = "Client details";
-                value = `<b>Name : </b>${value?.first_name} ${value?.last_name}, <b>Email : </b>${value?.email}, <b>Phone : </b>${value?.phone}`;
+                if(showOnwerDetails){
+                  objKey = "Client details";
+                  value = `<b>Name : </b>${value?.first_name} ${value?.last_name}, <b>Email : </b>${value?.email}, <b>Phone : </b>${value?.phone}`;
+                }else{
+                  continue;
+                }
               }
               newData[objKey] = value;
               if (key == "field" || key == "location") {
@@ -1222,46 +1226,26 @@ app.mixin({
       ) {
         htmlContent += `
             <div class="wrapper">
-              <h6><b style="text-transform: capitalize;">Name
-              : </b><span>${data?.first_name}</span></h6>
+              <h6><b style="text-transform: capitalize;">Name: </b><span>${data?.first_name}</span></h6>
             </div>`;
       }
       if (data?.email != null && data?.email != "" && showSecretInfo) {
         htmlContent += `
             <div class="wrapper">
-              <h6><b style="text-transform: capitalize;">email
-              : </b><span>${data?.email}</span></h6>
+              <h6><b style="text-transform: capitalize;">email: </b><span>${data?.email}</span></h6>
             </div>`;
       }
       if (data?.phone != null && data?.phone != "" && showSecretInfo) {
         htmlContent += ` <div class="wrapper">
-        <h6><b style="text-transform: capitalize;">phone
-        : </b><span>${data?.phone}</span></h6>
-      </div>`;
-      }
-      if (data?.job_title != null && data?.job_title != "") {
-        htmlContent += ` <div class="wrapper">
-        <h6><b style="text-transform: capitalize;">job title
-        : </b><span>${data?.job_title}</span></h6>
-      </div>`;
-      }
-      if (data?.law_firm != null && data?.law_firm != "") {
-        htmlContent += `<div class="wrapper">
-        <h6><b style="text-transform: capitalize;">law firm
-        : </b><span>${data?.law_firm}</span></h6>
-      </div>`;
-      }
-      if (data?.link != null && data?.link != "") {
-        htmlContent += `<div class="wrapper">
-        <h6><b style="text-transform: capitalize;">Website
-        : </b><span>${data?.link}</span></h6>
+        <h6><b style="text-transform: capitalize;">phone: </b><span>${data?.phone}</span></h6>
       </div>`;
       }
 
+
+
       if (data?.address != null && data?.address != "" && showSecretInfo) {
         htmlContent += ` <div class="wrapper" >
-            <h6><b style="text-transform: capitalize;">address
-            : </b><span>${data?.address}</span>`;
+            <h6><b style="text-transform: capitalize;">Street Address: </b><span>${data?.address}</span>`;
       }
 
       if (data?.suburb != null && data?.suburb != "" && showSecretInfo) {
@@ -1280,10 +1264,29 @@ app.mixin({
         data?.suburb != "")
       ) {
         htmlContent += ` <div class="wrapper" >
-            <h6><b style="text-transform: capitalize;">suburb
-            : </b><span>${data?.suburb}</span></h6>
+            <h6><b style="text-transform: capitalize;">address: </b><span>${data?.suburb}</span></h6>
           </div>`;
       }
+
+
+
+      if (data?.job_title != null && data?.job_title != "") {
+        htmlContent += ` <div class="wrapper">
+        <h6><b style="text-transform: capitalize;">job title: </b><span>${data?.job_title}</span></h6>
+      </div>`;
+      }
+      if (data?.law_firm != null && data?.law_firm != "") {
+        htmlContent += `<div class="wrapper">
+        <h6><b style="text-transform: capitalize;">law firm: </b><span>${data?.law_firm}</span></h6>
+      </div>`;
+      }
+      if (data?.link != null && data?.link != "") {
+        htmlContent += `<div class="wrapper">
+        <h6><b style="text-transform: capitalize;">website: </b><span>${data?.link}</span></h6>
+      </div>`;
+      }
+
+      
 
       if (
         consultation_content != null &&
@@ -1291,8 +1294,7 @@ app.mixin({
         showSecretInfo
       ) {
         htmlContent += ` <div class="wrapper" >
-        <h6><b style="text-transform: capitalize;">Initial Consultation
-        : </b><span>${consultation_content}</span></h6>
+        <h6><b style="text-transform: capitalize;">Initial Consultation: </b><span>${consultation_content}</span></h6>
       </div>`;
       }
       if (data?.remote_consultation && showSecretInfo) {
@@ -1795,6 +1797,7 @@ app.mixin({
           data?.charge_type == "Hourly" &&
           typeof data?.fee_earners != undefined &&
           data?.fee_earners != null &&
+          Array.isArray(data?.fee_earners) && 
           data?.fee_earners.length > 0
         ) {
           let feeEarnersTable = "<span></span>";
@@ -1834,6 +1837,7 @@ app.mixin({
           data?.charge_type == "Item" &&
           typeof data?.specific_tasks != undefined &&
           data?.specific_tasks != null &&
+          Array.isArray(data?.specific_tasks) && 
           data?.specific_tasks.length > 0
         ) {
           let specificTasksTable = "<span></span>";
@@ -1898,7 +1902,7 @@ app.mixin({
           data?.charge_type == "Success"
         ) {
           mainHtmlContent += ` <div class="flex-class">
-            <p ><span > Uplift Percentage:</span><span >${data?.uplift_percentage}</span></p>
+            <p ><span > Uplift Percentage:</span><span >${data?.uplift_percentage}%</span></p>
           </div>`;
         }
 

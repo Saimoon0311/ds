@@ -359,7 +359,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Address</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Street Address</h5>
               <button
                 type="button"
                 class="close btn btn-dark"
@@ -986,7 +986,7 @@
 
             <tr>
               <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
-                Address:
+                Street Address:
                 <button
                   type="button"
                   class="btn btn-dark btn-sm"

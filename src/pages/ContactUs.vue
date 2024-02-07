@@ -208,11 +208,11 @@
                     <option value="I have a subscription or billing issue">
                       I have a subscription or billing issue
                     </option>
-                    <option
+                    <!-- <option
                       value="I have an issue with a review left by a client"
                     >
                       I have an issue with a review left by a client
-                    </option>
+                    </option> -->
                     <option value="I am a lawyer outside of Australia">
                       I am a lawyer outside of Australia
                     </option>
