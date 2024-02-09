@@ -1,7 +1,7 @@
 <template lang="">
   <div class="text-center pt-4 container mobile-layout">
     <router-link to="/" class="main-logo">
-      <img src="../assets/images/new-logo.png" class="img-fluid" />
+      <img src="../assets/images/new-main.png" class="img-fluid" />
     </router-link>
     <div class="dropdown cstm-dropdown">
       <button
@@ -64,7 +64,7 @@ export default {
 </script>
 <style>
 .main-logo img {
-  width: 32%;
+  width: 20%;
 }
 
 .menu-burger:after {
@@ -134,7 +134,7 @@ export default {
   }
 
   .main-logo img {
-    width: 60%;
+    width: 40%;
   }
 }
 
@@ -155,8 +155,9 @@ export default {
   }
 
   .main-logo img {
-    width: 75%;
-  }
+    width: 50%;
+    margin-left: 20px;
+}
 }
 
 @media (min-width: 320px) and (max-width: 425px) {
@@ -177,7 +178,8 @@ export default {
   }
 
   .main-logo img {
-    width: 80%;
-  }
+    width: 55%;
+    margin-left: 10px;
+}
 }
 </style>

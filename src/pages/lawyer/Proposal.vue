@@ -1060,7 +1060,7 @@
                         v-if="editRow != null"
                         type="button"
                         @click="updateRow3"
-                        class="btn btn-dark"
+                        class="btn btn-dark my-2"
                       >
                         Update
                       </button>
@@ -2187,8 +2187,9 @@
             <button
               type="submit"
               :disabled="!selectedOption"
-              class="btn btn-bg"
-            >
+              :class="['btn', 'btn-bg', buttonText === 'Submit' ? 'softblue' : '']"
+              >
+              <!-- class="btn btn-bg" -->
               {{ buttonText }}
             </button>
             <!-- v-if="currentStep !== 3" -->

@@ -267,7 +267,7 @@
               <span class="text-center p-2"
                 >You haven't posted a job. Click here to</span
               >
-              <router-link to="/posting-job" class="btn btn-dark"
+              <router-link to="/posting-job" class="btn btn-dark softblue"
                 >Post a Job</router-link
               >
             </div>

@@ -127,7 +127,7 @@
               <div
                 class="col-md-5 col-sm-12 d-flex flex-column justify-content-between"
               >
-                <h3 class="fw-bold text-center">Our Values</h3>
+                <h4 class="fw-bold text-center">Our Values</h4>
                 <div class="values-inner">
                   <div class="parabox">
                     <h6>Transparency</h6>
@@ -150,7 +150,7 @@
               <div class="col-md-7 col-sm-12">
                 <div class="row align-items-start inner-row">
                   <div class="col-md-4 col-sm-12">
-                    <h4 class="colorblue">Simplawfy</h4>
+                    <h5 class="colorblue fw-bold">Simplawfy</h5>
                     <ul>
                       <li>Streamlined, simple process</li>
                       <li>Saves time</li>
@@ -169,7 +169,7 @@
                     <img src="../assets/level.png" alt="" class="img-fluid" />
                   </div>
                   <div class="col-md-4 col-sm-12">
-                    <h4>Other Methods</h4>
+                    <h5 class="fw-bold">Other Methods</h5>
                     <ul>
                       <li>Daunting, complicated and expensive process</li>
                       <li>Time-intensive</li>
@@ -272,7 +272,7 @@ export default {
 }
 p.img-bottom {
   right: -10%;
-  width: 70%;
+  width: 80%;
   text-align: center;
   margin: 0;
   border-radius: 30px;

@@ -38,7 +38,7 @@
                 <span v-if="subscriptionData?.subscription_status == 'trialing'" class="badge">
                 60-Day Free Trial
               </span>
-              <span class="badge" 
+              <span class="badge " 
               v-else-if="subscriptionData?.subscription_status == 'active'">
                 Subscribed
               </span>
@@ -77,7 +77,7 @@
               <p class="m-0 text-start pt-1">You have cancelled your subscription. You can continue to access the Simplawfy platform until the
               {{ subscriptionData?.current_period_end }}. You can 
               <button
-                  class=" btn btn-dark" 
+                  class=" btn btn-dark softblue" 
                   @click="resubscribe(subscriptionData?.plan)"
                 >
                   resubscribe
@@ -745,8 +745,9 @@ table {
     border-collapse: collapse;
   } 
 .table-responsive{
-  max-height: 180px; /* Set a max height for the table container */
+  max-height: 330px;
     overflow-y: auto;
+    min-height: auto;
 }
 .table-responsive thead th{
   position: sticky;
