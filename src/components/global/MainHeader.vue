@@ -1,7 +1,7 @@
 <template lang="">
   <div class="text-center  container-hd" >
     <router-link to="/"> 
-      <img  src="../../assets/images/new-logo.png" srcset="../../assets/images/new-logo.png 450w, ../../assets/images/new-logo.png 600w, ../../assets/images/new-logo.png 750w" sizes="(min-width: 820px) 446px, (min-width: 640px) 588px, calc(90vw + 30px)" class="img-fluid main-lg-img" />
+      <img  src="../../assets/images/new-main.png" srcset="../../assets/images/new-main.png 450w, ../../assets/images/new-main.png 600w, ../../assets/images/new-main.png 750w" sizes="(min-width: 820px) 446px, (min-width: 640px) 588px, calc(90vw + 30px)" class="img-fluid main-lg-img" />
     </router-link>
     <div class="dropdown cstm-dropdown">
       <button class="btn btn-secondary dropdown-toggle menu-burger" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

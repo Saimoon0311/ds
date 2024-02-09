@@ -42,6 +42,7 @@
   };
   </script>
   <style scoped>
+ 
 .enq{
   width: 220px;
 }
@@ -67,6 +68,8 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    font-size: 14px;
+    margin-bottom: 5px;
   }
   .top-avatar {
     width: 400px;

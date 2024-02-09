@@ -40,9 +40,9 @@
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-evenly mx-4 mb-3 mb-lg-4">
-                            <router-link to="/lawyer-profile" class="btn btn-outline-light btn-lg px-5">Back</router-link>
-                            <button @click="submitData" class="btn btn-outline-light btn-lg px-5">Submit</button>
+                        <div class="d-flex justify-content-evenly mx-4 mb-3 mb-lg-4 flex-wrap">
+                            <router-link to="/lawyer-profile" class="btn btn-outline-light btn-md px-5 m-1">Back</router-link>
+                            <button @click="submitData" class="btn btn-outline-light btn-md px-5 m-1">Submit</button>
                         </div>
                         <!-- <p class="mb-0">Don't have an account?
                             <br>
@@ -53,10 +53,11 @@
                 <h2 v-else class="text-center">This temporary link has expired. <router-link to="/forget-password" class="btn btn-dark text-white">Reset your password</router-link> </h2>
             </div>
         </div>
-        <div class="footer">
+       
+    </div>
+    <div class="footer">
             <MainFooter />
         </div>
-    </div>
 </template>
 <script >
 
@@ -186,7 +187,7 @@ export default {
 .footer {
     position: absolute;
     bottom: 0;
-    top: 100%;
+    /* top: 100%; */
     width: 100%;
     padding-top: 20px;
 }

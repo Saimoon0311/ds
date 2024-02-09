@@ -423,7 +423,7 @@
                   Summary
                 </button>
 
-                <button v-if="currentStep === 4" @click="submitStepForm" type="button" class="btn btn-bg">
+                <button v-if="currentStep === 4" @click="submitStepForm" type="button" class="btn btn-bg softblue">
                   Submit
                 </button>
               </div>

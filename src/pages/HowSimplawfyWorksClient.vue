@@ -62,7 +62,7 @@
               <div class="boxheading">Sign Up</div>
               <img src="../assets/icons/1.png" alt="icon" />
               <!-- <p>Create an account at </p> -->
-              <router-link to="/client-register" class="btn btn-dark text-white">Create an account</router-link>
+              <router-link to="/client-register" class="btn btn-dark text-white softblue">Create an account</router-link>
             </div>
           </div>
           <div class="col">
@@ -117,7 +117,7 @@
             <div class="subbox signup text-center">
               <div class="boxheading">Sign Up</div>
               <img src="../assets/icons/1.png" alt="icon" />
-              <router-link to="/lawyer-register" class="btn btn-dark text-white mb-2 mt-2 ">Create an account</router-link>
+              <router-link to="/lawyer-register" class="btn btn-dark text-white mb-2 mt-2 softblue">Create an account</router-link>
               <p> and complete your profile.</p>
               
             </div>
@@ -153,7 +153,7 @@
                 <!-- <router-link to="/lawyer-login" 
                 class="btn btn-dark text-white mt-2 ">Log in</router-link> -->
                 <button @click="goToLoginPage('lawyer')"
-                class="btn btn-dark text-white mt-2 ">Log in</button>
+                class="btn btn-dark text-white mt-2 softblue">Log in</button>
               </p>
               <p class="mt-2"> to view jobs in your location and areas of law.</p>
             </div>
