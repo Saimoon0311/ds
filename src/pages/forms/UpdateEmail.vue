@@ -54,9 +54,10 @@
             </div>
         </div>
        
-    </div>
+    
     <div class="footer">
             <MainFooter />
+        </div>
         </div>
 </template>
 <script >
@@ -205,8 +206,11 @@ export default {
 }
 
 .reset-main {
-    min-height: 57vh;
+    /* min-height: 57vh; */
     position: relative;
+    margin: auto;
+    min-height: 55vh;
+    align-items: center;
 }
 
 .linkc {

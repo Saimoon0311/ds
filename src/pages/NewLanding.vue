@@ -100,12 +100,12 @@
                 >
                   <router-link
                     to="/client-register"
-                    class="btn btn-dark softblue text-white rounded-pill m-1 m-md-0"
+                    class="btn btn-dark softblue text-white rounded-pill m-1 m-lg-0"
                     >Find a Lawyer Now</router-link
                   >
                   <router-link
                     to="/lawyer-register"
-                    class="btn btn-dark softblue text-white rounded-pill m-1 m-md-0"
+                    class="btn btn-dark softblue text-white rounded-pill m-1 m-lg-0"
                     >Find Clients Now</router-link
                   >
                 </div>
@@ -262,7 +262,7 @@ export default {
   margin: 10px;
   text-align: center;
   border-radius: 50px;
-  padding: 50px 10px;
+  padding: 70px 10px;
   color: white !important;
 }
 .parabox p {
@@ -272,18 +272,19 @@ export default {
 }
 p.img-bottom {
   right: -10%;
-  width: 80%;
+  width: 70%;
   text-align: center;
   margin: 0;
   border-radius: 30px;
-  font-size: 16px;
+  font-size: 20px;
   padding: 20px 5px;
   margin-top: -50px;
   z-index: 1;
   background: black !important;
   position: relative;
   margin-left: auto;
-  font-weight: 500;
+  font-weight: 400;
+  font-family: 'Bebas Neue', sans-serif;
 }
 .new-logo {
   width: 400px;
@@ -461,6 +462,9 @@ ul {
   }
 }
 @media only screen and (max-width: 1024px) {
+  p.img-bottom {
+    font-size: 16px;
+  }
     .inner-row .col-md-4 {
     width: 50%;
 }
@@ -474,6 +478,8 @@ ul {
 }
 .parabox{
         width: 95%;
+      padding: 50px 10px;
+
     }
   .top-avatar {
     width: 300px;
@@ -484,8 +490,21 @@ ul {
   .img-bottom {
     right: 0 !important;
   }
+  .btn-inner {
+    margin: 0 !important;
 }
+.how-tabs a{
+    padding: 8px 40px;
+  }
+}
+
 @media only screen and (max-width: 767px) {
+  .how-tabs a{
+    padding: 8px 40px;
+  }
+  p.img-bottom {
+    font-size: 18px;
+  }
   .parabox{
     padding: 30px 10px;
   }

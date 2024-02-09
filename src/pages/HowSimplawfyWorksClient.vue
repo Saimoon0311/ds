@@ -382,8 +382,13 @@ p {
   font-size: 22px;
   color: #000;
 }
-
+@media only screen and (max-width: 991px) {
+  .how-tabs a{
+        padding: 10px 40px;
+    }
+}
 @media only screen and (max-width: 767px) {
+  
   .how-tabs a{
         padding: 10px 30px;
     }
