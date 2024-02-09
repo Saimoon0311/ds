@@ -387,7 +387,7 @@ export default {
   }
 
   .showhover p {
-    font-size: 16px !important;
+    font-size: 15px !important;
   }
 }
 @media (min-width: 1024px) and (max-width:1036px) {
