@@ -1850,7 +1850,7 @@
 
             <div v-if="selectedOptionForSummary" class="text-center">
               <p class="topcharge topcharge1 text-center font-set">
-                 How you will charge. 
+                How you will be charged. 
               </p>
               <p class="topcharge text-center">
                 <span
@@ -3075,7 +3075,7 @@ export default {
             this.rows3.push({
               title: item?.title,
               hourlyRate: parseFloat(item?.hourly_rate).toFixed(2),
-              estimatedHours: 1,
+              estimatedHours: 0,
             });
           });
         }

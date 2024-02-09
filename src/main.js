@@ -2036,6 +2036,19 @@ app.mixin({
           <span >$${this.formatNumber(data?.total_with_gst)}</span>
         </p>`;
         }
+
+
+        if (
+          typeof data?.description != undefined &&
+          data?.description != null && data?.description != ""
+        ) {
+          mainHtmlContent += ` <div class="">
+            <p class="text-center" style="color:black;"><span><b>Proposed work</b></span></p>
+            <p class="text-center" style="color:black;"><span style="font-weight:normal;">${data?.description}</span></p>
+          </div>`;
+        }
+
+
         mainHtmlContent += `</div>`;
       }
 
