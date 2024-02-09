@@ -366,12 +366,13 @@ export default {
       try {
         this.$swal({
           title: "Are you sure?",
-          text: `Are you sure you want to cancel this job, You will not be able to see this anymore.`,
+          text: `Are you sure you want to cancel this job? This cannot be undone.`,
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
           confirmButtonText: `Yes, Cancel`,
+          cancelButtonText: `No`,
         }).then((result) => {
           if (result.isConfirmed) {
             api

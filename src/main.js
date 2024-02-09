@@ -672,81 +672,121 @@ app.mixin({
     },
 
     openJobDetailModal(data, removeArea = false, showOnwerDetails = false) {
-      let newData = {};
-      if (data && typeof data === "object") {
-        for (const key in data) {
-          if (Object.prototype.hasOwnProperty.call(data, key)) {
-            let value = data[key];
-            if (
-              value !== null &&
-              typeof value !== undefined &&
-              // key != "id" &&
-              // key != "field_id" &&
-              // key != "location_id" &&
-              // key != "status" &&
-              // key != "owner_id" &&
-              // key != "accessibility_requirements" &&
-              // key != "created_at" &&
-              // key != "chats" &&
-              // key != "updated_at" &&
-              // key != "lawyer_chat" &&
-              // key != "client_chat" &&
-              // key != "owner" &&
-              // key != "requirement" &&
-              // key != "proposal" && key != "proposals" &&
-              // key != "assigned_lawyer_id" && key != "assigned_lawyer"
-              (key == "title" ||
-                key == "description" ||
-                key == "field" ||
-                key == "location" ||
-                key == "city" ||
-                key == "identity" ||
-                key == "owner")
-            ) {
-              let objKey = key;
-              objKey = objKey.replace(/_/g, " ");
-              if (key == "field") {
-                objKey = "Areas of Practice";
-              }
-              if (key == "location") {
-                objKey = "State/territory";
-              }
-              if (key == "city") {
-                objKey = "City/suburb";
-              }
-              if (key == "identity") {
-                objKey = "Job no";
-              }
+      // let newData = {};
+      // if (data && typeof data === "object") {
+      //   for (const key in data) {
+      //     if (Object.prototype.hasOwnProperty.call(data, key)) {
+      //       let value = data[key];
+      //       if (
+      //         value !== null &&
+      //         typeof value !== undefined &&
+      //         // key != "id" &&
+      //         // key != "field_id" &&
+      //         // key != "location_id" &&
+      //         // key != "status" &&
+      //         // key != "owner_id" &&
+      //         // key != "accessibility_requirements" &&
+      //         // key != "created_at" &&
+      //         // key != "chats" &&
+      //         // key != "updated_at" &&
+      //         // key != "lawyer_chat" &&
+      //         // key != "client_chat" &&
+      //         // key != "owner" &&
+      //         // key != "requirement" &&
+      //         // key != "proposal" && key != "proposals" &&
+      //         // key != "assigned_lawyer_id" && key != "assigned_lawyer"
+      //         (key == "title" ||
+      //           key == "description" ||
+      //           key == "field" ||
+      //           key == "location" ||
+      //           key == "city" ||
+      //           key == "identity" ||
+      //           key == "owner")
+      //       ) {
+      //         let objKey = key;
+      //         objKey = objKey.replace(/_/g, " ");
+      //         if (key == "field") {
+      //           objKey = "Areas of Practice";
+      //         }
+      //         if (key == "location") {
+      //           objKey = "State/territory";
+      //         }
+      //         if (key == "city") {
+      //           objKey = "City/suburb";
+      //         }
+      //         if (key == "identity") {
+      //           objKey = "Job no";
+      //         }
 
-              if (key == "owner") {
-                if(showOnwerDetails){
-                  objKey = "Client details";
-                  value = `<b>Name : </b>${value?.first_name} ${value?.last_name}, <b>Email : </b>${value?.email}, <b>Phone : </b>${value?.phone}`;
-                }else{
-                  continue;
-                }
-              }
-              newData[objKey] = value;
-              if (key == "field" || key == "location") {
-                newData[objKey] = value?.title;
-              }
-            }
-          }
-        }
-        if (removeArea) {
-          delete newData["Areas of Practice"];
+      //         if (key == "owner") {
+      //           if (showOnwerDetails) {
+      //             objKey = "Client details";
+      //             value = `<b>Name : </b>${value?.first_name} ${value?.last_name}, <b>Email : </b>${value?.email}, <b>Phone : </b>${value?.phone}`;
+      //           } else {
+      //             continue;
+      //           }
+      //         }
+      //         newData[objKey] = value;
+      //         if (key == "field" || key == "location") {
+      //           newData[objKey] = value?.title;
+      //         }
+      //       }
+      //     }
+      //   }
+      //   if (removeArea) {
+      //     delete newData["Areas of Practice"];
+      //   }
+      // }
+      let htmlContent = "";
+      if (data?.description != null && data?.description != "") {
+        htmlContent += `<div class="wrapper" style="text-align: center;"><h6>
+        <span>${data?.description}</span></h6></div>`;
+      }
+
+      if (data?.identity != null && data?.identity != "") {
+        htmlContent += `<div class="wrapper"><h6>
+        <b style="text-transform: capitalize;">Job No: </b>
+        <span>${data?.identity}</span></h6></div>`;
+      }
+
+      if (!removeArea == true && data?.field != null && data?.field != "") {
+        htmlContent += `<div class="wrapper"><h6>
+        <b style="text-transform: capitalize;">Area Of Law: </b>
+        <span>${data?.field?.title}</span></h6></div>`;
+      }
+
+      if (data?.location != null && data?.location != "") {
+        htmlContent += `<div class="wrapper"><h6>
+        <b style="text-transform: capitalize;">Location: </b>
+        <span>${data?.city != null && data?.city != "" ? data?.city : ""}${data?.city != null && data?.city != "" ? ', ' : ''}
+        ${
+          data?.location?.title
+        }</span></h6></div>`;
+      }
+
+      if (showOnwerDetails && typeof data?.owner != undefined) {
+        if (data?.owner != null && data?.owner != "") {
+          htmlContent += `<div class="wrapper"><h6>
+          <b style="text-transform: capitalize;">Client details: </b>
+          </h6>
+          <span>
+            <h6><b>Name : </b>${data?.owner?.first_name} ${data?.owner?.last_name}<b></h6>
+            <h6>Email : </b>${data?.owner?.email}<b></h6>
+            <h6>Phone : </b>${data?.owner?.phone}</h6>
+          </span></div>`;
         }
       }
-      const htmlContent = Object.entries(newData)
-        .map(
-          ([key, value]) =>
-            `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`
-        )
-        .join("");
+
+      // const htmlContent = Object.entries(newData)
+      //   .map(
+      //     ([key, value]) =>
+      //       `<div class="wrapper" v-if="value != null"><h6><b style="text-transform: capitalize;">${key}: </b><span>${value}</span></h6></div>`
+      //   )
+      //   .join("");
 
       // Use dynamic HTML inside SweetAlert2 modal
       this.$swal.fire({
-        title: "Job Details",
+        title: data?.title ?? "Job Details",
         html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
         showCloseButton: true,
         showConfirmButton: false,
@@ -1241,8 +1281,6 @@ app.mixin({
       </div>`;
       }
 
-
-
       if (data?.address != null && data?.address != "" && showSecretInfo) {
         htmlContent += ` <div class="wrapper" >
             <h6><b style="text-transform: capitalize;">Street Address: </b><span>${data?.address}</span>`;
@@ -1257,18 +1295,14 @@ app.mixin({
       }
 
       if (
-        (data?.address == null ||
-        data?.address == "") 
-        && 
-        (data?.suburb != null &&
-        data?.suburb != "")
+        (data?.address == null || data?.address == "") &&
+        data?.suburb != null &&
+        data?.suburb != ""
       ) {
         htmlContent += ` <div class="wrapper" >
             <h6><b style="text-transform: capitalize;">address: </b><span>${data?.suburb}</span></h6>
           </div>`;
       }
-
-
 
       if (data?.job_title != null && data?.job_title != "") {
         htmlContent += ` <div class="wrapper">
@@ -1285,8 +1319,6 @@ app.mixin({
         <h6><b style="text-transform: capitalize;">website: </b><span>${data?.link}</span></h6>
       </div>`;
       }
-
-      
 
       if (
         consultation_content != null &&
@@ -1313,7 +1345,9 @@ app.mixin({
       htmlContent += `</div>`;
 
       this.$swal.fire({
-        title: showSecretInfo ? title : `${this.capitalizeFirstLetter(data?.type)} Details`,
+        title: showSecretInfo
+          ? title
+          : `${this.capitalizeFirstLetter(data?.type)} Details`,
         html: `<div class="table-wrap ${
           data?.type == "lawyer" && showSecretInfo ? "d-flex" : ""
         } justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
@@ -1743,7 +1777,7 @@ app.mixin({
           data?.charge_type != null
         ) {
           mainHtmlContent += `<div  class="text-center">
-          <p  class="topcharge topcharge1 text-center font-set"> How you will charge. </p>
+          <p  class="topcharge topcharge1 text-center font-set"> How you will be charged </p>
           <p  class="topcharge text-center"><span  class="btn-sm btn-dark btn rounded btn-charge py-1 px-3 text-center fs-6">
           ${this.chargeType(data?.charge_type)}
           </span></p>
@@ -1797,7 +1831,7 @@ app.mixin({
           data?.charge_type == "Hourly" &&
           typeof data?.fee_earners != undefined &&
           data?.fee_earners != null &&
-          Array.isArray(data?.fee_earners) && 
+          Array.isArray(data?.fee_earners) &&
           data?.fee_earners.length > 0
         ) {
           let feeEarnersTable = "<span></span>";
@@ -1837,7 +1871,7 @@ app.mixin({
           data?.charge_type == "Item" &&
           typeof data?.specific_tasks != undefined &&
           data?.specific_tasks != null &&
-          Array.isArray(data?.specific_tasks) && 
+          Array.isArray(data?.specific_tasks) &&
           data?.specific_tasks.length > 0
         ) {
           let specificTasksTable = "<span></span>";
@@ -2004,7 +2038,6 @@ app.mixin({
         }
         mainHtmlContent += `</div>`;
       }
-
 
       const swalHtmlContent = `
         <div class="table-wrap pb-0 proposed-work" >${mainHtmlContent}</div>

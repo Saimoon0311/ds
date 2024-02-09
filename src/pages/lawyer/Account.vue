@@ -560,6 +560,7 @@ export default {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, Cancel Subscription",
+        cancelButtonText: `No`,
       }).then((result) => {
         if (result.isConfirmed) {
           const endpoint = `/lawyer/cancel-subscription`;

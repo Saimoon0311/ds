@@ -144,7 +144,7 @@
   <button @click="generateJobsCsv()" class="btn btn-dark btn-sm m-1"><i class="fa fa-plus"></i> Generate CSV </button>
 </div>
       <div class="table-responsive">
-        <table class="table table-bordered table-striped ">
+        <table class="table table-bordered table-striped table-fixed">
           <thead>
             <tr>
               <th>Job no</th>

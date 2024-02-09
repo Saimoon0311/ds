@@ -344,7 +344,7 @@
                           </div>
 
                           <div v-if="MobilityIsChecked">
-                            <p><i class="fa fa-check"></i> <b>Obility/Physical Impairment</b>
+                            <p><i class="fa fa-check"></i> <b>Mobility/Physical Impairment</b>
                               <span v-if="this.mobilityOption != ''"><b>:</b> {{ mobilityOption }}</span>
                             </p>
                           </div>
