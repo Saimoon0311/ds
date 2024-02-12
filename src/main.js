@@ -797,6 +797,7 @@ app.mixin({
     },
 
     openRequirementsModal(data) {
+      console.log(data);
       let newData = {};
       if (data && typeof data === "object") {
         for (const key in data) {
@@ -2043,8 +2044,8 @@ app.mixin({
           data?.description != null && data?.description != ""
         ) {
           mainHtmlContent += ` <div class="">
-            <p class="text-center" style="color:black;"><span><b>Proposed work</b></span></p>
-            <p class="text-center" style="color:black;"><span style="font-weight:normal;">${data?.description}</span></p>
+            <p class="flex-class" style="color:black;"><span>Proposed work</span></p>
+            <p class="descriptionText" style="color:black;"><span style="font-weight:normal;">${data?.description}</span></p>
           </div>`;
         }
 

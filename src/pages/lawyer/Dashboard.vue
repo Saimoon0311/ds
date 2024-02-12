@@ -344,7 +344,7 @@
                                 </p>
 
                                 <button
-                                  v-if="item?.requirement"
+                                  v-if="item?.requirement || item?.accessibility_requirements"
                                   :disabled="!item?.requirement"
                                   type="button"
                                   class="btn btn-dark btn-sm custom-pad"

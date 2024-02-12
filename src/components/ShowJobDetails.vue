@@ -41,7 +41,7 @@
               on {{ formatCreatedAt(jobData?.created_at) }} 
             </p>
           <button
-            v-if="jobData?.requirement"
+            v-if="jobData?.requirement || jobData?.accessibility_requirements"
             :disabled="!jobData?.requirement"
             type="button"
             class="btn btn-sm custom-pad badge bg-dark"

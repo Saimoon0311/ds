@@ -310,26 +310,36 @@
                     </h4>
 
 
-                    <div v-if='this.VisualIsChecked ||
-                      this.AuditoryIsChecked ||
-                      this.MobilityIsChecked ||
-                      this.LearningIsChecked ||
-                      this.IntellectualIsChecked ||
-                      this.PsychiatricIsChecked ||
-                      this.MedicalIsChecked ||
-                      this.isChecked ||
-                      this.languageIsChecked'>
-                      <div>
+                    <div>
+                      <div v-if="requirementsOption">
                         <h4 class="d-inline "><b>Accessibility Requirements</b></h4>
 
-                        <h4 class="d-inline mx-3 font-small" @click="toggleDiv">
+                        <h4 v-if='this.VisualIsChecked ||
+                          this.AuditoryIsChecked ||
+                          this.MobilityIsChecked ||
+                          this.LearningIsChecked ||
+                          this.IntellectualIsChecked ||
+                          this.PsychiatricIsChecked ||
+                          this.MedicalIsChecked ||
+                          this.isChecked ||
+                          this.languageIsChecked' 
+                          class="d-inline mx-3 font-small" @click="toggleDiv">
                           View Details
                           <!-- <i class="fa fa-chevron-down"></i>   -->
                           <i :class="['fa', isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down']"></i>
                         </h4>
 
                       </div>
-                      <div class="mt-3">
+
+                      <div class="mt-3" v-if='this.VisualIsChecked ||
+                        this.AuditoryIsChecked ||
+                        this.MobilityIsChecked ||
+                        this.LearningIsChecked ||
+                        this.IntellectualIsChecked ||
+                        this.PsychiatricIsChecked ||
+                        this.MedicalIsChecked ||
+                        this.isChecked ||
+                        this.languageIsChecked'>
                         <div class="accordion-body-show" v-if="isDivVisible">
                           <div v-if="VisualIsChecked">
                             <p><i class="fa fa-check"></i> <b>Visual Impairment</b>
@@ -764,80 +774,80 @@ export default {
         // language: this.selectedLanguage == 'Other' ? this.otherLanguage : this.selectedLanguage
       };
 
-      let is_accessibility_requirement_selected = 0;
+      // let is_accessibility_requirement_selected = 0;
       formData.accessibility_requirements = 0;
       if (this.requirementsOption == 1) {
         if (this.VisualIsChecked && this.visualOption == "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.visual_impairment = "Visual Impairment";
         } else if (this.VisualIsChecked && this.visualOption != "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.visual_impairment = this.visualOption;
         }
 
         if (this.MobilityIsChecked && this.mobilityOption == "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.mobility_impairment = "Mobility/Physical Impairment";
         } else if (this.MobilityIsChecked && this.mobilityOption != "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.mobility_impairment = this.mobilityOption;
         }
 
 
         if (this.AuditoryIsChecked && this.auditoryOption == "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.auditory_impairment = "Auditory Impairment";
         } else if (this.AuditoryIsChecked && this.auditoryOption != "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.auditory_impairment = this.auditoryOption;
         }
 
         if (this.LearningIsChecked && this.learningOption == "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.learning_impairment = "Learning Impairment";
         } else if (this.LearningIsChecked && this.learningOption != "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.learning_impairment = this.learningOption;
         }
 
 
 
         if (this.IntellectualIsChecked && this.intellectualOption == "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.intellectual_disability = "Intellectual Disability";
         } else if (this.IntellectualIsChecked && this.intellectualOption != "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.intellectual_disability = this.intellectualOption;
         }
 
         if (this.PsychiatricIsChecked && this.psychiatricOption == "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.psychiatric_disability = "Psychiatric Disability";
         } else if (this.PsychiatricIsChecked && this.psychiatricOption != "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.psychiatric_disability = this.psychiatricOption;
         }
 
         if (this.MedicalIsChecked && this.medicalOption == "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.medical_disability = "Medical Disability";
         } else if (this.MedicalIsChecked && this.medicalOption != "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.medical_disability = this.medicalOption;
         }
 
         if (this.isChecked && this.requirementsOptionDescription == "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.other = "Other";
         } else if (this.isChecked && this.requirementsOptionDescription != "") {
-          is_accessibility_requirement_selected = 1;
+          // is_accessibility_requirement_selected = 1;
           formData.other = this.requirementsOptionDescription;
         }
 
 
         if (this.languageIsChecked) {
-          console.log('other lagn :::: ' , this.selectedLanguage);
-          is_accessibility_requirement_selected = 1;
+          console.log('other lagn :::: ', this.selectedLanguage);
+          // is_accessibility_requirement_selected = 1;
           if (this.selectedLanguage == '') {
             formData.language = "Language other than English";
           } else {
@@ -845,7 +855,8 @@ export default {
           }
         }
 
-        formData.accessibility_requirements = is_accessibility_requirement_selected;
+        // formData.accessibility_requirements = is_accessibility_requirement_selected;
+        formData.accessibility_requirements = this.requirementsOption;
       }
 
       // if (this.requirementsOption == 1) {
