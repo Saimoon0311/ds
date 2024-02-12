@@ -262,6 +262,34 @@ span.btn-charge {
 .stepbtn .btn.softblue {
     background: #91c8fc !important;
 }
+.descriptionText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 20px;
+    max-height: 120px;
+    /* line-break: anywhere; */
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-right: 5px;
+    white-space: pre-line;
+    text-align: left;
+    font-size: 16px;
+}
+.descriptionText::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 10px;
+}
+
+.descriptionText::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
+  border-radius: 10px;
+}
+
+.descriptionText::-webkit-scrollbar-thumb {
+  background-color: rgba(217, 217, 217, 1);
+  /* outline: 1px solid #292929; */
+  border-radius: 10px;
+}
   </style>
   <body>
     <!-- Inside the Body -->
