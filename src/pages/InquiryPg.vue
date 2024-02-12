@@ -69,7 +69,7 @@
     bottom: 0;
     width: 100%;
     font-size: 14px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
   .top-avatar {
     width: 400px;
