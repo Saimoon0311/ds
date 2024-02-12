@@ -1260,16 +1260,16 @@ app.mixin({
         }
       }
       htmlContent += `<div>`;
-      if (
-        data?.first_name != null &&
-        data?.first_name != "" &&
-        !showSecretInfo
-      ) {
-        htmlContent += `
-            <div class="wrapper">
-              <h6><b style="text-transform: capitalize;">Name: </b><span>${data?.first_name}</span></h6>
-            </div>`;
-      }
+      // if (
+      //   data?.first_name != null &&
+      //   data?.first_name != "" &&
+      //   !showSecretInfo
+      // ) {
+      //   htmlContent += `
+      //       <div class="wrapper">
+      //         <h6><b style="text-transform: capitalize;">Name: </b><span>${data?.first_name}</span></h6>
+      //       </div>`;
+      // }
       if (data?.email != null && data?.email != "" && showSecretInfo) {
         htmlContent += `
             <div class="wrapper">
@@ -1346,9 +1346,10 @@ app.mixin({
       htmlContent += `</div>`;
 
       this.$swal.fire({
-        title: showSecretInfo
-          ? title
-          : `${this.capitalizeFirstLetter(data?.type)} Details`,
+        // title: showSecretInfo
+        //   ? title
+        //   : `${this.capitalizeFirstLetter(data?.type)} Details`,
+        title : title,
         html: `<div class="table-wrap ${
           data?.type == "lawyer" && showSecretInfo ? "d-flex" : ""
         } justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
@@ -2114,7 +2115,7 @@ app.mixin({
               <td class='bg-dark text-white'>$${this.formatNumber(total)}</td>
             </tr>
             <tr v-if="title == 'Disbursements'">
-              <td class="border-0"><small>*GST not applicable on this item</small></td>
+              <td class="border-0"><small>${title == "Disbursements" ? '*GST not applicable on this item' : ''}</small></td>
             </tr>
           </tfoot>
         </table>
