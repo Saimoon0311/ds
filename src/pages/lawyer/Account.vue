@@ -24,12 +24,17 @@
           <h4 class="my-3 mt-4">Notification {{ checkbox ? "on" : "off" }}</h4>
           <div class="switch-container">
             <label class="switch">
-              <input
+              <!-- <input
                 type="checkbox"
                 v-model="checkbox"
                 @change="emitCheckboxValue"
               />
-              <span class="slider round"></span>
+              <span class="slider round"></span> -->
+
+
+      <input type="checkbox" v-model="checkbox" @change="toggleSubscription">
+      <span class="slider round"></span>
+    
             </label>
             <!-- <p>{{ checkbox ? "on" : "off" }}</p> -->
           </div>
@@ -443,10 +448,33 @@ export default {
     this.getReceipts();
   },
   methods: {
-    toggleCheckbox() {
-      this.checkbox = !this.checkbox;
-      this.$emit("setCheckboxVal", this.checkbox);
+
+    // add-or-remove-unsubscribe-group
+
+    toggleSubscription() {
+      console.log(this.checkbox);      
+      
+      // const val = !this.checkbox;
+      // console.log(this.checkbox);
+      api.post('/add-or-remove-unsubscribe-group')
+        .then(response => {
+          // if (!response.ok) {
+          //   throw new Error('Failed to toggle subscription');
+          // }
+          this.checkbox = !this.checkbox;
+            console.log(response);
+        })
+        .catch(error => {
+          console.error('Error toggling subscription:', error);
+        });
     },
+
+
+    // toggleCheckbox() {
+    //   console.log('abcfasdfasdfasdfasfasdfasdf');
+    //   this.checkbox = !this.checkbox;
+    //   // this.$emit("setCheckboxVal", this.checkbox);
+    // },
 
     formatReceiptDate(timestamp) {
       // Function to format the receipt date
@@ -463,6 +491,7 @@ export default {
           console.log("resp dataaaaaaa : ", res?.data?.data);
           this.receipts = res?.data?.data;
           console.log(res.data?.data);
+          this.checkbox = res?.data?.exist_in_sendgrid;
           if (res?.data?.clearOldSubscription) {
             this.$store.commit("SET_SUB_STATUS", null);
             this.$store.commit("SET_SUB_CANCEL_STATUS", false);
@@ -705,15 +734,15 @@ export default {
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: #101010;
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #101010;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(46px);
   -ms-transform: translateX(46px);
   transform: translateX(46px);
@@ -726,26 +755,32 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
 .subscriptioncard {
   box-shadow: 5px 5px 20px #00000017;
   width: max-content;
   max-width: 100%;
 }
+
 .invoice-table {
   box-shadow: 5px 5px 10px #00000017;
 }
+
 .header {
   border-radius: 5px 5px 0 0;
   background: rgba(55, 59, 62, 1);
 }
+
 thead.hd-receipt th {
   padding: 10px;
   background: #373b3e;
   color: white;
 }
+
 thead.hd-receipt {
   border-radius: 10px 10px 0 0;
 }
+
 .bubbles {
   border-radius: 6px;
   padding: 8px 11px;
@@ -775,6 +810,7 @@ thead.hd-receipt {
   border: 1px solid white;
   border-radius: 50%;
 }
+
 .invoice-table .hd-receipt th:first-child {
   border-radius: 5px 0 0 0;
 }
@@ -825,6 +861,7 @@ thead.hd-receipt {
 .forgetp {
   color: #000;
 }
+
 .badge {
   font-size: 0.875rem;
   line-height: 1.5em;
@@ -834,20 +871,24 @@ thead.hd-receipt {
   padding: 0.25rem 0.5rem;
   margin: 0;
 }
+
 table {
   width: 100%;
   border-collapse: collapse;
 }
+
 .table-responsive {
   max-height: 330px;
   overflow-y: auto;
   min-height: auto;
 }
+
 .table-responsive thead th {
   position: sticky;
   -webkit-position: sticky;
   top: 0;
 }
+
 .table-responsive tbody tr {
   /* display: table; */
   width: 100%;
@@ -874,6 +915,7 @@ table {
   .table-responsive table {
     width: max-content;
   }
+
   .hd-receipt th {
     padding: 5px;
   }
