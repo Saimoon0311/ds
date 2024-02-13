@@ -1,6 +1,15 @@
 <template lang="">
   <section class="howItWorks">
-    <div class="text-center pt-4">
+    <div v-if="loginUserData && loginUserData.type == 'client'">
+      <ClientHeader />
+    </div>
+    <div v-else-if="loginUserData && loginUserData.type == 'lawyer'">
+      <LawyerHeader />
+    </div>
+    <div v-else>
+      <GeneralHeader />
+    </div>
+    <!-- <div class="text-center pt-4">
       <img
         src="../assets/images/new-logo.png"
         alt="logo"
@@ -11,7 +20,8 @@
         individuals and businesses with legal professionals moving in different
         circles.
       </p>
-    </div>
+    </div> -->
+    <div class="mt-3 pt-3">
     <ul class="nav nav-tabs mb-3 container how-tabs" id="ex1" role="tablist">
       <li class="nav-item" role="presentation">
         <a
@@ -142,7 +152,7 @@
                     <p>
                       We're committed to breaking down barriers to ensure
                       everyone has access to a lawyer when they need one,
-                      regardless of their background or legal needs
+                      regardless of their background or legal needs.
                     </p>
                   </div>
                 </div>
@@ -211,6 +221,7 @@
         </div>
       </div>
     </div>
+  </div>
     <!-- ------------ -->
 
     <div class="footer">
@@ -219,17 +230,17 @@
   </section>
 </template>
 <script>
-//   import GeneralHeader from "../pages/GeneralHeader.vue";
+  import GeneralHeader from "../pages/GeneralHeader.vue";
 import MainFooter from "../components/global/MainFooter.vue";
-//   import ClientHeader from "../pages/client/Header.vue";
-//   import LawyerHeader from "../pages/lawyer/Header.vue";
+  import ClientHeader from "../pages/client/Header.vue";
+  import LawyerHeader from "../pages/lawyer/Header.vue";
 
 export default {
   components: {
-    //   GeneralHeader,
     MainFooter,
-    //   ClientHeader,
-    //   LawyerHeader
+    GeneralHeader,
+    ClientHeader,
+    LawyerHeader,
   },
 
   computed: {

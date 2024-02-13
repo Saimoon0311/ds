@@ -61,7 +61,7 @@ import termsForLawyer from "@/pages/lawyer/termsAndConditions.vue";
 // other
 import privacyPolicy from "@/pages/privacy-policy.vue";
 import termsOfUse from "@/pages/terms-of-use.vue";
-import AboutUs from "@/pages/AboutUs.vue";
+// import AboutUs from "@/pages/AboutUs.vue";
 import HowSimplawfyWorks from "@/pages/HowSimplawfyWorksClient.vue";
 // import HowSimplawfyWorksLawyer from "@/pages/HowSimplawfyWorksLawyer.vue";
 import ContactUs from "@/pages/ContactUs.vue";
@@ -397,10 +397,10 @@ const routes = [
     // beforeEnter: reverse_guard,
   },
 
-  {
-    path: "/about-us",
-    component: AboutUs,
-  },
+  // {
+  //   path: "/about-us",
+  //   component: AboutUs,
+  // },
   {
     path: "/how-simplawfy-works",
     component: HowSimplawfyWorks,
@@ -410,7 +410,7 @@ const routes = [
     component: InquiryPg,
   },
   {
-    path: "/new",
+    path: "/about-us",
     component: NewLanding,
   },
   {

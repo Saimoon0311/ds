@@ -8,14 +8,11 @@
       </div>
       <div v-if="isLoading" class="loading-indicator"></div>
 
-     
-
       <div v-if="adminApproval != 'approve'">
         <p class="h5 m-3 text-center">
           Your profile has not been approved yet.
         </p>
       </div>
-
 
       <div v-else class="pb-5 pt-2">
         <!-- <div v-if="!userFields && !userLocations" class="border rounded bg-light p-3 d-flex flex-wrap">
@@ -23,67 +20,100 @@
             <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
           </p>
         </div> -->
-        <div v-if="!userFields && !userLocations" >
-          <span>Your profile is not completed . Click here to complete your
-              <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
+        <div class="noti-main pb-3">
+          <h4 class="my-3 mt-4">Notification {{ checkbox ? "on" : "off" }}</h4>
+          <div class="switch-container">
+            <label class="switch">
+              <input
+                type="checkbox"
+                v-model="checkbox"
+                @change="emitCheckboxValue"
+              />
+              <span class="slider round"></span>
+            </label>
+            <!-- <p>{{ checkbox ? "on" : "off" }}</p> -->
+          </div>
+          <p class="mt-2">
+          {{ checkbox ? " " : "At Simplawfy, we are always seeking to improve the service we provide and would appreciate your feedback so we can improve." }}
+        </p>
+        </div>
+
+        
+
+        <div v-if="!userFields && !userLocations">
+          <span
+            >Your profile is not completed . Click here to complete your
+            <router-link to="/lawyer-profile" class="btn btn-dark text-white"
+              >Profile</router-link
+            >
           </span>
         </div>
 
-
         <span v-else>
-          <div v-if="subscriptionData != null" >
+          <div v-if="subscriptionData != null">
             <h4 class="my-3 mt-4">Subscription</h4>
-            <div class="subscriptioncard rounded ">
+            <div class="subscriptioncard rounded">
               <div class="header p-3">
-                <span v-if="subscriptionData?.subscription_status == 'trialing'" class="badge">
-                60-Day Free Trial
-              </span>
-              <span class="badge " 
-              v-else-if="subscriptionData?.subscription_status == 'active'">
-                Subscribed
-              </span>
-              <span v-else>
-              {{ subscriptionData?.subscription_status }}
-              </span>
+                <span
+                  v-if="subscriptionData?.subscription_status == 'trialing'"
+                  class="badge"
+                >
+                  60-Day Free Trial
+                </span>
+                <span
+                  class="badge"
+                  v-else-if="subscriptionData?.subscription_status == 'active'"
+                >
+                  Subscribed
+                </span>
+                <span v-else>
+                  {{ subscriptionData?.subscription_status }}
+                </span>
               </div>
               <div class="body p-3">
                 <span
-                class=""
-                v-if="
-                  subscriptionData?.subscription_status == 'active' ||
-                  subscriptionData?.subscription_status == 'trialing' ||
-                  subscriptionData?.subscription_status == 'past due'
-                "
-              >
-                Next bill due <b>{{ subscriptionData?.current_period_end }}</b>
-                <br />
-                <span v-if="subscriptionData?.plan == 'basic'"
-                  ><b>$39.00/month</b></span
+                  class=""
+                  v-if="
+                    subscriptionData?.subscription_status == 'active' ||
+                    subscriptionData?.subscription_status == 'trialing' ||
+                    subscriptionData?.subscription_status == 'past due'
+                  "
                 >
-                on {{ capitalizeFirstLetter(subscriptionData?.card_brand) }} ----{{
-                  subscriptionData?.card_last4
-                }}
-                Exp. {{ subscriptionData?.card_expiry }}
-              </span>
-              <div class="d-flex justify-content-start align-items-center mt-2 flex-wrap">
-                <button
-              class="btn btn-md btn-dark"
-              @click="replacePaymentMethod(subscriptionData?.plan)"
-            >
-              Replace Payment Method
-            </button>
-            <div class="">
-            <div v-if="subscriptionCancelStatus" class="text-center">
-              <p class="m-0 text-start pt-1">You have cancelled your subscription. You can continue to access the Simplawfy platform until the
-              {{ subscriptionData?.current_period_end }}. You can 
-              <button
-                  class=" btn btn-dark softblue" 
-                  @click="resubscribe(subscriptionData?.plan)"
+                  Next bill due
+                  <b>{{ subscriptionData?.current_period_end }}</b>
+                  <br />
+                  <span v-if="subscriptionData?.plan == 'basic'"
+                    ><b>$39.00/month</b></span
+                  >
+                  on
+                  {{ capitalizeFirstLetter(subscriptionData?.card_brand) }}
+                  ----{{ subscriptionData?.card_last4 }} Exp.
+                  {{ subscriptionData?.card_expiry }}
+                </span>
+                <div
+                  class="d-flex justify-content-start align-items-center mt-2 flex-wrap"
                 >
-                  resubscribe
-              </button>
-              at anytime.</p>
-              <!-- <p>
+                  <button
+                    class="btn btn-md btn-dark"
+                    @click="replacePaymentMethod(subscriptionData?.plan)"
+                  >
+                    Replace Payment Method
+                  </button>
+                  <div class="">
+                    <div v-if="subscriptionCancelStatus" class="text-center">
+                      <p class="m-0 text-start pt-1">
+                        You have cancelled your subscription. You can continue
+                        to access the Simplawfy platform until the
+                        {{ subscriptionData?.current_period_end }}. You can
+                        <button
+                          class="btn btn-dark softblue"
+                          @click="resubscribe(subscriptionData?.plan)"
+                        >
+                          resubscribe
+                        </button>
+                        at anytime.
+                      </p>
+                      <!-- <p>
                 Your subscription will be cancelled from
                 {{ subscriptionData?.current_period_end }}. You can
                 <button
@@ -94,22 +124,26 @@
                 </button>
                 at any time.
               </p> -->
-            </div>
-            <button v-else-if="subscriptionStatus == 'subscribed' || subscriptionStatus == 'incomplete'"
-              class="btn btn-danger btn-md mt-1 mt-md-0 mx-0 mx-md-1"
-              id="cancel-subscription"
-              @click="handleCancelSubscription"
-            >
-              Cancel Subscription
-            </button>
-            <span v-else>
-              You have not subscribed yet. 
-              <router-link to="/plans" class="btn btn-dark"
-                >Subscribe Now</router-link
-              >
-            </span>
-          </div>
-              </div>
+                    </div>
+                    <button
+                      v-else-if="
+                        subscriptionStatus == 'subscribed' ||
+                        subscriptionStatus == 'incomplete'
+                      "
+                      class="btn btn-danger btn-md mt-1 mt-md-0 mx-0 mx-md-1"
+                      id="cancel-subscription"
+                      @click="handleCancelSubscription"
+                    >
+                      Cancel Subscription
+                    </button>
+                    <span v-else>
+                      You have not subscribed yet.
+                      <router-link to="/plans" class="btn btn-dark"
+                        >Subscribe Now</router-link
+                      >
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- <p>
@@ -174,7 +208,7 @@
                 </button>
                 at any time.
               </p> -->
-            <!-- </div>
+          <!-- </div>
             <button v-else-if="subscriptionStatus == 'subscribed' || subscriptionStatus == 'incomplete'"
               class="btn btn-danger"
               id="cancel-subscription"
@@ -188,12 +222,11 @@
                 >Subscribe Now</router-link
               >
             </span>
-          </div> --> 
+          </div> -->
 
           <!-- Receipts new place -->
           <div v-if="subscriptionData != null">
             <h4 class="mt-5 mb-2 mb-md-3">Invoices</h4>
-
 
             <!-- <form @submit.prevent="searchReceipts">
               <label for="startDate">Start Date:</label>
@@ -205,54 +238,50 @@
               <button type="submit">Search</button>
             </form> -->
             <div class="table-responsive">
-           
-                    <table
-                      v-if="receipts.length > 0"
-                      class="table invoice-table table-striped "
-                    >
-                      <thead class="hd-receipt">
-                        <!-- <th>#</th> -->
-                        <!-- <th>Invoice ID</th> -->
-                        <th>Invoice Number</th>
-                        <th>Amount Paid</th>
-                        <th>Date of Issue</th>
-                        <th>Action</th>
-                      </thead>
-                      <tbody>
-                        <tr
-                          v-for="(receipt) in receipts"
-                          :key="receipt.id"
-                        >
-                          <!-- <td>{{ ++index }}</td> -->
-                          <!-- <td>{{ receipt?.id }}</td> -->
-                          <td>{{ receipt?.number }}</td>
-                          <td>$ {{ formatNumber(receipt?.amount_paid / 100.0) }}</td>
-                          <!-- <td>{{ new Date(receipt?.created * 1000).toLocaleDateString() }}</td> -->
-                          <td>
-                            {{
-                              new Date(
-                                receipt?.created * 1000
-                              ).toLocaleDateString("en-AU", {
-                                day: "numeric",
-                                month: "numeric",
-                                year: "numeric",
-                              })
-                            }}
-                          </td>
-                          <td>
-                            <a
-                              class="btn btn-sm btn-dark"
-                              :href="receipt?.invoice_pdf"
-                              >Download</a
-                            >
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <p v-else>No invoices found.</p>
-                 
+              <table
+                v-if="receipts.length > 0"
+                class="table invoice-table table-striped"
+              >
+                <thead class="hd-receipt">
+                  <!-- <th>#</th> -->
+                  <!-- <th>Invoice ID</th> -->
+                  <th>Invoice Number</th>
+                  <th>Amount Paid</th>
+                  <th>Date of Issue</th>
+                  <th>Action</th>
+                </thead>
+                <tbody>
+                  <tr v-for="receipt in receipts" :key="receipt.id">
+                    <!-- <td>{{ ++index }}</td> -->
+                    <!-- <td>{{ receipt?.id }}</td> -->
+                    <td>{{ receipt?.number }}</td>
+                    <td>$ {{ formatNumber(receipt?.amount_paid / 100.0) }}</td>
+                    <!-- <td>{{ new Date(receipt?.created * 1000).toLocaleDateString() }}</td> -->
+                    <td>
+                      {{
+                        new Date(receipt?.created * 1000).toLocaleDateString(
+                          "en-AU",
+                          {
+                            day: "numeric",
+                            month: "numeric",
+                            year: "numeric",
+                          }
+                        )
+                      }}
+                    </td>
+                    <td>
+                      <a
+                        class="btn btn-sm btn-dark"
+                        :href="receipt?.invoice_pdf"
+                        >Download</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p v-else>No invoices found.</p>
+            </div>
           </div>
-        </div>
         </span>
 
         <!-- Change account password -->
@@ -351,7 +380,6 @@ export default {
     // Form,
     // Field,
     ChangePasswordForm,
-  
   },
   data() {
     // const schema = yup.object().shape({
@@ -375,10 +403,12 @@ export default {
     //       'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character',
     //     ),
     // });
+
     return {
+      checkbox: true,
       // schema,
-      startDate: '',
-      endDate: '',
+      startDate: "",
+      endDate: "",
       receipts: [],
     };
   },
@@ -401,27 +431,29 @@ export default {
     },
 
     userFields() {
-      console.log('user : ', this.$store.getters?.loginUser);
+      console.log("user : ", this.$store.getters?.loginUser);
       return `${this.$store.getters?.loginUser?.fields}`;
     },
     userLocations() {
       return `${this.$store.getters?.loginUser?.locations}`;
     },
-
   },
   created() {
     this.$store.commit("SET_REPLACE_PAYMENT_METHOD", false);
     this.getReceipts();
   },
   methods: {
-
+    toggleCheckbox() {
+      this.checkbox = !this.checkbox;
+      this.$emit("setCheckboxVal", this.checkbox);
+    },
 
     formatReceiptDate(timestamp) {
       // Function to format the receipt date
-      return new Date(timestamp * 1000).toLocaleDateString('en-AU', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
+      return new Date(timestamp * 1000).toLocaleDateString("en-AU", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
       });
     },
     getReceipts() {
@@ -432,9 +464,9 @@ export default {
           this.receipts = res?.data?.data;
           console.log(res.data?.data);
           if (res?.data?.clearOldSubscription) {
-            this.$store.commit('SET_SUB_STATUS', null);
-            this.$store.commit('SET_SUB_CANCEL_STATUS', false);
-            this.$store.commit('SET_SUBSCRIPTION_DATA', null);
+            this.$store.commit("SET_SUB_STATUS", null);
+            this.$store.commit("SET_SUB_CANCEL_STATUS", false);
+            this.$store.commit("SET_SUBSCRIPTION_DATA", null);
           }
         })
         .catch((error) => {
@@ -442,13 +474,14 @@ export default {
         });
     },
 
-
-
     async searchReceipts() {
       // const startTimestamp = new Date(this.startDate).getTime() / 1000;
       // const endTimestamp = new Date(this.endDate).getTime() / 1000;
       try {
-        api.get("/lawyer/get-receipts", { params: { start_date: this.startDate, end_date: this.endDate } })
+        api
+          .get("/lawyer/get-receipts", {
+            params: { start_date: this.startDate, end_date: this.endDate },
+          })
           // api.get("/lawyer/get-receipts",{ params: { start_date: startTimestamp, end_date: endTimestamp } })
           .then((res) => {
             this.receipts = res?.data?.data;
@@ -458,14 +491,13 @@ export default {
             console.log("getResults : ", error);
           });
       } catch (error) {
-        console.error('Error fetching receipts', error);
+        console.error("Error fetching receipts", error);
       }
     },
 
-
     replacePaymentMethod(plan) {
       this.$store.commit("SET_REPLACE_PAYMENT_METHOD", true);
-      localStorage.setItem('replacePaymentMethod',true);
+      localStorage.setItem("replacePaymentMethod", true);
       this.$router.push({ path: `/subscribe/${plan}` });
     },
     resubscribe(plan) {
@@ -480,28 +512,26 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           const endpoint = `/lawyer/resubscribe`;
-          const body = { "plan": plan }
-          const title = 'Welcome back!';
-          const msg = 'You are now resubscribed.';
+          const body = { plan: plan };
+          const title = "Welcome back!";
+          const msg = "You are now resubscribed.";
           this.updateReason(endpoint, body, title, msg);
         }
       });
     },
 
-
     async updateReason(endpoint, body, title, msg, is_cancel = false) {
-
       try {
-            await api.post(endpoint, body);
-            this.$store.commit("SET_SUB_CANCEL_STATUS", is_cancel);
-            const result = await api.get("/verify");
-            this.setUserStatus(result);
-            this.$swal(title, msg, "success").then(()=>{
-              this.$router.push({ path: "/lawyer-dashboard" });
-            })
-          } catch (error) {
-            this.$swal.showValidationMessage(error?.response?.data?.error);
-          }
+        await api.post(endpoint, body);
+        this.$store.commit("SET_SUB_CANCEL_STATUS", is_cancel);
+        const result = await api.get("/verify");
+        this.setUserStatus(result);
+        this.$swal(title, msg, "success").then(() => {
+          this.$router.push({ path: "/lawyer-dashboard" });
+        });
+      } catch (error) {
+        this.$swal.showValidationMessage(error?.response?.data?.error);
+      }
 
       // this.$swal.fire({
       //   title: 'Type reason here:',
@@ -521,7 +551,7 @@ export default {
       //       const result = await api.get("/verify");
       //       this.setUserStatus(result);
       //       // this.verifyUser(result);
-            
+
       //       return inputValue;
       //     } catch (error) {
       //       // console.error('API Error:',  error?.response?.data?.error,);
@@ -538,7 +568,6 @@ export default {
       // });
     },
 
-
     // verifyUser() {
     //   api
     //     .get("/verify")
@@ -549,7 +578,6 @@ export default {
     //       console.log(error);
     //     });
     // },
-
 
     handleCancelSubscription() {
       this.$swal({
@@ -565,7 +593,8 @@ export default {
         if (result.isConfirmed) {
           const endpoint = `/lawyer/cancel-subscription`;
           const body = {};
-          const title = '<span class="sadtoast">You have cancelled your subscription.</span>';
+          const title =
+            '<span class="sadtoast">You have cancelled your subscription.</span>';
           // const msg = `Your subscription will be cancelled from ${this.subscriptionData?.current_period_end} You can resubscribe at any time.`;
           const msg = `You have cancelled your subscription. You can continue to access the Simplawfy platform until the ${this.subscriptionData?.current_period_end}. You can resubscribe at anytime.`;
           this.updateReason(endpoint, body, title, msg, true);
@@ -574,7 +603,8 @@ export default {
     },
 
     deleteAccount() {
-      let text = "Once deleted, your account cannot be recovered and any active subscription will be cancelled.";
+      let text =
+        "Once deleted, your account cannot be recovered and any active subscription will be cancelled.";
       let text2 = "Delete Account";
       // if (this.subscriptionStatus == "subscribed") {
       //   text =
@@ -594,20 +624,14 @@ export default {
           api
             .get("/delete-account")
             .then(() => {
-              this.$swal(
-                "",
-                "Your account has been deleted.",
-                "success"
-              ).then(() => {
-                this.logoutProcess("login");
-              });
+              this.$swal("", "Your account has been deleted.", "success").then(
+                () => {
+                  this.logoutProcess("login");
+                }
+              );
             })
             .catch((error) => {
-              this.$swal(
-                "",
-                error?.response?.data?.error,
-                "error"
-              );
+              this.$swal("", error?.response?.data?.error, "error");
             });
         }
       });
@@ -631,25 +655,95 @@ export default {
 };
 </script>
 <style scoped>
-.subscriptioncard {
-    box-shadow: 5px 5px 20px #00000017;
-    width: max-content;
-    max-width: 100%;
+/* .notification p {
+  margin: 0;
+  line-height: 1;
+  padding-left: 10px;
 }
-.invoice-table{
-  box-shadow: 5px 5px 10px #00000017;
+.notification {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+} */
+.switch-container {
+  display: flex;
+  align-items: center;
+}
 
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 34px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #101010;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #101010;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(46px);
+  -ms-transform: translateX(46px);
+  transform: translateX(46px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.subscriptioncard {
+  box-shadow: 5px 5px 20px #00000017;
+  width: max-content;
+  max-width: 100%;
+}
+.invoice-table {
+  box-shadow: 5px 5px 10px #00000017;
 }
 .header {
-    border-radius: 5px 5px 0 0;
-    background: rgba(55, 59, 62, 1);
+  border-radius: 5px 5px 0 0;
+  background: rgba(55, 59, 62, 1);
 }
 thead.hd-receipt th {
-    padding: 10px;
-    background: #373b3e;
-    color: white;
+  padding: 10px;
+  background: #373b3e;
+  color: white;
 }
-thead.hd-receipt{
+thead.hd-receipt {
   border-radius: 10px 10px 0 0;
 }
 .bubbles {
@@ -671,8 +765,8 @@ thead.hd-receipt{
 
 .logo-small {
   width: 185px;
-    height: 40px;
-    object-fit: contain;
+  height: 40px;
+  object-fit: contain;
 }
 
 .law-img {
@@ -682,13 +776,12 @@ thead.hd-receipt{
   border-radius: 50%;
 }
 .invoice-table .hd-receipt th:first-child {
-    border-radius: 5px 0 0 0;
+  border-radius: 5px 0 0 0;
 }
 
-.invoice-table .hd-receipt th:last-child{
-  border-radius: 0 5px 0 0 ;
-} 
-
+.invoice-table .hd-receipt th:last-child {
+  border-radius: 0 5px 0 0;
+}
 
 .navActive {
   background: rgb(0, 0, 0);
@@ -730,36 +823,36 @@ thead.hd-receipt{
 }
 
 .forgetp {
-  color: #000
+  color: #000;
 }
 .badge {
-    font-size: 0.875rem;
-    line-height: 1.5em;
-    font-weight: 400;
-    border: 1px solid rgba(255, 255, 255, 1);
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.25rem 0.5rem;
-    margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5em;
+  font-weight: 400;
+  border: 1px solid rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.5rem;
+  margin: 0;
 }
 table {
-    width: 100%;
-    border-collapse: collapse;
-  } 
-.table-responsive{
-  max-height: 330px;
-    overflow-y: auto;
-    min-height: auto;
+  width: 100%;
+  border-collapse: collapse;
 }
-.table-responsive thead th{
+.table-responsive {
+  max-height: 330px;
+  overflow-y: auto;
+  min-height: auto;
+}
+.table-responsive thead th {
   position: sticky;
   -webkit-position: sticky;
   top: 0;
 }
 .table-responsive tbody tr {
-    /* display: table; */
-    width: 100%;
-    /* table-layout: fixed; */
-  }
+  /* display: table; */
+  width: 100%;
+  /* table-layout: fixed; */
+}
 
 .table-responsive::-webkit-scrollbar {
   width: 6px;
@@ -778,11 +871,11 @@ table {
 }
 
 @media screen and (max-width: 767px) {
-.table-responsive table {
+  .table-responsive table {
     width: max-content;
-}
-.hd-receipt th {
-  padding: 5px;
-}
+  }
+  .hd-receipt th {
+    padding: 5px;
+  }
 }
 </style>

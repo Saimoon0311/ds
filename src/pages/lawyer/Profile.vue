@@ -1726,6 +1726,9 @@ tbody tr td {
 tbody tr td:last-child {
   border-left: 1px solid #dee2e6;
 }
+tbody tr td:first-child{
+  word-break: auto-phrase;
+}
 
 .form-check-input {
   border: 1px solid gray !important;
