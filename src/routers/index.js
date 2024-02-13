@@ -64,6 +64,7 @@ import termsOfUse from "@/pages/terms-of-use.vue";
 // import AboutUs from "@/pages/AboutUs.vue";
 import HowSimplawfyWorks from "@/pages/HowSimplawfyWorksClient.vue";
 // import HowSimplawfyWorksLawyer from "@/pages/HowSimplawfyWorksLawyer.vue";
+import unsubscribeEmailMarketing from "@/pages/Unsubscribe.vue";
 import ContactUs from "@/pages/ContactUs.vue";
 import ClientFaqs from "@/pages/ClientFaqs.vue";
 import LawyerFaqs from "@/pages/LawyerFaqs.vue";
@@ -141,6 +142,13 @@ function reverse_guard(to, from, next) {
 // }
 
 const routes = [
+
+  {
+    path: "/unsubscribe",
+    component: unsubscribeEmailMarketing,
+    // beforeEnter: reverse_guard,
+  },
+
   {
     path: "/login",
     component: LawyerLoginForm,
