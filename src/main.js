@@ -739,8 +739,8 @@ app.mixin({
       // }
       let htmlContent = "";
       if (data?.description != null && data?.description != "") {
-        htmlContent += `<div class="wrapper" style="text-align: center;"><h6>
-        <span>${data?.description}</span></h6></div>`;
+        htmlContent += `<div class="descriptionText mb-4">
+        ${data?.description}</div>`;
       }
 
       if (data?.identity != null && data?.identity != "") {
@@ -1779,7 +1779,7 @@ app.mixin({
           data?.charge_type != null
         ) {
           mainHtmlContent += `<div  class="text-center">
-          <p  class="topcharge topcharge1 text-center font-set"> How you will be charged </p>
+          <p  class="topcharge topcharge1 text-center font-set"> How you will be charged. </p>
           <p  class="topcharge text-center"><span  class="btn-sm btn-dark btn rounded btn-charge py-1 px-3 text-center fs-6">
           ${this.chargeType(data?.charge_type)}
           </span></p>
@@ -1852,7 +1852,7 @@ app.mixin({
           data?.charge_type == "Daily"
         ) {
           mainHtmlContent += ` <div class="flex-class">
-            <p ><span > Daily Rate:</span><span >$${this.formatNumber(
+            <p ><span > Daily rate:</span><span >$${this.formatNumber(
               data?.daily_rate
             )}</span></p>
           </div>`;
@@ -1906,7 +1906,7 @@ app.mixin({
           data?.charge_type == "Retainer"
         ) {
           mainHtmlContent += ` <div class="flex-class">
-            <p ><span > Retainer Limitation:</span><span >${data?.retainer_limitation}</span></p>
+            <p ><span > Retainer limitation:</span><span >${data?.retainer_limitation}</span></p>
           </div>`;
         }
 
@@ -1916,7 +1916,7 @@ app.mixin({
           data?.charge_type == "Retainer"
         ) {
           mainHtmlContent += ` <div class="flex-class">
-            <p ><span > Notice Period:</span><span >${data?.notice_period}</span></p>
+            <p ><span > Notice period:</span><span >${data?.notice_period}</span></p>
           </div>`;
         }
 
@@ -2040,15 +2040,15 @@ app.mixin({
         }
 
 
-        if (
-          typeof data?.description != undefined &&
-          data?.description != null && data?.description != ""
-        ) {
-          mainHtmlContent += ` <div class="">
-            <p class="flex-class" style="color:black;"><span>Proposed work</span></p>
-            <p class="descriptionText" style="color:black;"><span style="font-weight:normal;">${data?.description}</span></p>
-          </div>`;
-        }
+        // if (
+        //   typeof data?.description != undefined &&
+        //   data?.description != null && data?.description != ""
+        // ) {
+        //   mainHtmlContent += ` <div class="">
+        //     <p class="flex-class" style="color:black;"><span>Proposed work</span></p>
+        //     <p class="descriptionText" style="color:black;"><span style="font-weight:normal;">${data?.description}</span></p>
+        //   </div>`;
+        // }
 
 
         mainHtmlContent += `</div>`;

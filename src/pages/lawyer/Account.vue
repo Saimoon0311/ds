@@ -21,7 +21,7 @@
           </p>
         </div> -->
         <div class="noti-main pb-3">
-          <h4 class="my-3 mt-4">Notification {{ checkbox ? "on" : "off" }}</h4>
+          <h4 class="my-3 mt-4">Notifications {{ checkbox ? "on" : "off" }}</h4>
           <div class="switch-container">
             <label class="switch">
               <!-- <input
@@ -461,7 +461,7 @@ export default {
           // if (!response.ok) {
           //   throw new Error('Failed to toggle subscription');
           // }
-          this.checkbox = !this.checkbox;
+          this.checkbox == !this.checkbox;
             console.log(response);
         })
         .catch(error => {

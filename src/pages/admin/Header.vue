@@ -128,8 +128,8 @@ export default {
 }
 
 .cstm-dropdown img {
-  width: 50px;
-  margin-top: 15px;
+  width: 45px;
+  margin-top: 10px;
 }
 
 .logo-small {

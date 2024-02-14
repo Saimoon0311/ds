@@ -1850,7 +1850,7 @@
 
             <div v-if="selectedOptionForSummary" class="text-center">
               <p class="topcharge topcharge1 text-center font-set">
-                How you will be charged. 
+                How you will charge.
               </p>
               <p class="topcharge text-center">
                 <span

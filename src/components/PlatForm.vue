@@ -442,7 +442,7 @@ padding: 30px !important;
   }
 
   .cstm-dropdown {
-    right: 20px;
+    right: 5px;
   }
 
   .showhover {

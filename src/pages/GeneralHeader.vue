@@ -12,7 +12,7 @@
         aria-expanded="false"
       >
         <!-- <i class="fa-solid fa-bars"></i> -->
-        <img src="../assets/images/bar.png" alt="" />
+        <img src="../assets/images/bar1.png" alt="" />
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li>
@@ -141,7 +141,7 @@ export default {
 @media (min-width: 425px) and (max-width: 767px) {
   .cstm-dropdown {
     margin-top: -32px;
-    right: 20px;
+    right: 5px;
   }
 
   .mobile-layout {

@@ -24,7 +24,7 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <img src="../../assets/images/bar.png" alt="" />
+            <img src="../../assets/images/bar1.png" alt="" />
             <span class="countmsg header-count" v-if="noti_msg && noti_msg > 0">{{ noti_msg }}</span>
             <!-- <span class="navbar-toggler-icon"></span> -->
           </button>
@@ -142,7 +142,7 @@
                   aria-expanded="false"
                 >
                   <!-- <i class="fa-solid fa-bars"></i> -->
-                  <img src="../../assets/images/bar.png" alt="" />
+                  <img src="../../assets/images/bar1.png" alt="" />
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   <li>
@@ -302,8 +302,8 @@ export default {
 }
 
 .cstm-dropdown img {
-  width: 50px;
-  margin-top: 15px;
+  width: 45px;
+  margin-top: 10px;
 }
 
 ul.dropdown-menu.show {
@@ -364,8 +364,8 @@ ul.showonmonb {
     text-align: left;
   }
   .cstm-dropdown img {
-    width: 50px;
-    margin-top: 5px;
+    width: 45px;
+    margin-top: 0px;
 }
 }
 

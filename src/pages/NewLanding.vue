@@ -98,11 +98,11 @@
                     legal industry and create a more inclusive legal system in
                     which everyone can benefit.
                   </p>
-                  <p>
+                  <p class="position-relative mb-5">
                     Simplawfy is more than just an online marketplace - it's a
                     movement to make the law simple and more accessible. Now
                     those needing legal services, and lawyers needing clients,
-                    can move in the same circle -
+                    can move in the same circle -  <img src="../assets/images/sign.png" alt="simplawfy" class="signature img-fluid"/>
                   </p>
                 </div>
                 <div
@@ -253,6 +253,11 @@ export default {
 };
 </script>
 <style scoped>
+img.signature {
+    width: 150px;
+    position: absolute;
+    padding-left: 5px;
+}
 .top-avatar {
   width: 400px;
   border-radius: 50%;
@@ -510,6 +515,10 @@ ul {
 }
 
 @media only screen and (max-width: 767px) {
+  img.signature {
+    width: 70px;
+    position: absolute;
+}
   .how-tabs a{
     padding: 8px 40px;
   }
@@ -661,5 +670,11 @@ ul {
     width: 33%;
     flex: none;
   }
+}
+@media only screen and (max-width: 480px) {
+img.signature {
+    width: 150px;
+    position: absolute;
+}
 }
 </style>

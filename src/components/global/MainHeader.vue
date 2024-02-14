@@ -6,7 +6,7 @@
     <div class="dropdown cstm-dropdown">
       <button class="btn btn-secondary dropdown-toggle menu-burger" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
         <!-- <i class="fa-solid fa-bars"></i> -->
-        <img src="../../assets/images/bar.png" alt="">
+        <img src="../../assets/images/bar1.png" alt="">
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li><router-link class="dropdown-item" to="/about-us">About Us</router-link></li>
@@ -72,7 +72,7 @@ export default {
 @media (min-width: 425px) and (max-width: 767px) {
   .cstm-dropdown {
     margin-top: -32px;
-    right: 20px;
+    right: 5px;
   }
 }
 
