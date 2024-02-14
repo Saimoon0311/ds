@@ -21,26 +21,16 @@
           </p>
         </div> -->
         <div class="noti-main pb-3">
-          <h4 class="my-3 mt-4">Notifications {{ checkbox ? "on" : "off" }}</h4>
+          <h4 class="my-3 mt-4">Notifications</h4>
           <div class="switch-container">
             <label class="switch">
-              <!-- <input
-                type="checkbox"
-                v-model="checkbox"
-                @change="emitCheckboxValue"
-              />
-              <span class="slider round"></span> -->
-
-
-      <input type="checkbox" v-model="checkbox" @change="toggleSubscription">
-      <span class="slider round"></span>
-    
+              <input type="checkbox" v-model="checkbox" @change="toggleSubscription">
+              <span class="slider round"></span>
             </label>
-            <!-- <p>{{ checkbox ? "on" : "off" }}</p> -->
           </div>
           <p class="mt-2">
-          {{ checkbox ? " " : "At Simplawfy, we are always seeking to improve the service we provide and would appreciate your feedback so we can improve." }}
-        </p>
+            {{ checkbox ? " " : "At Simplawfy, we are always seeking to improve the service we provide and would appreciate your feedback so we can improve." }}
+          </p>
         </div>
 
         
