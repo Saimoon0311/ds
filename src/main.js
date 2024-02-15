@@ -1207,16 +1207,30 @@ app.mixin({
       // showSecretInfo = !showSecretInfo;
       console.log(data);
       console.log(showSecretInfo);
-      let image = "";
+      // let image = "";
+      
+      // let htmlContent = `${image}`;
+      let htmlContent = '';
+      htmlContent += `<div class="top-wrapper mb-4">`;
       if (
         // data?.image != "" &&
         // data?.image != "" &&
         data?.type == "lawyer"
         // showSecretInfo
       ) {
-        image = `<div v-if="image" class="circular-container popup-image me-2 ">
+        htmlContent += `<div v-if="image" class="circular-container popup-image me-2 ">
         <img src="${this.createImage(data?.image)}" alt="Image not uploaded" class="circular-image"></div>`;
       }
+
+      if (data?.about != null && data?.about != "") {
+        htmlContent += ` <div class="descriptionText ">
+        ${data?.about}
+      </div>`;
+      }
+
+      htmlContent += `</div>`;
+      // let lawyerAbout = "";
+     
 
       let title = "";
       if (showSecretInfo) {
@@ -1227,7 +1241,7 @@ app.mixin({
         title = `${this.capitalizeFirstLetter(data?.first_name)}`;
       }
 
-      let htmlContent = `${image}`;
+     
 
       let consultation_content = "";
       if (
@@ -1270,12 +1284,8 @@ app.mixin({
       //         <h6><b style="text-transform: capitalize;">Name: </b><span>${data?.first_name}</span></h6>
       //       </div>`;
       // }
-
-      if (data?.about != null && data?.about != "") {
-        htmlContent += ` <div class="wrapper">
-        <h6><b style="text-transform: capitalize;"></b><span>${data?.about}</span></h6>
-      </div>`;
-      }
+     
+     
 
       if (data?.email != null && data?.email != "" && showSecretInfo) {
         htmlContent += `
@@ -1359,7 +1369,7 @@ app.mixin({
         title : title,
         html: `<div class="table-wrap ${
           data?.type == "lawyer" ? "d-flex" : ""
-        } justify-content-center align-items-start" style="text-align:left !important;">${htmlContent}</div></div>`,
+        } justify-content-center align-items-start flex-nowrap flex-row" style="text-align:left !important;">${htmlContent}</div></div>`,
         showCloseButton: true,
         showConfirmButton: false,
         customClass: {

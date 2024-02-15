@@ -28,9 +28,7 @@
               <span class="slider round"></span>
             </label>
           </div>
-          <p class="mt-2">
-            {{ checkbox ? " " : "At Simplawfy, we are always seeking to improve the service we provide and would appreciate your feedback so we can improve." }}
-          </p>
+         
         </div>
 
         
@@ -441,23 +439,61 @@ export default {
 
     // add-or-remove-unsubscribe-group
 
-    toggleSubscription() {
-      console.log(this.checkbox);      
+    // toggleSubscription() {
+    //   console.log(this.checkbox);      
       
-      // const val = !this.checkbox;
-      // console.log(this.checkbox);
-      api.post('/add-or-remove-unsubscribe-group')
-        .then(response => {
-          // if (!response.ok) {
-          //   throw new Error('Failed to toggle subscription');
-          // }
-          this.checkbox == !this.checkbox;
-            console.log(response);
-        })
-        .catch(error => {
-          console.error('Error toggling subscription:', error);
+    //   // const val = !this.checkbox;
+    //   // console.log(this.checkbox);
+    //   api.post('/add-or-remove-unsubscribe-group')
+    //     .then(response => {
+    //       // if (!response.ok) {
+    //       //   throw new Error('Failed to toggle subscription');
+    //       // }
+    //       this.checkbox == !this.checkbox;
+    //         console.log(response);
+    //     })
+    //     .catch(error => {
+    //       console.error('Error toggling subscription:', error);
+    //     });
+    // },
+
+
+    toggleSubscription() {
+  console.log(this.checkbox);
+
+  // Make sure to store the reference to 'this' to access it inside the Promise callback
+  const vm = this;
+
+  api.post('/add-or-remove-unsubscribe-group')
+    .then(response => {
+   
+        // Toggle the checkbox state
+        vm.checkbox == !vm.checkbox;
+        console.log(response);
+      if(!vm.checkbox){
+        // Open Swal popup
+        this.$swal({
+          icon: 'success',
+          showCancelButton: true,
+          cancelButtonText: 'Close',
+          // title: 'Subscription toggled successfully!',
+          text: 'At Simplawfy, we are always seeking to improve the service we provide and would appreciate your feedback so we can improve.' ,
+          showConfirmButton: false,
+          // timer: 1500 // Auto close after 1.5 seconds
         });
-    },
+      }      
+    })
+    .catch(error => {
+      console.error('Error toggling subscription:', error);
+
+      // Open Swal popup for error
+      this.$swal({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Failed to toggle subscription!',
+      });
+    });
+},
 
 
     // toggleCheckbox() {
