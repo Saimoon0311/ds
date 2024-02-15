@@ -144,6 +144,14 @@
 
     <div class="noti-main pb-3">
           <h4 class="my-3 mt-4">Notifications</h4>
+          <h6>System Notifications : </h6>
+          <div class="switch-container">
+            <label class="switch">
+              <input type="checkbox" disabled checked>
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <h6>Access Notifications : </h6>
           <div class="switch-container">
             <label class="switch">
               <input type="checkbox" v-model="checkbox" @change="toggleSubscription">
@@ -468,7 +476,7 @@ export default {
       api
         .get("/check-sendgrid-status")
         .then((res) => {
-          this.checkbox = res?.data?.exist_in_sendgrid;
+          this.checkbox = !res?.data?.exist_in_sendgrid;
         })
         .catch((error) => {
           console.log("getResults : ", error);

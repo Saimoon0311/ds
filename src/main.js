@@ -1788,7 +1788,7 @@ app.mixin({
       }
     },
 
-    openProposalDetailsModalPopup(data, renderAsHtml = false) {
+    openProposalDetailsModalPopup(data, charge_heading, renderAsHtml = false) {
       let mainHtmlContent = "";
       if (data && typeof data === "object") {
         if (
@@ -1796,7 +1796,7 @@ app.mixin({
           data?.charge_type != null
         ) {
           mainHtmlContent += `<div  class="text-center">
-          <p  class="topcharge topcharge1 text-center font-set"> How you will be charged. </p>
+          <p  class="topcharge topcharge1 text-center font-set"> ${charge_heading} </p>
           <p  class="topcharge text-center"><span  class="btn-sm btn-dark btn rounded btn-charge py-1 px-3 text-center fs-6">
           ${this.chargeType(data?.charge_type)}
           </span></p>

@@ -162,7 +162,7 @@
                     </p>
                     <p
                       class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-0 font-small"
-                      @click="openProposalDetailsModalPopup(item)"
+                      @click="openProposalDetailsModalPopup(item,'How you will be charged.')"
                     >
                       see more
                     </p>
@@ -172,7 +172,7 @@
                   <td class="text-center" style="width: 40%; vertical-align: top;">
                     <!-- <p class="mb-1">{{ item?.description }}</p> -->
                     <!-- <p class="mb-1">{{ generateExcerpt(item?.description) }} <span class=" text-black fw-bolder" @click="openDescription(item?.description)"> See more</span></p> -->
-                    <p class="mb-1 descriptionText">{{ item?.description }}</p>
+                    <p class="mb-1 descriptionText" style="white-space: pre-line;">{{ item?.description }}</p>
                   </td>
                   <!-- <td>{{ formatCreatedAt(item?.created_at) }}</td> -->
 

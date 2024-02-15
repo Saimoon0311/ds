@@ -391,7 +391,7 @@
                           </button>
 
                           <button
-                            @click="openProposalDetailsModalPopup(item.proposal)"
+                            @click="openProposalDetailsModalPopup(item.proposal,'How you will charge.')"
                             v-if="tab == 'pending'"
                             class="btn btn-dark border btn-sm card-btn my-1 mx-1 softblue"
                           >
@@ -463,7 +463,7 @@
                         >
 
                         <button
-                            @click="openProposalDetailsModalPopup(item.proposal)"
+                            @click="openProposalDetailsModalPopup(item.proposal,'How you will charge.')"
                             class="btn btn-dark border btn-sm card-btn my-1 mx-1">
                           View Proposal
                         </button>

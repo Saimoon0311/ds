@@ -20,7 +20,7 @@
             <router-link to="/lawyer-profile" class="btn btn-dark text-white">Profile</router-link>
           </p>
         </div> -->
-        <div class="noti-main pb-3">
+        <!-- <div class="noti-main pb-3">
           <h4 class="my-3 mt-4">Notifications</h4>
           <div class="switch-container">
             <label class="switch">
@@ -29,7 +29,25 @@
             </label>
           </div>
          
-        </div>
+        </div> -->
+
+        <div class="noti-main pb-3">
+          <h4 class="my-3 mt-4">Notifications</h4>
+          <h6>System Notifications : </h6>
+          <div class="switch-container">
+            <label class="switch">
+              <input type="checkbox" disabled checked>
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <h6>Access Notifications : </h6>
+          <div class="switch-container">
+            <label class="switch">
+              <input type="checkbox" v-model="checkbox" @change="toggleSubscription">
+              <span class="slider round"></span>
+            </label>
+          </div>
+         </div>
 
         
 
@@ -517,7 +535,7 @@ export default {
           console.log("resp dataaaaaaa : ", res?.data?.data);
           this.receipts = res?.data?.data;
           console.log(res.data?.data);
-          this.checkbox = res?.data?.exist_in_sendgrid;
+          this.checkbox = !res?.data?.exist_in_sendgrid;
           if (res?.data?.clearOldSubscription) {
             this.$store.commit("SET_SUB_STATUS", null);
             this.$store.commit("SET_SUB_CANCEL_STATUS", false);

@@ -370,35 +370,76 @@ export default {
 
   methods: {
 
+    // declineVerification(index, id, type) {
+    //   this.$swal({
+    //     title: "Are you sure?",
+    //     text: `Are you sure you want to decline this verification ?`,
+    //     icon: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#3085d6",
+    //     cancelButtonColor: "#d33",
+    //     confirmButtonText: `Yes, Decline`,
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       api.post('/admin/decline-verification', { id, type })
+    //         .then(() => {
+    //           this.$swal(
+    //             "",
+    //             `Verification has been declined.`,
+    //             "success"
+    //           ).then(async () => {
+    //             await this.loadMore(this.pageStatus,true);
+    //           });
+    //         })
+    //         .catch((error) => {
+    //           console.log("error : ", error);
+    //         });
+    //     }
+    //   }).catch((error) => {
+    //     console.log("error : ", error);
+    //   });
+    // },
+
+
     declineVerification(index, id, type) {
-      this.$swal({
-        title: "Are you sure?",
-        text: `Are you sure you want to decline this verification ?`,
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: `Yes, Decline`,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          api.post('/admin/decline-verification', { id, type })
-            .then(() => {
+      console.log(id, index);
+      this.$swal
+        .fire({
+          title: "Type decline reason here:",
+          input: "text",
+          inputAttributes: {
+            autocapitalize: "off",
+          },
+          showCancelButton: true,
+          confirmButtonText: "Submit",
+          showLoaderOnConfirm: true,
+          preConfirm: async (inputValue) => {
+            try {
+              const response = await api.post("/admin/decline-verification", { id, type, reason: inputValue });
+              console.log("API Response:", response.data);
+              return inputValue;
+            } catch (error) {
+              console.error("API Error:", error);
+              this.$swal.showValidationMessage("API Error");
+            }
+          },
+          allowOutsideClick: () => !this.$swal.isLoading(),
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            if (result.isConfirmed) {
               this.$swal(
                 "",
                 `Verification has been declined.`,
                 "success"
               ).then(async () => {
-                await this.loadMore(this.pageStatus,true);
+                await this.loadMore(this.pageStatus, true);
               });
-            })
-            .catch((error) => {
-              console.log("error : ", error);
-            });
-        }
-      }).catch((error) => {
-        console.log("error : ", error);
-      });
+            }
+          }
+        });
     },
+
 
     verifyData(index, id, type) {
       this.$swal({

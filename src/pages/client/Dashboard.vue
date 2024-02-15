@@ -188,7 +188,7 @@
                       <button
                       v-if="tab == 'close'"
                         class="btn btn-sm btn-dark  card-btn my-1 mx-1 border"
-                        @click="openProposalDetailsModalPopup(item.proposal_accept)"
+                        @click="openProposalDetailsModalPopup(item.proposal_accept,'How you will be charged.')"
                       >
                         View Proposal{{ this.tab == 'open' ? 's' : ''}}
                       </button>
