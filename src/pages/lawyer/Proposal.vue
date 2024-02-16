@@ -1084,7 +1084,7 @@
                         <thead>
                           <tr class="border table-top">
                             <!-- <th></th> -->
-                            <th>Title</th>
+                            <th class="table-title-td">Title</th>
                             <th>Hourly rate</th>
                             <th>Hours</th>
                             <th>Subtotal</th>
@@ -3103,6 +3103,12 @@ export default {
 </script>
 
 <style scoped>
+th.table-title-td{
+  width: 5% !important;
+}
+.hourlycost .table-top th, .hourlycost .table-mid td{
+  line-height: 1.3em !important;
+}
 .summ div p span:first-child {
   font-weight: 600;
   font-size: 16px;
@@ -3403,6 +3409,9 @@ td {
   }
 }
 @media only screen and (max-width: 767px) {
+  th.table-title-td{
+  width: 100% !important;
+}
   .hourlycost tbody tr,
 .hourlycost td,
 .hourlycost th {
