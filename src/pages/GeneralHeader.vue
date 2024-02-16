@@ -12,7 +12,7 @@
         aria-expanded="false"
       >
         <!-- <i class="fa-solid fa-bars"></i> -->
-        <img src="../assets/images/bar1.png" alt="" />
+        <img src="../assets/images/menu.svg" alt="" />
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li>
