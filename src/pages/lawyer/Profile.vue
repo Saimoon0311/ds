@@ -548,7 +548,7 @@
                   <label
                     class="form-check-label"
                     for="freeFirstConsultationNo1"
-                    @click="changeConsultationType('no')"
+                    @click="changeConsultationType2('no')"
                   >
                     No
                   </label>
@@ -566,7 +566,7 @@
                   <label
                     class="form-check-label"
                     for="freeFirstConsultationYes"
-                    @click="changeConsultationType('free')"
+                    @click="changeConsultationType2('free')"
                   >
                     Free
                   </label>
@@ -584,7 +584,7 @@
                   <label
                     class="form-check-label"
                     for="freeFirstConsultationNo"
-                    @click="changeConsultationType('discounted')"
+                    @click="changeConsultationType2('discounted')"
                   >
                     Discounted
                   </label>
@@ -1081,8 +1081,9 @@
             <tr>
               <td class="d-flex align-items-center justify-content-between width-set" colspan="3">
                 Free/Discounted Consultation:
+                <!-- @click="changeConsultationType(form.consultation_type,true)" -->
                 <button
-                  @click="changeConsultationType(form.consultation_type)"
+                  @click="changeConsultationType()"
                   type="button"
                   class="btn btn-dark btn-sm"
                   data-bs-toggle="modal"
@@ -1458,7 +1459,45 @@ export default {
     //     // ...
     //   })
     // },
-    changeConsultationType(value) {
+    changeConsultationType() {
+      // console.log(clickEditButton);
+
+      // if(clickEditButton){
+      //   console.log('start');
+      //   console.log(value);
+      //   console.log(this.form.consultation_time);
+      //   console.log(this.form.consultation_amount);
+
+      //   console.log(this.form.consultation_type2);
+      //   console.log(this.form.consultation_time2);
+      //   console.log(this.form.consultation_amount2);
+      //   console.log('end');
+      // }
+
+
+      this.form.consultation_type = this.loginUser.consultation_type;
+      this.form.consultation_time = this.loginUser.consultation_time;
+      this.form.consultation_amount = this.loginUser.consultation_amount;
+
+      this.form.consultation_type2 = this.loginUser.consultation_type;
+      this.form.consultation_time2 = this.loginUser.consultation_time;
+      this.form.consultation_amount2 = this.loginUser.consultation_amount;
+
+
+      // if (value == "no") {
+      //   this.form.consultation_time = null;
+      //   this.form.consultation_amount = null;
+      // }
+      // this.form.consultation_type = value;
+
+      // this.form.consultation_type2 = this.form.consultation_type;
+      // // this.form.consultation_type2 = value;
+      // this.form.consultation_time2 = this.form.consultation_time;
+      // this.form.consultation_amount2 = this.form.consultation_amount;
+    },
+
+
+    changeConsultationType2(value) {
       if (value == "no") {
         this.form.consultation_time = null;
         this.form.consultation_amount = null;
@@ -1466,6 +1505,7 @@ export default {
       this.form.consultation_type = value;
 
       this.form.consultation_type2 = this.form.consultation_type;
+      // this.form.consultation_type2 = value;
       this.form.consultation_time2 = this.form.consultation_time;
       this.form.consultation_amount2 = this.form.consultation_amount;
     },

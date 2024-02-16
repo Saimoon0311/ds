@@ -5,7 +5,7 @@
       <div class="row justify-content-center align-items-center mt-5">
         <div class="col-sm-12 col-md-12 col-lg-9 text-center align-items-center d-flex flex-wrap flex-row">
 
-          <h4>We're sorry to see you go. To manage your platform notifications, please visit your <router-link to="/login">account</router-link>.</h4>
+          <h4>We're sorry to see you go. To manage your platform notifications, please visit your <router-link to="/login?goToAccount=true">account</router-link>.</h4>
         </div>
 
       </div>

@@ -110,6 +110,7 @@ export default {
   },
   mounted() {
     this.pageOption = this.userTypeForLogin;
+    console.log('page option : ' , this.pageOption);
   },
   methods: {
     submitData(formData) {
@@ -120,7 +121,20 @@ export default {
       // } else if (this.userTypeForLogin == "client") {
       //   dashboardUrl = "client-dashboard";
       // }
-      this.submitLoginForm(formData, this.userTypeForLogin);
+      let goToAccountPage = false;
+      const goToAccountExists = Object.prototype.hasOwnProperty.call(this.$route.query, 'goToAccount');
+      if(goToAccountExists && this.$route.query.goToAccount){
+        goToAccountPage = true;
+      }
+      console.log('g o t o a : ' , this.$route.query.goToAccount);
+      if(goToAccountPage){
+        // let dashboardUrl = (this.userTypeForLogin == 'lawyer') ? 'lawyer-account' : 'client-account'; 
+        // console.log('url 222: ' , dashboardUrl);
+        this.submitLoginForm(formData, this.userTypeForLogin, "" , true);
+      }else{
+        this.submitLoginForm(formData, this.userTypeForLogin);
+      }
+      
     },
     // getCurrentPageOption() {
     //   const currentRoute = this.$route.path;

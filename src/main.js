@@ -626,7 +626,7 @@ app.mixin({
     },
 
     // this function is to store user in state and localstorage after login then redirect to dashboard
-    setUserAndRedirect(res, path) {
+    setUserAndRedirect(res, path, goToAccountPage = false) {
       console.log("single a : ", res?.data);
       if (!localStorage.getItem("token")) {
         localStorage.setItem("token", res.data?.data?.api_token);
@@ -647,7 +647,11 @@ app.mixin({
       this.$store.commit("SET_AUTHENTICATED", true);
       if (!path) {
         if (res?.data?.data?.type == "client") {
-          path = "client-dashboard";
+          if(goToAccountPage){
+            path = "client-account";
+          }else{
+            path = "client-dashboard";
+          }
         } else if (res?.data?.data?.type == "lawyer") {
           console.log("len of fields : ", res?.data?.data?.fields.length);
           console.log("len of locations : ", res?.data?.data?.locations.length);
@@ -656,9 +660,21 @@ app.mixin({
             res?.data?.data?.locations.length > 0 &&
             res?.data?.data?.admin_approval == "approve"
           ) {
-            path = "lawyer-dashboard";
+
+            if(goToAccountPage){
+              path = "lawyer-account";
+            }else{
+              path = "lawyer-dashboard";
+            }
+
           } else {
-            path = "lawyer-profile";
+
+            if(goToAccountPage){
+              path = "lawyer-account";
+            }else{
+              path = "lawyer-profile";
+            }
+
           }
         }
       }
@@ -2311,13 +2327,13 @@ app.mixin({
       this.$router.push({ path: "/forget-password" });
     },
 
-    async submitLoginForm(formData, userType, dashboardUrl) {
+    async submitLoginForm(formData, userType, dashboardUrl, goToAccountPage = false) {
       try {
         formData.type = userType;
         api
           .post("/login", formData)
           .then((res) => {
-            this.setUserAndRedirect(res, dashboardUrl);
+            this.setUserAndRedirect(res, dashboardUrl, goToAccountPage);
           })
           .catch((error) => {
             // console.log('error : ' , error)
@@ -2632,6 +2648,11 @@ app.mixin({
     },
   },
 });
+
+app.config.errorHandler = function (err, vm, info) {
+  // Handle the error here, e.g., log it or display a message to the user
+  console.error('Global Error Handler:', err, vm, info);
+};
 
 app.use(PrimeVue);
 app.use(router);

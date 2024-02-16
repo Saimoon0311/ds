@@ -629,6 +629,7 @@ router.beforeEach(async (to, from, next) => {
         }
       } catch (e) {
         console.log("error from before Each", e);
+        next(false);
         // localStorage.removeItem("loginUser");
         // localStorage.removeItem("token");
         // console.log("error from before : ", e);
