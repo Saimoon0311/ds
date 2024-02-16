@@ -1369,7 +1369,7 @@ app.mixin({
         title : title,
         html: `<div class="table-wrap ${
           data?.type == "lawyer" ? "d-flex" : ""
-        } justify-content-center align-items-start flex-nowrap flex-row" style="text-align:left !important;">${htmlContent}</div></div>`,
+        } flex-wrap" style="text-align:left !important;">${htmlContent}</div></div>`,
         showCloseButton: true,
         showConfirmButton: false,
         customClass: {

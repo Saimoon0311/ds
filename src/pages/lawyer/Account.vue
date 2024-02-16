@@ -33,20 +33,26 @@
 
         <div class="noti-main pb-3">
           <h4 class="my-3 mt-4">Notifications</h4>
-          <h6>System Notifications : </h6>
-          <div class="switch-container">
+          <div class="d-flex align-items-center justify-content-start mb-2">
+            <h5>System Notifications : </h5>
+          <div class="switch-container disabled-swtich mx-1">
             <label class="switch">
               <input type="checkbox" disabled checked>
               <span class="slider round"></span>
             </label>
           </div>
-          <h6>Access Notifications : </h6>
-          <div class="switch-container">
-            <label class="switch">
-              <input type="checkbox" v-model="checkbox" @change="toggleSubscription">
-              <span class="slider round"></span>
-            </label>
           </div>
+
+          <div class="d-flex align-items-center justify-content-start">
+            <h5>Access Notifications : </h5>
+            <div class="switch-container mx-1">
+              <label class="switch">
+                <input type="checkbox" v-model="checkbox" @change="toggleSubscription">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+
          </div>
 
         
@@ -746,8 +752,8 @@ export default {
 .switch {
   position: relative;
   display: inline-block;
-  width: 80px;
-  height: 34px;
+  width: 78px;
+  height: 30px;
 }
 
 .switch input {
@@ -771,8 +777,8 @@ export default {
   content: "";
   height: 26px;
   width: 26px;
-  left: 4px;
-  bottom: 4px;
+  left: 3px;
+  bottom: 2px;
   background-color: white;
   -webkit-transition: 0.4s;
   transition: 0.4s;

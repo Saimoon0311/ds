@@ -1811,7 +1811,7 @@ tbody tr td:first-child{
   padding: 0px 13px;
 }
 
-.d-span-min {}
+
 
 .d-input {
   padding-left: 25px;
@@ -1828,6 +1828,11 @@ tbody tr td:first-child{
 }
 
 @media only screen and (max-width: 767px) {
+  tbody tr td:first-child{
+  white-space: normal;
+word-break: break-word;
+  text-wrap: nowrap;
+}
   table tr td:nth-child(2){
     width: 60%
 }

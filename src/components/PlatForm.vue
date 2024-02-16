@@ -400,7 +400,7 @@ padding: 30px !important;
 }
 @media screen and (max-width: 720px) {
   .showhover p {
-    line-height: 23px;
+    line-height: 20px;
     margin-bottom: 8px;
     font-size: 13px;
   }
