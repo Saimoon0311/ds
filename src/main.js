@@ -1571,6 +1571,7 @@ app.mixin({
     // },
 
     async requestNotificationPermission() {
+      console.log('requestNotificationPermission hit');
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
           .register("/firebase-messaging-sw.js")
