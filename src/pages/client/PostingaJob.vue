@@ -311,7 +311,7 @@
 
 
                     <div>
-                      <div v-if="requirementsOption">
+                      <div v-if="requirementsOption == 1">
                         <h4 class="d-inline "><b>Accessibility Requirements</b></h4>
 
                         <h4 v-if='this.VisualIsChecked ||
