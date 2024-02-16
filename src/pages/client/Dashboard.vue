@@ -511,32 +511,6 @@ ul#pills-tab {
 
 }
 
-.descriptionText {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-height: 20px;
-  max-height: 100px;
-  /* line-break: anywhere; */
-  overflow-y: auto;
-  padding-right: 10px;
-  white-space: pre-line;
-}
-
-.descriptionText::-webkit-scrollbar {
-  width: 6px;
-  border-radius: 10px;
-}
-
-.descriptionText::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px #0000004d;
-  border-radius: 10px;
-}
-
-.descriptionText::-webkit-scrollbar-thumb {
-  background-color: #969696;
-  /* outline: 1px solid #292929; */
-  border-radius: 10px;
-}
 
 
 
