@@ -31,29 +31,7 @@
          
         </div> -->
 
-        <div class="noti-main pb-3">
-          <h4 class="my-3 mt-4">Notifications</h4>
-          <div class="d-flex align-items-center justify-content-start mb-2">
-            <h5>System Notifications : </h5>
-          <div class="switch-container disabled-swtich mx-1">
-            <label class="switch">
-              <input type="checkbox" disabled checked>
-              <span class="slider round"></span>
-            </label>
-          </div>
-          </div>
-
-          <div class="d-flex align-items-center justify-content-start">
-            <h5>Access Notifications : </h5>
-            <div class="switch-container mx-1">
-              <label class="switch">
-                <input type="checkbox" v-model="checkbox" @change="toggleSubscription">
-                <span class="slider round"></span>
-              </label>
-            </div>
-          </div>
-
-         </div>
+        
 
         
 
@@ -301,6 +279,29 @@
           </div>
         </span>
 
+        <div class="noti-main pb-0">
+          <h4 class="my-3 mt-5">Notifications</h4>
+          <div class="d-flex align-items-center justify-content-start mb-2">
+            <h5>System Notifications : </h5>
+          <div class="switch-container disabled-swtich mx-1">
+            <label class="switch">
+              <input type="checkbox" disabled checked>
+              <span class="slider round"></span>
+            </label>
+          </div>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-start">
+            <h5>Access Notifications : </h5>
+            <div class="switch-container mx-1">
+              <label class="switch">
+                <input type="checkbox" v-model="checkbox" @change="toggleSubscription">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+
+         </div>
         <!-- Change account password -->
 
         <ChangePasswordForm />
@@ -505,7 +506,17 @@ export default {
           showConfirmButton: false,
           // timer: 1500 // Auto close after 1.5 seconds
         });
-      }      
+      }  else{
+        this.$swal({
+          icon: 'success',
+          showCancelButton: true,
+          cancelButtonText: 'Close',
+          // title: 'Subscription toggled successfully!',
+          text: 'Your preferences have been updated.' ,
+          showConfirmButton: false,
+          // timer: 1500 // Auto close after 1.5 seconds
+        });
+      }    
     })
     .catch(error => {
       console.error('Error toggling subscription:', error);
@@ -752,7 +763,7 @@ export default {
 .switch {
   position: relative;
   display: inline-block;
-  width: 78px;
+  width: 76px;
   height: 30px;
 }
 
@@ -777,7 +788,7 @@ export default {
   content: "";
   height: 26px;
   width: 26px;
-  left: 3px;
+  left: 2px;
   bottom: 2px;
   background-color: white;
   -webkit-transition: 0.4s;

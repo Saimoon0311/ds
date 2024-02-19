@@ -65,30 +65,13 @@
                   <th class="">Lawyer</th>
 
                   <th>
-                    Fee estimate
-                    <i
-                      class="bi bi-question-circle"
-                      onmouseover="showFeeEstimateInfo()"
-                      onmouseout="hideFeeEstimateInfo()"
-                    ></i>
-                    <dl
-                      class="d-none position-absolute bg-grey p-3 me-3 border rounded fw-light"
-                      id="feeEstimateInfoToolTip"
-                    >
-                      <dt>Fee Estimate:</dt>
-                      <dd>
-                        This is the lawyer's estimate of the total legal costs
-                        you are likely to have to pay, based on the information
-                        you have provided, what the lawyer has agreed to do and
-                        what is usually needed for your type of matter. The
-                        amount is in Australian dollars and excludes GST and
-                        disbursements (third party expenses which the lawyer
-                        passes on to you). The lawyer should provide you with
-                        updates, including discussing revising the estimate, if
-                        the costs incurred are getting close to the initial
-                        estimate.
-                      </dd>
-                    </dl>
+                    <span @mouseover="openFeeEstimateModal('Estimate')">
+                      Fee estimate
+                      <i class="fas fa-info-circle"></i>
+                     
+                      {{ chargeType(item?.charge_type === 'Estimate') }}
+                    </span>
+                  
                   </th>
 
                   <th>Proposed work</th>

@@ -1395,10 +1395,16 @@ app.mixin({
     },
 
     openFeeEstimateModal(charge_type) {
+      console.log('charge type', charge_type);
       if (charge_type) {
         let charge_heading = "";
         let charge_defination = "";
         switch (charge_type) {
+          case "Estimate":
+            charge_heading = "Fee Estimate";
+            charge_defination =
+              "This is the lawyer’s estimate of the total legal costs you are likely to have to pay, based on the information you have provided, what the lawyer has agreed to do and what is usually needed for your type of matter. The amount is in Australian dollars and excludes GST and disbursements (third party expenses which the lawyer passes on to you). The lawyer should provide you with updates, including discussing revising the estimate, if the costs incurred are getting close to the initial estimate.";
+            break;
           case "Fixed":
             charge_heading = "Fixed Fee";
             charge_defination =
@@ -1445,7 +1451,7 @@ app.mixin({
         // Use dynamic HTML inside SweetAlert2 modal
         this.$swal.fire({
           title: charge_heading,
-          html: `<div class="table-wrap" style="text-align:left !important;">${charge_defination}</div>`,
+          html: `<div class="table-wrap fee-estimate" style="text-align:left !important;">${charge_defination}</div>`,
           showCloseButton: true,
           showConfirmButton: false,
           customClass: {
