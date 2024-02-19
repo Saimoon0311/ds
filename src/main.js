@@ -1315,6 +1315,7 @@ app.mixin({
       </div>`;
       }
 
+
       if (data?.address != null && data?.address != "" && showSecretInfo) {
         htmlContent += ` <div class="wrapper" >
             <h6><b style="text-transform: capitalize;">Street Address: </b><span>${data?.address}</span>`;
@@ -1334,7 +1335,7 @@ app.mixin({
         data?.suburb != ""
       ) {
         htmlContent += ` <div class="wrapper" >
-            <h6><b style="text-transform: capitalize;">address: </b><span>${data?.suburb}</span></h6>
+            <h6><b style="text-transform: capitalize;">suburb: </b><span>${data?.suburb}</span></h6>
           </div>`;
       }
 
