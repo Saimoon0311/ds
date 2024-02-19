@@ -1402,7 +1402,7 @@ app.mixin({
           case "Fixed":
             charge_heading = "Fixed Fee";
             charge_defination =
-              "The lawyer is prepared to charge you this fixed amount for the work. You should not have to pay more than ";
+              "The lawyer is prepared to charge you this fixed amount for the work. You should not have to pay more than this.";
             break;
           case "Hourly":
             charge_heading = "Hourly Rate";

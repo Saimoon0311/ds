@@ -2155,7 +2155,7 @@
 
             <div v-if="form.description" class="sumdesc">
               <p class="text-center font-set">
-                What you will do.
+                How you will charge..
               </p>
               <p class="descriptionText" style="white-space: pre-line; text-transform:none;">
                 {{ form.description }}
