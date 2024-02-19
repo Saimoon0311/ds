@@ -980,7 +980,7 @@ export default {
   background: #ddd;
   color: black;
   border-radius: 5px;
-  text-align: end;
+  text-align: start;
 }
 
 .chat-messages .message .against-msg .text {

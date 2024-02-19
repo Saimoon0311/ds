@@ -1869,9 +1869,8 @@ tbody tr td:first-child{
 
 @media only screen and (max-width: 767px) {
   tbody tr td:first-child{
-  white-space: normal;
-word-break: break-word;
-  text-wrap: nowrap;
+    white-space: nowrap;
+    word-break: break-word;
 }
   table tr td:nth-child(2){
     width: 60%
