@@ -1887,4 +1887,13 @@ tbody tr td:first-child{
     flex-wrap: wrap;
   }
 }
+@media only screen and (max-width: 360px) {
+  table{
+    font-size: 15px;
+  }
+  table button.btn{
+    padding: 3px 5px;
+    font-size: 12px;
+  }
+}
 </style>
