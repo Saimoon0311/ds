@@ -944,7 +944,7 @@ export default {
 .chat-messages .message .own-message .text,
 .chat-messages .message .against-msg .text {
   max-width: 90%;
-  line-break: anywhere;
+  line-break: auto;
 }
 
 
