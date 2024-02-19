@@ -1869,15 +1869,16 @@ tbody tr td:first-child{
 
 @media only screen and (max-width: 767px) {
   tbody tr td:first-child{
-    white-space: nowrap;
-    word-break: break-word;
+  white-space: normal;
+/* word-break: break-word; */
+  /* text-wrap: ; */
 }
   table tr td:nth-child(2){
     width: 60%
 }
   table {
     table-layout: inherit;
-    word-break: auto-phrase;
+    word-break: break-word;
     border-collapse: collapse;
     width: 100%;
   }
