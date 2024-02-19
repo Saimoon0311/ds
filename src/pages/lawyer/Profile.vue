@@ -1874,7 +1874,7 @@ tbody tr td:first-child{
   /* text-wrap: ; */
 }
   table tr td:nth-child(2){
-    width: 60%
+    width: 50%
 }
   table {
     table-layout: inherit;
