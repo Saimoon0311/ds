@@ -1866,7 +1866,9 @@ tbody tr td:first-child{
   top: 0;
   right: 0;
 }
-
+table div span {
+    word-break: auto-phrase;
+}
 @media only screen and (max-width: 767px) {
   tbody tr td:first-child{
   white-space: normal;
