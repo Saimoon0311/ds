@@ -1866,7 +1866,9 @@ tbody tr td:first-child{
   top: 0;
   right: 0;
 }
-
+table div span {
+    word-break: auto-phrase;
+}
 @media only screen and (max-width: 767px) {
   tbody tr td:first-child{
   white-space: normal;
@@ -1885,6 +1887,15 @@ tbody tr td:first-child{
 
   .mob-set {
     flex-wrap: wrap;
+  }
+}
+@media only screen and (max-width: 360px) {
+  table{
+    font-size: 15px;
+  }
+  table button.btn{
+    padding: 3px 5px;
+    font-size: 12px;
   }
 }
 </style>
