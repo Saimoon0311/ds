@@ -2081,15 +2081,18 @@ app.mixin({
         }
 
 
-        // if (
-        //   typeof data?.description != undefined &&
-        //   data?.description != null && data?.description != ""
-        // ) {
-        //   mainHtmlContent += ` <div class="">
-        //     <p class="flex-class" style="color:black;"><span>Proposed work</span></p>
-        //     <p class="descriptionText" style="color:black;"><span style="font-weight:normal;">${data?.description}</span></p>
-        //   </div>`;
-        // }
+        if (
+          typeof data?.description != undefined &&
+          data?.description != null && data?.description != ""
+        ) {
+          const desc_title = this.loginUser?.type == 'lawyer' ? 'What you will do' : 'Proposed work';
+          mainHtmlContent += ` <div class="">
+            <p class="flex-class" style="color:black;"><span>${desc_title}</span></p>
+            <p class="descriptionText" style="color:black;">
+              <span style="font-weight:normal;">${data?.description}</span>
+            </p>
+          </div>`;
+        }
 
 
         mainHtmlContent += `</div>`;
