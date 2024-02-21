@@ -14,6 +14,8 @@ import "primevue/resources/themes/lara-light-indigo/theme.css";
 import "primevue/resources/primevue.min.css"; //core CSS
 import "primeicons/primeicons.css"; //icons
 
+import Tooltip from 'primevue/tooltip'
+
 import MultiSelect from "primevue/multiselect";
 import ToastService from "primevue/toastservice";
 /* import the fontawesome core */
@@ -647,9 +649,9 @@ app.mixin({
       this.$store.commit("SET_AUTHENTICATED", true);
       if (!path) {
         if (res?.data?.data?.type == "client") {
-          if(goToAccountPage){
+          if (goToAccountPage) {
             path = "client-account";
-          }else{
+          } else {
             path = "client-dashboard";
           }
         } else if (res?.data?.data?.type == "lawyer") {
@@ -660,21 +662,17 @@ app.mixin({
             res?.data?.data?.locations.length > 0 &&
             res?.data?.data?.admin_approval == "approve"
           ) {
-
-            if(goToAccountPage){
+            if (goToAccountPage) {
               path = "lawyer-account";
-            }else{
+            } else {
               path = "lawyer-dashboard";
             }
-
           } else {
-
-            if(goToAccountPage){
+            if (goToAccountPage) {
               path = "lawyer-account";
-            }else{
+            } else {
               path = "lawyer-profile";
             }
-
           }
         }
       }
@@ -774,10 +772,10 @@ app.mixin({
       if (data?.location != null && data?.location != "") {
         htmlContent += `<div class="wrapper"><h6>
         <b style="text-transform: capitalize;">Location: </b>
-        <span>${data?.city != null && data?.city != "" ? data?.city : ""}${data?.city != null && data?.city != "" ? ', ' : ''}
-        ${
-          data?.location?.title
-        }</span></h6></div>`;
+        <span>${data?.city != null && data?.city != "" ? data?.city : ""}${
+          data?.city != null && data?.city != "" ? ", " : ""
+        }
+        ${data?.location?.title}</span></h6></div>`;
       }
 
       if (showOnwerDetails && typeof data?.owner != undefined) {
@@ -1224,9 +1222,9 @@ app.mixin({
       console.log(data);
       console.log(showSecretInfo);
       // let image = "";
-      
+
       // let htmlContent = `${image}`;
-      let htmlContent = '';
+      let htmlContent = "";
       htmlContent += `<div class="top-wrapper mb-4">`;
       if (
         // data?.image != "" &&
@@ -1235,7 +1233,9 @@ app.mixin({
         // showSecretInfo
       ) {
         htmlContent += `<div v-if="image" class="circular-container popup-image me-2 ">
-        <img src="${this.createImage(data?.image)}" alt="Image not uploaded" class="circular-image"></div>`;
+        <img src="${this.createImage(
+          data?.image
+        )}" alt="Image not uploaded" class="circular-image"></div>`;
       }
 
       if (data?.about != null && data?.about != "") {
@@ -1246,7 +1246,6 @@ app.mixin({
 
       htmlContent += `</div>`;
       // let lawyerAbout = "";
-     
 
       let title = "";
       if (showSecretInfo) {
@@ -1256,8 +1255,6 @@ app.mixin({
       } else {
         title = `${this.capitalizeFirstLetter(data?.first_name)}`;
       }
-
-     
 
       let consultation_content = "";
       if (
@@ -1300,8 +1297,6 @@ app.mixin({
       //         <h6><b style="text-transform: capitalize;">Name: </b><span>${data?.first_name}</span></h6>
       //       </div>`;
       // }
-     
-     
 
       if (data?.email != null && data?.email != "" && showSecretInfo) {
         htmlContent += `
@@ -1314,7 +1309,6 @@ app.mixin({
         <h6><b style="text-transform: capitalize;">phone: </b><span>${data?.phone}</span></h6>
       </div>`;
       }
-
 
       if (data?.address != null && data?.address != "" && showSecretInfo) {
         htmlContent += ` <div class="wrapper" >
@@ -1329,11 +1323,7 @@ app.mixin({
         htmlContent += `</h6></div>`;
       }
 
-      if (
-        !showSecretInfo &&
-        data?.suburb != null &&
-        data?.suburb != ""
-      ) {
+      if (!showSecretInfo && data?.suburb != null && data?.suburb != "") {
         htmlContent += ` <div class="wrapper" >
             <h6><b style="text-transform: capitalize;">suburb: </b><span>${data?.suburb}</span></h6>
           </div>`;
@@ -1383,7 +1373,7 @@ app.mixin({
         // title: showSecretInfo
         //   ? title
         //   : `${this.capitalizeFirstLetter(data?.type)} Details`,
-        title : title,
+        title: title,
         html: `<div class="table-wrap ${
           data?.type == "lawyer" ? "d-flex" : ""
         } flex-wrap" style="text-align:left !important;">${htmlContent}</div></div>`,
@@ -1396,51 +1386,55 @@ app.mixin({
     },
 
     openFeeEstimateModal(charge_type) {
-      console.log('charge type', charge_type);
+      console.log("charge type", charge_type);
+
       if (charge_type) {
-        let charge_heading = "";
+        // let charge_heading = "";
         let charge_defination = "";
+
         switch (charge_type) {
           case "Estimate":
-            charge_heading = "Fee Estimate";
+            // charge_heading = "Fee Estimate";
             charge_defination =
               "This is the lawyer’s estimate of the total legal costs you are likely to have to pay, based on the information you have provided, what the lawyer has agreed to do and what is usually needed for your type of matter. The amount is in Australian dollars and excludes GST and disbursements (third party expenses which the lawyer passes on to you). The lawyer should provide you with updates, including discussing revising the estimate, if the costs incurred are getting close to the initial estimate.";
             break;
           case "Fixed":
-            charge_heading = "Fixed Fee";
+            // charge_heading = "Fixed Fee";
             charge_defination =
               "The lawyer is prepared to charge you this fixed amount for the work. You should not have to pay more than this.";
             break;
           case "Hourly":
-            charge_heading = "Hourly Rate";
+            // charge_heading = "Hourly Rate";
             charge_defination =
               "The lawyer charges an hourly rate (often billed in 6 minute increments) based on the actual time spent working on your matter. If there is a team of lawyers, they may have different hourly rates, depending on their level of experience. The fee estimate is based on a calculation of the total hours the job is expected to take multiplied by the hourly rate. It is not a fixed quote — the final legal costs may be more or less depending on how the matter progresses and the actual time taken. This is the most common way in which lawyers charge.";
             break;
           case "Daily":
-            charge_heading = "Daily Rate";
+            // charge_heading = "Daily Rate";
             charge_defination = "The lawyer charges a rate per day of work.";
             break;
           case "Item":
-            charge_heading = "Item by Item For Specific Tasks";
+            // charge_heading = "Item by Item For Specific Tasks";
             charge_defination =
               "The lawyer is estimating the legal cost by breaking down a large, complex or unpredictable matter into smaller stages i.e. milestones";
             break;
           case "Retainer":
-            charge_heading = "Retainer";
+            // charge_heading = "Retainer";
             charge_defination =
               "The lawyer is available to work for you as you need them, for a set fee per time period. This may be subject to some limitations (e.g. number of hours per month) and a notice period where you wish to terminate the engagement.";
             break;
           case "Success":
-            charge_heading = "Success Fee";
+            // charge_heading = "Success Fee";
             charge_defination =
               "In cases where the lawyer’s costs are conditional on a successful outcome (eg. a ‘no win, no fee’ arrangement), the lawyer can charge a success fee (also called an uplift fee) where they achieve that successful outcome (eg. winning a court case or a settlement in the client’s favour). This fee is up to a maximum of 25% and is paid on top of the lawyer’s usual legal costs. This is in recognition of the risk the lawyer has taken of not getting paid for their work if the matter was unsuccessful. This billing method is more common in personal injury matters.";
             break;
           case "Pro":
-            charge_heading = "Pro Bono";
+            // charge_heading = "Pro Bono";
             charge_defination =
               "The lawyer is prepared to take on your matter for free. You will not have to pay any legal costs.";
             break;
         }
+
+        return { definition: charge_defination };
 
         // const htmlContent = Object.entries(data)
         //   .map(
@@ -1450,16 +1444,27 @@ app.mixin({
         //   .join("");
 
         // Use dynamic HTML inside SweetAlert2 modal
-        this.$swal.fire({
-          title: charge_heading,
-          html: `<div class="table-wrap fee-estimate" style="text-align:left !important;">${charge_defination}</div>`,
-          showCloseButton: true,
-          showConfirmButton: false,
-          customClass: {
-            container: "my-swal-container", // You can define your custom class for styling
-          },
-        });
+        // this.$swal.fire({
+        //   title: charge_heading,
+        //   html: `<div class="table-wrap fee-estimate" style="text-align:left !important;">${charge_defination}</div>`,
+        //   showCloseButton: true,
+        //   showConfirmButton: false,
+        //   customClass: {
+        //     container: "my-swal-container", // You can define your custom class for styling
+        //   },
+        // });
       }
+      return null;
+    },
+
+    updateTooltip(charge_type,index) {
+      const tooltipSpan = document.getElementById("tooltipSpan"+index);
+      const { definition } = this.openFeeEstimateModal(charge_type);
+      tooltipSpan.setAttribute(
+        "title",
+        definition
+      );
+      // tooltipSpan.tooltip("update"); // This line updates the tooltip content
     },
 
     createImage(value) {
@@ -1578,7 +1583,7 @@ app.mixin({
     // },
 
     async requestNotificationPermission() {
-      console.log('requestNotificationPermission hit');
+      console.log("requestNotificationPermission hit");
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
           .register("/firebase-messaging-sw.js")
@@ -2080,12 +2085,15 @@ app.mixin({
         </p>`;
         }
 
-
         if (
           typeof data?.description != undefined &&
-          data?.description != null && data?.description != ""
+          data?.description != null &&
+          data?.description != ""
         ) {
-          const desc_title = this.loginUser?.type == 'lawyer' ? 'What you will do' : 'Proposed work';
+          const desc_title =
+            this.loginUser?.type == "lawyer"
+              ? "What you will do"
+              : "Proposed work";
           mainHtmlContent += ` <div class="">
             <p class="flex-class" style="color:black;"><span>${desc_title}</span></p>
             <p class="descriptionText" style="color:black;">
@@ -2093,7 +2101,6 @@ app.mixin({
             </p>
           </div>`;
         }
-
 
         mainHtmlContent += `</div>`;
       }
@@ -2159,7 +2166,11 @@ app.mixin({
               <td class='bg-dark text-white'>$${this.formatNumber(total)}</td>
             </tr>
             <tr v-if="title == 'Disbursements'">
-              <td class="border-0"><small>${title == "Disbursements" ? '*GST not applicable on this item' : ''}</small></td>
+              <td class="border-0"><small>${
+                title == "Disbursements"
+                  ? "*GST not applicable on this item"
+                  : ""
+              }</small></td>
             </tr>
           </tfoot>
         </table>
@@ -2338,7 +2349,12 @@ app.mixin({
       this.$router.push({ path: "/forget-password" });
     },
 
-    async submitLoginForm(formData, userType, dashboardUrl, goToAccountPage = false) {
+    async submitLoginForm(
+      formData,
+      userType,
+      dashboardUrl,
+      goToAccountPage = false
+    ) {
       try {
         formData.type = userType;
         api
@@ -2662,7 +2678,7 @@ app.mixin({
 
 app.config.errorHandler = function (err, vm, info) {
   // Handle the error here, e.g., log it or display a message to the user
-  console.error('Global Error Handler:', err, vm, info);
+  console.error("Global Error Handler:", err, vm, info);
 };
 
 app.use(PrimeVue);
@@ -2672,5 +2688,6 @@ app.use(VueSweetalert2);
 
 app.component("v-select", VueSelect);
 app.component("MultiSelectPrime", MultiSelect);
+app.directive('tooltip', Tooltip);
 app.use(ToastService);
 app.mount("#app");

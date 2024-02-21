@@ -220,14 +220,14 @@
                   <!-- <td>{{ item?.charge_type }}</td> -->
                   <td class="text-center" style="width: 30%">
                     <!-- <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ chargeType(item?.charge_type) }} <span data-toggle="tooltip" data-placement="top" title="How you will charge?"><i class="fas fa-info-circle"></i></span></p> -->
+                    <!-- @click="openFeeEstimateModal(item?.charge_type)" -->
                     <p
+                      :id="'tooltipSpan' + item?.id" data-bs-toggle="tooltip" data-bs-html="true" title="" 
+                      @mouseover="updateTooltip(item?.charge_type,item?.id)"
                       class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small"
                     >
                       {{ chargeType(item?.charge_type) }}
-                      <span
-                        
-                        @click="openFeeEstimateModal(item?.charge_type)"
-                      >
+                      <span>
                         <i class="fas fa-info-circle"></i>
                       </span>
                     </p>

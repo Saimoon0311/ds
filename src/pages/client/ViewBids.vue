@@ -65,7 +65,10 @@
                   <th class="">Lawyer</th>
 
                   <th>
-                    <span @mouseover="openFeeEstimateModal('Estimate')">
+                    <!-- <span @mouseover="openFeeEstimateModal('Estimate')"> -->
+                      
+                      <span id="tooltipSpan0" data-bs-toggle="tooltip" data-bs-html="true" title="" 
+                      @mouseover="updateTooltip('Estimate',0)">
                       Fee estimate
                       <i class="fas fa-info-circle"></i>
                      
@@ -74,9 +77,9 @@
                   
                   </th>
                   <th>
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title="fuch u">
-  Tooltip with HTML
-</button>
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title="fuch u">
+                      Tooltip with HTML
+                    </button> -->
                   </th>
 
                   <th>Proposed work</th>
@@ -116,13 +119,12 @@
                   <td class="text-center" style="width: 30%">
                     <!-- <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ chargeType(item?.charge_type) }} <span data-toggle="tooltip" data-placement="top" title="How you will charge?"><i class="fas fa-info-circle"></i></span></p> -->
                     <p
+                      :id="'tooltipSpan' + item?.id" data-bs-toggle="tooltip" data-bs-html="true" title="" 
+                      @mouseover="updateTooltip(item?.charge_type,item?.id)"
                       class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small"
-                      @mouseover="openFeeEstimateModal(item?.charge_type)"
                     >
                       {{ chargeType(item?.charge_type) }}
                       <span
-                        
-                     
                       >
                         <i class="fas fa-info-circle"></i>
                       </span>
