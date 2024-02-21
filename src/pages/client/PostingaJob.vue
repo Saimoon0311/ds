@@ -1299,6 +1299,7 @@ input[type="checkbox"]:checked {
   /* line-break: anywhere; */
   overflow-y: auto;
   padding-right: 10px;
+  white-space: pre-line;
 }
 
 #accordionPanelsStayOpenExample {
