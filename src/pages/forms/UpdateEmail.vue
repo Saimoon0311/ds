@@ -16,7 +16,7 @@
                             <div class="form-outline flex-fill mb-0">
                                 <p>Current Email</p>
                                 <!-- :class="{'is-invalid' : errors.email}" -->
-                                <input type="email" v-model="email"  class="form-control" name="email" :readonly="{is_readonly : true}" placeholder="Curr0ent Email"  />
+                                <input type="email" v-model="email"  class="form-control" name="email" :readonly="{is_readonly : true}" placeholder="Current Email"  />
                                 <!-- <span class="invalid-feedback">{{errors.email}}</span> -->
                             </div>
                         </div>
@@ -215,5 +215,20 @@ export default {
 
 .linkc {
     color: #000
+}
+@media only screen and (max-width: 1100px) {
+    .reset-p {
+    position: unset;
+    /* left: 50%;
+    right: 50%; */
+    transform: translate(10px , 10px);
+    width: 65%;
+    /* top: 60%; */
+}
+}
+@media only screen and (max-width: 1024px) {
+    .reset-p {
+        width: 100%;
+    }
 }
 </style>

@@ -2094,7 +2094,7 @@ app.mixin({
               ? "What you will do"
               : "Proposed work";
           mainHtmlContent += ` <div class="">
-            <p class="flex-class" style="color:black;"><span>${desc_title}</span></p>
+            <p class="text-center font-set" style="color:black;"><span>${desc_title}.</span></p>
             <p class="descriptionText" style="color:black;">${data?.description}</p>
           </div>`;
         }
