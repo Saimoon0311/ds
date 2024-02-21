@@ -280,7 +280,7 @@
         </span>
 
         <div class="noti-main pb-0">
-          <h4 class="my-3 mt-5">Notifications</h4>
+          <h4 class="my-3 mt-5">Email Notifications</h4>
           <div class="d-flex align-items-center justify-content-start mb-2">
             <h5 class="fw-normal">System Notifications: </h5>
           <div class="switch-container disabled-swtich mx-1">

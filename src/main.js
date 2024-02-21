@@ -1259,7 +1259,6 @@ app.mixin({
       let consultation_content = "";
       if (
         data?.type == "lawyer" &&
-        showSecretInfo &&
         data?.consultation_type != null &&
         (data?.consultation_type.toLowerCase() == "discounted" ||
           data?.consultation_type.toLowerCase() == "free")
@@ -1341,7 +1340,7 @@ app.mixin({
       }
       if (data?.link != null && data?.link != "") {
         htmlContent += `<div class="wrapper">
-        <h6><b style="text-transform: capitalize;">website: </b><span>${data?.link}</span></h6>
+        <h6><b style="text-transform: capitalize;">website: </b><span><a href="${data?.link}" target="_blank">${data?.link}</a></span></h6>
       </div>`;
       }
 

@@ -482,6 +482,7 @@ function prevStep() {
 import ClientHeader from "./Header.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
 import api from "@/config/api.js";
+import api2 from "@/config/api2.js";
 export default {
   components: {
     ClientHeader,
@@ -868,6 +869,7 @@ export default {
         .then(() => {
           this.$swal("", "Your job has been posted.", "success").then(
             () => {
+              api2.post("/client/send-email-to-lawyers", formData);
               this.changePostJobFormToDefault();
               this.currentStep = 0;
               this.$router.push({ path: "/client-dashboard" });
