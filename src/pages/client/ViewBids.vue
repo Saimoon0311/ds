@@ -147,7 +147,7 @@
                     </p>
                     <p
                       class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-0 font-small"
-                      @click="openProposalDetailsModalPopup(item,'How you will be charged.')"
+                      @click="openProposalDetailsModalPopup(item,'How you will be charged.',false,false)"
                     >
                       see more
                     </p>

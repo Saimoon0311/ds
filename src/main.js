@@ -1246,13 +1246,15 @@ app.mixin({
       // let lawyerAbout = "";
 
       let title = "";
-      if (showSecretInfo) {
-        title = `${this.capitalizeFirstLetter(
-          data?.first_name
-        )} ${this.capitalizeFirstLetter(data?.last_name)}`;
-      } else {
-        title = `${this.capitalizeFirstLetter(data?.first_name)}`;
-      }
+      // if (showSecretInfo) {
+      //   title = `${this.capitalizeFirstLetter(
+      //     data?.first_name
+      //   )} ${this.capitalizeFirstLetter(data?.last_name)}`;
+      // } else {
+      //   title = `${this.capitalizeFirstLetter(data?.first_name)}`;
+      // }
+
+      title = `${this.capitalizeFirstLetter(data?.first_name)} ${this.capitalizeFirstLetter(data?.last_name)}`;
 
       let consultation_content = "";
       if (
@@ -1345,21 +1347,20 @@ app.mixin({
 
       if (
         consultation_content != null &&
-        consultation_content != "" &&
-        showSecretInfo
+        consultation_content != ""
       ) {
         htmlContent += ` <div class="wrapper" >
         <h6><b style="text-transform: capitalize;">Initial Consultation: </b><span>${consultation_content}</span></h6>
       </div>`;
       }
-      if (data?.remote_consultation && showSecretInfo) {
+      if (data?.remote_consultation) {
         htmlContent += ` <div class="wrapper">
         <h6><b style="text-transform: capitalize;"><i class="fa fa-check-square fa1"></i>
             </b><span><b>Remote Consultations</b></span>
         </h6>
       </div>`;
       }
-      if (data?.mobile_friendly && showSecretInfo) {
+      if (data?.mobile_friendly) {
         htmlContent += ` <div class="wrapper">
         <h6><b style="text-transform: capitalize;"><i class="fa fa-check-square fa2"></i>
             </b><span><b>Mobile-Friendly</b></span></h6></div>`;
@@ -1815,7 +1816,7 @@ app.mixin({
       }
     },
 
-    openProposalDetailsModalPopup(data, charge_heading, renderAsHtml = false) {
+    openProposalDetailsModalPopup(data, charge_heading, renderAsHtml = false, showDescription = true) {
       let mainHtmlContent = "";
       if (data && typeof data === "object") {
         if (
@@ -2086,8 +2087,9 @@ app.mixin({
         if (
           typeof data?.description != undefined &&
           data?.description != null &&
-          data?.description != ""
-        ) {
+          data?.description != "" &&
+          showDescription 
+          ) {
           const desc_title =
             this.loginUser?.type == "lawyer"
               ? "What you will do"
