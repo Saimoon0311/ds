@@ -76,11 +76,6 @@
                     </span>
                   
                   </th>
-                  <th>
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title="fuch u">
-                      Tooltip with HTML
-                    </button> -->
-                  </th>
 
                   <th>Proposed work</th>
 
@@ -152,7 +147,7 @@
                     </p>
                     <p
                       class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-0 font-small"
-                      @click="openProposalDetailsModalPopup(item,'How you will be charged.')"
+                      @click="openProposalDetailsModalPopup(item,'How you will be charged.',false,false)"
                     >
                       see more
                     </p>
