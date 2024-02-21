@@ -1239,9 +1239,7 @@ app.mixin({
       }
 
       if (data?.about != null && data?.about != "") {
-        htmlContent += ` <div class="descriptionText ">
-        ${data?.about}
-      </div>`;
+        htmlContent += `<div class="descriptionText lawyerdesc">${data?.about.trim()}</div>`;
       }
 
       htmlContent += `</div>`;
@@ -2088,9 +2086,7 @@ app.mixin({
           const desc_title = this.loginUser?.type == 'lawyer' ? 'What you will do' : 'Proposed work';
           mainHtmlContent += ` <div class="">
             <p class="flex-class" style="color:black;"><span>${desc_title}</span></p>
-            <p class="descriptionText" style="color:black;">
-              <span style="font-weight:normal;">${data?.description}</span>
-            </p>
+            <p class="descriptionText" style="color:black;">${data?.description}</p>
           </div>`;
         }
 

@@ -563,6 +563,7 @@ p.badge {
   padding-right: 10px;
   margin-right: 5px;
   text-align: start;
+  white-space: pre-line;
 }
 
 .descriptionText::-webkit-scrollbar {

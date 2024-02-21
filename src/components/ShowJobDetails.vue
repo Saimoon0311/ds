@@ -93,6 +93,7 @@ export default {
   overflow-y: auto;
   padding-right: 10px;
   margin-right: 5px;
+  white-space: pre-line;
 }
 .title{
   font-size: 20px;

@@ -288,7 +288,7 @@
       <div class="noti-main pb-0">
           <h4 class="my-3 mt-5">Notifications</h4>
           <div class="d-flex align-items-center justify-content-start mb-2">
-          <h5>System Notifications: </h5>
+          <h5 class="fw-normal">System Notifications: </h5>
           <div class="switch-container disabled-swtich mx-1">
             <label class="switch">
               <input type="checkbox" disabled checked>
@@ -298,7 +298,7 @@
         </div>
 
         <div class="d-flex align-items-center justify-content-start">
-          <h5>Access Notifications: </h5>
+          <h5 class="fw-normal">Access Notifications: </h5>
           <div class="switch-container mx-1">
             <label class="switch">
               <input type="checkbox" v-model="checkbox" @change="toggleSubscription">
@@ -744,8 +744,8 @@ ul#pills-tab {
 .switch {
   position: relative;
   display: inline-block;
-  width: 76px;
-  height: 30px;
+  width: 71px;
+  height: 25px;
 }
 
 .switch input {
@@ -767,8 +767,8 @@ ul#pills-tab {
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
+  height: 21px;
+  width: 21px;
   left: 2px;
   bottom: 2px;
   background-color: white;
