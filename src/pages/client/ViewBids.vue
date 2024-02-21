@@ -73,6 +73,11 @@
                     </span>
                   
                   </th>
+                  <th>
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title="fuch u">
+  Tooltip with HTML
+</button>
+                  </th>
 
                   <th>Proposed work</th>
 
