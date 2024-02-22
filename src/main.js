@@ -753,8 +753,7 @@ app.mixin({
       // }
       let htmlContent = "";
       if (data?.description != null && data?.description != "") {
-        htmlContent += `<div class="descriptionText mb-4">
-        ${data?.description}</div>`;
+        htmlContent += `<div class="descriptionText mb-4">${data?.description}</div>`;
       }
 
       if (data?.identity != null && data?.identity != "") {
