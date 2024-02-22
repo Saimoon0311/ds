@@ -347,7 +347,7 @@ export default {
 
   .showhover {
     line-height: 22px;
-    font-size: 12px;
+    font-size: 11.5px;
   }
 
   .footer-main span {
@@ -478,7 +478,7 @@ padding: 30px !important;
   .showhover p{
     line-height: 1.5;
     margin-bottom: 8px;
-    font-size: 11px;
+    font-size: 10.5px;
 }
   .btn {
     padding: 3px 10px !important;
