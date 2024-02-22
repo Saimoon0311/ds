@@ -17,6 +17,7 @@
 
 
 
+// comment this for using without ssl start
 
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
@@ -35,7 +36,14 @@ const firebaseApp = initializeApp(firebaseConfig);
 const messaging = getMessaging(firebaseApp);
 const db = getFirestore(firebaseApp);
 
+// comment this for using without ssl end
+
+
+// uncomment this for using without ssl start
+
 // const db = null;
 // const messaging = null;
+
+// uncomment this for using without ssl start
 
 export { db , messaging };

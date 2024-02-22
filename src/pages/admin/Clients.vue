@@ -493,6 +493,7 @@ export default {
 <style scoped>
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     background-color: #000000 !important;
+    color: white !important;
 }
 .nav-pills .nav-link {
     color: black !important;
