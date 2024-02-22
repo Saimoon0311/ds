@@ -491,6 +491,12 @@ export default {
 };
 </script>
 <style scoped>
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #000000 !important;
+}
+.nav-pills .nav-link {
+    color: black !important;
+}
 ul#pills-tab {
   text-align: center;
   margin: 0 auto;
