@@ -1029,6 +1029,7 @@ small {
 section.chatSection {
   position: relative;
   min-height: 100vh;
+  padding-bottom: 60px;
 }
 
 @media screen and (max-width: 1600px) {
