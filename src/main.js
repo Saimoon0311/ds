@@ -5,7 +5,6 @@ import router from "@/routers";
 import store from "./store";
 import api from "@/config/api.js";
 import api2 from "@/config/api2.js";
-
 import VueSelect from "vue-select";
 
 import PrimeVue from "primevue/config";
@@ -69,7 +68,7 @@ app.mixin({
     return {
       baseUrl:
         process.env.NODE_ENV === "production"
-          ? "https://virtualrealitycreators.com/law-backend/"
+          ? "https://admin.makinglawsimple.com.au/"
           : "http://127.0.0.1:8000/",
       clear: false,
       searchQuery: "",
@@ -166,9 +165,8 @@ app.mixin({
     changeAccountStatus(id, type, status, pageStatus) {
       this.$swal({
         title: "Are you sure?",
-        text: `Are you sure you want to ${
-          status == "block" ? "unblock" : "block"
-        } this user ?`,
+        text: `Are you sure you want to ${status == "block" ? "unblock" : "block"
+          } this user ?`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -181,8 +179,7 @@ app.mixin({
             .then(() => {
               this.$swal(
                 "",
-                `This user is now ${
-                  status == "block" ? "unblock" : "block"
+                `This user is now ${status == "block" ? "unblock" : "block"
                 }ed.`,
                 "success"
               ).then(async () => {
@@ -771,9 +768,8 @@ app.mixin({
       if (data?.location != null && data?.location != "") {
         htmlContent += `<div class="wrapper"><h6>
         <b style="text-transform: capitalize;">Location: </b>
-        <span>${data?.city != null && data?.city != "" ? data?.city : ""}${
-          data?.city != null && data?.city != "" ? ", " : ""
-        }
+        <span>${data?.city != null && data?.city != "" ? data?.city : ""}${data?.city != null && data?.city != "" ? ", " : ""
+          }
         ${data?.location?.title}</span></h6></div>`;
       }
 
@@ -1269,18 +1265,17 @@ app.mixin({
         ) {
           consultation_content = `<span>
                       ${this.capitalizeFirstLetter(
-                        data?.consultation_type
-                      )} - $${this.formatNumber(data?.consultation_amount)}/${
-            data?.consultation_time
-          } mins
+            data?.consultation_type
+          )} - $${this.formatNumber(data?.consultation_amount)}/${data?.consultation_time
+            } mins
                     </span>`;
         }
 
         if (data?.consultation_type && data?.consultation_type == "free") {
           consultation_content = ` <span>
                       ${this.capitalizeFirstLetter(
-                        data?.consultation_type
-                      )} - ${data?.consultation_time} mins
+            data?.consultation_type
+          )} - ${data?.consultation_time} mins
                     </span>`;
         }
       }
@@ -1371,9 +1366,8 @@ app.mixin({
         //   ? title
         //   : `${this.capitalizeFirstLetter(data?.type)} Details`,
         title: title,
-        html: `<div class="table-wrap ${
-          data?.type == "lawyer" ? "d-flex" : ""
-        } flex-wrap" style="text-align:left !important;">${htmlContent}</div></div>`,
+        html: `<div class="table-wrap ${data?.type == "lawyer" ? "d-flex" : ""
+          } flex-wrap" style="text-align:left !important;">${htmlContent}</div></div>`,
         showCloseButton: true,
         showConfirmButton: false,
         customClass: {
@@ -1454,8 +1448,8 @@ app.mixin({
       return null;
     },
 
-    updateTooltip(charge_type,index) {
-      const tooltipSpan = document.getElementById("tooltipSpan"+index);
+    updateTooltip(charge_type, index) {
+      const tooltipSpan = document.getElementById("tooltipSpan" + index);
       const { definition } = this.openFeeEstimateModal(charge_type);
       tooltipSpan.setAttribute(
         "title",
@@ -1577,19 +1571,19 @@ app.mixin({
     //     console.log('An error occurred while retrieving token:', err);
     //     // ...
     //   }
-    // },
-
+    // },    
     async requestNotificationPermission() {
       console.log("requestNotificationPermission hit");
       if ("serviceWorker" in navigator) {
+        //.register("/app/firebase-messaging-sw.js")
         navigator.serviceWorker
           .register("/firebase-messaging-sw.js")
           .then((registration) => {
             console.log(
               "Service Worker registered with scope:",
-              registration.scope
+              registration
             );
-
+              console.log('message: ', messaging);
             getToken(messaging)
               .then(async (currentToken) => {
                 if (currentToken) {
@@ -1836,8 +1830,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Fixed fee amount:</span><span >$${this.formatNumber(
-              data?.fixed_fee_amount
-            )}</span></p>
+            data?.fixed_fee_amount
+          )}</span></p>
           </div>`;
         }
 
@@ -1853,8 +1847,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Hourly Rate:</span><span >$${this.formatNumber(
-              data?.hourly_rate
-            )}</span></p>
+            data?.hourly_rate
+          )}</span></p>
           </div>`;
         }
 
@@ -1864,8 +1858,7 @@ app.mixin({
           data?.charge_type == "Hourly"
         ) {
           mainHtmlContent += ` <div class="flex-class">
-            <p ><span > Fee earners working on this matter:</span><span >${
-              data?.fee_earners?.length > 0 ? "I'm part of a team" : "Just me"
+            <p ><span > Fee earners working on this matter:</span><span >${data?.fee_earners?.length > 0 ? "I'm part of a team" : "Just me"
             }</span></p>
           </div>`;
         }
@@ -1896,8 +1889,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Daily rate:</span><span >$${this.formatNumber(
-              data?.daily_rate
-            )}</span></p>
+            data?.daily_rate
+          )}</span></p>
           </div>`;
         }
 
@@ -1938,8 +1931,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Retainer fee:</span><span >$${this.formatNumber(
-              data?.retainer_fee
-            )}/${data?.retainer_period}</span></p>
+            data?.retainer_fee
+          )}/${data?.retainer_period}</span></p>
           </div>`;
         }
 
@@ -1970,8 +1963,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Estimated Fee:</span><span >$${this.formatNumber(
-              data?.estimated_fee
-            )}</span></p>
+            data?.estimated_fee
+          )}</span></p>
           </div>`;
         }
 
@@ -1998,13 +1991,13 @@ app.mixin({
           <div class="flex-class">
             <p ><span > If the case is successful:</span><span >
             $${this.formatNumber(
+            parseFloat(
+              parseFloat(data?.estimated_fee) +
               parseFloat(
-                parseFloat(data?.estimated_fee) +
-                  parseFloat(
-                    (data?.uplift_percentage / 100) * data?.estimated_fee
-                  )
+                (data?.uplift_percentage / 100) * data?.estimated_fee
               )
-            )}
+            )
+          )}
             </span></p>
           </div>
           `;
@@ -2016,8 +2009,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Estimated amount for disbursements:</span><span >$${this.formatNumber(
-              data?.disbursement_amount
-            )}</span></p>
+            data?.disbursement_amount
+          )}</span></p>
           </div>`;
         }
 
@@ -2042,8 +2035,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span >  Upfront payment:</span><span >$${this.formatNumber(
-              data?.upfront_payment
-            )}</span></p>
+            data?.upfront_payment
+          )}</span></p>
           </div>`;
         }
 
@@ -2086,8 +2079,8 @@ app.mixin({
           typeof data?.description != undefined &&
           data?.description != null &&
           data?.description != "" &&
-          showDescription 
-          ) {
+          showDescription
+        ) {
           const desc_title =
             this.loginUser?.type == "lawyer"
               ? "What you will do"
@@ -2135,16 +2128,15 @@ app.mixin({
             <tr>
               <td class='border'>${item.task ?? item.itemDisbursement}</td> 
               <td class='border'>$${this.formatNumber(
-                item.cost ?? item.costAud
-              )}${item.gst_not_applicable ? "*" : ""}</td>
+            item.cost ?? item.costAud
+          )}${item.gst_not_applicable ? "*" : ""}</td>
             </tr>
           `
         )
         .join("");
 
       return `
-        <div class="table-title text-start fw-bold mb-1">${
-          !renderAsHtml ? title : ""
+        <div class="table-title text-start fw-bold mb-1">${!renderAsHtml ? title : ""
         }</div>
         <table class='table dynamicTable'>
           <thead>
@@ -2162,11 +2154,10 @@ app.mixin({
               <td class='bg-dark text-white'>$${this.formatNumber(total)}</td>
             </tr>
             <tr v-if="title == 'Disbursements'">
-              <td class="border-0"><small>${
-                title == "Disbursements"
-                  ? "*GST not applicable on this item"
-                  : ""
-              }</small></td>
+              <td class="border-0"><small>${title == "Disbursements"
+          ? "*GST not applicable on this item"
+          : ""
+        }</small></td>
             </tr>
           </tfoot>
         </table>
@@ -2191,12 +2182,11 @@ app.mixin({
           grandTotal += subTotal;
           return `
             <tr>
-              <td class='border'>${
-                item.title
-              }</td> <!-- Replace with actual properties -->
+              <td class='border'>${item.title
+            }</td> <!-- Replace with actual properties -->
               <td class='border'>$${this.formatNumber(
-                item.hourly_rate ?? item.hourlyRate
-              )}</td>
+              item.hourly_rate ?? item.hourlyRate
+            )}</td>
               <td class='border'>${item.hours ?? item.estimatedHours}</td>
               <td class='border'>$${this.formatNumber(subTotal)}</td>
             </tr>
@@ -2205,8 +2195,7 @@ app.mixin({
         .join("");
 
       return `
-        <div class="table-title text-start fw-bold mb-1">${
-          !renderAsHtml ? title : ""
+        <div class="table-title text-start fw-bold mb-1">${!renderAsHtml ? title : ""
         }</div>
         <table class='table dynamicTable'>
           <thead>
@@ -2224,8 +2213,8 @@ app.mixin({
             <tr>
               <td class='bg-dark text-white'>Total</td><td class='bg-dark'></td><td class='bg-dark'></td>
               <td class='bg-dark text-white'>$${this.formatNumber(
-                grandTotal
-              )}</td>
+          grandTotal
+        )}</td>
             </tr>
           </tfoot>
         </table>

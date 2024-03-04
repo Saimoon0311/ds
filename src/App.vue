@@ -18,10 +18,12 @@ export default {
   },
   created() {
     // if (isSupported()) {
-    onMessage(messaging, (payload) => {
-      console.log('Message received. ', payload);
-      this.$store.commit('SET_NOTI', payload);
-    });
+    if (messaging) {
+      onMessage(messaging, (payload) => {
+        console.log('Message received. ', payload);
+        this.$store.commit('SET_NOTI', payload);
+      });
+    }
 
     // onBackgroundMessage(messaging, (payload) => {
     //   console.log('Message received 2. ', payload);
@@ -212,7 +214,7 @@ span.countmsg {
   z-index: 1 !important;
 }
 
-.dynamicTable{
+.dynamicTable {
   text-align: initial;
 }
 
