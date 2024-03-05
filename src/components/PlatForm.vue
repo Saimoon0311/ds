@@ -459,7 +459,14 @@ padding: 30px !important;
     font-size: 14px !important;  
 }
 }
-@media (min-width: 360px) and (max-width: 450px) {
+@media (min-width: 400px) and (max-width: 449px) {
+.homepage-circles {
+    width: 380px;
+    height: 380px;
+    padding: 20px;
+  }
+}
+@media (min-width: 360px) and (max-width: 399px) {
   .homepage-circles {
     width: 350px;
     height: 350px;
