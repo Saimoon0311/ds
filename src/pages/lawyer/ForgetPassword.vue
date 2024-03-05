@@ -74,7 +74,7 @@ export default {
                         console.log('successfully sent email : ', res?.data)
                     })
                     .catch(error => {
-                        alert('User not found!');
+                        alert('Error.');
                         console.log("getResults : ", error)
                     });
             } catch (error) {
