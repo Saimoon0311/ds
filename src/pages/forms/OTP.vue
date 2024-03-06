@@ -139,6 +139,7 @@ export default {
                             this.$swal({
                                 text: "Thank you for signing up.",
                                 icon: "success",
+                                confirmButtonColor: "#88C7FA",
                                 confirmButtonText: "Complete Your Profile",
                             }).then((result) => {
                                 if (result.isConfirmed) {
