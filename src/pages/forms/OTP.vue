@@ -137,7 +137,7 @@ export default {
 
                         if (dashboardUrl == "lawyer-profile") {
                             this.$swal({
-                                text: "Thank you for signing up. Please complete your profile.",
+                                text: "Thank you for signing up.",
                                 icon: "success",
                                 confirmButtonText: "Complete Your Profile",
                             }).then((result) => {

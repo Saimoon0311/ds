@@ -380,7 +380,7 @@ export default {
               .then(() => {
                 this.$swal(
                   "",
-                  `Job has been cancel successfully`,
+                  `You have successfully cancelled your job.`,
                   "success"
                 ).then(async () => {
                   this.fixLoadMoreAfterDeleteRecord(index);

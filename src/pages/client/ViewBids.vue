@@ -86,7 +86,7 @@
               <tbody>
                 <tr v-if="data_paginated == null || data_paginated.length == 0">
                   <td colspan="8" class="text-center">
-                    No active Proposals are available.
+                    You haven't received any proposals for this job yet.
                   </td>
                 </tr>
                 <tr
@@ -116,7 +116,7 @@
                     <p
                       :id="'tooltipSpan' + item?.id" data-bs-toggle="tooltip" data-bs-html="true" title="" 
                       @mouseover="updateTooltip(item?.charge_type,item?.id)"
-                      class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small"
+                      class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small no-hover"
                     >
                       {{ chargeType(item?.charge_type) }}
                       <span
@@ -553,6 +553,9 @@ export default {
 
 .font-small {
   font-size: 12px;
+}
+.no-hover:hover{
+  background: black !important; 
 }
 
 ul#pills-tab {
