@@ -450,7 +450,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   // history: createWebHistory(process.env.BASE_URL),
-  // base: process.env.NODE_ENV == 'production' ? '/law-frontend/' : '/',
+  base: process.env.NODE_ENV == 'production' ? '/app/' : '/',
   routes,
   scrollBehavior() {
     // Scroll to the top of the page when navigating to a new route
