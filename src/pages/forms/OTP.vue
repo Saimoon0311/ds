@@ -1,38 +1,60 @@
 <template>
-    <div class="l-register-main">
-        <div class="hello container">
-            <GeneralHeader />
+  <div class="l-register-main">
+    <div class="hello container">
+      <GeneralHeader />
 
-            <div class="pt-4 center-main row justify-content-center otp-main">
-                <div class="col-md-8 col-lg-6 text-center my-4 otp-inner">
-                    <div class="bg-dark text-white text-center m-3 p-4 pt-4 find-client" style="border-radius: 10px">
-                        <h2 class="mb-4 text-light otp-hd">Please enter your verification code.</h2>
-                        <div class="row">
-                            <div v-for="(digit, index) in otpDigits" :key="index" class="col-2">
-                                <input v-model="otpDigits[index]" @input="handleInput(index, $event)"
-                                    @paste="handlePaste(index, $event)" class="form-control text-center" maxlength="1"
-                                    type="number" ref="digitInputs" />
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-center mx-3 mb-2 mb-lg-3">
-                            <button @click="verifyOtp" class="btn btn-outline-light btn-lg mt-4
-                            ">
-                                Verify
-                            </button>
-                        </div>
-
-                        <a href="javascript:;" @click="sendOtpAgain(this.otpEmail)" class="text-white">Resend</a>
-                    </div>
-                </div>
+      <div class="pt-4 center-main row justify-content-center otp-main">
+        <div class="col-md-8 col-lg-6 text-center my-4 otp-inner">
+          <div
+            class="bg-dark text-white text-center m-3 p-4 pt-4 find-client"
+            style="border-radius: 10px"
+          >
+            <h2 class="mb-4 text-light otp-hd">
+              Please enter your verification code.
+            </h2>
+            <div class="row">
+              <div
+                v-for="(digit, index) in otpDigits"
+                :key="index"
+                class="col-2"
+              >
+                <input
+                  v-model="otpDigits[index]"
+                  @input="handleInput(index, $event)"
+                  @paste="handlePaste(index, $event)"
+                  class="form-control text-center"
+                  maxlength="1"
+                  type="number"
+                  ref="digitInputs"
+                />
+              </div>
             </div>
-        </div>
-        <div class="footer">
-            <MainFooter />
-        </div>
-    </div>
 
-    <!-- <div class="container mt-5">
+            <div class="d-flex justify-content-center mx-3 mb-2 mb-lg-3">
+              <button
+                @click="verifyOtp"
+                class="btn btn-outline-light btn-lg mt-4"
+              >
+                Verify
+              </button>
+            </div>
+
+            <a
+              href="javascript:;"
+              @click="sendOtpAgain(this.otpEmail)"
+              class="text-white"
+              >Resend</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <MainFooter />
+    </div>
+  </div>
+
+  <!-- <div class="container mt-5">
         <h2 class="mb-4">OTP Verification</h2>
         <div class="row">
             <div v-for="(digit, index) in otpDigits" :key="index" class="col-2">
@@ -51,172 +73,175 @@ import api from "@/config/api";
 import GeneralHeader from "../../pages/GeneralHeader.vue";
 import MainFooter from "../../components/global/MainFooter.vue";
 export default {
-    components: {
-        GeneralHeader,
-        MainFooter,
+  components: {
+    GeneralHeader,
+    MainFooter,
+  },
+  data() {
+    return {
+      otpVerified: false,
+      otpDigits: ["", "", "", "", "", ""],
+    };
+  },
+  beforeUnmount() {
+    if (!this.otpVerified) {
+      api
+        .get(`/delete-unverified-account/${this.otpEmail}`)
+        .then(() => {
+          console.log("deleted");
+        })
+        .catch((error) => console.log("getResults : ", error));
+    }
+  },
+  computed: {
+    otpEmail() {
+      // const otp = this.$store.state.otpEmail;
+      // if(otp == null || otp == ""){
+      //     if (!localStorage.hasOwnProperty(otpEmail) || localStorage[otpEmail] == null || localStorage[otpEmail] == '') {
+
+      //     }
+      // }
+      // if((this.$store.otpEmail == null || this.$store.otpEmail == "") && localStorage.getItem('otpEmail'))
+      return this.$store.state.otpEmail;
     },
-    data() {
-        return {
-            otpVerified: false,
-            otpDigits: ["", "", "", "", "", ""],
-        };
+  },
+  mounted() {
+    // Focus on the first input when the component is mounted
+    nextTick(() => this.$refs.digitInputs[0]?.focus());
+  },
+  methods: {
+    sendOtpAgain(email) {
+      this.sendOtp(email);
+      this.otpDigits = ["", "", "", "", "", ""];
     },
-    beforeUnmount() {
-        if (!this.otpVerified) {
-            api
-                .get(`/delete-unverified-account/${this.otpEmail}`)
-                .then(() => {
-                    console.log("deleted");
-                })
-                .catch((error) => console.log("getResults : ", error));
+    handlePaste(index, event) {
+      event.preventDefault();
+      const pastedValue = event.clipboardData.getData("text");
+      for (
+        let i = 0;
+        i < pastedValue.length && index + i < this.otpDigits.length;
+        i++
+      ) {
+        this.otpDigits[index + i] = pastedValue.charAt(i);
+      }
+      nextTick(() =>
+        this.$refs.digitInputs[index + pastedValue.length]?.focus()
+      );
+    },
+    handleInput(index, event) {
+      const inputValue = event.target.value;
+      if (/^\d$/.test(inputValue)) {
+        if (index < 5 && inputValue) {
+          nextTick(() => this.$refs.digitInputs[index + 1]?.focus());
         }
+      } else if (index > 0 && !inputValue) {
+        // If a digit is removed, move focus to the previous input
+        nextTick(() => this.$refs.digitInputs[index - 1]?.focus());
+      }
     },
-    computed: {
-        otpEmail() {
-            // const otp = this.$store.state.otpEmail;
-            // if(otp == null || otp == ""){
-            //     if (!localStorage.hasOwnProperty(otpEmail) || localStorage[otpEmail] == null || localStorage[otpEmail] == '') {
-
-            //     }
-            // }
-            // if((this.$store.otpEmail == null || this.$store.otpEmail == "") && localStorage.getItem('otpEmail'))
-            return this.$store.state.otpEmail;
-        },
-    },
-    mounted() {
-        // Focus on the first input when the component is mounted
-        nextTick(() => this.$refs.digitInputs[0]?.focus());
-    },
-    methods: {
-        sendOtpAgain(email) {
-            this.sendOtp(email);
-            this.otpDigits = ["", "", "", "", "", ""];
-        },
-        handlePaste(index, event) {
-            event.preventDefault();
-            const pastedValue = event.clipboardData.getData("text");
-            for (
-                let i = 0;
-                i < pastedValue.length && index + i < this.otpDigits.length;
-                i++
-            ) {
-                this.otpDigits[index + i] = pastedValue.charAt(i);
+    verifyOtp() {
+      const otp = this.otpDigits.join("");
+      if (otp.length > 0) {
+        // console.log("Verifying OTP:", otp);
+        api
+          .post("/verify-otp", { otp: otp, email: this.otpEmail })
+          .then((res) => {
+            console.log(res.data);
+            let dashboardUrl = null;
+            if (res?.data?.data?.type == "lawyer") {
+              dashboardUrl = "lawyer-profile";
+            } else if (res?.data?.data?.type == "client") {
+              dashboardUrl = "client-dashboard";
+            } else if (res?.data?.data?.type == "admin") {
+              dashboardUrl = "admin-dashboard";
             }
-            nextTick(() =>
-                this.$refs.digitInputs[index + pastedValue.length]?.focus()
-            );
-        },
-        handleInput(index, event) {
-            const inputValue = event.target.value;
-            if (/^\d$/.test(inputValue)) {
-                if (index < 5 && inputValue) {
-                    nextTick(() => this.$refs.digitInputs[index + 1]?.focus());
+            this.otpVerified = true;
+
+            if (dashboardUrl == "lawyer-profile") {
+              this.$swal({
+                text: "Thank you for signing up.",
+                icon: "success",
+                confirmButtonText: "Complete Your Profile",
+                customClass: {
+                  confirmButton: "customBtnClass", // Add your custom class here
+                },
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.setUserAndRedirect(res, dashboardUrl);
                 }
-            } else if (index > 0 && !inputValue) {
-                // If a digit is removed, move focus to the previous input
-                nextTick(() => this.$refs.digitInputs[index - 1]?.focus());
+              });
             }
-        },
-        verifyOtp() {
-            const otp = this.otpDigits.join("");
-            if (otp.length > 0) {
-                // console.log("Verifying OTP:", otp);
-                api
-                    .post("/verify-otp", { otp: otp, email: this.otpEmail })
-                    .then((res) => {
-                        console.log(res.data);
-                        let dashboardUrl = null;
-                        if (res?.data?.data?.type == "lawyer") {
-                            dashboardUrl = "lawyer-profile";
-                        } else if (res?.data?.data?.type == "client") {
-                            dashboardUrl = "client-dashboard";
-                        } else if (res?.data?.data?.type == "admin") {
-                            dashboardUrl = "admin-dashboard";
-                        }
-                        this.otpVerified = true;
-
-                        if (dashboardUrl == "lawyer-profile") {
-                            this.$swal({
-                                text: "Thank you for signing up.",
-                                icon: "success",
-                                confirmButtonText: "Complete Your Profile",
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    this.setUserAndRedirect(res, dashboardUrl);
-                                }
-                            });
-                        }
-                        this.setUserAndRedirect(res, dashboardUrl);
-                    })
-                    .catch(() => {
-                        this.$swal("", "This code is invalid or has expired.", "error");
-                    });
-            }
-        },
+            this.setUserAndRedirect(res, dashboardUrl);
+          })
+          .catch(() => {
+            this.$swal("", "This code is invalid or has expired.", "error");
+          });
+      }
     },
+  },
 };
 </script>
 
 <style scoped>
 .otp-form {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 400px;
-    width: 100%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
 }
 
 h2 {
-    margin-bottom: 20px;
-    color: #333;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .otp-container,
 .email-otp-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .otp-input,
 .email-otp-input {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    font-size: 18px;
-    margin: 0 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-    transition: border-color 0.3s;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s;
 }
 
 .otp-input:focus,
 .email-otp-input:focus {
-    border-color: #007bff;
+  border-color: #007bff;
 }
 
 #verificationCode,
 #emailverificationCode {
-    width: 100%;
-    margin-top: 15px;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-    transition: border-color 0.3s;
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s;
 }
 
 #verificationCode:focus,
 #emailverificationCode:focus {
-    border-color: #007bff;
+  border-color: #007bff;
 }
 
 .email-otp {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 
 /* 
@@ -237,47 +262,48 @@ button:hover {
 } */
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .otp-main {
-    min-height: 50vh;
-    position: relative;
+  min-height: 50vh;
+  position: relative;
 }
 
 .otp-inner {
-    position: absolute;
-    left: 50%;
-    right: 50%;
-    transform: translate(-50%, -40%);
-    top: 60%;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -40%);
+  top: 60%;
 }
 
 .otp-inner .col-2 {
-    justify-content: center;
-    display: flex;
+  justify-content: center;
+  display: flex;
 }
 
 .otp-hd {
-    font-size: 21px;
+  font-size: 21px;
 }
 
 .form-control {
-    min-height: 70px;
-    width: 100%;
-    font-size: 22px;
-    font-weight: 400;
+  min-height: 70px;
+  width: 100%;
+  font-size: 22px;
+  font-weight: 400;
 }
 
-@media only screen and (max-width: 767px) and (min-width: 320px) {
-    .otp-inner .col-2 {
-        padding: 7px;
-    }
 
-    .form-control {
-        min-height: 60px;
-    }
+@media only screen and (max-width: 767px) and (min-width: 320px) {
+  .otp-inner .col-2 {
+    padding: 7px;
+  }
+
+  .form-control {
+    min-height: 60px;
+  }
 }
 </style>

@@ -42,7 +42,7 @@
       <div class="row align-item-start">
         <div class="col-md-3 col-sm-12 text-center">
           <img
-            src="../assets/free.jpg"
+            src="../assets/free.png"
             alt=""
             class="img-fluid about-img rounded-circle w-100 object-fit-cover"
           />

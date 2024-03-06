@@ -62,7 +62,7 @@
               <div class="col-md-4 col-sm-12">
                 <div class="left-inner">
                   <img
-                    src="../assets/free.jpg"
+                    src="../assets/free.png"
                     alt=""
                     class="img-fluid top-avatar"
                   />

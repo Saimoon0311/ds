@@ -1,11 +1,9 @@
 <template lang="">
   <section class=" ">
     <GeneralHeader />
-    
-    <div class="WordSection1 container pt-3">
-      
-      <h3  class="mt-3 text-center">Website terms of use</h3>
 
+    <div class="WordSection1 container pt-3">
+      <h3 class="mt-3 text-center">Website terms of use</h3>
 
       <p class="LNMarginText">
         <span class="SpellE"
@@ -153,38 +151,6 @@
             </span></span
           ></span
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >Linked sites<o:p></o:p
-        ></span>
-      </p>
-
-      <p class="LNIndentText1">
-        <span lang="EN-US" style="font-family: Montserrat"
-          >This Website may contain links to other websites (<span
-            class="LNDefinedTermChar"
-            ><span style="font-family: Montserrat">Linked Sites</span></span
-          >), which are not operated by <span class="SpellE">Simplawfy</span>.
-          <span class="SpellE">Simplawfy</span> has no control over the Linked
-          Sites and accepts no responsibility for them or for any loss or damage
-          that may arise from your use of them. Your use of the Linked Sites
-          will be subject to the terms of use and service contained within each
-          such site.<o:p></o:p
-        ></span>
-      </p>
-
-      <p class="LNNumberedHeading1" style="mso-list: l8 level1 lfo8">
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >4<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;
-            </span></span
-          ></span
-        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
           >Privacy policy<o:p></o:p
         ></span>
       </p>
@@ -213,7 +179,7 @@
             mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
-            >5<span style="font: 7pt 'Times New Roman'"
+            >4<span style="font: 7pt 'Times New Roman'"
               >&nbsp;&nbsp;
             </span></span
           ></span
@@ -223,6 +189,13 @@
       </p>
 
       <p class="LNText3" style="mso-list: l8 level3 lfo8">
+        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
+          >You must not misuse this Website. Without limitation, you must not:
+          <o:p></o:p
+        ></span>
+      </p>
+
+      <p class="LNText4" style="mso-list: l8 level4 lfo8">
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
@@ -232,164 +205,17 @@
           "
           ><span style="mso-list: Ignore"
             >(a)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >You must not misuse this Website. You must not:<o:p></o:p
-        ></span>
-      </p>
-
-      <p class="LNText4" style="mso-list: l8 level4 lfo8">
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(i)<span style="font: 7pt 'Times New Roman'"
               >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </span></span
           ></span
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >commit or encourage a criminal offense;<o:p></o:p
+          >modify, adapt, copy, translate, sell, reverse engineer, decompile or
+          disassemble (or attempt to do any of the preceding to) any part of the
+          Website; <o:p></o:p
         ></span>
       </p>
 
       <p class="LNText4" style="mso-list: l8 level4 lfo8">
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(ii)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >transmit or distribute a virus, trojan, worm, logic bomb or any other
-          malware or material which is malicious, technologically harmful, in
-          breach of confidence or in any way offensive or obscene;<o:p></o:p
-        ></span>
-      </p>
-
-      <p class="LNText4" style="mso-list: l8 level4 lfo8">
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(iii)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >hack into any aspect of the Service; <o:p></o:p
-        ></span>
-      </p>
-
-      <p class="LNText4" style="mso-list: l8 level4 lfo8">
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(iv)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >corrupt data; <o:p></o:p
-        ></span>
-      </p>
-
-      <p class="LNText4" style="mso-list: l8 level4 lfo8">
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(v)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >cause annoyance to other users;<o:p></o:p
-        ></span>
-      </p>
-
-      <p class="LNText4" style="mso-list: l8 level4 lfo8">
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(vi)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >infringe upon the rights of any other person's proprietary
-          rights;<o:p></o:p
-        ></span>
-      </p>
-
-      <p class="LNText4" style="mso-list: l8 level4 lfo8">
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(vii)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >send any unsolicited advertising or promotional material, commonly
-          referred to as "spam"; or<o:p></o:p
-        ></span>
-      </p>
-
-      <p class="LNText4" style="mso-list: l8 level4 lfo8">
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(viii)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >attempt to affect the performance or functionality of any computer
-          facilities of or accessed through this Website.<o:p></o:p
-        ></span>
-      </p>
-
-      <p class="LNText3" style="mso-list: l8 level3 lfo8">
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
@@ -399,20 +225,136 @@
           "
           ><span style="mso-list: Ignore"
             >(b)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </span></span
           ></span
-        ><!--[endif]--><span class="SpellE"
-          ><span lang="EN-US" style="font-family: Montserrat"
-            >Simplawfy</span
+        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
+          >transmit or distribute a virus, trojan, worm, ransomware, spyware,
+          adware, rogue software, wiper, keylogger, logic bomb, code injection,
+          denial-of-service attack or any other malware or material which is
+          malicious, technologically harmful, in breach of confidence or in any
+          way offensive or obscene; <o:p></o:p
+        ></span>
+      </p>
+
+      <p class="LNText4" style="mso-list: l8 level4 lfo8">
+        <!--[if !supportLists]--><span
+          lang="EN-US"
+          style="
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
+          "
+          ><span style="mso-list: Ignore"
+            >(c)<span style="font: 7pt 'Times New Roman'"
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span></span
           ></span
-        ><span lang="EN-US" style="font-family: Montserrat">
-          will not be liable for any loss or damage caused by a distributed
-          denial-of-service attack, viruses or other technologically harmful
-          material that may infect your computer equipment, computer programs,
-          data or other proprietary material due to your use of this Website or
-          to your downloading of any material posted on it, or on any Linked
-          Sites.<o:p></o:p
+        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
+          >hack into, circumvent or bypass security or authentication on, or
+          access without authorisation, any aspect of the Website or Service,
+          including attempting to commit password cracking, social engineering,
+          phishing attacks or destruction or corruption of data in relation to
+          the Website, Service or its users; <o:p></o:p
+        ></span>
+      </p>
+
+      <p class="LNText4" style="mso-list: l8 level4 lfo8">
+        <!--[if !supportLists]--><span
+          lang="EN-US"
+          style="
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
+          "
+          ><span style="mso-list: Ignore"
+            >(d)<span style="font: 7pt 'Times New Roman'"
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span></span
+          ></span
+        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
+          >attempt to disrupt, damage, limit or affect the performance or
+          functionality of any computer facilities of or accessed through this
+          Website; <o:p></o:p
+        ></span>
+      </p>
+
+      <p class="LNText4" style="mso-list: l8 level4 lfo8">
+        <!--[if !supportLists]--><span
+          lang="EN-US"
+          style="
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
+          "
+          ><span style="mso-list: Ignore"
+            >(e)<span style="font: 7pt 'Times New Roman'"
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span></span
+          ></span
+        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
+          >use the Website or Services in a manner that is unlawful,
+          unauthorised, inhibiting on any other person’s rights or use of the
+          Website or Services, or an infringement of Simplawfy policies or the
+          spirit of the Platform, including, but not limited to, acting under
+          false pretenses by impersonating a Client, Lawyer or Simplawfy
+          personnel in order to gain market or customer knowledge, or otherwise
+          a competitive advantage; or <o:p></o:p
+        ></span>
+      </p>
+
+      <p class="LNText4" style="mso-list: l8 level4 lfo8">
+        <!--[if !supportLists]--><span
+          lang="EN-US"
+          style="
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
+          "
+          ><span style="mso-list: Ignore"
+            >(f)<span style="font: 7pt 'Times New Roman'"
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span></span
+          ></span
+        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
+          >publish any content or communicate with other users in a manner that
+          is unlawful, unsolicited advertising, threatening, harassing,
+          defamatory, discriminatory, explicit, offensive, encouraging or
+          inciting an illegal act, spam or machine- or randomly-generated,
+          infringing of intellectual property rights (including copyright), or
+          otherwise inappropriate. <o:p></o:p
+        ></span>
+      </p>
+
+      <p class="LNNumberedHeading1" style="mso-list: l8 level1 lfo8">
+        <!--[if !supportLists]--><span
+          lang="EN-US"
+          style="
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
+          "
+          ><span style="mso-list: Ignore"
+            >5<span style="font: 7pt 'Times New Roman'"
+              >&nbsp;&nbsp;
+            </span></span
+          ></span
+        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
+          >External sites <o:p></o:p
+        ></span>
+      </p>
+
+      <p class="LNIndentText1">
+        <span lang="EN-US" style="font-family: Montserrat"
+          >This Website may contain links to other websites (<span
+            class="LNDefinedTermChar"
+            ><span style="font-family: Montserrat">External sites </span></span
+          >), which are not operated by <span class="SpellE">Simplawfy</span>.
+          <span class="SpellE">Simplawfy</span> has no control over the Linked
+          Sites and accepts no responsibility for them or for any loss or damage
+          that may arise from your use of them. Your use of the External sites
+          will be subject to the terms of use and service contained within each
+          such site.<o:p></o:p
         ></span>
       </p>
 
@@ -430,24 +372,21 @@
             </span></span
           ></span
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >Intellectual property, software and content<o:p></o:p
+          >Linking to this Website <o:p></o:p
         ></span>
       </p>
 
       <p class="LNIndentText1">
         <span lang="EN-US" style="font-family: Montserrat"
-          >The intellectual property rights in all software and content
-          (including photographic images) made available to you on or through
-          this Website remain the property of
-          <span class="SpellE">Simplawfy</span> or its licensors and are
-          protected by copyright laws and treaties around the world. All such
-          rights are reserved by <span class="SpellE">Simplawfy</span> and its
-          licensors. You may store, print and display the content supplied
-          solely for your own personal use. You are not permitted to publish,
-          manipulate, distribute or otherwise reproduce, in any format, any of
-          the content or copies of the content supplied to you or which appears
-          on this Website nor may you use any such content in connection with
-          any business or commercial enterprise.<o:p></o:p
+          >You may link to this Website’s home page, provided you do so in a way
+          that is fair and legal and does not damage our reputation or take
+          advantage of it, but you must not establish a link in such a way as to
+          suggest any form of association, approval or endorsement on our part
+          where none exists. You must not establish a link from any website that
+          is not owned by you. This Website must not be framed on any other
+          site, nor may you create a link to any part of this Website other than
+          the home page. Simplawfy reserves the right to withdraw linking
+          permission without notice. <o:p></o:p
         ></span>
       </p>
 
@@ -465,11 +404,17 @@
             </span></span
           ></span
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >Disclaimer of liability<o:p></o:p
+          >Emails <o:p></o:p
         ></span>
       </p>
 
-      <p class="LNText3" style="mso-list: l8 level3 lfo8">
+      <p class="LNIndentText1">
+        <span lang="EN-US" style="font-family: Montserrat"
+          >Simplawfy uses email to communicate with its users. From time to
+          time, users may receive from Simplawfy: <o:p></o:p
+        ></span>
+      </p>
+      <p class="LNText4" style="mso-list: l8 level4 lfo8">
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
@@ -479,18 +424,19 @@
           "
           ><span style="mso-list: Ignore"
             >(a)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </span></span
           ></span
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >Subject to any non-excludable consumer guarantees and other consumer
-          protection provisions set out in the Australian Consumer Law, the
-          material displayed on this Website is provided without any guarantees,
-          conditions or warranties as to its accuracy. <o:p></o:p
+          >emails directly from Simplawfy (<b>Info Emails</b>), such as in
+          response to an enquiry you make to Simplawfy. You consent to the
+          receipt of Info Emails on the basis of the context in which you have
+          communicated with Simplawfy, as relevant. Info Emails therefore do not
+          contain an unsubscribe link; <o:p></o:p
         ></span>
       </p>
 
-      <p class="LNText3" style="mso-list: l8 level3 lfo8">
+      <p class="LNText4" style="mso-list: l8 level4 lfo8">
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
@@ -500,28 +446,20 @@
           "
           ><span style="mso-list: Ignore"
             >(b)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </span></span
           ></span
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >To the fullest extent permitted by law,
-          <span class="SpellE">Simplawfy</span> hereby expressly excludes all
-          warranties and other terms which might otherwise be implied by
-          statute, common law or the law of equity and must not be liable for
-          any damages whatsoever, including but without limitation to any
-          direct, indirect, special, consequential, punitive or incidental
-          damages, or damages for loss of use, profits, data or other
-          intangibles, damage to goodwill or reputation, or the cost of
-          procurement of substitute goods and services, arising out of or
-          related to the use, inability to use, performance or failures of this
-          Website or the Linked Sites and any materials posted on those sites,
-          irrespective of whether such damages were foreseeable or arise in
-          contract, tort, equity, restitution, by statute, at common law or
-          otherwise. <o:p></o:p
+          >automatic system-generated emails based on their registration of an
+          account as a Client or a Lawyer (<b>System Emails</b>). You consent to
+          the receipt of System Emails on the basis of your registration as a
+          Client or a Lawyer. System Emails are not marketing or promotional
+          emails and therefore do not contain an unsubscribe link. If you no
+          longer wish to receive System Emails, you must delete your account as
+          Client or Lawyer (as appropriate); and <o:p></o:p
         ></span>
       </p>
-
-      <p class="LNText3" style="mso-list: l8 level3 lfo8">
+      <p class="LNText4" style="mso-list: l8 level4 lfo8">
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
@@ -531,13 +469,12 @@
           "
           ><span style="mso-list: Ignore"
             >(c)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </span></span
           ></span
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >This does not affect any
-          <span class="SpellE">Simplawfy's</span> liability which cannot be
-          excluded or limited under applicable law.<o:p></o:p
+          >marketing emails (<b>Access Emails</b>). Users may request to be
+          unsubscribed from Access Emails. <o:p></o:p
         ></span>
       </p>
 
@@ -555,21 +492,35 @@
             </span></span
           ></span
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >Linking to this website<o:p></o:p
+          >Intellectual property rights <o:p></o:p
         ></span>
       </p>
 
       <p class="LNIndentText1">
         <span lang="EN-US" style="font-family: Montserrat"
-          >You may link to our home page, provided you do so in a way that is
-          fair and legal and does not damage our reputation or take advantage of
-          it, but you must not establish a link in such a way as to suggest any
-          form of association, approval or endorsement on our part where none
-          exists. You must not establish a link from any website that is not
-          owned by you. This Website must not be framed on any other site, nor
-          may you create a link to any part of this Website other than the home
-          page. <span class="SpellE">Simplawfy</span> reserves the right to
-          withdraw linking permission without notice.<o:p></o:p
+          >All content on this Website (including text, graphics, logos, images
+          and software) and the Services is protected by copyright under the
+          laws of Australia and through international treaties. All intellectual
+          property, including any copyrights, trade marks and patents, in the
+          Website (and all its contents including text, graphics and logos),
+          Services and these Terms of Use is owned by Simplawfy, and Simplawfy
+          retains all rights, title and interest to the same, save for any
+          original user-generated content posted to the Website by third
+          parties, in respect of which ownership in the intellectual property is
+          retained by the respective trade mark owner, but for which, by
+          posting, you grant Simplawfy a non-exclusive, non-transferable,
+          royalty free right to use for the sole purpose of allowing the content
+          to be presented on the Website without Simplawfy violating any rights
+          you have in it. You may store, print and display the content supplied
+          solely for your own personal use. You are not permitted to publish,
+          manipulate, distribute or otherwise reproduce, in any format, any of
+          the content or copies of the content supplied to you or which appears
+          on this Website nor may you use any such content in connection with
+          any business or commercial enterprise. Unless you express otherwise in
+          writing to Simplawfy, you acknowledge and agree that Simplawfy may use
+          your logo, branding or other trade marks for Simplawfy’s marketing
+          efforts and you grant to Simplawfy a non-exclusive, non-transferable,
+          royalty free right to use the same. <o:p></o:p
         ></span>
       </p>
 
@@ -587,24 +538,18 @@
             </span></span
           ></span
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >Disclaimer as to ownership of trade marks, images of personalities
-          and <span class="GramE">third party</span> copyright<o:p></o:p
+          >General information only <o:p></o:p
         ></span>
       </p>
 
-      <p class="LNIndentText1">
-        <span lang="EN-US" style="font-family: Montserrat"
-          >Except where expressly stated to the contrary all persons (including
-          their names and images), third party
-          <span class="SpellE">trade marks</span> and content, services and/or
-          locations featured on this Website are in no way associated, linked or
-          affiliated with <span class="SpellE">Simplawfy</span> and you should
-          not rely on the existence of such a connection or affiliation. Any
-          trade marks/names featured on this Website are owned by the respective
-          trade mark owners. Where a trade mark or brand name is referred to it
-          is used solely to describe or identify the products and services and
-          is in no way an assertion that such products or services are endorsed
-          by or connected to <span class="SpellE">Simplawfy</span>.<o:p></o:p
+      <p class="LNText3" style="mso-list: l8 level3 lfo8">
+        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
+          >Any information, opinions, statements and content published on the
+          Website is provided for informational purposes only and is not
+          intended as, nor does it constitute, legal, financial, taxation or
+          expert advice. You should make your own inquiries and obtain
+          independent advice based on your specific circumstances before acting
+          or relying on the information. <o:p></o:p
         ></span>
       </p>
 
@@ -622,18 +567,25 @@
             </span></span
           ></span
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >Indemnity<o:p></o:p
+          >Limitation of liability <o:p></o:p
         ></span>
       </p>
 
       <p class="LNIndentText1">
         <span lang="EN-US" style="font-family: Montserrat"
-          >You agree to indemnify, defend and hold harmless
-          <span class="SpellE">Simplawfy</span>, its directors, officers,
-          employees, consultants, agents, and affiliates, from any and all
-          <span class="GramE">third party</span> claims, liability, damages or
-          costs (including, but not limited to, legal fees) arising from your
-          use of this Website or your breach of the Terms of Use.<o:p></o:p
+          >Your use of the Website and Services is at your own risk. To the
+          fullest extent permitted by law, and subject to any non-excludable
+          consumer guarantees, Simplawfy expressly excludes all warranties and
+          other terms which might otherwise be implied by statute, common law or
+          equity, and will not be liable for, and you expressly release
+          Simplawfy from, any loss or damages of any kind, including but without
+          limitation any direct, indirect, special, consequential, punitive or
+          incidental damages, or damages for loss of use, profits, data or other
+          intangibles, damage to goodwill or reputation, or the cost of
+          procurement of substitute goods and services, arising from or in
+          connection to the use, inability to use, performance or failures of
+          this Website, the Services or the External Sites, or any materials
+          posted on the same. <o:p></o:p
         ></span>
       </p>
 
@@ -650,27 +602,24 @@
               >&nbsp;&nbsp;
             </span></span
           ></span
-        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >Variation<o:p></o:p
+        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat">
+          Indemnity <o:p></o:p
         ></span>
       </p>
 
       <p class="LNIndentText1">
-        <span class="SpellE"
-          ><span lang="EN-US" style="font-family: Montserrat"
-            >Simplawfy</span
-          ></span
-        ><span lang="EN-US" style="font-family: Montserrat">
-          reserves the right to vary these Terms of Use, or remove or vary the
-          Services or any page of this Website, at any time and without notice.
-          Variations will be effective immediately upon publication on this
-          Website. Your continued use of the Website following such publication
-          will represent an agreement by you to be bound by the Terms of Use as
-          varied.<o:p></o:p
+        <span lang="EN-US" style="font-family: Montserrat"
+          >You agree to indemnify and hold harmless Simplawfy and its
+          affiliates, officers, agents and employees from any claims, demands,
+          liabilities, losses, costs or expenses (including without limitation
+          solicitors and court costs), including from a third party, arising out
+          of or in relation to your use of this Website or the Services, your
+          breach of the Terms of Use or the law, or intellectual property
+          infringement. <o:p></o:p
         ></span>
       </p>
 
-      <p class="LNNumberedHeading1" style="mso-list: l8 level1 lfo8">
+      <p class="LNText4" style="mso-list: l8 level4 lfo8">
         <!--[if !supportLists]--><span
           lang="EN-US"
           style="
@@ -679,27 +628,79 @@
             mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
-            >12<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;
+            >(a)<span style="font: 7pt 'Times New Roman'"
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </span></span
           ></span
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >Invalidity<o:p></o:p
+          >Simplawfy reserves the right to vary these Terms of Use, at any time,
+          by updating this page. Any variations to the Terms of Use take
+          immediate effect upon publication on this Website. Simplawfy
+          encourages you to check this page often for any such variations. Your
+          continued use of the Website and Services following publication
+          constitute acceptance of any variations to the Terms of Use. If you do
+          not agree to any variations to the Terms of Use, you must immediately
+          cease using the Website and Services. <o:p></o:p
         ></span>
       </p>
 
-      <p class="LNIndentText1">
-        <span lang="EN-US" style="font-family: Montserrat"
-          >If any part of the Terms of Use is unenforceable (including any
-          provision in which <span class="SpellE">Simplawfy</span> excludes its
-          liability to you) the enforceability of any other part of the Terms of
-          Use will not be affected and all other clauses remain in full force
-          and effect. So far as possible where any clause/sub-clause or part of
-          a clause/sub-clause can be severed to render the remaining part valid,
-          the clause must be interpreted accordingly. Alternatively, you agree
-          that the clause must be rectified and interpreted in such a way that
-          closely resembles the original meaning of the clause/sub-clause as is
-          permitted by law.<o:p></o:p
+      <p class="LNText4" style="mso-list: l8 level4 lfo8">
+        <!--[if !supportLists]--><span
+          lang="EN-US"
+          style="
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
+          "
+          ><span style="mso-list: Ignore"
+            >(b)<span style="font: 7pt 'Times New Roman'"
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span></span
+          ></span
+        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
+          >These Terms of Use are governed by the laws of Western Australia and
+          the parties submit to the non-exclusive jurisdiction of the courts of
+          Western Australia. <o:p></o:p
+        ></span>
+      </p>
+
+      <p class="LNText4" style="mso-list: l8 level4 lfo8">
+        <!--[if !supportLists]--><span
+          lang="EN-US"
+          style="
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
+          "
+          ><span style="mso-list: Ignore"
+            >(c)<span style="font: 7pt 'Times New Roman'"
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span></span
+          ></span
+        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
+          >In these Terms of Use, headings are for convenience only and do not
+          affect meaning. <o:p></o:p
+        ></span>
+      </p>
+
+      <p class="LNText4" style="mso-list: l8 level4 lfo8">
+        <!--[if !supportLists]--><span
+          lang="EN-US"
+          style="
+                font-family: 'Montserrat', sans-serif;
+            mso-fareast-    font-family: 'Montserrat', sans-serif;
+            mso-bidi-    font-family: 'Montserrat', sans-serif;
+          "
+          ><span style="mso-list: Ignore"
+            >(d)<span style="font: 7pt 'Times New Roman'"
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span></span
+          ></span
+        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
+          >If any part of these Terms of Use is found to be invalid or
+          unenforceable by a court of competent jurisdiction, that part will be
+          severed and the remainder of the Terms will continue in full force and
+          effect. <o:p></o:p
         ></span>
       </p>
 
@@ -716,34 +717,23 @@
               >&nbsp;&nbsp;
             </span></span
           ></span
-        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >Complaints<o:p></o:p
+        ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat">
+          Contacting us <o:p></o:p
         ></span>
       </p>
 
       <p class="LNIndentText1">
-        <span class="SpellE"
-          ><span lang="EN-US" style="font-family: Montserrat"
-            >Simplawfy</span
-          ></span
-        ><span lang="EN-US" style="font-family: Montserrat">
-          operates a <span class="GramE">complaints</span> handling procedure to
-          try to resolve disputes when they first arise. Please let us know if
-          you have any complaints or comments by emailing </span
-        ><span lang="EN-US"
-          ><a href="mailto:info@makinglawsimple.com.au"
-            ><span style="font-family: Montserrat"
-              >info@makinglawsimple.com.au</span
-            ></a
-          ></span
-        ><span lang="EN-US" style="font-family: Montserrat">.<o:p></o:p></span>
+        <span lang="EN-US" style="font-family: Montserrat"
+          >If you have any queries regarding these Terms of Use, the Website or
+          the Services, please contact us via the Contact Us page or by emailing
+          <a href="mailto:info@makinglawsimple.com.au">info@makinglawsimple.com.au</a>. <o:p></o:p
+        ></span>
       </p>
     </div>
     <div class="footer">
       <MainFooter />
     </div>
   </section>
-
 </template>
 <script>
 import GeneralHeader from "../pages/GeneralHeader.vue";
@@ -752,7 +742,7 @@ import MainFooter from "../components/global/MainFooter.vue";
 export default {
   components: {
     MainFooter,
-    GeneralHeader
+    GeneralHeader,
   },
 
   name: "terms-of-use",
