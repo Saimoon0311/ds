@@ -137,7 +137,7 @@ export default {
 
                         if (dashboardUrl == "lawyer-profile") {
                             this.$swal({
-                                text: "Thank you for signing up. Please complete your profile.",
+                                text: "Thank you for signing up.",
                                 icon: "success",
                                 confirmButtonText: "Complete Your Profile",
                             }).then((result) => {
@@ -149,7 +149,7 @@ export default {
                         this.setUserAndRedirect(res, dashboardUrl);
                     })
                     .catch(() => {
-                        this.$swal("", "Invalid otp or may be expire", "error");
+                        this.$swal("", "This code is invalid or has expired.", "error");
                     });
             }
         },

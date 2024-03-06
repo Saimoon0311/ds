@@ -86,7 +86,7 @@
               <tbody>
                 <tr v-if="data_paginated == null || data_paginated.length == 0">
                   <td colspan="8" class="text-center">
-                    No active Proposals are available.
+                    You haven't received any proposals for this job yet.
                   </td>
                 </tr>
                 <tr

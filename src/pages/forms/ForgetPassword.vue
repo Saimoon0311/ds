@@ -88,7 +88,7 @@ export default {
                     })
                     .catch(error => {
                         // alert('User not found!');
-                        this.$swal("", "User not found!", "error")
+                        this.$swal("", "Error.", "error")
                         console.log("getResults : ", error)
                     });
             } catch (error) {

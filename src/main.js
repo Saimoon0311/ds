@@ -82,6 +82,9 @@ app.mixin({
       admin_approval: "pending",
     };
   },
+  created(){
+    this.checkTokenExpiration();
+  },
   watch: {
     searchQuery(newQuery) {
       if (newQuery == "" && !this.clear) {
@@ -135,6 +138,22 @@ app.mixin({
   },
 
   methods: {
+
+    checkTokenExpiration() {
+      const expirationTime = localStorage.getItem('tokenExpiration');
+      // console.log('ex1: ' , expirationTime);
+      if (expirationTime) {
+        const currentTime = new Date().getTime();
+        // console.log('ex2: ' , currentTime);
+        // console.log('ex3: ' , parseInt(expirationTime));
+        if (currentTime >= parseInt(expirationTime)) {
+          // console.log('ex4: ' , true);
+          localStorage.removeItem('token');
+          localStorage.removeItem('tokenExpiration');
+        }
+      }
+    },
+
     async uploadImage() {
       const fileInput = this.$refs.fileInput;
       const file = fileInput.files[0];
@@ -628,6 +647,10 @@ app.mixin({
     setUserAndRedirect(res, path, goToAccountPage = false) {
       console.log("single a : ", res?.data);
       if (!localStorage.getItem("token")) {
+        const expiresIn = 7200; // 2 hours miliseconds
+        // const expiresIn = 2 * 60;
+        const expirationTime = new Date().getTime() + expiresIn * 1000;
+        localStorage.setItem('tokenExpiration', expirationTime);
         localStorage.setItem("token", res.data?.data?.api_token);
       }
       this.$store.commit("SET_NOTI_COUNT_MSG", res?.data?.noti_msg);
@@ -2374,6 +2397,7 @@ app.mixin({
 
     logoutProcess(redirectUrl, redirection = true) {
       localStorage.removeItem("token");
+      localStorage.removeItem('tokenExpiration');
       this.$store.commit("SET_AUTHENTICATED", false);
       localStorage.removeItem("loginUser");
 

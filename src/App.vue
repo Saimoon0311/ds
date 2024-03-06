@@ -17,6 +17,7 @@ export default {
     LoadingIndicator
   },
   created() {
+    // this.checkTokenExpiration();
     // if (isSupported()) {
     if (messaging) {
       onMessage(messaging, (payload) => {
@@ -135,7 +136,24 @@ export default {
     firebaseNoti() {
       return this.$store.state.noti;
     },
-  }
+  },
+
+  // methods: {
+  //   checkTokenExpiration() {
+  //     const expirationTime = localStorage.getItem('tokenExpiration');
+  //     console.log('ex1: ' , expirationTime);
+  //     if (expirationTime) {
+  //       const currentTime = new Date().getTime();
+  //       console.log('ex2: ' , currentTime);
+  //       console.log('ex3: ' , parseInt(expirationTime));
+  //       if (currentTime >= parseInt(expirationTime)) {
+  //         console.log('ex4: ' , true);
+  //         localStorage.removeItem('token');
+  //         localStorage.removeItem('tokenExpiration');
+  //       }
+  //     }
+  //   }
+  // }
 
 }
 </script>

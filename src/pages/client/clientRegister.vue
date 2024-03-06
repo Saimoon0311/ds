@@ -152,7 +152,7 @@ export default {
                 .max(16, 'Password must be less then 16 digit.')
                 .matches(
                     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                    'Must contain 8 characters, one uppercase, one lowercase, one number and one special case character.',
+                    'Must contain 8 characters, one uppercase or lowercase, one number and one special case character.',
                 ),
             confirm_password: yup
                 .string()
