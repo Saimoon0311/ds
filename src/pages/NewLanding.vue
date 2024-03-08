@@ -245,6 +245,7 @@ export default {
     LawyerHeader,
   },
  
+ 
   name: "NewLanding",
 
   computed: {
@@ -254,7 +255,7 @@ export default {
     },
   },
   mounted() {
-    this.updateMetaDescription(`We're more than just an online marketplace - we're making the law simple by increasing accessiblity to and transparency of legal services.`);
+    this.updateMetaDescription(`We're more than just an online marketplace - we're making the law simple by increasing accessiblity to and transparency of legal services.`);   
   },
   methods: {
     updateMetaDescription(newDescription) {
