@@ -158,8 +158,8 @@ export default {
                 .min(6, 'Password must be greater then 6 digit.')
                 .max(16, 'Password must be less then 16 digit.')
                 .matches(
-                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                    'Must contain 8 characters, one uppercase or lowercase, one number and one special case character.',
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                    'Must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
                 ),
             confirm_password: yup
                 .string()
@@ -182,7 +182,20 @@ export default {
         Field,
         MainFooter
     },
+    mounted(){
+    this.updateMetaDescription(`Looking for clients? Find potential clients in your practice area and location without leaving your desk.`);
+    },
     methods: {
+        updateMetaDescription(newDescription) {
+      const metaDescriptionTag = document.querySelector('meta[name="description"]');
+      console.log('tag check',metaDescriptionTag);
+      if (metaDescriptionTag) {
+        metaDescriptionTag.setAttribute('content', newDescription);
+      } else {
+        // Meta description tag not found, handle error or log it
+        console.error('Meta description tag not found.');
+      }
+    },
         submitData(formData) {
             console.log(this.selectedOption, " . option")
             if (this.selectedOption != "") {

@@ -233,6 +233,21 @@ export default {
    
   },
   name: "HowSimplawfyWorks",
+  mounted() {
+    this.updateMetaDescription(`We're an independent legal marketplace connecting people who need a lawyer, with lawyers who need clients.`);
+  },
+  methods: {
+    updateMetaDescription(newDescription) {
+      const metaDescriptionTag = document.querySelector('meta[name="description"]');
+      console.log('tag check',metaDescriptionTag);
+      if (metaDescriptionTag) {
+        metaDescriptionTag.setAttribute('content', newDescription);
+      } else {
+        // Meta description tag not found, handle error or log it
+        console.error('Meta description tag not found.');
+      }
+    }
+  }
 };
 </script>
 <style scoped>

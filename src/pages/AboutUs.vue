@@ -101,6 +101,8 @@ import MainFooter from "../components/global/MainFooter.vue";
 import GeneralHeader from "./GeneralHeader.vue";
 import ClientHeader from "../pages/client/Header.vue";
 import LawyerHeader from "../pages/lawyer/Header.vue";
+// import { useMeta } from 'vue-meta';
+// import { useHead } from '@vueuse/head'
 
 export default {
   components: {
@@ -117,28 +119,34 @@ export default {
       return this.$store.getters?.loginUser;
     },
   },
+ 
 };
 </script>
 <style scoped>
-.text-justify{
+.text-justify {
   text-align: justify;
 }
+
 .btn-inner a {
   width: 220px;
 }
+
 .btn-inner {
   margin: 0 !important;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
 }
+
 .about-main {
   position: relative;
   padding-bottom: 60px;
   min-height: 100vh;
 }
+
 .probox {
   width: 40%;
   margin: auto;
@@ -149,24 +157,27 @@ export default {
   padding: 30px 10px;
   color: white !important;
 }
-.probox p{
-    margin: 0;
-    color: white !important;
-    font-size: 14px;
+
+.probox p {
+  margin: 0;
+  color: white !important;
+  font-size: 14px;
 }
 
 @media only screen and (max-width: 767px) {
-.probox{
-  width: 100% !important;
-}
-img.about-img {
+  .probox {
+    width: 100% !important;
+  }
+
+  img.about-img {
     width: 300px !important;
     height: 300px;
     object-fit: cover !important;
     margin: 20px 0;
-}
-.value-inner{
-  flex-wrap: wrap;
-}
+  }
+
+  .value-inner {
+    flex-wrap: wrap;
+  }
 }
 </style>

@@ -336,9 +336,21 @@ export default {
       });
       // alert("Thanks for reaching out. Simplawfy will be in touch with you soon.");
     },
-   
+    updateMetaDescription(newDescription) {
+      const metaDescriptionTag = document.querySelector('meta[name="description"]');
+      console.log('tag check',metaDescriptionTag);
+      if (metaDescriptionTag) {
+        metaDescriptionTag.setAttribute('content', newDescription);
+      } else {
+        // Meta description tag not found, handle error or log it
+        console.error('Meta description tag not found.');
+      }
+    },
   
 },
+mounted() {
+    this.updateMetaDescription(`Reach out to us, we're here to help.`);
+  },
   components: {
     MainFooter,
     GeneralHeader,

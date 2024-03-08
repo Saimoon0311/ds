@@ -1,4 +1,5 @@
 <template lang="">
+  
   <section class="howItWorks">
     <div v-if="loginUserData && loginUserData.type == 'client'">
       <ClientHeader />
@@ -234,6 +235,7 @@
 import MainFooter from "../components/global/MainFooter.vue";
   import ClientHeader from "../pages/client/Header.vue";
   import LawyerHeader from "../pages/lawyer/Header.vue";
+ 
 
 export default {
   components: {
@@ -242,6 +244,8 @@ export default {
     ClientHeader,
     LawyerHeader,
   },
+ 
+  name: "NewLanding",
 
   computed: {
     loginUserData() {
@@ -249,7 +253,21 @@ export default {
       return this.$store.getters?.loginUser;
     },
   },
-  name: "NewLanding",
+  mounted() {
+    this.updateMetaDescription(`We're more than just an online marketplace - we're making the law simple by increasing accessiblity to and transparency of legal services.`);
+  },
+  methods: {
+    updateMetaDescription(newDescription) {
+      const metaDescriptionTag = document.querySelector('meta[name="description"]');
+      console.log('tag check',metaDescriptionTag);
+      if (metaDescriptionTag) {
+        metaDescriptionTag.setAttribute('content', newDescription);
+      } else {
+        // Meta description tag not found, handle error or log it
+        console.error('Meta description tag not found.');
+      }
+    }
+  }
 };
 </script>
 <style scoped>

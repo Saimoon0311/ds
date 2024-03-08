@@ -111,8 +111,19 @@ export default {
   mounted() {
     this.pageOption = this.userTypeForLogin;
     console.log('page option : ' , this.pageOption);
+    this.updateMetaDescription(`Get one step closer to finding a lawyer or client.`);    
   },
   methods: {
+    updateMetaDescription(newDescription) {
+      const metaDescriptionTag = document.querySelector('meta[name="description"]');
+      console.log('tag check',metaDescriptionTag);
+      if (metaDescriptionTag) {
+        metaDescriptionTag.setAttribute('content', newDescription);
+      } else {
+        // Meta description tag not found, handle error or log it
+        console.error('Meta description tag not found.');
+      }
+    },
     submitData(formData) {
       console.log('sbumt');
       // let dashboardUrl = null;

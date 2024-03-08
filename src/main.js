@@ -13,7 +13,7 @@ import "primevue/resources/themes/lara-light-indigo/theme.css";
 import "primevue/resources/primevue.min.css"; //core CSS
 import "primeicons/primeicons.css"; //icons
 
-import Tooltip from 'primevue/tooltip'
+import Tooltip from "primevue/tooltip";
 
 import MultiSelect from "primevue/multiselect";
 import ToastService from "primevue/toastservice";
@@ -38,9 +38,14 @@ import { messaging } from "@/config/firebaseConfig";
 import { deleteToken } from "firebase/messaging";
 
 import Papa from "papaparse";
+// import { createHead } from '@vueuse/head'
+
+
 
 /* add icons to the library */
 library.add(faUserSecret);
+
+
 
 // import { firebaseApp } from '@/config/firebaseConfig';
 
@@ -58,7 +63,6 @@ library.add(faUserSecret);
 // // initializeApp(firebaseConfig);
 // const firebaseApp = initializeApp(firebaseConfig);
 // const db = getFirestore(firebaseApp);
-
 const app = createApp(App).component("font-awesome-icon", FontAwesomeIcon);
 
 // app.config.globalProperties.$db = db;
@@ -82,7 +86,7 @@ app.mixin({
       admin_approval: "pending",
     };
   },
-  created(){
+  created() {
     this.checkTokenExpiration();
   },
   watch: {
@@ -138,9 +142,8 @@ app.mixin({
   },
 
   methods: {
-
     checkTokenExpiration() {
-      const expirationTime = localStorage.getItem('tokenExpiration');
+      const expirationTime = localStorage.getItem("tokenExpiration");
       // console.log('ex1: ' , expirationTime);
       if (expirationTime) {
         const currentTime = new Date().getTime();
@@ -148,8 +151,8 @@ app.mixin({
         // console.log('ex3: ' , parseInt(expirationTime));
         if (currentTime >= parseInt(expirationTime)) {
           // console.log('ex4: ' , true);
-          localStorage.removeItem('token');
-          localStorage.removeItem('tokenExpiration');
+          localStorage.removeItem("token");
+          localStorage.removeItem("tokenExpiration");
         }
       }
     },
@@ -184,8 +187,9 @@ app.mixin({
     changeAccountStatus(id, type, status, pageStatus) {
       this.$swal({
         title: "Are you sure?",
-        text: `Are you sure you want to ${status == "block" ? "unblock" : "block"
-          } this user ?`,
+        text: `Are you sure you want to ${
+          status == "block" ? "unblock" : "block"
+        } this user ?`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -198,7 +202,8 @@ app.mixin({
             .then(() => {
               this.$swal(
                 "",
-                `This user is now ${status == "block" ? "unblock" : "block"
+                `This user is now ${
+                  status == "block" ? "unblock" : "block"
                 }ed.`,
                 "success"
               ).then(async () => {
@@ -650,7 +655,7 @@ app.mixin({
         const expiresIn = 7200; // 2 hours miliseconds
         // const expiresIn = 2 * 60;
         const expirationTime = new Date().getTime() + expiresIn * 1000;
-        localStorage.setItem('tokenExpiration', expirationTime);
+        localStorage.setItem("tokenExpiration", expirationTime);
         localStorage.setItem("token", res.data?.data?.api_token);
       }
       this.$store.commit("SET_NOTI_COUNT_MSG", res?.data?.noti_msg);
@@ -791,8 +796,9 @@ app.mixin({
       if (data?.location != null && data?.location != "") {
         htmlContent += `<div class="wrapper"><h6>
         <b style="text-transform: capitalize;">Location: </b>
-        <span>${data?.city != null && data?.city != "" ? data?.city : ""}${data?.city != null && data?.city != "" ? ", " : ""
-          }
+        <span>${data?.city != null && data?.city != "" ? data?.city : ""}${
+          data?.city != null && data?.city != "" ? ", " : ""
+        }
         ${data?.location?.title}</span></h6></div>`;
       }
 
@@ -1272,7 +1278,9 @@ app.mixin({
       //   title = `${this.capitalizeFirstLetter(data?.first_name)}`;
       // }
 
-      title = `${this.capitalizeFirstLetter(data?.first_name)} ${this.capitalizeFirstLetter(data?.last_name)}`;
+      title = `${this.capitalizeFirstLetter(
+        data?.first_name
+      )} ${this.capitalizeFirstLetter(data?.last_name)}`;
 
       let consultation_content = "";
       if (
@@ -1288,17 +1296,18 @@ app.mixin({
         ) {
           consultation_content = `<span>
                       ${this.capitalizeFirstLetter(
-            data?.consultation_type
-          )} - $${this.formatNumber(data?.consultation_amount)}/${data?.consultation_time
-            } mins
+                        data?.consultation_type
+                      )} - $${this.formatNumber(data?.consultation_amount)}/${
+            data?.consultation_time
+          } mins
                     </span>`;
         }
 
         if (data?.consultation_type && data?.consultation_type == "free") {
           consultation_content = ` <span>
                       ${this.capitalizeFirstLetter(
-            data?.consultation_type
-          )} - ${data?.consultation_time} mins
+                        data?.consultation_type
+                      )} - ${data?.consultation_time} mins
                     </span>`;
         }
       }
@@ -1361,10 +1370,7 @@ app.mixin({
       </div>`;
       }
 
-      if (
-        consultation_content != null &&
-        consultation_content != ""
-      ) {
+      if (consultation_content != null && consultation_content != "") {
         htmlContent += ` <div class="wrapper" >
         <h6><b style="text-transform: capitalize;">Initial Consultation: </b><span>${consultation_content}</span></h6>
       </div>`;
@@ -1389,8 +1395,9 @@ app.mixin({
         //   ? title
         //   : `${this.capitalizeFirstLetter(data?.type)} Details`,
         title: title,
-        html: `<div class="table-wrap ${data?.type == "lawyer" ? "d-flex" : ""
-          } flex-wrap" style="text-align:left !important;">${htmlContent}</div></div>`,
+        html: `<div class="table-wrap ${
+          data?.type == "lawyer" ? "d-flex" : ""
+        } flex-wrap" style="text-align:left !important;">${htmlContent}</div></div>`,
         showCloseButton: true,
         showConfirmButton: false,
         customClass: {
@@ -1474,10 +1481,7 @@ app.mixin({
     updateTooltip(charge_type, index) {
       const tooltipSpan = document.getElementById("tooltipSpan" + index);
       const { definition } = this.openFeeEstimateModal(charge_type);
-      tooltipSpan.setAttribute(
-        "title",
-        definition
-      );
+      tooltipSpan.setAttribute("title", definition);
       // tooltipSpan.tooltip("update"); // This line updates the tooltip content
     },
 
@@ -1594,7 +1598,7 @@ app.mixin({
     //     console.log('An error occurred while retrieving token:', err);
     //     // ...
     //   }
-    // },    
+    // },
     async requestNotificationPermission() {
       console.log("requestNotificationPermission hit");
       if ("serviceWorker" in navigator) {
@@ -1602,11 +1606,8 @@ app.mixin({
         navigator.serviceWorker
           .register("/firebase-messaging-sw.js")
           .then((registration) => {
-            console.log(
-              "Service Worker registered with scope:",
-              registration
-            );
-              console.log('message: ', messaging);
+            console.log("Service Worker registered with scope:", registration);
+            console.log("message: ", messaging);
             getToken(messaging)
               .then(async (currentToken) => {
                 if (currentToken) {
@@ -1831,7 +1832,12 @@ app.mixin({
       }
     },
 
-    openProposalDetailsModalPopup(data, charge_heading, renderAsHtml = false, showDescription = true) {
+    openProposalDetailsModalPopup(
+      data,
+      charge_heading,
+      renderAsHtml = false,
+      showDescription = true
+    ) {
       let mainHtmlContent = "";
       if (data && typeof data === "object") {
         if (
@@ -1853,8 +1859,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Fixed fee amount:</span><span >$${this.formatNumber(
-            data?.fixed_fee_amount
-          )}</span></p>
+              data?.fixed_fee_amount
+            )}</span></p>
           </div>`;
         }
 
@@ -1870,8 +1876,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Hourly Rate:</span><span >$${this.formatNumber(
-            data?.hourly_rate
-          )}</span></p>
+              data?.hourly_rate
+            )}</span></p>
           </div>`;
         }
 
@@ -1881,7 +1887,8 @@ app.mixin({
           data?.charge_type == "Hourly"
         ) {
           mainHtmlContent += ` <div class="flex-class">
-            <p ><span > Fee earners working on this matter:</span><span >${data?.fee_earners?.length > 0 ? "I'm part of a team" : "Just me"
+            <p ><span > Fee earners working on this matter:</span><span >${
+              data?.fee_earners?.length > 0 ? "I'm part of a team" : "Just me"
             }</span></p>
           </div>`;
         }
@@ -1912,8 +1919,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Daily rate:</span><span >$${this.formatNumber(
-            data?.daily_rate
-          )}</span></p>
+              data?.daily_rate
+            )}</span></p>
           </div>`;
         }
 
@@ -1954,8 +1961,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Retainer fee:</span><span >$${this.formatNumber(
-            data?.retainer_fee
-          )}/${data?.retainer_period}</span></p>
+              data?.retainer_fee
+            )}/${data?.retainer_period}</span></p>
           </div>`;
         }
 
@@ -1986,8 +1993,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Estimated Fee:</span><span >$${this.formatNumber(
-            data?.estimated_fee
-          )}</span></p>
+              data?.estimated_fee
+            )}</span></p>
           </div>`;
         }
 
@@ -2014,13 +2021,13 @@ app.mixin({
           <div class="flex-class">
             <p ><span > If the case is successful:</span><span >
             $${this.formatNumber(
-            parseFloat(
-              parseFloat(data?.estimated_fee) +
               parseFloat(
-                (data?.uplift_percentage / 100) * data?.estimated_fee
+                parseFloat(data?.estimated_fee) +
+                  parseFloat(
+                    (data?.uplift_percentage / 100) * data?.estimated_fee
+                  )
               )
-            )
-          )}
+            )}
             </span></p>
           </div>
           `;
@@ -2032,8 +2039,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span > Estimated amount for disbursements:</span><span >$${this.formatNumber(
-            data?.disbursement_amount
-          )}</span></p>
+              data?.disbursement_amount
+            )}</span></p>
           </div>`;
         }
 
@@ -2058,8 +2065,8 @@ app.mixin({
         ) {
           mainHtmlContent += ` <div class="flex-class">
             <p ><span >  Upfront payment:</span><span >$${this.formatNumber(
-            data?.upfront_payment
-          )}</span></p>
+              data?.upfront_payment
+            )}</span></p>
           </div>`;
         }
 
@@ -2151,15 +2158,16 @@ app.mixin({
             <tr>
               <td class='border'>${item.task ?? item.itemDisbursement}</td> 
               <td class='border'>$${this.formatNumber(
-            item.cost ?? item.costAud
-          )}${item.gst_not_applicable ? "*" : ""}</td>
+                item.cost ?? item.costAud
+              )}${item.gst_not_applicable ? "*" : ""}</td>
             </tr>
           `
         )
         .join("");
 
       return `
-        <div class="table-title text-start fw-bold mb-1">${!renderAsHtml ? title : ""
+        <div class="table-title text-start fw-bold mb-1">${
+          !renderAsHtml ? title : ""
         }</div>
         <table class='table dynamicTable'>
           <thead>
@@ -2177,10 +2185,11 @@ app.mixin({
               <td class='bg-dark text-white'>$${this.formatNumber(total)}</td>
             </tr>
             <tr v-if="title == 'Disbursements'">
-              <td class="border-0"><small>${title == "Disbursements"
-          ? "*GST not applicable on this item"
-          : ""
-        }</small></td>
+              <td class="border-0"><small>${
+                title == "Disbursements"
+                  ? "*GST not applicable on this item"
+                  : ""
+              }</small></td>
             </tr>
           </tfoot>
         </table>
@@ -2205,11 +2214,12 @@ app.mixin({
           grandTotal += subTotal;
           return `
             <tr>
-              <td class='border'>${item.title
-            }</td> <!-- Replace with actual properties -->
+              <td class='border'>${
+                item.title
+              }</td> <!-- Replace with actual properties -->
               <td class='border'>$${this.formatNumber(
-              item.hourly_rate ?? item.hourlyRate
-            )}</td>
+                item.hourly_rate ?? item.hourlyRate
+              )}</td>
               <td class='border'>${item.hours ?? item.estimatedHours}</td>
               <td class='border'>$${this.formatNumber(subTotal)}</td>
             </tr>
@@ -2218,7 +2228,8 @@ app.mixin({
         .join("");
 
       return `
-        <div class="table-title text-start fw-bold mb-1">${!renderAsHtml ? title : ""
+        <div class="table-title text-start fw-bold mb-1">${
+          !renderAsHtml ? title : ""
         }</div>
         <table class='table dynamicTable'>
           <thead>
@@ -2236,8 +2247,8 @@ app.mixin({
             <tr>
               <td class='bg-dark text-white'>Total</td><td class='bg-dark'></td><td class='bg-dark'></td>
               <td class='bg-dark text-white'>$${this.formatNumber(
-          grandTotal
-        )}</td>
+                grandTotal
+              )}</td>
             </tr>
           </tfoot>
         </table>
@@ -2397,7 +2408,7 @@ app.mixin({
 
     logoutProcess(redirectUrl, redirection = true) {
       localStorage.removeItem("token");
-      localStorage.removeItem('tokenExpiration');
+      localStorage.removeItem("tokenExpiration");
       this.$store.commit("SET_AUTHENTICATED", false);
       localStorage.removeItem("loginUser");
 
@@ -2689,14 +2700,16 @@ app.config.errorHandler = function (err, vm, info) {
   // Handle the error here, e.g., log it or display a message to the user
   console.error("Global Error Handler:", err, vm, info);
 };
-
+// const head = createHead()
+// app.use(head)
 app.use(PrimeVue);
 app.use(router);
 app.use(store);
+
 app.use(VueSweetalert2);
 
 app.component("v-select", VueSelect);
 app.component("MultiSelectPrime", MultiSelect);
-app.directive('tooltip', Tooltip);
+app.directive("tooltip", Tooltip);
 app.use(ToastService);
 app.mount("#app");
