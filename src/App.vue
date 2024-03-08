@@ -10,11 +10,30 @@ import { messaging } from "@/config/firebaseConfig";
 import { onMessage } from "firebase/messaging";
 // import { onBackgroundMessage } from "firebase/messaging/sw";
 
+import {computed, reactive } from 'vue'
+import { useHead } from '@vueuse/head'
 
 export default {
   name: 'App',
   components: {
     LoadingIndicator
+  },
+  setup() {
+    const siteData = reactive({
+      title: `My website`,
+      description: `My beautiful website`,
+    })
+    useHead({
+      // Can be static or computed
+      title: computed(() => siteData.title),
+      meta: [
+        {
+          name: `description`,
+          content: computed(() => siteData.description),
+        },
+        ],
+     
+    })
   },
   created() {
     // this.checkTokenExpiration();

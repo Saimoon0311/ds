@@ -194,11 +194,24 @@ export default {
     // Add event listener to update isMobile when the window is resized
     window.addEventListener('resize', this.updateIsMobile);
   },
+  mounted(){
+    this.updateMetaDescription(`An online legal marketplace making law simple by helping you find a lawyer or promote your law firm.`)
+  },
   unmounted() {
     // Remove event listener to avoid memory leaks
     window.removeEventListener('resize', this.updateIsMobile);
   },
   methods: {
+    updateMetaDescription(newDescription) {
+      const metaDescriptionTag = document.querySelector('meta[name="description"]');
+      console.log('tag check',metaDescriptionTag);
+      if (metaDescriptionTag) {
+        metaDescriptionTag.setAttribute('content', newDescription);
+      } else {
+        // Meta description tag not found, handle error or log it
+        console.error('Meta description tag not found.');
+      }
+    },
     openSweetAlert() {
       this.$swal({
         title: 'Login',

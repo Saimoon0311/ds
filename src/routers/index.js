@@ -75,6 +75,8 @@ import InquiryPg from "../pages/InquiryPg.vue";
 
 import store from "../store";
 
+
+
 function reverse_guard(to, from, next) {
   api
     .get("/verify")
@@ -153,6 +155,7 @@ const routes = [
     path: "/login",
     component: LawyerLoginForm,
     beforeEnter: reverse_guard,
+    meta: {title: 'Simplawfy - Independent Australian Legal Marketplace'}
   },
 
   // lawyer start
@@ -178,6 +181,7 @@ const routes = [
     path: "/lawyer-register",
     component: LawyerRegister,
     beforeEnter: reverse_guard,
+    meta: { title: 'Simplawfy - Find Clients for your Law Firm' },
   },
   {
     path: "/lawyer-dashboard",
@@ -229,6 +233,8 @@ const routes = [
     path: "/client-register",
     component: ClientRegister,
     beforeEnter: reverse_guard,
+    meta: { title: 'Simplawfy - Find a Lawyer' },
+
   },
   {
     path: "/otp",
@@ -267,6 +273,8 @@ const routes = [
     // component: HelloWorld,
     component: PlatForm,
     beforeEnter: reverse_guard,
+    meta: { title: 'Simplawfy - Independent Australian Legal Marketplace'},
+
   },
   // {
   //   path: "/platform",
@@ -412,6 +420,7 @@ const routes = [
   {
     path: "/how-simplawfy-works",
     component: HowSimplawfyWorks,
+    meta: {title: 'Simplawfy - What is Simplawfy'},
   },
   {
     path: "/lp",
@@ -420,6 +429,8 @@ const routes = [
   {
     path: "/about-us",
     component: NewLanding,
+    meta: { title: 'Simplawfy - Who Founded Simplawfy'},
+
   },
   {
     path: "/client-faqs",
@@ -436,6 +447,7 @@ const routes = [
   {
     path: "/contact-us",
     component: ContactUs,
+    meta: {title: 'Simplawfy - Contact Us'},
   },
   {
     path: "/wizard-form",
@@ -457,6 +469,12 @@ const router = createRouter({
     return { top: 0 };
   },
 });
+
+router.beforeEach((to ) => {
+  document.title = to.meta?.title ?? 'Simplawfy - Independent Australian Legal Marketplace';
+
+});
+
 
 const isLoggedIn = () => {
   const token = localStorage.getItem("token");
