@@ -486,6 +486,11 @@ ul {
 .row-flip ul li:last-child {
     margin-bottom: 0;
 }
+@media only screen and (max-width: 1720px) and (min-width: 1550px)  {
+  img.signature{
+    position: relative;
+  }
+}
 @media only screen and (max-width: 1600px) {
     .parabox{
         width: 45%;
