@@ -420,7 +420,7 @@ const routes = [
   {
     path: "/how-simplawfy-works",
     component: HowSimplawfyWorks,
-    meta: {title: 'Simplawfy - What is Simplawfy'},
+    meta: {title: 'Simplawfy - What is a Legal Marketplace'},
   },
   {
     path: "/lp",

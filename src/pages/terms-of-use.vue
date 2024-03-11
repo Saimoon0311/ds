@@ -1,9 +1,17 @@
 <template lang="">
   <section class=" ">
-    <GeneralHeader />
+    <div v-if="loginUserData && loginUserData.type == 'client'">
+      <ClientHeader />
+    </div>
+    <div v-else-if="loginUserData && loginUserData.type == 'lawyer'">
+        <LawyerHeader />
+    </div>
+    <div v-else>
+      <GeneralHeader  />
+    </div>
 
     <div class="WordSection1 container pt-3">
-      <h3 class="mt-3 text-center">Website terms of use</h3>
+      <h3 class="mt-3 text-center">Website Terms of Use</h3>
 
       <p class="LNMarginText">
         <span class="SpellE"
@@ -713,7 +721,7 @@
             mso-bidi-    font-family: 'Montserrat', sans-serif;
           "
           ><span style="mso-list: Ignore"
-            >13<span style="font: 7pt 'Times New Roman'"
+            >12<span style="font: 7pt 'Times New Roman'"
               >&nbsp;&nbsp;
             </span></span
           ></span
@@ -738,11 +746,15 @@
 <script>
 import GeneralHeader from "../pages/GeneralHeader.vue";
 import MainFooter from "../components/global/MainFooter.vue";
+import ClientHeader from "../pages/client/Header.vue";
+import LawyerHeader from "../pages/lawyer/Header.vue";
 
 export default {
   components: {
-    MainFooter,
     GeneralHeader,
+    MainFooter,
+    ClientHeader,
+    LawyerHeader
   },
 
   name: "terms-of-use",
