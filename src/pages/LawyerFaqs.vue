@@ -114,9 +114,20 @@
                       You can amend most fields of your profile without
                       restriction. However, some fields require our approval to
                       amend because they relate to the verification process (for
-                      an explanation of the verification process, see Why do I
-                      have to be verified before I can subscribe and view
-                      jobs?).
+                      an explanation of the verification process, see
+                      <button
+                        class="accordion-button collapsed cstm-accor"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapselOne"
+                        aria-expanded="false"
+                        aria-controls="collapselOne"
+                        id="scToItem"
+                        v-on:click="hideButtonAndScroll()"
+                      >
+                        Why do I have to be verified before I can subscribe and
+                        view jobs?)</button
+                      >.
                     </div>
                   </div>
                 </div>
@@ -718,7 +729,7 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="headingltwel">
                       <button
@@ -1204,7 +1215,9 @@ section.faq-main b {
 .hd-b {
   margin-bottom: 10px;
 }
-
+.cstm-accor::after{
+  content: unset;
+}
 .accordion-button {
   padding: 13px 10px !important;
   font-weight: 400 !important;
