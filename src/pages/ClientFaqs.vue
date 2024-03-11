@@ -518,9 +518,18 @@
                       Generally, the details of the costs disclosure statement
                       and the costs agreement should match the terms of the
                       lawyer’s proposal that you have accepted through the
-                      platform. If they do not match, see Why don’t the details
+                      platform. If they do not match, see <button
+                          class="accordion-button collapsed cstm-accor"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapse2Seven"
+                          aria-expanded="false"
+                          aria-controls="collapse2Seven"
+                          id="scToItem"
+                          v-on:click="hideButtonAndScroll()"
+                        >Why don’t the details
                       of the costs disclosure statement or costs agreement match
-                      the proposal I accepted?
+                      the proposal I accepted?</button>
                     </div>
                   </div>
                 </div>
@@ -553,9 +562,18 @@
                       <router-link to="/contact-us">contact us</router-link>
                       us and let us know about your issue, so that we can
                       investigate it further. For an explanation of the costs
-                      disclosure statement or costs agreement, see They have
+                      disclosure statement or costs agreement, see <button
+                          class="accordion-button collapsed cstm-accor"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapse1Seven"
+                          aria-expanded="false"
+                          aria-controls="collapse1Seven"
+                          id="scToItem"
+                          v-on:click="hideButtonAndScroll()"
+                        >They have
                       sent me a costs disclosure statement and/or a costs
-                      agreement – what is this?
+                      agreement – what is this?</button>
                     </div>
                   </div>
                 </div>
@@ -948,17 +966,24 @@ section.faq-main b {
   margin-bottom: 0px !important;
   padding-bottom: 70px !important;
 }
-
 .cstm-accor {
-  width: auto !important;
-  display: inline-block;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  font-weight: 400 !important;
-  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
-  text-decoration: underline;
+    width: auto !important;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 400 !important;
+    color: #000 !important;
+    text-decoration: underline;
+    padding: 0 !important;
+}
+.cstm-accor::after{
+  content: unset !important;
 }
 
+.accordion-button.cstm-accor:not(.collapsed) {
+    background-color: transparent;
+    color: #000;
+    text-decoration: underline;
+}
 .accordion-button.cstm-accor:not(.collapsed) {
   background-color: transparent;
   color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
