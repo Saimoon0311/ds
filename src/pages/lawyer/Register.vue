@@ -183,7 +183,7 @@ export default {
         MainFooter
     },
     mounted(){
-    this.updateMetaDescription(`Looking for clients? Find potential clients in your practice area and location without leaving your desk.`);
+    this.updateMetaDescription(`If you're a legal practitioner looking to find new clients you can access a platform of potential clients on Simplawfy. Simply sign up, get a 60 day free trial and find jobs in your area.`);
     },
     methods: {
         updateMetaDescription(newDescription) {

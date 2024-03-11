@@ -134,8 +134,9 @@
                   >
                     <div class="accordion-body">
                       We do not charge you anything to use our platform. You may
-                      need to pay costs to your lawyer or opponent as part of
-                      your legal matter.
+                      need to pay fees to your lawyer and other costs associated
+                      with your legal matter, depending on the proposal you
+                      accept and the nature of your legal matter.
                     </div>
                   </div>
                 </div>
@@ -708,7 +709,7 @@
                       encourage you to complete the following steps:
                       <ul class="style-num">
                         <li>
-                          <router-link to="/contact-us">contact us</router-link>
+                          <router-link to="/contact-us">Contact us</router-link>
                           to let us know, and also contact your lawyer directly
                           to give them the opportunity to resolve the issues you
                           have.

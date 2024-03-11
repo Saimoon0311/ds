@@ -78,6 +78,7 @@
                     v-on:blur="setTwoDigitsAfterDecimal('daily_rate')"
                     placeholder=""
                     required
+                    maxlength="10"
                   />
                 </div>
               </div>
@@ -95,6 +96,7 @@
                     min="1"
                     placeholder=""
                     required
+                    maxlength="10"
                   />
                 </div>
               </div>
@@ -119,6 +121,7 @@
                         setTwoDigitsAfterDecimal('disbursement_amount')
                       "
                       placeholder=""
+                      maxlength="10"
                     />
                   </div>
                   <button
@@ -151,6 +154,8 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
+                          maxlength="25"
+                          pattern="[0-9]*[.,]?[0-9]*"
                         />
                       </label>
                       <br />
@@ -166,8 +171,11 @@
                           <input
                             v-model="newRow.costAud"
                             min="1"
-                            type="number"
+                            type="text"
                             class="form-control d-input"
+                            maxlength="10"
+                           
+                        pattern="[0-9]*[.,]?[0-9]*"
                           />
                         </div>
                       </label>
@@ -280,6 +288,7 @@
                     v-on:blur="setTwoDigitsAfterDecimal('retainer_fee')"
                     placeholder=""
                     required
+                    maxlength="10"
                   />
                 </div>
               </div>
@@ -319,6 +328,7 @@
                       name="fixedFeeAmount"
                       class="form-control"
                       placeholder="Eg: up to 20 hours"
+                      maxlength="10"
                     />
                   </div>
                   <label> Termination notice period: </label>
@@ -330,6 +340,7 @@
                       name="fixedFeeAmount"
                       class="form-control"
                       placeholder="Eg: 2 weeks"
+                      maxlength="10"
                     />
                   </div>
                   <label>
@@ -350,6 +361,7 @@
                         setTwoDigitsAfterDecimal('disbursement_amount')
                       "
                       placeholder=""
+                      maxlength="10"
                     />
                   </div>
                   <button
@@ -382,6 +394,8 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
+                          maxlength="25"
+                          pattern="[0-9]*[.,]?[0-9]*"
                         />
                       </label>
                       <br />
@@ -397,8 +411,10 @@
                           <input
                             v-model="newRow.costAud"
                             min="1"
-                            type="number"
+                            type="text"
                             class="form-control d-input"
+                            maxlength="10"
+                            pattern="[0-9]*[.,]?[0-9]*"
                           />
                         </div>
                       </label>
@@ -511,6 +527,7 @@
                       v-model="newRow2.itemDisbursement"
                       placeholder="Eg: letter of advice"
                       class="form-control"
+                      maxlength="25"
                     />
                   </label>
                   <br />
@@ -530,6 +547,7 @@
                         min="1"
                         type="number"
                         class="form-control d-input"
+                        maxlength="10"
                       />
                     </div>
                   </label>
@@ -619,6 +637,7 @@
                         setTwoDigitsAfterDecimal('disbursement_amount')
                       "
                       placeholder=""
+                      maxlength="10"
                     />
                   </div>
                   <button
@@ -651,6 +670,8 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
+                          maxlength="25"
+                          pattern="[0-9]*[.,]?[0-9]*"
                         />
                       </label>
                       <br />
@@ -666,8 +687,10 @@
                           <input
                             v-model="newRow.costAud"
                             min="1"
-                            type="number"
+                            type="text"
                             class="form-control d-input"
+                            maxlength="10"
+                            pattern="[0-9]*[.,]?[0-9]*"
                           />
                         </div>
                       </label>
@@ -781,6 +804,7 @@
                   pattern="[0-9]+([.,][0-9]+)?"
                   v-on:blur="setTwoDigitsAfterDecimal('fixed_fee_amount')"
                   required="required"
+                  maxlength="10"
                 />
               </div>
               <!-- <span class="invalid-feedback">{{errors.fixedFeeAmount}}</span> -->
@@ -805,6 +829,7 @@
                         setTwoDigitsAfterDecimal('disbursement_amount')
                       "
                       placeholder=""
+                      maxlength="10"
                     />
                   </div>
                   <button
@@ -837,6 +862,8 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
+                          maxlength="25"
+                          pattern="[0-9]*[.,]?[0-9]*"
                         />
                       </label>
 
@@ -853,8 +880,10 @@
                           <input
                             v-model="newRow.costAud"
                             min="1"
-                            type="number"
+                            type="text"
                             class="form-control d-input"
+                            maxlength="10"
+                            pattern="[0-9]*[.,]?[0-9]*"
                           />
                         </div>
                       </label>
@@ -1025,6 +1054,7 @@
                             autocomplete="on"
                             type="number"
                             class="form-control d-input"
+                            maxlength="10"
                           />
                         </div>
                       </label>
@@ -1040,6 +1070,7 @@
                           autocomplete="on"
                           type="number"
                           class="form-control"
+                          maxlength="10"
                         />
                       </label>
                       <br />
@@ -1174,6 +1205,7 @@
                       v-on:blur="setTwoDigitsAfterDecimal('hourly_rate')"
                       class="form-control d-input"
                       required
+                      maxlength="25"
                     />
                   </div>
 
@@ -1190,6 +1222,7 @@
                     min="1"
                     class="form-control"
                     required
+                    maxlength="10"
                   />
 
                   <br />
@@ -1226,6 +1259,7 @@
                         setTwoDigitsAfterDecimal('disbursement_amount')
                       "
                       placeholder=""
+                      maxlength="10"
                     />
                   </div>
                   <button
@@ -1258,6 +1292,8 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
+                          maxlength="25"
+                          pattern="[0-9]*[.,]?[0-9]*"
                         />
                       </label>
                       <br />
@@ -1273,8 +1309,10 @@
                           <input
                             v-model="newRow.costAud"
                             min="1"
-                            type="number"
+                            type="text"
                             class="form-control d-input"
+                            maxlength="10"
+                            pattern="[0-9]*[.,]?[0-9]*"
                           />
                         </div>
                       </label>
@@ -1380,6 +1418,7 @@
                   class="form-control d-input"
                   pattern="[0-9]*[.,]?[0-9]*"
                   required
+                  maxlength="10"
                 />
               </div>
               <br />
@@ -1396,20 +1435,21 @@
                 @input="limitNumber"
                 pattern="[0-9]*[.,]?[0-9]*"
                 required
+                maxlength="10"
               />
 
               <br />
 
               <label
-                >Summarise terms upon which the Success Fee will be
-                charged:</label
+                >Summarise terms upon which the Success Fee will be charged:</label
               >
               <textarea
-                type="text"
+                
                 id="successFeeTerms"
                 v-model="form.success_fee_term"
                 name="successFeeTerms"
                 class="form-control"
+                maxlength="25000"
               ></textarea>
               <br />
               <div class="disbursement-fields">
@@ -1432,6 +1472,7 @@
                         setTwoDigitsAfterDecimal('disbursement_amount')
                       "
                       placeholder=""
+                      maxlength="10"
                     />
                   </div>
                   <button
@@ -1464,6 +1505,8 @@
                           v-model="newRow.itemDisbursement"
                           placeholder="Eg: filing fees"
                           class="form-control"
+                          maxlength="25"
+                          pattern="[0-9]*[.,]?[0-9]*"
                         />
                       </label>
                       <br />
@@ -1479,8 +1522,10 @@
                           <input
                             v-model="newRow.costAud"
                             min="1"
-                            type="number"
+                            type="text"
                             class="form-control d-input"
+                            maxlength="10"
+                            pattern="[0-9]*[.,]?[0-9]*"
                           />
                         </div>
                       </label>
@@ -1590,6 +1635,7 @@
                     pattern="[0-9]*[.,]?[0-9]*"
                     v-on:blur="setTwoDigitsAfterDecimal('disbursement_amount')"
                     placeholder=""
+                    maxlength="10"
                   />
                 </div>
                 <button
@@ -1622,6 +1668,8 @@
                         v-model="newRow.itemDisbursement"
                         placeholder="Eg: filing fees"
                         class="form-control"
+                        maxlength="25"
+                        pattern="[0-9]*[.,]?[0-9]*"
                       />
                     </label>
                     <br />
@@ -1637,9 +1685,11 @@
                         <input
                           v-model="newRow.costAud"
                           min="1"
-                          type="number"
+                          type="text"
                           class="form-control d-input"
                           required
+                          maxlength="10"
+                          pattern="[0-9]*[.,]?[0-9]*"
                         />
                       </div>
                     </label>
@@ -1815,6 +1865,7 @@
                   v-on:blur="setTwoDigitsAfterDecimal('upfront_payment')"
                   class="form-control d-input"
                   required
+                  maxlength="10"
                 />
               </div>
             </div>

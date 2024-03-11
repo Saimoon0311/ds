@@ -270,10 +270,10 @@
                       <div class="accordion-body">
                         We understand it can be difficult in some legal matters
                         to articulate the full scope of the services to be
-                        provided to the client. You are able to send one message
-                        to the client where you can ask the client any questions
-                        to seek any further information or clarification
-                        necessary for you to submit a proposal.
+                        provided to the client. Don’t forget you are able to
+                        send one message to the client where you can ask the
+                        client any questions to seek any further information or
+                        clarification necessary for you to submit a proposal.
                         <br /><br />
                         We suggest you try to set out, in as much detail as
                         possible, the services you will provide to the client,
@@ -284,7 +284,8 @@
                         platform is not intended to replace your disclosure
                         requirements to clients under applicable legal
                         profession laws — you should still issue a separate
-                        costs disclosure form to your client as required.
+                        costs disclosure statement to your client where
+                        required.
                       </div>
                     </div>
                   </div>
@@ -652,40 +653,72 @@
                     </div>
                   </div>
                   <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingleleven">
+                    <h2 class="accordion-header" id="headingl32ten">
                       <button
                         class="accordion-button collapsed"
                         style="font-weight: 400"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#collapseleleven"
+                        data-bs-target="#collapsel32ten"
                         aria-expanded="false"
-                        aria-controls="collapseleleven"
+                        aria-controls="collapsel32ten"
+                      >
+                        Do I still need to send them a costs disclosure
+                        statement or costs agreement?
+                      </button>
+                    </h2>
+                    <div
+                      id="collapsel32ten"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="headingl32ten"
+                      data-bs-parent="#accordionExample1"
+                    >
+                      <div class="accordion-body">
+                        Yes, the information you have provided to the client in
+                        your proposal does not replace any requirements under
+                        applicable legal profession laws to provide the client
+                        with a costs disclosure statement where the estimated
+                        cost exceeds the relevant threshold, or a costs
+                        agreement where required by you or the client. The
+                        details of the costs disclosure statement or costs
+                        agreement should generally match the terms of the
+                        proposal the client has accepted.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingl312ten">
+                      <button
+                        class="accordion-button collapsed"
+                        style="font-weight: 400"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapsel312ten"
+                        aria-expanded="false"
+                        aria-controls="collapsel312ten"
                       >
                         They are refusing to sign my costs agreement.
                       </button>
                     </h2>
                     <div
-                      id="collapseleleven"
+                      id="collapsel312ten"
                       class="accordion-collapse collapse"
-                      aria-labelledby="headingleleven"
+                      aria-labelledby="headingl312ten"
                       data-bs-parent="#accordionExample1"
                     >
                       <div class="accordion-body">
                         Please
                         <router-link to="/contact-us">contact us</router-link>
                         and tell us of the client’s refusal, so that we can
-                        contact them and ask for an explanation. Unless we
-                        receive a satisfactory explanation, we won’t reinstate
-                        the client’s job on the platform. We will consider
-                        banning them from the platform for repeated instances of
-                        such conduct, as this goes against the spirit of the
-                        platform. Unfortunately, we cannot compel a client to
-                        follow through with an engagement that they accepted a
-                        proposal for.
+                        contact them and ask for an explanation. Whilst we
+                        cannot compel a client to follow through with an
+                        engagement that they accepted a proposal for, it goes
+                        against the spirit of the platform, so we want to help
+                        resolve such disagreements amicably.
                       </div>
                     </div>
                   </div>
+                  
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="headingltwel">
                       <button

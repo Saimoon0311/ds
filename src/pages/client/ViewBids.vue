@@ -512,10 +512,10 @@ export default {
                 msg = `We're so glad that you found a lawyer, ${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, through Simplawfy. You will receive an email shortly with their details. You can also view them in the Closed tab on your Dashboard.`;
 
               } else {
-                msg = `Proposal has been ${obj.status}ed successfully`;
+                msg = `You have ${obj.status}ed this proposal successfully.`;
               }
 
-              this.$swal("Congratulations on finding a lawyer!", msg, "success").then(async () => {
+              this.$swal(" ", msg, "success").then(async () => {
                 if (obj.status.toLowerCase() == "accept") {
                   this.$router.push("/client-dashboard");
                 } else {

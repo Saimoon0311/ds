@@ -177,7 +177,7 @@ export default {
         GeneralHeader
     },
     mounted() {
-    this.updateMetaDescription(`Looking for a lawyer? Post a job, compare proposals and choose the lawyer that is right for you.`);        
+    this.updateMetaDescription(`If you need a lawyer you can find a lawyer on Simplawfy. Simply sign up to the platform for free, post a job and have the lawyers come to you. `);        
     },
     methods: {
         updateMetaDescription(newDescription) {
