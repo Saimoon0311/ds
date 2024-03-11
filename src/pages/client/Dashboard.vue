@@ -4,7 +4,8 @@
     <div class="container">
       <p class="h4 m-3">Welcome, {{ userName }}</p>
       <p class="m-3" v-if="openJobs.length > 0">
-        Here are all the jobs you have posted.
+        {{ (tab == 'open') ? 'Here are all the jobs you have posted which you have not yet accepted a proposal for.' : 'Here are all the jobs you have posted which you have accepted a proposal for.' }}
+        <!-- Here are all the jobs you have posted. -->
       </p>
 
       <div data-v-511b78bb="" class="container">
@@ -96,12 +97,14 @@
                   >
                     <div class="p-3 card-top">
                       <div>
-                        <p class="badge" title="Area">
+                        <!-- <p class="badge" title="Area"> -->
+                        <p class="badge">
                           {{ item?.field?.title }}
                         </p>
 
                         &nbsp;
-                        <p class="badge" title="Location">
+                        <!-- <p class="badge" title="Location"> -->
+                        <p class="badge">
                           {{ item?.location?.title }}
                         </p>
                         &nbsp;

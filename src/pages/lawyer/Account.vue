@@ -282,7 +282,7 @@
         <div class="noti-main pb-0">
           <h4 class="my-3 mt-5">Email Notifications</h4>
           <div class="d-flex align-items-center justify-content-start mb-2">
-            <h5 class="fw-normal">System Notifications: </h5>
+            <h5 class="fw-normal">System Notifications </h5>
           <div class="switch-container disabled-swtich mx-1">
             <label class="switch">
               <input type="checkbox" disabled checked>
@@ -292,7 +292,7 @@
           </div>
 
           <div class="d-flex align-items-center justify-content-start">
-            <h5 class="fw-normal">Access Notifications: </h5>
+            <h5 class="fw-normal">Access Notifications </h5>
             <div class="switch-container mx-1">
               <label class="switch">
                 <input type="checkbox" v-model="checkbox" @change="toggleSubscription">

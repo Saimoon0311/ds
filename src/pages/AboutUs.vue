@@ -102,7 +102,6 @@ import GeneralHeader from "./GeneralHeader.vue";
 import ClientHeader from "../pages/client/Header.vue";
 import LawyerHeader from "../pages/lawyer/Header.vue";
 // import { useMeta } from 'vue-meta';
-// import { useHead } from '@vueuse/head'
 
 export default {
   components: {
