@@ -446,7 +446,8 @@ export default {
         this.endpoint = "/client/client-close-jobs";
       }
       await this.loadMore(null, true);
-      this.resetCount('job');
+      // console.log('changeTab : ' , status);
+      // this.resetCount('job');
     },
 
 

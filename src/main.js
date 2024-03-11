@@ -151,7 +151,8 @@ app.mixin({
         // console.log('ex3: ' , parseInt(expirationTime));
         if (currentTime >= parseInt(expirationTime)) {
           // console.log('ex4: ' , true);
-          localStorage.removeItem("token");
+          // localStorage.removeItem("token");
+          this.logout('login');
           localStorage.removeItem("tokenExpiration");
         }
       }
@@ -616,6 +617,7 @@ app.mixin({
       localStorage.setItem("jobId", id);
       this.$store.commit("SET_DATATAB", this.tab);
       this.saveJobInfo(data);
+      this.resetCount('job');
       this.$router.push({ path: "/view-proposals" });
     },
 
@@ -703,6 +705,15 @@ app.mixin({
       }
 
       if (path != "admin-dashboard") {
+
+        deleteToken(messaging)
+        .then((res) => {
+          console.log("res , ", res);
+        })
+        .catch(function (error) {
+          console.error("Error deleting FCM token:", error);
+        });
+
         this.requestNotificationPermission();
         this.$router.push({ path: path });
       } else {

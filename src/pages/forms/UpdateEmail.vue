@@ -50,7 +50,8 @@
                         </p> -->
                     </div>
                 </div>
-                <h2 v-else class="text-center">This temporary link has expired. <router-link to="/forget-password" class="btn btn-dark text-white">Reset your password</router-link> </h2>
+                <h2 v-else class="text-center">This temporary link has expired.</h2>
+                <!-- <h2 v-else class="text-center">This temporary link has expired. <router-link to="/forget-password" class="btn btn-dark text-white">Reset your password</router-link> </h2> -->
             </div>
         </div>
        
