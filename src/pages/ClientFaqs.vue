@@ -3,7 +3,7 @@
     <!-- <GeneralHeader /> -->
     <ClientHeader />
 
-    <div class="WordSection1 container">
+    <div class="WordSection1 container " id="client-faqs">
       <!-- ----------- -->
       <h3 class="mt-3 mb-3" style="text-align: center">FAQs</h3>
       <!-- <ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">

@@ -2,7 +2,7 @@
   <section class="faq-main">
     <!-- <GeneralHeader /> -->
     <LawyerHeader />
-    <div class="WordSection1 container">
+    <div class="WordSection1 container" id="lawyer-faq">
       <!-- ----------- -->
       <h3 class="mt-3 mb-3" style="text-align: center">FAQs</h3>
 
@@ -1174,12 +1174,24 @@ export default {
 
   methods: {
     async hideButtonAndScroll() {
-      await this.$nextTick();
-      window.scrollTo({
-        top: document.getElementById("scToItem").offsetTop,
-        behavior: "smooth",
-      });
-    },
+  await this.$nextTick();
+
+  const accordionItems = document.querySelectorAll('.accordion-item');
+
+  // Add event listener to each accordion item
+  accordionItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const targetElement = item.querySelector('#scToItem');
+
+      // Check if target element exists and is within the clicked accordion item
+      if (targetElement && item.contains(targetElement)) {
+        // Scroll to bring the target element into the center of the viewport
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  });
+}
+
   },
 };
 </script>
