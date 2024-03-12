@@ -501,7 +501,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
-                Free/Discounted Consultation
+                Free/Discounted Consultation {{ constitutionalRadioValue }}
               </h5>
               <button
                 type="button"
@@ -514,33 +514,15 @@
             </div>
 
             <div class="modal-body">
-              <!-- <div class="form-group">
-                <input
-                  type="tel"
-                  name="phone"
-                  maxlength="10"
-                  class="form-control"
-                  id="phone"
-                  v-model="form.phone"
-                />
-                <button
-                  type="button"
-                  name="phone-submit"
-                  class="btn btn-dark my-3"
-                  @click="updateProfile('phone','#PhoneModal')"
-                >
-                  Save changes
-                </button>
-              </div> -->
-
+  
               <div class="form-group m-2" id="freeFirstConsultationRadio">
                 <!-- <label>Consultation type:</label> -->
                 <div class="form-check">
                   <input
                     class="form-check-input"
-                    v-model="form.consultation_type2"
+                    v-model="constitutionalRadioValue"
                     type="radio"
-                    name="freeFirstConsultationNo1"
+                    name="consultationRadio"
                     id="freeFirstConsultationNo1"
                     value="no"
                     :checked="form.consultation_type2 == 'no'"
@@ -556,9 +538,9 @@
                 <div class="form-check">
                   <input
                     class="form-check-input"
-                    v-model="form.consultation_type2"
+                    v-model="constitutionalRadioValue"
                     type="radio"
-                    name="freeFirstConsultation"
+                    name="consultationRadio"
                     id="freeFirstConsultationYes"
                     value="free"
                     :checked="form.consultation_type2 == 'free'"
@@ -575,8 +557,8 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    v-model="form.consultation_type2"
-                    name="freeFirstConsultation"
+                    v-model="constitutionalRadioValue"
+                    name="consultationRadio"
                     id="freeFirstConsultationNo"
                     value="discounted"
                     :checked="form.consultation_type2 == 'discounted'"
@@ -591,7 +573,8 @@
                 </div>
               </div>
 
-              <div v-if="form.consultation_type === 'discounted'">
+              <!-- v-if="form.consultation_type === 'discounted'" -->
+              <div v-if="constitutionalRadioValue == 'discounted'">
                 <div class="form-group my-3" id="div-freeFirstConsultationFee">
                   <label for="freeFirstConsultationFee"
                     >Fee (including GST):<sup><code>*</code></sup></label
@@ -610,8 +593,9 @@
                 </div>
               </div>
 
+              <!-- v-if="form.consultation_type2 != 'no'" -->
               <div
-                v-if="form.consultation_type2 != 'no'"
+                v-if="constitutionalRadioValue == 'free' || constitutionalRadioValue == 'discounted'"
                 class=""
                 id="div-freeFirstConsultationMinutes"
               >
@@ -1321,6 +1305,9 @@ export default {
     return {
       // baseUrl : process.env.BACKEND_URL + 'storage/images/',
       image: null,
+
+      constitutionalRadioValue : null,
+
       form: {
         first_name_verify: null,
         last_name_verify: null,
@@ -1474,7 +1461,7 @@ export default {
       //   console.log('end');
       // }
 
-
+      this.constitutionalRadioValue = this.loginUser.consultation_type;
       this.form.consultation_type = this.loginUser.consultation_type;
       this.form.consultation_time = this.loginUser.consultation_time;
       this.form.consultation_amount = this.loginUser.consultation_amount;
@@ -1498,6 +1485,7 @@ export default {
 
 
     changeConsultationType2(value) {
+      this.constitutionalRadioValue = value;
       if (value == "no") {
         this.form.consultation_time = null;
         this.form.consultation_amount = null;

@@ -1376,8 +1376,12 @@ app.mixin({
       </div>`;
       }
       if (data?.link != null && data?.link != "") {
+        let url = data?.link;
+        if (url.startsWith('www')) {
+          url = `https://${url}`;
+        }
         htmlContent += `<div class="wrapper">
-        <h6><b style="text-transform: capitalize;">website: </b><span><a href="${data?.link}" target="_blank">${data?.link}</a></span></h6>
+        <h6><b style="text-transform: capitalize;">website: </b><span><a href="${url}" target="_blank">${data?.link}</a></span></h6>
       </div>`;
       }
 

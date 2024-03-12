@@ -216,7 +216,7 @@
                       >
                         View Messages
                         {{
-                          item?.chats && item?.chats.length == 0
+                          item?.chats && item?.chats?.length == 0
                             ? ", (N/A)"
                             : ""
                         }}

@@ -60,7 +60,7 @@ export default {
                 .min(6, 'Password must be greater then 6 digit')
                 .max(16, 'Password must be less then 16 digit')
                 .matches(
-                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                     'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character',
                 ),
             confirm_password: yup

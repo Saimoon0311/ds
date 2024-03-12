@@ -21,7 +21,9 @@
             <div v-if="userFirst?.type == 'client'">
               <button @click="goToViewProposals(jobData)" class="btn btn-dark btn-sm toptag">Proposals</button>
             </div>
-            <div v-if="userFirst?.type == 'lawyer' && jobData?.proposal == null">
+            <!-- jobData?.proposal (check if my proposal exist on job) -->
+            <!-- jobData?.proposal_accept (check if any accepted proposal exist on job) -->
+            <div v-if="userFirst?.type == 'lawyer' && jobData?.proposal == null && jobData?.proposal_accept == null">
               <router-link to="/proposal" class="btn btn-dark btn-sm toptag">Submit a Proposal</router-link>
             </div>
 
@@ -49,6 +51,9 @@ export default {
     userFirst() {
       return this.$store.state.loginUser;
     },
+  },
+  mounted(){
+    console.log('jobdata from job header : ' , this.jobData)
   }
 };
 </script>

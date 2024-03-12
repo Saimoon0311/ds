@@ -345,6 +345,7 @@ export default {
           }
 
           if (index == 0) {
+            console.log('A2 : ', this.client_data2[0]?.job);
             this.$store.commit("SET_JOB_DATA", this.client_data2[0]?.job);
             this.$store.commit('SET_USERTOCHAT', this.userFirst?.type == 'lawyer' ? this.client_data2[0]?.client : this.client_data2[0]?.lawyer);
             console.log('maaz 2 : ', this.userSecond);
@@ -607,6 +608,7 @@ export default {
       console.log("start chat for all messages");
       const index = data?.id;
       if (changeJobData) {
+        console.log('A1 : ', data?.job);
         this.$store.commit("SET_JOB_DATA", data?.job);
         // this.$store.commit('SET_USERTOCHAT', data?.client);
         this.$store.commit('SET_USERTOCHAT', this.userFirst?.type == 'lawyer' ? data?.client : data?.lawyer);

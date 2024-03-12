@@ -2489,48 +2489,48 @@ export default {
 
   methods: {
 
-    convertToTitleCase(paragraph) {
-      console.log(paragraph);
-      const stopWords = [
-        "a",
-        "an",
-        "the",
-        "and",
-        "but",
-        "or",
-        "nor",
-        "for",
-        "so",
-        "yet",
-        "on",
-        "in",
-        "at",
-        "by",
-        "from",
-        "over",
-        "with",
-        "to",
-        "into",
-        "of",
-      ];
+    // convertToTitleCase(paragraph) {
+    //   console.log(paragraph);
+    //   const stopWords = [
+    //     "a",
+    //     "an",
+    //     "the",
+    //     "and",
+    //     "but",
+    //     "or",
+    //     "nor",
+    //     "for",
+    //     "so",
+    //     "yet",
+    //     "on",
+    //     "in",
+    //     "at",
+    //     "by",
+    //     "from",
+    //     "over",
+    //     "with",
+    //     "to",
+    //     "into",
+    //     "of",
+    //   ];
 
-      // Split the paragraph into an array of words
-      let words = paragraph.split(" ");
+    //   // Split the paragraph into an array of words
+    //   let words = paragraph.split(" ");
 
-      // Capitalize the first letter of each non-stop word
-      for (let i = 0; i < words.length; i++) {
-        let word = words[i].toLowerCase();
-        if (i === 0 || !stopWords.includes(word)) {
-          words[i] = word.charAt(0).toUpperCase() + word.slice(1);
-        }
-      }
+    //   // Capitalize the first letter of each non-stop word
+    //   for (let i = 0; i < words.length; i++) {
+    //     let word = words[i].toLowerCase();
+    //     if (i === 0 || !stopWords.includes(word)) {
+    //       words[i] = word.charAt(0).toUpperCase() + word.slice(1);
+    //     }
+    //   }
 
-      // Join the words back into a single string
-      let titleCaseParagraph = words.join(" ");
-      this.form.description = titleCaseParagraph;
+    //   // Join the words back into a single string
+    //   let titleCaseParagraph = words.join(" ");
+    //   this.form.description = titleCaseParagraph;
 
-      // return titleCaseParagraph;
-    },
+    //   // return titleCaseParagraph;
+    // },
 
 
     getPreviousFeeEarners(){

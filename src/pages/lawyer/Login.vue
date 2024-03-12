@@ -86,7 +86,7 @@ export default {
         .min(6, 'Have you forgotten your password?')
         .max(16, 'Have you forgotten your password?')
         .matches(
-          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
           'Have you forgotten your password?',
         ),
     });

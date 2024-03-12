@@ -502,20 +502,21 @@ export default {
             .then((res) => {
               // this.$swal('', `Proposal has been ${obj.status}ed successfully`, 'success').then(async () => {
               let msg = "";
+              let heading = "";
               if (obj?.status?.toLowerCase() == "accept") {
                 // msg = `Congratulations on finding a lawyer!
                 // msg = `We're so glad that you found a lawyer for your job '[${this.jobData?.title} - ${this.jobData?.identity}.]' through Simplawfy. 
                 // Here are your lawyer's contact details so you can communicate with them directly:
                 // [${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, ${obj?.lawyer?.email} and ${obj?.lawyer?.phone}]. 
                 // You will receive an email shortly with all these details as well as the details of the proposal you accepted, the details of your job and any correspondence between you and your chosen Lawyer.`;
-
+                heading = "Congratulations on finding a lawyer!";
                 msg = `We're so glad that you found a lawyer, ${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, through Simplawfy. You will receive an email shortly with their details. You can also view them in the Closed tab on your Dashboard.`;
 
               } else {
-                msg = `You have ${obj.status}ed this proposal successfully.`;
+                msg = `You have ${obj.status.toLowerCase()}ed this proposal successfully.`;
               }
 
-              this.$swal(" ", msg, "success").then(async () => {
+              this.$swal(heading, msg, "success").then(async () => {
                 if (obj.status.toLowerCase() == "accept") {
                   this.$router.push("/client-dashboard");
                 } else {
