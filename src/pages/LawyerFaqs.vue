@@ -1175,7 +1175,6 @@ export default {
   methods: {
     async hideButtonAndScroll() {
       await this.$nextTick();
-
       window.scrollTo({
         top: document.getElementById("scToItem").offsetTop,
         behavior: "smooth",

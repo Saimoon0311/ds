@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row pt-4">
         <div class="col-md-6 col-sm-12">
-          <router-link to="/lawyer-dashboard" class="btn btn-dark ">
+          <router-link to="/lawyer-dashboard" class="btn btn-dark">
             Back
           </router-link>
         </div>
@@ -64,7 +64,9 @@
               v-if="selectedOption === 'Daily'"
             >
               <div>
-                <label> Daily rate (excluding GST):<sup><code>*</code></sup></label>
+                <label>
+                  Daily rate (excluding GST):<sup><code>*</code></sup></label
+                >
                 <div>
                   <span class="position-absolute d-span"> $</span>
                   <input
@@ -84,19 +86,22 @@
               </div>
 
               <div class="form-group mt-3">
-                <label> Estimated number of days:<sup><code>*</code></sup></label>
+                <label>
+                  Estimated number of days:<sup><code>*</code></sup></label
+                >
                 <div>
                   <!-- <span class="position-absolute d-span"> $</span> -->
                   <input
-                    type="number"
+                    type="text"
                     id="fixedFeeAmount"
                     v-model="form.days"
                     name="fixedFeeAmount"
-                    class="form-control d-input"
-                    min="1"
+                    class="form-control"
                     placeholder=""
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     required
                     maxlength="10"
+                    v-only-number-with-limit:10
                   />
                 </div>
               </div>
@@ -174,8 +179,7 @@
                             type="text"
                             class="form-control d-input"
                             maxlength="10"
-                           
-                        pattern="[0-9]*[.,]?[0-9]*"
+                            pattern="[0-9]*[.,]?[0-9]*"
                           />
                         </div>
                       </label>
@@ -222,7 +226,10 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                            <td>
+                              $ {{ formatNumber(row.costAud)
+                              }}{{ row.gst_not_applicable ? "*" : "" }}
+                            </td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -256,7 +263,9 @@
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
-                            <td class="gstStyle p-0">*GST not applicable on this item</td>
+                            <td class="gstStyle p-0">
+                              *GST not applicable on this item
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -273,7 +282,9 @@
               v-if="selectedOption === 'Retainer'"
             >
               <div>
-                <label>Retainer fee (excluding GST):<sup><code>*</code></sup></label>
+                <label
+                  >Retainer fee (excluding GST):<sup><code>*</code></sup></label
+                >
                 <div>
                   <span class="position-absolute d-span"> $</span>
                   <!-- daily rate already used -->
@@ -294,7 +305,9 @@
               </div>
               <div class="disbursement-fields">
                 <div class="form-group mt-3">
-                  <label> Retainer period:<sup><code>*</code></sup></label>
+                  <label>
+                    Retainer period:<sup><code>*</code></sup></label
+                  >
                   <div class="mb-3">
                     <!-- <input
                       type="text"
@@ -328,7 +341,6 @@
                       name="fixedFeeAmount"
                       class="form-control"
                       placeholder="Eg: up to 20 hours"
-                      maxlength="10"
                     />
                   </div>
                   <label> Termination notice period: </label>
@@ -461,7 +473,10 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                            <td>
+                              $ {{ formatNumber(row.costAud)
+                              }}{{ row.gst_not_applicable ? "*" : "" }}
+                            </td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -494,7 +509,9 @@
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
-                            <td class="gstStyle p-0">*GST not applicable on this item</td>
+                            <td class="gstStyle p-0">
+                              *GST not applicable on this item
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -737,7 +754,10 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                            <td>
+                              $ {{ formatNumber(row.costAud)
+                              }}{{ row.gst_not_applicable ? "*" : "" }}
+                            </td>
                             <!-- <td class="text-center"> -->
                             <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -771,7 +791,9 @@
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
-                            <td class="gstStyle p-0">*GST not applicable on this item</td>
+                            <td class="gstStyle p-0">
+                              *GST not applicable on this item
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -931,7 +953,10 @@
                             class="border"
                           >
                             <td>{{ row.itemDisbursement }}</td>
-                            <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                            <td>
+                              $ {{ formatNumber(row.costAud)
+                              }}{{ row.gst_not_applicable ? "*" : "" }}
+                            </td>
                             <!-- <td class="text-center"> -->
                             <td style="width: 0px">
                               <button
@@ -959,7 +984,9 @@
                             <td class="bg-transparent p-0 b-round-end"></td>
                           </tr>
                           <tr class="border-0 p-0">
-                            <td class="gstStyle p-0">*GST not applicable on this item</td>
+                            <td class="gstStyle p-0">
+                              *GST not applicable on this item
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -1040,6 +1067,7 @@
                           autocomplete="on"
                           placeholder="Eg: Associate"
                           class="form-control"
+                          maxlength="25"
                         />
                       </label>
                       <br />
@@ -1060,8 +1088,7 @@
                       </label>
                       <br />
                       <br />
-                     
-                      
+
                       <label class="w-100 text-start">
                         Estimated number of hours:<sup><code>*</code></sup>
                         <input
@@ -1071,10 +1098,11 @@
                           type="number"
                           class="form-control"
                           maxlength="10"
+                          v-only-number-with-limit:10
                         />
                       </label>
                       <br />
-                     
+
                       <!-- <div class="form-check text-start mt-3">
                         <input
                           class="form-check-input"
@@ -1104,78 +1132,85 @@
                         Add
                       </button>
                     </fieldset>
-
                   </div>
 
                   <div class="table-responsive">
-                      <table
-                        class="table table-bordered mb-3 hourlycost"
-                        id="additionalFeeEarnersTable"
-                      >
-                        <thead>
-                          <tr class="border table-top">
-                            <!-- <th></th> -->
-                            <th class="table-title-td">Title</th>
-                            <th>Hourly rate</th>
-                            <th>Hours</th>
-                            <th>Subtotal</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody id="addFeeEarnersRow">
-                          <tr
-                            v-for="(row, index) in rows3"
-                            :key="index"
-                            class="border extra-class table-mid show"
-                          >
+                    <table
+                      class="table table-bordered mb-3 hourlycost"
+                      id="additionalFeeEarnersTable"
+                    >
+                      <thead>
+                        <tr class="border table-top">
+                          <!-- <th></th> -->
+                          <th class="table-title-td">Title</th>
+                          <th>Hourly rate</th>
+                          <th>Hours</th>
+                          <th>Subtotal</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody id="addFeeEarnersRow">
+                        <tr
+                          v-for="(row, index) in rows3"
+                          :key="index"
+                          class="border extra-class table-mid show"
+                        >
                           <td>{{ row.title }}</td>
                           <td>$ {{ formatNumber(row.hourlyRate) }}</td>
                           <td>{{ row.estimatedHours }}</td>
-                          <td>$ {{ formatNumber(row.hourlyRate * row.estimatedHours) }}</td>
+                          <td>
+                            $
+                            {{
+                              formatNumber(row.hourlyRate * row.estimatedHours)
+                            }}
+                          </td>
 
-                            <td>
-                              <button
-                                type="button"
-                                class="btn btn-default btn-circle p-1"
-                                @click="editRow3(index)"
-                              >
-                                <i class="fa fa-edit"></i>
-                              </button>
-                              <button
-                                type="button"
-                                class="btn btn-default btn-circle p-1"
-                                @click="removeRow3(index)"
-                              >
-                                <i class="fa fa-trash"></i>
-                              </button>
-                            </td>
-                          </tr>
-                          <tr class="border-0">
-                            <td class="p-1"></td>
-                          </tr>
-                          <tr
-                            class="bg-dark text-white border-0 extra-class extra-class1"
-                          >
-                            <td
-                              class="bg-transparent text-white p-0 px-2 b-round-start"
-                              colspan="3"
+                          <td>
+                            <button
+                              type="button"
+                              class="btn btn-default btn-circle p-1"
+                              @click="editRow3(index)"
                             >
-                              Total (excluding GST):
-                            </td>
-                            <!-- <td class="bg-transparent p-0"></td>
+                              <i class="fa fa-edit"></i>
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-default btn-circle p-1"
+                              @click="removeRow3(index)"
+                            >
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr class="border-0">
+                          <td class="p-1"></td>
+                        </tr>
+                        <tr
+                          class="bg-dark text-white border-0 extra-class extra-class1"
+                        >
+                          <td
+                            class="bg-transparent text-white p-0 px-2 b-round-start"
+                            colspan="3"
+                          >
+                            Total (excluding GST):
+                          </td>
+                          <!-- <td class="bg-transparent p-0"></td>
                           <td class="bg-transparent p-0"></td> -->
-                            <td class="bg-transparent text-white p-0 px-2" colspan="3">
-                              $ {{ formatNumber(grandTotal3) }}
-                            </td>
-                            <!-- <td class="bg-transparent p-0 "></td> -->
-                            <td class="bg-transparent p-0 b-round-end" ></td>
-                          </tr>
-                          <!-- <tr class="border-0 p-0">
+                          <td
+                            class="bg-transparent text-white p-0 px-2"
+                            colspan="3"
+                          >
+                            $ {{ formatNumber(grandTotal3) }}
+                          </td>
+                          <!-- <td class="bg-transparent p-0 "></td> -->
+                          <td class="bg-transparent p-0 b-round-end"></td>
+                        </tr>
+                        <!-- <tr class="border-0 p-0">
                             <td class="gstStyle p-0">*GST not applicable on this item</td>
                           </tr> -->
-                        </tbody>
-                      </table>
-                    </div> 
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 
@@ -1205,7 +1240,7 @@
                       v-on:blur="setTwoDigitsAfterDecimal('hourly_rate')"
                       class="form-control d-input"
                       required
-                      maxlength="25"
+                      maxlength="10"
                     />
                   </div>
 
@@ -1215,7 +1250,7 @@
                     >Estimated number of hours<sup><code>*</code></sup></label
                   >
                   <input
-                    type="number"
+                    type="text"
                     id="noOfHours"
                     name="noOfHours"
                     v-model="form.hours"
@@ -1223,6 +1258,8 @@
                     class="form-control"
                     required
                     maxlength="10"
+                    v-only-number-with-limit:10
+
                   />
 
                   <br />
@@ -1359,7 +1396,10 @@
                           class="border"
                         >
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                          <td>
+                            $ {{ formatNumber(row.costAud)
+                            }}{{ row.gst_not_applicable ? "*" : "" }}
+                          </td>
                           <!-- <td class="text-center"> -->
                           <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                             </p> -->
@@ -1392,7 +1432,9 @@
                           <td class="bg-transparent p-0 b-round-end"></td>
                         </tr>
                         <tr class="border-0 p-0">
-                          <td class="gstStyle p-0">*GST not applicable on this item</td>
+                          <td class="gstStyle p-0">
+                            *GST not applicable on this item
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -1407,7 +1449,11 @@
               id="success-fee"
               v-if="selectedOption === 'Success'"
             >
-              <label>Estimated fee amount (excluding GST):<sup><code>*</code></sup></label>
+              <label
+                >Estimated fee amount (excluding GST):<sup
+                  ><code>*</code></sup
+                ></label
+              >
               <div>
                 <span class="position-absolute d-span"> $</span>
                 <input
@@ -1441,10 +1487,10 @@
               <br />
 
               <label
-                >Summarise terms upon which the Success Fee will be charged:</label
+                >Summarise terms upon which the Success Fee will be
+                charged:</label
               >
               <textarea
-                
                 id="successFeeTerms"
                 v-model="form.success_fee_term"
                 name="successFeeTerms"
@@ -1572,7 +1618,10 @@
                           class="border"
                         >
                           <td>{{ row.itemDisbursement }}</td>
-                          <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                          <td>
+                            $ {{ formatNumber(row.costAud)
+                            }}{{ row.gst_not_applicable ? "*" : "" }}
+                          </td>
                           <td class="text-center">
                             <button
                               type="button"
@@ -1599,7 +1648,9 @@
                           <td class="bg-transparent p-0 b-round-end"></td>
                         </tr>
                         <tr class="border-0 p-0">
-                          <td class="gstStyle p-0">*GST not applicable on this item</td>
+                          <td class="gstStyle p-0">
+                            *GST not applicable on this item
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -1731,7 +1782,10 @@
                         class="border"
                       >
                         <td>{{ row.itemDisbursement }}</td>
-                        <td>$ {{ formatNumber(row.costAud) }}{{ row.gst_not_applicable ? '*' : '' }}</td>
+                        <td>
+                          $ {{ formatNumber(row.costAud)
+                          }}{{ row.gst_not_applicable ? "*" : "" }}
+                        </td>
                         <!-- <td class="text-center"> -->
                         <!-- <p class="mb-0 bg-secondary border p-1 rounded text-white text-center">Total: ${{ row.total }}
                           </p> -->
@@ -1764,7 +1818,9 @@
                         <td class="bg-transparent p-0 b-round-end"></td>
                       </tr>
                       <tr class="border-0 p-0">
-                        <td class="gstStyle p-0">*GST not applicable on this item</td>
+                        <td class="gstStyle p-0">
+                          *GST not applicable on this item
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -1962,14 +2018,12 @@
                 <span>${{ formatNumber(form.daily_rate) }}</span>
               </p>
             </div>
-            
+
             <div v-if="form.days">
               <p>
                 <span> Days:</span> <span>{{ form.days }}</span>
               </p>
             </div>
-
-            
 
             <div v-if="form.charge_type">
               <p>
@@ -1988,18 +2042,32 @@
 
             <div v-if="form.fee_earners && selectedOption == 'Hourly'">
               <p>
-                <span class="text-trans"> Fee earners working on this matter:</span>
+                <span class="text-trans">
+                  Fee earners working on this matter:</span
+                >
                 <span>{{
                   form.fee_earners == "team" ? "I'm part of a team" : "Just me"
                 }}</span>
               </p>
             </div>
 
-            <div v-if="rows3.length > 0 && form.fee_earners && selectedOption == 'Hourly'" class="mb-2">
+            <div
+              v-if="
+                rows3.length > 0 &&
+                form.fee_earners &&
+                selectedOption == 'Hourly'
+              "
+              class="mb-2"
+            >
               <div class="d-flex table-title">
                 <h5 style="text-align: left !important">Fee Earners:</h5>
                 <span @click="toggleDiv" class="summarytogicon mr-2">
-                  <i :class="['fas', isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down',]"></i>
+                  <i
+                    :class="[
+                      'fas',
+                      isDivVisible ? 'fa-chevron-up' : 'fa-chevron-down',
+                    ]"
+                  ></i>
                 </span>
               </div>
               <div v-if="isDivVisible">
@@ -2007,10 +2075,12 @@
               </div>
             </div>
 
-            <div v-if="selectedOption == 'item' || selectedOption == 'Item'" class="mb-2">
+            <div
+              v-if="selectedOption == 'item' || selectedOption == 'Item'"
+              class="mb-2"
+            >
               <!-- <div class="d-flex table-title"> -->
               <div class="table-title">
-
                 <h5 style="text-align: left !important">Specific Tasks:</h5>
                 <div v-html="summaryHtmlItemByItemTasks"></div>
                 <!-- <span @click="toggleDiv1" class="summarytogicon mr-2">
@@ -2041,22 +2111,26 @@
                 
               </p> -->
 
-              <div class=" mb-3">
-              <div class="d-flex table-title">
-                <h5 style="text-align: left !important">
-                  Success Fee Terms:
-                </h5>
-                <span @click="toggleDiv3" class="summarytogicon mr-2">
-                  <i :class="['fas', isDivVisible3 ? 'fa-chevron-up' : 'fa-chevron-down',]"></i>                
-                </span>
+              <div class="mb-3">
+                <div class="d-flex table-title">
+                  <h5 style="text-align: left !important">
+                    Success Fee Terms:
+                  </h5>
+                  <span @click="toggleDiv3" class="summarytogicon mr-2">
+                    <i
+                      :class="[
+                        'fas',
+                        isDivVisible3 ? 'fa-chevron-up' : 'fa-chevron-down',
+                      ]"
+                    ></i>
+                  </span>
+                </div>
+                <div v-if="isDivVisible3">
+                  <span class="descriptionText" style="white-space: pre-line">{{
+                    form.success_fee_term
+                  }}</span>
+                </div>
               </div>
-              <div v-if="isDivVisible3">
-                <span class="descriptionText" style="white-space: pre-line">{{ form.success_fee_term }}</span>
-              </div>
-
-
-              </div>
-
             </div>
             <span
               v-if="
@@ -2091,14 +2165,14 @@
               </div>
             </span>
 
-            
-
             <div v-if="form.disbursement_amount">
               <p>
                 <span> Estimated amount for disbursements:</span>
                 <span
                   >${{
-                    grandTotal > 0 ? formatNumber(parseFloat(grandTotal)) : formatNumber(parseFloat(form.disbursement_amount))
+                    grandTotal > 0
+                      ? formatNumber(parseFloat(grandTotal))
+                      : formatNumber(parseFloat(form.disbursement_amount))
                   }}</span
                 >
               </p>
@@ -2110,7 +2184,12 @@
                   Itemised Disbursements:
                 </h5>
                 <span @click="toggleDiv2" class="summarytogicon mr-2">
-                  <i :class="['fas', isDivVisible2 ? 'fa-chevron-up' : 'fa-chevron-down',]"></i>                
+                  <i
+                    :class="[
+                      'fas',
+                      isDivVisible2 ? 'fa-chevron-up' : 'fa-chevron-down',
+                    ]"
+                  ></i>
                 </span>
               </div>
               <div v-if="isDivVisible2">
@@ -2122,20 +2201,12 @@
                         <p> <span> Upfront Payment Status:</span>  <span>{{ form.upfront_payment_status }}</span></p>
                       </div> -->
 
-         
-
             <div v-if="form.law_practice_cost">
               <p>
                 <span> Law Practice Cost:</span>
                 <span>${{ formatNumber(form.law_practice_cost) }}</span>
               </p>
             </div>
-
-           
-
-           
-
-            
 
             <div v-if="form.pro_bono_description">
               <p>
@@ -2184,7 +2255,7 @@
                 >
               </p>
             </div>
-            
+
             <div>
               <p v-if="!isNaN(totals?.totalExcludingGst)">
                 <span class="text-trans"> Total (excluding GST):</span>
@@ -2202,13 +2273,12 @@
               </p>
             </div>
 
-          
-
             <div v-if="form.description" class="sumdesc">
-              <p class="text-center font-set">
-                What you will do.
-              </p>
-              <p class="descriptionText" style="white-space: pre-line; text-transform:none;">
+              <p class="text-center font-set">What you will do.</p>
+              <p
+                class="descriptionText"
+                style="white-space: pre-line; text-transform: none"
+              >
                 {{ form.description }}
               </p>
             </div>
@@ -2219,7 +2289,9 @@
 
         <div class="stepbtn mt-3">
           <span v-if="selectedOption == 'Pro'">
-            <span class="pagination-indicator"> {{ currentStep  }} of {{ 3 }} </span>
+            <span class="pagination-indicator">
+              {{ currentStep }} of {{ 3 }}
+            </span>
           </span>
           <span v-else>
             <span v-if="currentStep !== 5" class="pagination-indicator">
@@ -2238,8 +2310,12 @@
             <button
               type="submit"
               :disabled="!selectedOption"
-              :class="['btn', 'btn-bg', buttonText === 'Submit' ? 'softblue' : '']"
-              >
+              :class="[
+                'btn',
+                'btn-bg',
+                buttonText === 'Submit' ? 'softblue' : '',
+              ]"
+            >
               <!-- class="btn btn-bg" -->
               {{ buttonText }}
             </button>
@@ -2270,7 +2346,7 @@ import api from "@/config/api";
 export default {
   data() {
     return {
-      oldFeeEarners : [],
+      oldFeeEarners: [],
       selectedOptionForSummary: null,
       isDivVisible: false,
       isDivVisible1: false,
@@ -2297,10 +2373,10 @@ export default {
         fee_earners: "me",
         daily_rate: null,
         uplift_percentage: null,
-        
+
         estimated_fee: null,
         success_fee_term: null,
-        
+
         pro_bono_description: null,
         meet_deadlines: null,
         miss_deadline_reason: null,
@@ -2357,42 +2433,42 @@ export default {
   },
 
   watch: {
-    'form.disbursement_amount': function(newVal) {
+    "form.disbursement_amount": function (newVal) {
       if (isNaN(newVal)) {
         this.form.disbursement_amount = null;
       }
     },
-    'form.fixed_fee_amount': function(newVal) {
+    "form.fixed_fee_amount": function (newVal) {
       if (isNaN(newVal)) {
         this.form.fixed_fee_amount = null;
       }
     },
-    'form.upfront_payment': function(newVal) {
+    "form.upfront_payment": function (newVal) {
       if (isNaN(newVal)) {
         this.form.upfront_payment = null;
       }
     },
-    'form.hourly_rate': function(newVal) {
+    "form.hourly_rate": function (newVal) {
       if (isNaN(newVal)) {
         this.form.hourly_rate = null;
       }
     },
-    'form.daily_rate': function(newVal) {
+    "form.daily_rate": function (newVal) {
       if (isNaN(newVal)) {
         this.form.daily_rate = null;
       }
     },
-    'form.retainer_fee': function(newVal) {
+    "form.retainer_fee": function (newVal) {
       if (isNaN(newVal)) {
         this.form.retainer_fee = null;
       }
     },
-    'form.estimated_fee': function(newVal) {
+    "form.estimated_fee": function (newVal) {
       if (isNaN(newVal)) {
         this.form.estimated_fee = null;
       }
     },
-    'form.uplift_percentage': function(newVal) {
+    "form.uplift_percentage": function (newVal) {
       if (isNaN(newVal)) {
         this.form.uplift_percentage = null;
       }
@@ -2488,7 +2564,6 @@ export default {
   },
 
   methods: {
-
     convertToTitleCase(paragraph) {
       console.log(paragraph);
       const stopWords = [
@@ -2532,25 +2607,27 @@ export default {
       // return titleCaseParagraph;
     },
 
-
-    getPreviousFeeEarners(){
-      api.get('/lawyer/last-fee-earners').then((res)=>{
-        console.log('last fee earners : ' , res?.data);
-        if(res?.data?.fee?.fee_earners?.length > 0){
-          this.oldFeeEarners = res?.data?.fee?.fee_earners;
-        }
-        if(res?.data?.success){
-          'uplift_percentage','success_fee_term'
-          this.uplift_percentage_old = res?.data?.success?.uplift_percentage;
-          this.success_fee_term_old = res?.data?.success?.success_fee_term;
-        }
-      }).catch((err)=>{
-        console.log('error in fetching last fee earners : ' , err);
-      });
+    getPreviousFeeEarners() {
+      api
+        .get("/lawyer/last-fee-earners")
+        .then((res) => {
+          console.log("last fee earners : ", res?.data);
+          if (res?.data?.fee?.fee_earners?.length > 0) {
+            this.oldFeeEarners = res?.data?.fee?.fee_earners;
+          }
+          if (res?.data?.success) {
+            "uplift_percentage", "success_fee_term";
+            this.uplift_percentage_old = res?.data?.success?.uplift_percentage;
+            this.success_fee_term_old = res?.data?.success?.success_fee_term;
+          }
+        })
+        .catch((err) => {
+          console.log("error in fetching last fee earners : ", err);
+        });
     },
 
     setTwoDigitsAfterDecimal(key) {
-      console.log('key : ' , key);
+      console.log("key : ", key);
       if (isNaN(this.form[key])) {
         this.form[key] = null;
       } else {
@@ -2560,30 +2637,32 @@ export default {
 
     calculateTotals() {
       let grandTotal = 0;
-      if(this.selectedOption == "Hourly" && this.rows3.length > 0){
-        for (const item of this.rows3) {        
-          const subTotal = (item.hourly_rate ?? item.hourlyRate) * (item.hours ?? item.estimatedHours);
+      if (this.selectedOption == "Hourly" && this.rows3.length > 0) {
+        for (const item of this.rows3) {
+          const subTotal =
+            (item.hourly_rate ?? item.hourlyRate) *
+            (item.hours ?? item.estimatedHours);
           grandTotal += subTotal;
         }
       }
-      if(this.selectedOption == "Item" && this.rows2.length > 0){
-        console.log('item by item  : ' , this.rows2);
+      if (this.selectedOption == "Item" && this.rows2.length > 0) {
+        console.log("item by item  : ", this.rows2);
         for (const item of this.rows2) {
           grandTotal += parseFloat(item.total);
         }
       }
 
       let successTotal = 0;
-      if(this.selectedOption == "Success"){
+      if (this.selectedOption == "Success") {
         successTotal = parseFloat(
-            parseFloat(this.form.estimated_fee) +
-              parseFloat(
-                (this.form.uplift_percentage / 100) * this.form.estimated_fee
-                )
-              )
+          parseFloat(this.form.estimated_fee) +
+            parseFloat(
+              (this.form.uplift_percentage / 100) * this.form.estimated_fee
+            )
+        );
       }
 
-      console.log('item by item  2: ' , grandTotal);
+      console.log("item by item  2: ", grandTotal);
       // <option disabled selected value="">Select an option</option>
       //           <option value="Fixed">Fixed fee</option>
       //           <option value="Hourly">Hourly rate</option>
@@ -2599,25 +2678,23 @@ export default {
       switch (this.selectedOption) {
         case "Fixed":
           console.log("under fixed");
-          total =
-            parseFloat(this.form.fixed_fee_amount) 
-            // +
-            // parseFloat(this.form.disbursement_amount);
+          total = parseFloat(this.form.fixed_fee_amount);
+          // +
+          // parseFloat(this.form.disbursement_amount);
           break;
         case "Hourly":
           total =
             this.form.fee_earners == "me"
-              ? parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours) 
-                //   +
+              ? parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)
+              : //   +
                 // parseFloat(this.form.disbursement_amount)
-              : parseFloat(grandTotal);
+                parseFloat(grandTotal);
           // arr = (this.form.fee_earners == 'me') ? [(parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)),parseFloat(this.form.disbursement_amount)] : [this.form.disbursement_amount];
           break;
         case "Daily":
-          total =
-            parseFloat(this.form.daily_rate) * parseFloat(this.form.days) 
-            // +
-            // parseFloat(this.form.disbursement_amount);
+          total = parseFloat(this.form.daily_rate) * parseFloat(this.form.days);
+          // +
+          // parseFloat(this.form.disbursement_amount);
           // arr = (this.form.fee_earners == 'me') ? [(parseFloat(this.form.hourly_rate) * parseFloat(this.form.hours)),parseFloat(this.form.disbursement_amount)] : [this.form.disbursement_amount];
           break;
         case "Item":
@@ -2636,44 +2713,50 @@ export default {
           break;
       }
 
-      console.log('total : : : ' , total);
-      console.log('items : : : ' , this.rows);
+      console.log("total : : : ", total);
+      console.log("items : : : ", this.rows);
       // parseFloat(this.form.disbursement_amount)
 
       let disbursement = 0;
-      if(this.isNumericString(this.form.disbursement_amount)){
+      if (this.isNumericString(this.form.disbursement_amount)) {
         disbursement = parseFloat(this.form.disbursement_amount);
-      }else{
+      } else {
         disbursement = 0;
       }
 
       // this.totals["totalExcludingGst"] = this.getTotalWithOutGst(total);
-      total = this.grandTotal > 0 ? parseFloat(this.grandTotal) + total : disbursement + total; 
+      total =
+        this.grandTotal > 0
+          ? parseFloat(this.grandTotal) + total
+          : disbursement + total;
       this.totals["totalExcludingGst"] = total;
-      this.totals["gst"] = this.getGst(total,disbursement);
-      console.log('t1 : ' , this.totals["totalExcludingGst"])
-      console.log('t2 : ' , this.totals["gst"])
-      this.totals["totalIncludingGst"] = this.totals["totalExcludingGst"] + this.totals["gst"];
-      console.log('t3 : ' , this.totals["totalIncludingGst"])
+      this.totals["gst"] = this.getGst(total, disbursement);
+      console.log("t1 : ", this.totals["totalExcludingGst"]);
+      console.log("t2 : ", this.totals["gst"]);
+      this.totals["totalIncludingGst"] =
+        this.totals["totalExcludingGst"] + this.totals["gst"];
+      console.log("t3 : ", this.totals["totalIncludingGst"]);
 
       // let disbursement = 0;
       // if(this.isNumericString(this.form.disbursement_amount)){
       //   disbursement = parseFloat(this.form.disbursement_amount);
       // }
       // check if gst applicable in any item of disbursements
-      if(this.rows.length > 0){
-        const gst_applicable_items = this.rows.filter(item => item.gst_not_applicable == "");
+      if (this.rows.length > 0) {
+        const gst_applicable_items = this.rows.filter(
+          (item) => item.gst_not_applicable == ""
+        );
 
-        gst_applicable_items.forEach(item => {
+        gst_applicable_items.forEach((item) => {
           const gstAmount = 0.1 * parseFloat(item.total);
           disbursement += gstAmount;
         });
       }
       // if(this.isNumericString(this.form.disbursement_amount)){
       //   console.log('t4 under if : ' , disbursement);
-        // this.totals["totalIncludingGst"] += disbursement;
+      // this.totals["totalIncludingGst"] += disbursement;
       // }
-      console.log('cons sole log : ' , this.totals);
+      console.log("cons sole log : ", this.totals);
     },
 
     // getTotalWithGst(...valuesArray){
@@ -2720,21 +2803,21 @@ export default {
     //   return parseFloat(gst);
     // },
 
-    getGst(total,disbursement) {
+    getGst(total, disbursement) {
       let gst1 = 0;
       let gst2 = 0;
-      if(this.grandTotal > 0){
+      if (this.grandTotal > 0) {
         const disbursementTotalForGst = this.rows.reduce((total, row) => {
           // Check if gst_not_applicable is false before adding the cost
           if (!row.gst_not_applicable) {
             return total + (parseFloat(row.costAud) || 0);
           }
           return total;
-        },0);
+        }, 0);
         let val = total - this.grandTotal;
         gst1 = val * 0.1;
         gst2 = disbursementTotalForGst * 0.1;
-      }else{
+      } else {
         let val = total - disbursement;
         gst1 = val * 0.1;
         gst2 = disbursement * 0.1;
@@ -2796,7 +2879,7 @@ export default {
     },
 
     resetForm() {
-      this.form = {
+      (this.form = {
         hours: null,
         hourly_rate: null,
         retainer_period: null,
@@ -2823,14 +2906,14 @@ export default {
         description: null,
         lawyer_id: null,
         job_id: null,
-      },
-      this.isVisible = 'Yes';
-      console.log('reset ' , this.form);
-        this.paySucc = "No",
+      }),
+        (this.isVisible = "Yes");
+      console.log("reset ", this.form);
+      (this.paySucc = "No"),
         // this.newRow.itemDisbursement = "";
         // this.newRow.costAud = "";
         // this.newRow.gst_not_applicable = false;
-        this.newRow2.itemDisbursement = "";
+        (this.newRow2.itemDisbursement = "");
       this.newRow2.costAud = "";
       this.newRow3.title = "";
       this.newRow3.hourlyRate = "";
@@ -2846,7 +2929,7 @@ export default {
       this.currentSchema = this.selectedOption;
       console.log("schema", this.currentSchema);
       this.resetForm();
-      if(this.selectedOption == "Success"){
+      if (this.selectedOption == "Success") {
         this.form.uplift_percentage = this.uplift_percentage_old;
         this.form.success_fee_term = this.success_fee_term_old;
       }
@@ -2913,11 +2996,14 @@ export default {
     },
 
     addRow() {
-      if (this.newRow.itemDisbursement && (this.newRow.costAud || this.newRow.costAud == 0.00)) {
+      if (
+        this.newRow.itemDisbursement &&
+        (this.newRow.costAud || this.newRow.costAud == 0.0)
+      ) {
         // let total = this.rows.reduce((accumulator, currentItem) => {
         //   return accumulator + parseFloat(currentItem.total);
         // }, 0);
-        
+
         // let value_to_check = this.newRow.costAud;
         // let total_to_check = value_to_check += total;
 
@@ -2973,11 +3059,9 @@ export default {
     },
 
     toggleDiv() {
-      
       this.isDivVisible = !this.isDivVisible;
     },
     toggleDiv1() {
-     
       this.isDivVisible1 = !this.isDivVisible1;
     },
     toggleDiv2() {
@@ -2985,7 +3069,6 @@ export default {
       this.isDivVisible2 = !this.isDivVisible2;
     },
     toggleDiv3() {
-   
       this.isDivVisible3 = !this.isDivVisible3;
     },
 
@@ -3007,7 +3090,7 @@ export default {
       this.newRow3.hourlyRate = this.rows3[index].hourlyRate;
       this.newRow3.estimatedHours = this.rows3[index].estimatedHours;
 
-      if(this.divEarnerAddVisible == false && this.divEarnerVisible == false){
+      if (this.divEarnerAddVisible == false && this.divEarnerVisible == false) {
         this.divEarnerAddVisible = true;
         this.divEarnerVisible = true;
       }
@@ -3035,12 +3118,19 @@ export default {
     },
 
     nextStep() {
-      
       // if upfront payment amount greater than total amount
-      if(this.selectedOption != "Pro" && this.paySucc == "Yes" && this.currentStep == 1){
+      if (
+        this.selectedOption != "Pro" &&
+        this.paySucc == "Yes" &&
+        this.currentStep == 1
+      ) {
         this.calculateTotals();
-        if(this.form.upfront_payment > this.totals["totalExcludingGst"]){
-          this.$swal("", "Your upfront payment cannot exceed your quoted fees. Please amend.", "error");
+        if (this.form.upfront_payment > this.totals["totalExcludingGst"]) {
+          this.$swal(
+            "",
+            "Your upfront payment cannot exceed your quoted fees. Please amend.",
+            "error"
+          );
           // alert("Upfront payment should not greater than total amount");
           return;
         }
@@ -3087,7 +3177,6 @@ export default {
       this.divItemiseVisible = !this.divItemiseVisible;
     },
     showEarner() {
-        
       this.divEarnerAddVisible = true;
       this.divEarnerVisible = !this.divEarnerVisible;
     },
@@ -3115,13 +3204,13 @@ export default {
     },
     showElement(value) {
       // if jus me
-      if(value == "Yes"){
+      if (value == "Yes") {
         this.rows3 = [];
-      }else{
+      } else {
         this.form.hourly_rate = null;
         this.form.hours = null;
 
-        if(this.oldFeeEarners.length > 0){
+        if (this.oldFeeEarners.length > 0) {
           this.oldFeeEarners.forEach((item) => {
             this.rows3.push({
               title: item?.title,
@@ -3130,7 +3219,6 @@ export default {
             });
           });
         }
-      
       }
       this.isVisible = value;
     },
@@ -3149,15 +3237,32 @@ export default {
       }
     },
   },
+  directives: {
+    'only-number-with-limit': {
+      mounted(el, binding) {
+        el.addEventListener('input', function(event) {
+          const limit = binding.value || Infinity; // Default to Infinity if no limit provided
+          const input = event.target.value;
+          const numericValue = input.replace(/\D/g, ''); // Remove non-numeric characters
+          const truncatedValue = numericValue.slice(0, limit); // Limit the length
+          if (input !== truncatedValue) {
+            event.target.value = truncatedValue;
+            event.target.dispatchEvent(new Event('input')); // Emit input event to update v-model
+          }
+        });
+      }
+    }
+  },
   name: "DashboardTab",
 };
 </script>
 
 <style scoped>
-th.table-title-td{
+th.table-title-td {
   width: 5% !important;
 }
-.hourlycost .table-top th, .hourlycost .table-mid td{
+.hourlycost .table-top th,
+.hourlycost .table-mid td {
   line-height: 1.3em !important;
 }
 .summ div p span:first-child {
@@ -3170,9 +3275,9 @@ th.table-title-td{
 }
 .summ div .topcharge1 {
   font-weight: 600;
-    font-size: 16px;
+  font-size: 16px;
 }
-.summ div .topcharge span{
+.summ div .topcharge span {
   font-weight: 500 !important;
   font-size: 14px !important;
 }
@@ -3180,22 +3285,22 @@ th.table-title-td{
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content:space-between;
+  justify-content: space-between;
   text-transform: capitalize;
 }
 .summ div p.fee {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    text-transform: capitalize;
-    flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  text-transform: capitalize;
+  flex-direction: column;
 }
 .font-set {
-    font-weight: 800 !important;
-    text-transform: none !important;
+  font-weight: 800 !important;
+  text-transform: none !important;
 }
-.text-trans{
+.text-trans {
   text-transform: none !important;
 }
 .summ .sumdesc p {
@@ -3460,19 +3565,19 @@ td {
   }
 }
 @media only screen and (max-width: 767px) {
-  th.table-title-td{
-  width: 100% !important;
-}
+  th.table-title-td {
+    width: 100% !important;
+  }
   .hourlycost tbody tr,
-.hourlycost td,
-.hourlycost th {
-  width: 100%;
-}
+  .hourlycost td,
+  .hourlycost th {
+    width: 100%;
+  }
   .hourlycost {
-  /* display: table;
+    /* display: table;
   width: 100%; */
-  table-layout: fixed;
-}
+    table-layout: fixed;
+  }
   form#mainForm {
     width: unset;
   }
