@@ -119,7 +119,7 @@
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
           >If you are a Client, you also agree to be bound by the Terms &amp;
           Conditions for Clients, which is available
-          <a target="_blank" href="/terms-of-use">here</a>
+          <a target="_blank" href="/terms-of-use-client">here</a>
           .<o:p></o:p
         ></span>
       </p>
@@ -140,7 +140,7 @@
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
           >If you are a Lawyer, you also agree to be bound by the Terms &amp;
           Conditions for Lawyers, which is available
-          <a target="_blank" href="/terms-of-use  ">here</a>
+          <a target="_blank" href="/terms-of-use-lawyer">here</a>
           .<o:p></o:p
         ></span>
       </p>

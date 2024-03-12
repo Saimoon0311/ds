@@ -582,12 +582,14 @@
                   <div class="mb-2">
                     <span class="position-absolute d-span"> $</span>
                     <input
-                      type="number"
+                      type="text"
                       min="1"
                       class="form-control d-input"
                       v-model="form.consultation_amount2"
                       name="freeFirstConsultationFee"
                       id="freeFirstConsultationFee"
+                      maxlength="25"
+                      v-only-number-with-limit:25
                     />
                   </div>
                 </div>
@@ -605,12 +607,14 @@
                   >
                   <div class="mb-2 position-relative">
                     <input
-                      type="number"
+                      type="text"
                       v-model="form.consultation_time2"
                       class="form-control d-input-min"
                       name="freeFirstConsultationMinutes"
                       id="freeFirstConsultationMinutes"
                       placeholder="E.g. 60"
+                      maxlength="25"
+                      v-only-number-with-limit:25
                     />
                     <span class="position-absolute d-span min-span"
                       >minutes</span
@@ -964,7 +968,8 @@
 
               <!-- Modal ends here -->
               <td colspan="3">
-                {{ loginUser?.link }}
+                <!-- {{ loginUser?.link }} -->
+                <a :href="linkUrl" target="_blank">{{ loginUser?.link }}</a>
               </td>
             </tr>
 
@@ -1303,10 +1308,11 @@ window.$ = window.jQuery = $;
 export default {
   data() {
     return {
+      linkUrl: null,
       // baseUrl : process.env.BACKEND_URL + 'storage/images/',
       image: null,
 
-      constitutionalRadioValue : null,
+      constitutionalRadioValue: null,
 
       form: {
         first_name_verify: null,
@@ -1360,6 +1366,12 @@ export default {
 
 
   watch: {
+    loginUser: {
+      immediate: true,
+      handler() {
+        this.updateLink();
+      }
+    },
     'form.consultation_amount2': function (newVal) {
       if (newVal == 0) {
         this.form.consultation_amount2 = 1;
@@ -1403,6 +1415,9 @@ export default {
     this.updateFormProperties();
   },
   mounted() {
+
+    this.updateLink();
+
     // this.checkMessages();
     this.fetchOptions();
     this.fetchOptions_locations();
@@ -1411,6 +1426,17 @@ export default {
     }
   },
   methods: {
+
+    updateLink() {
+      if (this.loginUser?.link) {
+        let url = this.loginUser?.link;
+        this.linkUrl = url;
+        if (url.startsWith('www')) {
+          this.linkUrl = `https://${url}`;
+        }
+      }
+    },
+
     async sendUpdateEmail(modalId = null) {
       try {
         await api.post("/send-email-update-link", {
@@ -1693,6 +1719,25 @@ export default {
       $(modalId).modal("hide");
     },
   },
+
+
+  directives: {
+    'only-number-with-limit': {
+      mounted(el, binding) {
+        el.addEventListener('input', function (event) {
+          const limit = binding.value || Infinity; // Default to Infinity if no limit provided
+          const input = event.target.value;
+          const numericValue = input.replace(/\D/g, ''); // Remove non-numeric characters
+          const truncatedValue = numericValue.slice(0, limit); // Limit the length
+          if (input !== truncatedValue) {
+            event.target.value = truncatedValue;
+            event.target.dispatchEvent(new Event('input')); // Emit input event to update v-model
+          }
+        });
+      }
+    }
+  },
+
   name: "ProfileTab",
 };
 </script>
@@ -1754,7 +1799,8 @@ tbody tr td {
 tbody tr td:last-child {
   border-left: 1px solid #dee2e6;
 }
-tbody tr td:first-child{
+
+tbody tr td:first-child {
   word-break: auto-phrase;
 }
 
@@ -1772,8 +1818,8 @@ tbody tr td:first-child{
 
 .logo-small {
   width: 185px;
-    height: 40px;
-    object-fit: contain;
+  height: 40px;
+  object-fit: contain;
 }
 
 .law-img {
@@ -1854,18 +1900,22 @@ tbody tr td:first-child{
   top: 0;
   right: 0;
 }
+
 table div span {
-    word-break: auto-phrase;
+  word-break: auto-phrase;
 }
+
 @media only screen and (max-width: 767px) {
-  tbody tr td:first-child{
-  white-space: normal;
-/* word-break: break-word; */
-  /* text-wrap: ; */
-}
-  table tr td:nth-child(2){
+  tbody tr td:first-child {
+    white-space: normal;
+    /* word-break: break-word; */
+    /* text-wrap: ; */
+  }
+
+  table tr td:nth-child(2) {
     width: 50%
-}
+  }
+
   table {
     table-layout: inherit;
     word-break: break-word;
@@ -1877,11 +1927,13 @@ table div span {
     flex-wrap: wrap;
   }
 }
+
 @media only screen and (max-width: 360px) {
-  table{
+  table {
     font-size: 15px;
   }
-  table button.btn{
+
+  table button.btn {
     padding: 3px 5px;
     font-size: 12px;
   }

@@ -61,6 +61,8 @@ import termsForLawyer from "@/pages/lawyer/termsAndConditions.vue";
 // other
 import privacyPolicy from "@/pages/privacy-policy.vue";
 import termsOfUse from "@/pages/terms-of-use.vue";
+import termsLawyer from "@/pages/terms-lawyer.vue";
+import termsClient from "@/pages/terms-client.vue";
 // import AboutUs from "@/pages/AboutUs.vue";
 import HowSimplawfyWorks from "@/pages/HowSimplawfyWorksClient.vue";
 // import HowSimplawfyWorksLawyer from "@/pages/HowSimplawfyWorksLawyer.vue";
@@ -394,7 +396,14 @@ const routes = [
     path: "/terms-of-use",
     component: termsOfUse,
   },
-
+  {
+    path: "/terms-of-use-lawyer",
+    component: termsLawyer,
+  },
+  {
+    path: "/terms-of-use-client",
+    component: termsClient,
+  },
   {
     path: "/forget-password",
     component: ForgetPassword,
