@@ -544,7 +544,7 @@
                       v-model="newRow2.itemDisbursement"
                       placeholder="Eg: letter of advice"
                       class="form-control"
-                      maxlength="25"
+                      maxlength="50"
                     />
                   </label>
                   <br />
@@ -562,9 +562,10 @@
                       <input
                         v-model="newRow2.costAud"
                         min="1"
-                        type="number"
+                        type="text"
                         class="form-control d-input"
-                        maxlength="10"
+                        maxlength="25"
+                        v-only-number-with-limit:25
                       />
                     </div>
                   </label>
