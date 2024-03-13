@@ -517,7 +517,7 @@
   
               <div class="form-group m-2" id="freeFirstConsultationRadio">
                 <!-- <label>Consultation type:</label> -->
-                <div class="form-check">
+                <div class="form-check" @click="changeConsultationType2('no')">
                   <input
                     class="form-check-input"
                     v-model="constitutionalRadioValue"
@@ -530,12 +530,11 @@
                   <label
                     class="form-check-label"
                     for="freeFirstConsultationNo1"
-                    @click="changeConsultationType2('no')"
                   >
                     No
                   </label>
                 </div>
-                <div class="form-check">
+                <div class="form-check" @click="changeConsultationType2('free')">
                   <input
                     class="form-check-input"
                     v-model="constitutionalRadioValue"
@@ -548,12 +547,12 @@
                   <label
                     class="form-check-label"
                     for="freeFirstConsultationYes"
-                    @click="changeConsultationType2('free')"
+                    
                   >
                     Free
                   </label>
                 </div>
-                <div class="form-check">
+                <div class="form-check" @click="changeConsultationType2('discounted')">
                   <input
                     class="form-check-input"
                     type="radio"
@@ -566,7 +565,7 @@
                   <label
                     class="form-check-label"
                     for="freeFirstConsultationNo"
-                    @click="changeConsultationType2('discounted')"
+                    
                   >
                     Discounted
                   </label>

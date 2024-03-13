@@ -67,20 +67,33 @@
                   <th>
                     <!-- <span @mouseover="openFeeEstimateModal('Estimate')"> -->
 
+                      <!-- @mouseover="updateTooltip('Estimate', 0)"
+                      @click="updateTooltip('Estimate', 0)" -->
+                      <!-- data-bs-toggle="tooltip"
+                      data-bs-html="true" -->
+                    <div class="custom-tooltip">
                     <span
                       
                       id="tooltipSpan0"
-                      data-bs-toggle="tooltip"
-                      data-bs-html="true"
+                      
                       title=""
-                      @mouseover="updateTooltip('Estimate', 0)"
-                      @click="updateTooltip('Estimate', 0)"
+
+                      @mouseenter="showTooltip('Estimate')" @mouseleave="hideTooltip" @click="toggleTooltip"
+
                     >
                       Fee estimate
                       <i class="fas fa-info-circle"></i>
 
                       {{ chargeType(item?.charge_type === "Estimate") }}
                     </span>
+
+                    <!-- <transition name="fade">
+                      <div v-if="isTooltipVisible" class="tooltip">
+                        <p style="color:#fff">{{ tooltipText }}</p>
+                      </div>
+                    </transition> -->
+                  </div>
+    
                   </th>
 
                   <th>Proposed work</th>
@@ -119,12 +132,13 @@
                   <!-- <td>{{ item?.charge_type }}</td> -->
                   <td class="text-center" style="width: 30%">
                     <!-- <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ chargeType(item?.charge_type) }} <span data-toggle="tooltip" data-placement="top" title="How you will charge?"><i class="fas fa-info-circle"></i></span></p> -->
-                    <p
-                      :id="'tooltipSpan' + item?.id"
-                      data-bs-toggle="tooltip"
+                    <!-- data-bs-toggle="tooltip"
                       data-bs-html="true"
                       title=""
-                      @mouseover="updateTooltip(item?.charge_type, item?.id)"
+                      @mouseover="updateTooltip(item?.charge_type, item?.id)" -->
+                    <p
+                      :id="'tooltipSpan' + item?.id"
+                      @mouseenter="showTooltip(item?.charge_type)" @mouseleave="hideTooltip" @click="toggleTooltip"
                       class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small no-hover"
                     >
                       {{ chargeType(item?.charge_type) }}
@@ -275,9 +289,11 @@ export default {
     return {
       // charge_defination : "",
       tab: null,
+      isTooltipVisible: false,
+      tooltipText : "",
     };
   },
-  
+
   computed: {
     jobId() {
       return this.$store.state.jobId;
@@ -314,6 +330,34 @@ export default {
   },
 
   methods: {
+
+
+    showTooltip(type) {
+      if (!this.isMobileDevice()) {
+        const { definition } = this.openFeeEstimateModal(type);
+        this.tooltipText = definition;
+        console.log(this.tooltipText);
+        this.isTooltipVisible = true;
+        alert(this.tooltipText);
+      }
+    },
+    hideTooltip() {
+      if (!this.isMobileDevice()) {
+        this.isTooltipVisible = false;
+      }
+    },
+    toggleTooltip() {
+      if (this.isMobileDevice()) {
+        this.isTooltipVisible = !this.isTooltipVisible;
+      }
+    },
+    isMobileDevice() {
+      // Adjust this condition as per your needs to detect mobile devices
+      return window.innerWidth <= 768;
+    },
+
+
+
     goToMessagePage2(item = null) {
       if (item) {
         console.log("item mm mm : ", item);
@@ -568,6 +612,45 @@ export default {
 </script>
 
 <style scoped>
+
+
+
+
+/* .custom-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 1;
+  background-color: #000;
+  color: #fff;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  display: none;
+}
+
+.tooltip.fade-enter-active, .tooltip.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.tooltip.fade-enter, .tooltip.fade-leave-to {
+  opacity: 0;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
 .lawname {
   font-size: 14px;
 }
@@ -575,6 +658,7 @@ export default {
 .font-small {
   font-size: 12px;
 }
+
 .no-hover:hover {
   background: black !important;
 }
@@ -591,7 +675,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
   color: white;
   background-color: #000000;
 }
@@ -635,12 +719,15 @@ ul#pills-tab {
   white-space: normal;
   word-break: break-word;
 }
+
 .charge-modal {
   border-bottom: 0;
 }
+
 .charge-modal h6 {
   margin: 0;
 }
+
 .charge-modal button.close {
   border: none;
   background: transparent;
@@ -649,6 +736,7 @@ ul#pills-tab {
   line-height: 1;
   font-weight: 600;
 }
+
 .descriptionText::-webkit-scrollbar,
 span.class-para::-webkit-scrollbar {
   width: 6px;
@@ -676,9 +764,11 @@ span.class-para::-webkit-scrollbar-track {
     font-size: 14px;
     padding-right: 2px;
   }
+
   .lawname {
     font-size: 12px;
   }
+
   table#bidsActive tr th:first-child,
   table#bidsActive tr td:first-child {
     position: -webkit-sticky;
@@ -704,5 +794,4 @@ span.class-para::-webkit-scrollbar-track {
     display: flex;
     flex-wrap: wrap;
   }
-}
-</style>
+}</style>
