@@ -992,4 +992,10 @@ section.faq-main b {
 ul.style-num {
   list-style: auto;
 }
+
+@media only screen and (max-width: 600px) {
+  #client-faq{
+  padding-bottom: 30px;
+}
+}
 </style>

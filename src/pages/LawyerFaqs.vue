@@ -1293,4 +1293,9 @@ a,
 a:hover {
   color: #000;
 }
+@media only screen and (max-width: 600px) {
+  #lawyer-faq{
+  padding-bottom: 30px;
+}
+}
 </style>

@@ -2000,7 +2000,7 @@
             <div v-if="form.retainer_limitation">
               <p>
                 <span> Retainer Limitation:</span>
-                <span> {{ form.retainer_limitation }}</span>
+                <span class="descriptionText"> {{ form.retainer_limitation }}</span>
               </p>
             </div>
 
@@ -3581,6 +3581,9 @@ td {
   }
 }
 @media only screen and (max-width: 767px) {
+  .hourlycost *{
+    font-size: 12px;
+  }
   th.table-title-td {
     width: 100% !important;
   }

@@ -68,7 +68,8 @@
                     <!-- <span @mouseover="openFeeEstimateModal('Estimate')"> -->
                       
                       <span id="tooltipSpan0" data-bs-toggle="tooltip" data-bs-html="true" title="" 
-                      @mouseover="updateTooltip('Estimate',0)">
+                      @mouseover="updateTooltip('Estimate',0)"
+      @click="updateTooltip('Estimate',0)">
                       Fee estimate
                       <i class="fas fa-info-circle"></i>
                      
