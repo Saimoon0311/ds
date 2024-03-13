@@ -2353,7 +2353,6 @@ import ShowJobDetails from "../../components/ShowJobDetails";
 <script>
 import LawyerHeader from "./Header.vue";
 import api from "@/config/api";
-import { Tooltip } from 'bootstrap'
 
 export default {
   data() {
@@ -2565,9 +2564,6 @@ export default {
   },
 
   mounted() {
-    new Tooltip(document.body, {
-      selector: "[data-bs-toggle='tooltip']",
-    })
     this.getPreviousFeeEarners();
     if (this.jobData == null || this.jobData == "") {
       this.$router.push({ path: "/lawyer-dashboard" });

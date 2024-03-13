@@ -78,13 +78,13 @@
                       
                       title=""
 
-                      @mouseenter="showTooltip('Estimate')" @mouseleave="hideTooltip" @click="toggleTooltip"
+                      @mouseenter="showTooltip('Estimate')" @mouseleave="hideTooltip" @click="toggleTooltip('Estimate')"
 
                     >
                       Fee estimate
                       <i class="fas fa-info-circle"></i>
-
-                      {{ chargeType(item?.charge_type === "Estimate") }}
+                     
+                      {{ chargeType(item?.charge_type === 'Estimate') }}
                     </span>
 
                     <!-- <transition name="fade">
@@ -138,11 +138,12 @@
                       @mouseover="updateTooltip(item?.charge_type, item?.id)" -->
                     <p
                       :id="'tooltipSpan' + item?.id"
-                      @mouseenter="showTooltip(item?.charge_type)" @mouseleave="hideTooltip" @click="toggleTooltip"
+                      @mouseenter="showTooltip(item?.charge_type)" @mouseleave="hideTooltip" @click="toggleTooltip(item?.charge_type)"
                       class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small no-hover"
                     >
                       {{ chargeType(item?.charge_type) }}
-                      <span>
+                      <span
+                      >
                         <i class="fas fa-info-circle"></i>
                       </span>
                     </p>
@@ -169,32 +170,17 @@
                     </p>
                     <p
                       class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-0 font-small"
-                      @click="
-                        openProposalDetailsModalPopup(
-                          item,
-                          'How you will be charged.',
-                          false,
-                          false
-                        )
-                      "
+                      @click="openProposalDetailsModalPopup(item,'How you will be charged.',false,false)"
                     >
                       see more
                     </p>
                   </td>
 
                   <!-- <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td> -->
-                  <td
-                    class="text-center"
-                    style="width: 40%; vertical-align: top"
-                  >
+                  <td class="text-center" style="width: 40%; vertical-align: top;">
                     <!-- <p class="mb-1">{{ item?.description }}</p> -->
                     <!-- <p class="mb-1">{{ generateExcerpt(item?.description) }} <span class=" text-black fw-bolder" @click="openDescription(item?.description)"> See more</span></p> -->
-                    <p
-                      class="mb-1 descriptionText"
-                      style="white-space: pre-line"
-                    >
-                      {{ item?.description }}
-                    </p>
+                    <p class="mb-1 descriptionText" style="white-space: pre-line;">{{ item?.description }}</p>
                   </td>
                   <!-- <td>{{ formatCreatedAt(item?.created_at) }}</td> -->
 
@@ -279,6 +265,7 @@ import $ from "jquery";
 window.$ = window.jQuery = $;
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
+
 export default {
   name: "ClientDashboard",
   components: {
@@ -293,7 +280,6 @@ export default {
       tooltipText : "",
     };
   },
-
   computed: {
     jobId() {
       return this.$store.state.jobId;
@@ -346,9 +332,13 @@ export default {
         this.isTooltipVisible = false;
       }
     },
-    toggleTooltip() {
+    toggleTooltip(type) {
       if (this.isMobileDevice()) {
+        const { definition } = this.openFeeEstimateModal(type);
+        this.tooltipText = definition;
+        console.log(this.tooltipText);
         this.isTooltipVisible = !this.isTooltipVisible;
+        alert(this.tooltipText);
       }
     },
     isMobileDevice() {
@@ -360,19 +350,21 @@ export default {
 
     goToMessagePage2(item = null) {
       if (item) {
-        console.log("item mm mm : ", item);
+        console.log('item mm mm : ' , item);
         this.saveJobInfo(item?.job);
         // this.saveLoadMoreData();
 
         this.$store.commit("SET_JOBIDTOCHAT", item?.job?.id);
         // this.$store.commit("SET_DATATAB", this.tab);
-
-        this.$store.commit("SET_USERTOCHAT", item?.lawyer);
-        // if (item?.lawyer_chat == null) {
-        //   this.$store.commit("SET_CHATSTATUS", "new");
-        // } else {
-        //   this.$store.commit("SET_CHATSTATUS", "old");
-        // }
+        
+      
+          this.$store.commit("SET_USERTOCHAT", item?.lawyer);
+          // if (item?.lawyer_chat == null) {
+          //   this.$store.commit("SET_CHATSTATUS", "new");
+          // } else {
+          //   this.$store.commit("SET_CHATSTATUS", "old");
+          // }
+      
       }
 
       // if (item == null) {
@@ -385,7 +377,7 @@ export default {
       //   this.$store.commit("SET_CHATSTATUS", null);
       // }
       this.$store.commit("SET_IS_NOT_HEADER_CHAT", true);
-
+      
       this.$router.push({
         path: "/messages-history",
         query: { job: item?.job?.id },
@@ -419,11 +411,11 @@ export default {
     //         break;
     //     }
     //     $(this.$refs.myModal).modal('show');
-    //   }
+    //   }      
     // },
     closeModal() {
       // Hide Bootstrap Modal
-      $(this.$refs.myModal).modal("hide");
+      $(this.$refs.myModal).modal('hide');
     },
     disableMessageButton(item) {
       console.log("lawyer id : ", item?.lawyer_id);
@@ -545,12 +537,10 @@ export default {
     },
     changeStatus(obj) {
       let question = "";
-      if (obj?.status?.toLowerCase() == "accept") {
-        question =
-          "Are you sure you want to accept this proposal? All other proposals will be automatically rejected.";
-      } else if (obj?.status.toLowerCase() == "reject") {
-        question =
-          "Are you sure you want to reject this proposal? This cannot be undone.";
+      if(obj?.status?.toLowerCase() == "accept"){
+        question = "Are you sure you want to accept this proposal? All other proposals will be automatically rejected.";
+      }else if(obj?.status.toLowerCase() == "reject"){
+         question = 'Are you sure you want to reject this proposal? This cannot be undone.'
       }
       this.$swal({
         title: "Are you sure?",
@@ -571,12 +561,13 @@ export default {
               let heading = "";
               if (obj?.status?.toLowerCase() == "accept") {
                 // msg = `Congratulations on finding a lawyer!
-                // msg = `We're so glad that you found a lawyer for your job '[${this.jobData?.title} - ${this.jobData?.identity}.]' through Simplawfy.
+                // msg = `We're so glad that you found a lawyer for your job '[${this.jobData?.title} - ${this.jobData?.identity}.]' through Simplawfy. 
                 // Here are your lawyer's contact details so you can communicate with them directly:
-                // [${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, ${obj?.lawyer?.email} and ${obj?.lawyer?.phone}].
+                // [${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, ${obj?.lawyer?.email} and ${obj?.lawyer?.phone}]. 
                 // You will receive an email shortly with all these details as well as the details of the proposal you accepted, the details of your job and any correspondence between you and your chosen Lawyer.`;
                 heading = "Congratulations on finding a lawyer!";
                 msg = `We're so glad that you found a lawyer, ${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, through Simplawfy. You will receive an email shortly with their details. You can also view them in the Closed tab on your Dashboard.`;
+
               } else {
                 msg = `You have ${obj.status.toLowerCase()}ed this proposal successfully.`;
               }
@@ -589,15 +580,16 @@ export default {
                 }
               });
 
-              //       this.$swal.fire({
-              //   title: "Congratulations on finding a lawyer!",
-              //   html: msg,
-              //   showCloseButton: true,
-              //   showConfirmButton: false,
-              //   customClass: {
-              //     container: "my-swal-container", // You can define your custom class for styling
-              //   },
-              // });
+        //       this.$swal.fire({
+        //   title: "Congratulations on finding a lawyer!",
+        //   html: msg,
+        //   showCloseButton: true,
+        //   showConfirmButton: false,
+        //   customClass: {
+        //     container: "my-swal-container", // You can define your custom class for styling
+        //   },
+        // });
+
 
               console.log("response : ", res);
             })
@@ -658,9 +650,8 @@ export default {
 .font-small {
   font-size: 12px;
 }
-
-.no-hover:hover {
-  background: black !important;
+.no-hover:hover{
+  background: black !important; 
 }
 
 ul#pills-tab {
@@ -717,41 +708,35 @@ ul#pills-tab {
   margin-right: 5px;
   text-align: start;
   white-space: normal;
-  word-break: break-word;
+    word-break: break-word;
 }
 
 .charge-modal {
-  border-bottom: 0;
+    border-bottom: 0;
 }
-
-.charge-modal h6 {
-  margin: 0;
+.charge-modal h6{
+    margin: 0;
 }
-
-.charge-modal button.close {
-  border: none;
-  background: transparent;
-  font-size: 32px;
-  padding: 0;
-  line-height: 1;
-  font-weight: 600;
+.charge-modal  button.close {
+    border: none;
+    background: transparent;
+    font-size: 32px;
+    padding: 0;
+    line-height: 1;
+    font-weight: 600;
 }
-
-.descriptionText::-webkit-scrollbar,
-span.class-para::-webkit-scrollbar {
+.descriptionText::-webkit-scrollbar , span.class-para::-webkit-scrollbar {
   width: 6px;
   border-radius: 10px;
 }
 
-.descriptionText::-webkit-scrollbar-thumb,
-span.class-para::-webkit-scrollbar-thumb {
+.descriptionText::-webkit-scrollbar-thumb , span.class-para::-webkit-scrollbar-thumb {
   background-color: #969696;
   /* outline: 1px solid #292929; */
   border-radius: 10px;
 }
 
-.descriptionText::-webkit-scrollbar-track,
-span.class-para::-webkit-scrollbar-track {
+.descriptionText::-webkit-scrollbar-track , span.class-para::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
   border-radius: 10px;
 }
@@ -760,7 +745,7 @@ span.class-para::-webkit-scrollbar-track {
   .descriptionText {
     width: 100%;
     white-space: normal;
-    word-break: break-word;
+word-break: break-word;
     font-size: 14px;
     padding-right: 2px;
   }
