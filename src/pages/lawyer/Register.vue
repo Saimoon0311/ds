@@ -95,11 +95,13 @@
                 </div>
             </div> 
 
-            <div class="d-flex align-items-between justify-content-center mb-4 inline-table terms-check">
+            <div class="d-flex align-items-between justify-content-center mb-4 align-items-start terms-check">
                 <Field class="form-check-Field" type="checkbox" id="termsAndConditions" name="tandc" value="true" :class="{'is-invalid' : errors.tandc}" />
                 <label class="form-check-label tac" for="termsAndConditions">
                     &nbsp;I have read and agree to the 
-                    <router-link to="/terms-and-conditions-for-lawyers" target="_blank" >terms and conditions.</router-link>
+                    <!-- <router-link to="/terms-and-conditions-for-lawyers" target="_blank" >terms and conditions.</router-link> -->
+                    <router-link to="https://makinglawsimple.com.au/app/terms-of-use-lawyer" target="_blank" >terms and conditions.</router-link>
+
                 </label>
                 <span class="invalid-feedback">{{errors.tandc}}</span>
             </div>
@@ -237,6 +239,9 @@ export default {
 }
 </script>
 <style scoped>
+#termsAndConditions{
+    margin-top: 4px;
+}
 .hello {
     /* min-height: 100vh;
     display: grid; */
@@ -353,6 +358,14 @@ a:hover {
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {
+    #termsAndConditions{
+    margin-top: 4px;
+}
+    .terms-check {
+    width: 90%;
+    text-align: left;
+    margin-left: 40px;
+}
     .find-client {
         margin: 0 !important;
         padding-right: 30px !important;

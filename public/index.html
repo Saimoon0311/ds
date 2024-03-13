@@ -51,6 +51,9 @@
    
   </head>
   <style>
+    div:where(.swal2-container).swal2-center>.swal2-popup a{
+      color: #91c8fc !important;
+    }
     button.customBtnClass {
     background: #88c7fa !important;
 }
@@ -200,10 +203,12 @@
 
     @media only screen and (max-width: 767px) {
       div:where(.swal2-container) button:where(.swal2-close) {
-        right: 2px;
-        top: 2px;
-        font-size: 0.8rem !important;
-      }
+    right: 2px;
+    top: 2px;
+    font-size: 1rem !important;
+    height: 25px !important;
+    width: 25px !important;
+}
       .my-swal-container .swal2-title {
         font-size: 20px !important;
       }
@@ -317,11 +322,15 @@
     .stepbtn .btn.softblue {
       background: #91c8fc !important;
     }
+    .limitText{
+      line-break: anywhere;
+
+    }
     .descriptionText {
       overflow: hidden;
       text-overflow: ellipsis;
-      min-height: 20px;
-      max-height: 120px;
+      min-height: 20px !important;
+      max-height: 120px !important;
       /* line-break: anywhere; */
       overflow-y: auto;
       padding-right: 10px;
@@ -346,6 +355,9 @@
       /* outline: 1px solid #292929; */
       border-radius: 10px;
     }
+    .WordSection1 a{
+      color: #91c8fc;
+    }
     div.top-wrapper {
       display: flex;
       justify-content: flex-start;
@@ -355,6 +367,9 @@
     }
     div.fee-estimate {
       font-size: 16px;
+    }
+    .navbar-nav .left-menu a.nav-link{
+      width: max-content;
     }
   </style>
   <body>
@@ -367,5 +382,8 @@
       >
     </noscript>
     <div id="app"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+
   </body>
 </html>

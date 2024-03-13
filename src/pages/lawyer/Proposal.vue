@@ -334,14 +334,23 @@
                   </div>
                   <label> Time/other limitations: </label>
                   <div class="mb-3">
-                    <input
+                    <!-- <input
                       type="text"
                       id="fixedFeeAmount"
                       v-model="form.retainer_limitation"
                       name="fixedFeeAmount"
                       class="form-control"
                       placeholder="Eg: up to 20 hours"
-                    />
+                    /> -->
+                    <textarea
+                      id="fixedFeeAmount"
+                      v-model="form.retainer_limitation"
+                      name="fixedFeeAmount"
+                      class="descriptionText form-control"
+                      maxlength="25000"
+                      placeholder="Eg: up to 20 hours"
+                    
+                    ></textarea>
                   </div>
                   <label> Termination notice period: </label>
                   <div class="mb-3">
@@ -1260,7 +1269,6 @@
                     required
                     maxlength="10"
                     v-only-number-with-limit:10
-
                   />
 
                   <br />
@@ -2001,7 +2009,9 @@
             <div v-if="form.retainer_limitation">
               <p>
                 <span> Retainer Limitation:</span>
-                <span> {{ form.retainer_limitation }}</span>
+                <span class="descriptionText limitText">
+                  {{ form.retainer_limitation }}</span
+                >
               </p>
             </div>
 
@@ -2343,6 +2353,7 @@ import ShowJobDetails from "../../components/ShowJobDetails";
 <script>
 import LawyerHeader from "./Header.vue";
 import api from "@/config/api";
+import { Tooltip } from 'bootstrap'
 
 export default {
   data() {
@@ -2358,7 +2369,7 @@ export default {
       summaryHtmlItemByItemTasks: null,
       summaryHtmlFeeEarners: null,
       uplift_percentage_old: null,
-      retainer_limitation_old : null,
+      retainer_limitation_old: null,
       success_fee_term_old: null,
       form: {
         hours: null,
@@ -2554,6 +2565,9 @@ export default {
   },
 
   mounted() {
+    new Tooltip(document.body, {
+      selector: "[data-bs-toggle='tooltip']",
+    })
     this.getPreviousFeeEarners();
     if (this.jobData == null || this.jobData == "") {
       this.$router.push({ path: "/lawyer-dashboard" });
@@ -2566,7 +2580,6 @@ export default {
   },
 
   methods: {
-
     // convertToTitleCase(paragraph) {
     //   console.log(paragraph);
     //   const stopWords = [
@@ -2614,8 +2627,7 @@ export default {
       api
         .get(`/lawyer/last-fee-earners/${this.jobData?.id}`)
         .then((res) => {
-
-          if(res?.data?.not_eligible){
+          if (res?.data?.not_eligible) {
             this.$router.push({ path: "/lawyer-dashboard" });
           }
 
@@ -2628,11 +2640,10 @@ export default {
             this.uplift_percentage_old = res?.data?.success?.uplift_percentage;
             this.success_fee_term_old = res?.data?.success?.success_fee_term;
           }
-          
-          if (res?.data?.retainer_limitation){
+
+          if (res?.data?.retainer_limitation) {
             this.retainer_limitation_old = res?.data?.retainer_limitation;
           }
-
         })
         .catch((err) => {
           console.log("error in fetching last fee earners : ", err);
@@ -2946,9 +2957,9 @@ export default {
         this.form.uplift_percentage = this.uplift_percentage_old;
         this.form.success_fee_term = this.success_fee_term_old;
       }
-      if(this.selectedOption == "Retainer"){
+      if (this.selectedOption == "Retainer") {
         this.form.retainer_limitation = this.retainer_limitation_old;
-        console.log('t f r i :' , this.form.retainer_limitation);
+        console.log("t f r i :", this.form.retainer_limitation);
       }
       // console.log('schema', this.selectedOption);
     },
@@ -3255,20 +3266,20 @@ export default {
     },
   },
   directives: {
-    'only-number-with-limit': {
+    "only-number-with-limit": {
       mounted(el, binding) {
-        el.addEventListener('input', function(event) {
+        el.addEventListener("input", function (event) {
           const limit = binding.value || Infinity; // Default to Infinity if no limit provided
           const input = event.target.value;
-          const numericValue = input.replace(/\D/g, ''); // Remove non-numeric characters
+          const numericValue = input.replace(/\D/g, ""); // Remove non-numeric characters
           const truncatedValue = numericValue.slice(0, limit); // Limit the length
           if (input !== truncatedValue) {
             event.target.value = truncatedValue;
-            event.target.dispatchEvent(new Event('input')); // Emit input event to update v-model
+            event.target.dispatchEvent(new Event("input")); // Emit input event to update v-model
           }
         });
-      }
-    }
+      },
+    },
   },
   name: "DashboardTab",
 };
@@ -3582,6 +3593,17 @@ td {
   }
 }
 @media only screen and (max-width: 767px) {
+  .f-pt {
+    padding-bottom: 30px;
+}
+.footer-ct {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+  .hourlycost * {
+    font-size: 12px;
+  }
   th.table-title-td {
     width: 100% !important;
   }

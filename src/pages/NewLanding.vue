@@ -99,7 +99,7 @@
                     legal industry and create a more inclusive legal system in
                     which everyone can benefit.
                   </p>
-                  <p class="position-relative mb-5">
+                  <p class="position-relative mb-md-5 mb-sm-3">
                     Simplawfy is more than just an online marketplace - it's a
                     movement to make the law simple and more accessible. Now
                     those needing legal services, and lawyers needing clients,
@@ -107,7 +107,7 @@
                   </p>
                 </div>
                 <div
-                  class="btn-inner mt-5 pt-3 d-flex justify-content-evenly align-items-center flex-wrap"
+                  class="btn-inner mt-5 pt-3 mb-sm-3 mb-md-1 d-flex justify-content-evenly align-items-center flex-wrap"
                 >
                   <router-link
                     to="/client-register"
@@ -203,7 +203,7 @@
             <div class="row">
                 <div class="col-md-12">
                 <div
-                  class="btn-inner mt-5 pt-3 d-flex justify-content-evenly align-items-center flex-wrap"
+                  class="btn-inner mb-sm-3 mb-md-1 mt-5 pt-3 d-flex justify-content-evenly align-items-center flex-wrap"
                 >
                   <router-link
                     to="/client-register"
@@ -531,7 +531,7 @@ ul {
     right: 0 !important;
   }
   .btn-inner {
-    margin: 0 !important;
+    margin-top: 0 !important;
 }
 .how-tabs a{
     padding: 8px 40px;
@@ -540,8 +540,8 @@ ul {
 
 @media only screen and (max-width: 767px) {
   img.signature {
-    width: 70px;
-    position: absolute;
+    width: 100px;
+    position: relative;
 }
   .how-tabs a{
     padding: 8px 40px;
@@ -577,7 +577,7 @@ ul {
     margin: 0 0 25px 0 !important;
   }
   .btn-inner {
-    margin: 0 !important;
+    margin-top: 0 !important;
   }
   .img-bottom {
     margin-top: 20px !important;
@@ -695,10 +695,10 @@ ul {
     flex: none;
   }
 }
-@media only screen and (max-width: 480px) {
+/* @media only screen and (max-width: 480px) {
 img.signature {
     width: 150px;
-    position: absolute;
+    position: relative;
 }
-}
+} */
 </style>

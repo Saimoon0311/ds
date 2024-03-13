@@ -99,7 +99,8 @@
                 <Field class="form-check-Field" type="checkbox" id="termsAndConditions" name="tandc" value="true" :class="{'is-invalid' : errors.tandc}" />
                 <label class="form-check-label tac" for="termsAndConditions">
                     &nbsp;I have read and agree to the 
-                    <router-link to="/terms-and-conditions-for-clients" target="_blank" >terms and conditions.</router-link>
+                    <!-- <router-link to="https://makinglawsimple.com.au/app/terms-of-use-client" target="_blank" >terms and conditions.</router-link> -->
+                    <router-link to="https://makinglawsimple.com.au/app/terms-of-use-client" target="_blank" >terms and conditions.</router-link>
                 </label>
                 <span class="invalid-feedback">{{errors.tandc}}</span>
             </div>
@@ -354,6 +355,14 @@ option {
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {
+    #termsAndConditions{
+    margin-top: 4px;
+}
+    .terms-check {
+    width: 90%;
+    text-align: left;
+    margin-left: 40px;
+}
     .find-client {
         margin: 0 !important;
         padding-right: 30px !important;

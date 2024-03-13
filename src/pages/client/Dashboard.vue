@@ -255,7 +255,7 @@
               </div>
             </div>
 
-            <h6 class="text-center" v-if="openJobs.length > 0 && isEndOfResult">
+            <h6 class="text-center mb-3" v-if="openJobs.length > 0 && isEndOfResult">
                 End of results   
             </h6>
            
