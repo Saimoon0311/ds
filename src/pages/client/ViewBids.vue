@@ -68,7 +68,6 @@
                     <!-- <span @mouseover="openFeeEstimateModal('Estimate')"> -->
 
                     <span
-                      
                       id="tooltipSpan0"
                       data-bs-toggle="tooltip"
                       data-bs-html="true"
@@ -265,6 +264,8 @@ import $ from "jquery";
 window.$ = window.jQuery = $;
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
+// import { onMounted, ref } from 'vue';
+
 export default {
   name: "ClientDashboard",
   components: {
@@ -564,6 +565,7 @@ export default {
       });
     },
   },
+
 };
 </script>
 
