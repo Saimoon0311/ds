@@ -1,7 +1,7 @@
 <template lang="">
   <div class="l-main">
     <LawyerHeader />
-    <div class="container">
+    <div class="container profile-container">
       <h3 class="mt-3 text-center">Profile</h3>
       <!-- <h1 v-if="firebaseNoti">{{ firebaseNoti?.title }}</h1> -->
       <p>
@@ -1282,7 +1282,7 @@
           </tbody>
         </table>
       </div>
-      <p class="text-center">
+      <p class="text-center mb-5 mb-md-3">
         Your entries are automatically saved, so you can logout when you're
         ready
       </p>

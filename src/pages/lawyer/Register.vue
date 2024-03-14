@@ -358,6 +358,9 @@ a:hover {
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {
+    .im-user{
+    padding: 0px 10px 20px 10px;
+}
     #termsAndConditions{
     margin-top: 4px;
 }

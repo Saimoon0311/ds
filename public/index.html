@@ -330,7 +330,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       min-height: 20px !important;
-      max-height: 120px !;
+      max-height: 120px !important;
       /* line-break: anywhere; */
       overflow-y: auto;
       padding-right: 10px;
@@ -355,7 +355,7 @@
       /* outline: 1px solid #292929; */
       border-radius: 10px;
     }
-    .WordSection1 a{
+    .WordSection1 a, .profile-container a{
       color: #91c8fc;
     }
     div.top-wrapper {
@@ -371,6 +371,11 @@
     .navbar-nav .left-menu a.nav-link{
       width: max-content;
     }
+    @media only screen and (max-width: 767px) {
+    .set-pad{
+      padding: 0 !important;
+    }
+  }
   </style>
   <body>
     <!-- Inside the Body -->

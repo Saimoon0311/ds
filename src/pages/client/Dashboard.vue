@@ -89,7 +89,7 @@
                 <div
                   v-for="(item, index) in openJobs"
                   :key="index"
-                  class="col-md-12"
+                  class="col-md-12 set-pad"
                   id="30"
                 >
                   <div
@@ -255,7 +255,7 @@
               </div>
             </div>
 
-            <h6 class="text-center mb-3" v-if="openJobs.length > 0 && isEndOfResult">
+            <h6 class="text-center pb-md-3 pb-sm-5" v-if="openJobs.length > 0 && isEndOfResult">
                 End of results   
             </h6>
            

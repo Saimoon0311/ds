@@ -1987,7 +1987,8 @@ app.mixin({
           data?.charge_type == "Retainer"
         ) {
           mainHtmlContent += ` <div class="flex-class">
-            <p ><span > Retainer limitation:</span><span >${data?.retainer_limitation}</span></p>
+          <p><span > Retainer limitation:</span></p>
+            <p class="descriptionText" style="color:black;">${data?.retainer_limitation}</p>
           </div>`;
         }
 

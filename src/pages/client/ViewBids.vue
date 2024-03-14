@@ -1,17 +1,18 @@
 <template lang="">
   <div>
     <ClientHeader />
-    <div class="container client-proposal">
-      <router-link
-        class="btn btn-dark btn-sm my-3"
-        title="back"
-        to="/client-dashboard"
-        ><i class="bi bi-arrow-left"></i> Back</router-link
-      >
-      <h4 class="text-center">Proposals</h4>
+    <div class="container-main">
+      <div class="container client-proposal">
+        <router-link
+          class="btn btn-dark btn-sm my-3"
+          title="back"
+          to="/client-dashboard"
+          ><i class="bi bi-arrow-left"></i> Back</router-link
+        >
+        <h4 class="text-center">Proposals</h4>
 
-      <div data-v-511b78bb="" class="">
-        <!-- <ul
+        <div data-v-511b78bb="" class="">
+          <!-- <ul
           data-v-511b78bb=""
           class="nav nav-pills mb-3 bg-light border p-2 py-3 rounded"
           id="pills-tab"
@@ -51,104 +52,108 @@
             </button>
           </li>
         </ul> -->
-        <div data-v-511b78bb="" class="tab-content" id="pills-tabContent">
-          <div
-            data-v-511b78bb=""
-            class="tab-pane fade text-center active show table-over"
-            id="pills-home"
-            role="tabpanel"
-            aria-labelledby="pills-home-tab"
-          >
-            <table class="table table-layout" id="bidsActive">
-              <thead class="">
-                <tr>
-                  <th class="">Lawyer</th>
+          <div data-v-511b78bb="" class="tab-content" id="pills-tabContent">
+            <div
+              data-v-511b78bb=""
+              class="tab-pane fade text-center active show table-over"
+              id="pills-home"
+              role="tabpanel"
+              aria-labelledby="pills-home-tab"
+            >
+              <table class="table table-layout" id="bidsActive">
+                <thead class="">
+                  <tr>
+                    <th class="">Lawyer</th>
 
-                  <th>
-                    <!-- <span @mouseover="openFeeEstimateModal('Estimate')"> -->
+                    <th>
+                      <!-- <span @mouseover="openFeeEstimateModal('Estimate')"> -->
 
                       <!-- @mouseover="updateTooltip('Estimate', 0)"
                       @click="updateTooltip('Estimate', 0)" -->
                       <!-- data-bs-toggle="tooltip"
                       data-bs-html="true" -->
-                    <div class="custom-tooltip">
-                    <span
-                      
-                      id="tooltipSpan0"
-                      
-                      title=""
+                      <div class="custom-tooltip">
+                        <span
+                          id="tooltipSpan0"
+                          title=""
+                          @mouseenter="showTooltip('Estimate')"
+                          @mouseleave="hideTooltip"
+                          @click="toggleTooltip('Estimate')"
+                        >
+                          Fee estimate
+                          <i class="fas fa-info-circle"></i>
 
-                      @mouseenter="showTooltip('Estimate')" @mouseleave="hideTooltip" @click="toggleTooltip('Estimate')"
-
-                    >
-                      Fee estimate
-                      <i class="fas fa-info-circle"></i>
-                     
-                      {{ chargeType(item?.charge_type === 'Estimate') }}
-                    </span>
-
-                    <!-- <transition name="fade">
+                          {{ chargeType(item?.charge_type === "Estimate") }}
+                        </span>
+                        <div v-if="isTooltipVisible" class="tooltip-text">
+                          {{ tooltipText }}
+                        </div>
+                        <!-- <transition name="fade">
                       <div v-if="isTooltipVisible" class="tooltip">
                         <p style="color:#fff">{{ tooltipText }}</p>
                       </div>
                     </transition> -->
-                  </div>
-    
-                  </th>
+                      </div>
+                    </th>
 
-                  <th>Proposed work</th>
+                    <th>Proposed work</th>
 
-                  <th v-if="tab == 'Open'">Actions</th>
-                </tr>
-              </thead>
+                    <th v-if="tab == 'Open'">Actions</th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                <tr v-if="data_paginated == null || data_paginated.length == 0">
-                  <td colspan="8" class="text-center">
-                    You haven't received any proposals for this job yet.
-                  </td>
-                </tr>
-                <tr
-                  v-else
-                  class="text-left border-bottom"
-                  v-for="(item, index) in data_paginated"
-                  :key="index"
-                >
-                  <!-- <td>testing client (crinimal)</td> -->
-                  <td class="text-center" style="width: 15%">
-                    <p
-                      @click="
-                        openLawyerDetailsModal(
-                          item?.lawyer,
-                          item?.status.toLowerCase() == 'accept'
-                        )
-                      "
-                      class="lawname btn-dark rounded-pill btn text-capitalize fw-bold px-4 py-1"
-                    >
-                      {{ item?.lawyer?.first_name }}
-                      {{ tab == "Accept" ? item?.lawyer?.last_name : "" }}
-                    </p>
-                  </td>
-                  <!-- <td>{{ item?.charge_type }}</td> -->
-                  <td class="text-center" style="width: 30%">
-                    <!-- <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ chargeType(item?.charge_type) }} <span data-toggle="tooltip" data-placement="top" title="How you will charge?"><i class="fas fa-info-circle"></i></span></p> -->
-                    <!-- data-bs-toggle="tooltip"
+                <tbody>
+                  <tr
+                    v-if="data_paginated == null || data_paginated.length == 0"
+                  >
+                    <td colspan="8" class="text-center">
+                      You haven't received any proposals for this job yet.
+                    </td>
+                  </tr>
+                  <tr
+                    v-else
+                    class="text-left border-bottom"
+                    v-for="(item, index) in data_paginated"
+                    :key="index"
+                  >
+                    <!-- <td>testing client (crinimal)</td> -->
+                    <td class="text-center" style="width: 15%">
+                      <p
+                        @click="
+                          openLawyerDetailsModal(
+                            item?.lawyer,
+                            item?.status.toLowerCase() == 'accept'
+                          )
+                        "
+                        class="lawname btn-dark rounded-pill btn text-capitalize fw-bold px-4 py-1"
+                      >
+                        {{ item?.lawyer?.first_name }}
+                        {{ tab == "Accept" ? item?.lawyer?.last_name : "" }}
+                      </p>
+                    </td>
+                    <!-- <td>{{ item?.charge_type }}</td> -->
+                    <td class="text-center" style="width: 30%">
+                      <!-- <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ chargeType(item?.charge_type) }} <span data-toggle="tooltip" data-placement="top" title="How you will charge?"><i class="fas fa-info-circle"></i></span></p> -->
+                      <!-- data-bs-toggle="tooltip"
                       data-bs-html="true"
                       title=""
                       @mouseover="updateTooltip(item?.charge_type, item?.id)" -->
-                    <p
-                      :id="'tooltipSpan' + item?.id"
-                      @mouseenter="showTooltip(item?.charge_type)" @mouseleave="hideTooltip" @click="toggleTooltip(item?.charge_type)"
-                      class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small no-hover"
-                    >
-                      {{ chargeType(item?.charge_type) }}
-                      <span
+                      <p
+                        :id="'tooltipSpan' + item?.id"
+                        @mouseenter="showTooltip(item?.charge_type)"
+                        @mouseleave="hideTooltip"
+                        @click="toggleTooltip(item?.charge_type)"
+                        class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small no-hover"
                       >
-                        <i class="fas fa-info-circle"></i>
-                      </span>
-                    </p>
-
-                    <!-- <div class="modal" tabindex="-1" role="dialog" ref="myModal">
+                        {{ chargeType(item?.charge_type) }}
+                        <span>
+                          <i class="fas fa-info-circle"></i>
+                        </span>
+                      </p>
+                      <div v-if="isTooltipVisible" class="tooltip-text">
+                          {{ tooltipText }}
+                        </div>
+                      <!-- <div class="modal" tabindex="-1" role="dialog" ref="myModal">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header charge-modal">
@@ -161,98 +166,118 @@
                         </div>
                       </div>
                     </div> -->
-                    <p class="text-capitalize text-black fw-normal mb-1">
-                      {{
-                        item?.total_with_gst
-                          ? "$" + formatNumber(item?.total_with_gst)
-                          : ""
-                      }}
-                    </p>
-                    <p
-                      class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-0 font-small"
-                      @click="openProposalDetailsModalPopup(item,'How you will be charged.',false,false)"
-                    >
-                      see more
-                    </p>
-                  </td>
-
-                  <!-- <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td> -->
-                  <td class="text-center" style="width: 40%; vertical-align: top;">
-                    <!-- <p class="mb-1">{{ item?.description }}</p> -->
-                    <!-- <p class="mb-1">{{ generateExcerpt(item?.description) }} <span class=" text-black fw-bolder" @click="openDescription(item?.description)"> See more</span></p> -->
-                    <p class="mb-1 descriptionText" style="white-space: pre-line;">{{ item?.description }}</p>
-                  </td>
-                  <!-- <td>{{ formatCreatedAt(item?.created_at) }}</td> -->
-
-                  <!-- <td>Yes</td>
-                  <td>No</td> -->
-                  <td style="width: 15%" v-if="tab == 'Open'">
-                    <div
-                      class="text-center btn-wid"
-                      v-if="item?.status == 'Open'"
-                    >
-                      <button
-                        class="btn btn-dark softblue text-white btn-sm border p-1 px-2 mb-1 w-75 rounded-pill"
+                      <p class="text-capitalize text-black fw-normal mb-1">
+                        {{
+                          item?.total_with_gst
+                            ? "$" + formatNumber(item?.total_with_gst)
+                            : ""
+                        }}
+                      </p>
+                      <p
+                        class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-0 font-small"
                         @click="
-                          handleAcceptBidAction(
-                            item?.id,
-                            item?.lawyer,
-                            item?.job_id,
-                            item.job?.client_chat?.chat_id,
-                            item?.job?.client_chat?.lawyer_id
+                          openProposalDetailsModalPopup(
+                            item,
+                            'How you will be charged.',
+                            false,
+                            false
                           )
                         "
                       >
-                        Accept
-                      </button>
-                      <form method="post" action="backend/acceptBid.php">
-                        <input value="146" class="d-none" name="bidId" />
-                        <input value="30" class="d-none" name="jobId" />
-                        <input value="22" class="d-none" name="lawyerId" />
-                        <button class="d-none" name="accept">
-                          <i class="bi bi-check-lg"></i> Accept
-                        </button>
-                      </form>
-                      <!-- :disabled="!disableMessageButton(item)" -->
-                      <button
-                        class="btn btn-light btn-sm p-1 px-2 w-75 rounded-pill mb-1 border"
-                        @click="goToMessagePage2(item)"
+                        see more
+                      </p>
+                    </td>
+
+                    <!-- <td>{{ item?.upfront_payment_status == 'yes' ? 'Yes - $' + item?.upfront_payment : 'No'}}</td> -->
+                    <td
+                      class="text-center"
+                      style="width: 40%; vertical-align: top"
+                    >
+                      <!-- <p class="mb-1">{{ item?.description }}</p> -->
+                      <!-- <p class="mb-1">{{ generateExcerpt(item?.description) }} <span class=" text-black fw-bolder" @click="openDescription(item?.description)"> See more</span></p> -->
+                      <p
+                        class="mb-1 descriptionText"
+                        style="white-space: pre-line"
                       >
-                        Message
-                        <!-- {{
+                        {{ item?.description }}
+                      </p>
+                    </td>
+                    <!-- <td>{{ formatCreatedAt(item?.created_at) }}</td> -->
+
+                    <!-- <td>Yes</td>
+                  <td>No</td> -->
+                    <td style="width: 15%" v-if="tab == 'Open'">
+                      <div
+                        class="text-center btn-wid"
+                        v-if="item?.status == 'Open'"
+                      >
+                        <button
+                          class="btn btn-dark softblue text-white btn-sm border p-1 px-2 mb-1 w-75 rounded-pill"
+                          @click="
+                            handleAcceptBidAction(
+                              item?.id,
+                              item?.lawyer,
+                              item?.job_id,
+                              item.job?.client_chat?.chat_id,
+                              item?.job?.client_chat?.lawyer_id
+                            )
+                          "
+                        >
+                          Accept
+                        </button>
+                        <form method="post" action="backend/acceptBid.php">
+                          <input value="146" class="d-none" name="bidId" />
+                          <input value="30" class="d-none" name="jobId" />
+                          <input value="22" class="d-none" name="lawyerId" />
+                          <button class="d-none" name="accept">
+                            <i class="bi bi-check-lg"></i> Accept
+                          </button>
+                        </form>
+                        <!-- :disabled="!disableMessageButton(item)" -->
+                        <button
+                          class="btn btn-light btn-sm p-1 px-2 w-75 rounded-pill mb-1 border"
+                          @click="goToMessagePage2(item)"
+                        >
+                          Message
+                          <!-- {{
                           !disableMessageButton(item) ? ", (N/A)" : ""
                         }} -->
-                      </button>
-                      <button
-                        class="btn btn-danger btn-sm p-1 px-2 mb-1 w-75 rounded-pill"
-                        @click="
-                          handleRejectBidAction(
-                            item?.id,
-                            item?.lawyer,
-                            item?.job_id
-                          )
-                        "
-                      >
-                        Reject
-                      </button>
+                        </button>
+                        <button
+                          class="btn btn-danger btn-sm p-1 px-2 mb-1 w-75 rounded-pill"
+                          @click="
+                            handleRejectBidAction(
+                              item?.id,
+                              item?.lawyer,
+                              item?.job_id
+                            )
+                          "
+                        >
+                          Reject
+                        </button>
 
-                      <!-- <button @click="openProposalDetailsModal(item)" class="btn btn-dark text-white mt-1 btn-sm p-1 px-2 w-100">
+                        <!-- <button @click="openProposalDetailsModal(item)" class="btn btn-dark text-white mt-1 btn-sm p-1 px-2 w-100">
                         View
                       </button> -->
-                    </div>
-                    <p v-else>{{ item?.status }}</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                      </div>
+                      <p v-else>{{ item?.status }}</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-          <!-- for pagination -->
-          <CustomPagination
-            v-if="data_paginated != null && data_paginated.length > 0"
-          />
-          <!-- for pagination -->
+            <!-- for pagination -->
+            <CustomPagination
+              class="mb-5"
+              v-if="data_paginated != null && data_paginated.length > 0"
+            />
+            <!-- for pagination -->
+          </div>
         </div>
+      </div>
+      <div class="footer footer-ct">
+        <MainFooter />
       </div>
     </div>
   </div>
@@ -265,19 +290,21 @@ import $ from "jquery";
 window.$ = window.jQuery = $;
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/config/firebaseConfig";
+import MainFooter from "../../components/global/MainFooter.vue";
 
 export default {
   name: "ClientDashboard",
   components: {
     ClientHeader,
     CustomPagination,
+    MainFooter,
   },
   data() {
     return {
       // charge_defination : "",
       tab: null,
       isTooltipVisible: false,
-      tooltipText : "",
+      tooltipText: "",
     };
   },
   computed: {
@@ -316,15 +343,13 @@ export default {
   },
 
   methods: {
-
-
     showTooltip(type) {
       if (!this.isMobileDevice()) {
         const { definition } = this.openFeeEstimateModal(type);
         this.tooltipText = definition;
         console.log(this.tooltipText);
         this.isTooltipVisible = true;
-        alert(this.tooltipText);
+        // alert(this.tooltipText);
       }
     },
     hideTooltip() {
@@ -338,7 +363,7 @@ export default {
         this.tooltipText = definition;
         console.log(this.tooltipText);
         this.isTooltipVisible = !this.isTooltipVisible;
-        alert(this.tooltipText);
+        // alert(this.tooltipText);
       }
     },
     isMobileDevice() {
@@ -346,25 +371,21 @@ export default {
       return window.innerWidth <= 768;
     },
 
-
-
     goToMessagePage2(item = null) {
       if (item) {
-        console.log('item mm mm : ' , item);
+        console.log("item mm mm : ", item);
         this.saveJobInfo(item?.job);
         // this.saveLoadMoreData();
 
         this.$store.commit("SET_JOBIDTOCHAT", item?.job?.id);
         // this.$store.commit("SET_DATATAB", this.tab);
-        
-      
-          this.$store.commit("SET_USERTOCHAT", item?.lawyer);
-          // if (item?.lawyer_chat == null) {
-          //   this.$store.commit("SET_CHATSTATUS", "new");
-          // } else {
-          //   this.$store.commit("SET_CHATSTATUS", "old");
-          // }
-      
+
+        this.$store.commit("SET_USERTOCHAT", item?.lawyer);
+        // if (item?.lawyer_chat == null) {
+        //   this.$store.commit("SET_CHATSTATUS", "new");
+        // } else {
+        //   this.$store.commit("SET_CHATSTATUS", "old");
+        // }
       }
 
       // if (item == null) {
@@ -377,7 +398,7 @@ export default {
       //   this.$store.commit("SET_CHATSTATUS", null);
       // }
       this.$store.commit("SET_IS_NOT_HEADER_CHAT", true);
-      
+
       this.$router.push({
         path: "/messages-history",
         query: { job: item?.job?.id },
@@ -411,11 +432,11 @@ export default {
     //         break;
     //     }
     //     $(this.$refs.myModal).modal('show');
-    //   }      
+    //   }
     // },
     closeModal() {
       // Hide Bootstrap Modal
-      $(this.$refs.myModal).modal('hide');
+      $(this.$refs.myModal).modal("hide");
     },
     disableMessageButton(item) {
       console.log("lawyer id : ", item?.lawyer_id);
@@ -537,10 +558,12 @@ export default {
     },
     changeStatus(obj) {
       let question = "";
-      if(obj?.status?.toLowerCase() == "accept"){
-        question = "Are you sure you want to accept this proposal? All other proposals will be automatically rejected.";
-      }else if(obj?.status.toLowerCase() == "reject"){
-         question = 'Are you sure you want to reject this proposal? This cannot be undone.'
+      if (obj?.status?.toLowerCase() == "accept") {
+        question =
+          "Are you sure you want to accept this proposal? All other proposals will be automatically rejected.";
+      } else if (obj?.status.toLowerCase() == "reject") {
+        question =
+          "Are you sure you want to reject this proposal? This cannot be undone.";
       }
       this.$swal({
         title: "Are you sure?",
@@ -561,13 +584,12 @@ export default {
               let heading = "";
               if (obj?.status?.toLowerCase() == "accept") {
                 // msg = `Congratulations on finding a lawyer!
-                // msg = `We're so glad that you found a lawyer for your job '[${this.jobData?.title} - ${this.jobData?.identity}.]' through Simplawfy. 
+                // msg = `We're so glad that you found a lawyer for your job '[${this.jobData?.title} - ${this.jobData?.identity}.]' through Simplawfy.
                 // Here are your lawyer's contact details so you can communicate with them directly:
-                // [${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, ${obj?.lawyer?.email} and ${obj?.lawyer?.phone}]. 
+                // [${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, ${obj?.lawyer?.email} and ${obj?.lawyer?.phone}].
                 // You will receive an email shortly with all these details as well as the details of the proposal you accepted, the details of your job and any correspondence between you and your chosen Lawyer.`;
                 heading = "Congratulations on finding a lawyer!";
                 msg = `We're so glad that you found a lawyer, ${obj?.lawyer?.first_name} ${obj?.lawyer?.last_name}, through Simplawfy. You will receive an email shortly with their details. You can also view them in the Closed tab on your Dashboard.`;
-
               } else {
                 msg = `You have ${obj.status.toLowerCase()}ed this proposal successfully.`;
               }
@@ -580,16 +602,15 @@ export default {
                 }
               });
 
-        //       this.$swal.fire({
-        //   title: "Congratulations on finding a lawyer!",
-        //   html: msg,
-        //   showCloseButton: true,
-        //   showConfirmButton: false,
-        //   customClass: {
-        //     container: "my-swal-container", // You can define your custom class for styling
-        //   },
-        // });
-
+              //       this.$swal.fire({
+              //   title: "Congratulations on finding a lawyer!",
+              //   html: msg,
+              //   showCloseButton: true,
+              //   showConfirmButton: false,
+              //   customClass: {
+              //     container: "my-swal-container", // You can define your custom class for styling
+              //   },
+              // });
 
               console.log("response : ", res);
             })
@@ -604,10 +625,6 @@ export default {
 </script>
 
 <style scoped>
-
-
-
-
 /* .custom-tooltip {
   position: relative;
   display: inline-block;
@@ -631,17 +648,23 @@ export default {
 .tooltip.fade-enter, .tooltip.fade-leave-to {
   opacity: 0;
 } */
-
-
-
-
-
-
-
-
-
-
-
+.tooltip-text {
+  position: absolute;
+  background-color: #f3f3f3;
+  border: 1px solid #cccccc;
+  padding: 5px;
+  border-radius: 1px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  z-index: 9999; /* Ensure tooltip appears above other content */
+  width: auto;
+  font-size: 10px;
+  font-weight: 400  ;
+}
+.container-main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+}
 
 .lawname {
   font-size: 14px;
@@ -650,8 +673,8 @@ export default {
 .font-small {
   font-size: 12px;
 }
-.no-hover:hover{
-  background: black !important; 
+.no-hover:hover {
+  background: black !important;
 }
 
 ul#pills-tab {
@@ -666,7 +689,7 @@ ul#pills-tab {
 }
 
 .nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
+.nav-pills .show > .nav-link {
   color: white;
   background-color: #000000;
 }
@@ -708,44 +731,67 @@ ul#pills-tab {
   margin-right: 5px;
   text-align: start;
   white-space: normal;
-    word-break: break-word;
+  word-break: break-word;
 }
 
 .charge-modal {
-    border-bottom: 0;
+  border-bottom: 0;
 }
-.charge-modal h6{
-    margin: 0;
+.charge-modal h6 {
+  margin: 0;
 }
-.charge-modal  button.close {
-    border: none;
-    background: transparent;
-    font-size: 32px;
-    padding: 0;
-    line-height: 1;
-    font-weight: 600;
+.charge-modal button.close {
+  border: none;
+  background: transparent;
+  font-size: 32px;
+  padding: 0;
+  line-height: 1;
+  font-weight: 600;
 }
-.descriptionText::-webkit-scrollbar , span.class-para::-webkit-scrollbar {
+.descriptionText::-webkit-scrollbar,
+span.class-para::-webkit-scrollbar {
   width: 6px;
   border-radius: 10px;
 }
 
-.descriptionText::-webkit-scrollbar-thumb , span.class-para::-webkit-scrollbar-thumb {
+.descriptionText::-webkit-scrollbar-thumb,
+span.class-para::-webkit-scrollbar-thumb {
   background-color: #969696;
   /* outline: 1px solid #292929; */
   border-radius: 10px;
 }
 
-.descriptionText::-webkit-scrollbar-track , span.class-para::-webkit-scrollbar-track {
+.descriptionText::-webkit-scrollbar-track,
+span.class-para::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(217, 217, 217, 1);
   border-radius: 10px;
 }
-
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
 @media only screen and (max-width: 767px) {
+  .tooltip-text {
+    position: absolute;
+    background-color: #f3f3f3;
+    border: 1px solid #cccccc;
+    padding: 5px;
+    border-radius: 1px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    width: 90%;
+    font-size: 10px;
+    font-weight: 400;
+    margin: auto;
+    left: 0;
+    right: 0;
+    text-wrap: wrap;
+}
   .descriptionText {
     width: 100%;
     white-space: normal;
-word-break: break-word;
+    word-break: break-word;
     font-size: 14px;
     padding-right: 2px;
   }
@@ -779,4 +825,5 @@ word-break: break-word;
     display: flex;
     flex-wrap: wrap;
   }
-}</style>
+}
+</style>

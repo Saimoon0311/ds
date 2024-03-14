@@ -1,7 +1,7 @@
 <template lang="">
   <div class="c-main">
   <ClientHeader />
-  <div class="container">
+  <div class="container pb-5 pt-2">
     <h3 class="mt-3 text-center">Account</h3>
   
     <div

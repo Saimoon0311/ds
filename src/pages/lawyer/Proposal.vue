@@ -98,7 +98,6 @@
                     name="fixedFeeAmount"
                     class="form-control"
                     placeholder=""
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     required
                     maxlength="10"
                     v-only-number-with-limit:10

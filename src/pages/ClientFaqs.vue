@@ -993,7 +993,10 @@ ul.style-num {
   list-style: auto;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 767px) {
+  .n-mb {   
+    padding-bottom: 100px !important;
+}
   #client-faq{
   padding-bottom: 30px;
 }

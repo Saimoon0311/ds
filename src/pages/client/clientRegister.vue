@@ -95,7 +95,7 @@
                 </div>
             </div>    
 
-            <div class="d-flex align-items-between justify-content-center mb-4 inline-table terms-check">
+            <div class="d-flex align-items-between justify-content-center mb-4 align-items-start terms-check">
                 <Field class="form-check-Field" type="checkbox" id="termsAndConditions" name="tandc" value="true" :class="{'is-invalid' : errors.tandc}" />
                 <label class="form-check-label tac" for="termsAndConditions">
                     &nbsp;I have read and agree to the 
@@ -355,6 +355,9 @@ option {
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {
+    .im-user{
+    padding: 0px 10px 20px 10px;
+}
     #termsAndConditions{
     margin-top: 4px;
 }
