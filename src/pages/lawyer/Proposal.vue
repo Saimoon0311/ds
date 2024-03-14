@@ -3392,7 +3392,7 @@ th.table-title-td {
   overflow: hidden;
   text-overflow: ellipsis;
   height: 100px;
-  /* line-break: anywhere; */
+  line-break: anywhere;
   overflow-y: auto;
   padding-right: 10px;
   margin-right: 5px;
