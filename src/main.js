@@ -2146,10 +2146,9 @@ app.mixin({
             this.loginUser?.type == "lawyer"
               ? "What you will do"
               : "Proposed work";
-          mainHtmlContent += ` <div class="trouble">
-            <p class="text-center font-set" style="color:black;"><span>${desc_title}.</span></p>
-           
-            <p class="descriptionText initialText" style="color:black;">${data?.description}</p>
+          mainHtmlContent += ` <div class="flex-class trouble-class">
+            <p class="text-center font-set" style="color:black;"><span>${desc_title}.</span></p>           
+            <p class="descriptionText" style="color:black;">${data?.description}</p>
             
           </div>`;
         }
