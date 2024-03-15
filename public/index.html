@@ -331,16 +331,16 @@
     .textwrap {
        min-height: 20px !important;
       max-height: 100px !important;
-    position: relative;
+      height: 100px !important;
+    /* position: relative;
+    overflow: hidden; */
     overflow: hidden;
-    overflow-y: auto;
 }
     .descriptionText {
       position: relative; 
-       overflow: hidden;
-      text-overflow: ellipsis;
-      min-height: 20px !important;
-      max-height: 100px !important;
+       overflow-x: hidden;
+      text-overflow: ellipsis;      
+      height: 100% !important;
       /* line-break: anywhere; */
       overflow-y: auto !important; 
       padding-right: 10px;
