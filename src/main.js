@@ -1274,9 +1274,7 @@ app.mixin({
       }
 
       if (data?.about != null && data?.about != "") {
-        htmlContent += `<div class="textwrap" style="   -webkit-overflow-scrolling: touch;
-        overscroll-behavior-y: auto; "><div class="descriptionText descriptionTextAbout" >${data?.about}</div></div>
-        `;
+        htmlContent += `<div class="descriptionText descriptionTextAbout" >${data?.about}</div>`;
       }
 
       htmlContent += `</div>`;
