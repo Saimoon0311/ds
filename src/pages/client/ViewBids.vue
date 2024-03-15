@@ -805,14 +805,17 @@ span.class-para::-webkit-scrollbar-track {
     border-radius: 1px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     z-index: 9999;
-    width: 300px;
+    width: auto; /* Let the width be determined by content */
+        max-width: 90%;
     font-size: 10px;
     font-weight: 400;
     margin: auto;
     left: 0;
     right: 0;
-    text-wrap: balance;
-    /* overflow-wrap: break-word; */
+    overflow-wrap: break-word; /* Fallback for older browsers */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
   .descriptionText {
     width: 100%;
