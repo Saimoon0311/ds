@@ -326,11 +326,11 @@
     }
     .limitText{
       line-break: anywhere;
-
     }
     
     .descriptionText {
       position: relative; 
+       overflow: auto;
        overflow-x: hidden;
       text-overflow: ellipsis;      
       min-height: 20px !important;
@@ -343,10 +343,10 @@
       text-align: left;
       font-size: 16px;
       width: 100%;
-   
+      -webkit-overflow-scrolling:touch;   
     }
     .descriptionText::-webkit-scrollbar {
-      -webkit-appearance: none;
+      /* -webkit-appearance: none; */
       width: 6px;
       border-radius: 10px;
     }
