@@ -8,7 +8,7 @@
     </div>
 
     <div class="WordSection1 container pt-3">
-      <h3 class="mt-3 text-center">TERMS & CONDITIONS FOR LAWYER</h3>
+      <h3 class="mt-3 text-center">Terms and Conditions for Lawyers</h3>
 
       <h6>
         1<span>&nbsp;&nbsp;&nbsp;</span>Introduction

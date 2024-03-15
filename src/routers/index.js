@@ -397,11 +397,11 @@ const routes = [
     component: termsOfUse,
   },
   {
-    path: "/terms-of-use-lawyer",
+    path: "/terms-of-use-lawyers",
     component: termsLawyer,
   },
   {
-    path: "/terms-of-use-client",
+    path: "/terms-of-use-clients",
     component: termsClient,
   },
   {

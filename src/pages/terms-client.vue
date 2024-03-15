@@ -8,17 +8,17 @@
     </div>
 
     <div class="WordSection1 container pt-3">
-      <h3 class="mt-3 text-center">TERMS & CONDITIONS FOR CLIENTS</h3>
+      <h3 class="mt-3 text-center">Terms and Conditions for Clients</h3>
 
       <h6>1<span>&nbsp;&nbsp;&nbsp;</span>Introduction</h6>
       <p>
         1.1
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>These terms and
         conditions (<b>Terms</b>) govern your use of the website
-        ‘makinglawsimple.com.au’ (<b>Website</b>) as a Lawyer (defined in clause
-        1.2(b) of these Terms). The Website is operated by Simplawfy Pty Ltd
-        (<b>Simplawfy</b>). By using the Website as a Lawyer, you acknowledge
-        that you have read, understood and agree to be bound by the Terms.
+        ‘makinglawsimple.com.au’ (<b>Website</b>) as a Client (defined in clause 1.2(a)
+        of these Terms). The Website is operated by Simplawfy Pty Ltd
+        (<b>Simplawfy</b>). By using the Website as a Client, you acknowledge that you
+        have read, understood and agree to be bound by the Terms.
       </p>
 
       <p>
@@ -436,7 +436,8 @@
       <p>
         6.1 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Your use of
         the Website is also governed by the Website Terms of Use, which you
-        should also read and must also comply with, and which is available  <router-link to="makinglawsimple.com.au/terms-of-use">
+        should also read and must also comply with, and which is available
+        <router-link to="makinglawsimple.com.au/terms-of-use">
           here:</router-link
         >
       </p>
@@ -457,8 +458,11 @@
         communications given pursuant to these Terms must be in writing and
         given to the other party electronically at, in the case of the Client,
         the email address provided by the Client via the Platform and, in the
-        case of Simplawfy, at <a href="mailto:info@makinglawsimple.com.au">info@makinglawsimple.com.au</a>; and will be deemed to
-        be delivered to the recipient upon being sent to that address.
+        case of Simplawfy, at
+        <a href="mailto:info@makinglawsimple.com.au"
+          >info@makinglawsimple.com.au</a
+        >; and will be deemed to be delivered to the recipient upon being sent
+        to that address.
       </p>
       <p>
         6.4 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Nothing in

@@ -11,7 +11,7 @@
     </div>
 
     <div class="WordSection1 container pt-3">
-      <h3 class="mt-3 text-center">Website Terms of Use</h3>
+      <h3 class="mt-3 text-center">User accounts and terms & conditions</h3>
 
       <p class="LNMarginText">
         <span class="SpellE"
@@ -119,7 +119,7 @@
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
           >If you are a Client, you also agree to be bound by the Terms &amp;
           Conditions for Clients, which is available
-          <a target="_blank" href="app/terms-of-use-client">here</a>
+          <a target="_blank" href="app/terms-of-use-clients">here</a>
           .<o:p></o:p
         ></span>
       </p>
@@ -140,7 +140,7 @@
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
           >If you are a Lawyer, you also agree to be bound by the Terms &amp;
           Conditions for Lawyers, which is available
-          <a target="_blank" href="app/terms-of-use-lawyer">here</a>
+          <a target="_blank" href="app/terms-of-use-lawyers">here</a>
           .<o:p></o:p
         ></span>
       </p>

@@ -682,7 +682,8 @@ export default {
   z-index: 9999; /* Ensure tooltip appears above other content */
   width: auto;
   font-size: 10px;
-  font-weight: 400  ;
+  font-weight: 400;
+  text-align: start;
 }
 .container-main {
   min-height: 100vh;
@@ -810,7 +811,8 @@ span.class-para::-webkit-scrollbar-track {
     margin: auto;
     left: 0;
     right: 0;
-    text-wrap: wrap;
+    text-wrap: balance;
+    /* overflow-wrap: break-word; */
 }
   .descriptionText {
     width: 100%;
