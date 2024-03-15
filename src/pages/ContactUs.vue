@@ -330,7 +330,7 @@ export default {
   methods: {
     submitData(formData) {
       api.post('/submit-contact-form',formData).then(()=>{
-        this.$swal('','Thanks for reaching out. Simplawfy will be in touch with you soon1.','success').then(()=>{
+        this.$swal('','Thanks for reaching out. Simplawfy will be in touch with you soon.','success').then(()=>{
           window.location.reload();
         })
       }).catch((error)=>{

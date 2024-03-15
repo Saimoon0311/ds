@@ -2049,6 +2049,19 @@ app.mixin({
           `;
         }
 
+
+        if (
+          typeof data?.success_fee_term != undefined &&
+          data?.success_fee_term != null &&
+          data?.success_fee_term != "" &&
+          data?.charge_type == "Success"
+        ) {
+          mainHtmlContent += ` <div class="">
+            <p class="text-center font-set" style="color:black;"><span>Success fee term.</span></p>
+            <p class="descriptionText" style="color:black;">${data?.success_fee_term}</p>
+          </div>`;
+        }
+
         if (
           typeof data?.disbursement_amount != undefined &&
           data?.disbursement_amount != null
