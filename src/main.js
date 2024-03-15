@@ -1274,7 +1274,7 @@ app.mixin({
       }
 
       if (data?.about != null && data?.about != "") {
-        htmlContent += `<div class="descriptionText ">${data?.about}</div>`;
+        htmlContent += `<div class="descriptionText descriptionTextAbout">${data?.about}</div>`;
       }
 
       htmlContent += `</div>`;
