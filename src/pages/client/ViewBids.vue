@@ -76,11 +76,9 @@
                         <span
                           id="tooltipSpan0"
                           title=""
-
                           @mouseenter="showTooltipth('Estimate')"
                           @mouseleave="hideTooltipth"
                           @click="toggleTooltipth('Estimate')"
-
                         >
                           Fee estimate
                           <i class="fas fa-info-circle"></i>
@@ -133,6 +131,7 @@
                         {{ tab == "Accept" ? item?.lawyer?.last_name : "" }}
                       </p>
                     </td>
+
                     <!-- <td>{{ item?.charge_type }}</td> -->
                     <td class="text-center" style="width: 30%">
                       <!-- <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ chargeType(item?.charge_type) }} <span data-toggle="tooltip" data-placement="top" title="How you will charge?"><i class="fas fa-info-circle"></i></span></p> -->
@@ -142,9 +141,9 @@
                       @mouseover="updateTooltip(item?.charge_type, item?.id)" -->
                       <p
                         :id="'tooltipSpan' + item?.id"
-                        @mouseenter="showTooltip(item?.charge_type,item?.id)"
+                        @mouseenter="showTooltip(item?.charge_type, item?.id)"
                         @mouseleave="hideTooltip"
-                        @click="toggleTooltip(item?.charge_type,item?.id)"
+                        @click="toggleTooltip(item?.charge_type, item?.id)"
                         class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small no-hover"
                       >
                         {{ chargeType(item?.charge_type) }}
@@ -152,9 +151,12 @@
                           <i class="fas fa-info-circle"></i>
                         </span>
                       </p>
-                      <div v-if="isTooltipVisible && tooltipId == item?.id" class="tooltip-text">
-                          {{ tooltipText }}
-                        </div>
+                      <div
+                        v-if="isTooltipVisible && tooltipId == item?.id"
+                        class="tooltip-text"
+                      >
+                        {{ tooltipText }}
+                      </div>
                       <!-- <div class="modal" tabindex="-1" role="dialog" ref="myModal">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -308,7 +310,7 @@ export default {
       isTooltipVisible: false,
       isTooltipVisibleth: false,
       tooltipText: "",
-      tooltipId : null,
+      tooltipId: null,
     };
   },
   computed: {
@@ -347,7 +349,7 @@ export default {
   },
 
   methods: {
-    showTooltip(type,id) {
+    showTooltip(type, id) {
       if (!this.isMobileDevice()) {
         const { definition } = this.openFeeEstimateModal(type);
         this.tooltipText = definition;
@@ -373,7 +375,7 @@ export default {
         this.isTooltipVisibleth = false;
       }
     },
-    toggleTooltip(type,id) {
+    toggleTooltip(type, id) {
       if (this.isMobileDevice()) {
         const { definition } = this.openFeeEstimateModal(type);
         this.tooltipText = definition;
@@ -806,7 +808,7 @@ span.class-para::-webkit-scrollbar-track {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     z-index: 9999;
     width: auto; /* Let the width be determined by content */
-        max-width: 90%;
+    max-width: 90%;
     font-size: 10px;
     font-weight: 400;
     margin: auto;
@@ -816,7 +818,7 @@ span.class-para::-webkit-scrollbar-track {
     word-wrap: break-word;
     overflow-wrap: break-word;
     white-space: normal;
-}
+  }
   .descriptionText {
     width: 100%;
     white-space: normal;
