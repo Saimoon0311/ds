@@ -1274,7 +1274,7 @@ app.mixin({
       }
 
       if (data?.about != null && data?.about != "") {
-        htmlContent += `<div class="textwrap"><div class="descriptionText descriptionTextAbout" >${data?.about}</div></div>`;
+        htmlContent += `<div class="descriptionText descriptionTextAbout">${data?.about.trim()}</div>`;
       }
 
       htmlContent += `</div>`;
