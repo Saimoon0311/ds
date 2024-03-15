@@ -2146,11 +2146,11 @@ app.mixin({
             this.loginUser?.type == "lawyer"
               ? "What you will do"
               : "Proposed work";
-          mainHtmlContent += ` <div class="trouble" style="color: red !important;">
+          mainHtmlContent += ` <div class="trouble">
             <p class="text-center font-set" style="color:black;"><span>${desc_title}.</span></p>
-            <div class="parental" style="max-height: 50px; overflow: auto;">
-            <p class="descriptionText" style="color:black;">${data?.description}</p>
-            </div>
+           
+            <p class="descriptionText initialText" style="color:black;">${data?.description}</p>
+            
           </div>`;
         }
 
