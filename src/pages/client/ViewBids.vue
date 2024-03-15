@@ -121,18 +121,14 @@
                     <!-- <td>testing client (crinimal)</td> -->
                     <td class="text-center" style="width: 15%">
                       <p
-                        @click="
-                          openLawyerDetailsModal(
-                            item?.lawyer,
-                            item?.status.toLowerCase() == 'accept'
-                          )
-                        "
+                      @click="openLawyerDetailsModal(item?.lawyer, item?.status.toLowerCase() == 'accept')"
                         class="lawname btn-dark rounded-pill btn text-capitalize fw-bold px-4 py-1"
                       >
                         {{ item?.lawyer?.first_name }}
                         {{ tab == "Accept" ? item?.lawyer?.last_name : "" }}
                       </p>
                     </td>
+                    
                     <!-- <td>{{ item?.charge_type }}</td> -->
                     <td class="text-center" style="width: 30%">
                       <!-- <p class="text-capitalize px-3 py-0 btn-dark rounded-pill btn fw-normal mb-1 font-small">{{ chargeType(item?.charge_type) }} <span data-toggle="tooltip" data-placement="top" title="How you will charge?"><i class="fas fa-info-circle"></i></span></p> -->
@@ -285,6 +281,7 @@
   </div>
 </template>
 <script>
+
 import ClientHeader from "./Header.vue";
 import CustomPagination from "@/components/CustomPagination";
 import api from "@/config/api";
@@ -300,6 +297,8 @@ export default {
     ClientHeader,
     CustomPagination,
     MainFooter,
+    
+
   },
   data() {
     return {
@@ -347,6 +346,7 @@ export default {
   },
 
   methods: {
+  
     showTooltip(type,id) {
       if (!this.isMobileDevice()) {
         const { definition } = this.openFeeEstimateModal(type);

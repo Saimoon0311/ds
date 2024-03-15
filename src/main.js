@@ -1410,9 +1410,9 @@ app.mixin({
         //   ? title
         //   : `${this.capitalizeFirstLetter(data?.type)} Details`,
         title: title,
-        html: `${
+        html: `<div class="table-wrap ${
           data?.type == "lawyer" ? "d-flex" : ""
-        } flex-wrap" style="text-align:left !important;">${htmlContent}</div>`,
+        } flex-wrap" style="text-align:left !important;">${htmlContent}</div></div>`,
         showCloseButton: true,
         showConfirmButton: false,
         customClass: {
@@ -1420,6 +1420,8 @@ app.mixin({
         },
       });
     },
+
+    
 
     openFeeEstimateModal(charge_type) {
       console.log("charge type", charge_type);
