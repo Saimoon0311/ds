@@ -1410,9 +1410,9 @@ app.mixin({
         //   ? title
         //   : `${this.capitalizeFirstLetter(data?.type)} Details`,
         title: title,
-        html: `<div class="table-wrap ${
+        html: `${
           data?.type == "lawyer" ? "d-flex" : ""
-        } flex-wrap" style="text-align:left !important;">${htmlContent}</div></div>`,
+        } flex-wrap" style="text-align:left !important;">${htmlContent}</div>`,
         showCloseButton: true,
         showConfirmButton: false,
         customClass: {
