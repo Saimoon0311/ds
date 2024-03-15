@@ -3391,7 +3391,8 @@ th.table-title-td {
 .descriptionText {
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 100px;
+  min-height: 20px;
+  max-height: 100px;
   line-break: anywhere;
   overflow-y: auto;
   padding-right: 10px;
