@@ -2057,7 +2057,7 @@ app.mixin({
           data?.charge_type == "Success"
         ) {
           mainHtmlContent += ` <div class="">
-            <p class="text-center font-set" style="color:black;"><span>Success fee term.</span></p>
+            <p><span>Success fee term.</span></p>
             <p class="descriptionText" style="color:black;">${data?.success_fee_term}</p>
           </div>`;
         }
