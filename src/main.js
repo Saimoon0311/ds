@@ -37,15 +37,14 @@ import { getToken } from "firebase/messaging";
 import { messaging } from "@/config/firebaseConfig";
 import { deleteToken } from "firebase/messaging";
 
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+
 import Papa from "papaparse";
 // import { createHead } from '@vueuse/head'
 
-
-
 /* add icons to the library */
 library.add(faUserSecret);
-
-
 
 // import { firebaseApp } from '@/config/firebaseConfig';
 
@@ -152,7 +151,7 @@ app.mixin({
         if (currentTime >= parseInt(expirationTime)) {
           // console.log('ex4: ' , true);
           // localStorage.removeItem("token");
-          this.logout('login');
+          this.logout("login");
           localStorage.removeItem("tokenExpiration");
         }
       }
@@ -617,7 +616,7 @@ app.mixin({
       localStorage.setItem("jobId", id);
       this.$store.commit("SET_DATATAB", this.tab);
       this.saveJobInfo(data);
-      this.resetCount('job');
+      this.resetCount("job");
       this.$router.push({ path: "/view-proposals" });
     },
 
@@ -705,14 +704,13 @@ app.mixin({
       }
 
       if (path != "admin-dashboard") {
-
         deleteToken(messaging)
-        .then((res) => {
-          console.log("res , ", res);
-        })
-        .catch(function (error) {
-          console.error("Error deleting FCM token:", error);
-        });
+          .then((res) => {
+            console.log("res , ", res);
+          })
+          .catch(function (error) {
+            console.error("Error deleting FCM token:", error);
+          });
 
         this.requestNotificationPermission();
         this.$router.push({ path: path });
@@ -1377,7 +1375,7 @@ app.mixin({
       }
       if (data?.link != null && data?.link != "") {
         let url = data?.link;
-        if (url.startsWith('www')) {
+        if (url.startsWith("www")) {
           url = `https://${url}`;
         }
         htmlContent += `<div class="wrapper">
@@ -1420,8 +1418,6 @@ app.mixin({
         },
       });
     },
-
-    
 
     openFeeEstimateModal(charge_type) {
       console.log("charge type", charge_type);
@@ -2051,7 +2047,6 @@ app.mixin({
           `;
         }
 
-
         if (
           typeof data?.success_fee_term != undefined &&
           data?.success_fee_term != null &&
@@ -2162,15 +2157,41 @@ app.mixin({
       console.log("dis bur sement : ", swalHtmlContent);
       // Use dynamic HTML inside SweetAlert2 modal
 
-      this.$swal.fire({
-        title: "Proposal Details",
-        html: swalHtmlContent,
-        showCloseButton: true,
-        showConfirmButton: false,
-        customClass: {
-          container: "my-swal-container", // You can define your custom class for styling
-        },
+      // this.$swal.fire({
+      //   title: "Proposal Details",
+      //   html: swalHtmlContent,
+      //   showCloseButton: true,
+      //   showConfirmButton: false,
+      //   customClass: {
+      //     container: "my-swal-container", // You can define your custom class for styling
+      //   },
+      // });
+
+      console.log('start start start : ');
+      console.log(swalHtmlContent);
+
+      const modalHTML = `<div class="modal fade" id="proposalDetailsModal" tabindex="-1" aria-labelledby="proposalDetailsModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="proposalDetailsModalLabel">Proposal Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ${swalHtmlContent}
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+      $('body').append(modalHTML);
+      $('#proposalDetailsModal').modal('show');
+
+      $('#proposalDetailsModal .btn-close').on('click', function() {
+        $('#proposalDetailsModal').modal('hide'); // Hide the modal first
+        $('#proposalDetailsModal').remove(); // Remove the modal HTML from the DOM
       });
+
     },
 
     createTableHtml(title, dataArray, renderAsHtml = false) {
@@ -2439,10 +2460,12 @@ app.mixin({
     },
 
     logoutProcess(redirectUrl, redirection = true) {
+      this.$store.commit("SET_LOGIN_USER", null);
+      localStorage.removeItem("loginUser");
+
       localStorage.removeItem("token");
       localStorage.removeItem("tokenExpiration");
       this.$store.commit("SET_AUTHENTICATED", false);
-      localStorage.removeItem("loginUser");
 
       localStorage.removeItem("jobData");
       localStorage.removeItem("noti_count_job");
@@ -2451,7 +2474,6 @@ app.mixin({
       this.$store.commit("SET_NOTI_COUNT_MSG", 0);
       this.$store.commit("SET_NOTI_COUNT_JOB", 0);
 
-      this.$store.commit("SET_LOGIN_USER", null);
       this.$store.commit("SET_SUB_STATUS", null);
       this.$store.commit("SET_SUB_CANCEL_STATUS", false);
       this.$store.commit("SET_APPROVAL_STATUS", null);
