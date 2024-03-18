@@ -21,12 +21,12 @@
           >
         </li>
 
-        <li v-if="loginUser !== null && loginUser?.type === 'client'">
+        <li v-if="loginData != null && loginUser != null && loginUser?.type === 'client'">
           <router-link class="dropdown-item" to="/client-faqs"
             >FAQs</router-link
           >
         </li>
-        <li v-if="loginUser !== null && loginUser?.type === 'lawyer'">
+        <li v-if="loginData != null && loginUser != null && loginUser?.type === 'lawyer'">
           <router-link class="dropdown-item" to="/lawyer-faqs"
             >FAQs</router-link
           >
@@ -56,9 +56,11 @@ export default {
   name: "GeneralHeader",
   computed: {
     loginUser() {
-      // console.log("asdasd", this.$store.getters.loginUser)
       return this.$store.getters.loginUser;
     },
+    loginData(){
+      return localStorage.getItem('loginUser');
+    }
   },
 };
 </script>
