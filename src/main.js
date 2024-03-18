@@ -1272,7 +1272,7 @@ app.mixin({
       }
 
       if (data?.about != null && data?.about != "") {
-        htmlContent += `<div class="descriptionText descriptionTextAbout">${data?.about.trim()}</div>`;
+        htmlContent += `<div class="top-text-wrap" style=" overflow: auto"><p class=" descriptionTextAbout">${data?.about.trim()}</p></div>`;
       }
 
       htmlContent += `</div>`;
@@ -1403,20 +1403,47 @@ app.mixin({
 
       htmlContent += `</div>`;
 
-      this.$swal.fire({
-        // title: showSecretInfo
+       // title: showSecretInfo
         //   ? title
         //   : `${this.capitalizeFirstLetter(data?.type)} Details`,
-        title: title,
-        html: `<div class="table-wrap ${
-          data?.type == "lawyer" ? "d-flex" : ""
-        } flex-wrap" style="text-align:left !important;">${htmlContent}</div></div>`,
-        showCloseButton: true,
-        showConfirmButton: false,
-        customClass: {
-          container: "my-swal-container", // You can define your custom class for styling
-        },
+
+      // this.$swal.fire({
+      //   title: title,
+      //   html: `<div class="table-wrap ${
+      //     data?.type == "lawyer" ? "d-flex" : ""
+      //   } flex-wrap" style="text-align:left !important;">${htmlContent}</div></div>`,
+      //   showCloseButton: true,
+      //   showConfirmButton: false,
+      //   customClass: {
+      //     container: "my-swal-container", // You can define your custom class for styling
+      //   },
+      // });
+
+
+
+      const modalHTML = `<div class="modal fade" id="proposalDetailsModal" tabindex="-1" aria-labelledby="proposalDetailsModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="proposalDetailsModalLabel">Proposal Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ${htmlContent}
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+      $('body').append(modalHTML);
+      $('#proposalDetailsModal').modal('show');
+
+      $('#proposalDetailsModal .btn-close').on('click', function() {
+        $('#proposalDetailsModal').modal('hide'); // Hide the modal first
+        $('#proposalDetailsModal').remove(); // Remove the modal HTML from the DOM
       });
+
+
     },
 
     openFeeEstimateModal(charge_type) {
@@ -2054,7 +2081,7 @@ app.mixin({
           data?.charge_type == "Success"
         ) {
           mainHtmlContent += ` <div class="">
-            <p><span>Success fee term.</span></p>
+            <p class="success-class"><span>Success fee terms:</span></p>
             <p class="descriptionText" style="color:black;">${data?.success_fee_term}</p>
           </div>`;
         }
@@ -2157,40 +2184,40 @@ app.mixin({
       console.log("dis bur sement : ", swalHtmlContent);
       // Use dynamic HTML inside SweetAlert2 modal
 
-      // this.$swal.fire({
-      //   title: "Proposal Details",
-      //   html: swalHtmlContent,
-      //   showCloseButton: true,
-      //   showConfirmButton: false,
-      //   customClass: {
-      //     container: "my-swal-container", // You can define your custom class for styling
-      //   },
-      // });
-
-      console.log('start start start : ');
-      console.log(swalHtmlContent);
-
-      const modalHTML = `<div class="modal fade" id="proposalDetailsModal" tabindex="-1" aria-labelledby="proposalDetailsModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="proposalDetailsModalLabel">Proposal Details</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            ${swalHtmlContent}
-          </div>
-        </div>
-      </div>
-    </div>`;
-
-      $('body').append(modalHTML);
-      $('#proposalDetailsModal').modal('show');
-
-      $('#proposalDetailsModal .btn-close').on('click', function() {
-        $('#proposalDetailsModal').modal('hide'); // Hide the modal first
-        $('#proposalDetailsModal').remove(); // Remove the modal HTML from the DOM
+      this.$swal.fire({
+        title: "Proposal Details",
+        html: swalHtmlContent,
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+          container: "my-swal-container", // You can define your custom class for styling
+        },
       });
+
+      // console.log('start start start : ');
+      // console.log(swalHtmlContent);
+
+    //   const modalHTML = `<div class="modal fade" id="proposalDetailsModal" tabindex="-1" aria-labelledby="proposalDetailsModalLabel" aria-hidden="true">
+    //   <div class="modal-dialog">
+    //     <div class="modal-content">
+    //       <div class="modal-header">
+    //         <h5 class="modal-title" id="proposalDetailsModalLabel">Proposal Details</h5>
+    //         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    //       </div>
+    //       <div class="modal-body">
+    //         ${swalHtmlContent}
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>`;
+
+    //   $('body').append(modalHTML);
+    //   $('#proposalDetailsModal').modal('show');
+
+    //   $('#proposalDetailsModal .btn-close').on('click', function() {
+    //     $('#proposalDetailsModal').modal('hide'); // Hide the modal first
+    //     $('#proposalDetailsModal').remove(); // Remove the modal HTML from the DOM
+    //   });
 
     },
 

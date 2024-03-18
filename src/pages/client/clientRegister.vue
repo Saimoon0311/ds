@@ -100,7 +100,7 @@
                 <label class="form-check-label tac" for="termsAndConditions">
                     &nbsp;I have read and agree to the 
                     <!-- <router-link to="https://makinglawsimple.com.au/app/terms-of-use-client" target="_blank" >terms and conditions.</router-link> -->
-                    <router-link to="https://makinglawsimple.com.au/app/terms-of-use-client" target="_blank" >terms and conditions.</router-link>
+                    <router-link to="https://makinglawsimple.com.au/app/terms-and-conditions-for-client" target="_blank" >terms and conditions.</router-link>
                 </label>
                 <span class="invalid-feedback">{{errors.tandc}}</span>
             </div>

@@ -438,8 +438,7 @@
         the Website is also governed by the Website Terms of Use, which you
         should also read and must also comply with, and which is available
         <router-link to="makinglawsimple.com.au/terms-of-use">
-          here:</router-link
-        >
+          here</router-link>.
       </p>
       <p>
         6.2 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Simplawfy
