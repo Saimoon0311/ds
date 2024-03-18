@@ -390,29 +390,33 @@
     color: black;
     font-weight: 600;
     }
-    .modal-header h5 {
+   #proposalDetailsModal .modal-header h5 {
     font-size: 24px !important;
     color: black;
     font-weight: 600;
     text-align: center;
 }
-.modal-header {
+#proposalDetailsModal .modal-header {
     text-align: center;
     border: none;
     padding: 15px 15px 0px 15px;
+    justify-content: center;
 }
-.modal-header button.btn-close {
+#proposalDetailsModal .modal-header button.btn-close:focus{
+  outline: none !important;
+  box-shadow: none;
+}
+#proposalDetailsModal .modal-header button.btn-close {
     padding: 0.325rem 0.75rem !important;
     background: black !important;
     position: absolute;
     right: 15px;
     top: 15px;
-    font-size: 1rem !important;
     height: 24px;
     width: 10px;
     opacity: 1;
     color: white !important;
-    font-size: 10px !important;
+    font-size: 14px !important;
 }
     .WordSection1 a, .profile-container a{
       color: #91c8fc;
@@ -431,6 +435,22 @@
       width: max-content;
     }
     @media only screen and (max-width: 767px) {
+      #proposalDetailsModal .modal-header button.btn-close {
+    padding: 2px 5px !important;
+    background: black !important;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 20px;
+    width: 14px;
+    opacity: 1;
+    color: white !important;
+    font-size: 12px !important;
+}
+#proposalDetailsModal .modal-header h5 {
+    font-size: 20px !important;
+    
+}
     .set-pad{
       padding: 0 !important;
     }
