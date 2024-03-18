@@ -37,7 +37,7 @@ import { getToken } from "firebase/messaging";
 import { messaging } from "@/config/firebaseConfig";
 import { deleteToken } from "firebase/messaging";
 
-import $ from 'jquery';
+import $ from "jquery";
 window.$ = window.jQuery = $;
 
 import Papa from "papaparse";
@@ -832,14 +832,38 @@ app.mixin({
       //   .join("");
 
       // Use dynamic HTML inside SweetAlert2 modal
-      this.$swal.fire({
-        title: data?.title ?? "Job Details",
-        html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
-        showCloseButton: true,
-        showConfirmButton: false,
-        customClass: {
-          container: "my-swal-container", // You can define your custom class for styling
-        },
+      // this.$swal.fire({
+      //   title: data?.title ?? "Job Details",
+      //   html: `<div class="table-wrap" style="text-align:left !important;">${htmlContent}</div>`,
+      //   showCloseButton: true,
+      //   showConfirmButton: false,
+      //   customClass: {
+      //     container: "my-swal-container", // You can define your custom class for styling
+      //   },
+      // });
+
+      const modalHTML = `<div class="modal fade" id="proposalDetailsModal" tabindex="-1" aria-labelledby="proposalDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="proposalDetailsModalLabel">Proposal Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="modal-body">
+              <div class="table-wrap" style="text-align:left !important;">
+              ${htmlContent}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+
+      $("body").append(modalHTML);
+      $("#proposalDetailsModal").modal("show");
+
+      $("#proposalDetailsModal .btn-close").on("click", function () {
+        $("#proposalDetailsModal").modal("hide"); // Hide the modal first
+        $("#proposalDetailsModal").remove(); // Remove the modal HTML from the DOM
       });
     },
 
@@ -1403,9 +1427,9 @@ app.mixin({
 
       htmlContent += `</div>`;
 
-       // title: showSecretInfo
-        //   ? title
-        //   : `${this.capitalizeFirstLetter(data?.type)} Details`,
+      // title: showSecretInfo
+      //   ? title
+      //   : `${this.capitalizeFirstLetter(data?.type)} Details`,
 
       // this.$swal.fire({
       //   title: title,
@@ -1419,8 +1443,6 @@ app.mixin({
       //   },
       // });
 
-
-
       const modalHTML = `<div class="modal fade" id="proposalDetailsModal" tabindex="-1" aria-labelledby="proposalDetailsModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -1429,21 +1451,22 @@ app.mixin({
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
           </div>
           <div class="modal-body">
-            ${htmlContent}
+            <div class="table-wrap 
+              ${data?.type == "lawyer" ? "d-flex" : ""} flex-wrap" 
+              style="text-align:left !important;">${htmlContent}</div>
+            </div>
           </div>
         </div>
       </div>
     </div>`;
 
-      $('body').append(modalHTML);
-      $('#proposalDetailsModal').modal('show');
+      $("body").append(modalHTML);
+      $("#proposalDetailsModal").modal("show");
 
-      $('#proposalDetailsModal .btn-close').on('click', function() {
-        $('#proposalDetailsModal').modal('hide'); // Hide the modal first
-        $('#proposalDetailsModal').remove(); // Remove the modal HTML from the DOM
+      $("#proposalDetailsModal .btn-close").on("click", function () {
+        $("#proposalDetailsModal").modal("hide"); // Hide the modal first
+        $("#proposalDetailsModal").remove(); // Remove the modal HTML from the DOM
       });
-
-
     },
 
     openFeeEstimateModal(charge_type) {
@@ -2184,41 +2207,62 @@ app.mixin({
       console.log("dis bur sement : ", swalHtmlContent);
       // Use dynamic HTML inside SweetAlert2 modal
 
-      this.$swal.fire({
-        title: "Proposal Details",
-        html: swalHtmlContent,
-        showCloseButton: true,
-        showConfirmButton: false,
-        customClass: {
-          container: "my-swal-container", // You can define your custom class for styling
-        },
-      });
+      // this.$swal.fire({
+      //   title: "Proposal Details",
+      //   html: swalHtmlContent,
+      //   showCloseButton: true,
+      //   showConfirmButton: false,
+      //   customClass: {
+      //     container: "my-swal-container", // You can define your custom class for styling
+      //   },
+      // });
 
       // console.log('start start start : ');
       // console.log(swalHtmlContent);
 
-    //   const modalHTML = `<div class="modal fade" id="proposalDetailsModal" tabindex="-1" aria-labelledby="proposalDetailsModalLabel" aria-hidden="true">
-    //   <div class="modal-dialog">
-    //     <div class="modal-content">
-    //       <div class="modal-header">
-    //         <h5 class="modal-title" id="proposalDetailsModalLabel">Proposal Details</h5>
-    //         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    //       </div>
-    //       <div class="modal-body">
-    //         ${swalHtmlContent}
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>`;
+      //   const modalHTML = `<div class="modal fade" id="proposalDetailsModal" tabindex="-1" aria-labelledby="proposalDetailsModalLabel" aria-hidden="true">
+      //   <div class="modal-dialog">
+      //     <div class="modal-content">
+      //       <div class="modal-header">
+      //         <h5 class="modal-title" id="proposalDetailsModalLabel">Proposal Details</h5>
+      //         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      //       </div>
+      //       <div class="modal-body">
+      //         ${swalHtmlContent}
+      //       </div>
+      //     </div>
+      //   </div>
+      // </div>`;
 
-    //   $('body').append(modalHTML);
-    //   $('#proposalDetailsModal').modal('show');
+      //   $('body').append(modalHTML);
+      //   $('#proposalDetailsModal').modal('show');
 
-    //   $('#proposalDetailsModal .btn-close').on('click', function() {
-    //     $('#proposalDetailsModal').modal('hide'); // Hide the modal first
-    //     $('#proposalDetailsModal').remove(); // Remove the modal HTML from the DOM
-    //   });
+      //   $('#proposalDetailsModal .btn-close').on('click', function() {
+      //     $('#proposalDetailsModal').modal('hide'); // Hide the modal first
+      //     $('#proposalDetailsModal').remove(); // Remove the modal HTML from the DOM
+      //   });
 
+      const modalHTML = `<div class="modal fade" id="proposalDetailsModal" tabindex="-1" aria-labelledby="proposalDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="proposalDetailsModalLabel">Proposal Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="modal-body">
+              ${swalHtmlContent}
+            </div>
+          </div>
+        </div>
+      </div>`;
+
+      $("body").append(modalHTML);
+      $("#proposalDetailsModal").modal("show");
+
+      $("#proposalDetailsModal .btn-close").on("click", function () {
+        $("#proposalDetailsModal").modal("hide"); // Hide the modal first
+        $("#proposalDetailsModal").remove(); // Remove the modal HTML from the DOM
+      });
     },
 
     createTableHtml(title, dataArray, renderAsHtml = false) {
