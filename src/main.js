@@ -861,10 +861,24 @@ app.mixin({
       $("body").append(modalHTML);
       $("#proposalDetailsModal").modal("show");
 
-      $("#proposalDetailsModal .btn-close").on("click", function () {
-        $("#proposalDetailsModal").modal("hide"); // Hide the modal first
-        $("#proposalDetailsModal").remove(); // Remove the modal HTML from the DOM
-      });
+      // $("#proposalDetailsModal .btn-close").on("click", function () {
+      //   $("#proposalDetailsModal").modal("hide"); // Hide the modal first
+      //   $("#proposalDetailsModal").remove(); // Remove the modal HTML from the DOM
+      // });
+
+      $("#proposalDetailsModal .btn-close, #proposalDetailsModal").on(
+        "click",
+        function (e) {
+          if (
+            $(e.target).is(".btn-close") ||
+            $(e.target).is("#proposalDetailsModal")
+          ) {
+            $("#proposalDetailsModal").modal("hide"); // Hide the modal first
+            $("#proposalDetailsModal").remove(); // Remove the modal HTML from the DOM
+          }
+        }
+      );
+      
     },
 
     openRequirementsModal(data) {
@@ -1463,10 +1477,23 @@ app.mixin({
       $("body").append(modalHTML);
       $("#proposalDetailsModal").modal("show");
 
-      $("#proposalDetailsModal .btn-close").on("click", function () {
-        $("#proposalDetailsModal").modal("hide"); // Hide the modal first
-        $("#proposalDetailsModal").remove(); // Remove the modal HTML from the DOM
-      });
+      // $("#proposalDetailsModal .btn-close").on("click", function () {
+      //   $("#proposalDetailsModal").modal("hide"); // Hide the modal first
+      //   $("#proposalDetailsModal").remove(); // Remove the modal HTML from the DOM
+      // });
+
+      $("#proposalDetailsModal .btn-close, #proposalDetailsModal").on(
+        "click",
+        function (e) {
+          if (
+            $(e.target).is(".btn-close") ||
+            $(e.target).is("#proposalDetailsModal")
+          ) {
+            $("#proposalDetailsModal").modal("hide"); // Hide the modal first
+            $("#proposalDetailsModal").remove(); // Remove the modal HTML from the DOM
+          }
+        }
+      );
     },
 
     openFeeEstimateModal(charge_type) {
@@ -2259,10 +2286,23 @@ app.mixin({
       $("body").append(modalHTML);
       $("#proposalDetailsModal").modal("show");
 
-      $("#proposalDetailsModal .btn-close").on("click", function () {
-        $("#proposalDetailsModal").modal("hide"); // Hide the modal first
-        $("#proposalDetailsModal").remove(); // Remove the modal HTML from the DOM
-      });
+      // $("#proposalDetailsModal .btn-close").on("click", function () {
+      //   $("#proposalDetailsModal").modal("hide"); // Hide the modal first
+      //   $("#proposalDetailsModal").remove(); // Remove the modal HTML from the DOM
+      // });
+
+      $("#proposalDetailsModal .btn-close, #proposalDetailsModal").on(
+        "click",
+        function (e) {
+          if (
+            $(e.target).is(".btn-close") ||
+            $(e.target).is("#proposalDetailsModal")
+          ) {
+            $("#proposalDetailsModal").modal("hide"); // Hide the modal first
+            $("#proposalDetailsModal").remove(); // Remove the modal HTML from the DOM
+          }
+        }
+      );
     },
 
     createTableHtml(title, dataArray, renderAsHtml = false) {
