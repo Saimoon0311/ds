@@ -4,14 +4,14 @@
       <ClientHeader />
     </div>
     <div v-else-if="loginUserData && loginUserData.type == 'lawyer'">
-        <LawyerHeader />
+      <LawyerHeader />
     </div>
     <div v-else>
-      <GeneralHeader  />
+      <GeneralHeader />
     </div>
 
     <div class="WordSection1 container pt-3">
-      <h3 class="mt-3 text-center">User accounts and terms & conditions</h3>
+      <h3 class="mt-3 text-center">User Accounts and Terms & Conditions</h3>
 
       <p class="LNMarginText">
         <span class="SpellE"
@@ -21,7 +21,9 @@
         ><span lang="EN-US" style="font-family: Montserrat">
           Pty Ltd (<span class="SpellE"
             ><span class="LNDefinedTermChar"
-              ><span style="font-family: Montserrat">Simplawfy</span></span
+              ><span style="font-family: Montserrat"
+                ><b>Simplawfy</b></span
+              ></span
             ></span
           >) owns and operates this website 'makinglawsimple.com.au' (<b
             style="mso-bidi-font-weight: 400: normal"
@@ -33,14 +35,16 @@
           >and the products and services available through this Website
           (collectively,
           <span class="LNDefinedTermChar"
-            ><span style="font-family: Montserrat">Services</span></span
+            ><span style="font-family: Montserrat"><b>Services</b></span></span
           >) is subject to the following terms, conditions and notices (<span
             class="LNDefinedTermChar"
-            ><span style="font-family: Montserrat">Terms of Use</span></span
-          >). By using the Services, you are agreeing to all of the Terms of
-          Use, as may be updated by us from time to time. You should check this
-          page regularly to take notice of any changes that may have been made
-          to the Terms of Use.<o:p></o:p
+            ><span style="font-family: Montserrat"
+              ><b>Terms of Use</b></span
+            ></span
+          >). By using the Services, you acknowledge that you have read,
+          understood and agree to be bound by the Terms of Use. If you do not
+          agree to these Terms of Use, you must immediately cease usage of the
+          Website and Services. <o:p></o:p
         ></span>
       </p>
 
@@ -63,18 +67,12 @@
       </p>
 
       <p class="LNIndentText1">
-        <span lang="EN-US" style="font-family: Montserrat"
-          >Access to this Website is permitted on a temporary basis, and
-          <span class="SpellE">Simplawfy</span> reserves the right to withdraw
-          or amend the Services without notice. Your use of the Website is at
-          your own risk. The Website is provided on an "as is" and "as
-          available" basis. <span class="SpellE">Simplawfy</span> does not
-          warrant that the Website will be uninterrupted or error-free.
-          <span class="SpellE">Simplawfy</span> will not be liable if for any
-          reason this Website is unavailable at any time or for any period. From
-          time to time, <span class="SpellE">Simplawfy</span> may restrict
-          access to some parts or all of this Website.<o:p></o:p
-        ></span>
+        Access to this Website is provided on an “as is” and “as available”
+        basis, without any warranties of any kind, either expressed or implied.
+        Simplawfy does not warrant that the Website will be available,
+        uninterrupted, secure, or free of errors, defects or malware. Simplawfy
+        reserves the right to withdraw, update, restrict or amend the Website or
+        Services without notice.
       </p>
 
       <p class="LNNumberedHeading1" style="mso-list: l8 level1 lfo8">
@@ -96,11 +94,10 @@
       </p>
 
       <p class="LNIndentText1">
-        <span lang="EN-US" style="font-family: Montserrat"
-          >Your use of the Website may be as a Client or Lawyer (as those terms
-          are defined in the Terms &amp; Conditions for Clients and Terms &amp;
-          Conditions for Lawyers):<o:p></o:p
-        ></span>
+        You may create an account on this Website in order to use the Services,
+        as a Client or Lawyer (as those terms are defined in the Terms &
+        Conditions for Clients and Terms & Conditions for Lawyers as linked
+        below):
       </p>
 
       <p class="LNText3" style="mso-list: l8 level3 lfo8">
@@ -119,7 +116,9 @@
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
           >If you are a Client, you also agree to be bound by the Terms &amp;
           Conditions for Clients, which is available
-          <a target="_blank" href="app/terms-of-use-clients">here</a>
+          <a target="_blank" href="app/terms-and-conditions-for-clients"
+            >here</a
+          >
           .<o:p></o:p
         ></span>
       </p>
@@ -140,7 +139,9 @@
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
           >If you are a Lawyer, you also agree to be bound by the Terms &amp;
           Conditions for Lawyers, which is available
-          <a target="_blank" href="app/terms-of-use-lawyers">here</a>
+          <a target="_blank" href="app/terms-and-conditions-for-lawyers"
+            >here</a
+          >
           .<o:p></o:p
         ></span>
       </p>
@@ -356,13 +357,15 @@
         <span lang="EN-US" style="font-family: Montserrat"
           >This Website may contain links to other websites (<span
             class="LNDefinedTermChar"
-            ><span style="font-family: Montserrat">External sites </span></span
+            ><span style="font-family: Montserrat"
+              ><b>External sites</b>
+            </span></span
           >), which are not operated by <span class="SpellE">Simplawfy</span>.
-          <span class="SpellE">Simplawfy</span> has no control over the Linked
-          Sites and accepts no responsibility for them or for any loss or damage
-          that may arise from your use of them. Your use of the External sites
-          will be subject to the terms of use and service contained within each
-          such site.<o:p></o:p
+          <span class="SpellE">Simplawfy</span> has no control over
+          the External Sites and accepts no responsibility for them or for any
+          loss or damage that may arise from your use of them. Your use of the
+          External Sites will be subject to the terms of use and service
+          contained within each such site.<o:p></o:p
         ></span>
       </p>
 
@@ -752,7 +755,9 @@
         <span lang="EN-US" style="font-family: Montserrat"
           >If you have any queries regarding these Terms of Use, the Website or
           the Services, please contact us via the Contact Us page or by emailing
-          <a href="mailto:info@makinglawsimple.com.au">info@makinglawsimple.com.au</a>. <o:p></o:p
+          <a href="mailto:info@makinglawsimple.com.au"
+            >info@makinglawsimple.com.au</a
+          >. <o:p></o:p
         ></span>
       </p>
     </div>
@@ -772,7 +777,7 @@ export default {
     GeneralHeader,
     MainFooter,
     ClientHeader,
-    LawyerHeader
+    LawyerHeader,
   },
 
   name: "terms-of-use",
