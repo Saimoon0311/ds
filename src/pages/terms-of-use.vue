@@ -11,7 +11,7 @@
     </div>
 
     <div class="WordSection1 container pt-3">
-      <h3 class="mt-3 text-center">User Accounts and Terms & Conditions</h3>
+      <h3 class="mt-3 text-center">Website Terms of Use</h3>
 
       <p class="LNMarginText">
         <span class="SpellE"
@@ -89,7 +89,7 @@
             </span></span
           ></span
         ><!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >Terms &amp; Conditions for clients and lawyers<o:p></o:p
+          >User accounts and terms & conditions<o:p></o:p
         ></span>
       </p>
 
@@ -118,8 +118,7 @@
           Conditions for Clients, which is available
           <a target="_blank" href="app/terms-and-conditions-for-clients"
             >here</a
-          >
-          .<o:p></o:p
+          >.<o:p></o:p
         ></span>
       </p>
 
@@ -141,8 +140,7 @@
           Conditions for Lawyers, which is available
           <a target="_blank" href="app/terms-and-conditions-for-lawyers"
             >here</a
-          >
-          .<o:p></o:p
+          >.<o:p></o:p
         ></span>
       </p>
 
