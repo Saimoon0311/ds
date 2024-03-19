@@ -355,7 +355,7 @@
           >This Website may contain links to other websites (<span
             class="LNDefinedTermChar"
             ><span style="font-family: Montserrat"
-              ><b>External sites</b>
+              ><b>External Sites</b>
             </span></span
           >), which are not operated by <span class="SpellE">Simplawfy</span>.
           <span class="SpellE">Simplawfy</span> has no control over
