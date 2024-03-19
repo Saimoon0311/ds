@@ -66,8 +66,7 @@
 
       <p>
         2.2
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>The
-        Whilst you hold an Account, you warrant that:
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Whilst you hold an Account, you warrant that:
       </p>
       <p>
         (a)

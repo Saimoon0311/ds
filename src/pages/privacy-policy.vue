@@ -1,601 +1,150 @@
 <template lang="">
-  <section class="  ">
-    <GeneralHeader />
-    <div class="WordSection1 container pt-3">
-      <h3 class="mt-3 text-center">Privacy Policy</h3>
-
-      <p
-        class="LNNumberedHeading1"
-        style="
-          margin-left: 0cm;
-          text-indent: 0cm;
-          mso-pagination: none;
-          page-break-after: auto;
-          mso-list: none;
-          tab-stops: 36pt;
-        "
-      >
-        <span
-          lang="EN-US"
-          style="    font-family: 'Montserrat', sans-serif; font-weight: 400: normal"
-          >This Privacy Policy applies to all personal information collected by
-          <span class="SpellE">Simplawfy</span> Pty Ltd via the website
-          'makinglawsimple.com.au' (</span
-        ><span lang="EN-US" style="font-family: Montserrat">Website</span
-        ><span
-          lang="EN-US"
-          style="    font-family: 'Montserrat', sans-serif; font-weight: 400: normal"
-          >).<o:p></o:p
-        ></span>
-      </p>
-
-      <p
-        class="LNNumberedHeading1"
-        style="
-          mso-pagination: none;
-          page-break-after: auto;
-          mso-list: l13 level1 lfo33;
-        "
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >1<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >What is personal information?<o:p></o:p
-        ></span>
-      </p>
-
-      <p
-        class="Level3"
-        style="mso-pagination: none; mso-list: l13 level3 lfo33"
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(a)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >The Privacy Act 1988 (<span class="SpellE">Cth</span>) defines
-          "personal information" as meaning information or an opinion about an
-          identified individual or an individual who is reasonably
-          identifiable:<o:p></o:p
-        ></span>
-      </p>
-
-      <p
-        class="LNText4"
-        style="mso-pagination: none; mso-list: l13 level4 lfo33"
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(i)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >whether the information or opinion is true or not; and<o:p></o:p
-        ></span>
-      </p>
-
-      <p
-        class="LNText4"
-        style="mso-pagination: none; mso-list: l13 level4 lfo33"
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(ii)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >whether the information or opinion is recorded in a material form or
-          not.<o:p></o:p
-        ></span>
-      </p>
-
-      <p
-        class="Level3"
-        style="mso-pagination: none; mso-list: l13 level3 lfo33"
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(b)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >If the information does not disclose your identity or enable your
-          identity to be ascertained it will in most cases not be classified as
-          "personal information" and will not be subject to this privacy
-          policy.<o:p></o:p
-        ></span>
-      </p>
-
-      <p
-        class="LNNumberedHeading1"
-        style="
-          mso-pagination: none;
-          page-break-after: auto;
-          mso-list: l13 level1 lfo33;
-        "
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >2<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >What information do we collect?<o:p></o:p
-        ></span>
-      </p>
-
-      <p class="LNIndentText1" style="mso-pagination: none">
-        <span lang="EN-US" style="font-family: Montserrat"
-          >The kind of personal information that we collect from you will depend
-          on how you use the Website. The personal information which we collect
-          and hold about you may include: personal details and confidential
-          information including related to legal matters.<o:p></o:p
-        ></span>
-      </p>
-
-      <p
-        class="LNNumberedHeading1"
-        style="
-          mso-pagination: none;
-          page-break-after: auto;
-          mso-list: l13 level1 lfo33;
-        "
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >3<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >How do we collect your personal
-          <span class="GramE">information</span>
-          <o:p></o:p>
-        </span>
-      </p>
-
-      <p
-        class="Level3"
-        style="mso-pagination: none; mso-list: l13 level3 lfo33"
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(a)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >We may collect personal information from you whenever you input such
-          information into the Website.<o:p></o:p
-        ></span>
-      </p>
-
-      <p
-        class="Level3"
-        style="mso-pagination: none; mso-list: l13 level3 lfo33"
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(b)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >We also collect cookies from your computer which enable us to tell
-          when you use the Website and also to help
-          <span class="SpellE">customise</span> your website experience.<o:p
-          ></o:p
-        ></span>
-      </p>
-
-      <p
-        class="LNNumberedHeading1"
-        style="
-          mso-pagination: none;
-          page-break-after: auto;
-          mso-list: l13 level1 lfo33;
-        "
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >4<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >How we use personal information <o:p></o:p
-        ></span>
-      </p>
-
-      <p
-        class="Level3"
-        style="mso-pagination: none; mso-list: l13 level3 lfo33"
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(a)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >The primary purpose for which we collect personal information is to
-          provide you with the service you have requested by using the Website.
-          <o:p></o:p
-        ></span>
-      </p>
-
-      <p
-        class="Level3"
-        style="mso-pagination: none; mso-list: l13 level3 lfo33"
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(b)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >We customarily disclose personal information only to our service
-          providers who assist us in operating the Website. Your personal
-          information may also be exposed from time to time to maintenance and
-          support personnel acting in the normal course of their duties.
-          <o:p></o:p
-        ></span>
-      </p>
-
-      <p
-        class="Level3"
-        style="mso-pagination: none; mso-list: l13 level3 lfo33"
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(c)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >By using our Website, you consent to the receipt of direct marketing
-          material. We will only use your personal information for this purpose
-          if we have collected such information direct from you, and if it is
-          material of a type which you would reasonably expect to receive from
-          us. We do not use sensitive personal information in direct marketing
-          activity. Our direct marketing material will include a simple means by
-          which you can request not to receive further communications of this
-          nature.<o:p></o:p
-        ></span>
-      </p>
-
-      <p
-        class="LNNumberedHeading1"
-        style="
-          mso-pagination: none;
-          page-break-after: auto;
-          mso-list: l13 level1 lfo33;
-        "
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >5<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >How we disclose personal information <o:p></o:p
-        ></span>
-      </p>
-
-      <p class="LNIndentText1" style="mso-pagination: none">
-        <span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(a)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <span lang="EN-US" style="font-family: Montserrat"
-          >The personal information of users may be held, transmitted to or
-          processed on our behalf outside Australia, including 'in the cloud',
-          by our third party service providers. Our third party service
-          providers include:
-           <o:p></o:p
-        ></span>
-        <ul class="style-rom">
-          <li>cloud hosting, storage, networking and related providers; </li>
-          <li>payment and banking providers;  </li>
-          <li>marketing and analytics providers; and  </li>
-          <li>security providers.  </li>
-        </ul>
-        
-      </p>
-      <p class="LNIndentText1" style="mso-pagination: none">
-        <span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(b)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <span lang="EN-US" style="font-family: Montserrat"
-          >We may grant access to personal information through third party applications or APIs of our website. 
-           <o:p></o:p
-        ></span>
-
-        
-        
-      </p>
-      <p class="LNIndentText1" style="mso-pagination: none">
-        <span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >(c)<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <span lang="EN-US" style="font-family: Montserrat"
-          >We may also disclose your personal information to third parties: 
-           <o:p></o:p
-        ></span>
-        <ul class="style-rom">
-          <li>if necessary to provide the service or product you have requested;  </li>
-          <li>if required by court order, subpoena or request for information by law enforcement;   </li>
-          <li>if otherwise permitted or required by law; or   </li>
-          <li>for other purposes with your consent.  </li>
-        </ul>
-        
-      </p>
+  <section class=" ">
+    <div >
+          <GeneralHeader />
+      </div>
 
 
-      <p
-        class="LNNumberedHeading1"
-        style="
-          mso-pagination: none;
-          page-break-after: auto;
-          mso-list: l13 level1 lfo33;
-        "
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >6<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >Access and correction <o:p></o:p
-        ></span>
-      </p>
+      <div class="WordSection1 container pt-3">
+          <h3 class="mt-3 text-center">Privacy Policy</h3>
 
-      <p class="LNIndentText1" style="mso-pagination: none">
-        <span lang="EN-US" style="font-family: Montserrat"
-          >You may contact us to access and correct inaccurate personal information subject to certain exceptions.<o:p></o:p
-        ></span>
-      </p>
+          <p>This Privacy Policy applies to all personal information collected by Simplawfy Pty Ltd via the
+              website
+              ‘makinglawsimple.com.au’ (<b>Website</b>). </p>
 
+          <h6>
+              1<span>&nbsp;&nbsp;&nbsp;</span>What is personal information?
+          </h6>
+          <p>
+              The Privacy Act 1988 (Cth) defines “personal information” as meaning information or an opinion about
+              an
+              identified individual or an individual who is reasonably identifiable, whether the information or
+              opinion is true or not, and whether the information or opinion is recorded in a material form or
+              not.
+          </p>
 
-      <p
-        class="LNNumberedHeading1"
-        style="
-          mso-pagination: none;
-          page-break-after: auto;
-          mso-list: l13 level1 lfo33;
-        "
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >7<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >Complaint procedure<o:p></o:p
-        ></span>
-      </p>
+          <h6>
+              2<span>&nbsp;&nbsp;&nbsp;</span>What information do we collect?
+          </h6>
+          <p>
+              The kind of personal information that we collect from you will depend on how you use the Website.
+              The
+              personal information which we collect and hold about you may include account details, personal and
+              contact details, and information related to legal matters.
+          </p>
 
-      <p class="LNIndentText1" style="mso-pagination: none">
-        <span lang="EN-US" style="font-family: Montserrat"
-          >If you have a complaint concerning the manner in which we maintain
-          the privacy of your personal information, please contact us as set out
-          below. All complaints will be considered by our Privacy Officer and we
-          may seek further information from you to clarify our concerns. If we
-          agree that your complaint is well founded, we will, in consultation
-          with you, take appropriate steps to rectify the problem. If you remain
-          dissatisfied with the outcome, you may refer the matter to the Office
-          of the Australian Information Commissioner.<o:p></o:p
-        ></span>
-      </p>
+          <h6>
+              3<span>&nbsp;&nbsp;&nbsp;</span>How we collect your personal information
+          </h6>
+          <p>
+              We may collect personal information from you whenever you input such information into the Website.
+              We
+              may also collect cookies from your computer which enable us to tell when you use the Website and
+              also to
+              help customise your website experience.
+          </p>
 
-   
+          <h6>
+              4<span>&nbsp;&nbsp;&nbsp;</span>How we use personal information
+          </h6>
+          <p>
+              (a) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>The primary purpose for which we collect
+              personal information is to provide you with the service you have requested by using the Website.
+          </p>
+          <p>
+              (b) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>We customarily disclose personal
+              information
+              only to our service providers who assist us in operating the Website. Your personal information may
+              also
+              be exposed from time to time to maintenance and support personnel acting in the normal course of
+              their
+              duties. </p>
+          <p>
+              (c) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>By using our Website, you consent to the
+              receipt of direct marketing material. We will only use your personal information for this purpose if
+              we
+              have collected such information direct from you, and if it is material of a type which you would
+              reasonably expect to receive from us. We do not use sensitive personal information in direct
+              marketing
+              activity. Our direct marketing material will include a simple means by which you can request not to
+              receive further communications of this nature. </p>
+          <h6>
+              5<span>&nbsp;&nbsp;&nbsp;</span>How we disclose personal information
+          </h6>
+          <p>
+              (a) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>The personal information of users may be
+              held, transmitted to or processed on our behalf outside Australia, including 'in the cloud', by our
+              third party service providers. Our third party service providers include: </p>
+          <p>
+              (i) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              cloud hosting, storage, networking and related providers;
+          </p>
+          <p>
+              (ii) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              payment and banking providers;
+          </p>
+          <p>
+              (iii) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              marketing and analytics providers; and
+          </p>
+          <p>
+              (iv) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              security providers.
+          </p>
+          <p>
+              (b) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              We may grant access to personal information through third party applications or APIs of our website.
+          </p>
+          <p>
+              (c) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              We may also disclose your personal information to third parties:
+          </p>
+          <p>
+              (i) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              if necessary to provide the service or product you have requested;
+          </p>
+          <p>
+              (ii) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              if required by court order, subpoena or request for information by law enforcement;
+          </p>
+          <p>
+              (iii) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              if otherwise permitted or required by law; or
+          </p>
+          <p>
+              (iv) <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              for other purposes with your consent.
+          </p>
+          <h6>
+              6<span>&nbsp;&nbsp;&nbsp;</span>Access and correction
+          </h6>
+          <p>
+              You may contact us to access and correct inaccurate personal information subject to certain
+              exceptions.
+          </p>
+          <h6>
+              7<span>&nbsp;&nbsp;&nbsp;</span>Complaint procedure
+          </h6>
+          <p>
+              If you have a complaint concerning the manner in which we maintain the privacy of your personal
+              information, please contact us as set out below. All complaints will be considered by our Privacy
+              Officer and we may seek further information from you to clarify our concerns. If we agree that your
+              complaint is well founded, we will, in consultation with you, take appropriate steps to rectify the
+              problem. If you remain dissatisfied with the outcome, you may refer the matter to the Office of the
+              Australian Information Commissioner. </p>
+          <h6>
+              8<span>&nbsp;&nbsp;&nbsp;</span>How to contact us about privacy
+          </h6>
+          <p>
+              If you have any queries, or if you seek access to your personal information, or if you have a
+              complaint
+              about our privacy practices, you can contact us through: <a
+                  href="mailto:info@makinglawsimple.com.au">info@makinglawsimple.com.au</a>. </p>
 
-     
-
-      <p
-        class="LNNumberedHeading1"
-        style="
-          mso-pagination: none;
-          page-break-after: auto;
-          mso-list: l13 level1 lfo33;
-        "
-      >
-        <!--[if !supportLists]--><span
-          lang="EN-US"
-          style="
-                font-family: 'Montserrat', sans-serif;
-            mso-fareast-    font-family: 'Montserrat', sans-serif;
-            mso-bidi-    font-family: 'Montserrat', sans-serif;
-          "
-          ><span style="mso-list: Ignore"
-            >8<span style="font: 7pt 'Times New Roman'"
-              >&nbsp;&nbsp;
-            </span></span
-          ></span
-        >
-        <!--[endif]--><span lang="EN-US" style="font-family: Montserrat"
-          >How to contact us about privacy<o:p></o:p
-        ></span>
-      </p>
-
-      <p class="LNIndentText1" style="mso-pagination: none">
-        <span lang="EN-US" style="font-family: Montserrat"
-          >If you have any queries, or if you seek access to your personal
-          information, or if you have a complaint about our privacy practices,
-          you can contact us through: </span
-        ><span lang="EN-US"
-          ><a href="mailto:info@makinglawsimple.com.au"
-            ><span style="font-family: Montserrat"
-              >info@makinglawsimple.com.au</span
-            ></a
-          ></span
-        ><span lang="EN-US" style="font-family: Montserrat">. <o:p></o:p></span>
-      </p>
-    </div>
-
-    <!-- <div class="card flex justify-content-center">
-        <MultiSelectPrime v-model="selectedCities" :options="cities" optionLabel="name" placeholder="Select Cities"
-            :maxSelectedLabels="3" class="w-full md:w-20rem" />
-    </div> -->
-
-    <div class="footer">
-      <MainFooter />
-    </div>
+      </div>
+      <div class="footer">
+          <MainFooter />
+      </div>
   </section>
 </template>
 <script>
@@ -633,4 +182,27 @@ ul.style-rom {
   font-size: 14pt !important;
   font-weight: 400;
 }
+
+h6 {
+            font-size: 19px !important;
+            font-weight: 400;
+            color: black;
+            line-height: 28px;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1rem;
+            color: black;
+            line-height: 24px;
+            margin-bottom: 24px;
+        }
+
+        * {
+            font-family: "Montserrat", san-sarif;
+            box-sizing: border-box;
+            padding: 0;
+        }
+
+
 </style>
