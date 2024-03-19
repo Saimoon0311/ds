@@ -32,7 +32,7 @@
             style="mso-bidi-font-weight: 400: normal"
           >
           </b
-          >and the products and services available through this Website
+          > and the products and services available through this Website
           (collectively,
           <span class="LNDefinedTermChar"
             ><span style="font-family: Montserrat"><b>Services</b></span></span
@@ -170,8 +170,7 @@
         ><span lang="EN-US" style="font-family: Montserrat">
           privacy policy, which sets out how your information is used, can be
           found
-          <router-link to="/privacy-policy">here</router-link>
-          . By using this Website, you consent to the processing described the
+          <router-link to="/privacy-policy">here</router-link>. By using this Website, you consent to the processing described in the
           privacy policy and warrant that all data provided by you is
           accurate.<o:p></o:p
         ></span>

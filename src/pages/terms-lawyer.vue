@@ -772,9 +772,9 @@
       <p>
         8.6
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        These Terms are governed by the laws of Western Australia and the
-        parties submit to the non-exclusive jurisdiction of the courts of
-        Western Australia.
+        These Terms constitute the entire agreement between the parties on the subject 
+        matter contained in them and supersede any prior agreements or understandings, 
+        whether written or oral.
       </p>
       <p>
         8.7
