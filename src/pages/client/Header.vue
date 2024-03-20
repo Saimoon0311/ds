@@ -216,7 +216,7 @@ export default {
   components: {},
   methods: {
     updateDimensions() {
-      console.log('reun');
+      // console.log('reun');
       this.screenWidth = window.innerWidth;
       this.runFunctionIfMobile();
     },
@@ -224,7 +224,7 @@ export default {
     runFunctionIfMobile() {
       if (window.innerWidth <= 991) {
         this.isMobileScreen = true;
-        console.log('Running function for mobile ' , this.isMobileScreen);
+        // console.log('Running function for mobile ' , this.isMobileScreen);
       }
     },
   },

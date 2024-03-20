@@ -131,7 +131,7 @@ export default {
       const formData = {
         [keyName]: this.form[keyName]
       }
-      console.log('jjkk :::: ', formData);
+      // console.log('jjkk :::: ', formData);
       try {
         api.post('/update-profile', formData).then(res => {
           this.closeModal(modalId);

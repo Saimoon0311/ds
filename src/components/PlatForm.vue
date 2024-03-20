@@ -204,7 +204,7 @@ export default {
   methods: {
     updateMetaDescription(newDescription) {
       const metaDescriptionTag = document.querySelector('meta[name="description"]');
-      console.log('tag check',metaDescriptionTag);
+      // console.log('tag check',metaDescriptionTag);
       if (metaDescriptionTag) {
         metaDescriptionTag.setAttribute('content', newDescription);
       } else {

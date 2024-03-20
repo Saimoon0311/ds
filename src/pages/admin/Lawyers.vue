@@ -1277,11 +1277,11 @@ export default {
     };
   },
 
-  watch: {
-    pageStatus(newQuery) {
-      console.log('pageStatus : ', newQuery);
-    },
-  },
+  // watch: {
+  //   pageStatus(newQuery) {
+  //     console.log('pageStatus : ', newQuery);
+  //   },
+  // },
 
   computed: {
     userName() {
@@ -1459,7 +1459,7 @@ export default {
       this.form[keyName] = value;
       // }
       this.form.user_id = user_id;
-      console.log(this.form);
+      // console.log(this.form);
     },
 
     setModal(type, user_id) {
@@ -1467,7 +1467,7 @@ export default {
       if (type == "fields") {
         this.fetchOptions();
         this.selectedOptionIds = this.selectedOptionIdsShow;
-        console.log('idssss ::::: ', this.selectedOptionIdsShow);
+        // console.log('idssss ::::: ', this.selectedOptionIdsShow);
       } else if (type == "locations") {
         this.fetchOptions_locations();
         this.selectedOptionIds_locations = this.selectedOptionIdsShow_locations;
@@ -1478,7 +1478,7 @@ export default {
     async fetchOptions() {
       try {
         const response = await api.get(`/get-active-fields?user_id=${this.form.user_id}`);
-        console.log('sundak  :::: ', this.form.user_id, response?.data?.myFields);
+        // console.log('sundak  :::: ', this.form.user_id, response?.data?.myFields);
         this.options = response?.data?.allFields;
         this.selectedOptionIds = response?.data?.myFields ?? [];
         this.selectedOptionIdsShow = response?.data?.myFields ?? [];
@@ -1491,7 +1491,7 @@ export default {
     async fetchOptions_locations() {
       try {
         const response = await api.get(`/get-active-locations?user_id=${this.form.user_id}`);
-        console.log('sundak  :::: ', response?.data);
+        // console.log('sundak  :::: ', response?.data);
         this.options_locations = response?.data?.allLocations;
         this.selectedOptionIds_locations = response?.data?.myLocations ?? [];
         this.selectedOptionIdsShow_locations = response?.data?.myLocations ?? [];
@@ -1502,7 +1502,7 @@ export default {
 
     // fields
     saveSelectedFields(user_id, index) {
-      console.log('Selected Option IDs:', this.selectedOptionIds);
+      // console.log('Selected Option IDs:', this.selectedOptionIds);
       if (this.selectedOptionIds?.length == 0) {
         return false;
       }
@@ -1533,7 +1533,7 @@ export default {
 
     // locations
     saveSelectedLocations(user_id, index) {
-      console.log('Selected Option IDs:', this.selectedOptionIds_locations);
+      // console.log('Selected Option IDs:', this.selectedOptionIds_locations);
       if (this.selectedOptionIds_locations?.length == 0) {
         return false;
       }
@@ -1543,10 +1543,10 @@ export default {
           // this.fetchOptions_locations();
           // this.fetchUserData();
           this.closeModal(`#StateModal${index}`);
-          console.log('loc ::::: ', this.openJobs);
+          // console.log('loc ::::: ', this.openJobs);
           if (this.openJobs?.length > 0) {
-            console.log('index ::::: ', this.openJobs);
-            console.log('index ::::: ', res);
+            // console.log('index ::::: ', this.openJobs);
+            // console.log('index ::::: ', res);
             const openJobsIndex = this.openJobs.findIndex(
               (user) => user.email === res?.data?.data?.email
             );
@@ -1566,7 +1566,7 @@ export default {
     async setStatus(status) {
       this.pageStatus = status;
       await this.loadMore(status, true)
-      console.log('run run run ', this.openJobs);
+      // console.log('run run run ', this.openJobs);
     },
     approve(id, index) {
       try {

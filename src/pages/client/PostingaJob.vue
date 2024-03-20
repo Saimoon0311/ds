@@ -695,7 +695,7 @@ export default {
       if (this.currentStep == 0 && !this.otherAreaSelected && !this.selectedArea && !this.selectedAreaIndex) {
         return false;
       }
-      console.log(this.otherAreaSelected, ' : other');
+      // console.log(this.otherAreaSelected, ' : other');
       // if (
       //   this.currentStep == 0 &&
       //   !this.selectedArea &&
@@ -847,7 +847,7 @@ export default {
 
 
         if (this.languageIsChecked) {
-          console.log('other lagn :::: ', this.selectedLanguage);
+          // console.log('other lagn :::: ', this.selectedLanguage);
           // is_accessibility_requirement_selected = 1;
           if (this.selectedLanguage == '') {
             formData.language = "Language other than English";

@@ -449,7 +449,7 @@ export default {
   watch: {
     // for pagination
     currentPaginationPage() {
-      console.log('watch run');
+      // console.log('watch run');
       this.getPaginatedData();
     },
     // for pagination
@@ -499,7 +499,7 @@ export default {
     },
 
     updateArea(job_id, modalId) {
-      console.log(modalId);
+      // console.log(modalId);
       if (job_id && this.area) {
         api.post(`/admin/set-job-area`, { "area_id": this.area, "job_id": job_id }).then(() => {
           // console.log(res);
@@ -538,7 +538,7 @@ export default {
       this.clear = true;
       this.data_paginated = [];
       this.searchQueryNumberPagination = "";
-      console.log('data url : ', this.dataUrl);
+      // console.log('data url : ', this.dataUrl);
       this.$store.commit('SET_ENDPOINT_FOR_PAGINATED_DATA', this.dataUrl);
       this.getPaginatedData();
       this.clear = false;
@@ -570,7 +570,7 @@ export default {
 
 
     reopenJob(id) {
-      console.log(id);
+      // console.log(id);
       this.$swal({
         title: 'Are you sure?',
         text: "You want to reopen this job ?",
@@ -600,7 +600,7 @@ export default {
 
 
     deleteJob(id) {
-      console.log(id);
+      // console.log(id);
       this.$swal({
         title: 'Are you sure?',
         text: "You want to delete this job ?",

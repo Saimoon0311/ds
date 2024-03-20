@@ -110,13 +110,13 @@ export default {
   },
   mounted() {
     this.pageOption = this.userTypeForLogin;
-    console.log('page option : ' , this.pageOption);
+    // console.log('page option : ' , this.pageOption);
     this.updateMetaDescription(`Get one step closer to finding a lawyer or client.`);    
   },
   methods: {
     updateMetaDescription(newDescription) {
       const metaDescriptionTag = document.querySelector('meta[name="description"]');
-      console.log('tag check',metaDescriptionTag);
+      // console.log('tag check',metaDescriptionTag);
       if (metaDescriptionTag) {
         metaDescriptionTag.setAttribute('content', newDescription);
       } else {
@@ -125,7 +125,7 @@ export default {
       }
     },
     submitData(formData) {
-      console.log('sbumt');
+      // console.log('sbumt');
       // let dashboardUrl = null;
       // if (this.userTypeForLogin == "lawyer") {
       //   dashboardUrl = "lawyer-profile";
@@ -137,7 +137,7 @@ export default {
       if(goToAccountExists && this.$route.query.goToAccount){
         goToAccountPage = true;
       }
-      console.log('g o t o a : ' , this.$route.query.goToAccount);
+      // console.log('g o t o a : ' , this.$route.query.goToAccount);
       if(goToAccountPage){
         // let dashboardUrl = (this.userTypeForLogin == 'lawyer') ? 'lawyer-account' : 'client-account'; 
         // console.log('url 222: ' , dashboardUrl);

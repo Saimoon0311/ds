@@ -227,7 +227,7 @@ export default {
  
      computed: {
     loginUserData() {
-      console.log('dhuurr', this.$store.getters?.loginUser)
+      // console.log('dhuurr', this.$store.getters?.loginUser)
       return this.$store.getters?.loginUser;
     },
    
@@ -239,7 +239,7 @@ export default {
   methods: {
     updateMetaDescription(newDescription) {
       const metaDescriptionTag = document.querySelector('meta[name="description"]');
-      console.log('tag check',metaDescriptionTag);
+      // console.log('tag check',metaDescriptionTag);
       if (metaDescriptionTag) {
         metaDescriptionTag.setAttribute('content', newDescription);
       } else {

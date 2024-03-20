@@ -516,7 +516,7 @@ export default {
       const formData = {
         [keyName]: this.form[keyName]
       }
-      console.log('jjkk :::: ', formData);
+      // console.log('jjkk :::: ', formData);
       try {
         api.post('/update-profile', formData).then(res => {
           this.closeModal(modalId);
@@ -611,7 +611,7 @@ export default {
     // },
 
     toggleSubscription() {
-  console.log(this.checkbox);
+  // console.log(this.checkbox);
 
   // Make sure to store the reference to 'this' to access it inside the Promise callback
   const vm = this;

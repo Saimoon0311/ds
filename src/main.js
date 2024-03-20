@@ -132,7 +132,7 @@ app.mixin({
     },
 
     currentPaginationPage() {
-      console.log("computed run");
+      // console.log("computed run");
       return this.$store.state.currentPaginationPage;
     },
     paginationEndpoint() {
@@ -173,8 +173,8 @@ app.mixin({
             "success"
           ).then(() => {
             this.image = this.baseUrl + "storage/images/" + res?.data?.image;
-            console.log(res);
-            console.log("loginUser : " + res?.data?.image);
+            // console.log(res);
+            // console.log("loginUser : " + res?.data?.image);
             fileInput.value = "";
           });
         });
@@ -248,7 +248,7 @@ app.mixin({
     // convert numbers in currency format
     formatNumber(number) {
       // Ensure that the input is a number
-      console.log("number to formate : ", number);
+      // console.log("number to formate : ", number);
       // if (typeof number !== 'number') {
       //   return number;
       // }
@@ -271,7 +271,7 @@ app.mixin({
 
         this.$store.commit("SET_JOBIDTOCHAT", item?.id);
         this.$store.commit("SET_DATATAB", this.tab);
-        console.log(type);
+        // console.log(type);
         if (type == "lawyer") {
           this.$store.commit("SET_USERTOCHAT", item?.owner);
           // console.log('lawyer chat status : ' , item)
@@ -284,7 +284,7 @@ app.mixin({
       }
 
       if (item == null) {
-        console.log("else else else");
+        // console.log("else else else");
         this.saveJobInfo(null, reset);
         this.saveLoadMoreData(reset);
         this.$store.commit("SET_JOBIDTOCHAT", null);
@@ -311,7 +311,7 @@ app.mixin({
         this.$store.commit("SET_JOB_DATA", null);
         localStorage.removeItem("jobData");
       } else {
-        console.log("save jbo index , ", item);
+        // console.log("save jbo index , ", item);
         this.$store.commit("SET_JOB_DATA", item);
         localStorage.setItem("jobData", JSON.stringify(item));
       }
@@ -329,8 +329,8 @@ app.mixin({
         });
       }
 
-      console.log("curr : ", this.currentPage);
-      console.log("last : ", this.lastPage);
+      // console.log("curr : ", this.currentPage);
+      // console.log("last : ", this.lastPage);
     },
 
     goToLoginPage(type) {
@@ -340,7 +340,7 @@ app.mixin({
     },
 
     async updateProfile(keyName, modalId = null, keyName2 = "Profile") {
-      console.log("response after update 1", keyName);
+      // console.log("response after update 1", keyName);
       if (modalId == "#ConsultationModal" && Array.isArray(keyName)) {
         this.form.consultation_type = this.form.consultation_type2;
         this.form.consultation_amount = this.form.consultation_amount2;
@@ -352,16 +352,16 @@ app.mixin({
           "consultation_time",
         ];
 
-        console.log(keyName.length);
+        // console.log(keyName.length);
         if (keyName.length == 3) {
-          console.log(keyName[0], keyName[2]);
+          // console.log(keyName[0], keyName[2]);
           if (
             this.form[keyName[0]] == "free" &&
             this.form[keyName[2]] == null
           ) {
             return false;
           }
-          console.log(keyName[0], keyName[1], keyName[2]);
+          // console.log(keyName[0], keyName[1], keyName[2]);
           if (
             this.form[keyName[0]] == "discounted" &&
             (this.form[keyName[1]] == null || this.form[keyName[2]] == null)
@@ -387,7 +387,7 @@ app.mixin({
       // if(user_id){
       //   formDataObject[keyName] = user_id;
       // }
-      console.log("formDataObject:", formDataObject);
+      // console.log("formDataObject:", formDataObject);
       try {
         api.post("/update-profile", formDataObject).then((res) => {
           console.log("chk res : ", res);
@@ -435,12 +435,12 @@ app.mixin({
 
     // number pagination data
     async getPaginatedData() {
-      console.log("func run");
+      // console.log("func run");
       api
         .get(`${this.paginationEndpoint}?page=${this.currentPaginationPage}`)
         .then((res) => {
           this.data_paginated = res?.data?.data;
-          console.log("last api : ", this.data_paginated);
+          // console.log("last api : ", this.data_paginated);
           this.$store.commit("SET_PAGINATION_LAST", res?.data?.last_page);
         })
         .catch((error) => {
@@ -453,7 +453,7 @@ app.mixin({
       if (this.searchQueryNumberPagination == "") return false;
       let obj = { query: this.searchQueryNumberPagination };
       if (status) obj.admin_approval = status;
-      console.log(obj);
+      // console.log(obj);
       const response = await api.get(this.paginationEndpoint, {
         params: obj,
       });
@@ -466,7 +466,7 @@ app.mixin({
     },
 
     setUserInStateAndLocalStorage(res, removeFromLocalStorage = true) {
-      console.log("new func : ", res?.data?.data);
+      // console.log("new func : ", res?.data?.data);
       const userData = {
         id: res?.data?.data?.id,
         first_name: res?.data?.data?.first_name,
@@ -544,9 +544,9 @@ app.mixin({
     },
 
     sendOtp(email = null) {
-      console.log("user email : ", email);
+      // console.log("user email : ", email);
       if (email == null) {
-        email = "admin@mailinator.com";
+        email = "info@makinglawsimple.com.au";
       }
       api
         .post("/generate-send-otp", { email })
@@ -559,7 +559,7 @@ app.mixin({
             this.$store.commit("SET_OTP_EMAIL", email);
             localStorage.setItem("otpEmail", email);
 
-            if (email == "admin@mailinator.com") {
+            if (email == "info@makinglawsimple.com.au") {
               this.$router.push({ path: "/otp-verification" });
             } else {
               this.$router.push({ path: "/otp" });
@@ -651,7 +651,7 @@ app.mixin({
 
     // this function is to store user in state and localstorage after login then redirect to dashboard
     setUserAndRedirect(res, path, goToAccountPage = false) {
-      console.log("single a : ", res?.data);
+      // console.log("single a : ", res?.data);
       if (!localStorage.getItem("token")) {
         const expiresIn = 7200; // 2 hours miliseconds
         // const expiresIn = 2 * 60;
@@ -681,8 +681,8 @@ app.mixin({
             path = "client-dashboard";
           }
         } else if (res?.data?.data?.type == "lawyer") {
-          console.log("len of fields : ", res?.data?.data?.fields.length);
-          console.log("len of locations : ", res?.data?.data?.locations.length);
+          // console.log("len of fields : ", res?.data?.data?.fields.length);
+          // console.log("len of locations : ", res?.data?.data?.locations.length);
           if (
             res?.data?.data?.fields.length > 0 &&
             res?.data?.data?.locations.length > 0 &&
@@ -846,7 +846,7 @@ app.mixin({
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="proposalDetailsModalLabel">Proposal Details</h5>
+              <h5 class="modal-title" id="proposalDetailsModalLabel">Job Details</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
             </div>
             <div class="modal-body">
@@ -882,7 +882,7 @@ app.mixin({
     },
 
     openRequirementsModal(data) {
-      console.log(data);
+      // console.log(data);
       let newData = {};
       if (data && typeof data === "object") {
         for (const key in data) {
@@ -1290,8 +1290,8 @@ app.mixin({
 
     openLawyerDetailsModal(data, showSecretInfo = false) {
       // showSecretInfo = !showSecretInfo;
-      console.log(data);
-      console.log(showSecretInfo);
+      // console.log(data);
+      // console.log(showSecretInfo);
       // let image = "";
 
       // let htmlContent = `${image}`;
@@ -1497,7 +1497,7 @@ app.mixin({
     },
 
     openFeeEstimateModal(charge_type) {
-      console.log("charge type", charge_type);
+      // console.log("charge type", charge_type);
 
       if (charge_type) {
         // let charge_heading = "";
@@ -1690,7 +1690,7 @@ app.mixin({
     //   }
     // },
     async requestNotificationPermission() {
-      console.log("requestNotificationPermission hit");
+      // console.log("requestNotificationPermission hit");
       if ("serviceWorker" in navigator) {
         //.register("/app/firebase-messaging-sw.js")
         navigator.serviceWorker
@@ -1702,8 +1702,8 @@ app.mixin({
               .then(async (currentToken) => {
                 if (currentToken) {
                   const permission = await Notification.requestPermission();
-                  console.log("check notification 1 permission : ", permission);
-                  console.log("check notification 2 token : ", currentToken);
+                  // console.log("check notification 1 permission : ", permission);
+                  // console.log("check notification 2 token : ", currentToken);
                   if (permission === "granted") {
                     // console.log('mess :: ' , currentToken);
                     // console.log('Notification permission granted. Token:', currentToken);
@@ -1808,7 +1808,7 @@ app.mixin({
     // },
 
     openProposalDetailsModal(data, renderAsHtml = false) {
-      console.log("proposal details:", data);
+      // console.log("proposal details:", data);
       let newData = {};
       let specificTasks = [];
       let disbursements = [];
@@ -1860,7 +1860,7 @@ app.mixin({
         }
       }
 
-      console.log("fee earners 1-1 : ", feeEarners);
+      // console.log("fee earners 1-1 : ", feeEarners);
 
       const mainHtmlContent = Object.entries(newData)
         .map(([key, value]) => {
@@ -1890,7 +1890,7 @@ app.mixin({
       }
 
       if (feeEarners.length > 0) {
-        console.log("fee earners : : ", feeEarners);
+        // console.log("fee earners : : ", feeEarners);
         feeEarnersTable = this.createTableHtmlFeeEarners(
           "Fee Earners",
           feeEarners,
@@ -1904,7 +1904,7 @@ app.mixin({
         ${disbursementsTable}
         ${feeEarnersTable}
       `;
-      console.log("dis bur sement : ", swalHtmlContent);
+      // console.log("dis bur sement : ", swalHtmlContent);
       // Use dynamic HTML inside SweetAlert2 modal
 
       if (renderAsHtml) {
@@ -1983,7 +1983,7 @@ app.mixin({
           </div>`;
         }
 
-        console.log("data 101 : ", data);
+        // console.log("data 101 : ", data);
         if (
           typeof data?.charge_type != undefined &&
           data?.charge_type == "Hourly" &&
@@ -2231,7 +2231,7 @@ app.mixin({
       const swalHtmlContent = `
         <div class="table-wrap pb-0 proposed-work" >${mainHtmlContent}</div>
       `;
-      console.log("dis bur sement : ", swalHtmlContent);
+      // console.log("dis bur sement : ", swalHtmlContent);
       // Use dynamic HTML inside SweetAlert2 modal
 
       // this.$swal.fire({
@@ -2306,7 +2306,7 @@ app.mixin({
     },
 
     createTableHtml(title, dataArray, renderAsHtml = false) {
-      console.log("create table dis : ", dataArray);
+      // console.log("create table dis : ", dataArray);
 
       if (!Array.isArray(dataArray)) {
         return;
@@ -2361,7 +2361,7 @@ app.mixin({
     },
 
     createTableHtmlFeeEarners(title, dataArray, renderAsHtml = false) {
-      console.log("fee1 : ", dataArray);
+      // console.log("fee1 : ", dataArray);
       // const total = dataArray.reduce(
       //   (total, row) => total + parseFloat(row.hourlyRate * row.estimatedHours) || 0,
       //   0
@@ -2562,7 +2562,7 @@ app.mixin({
               this.$swal("", "Incorrect email or password.", "error");
             }
           });
-        console.log(formData);
+        // console.log(formData);
       } catch (error) {
         this.$swal("", "Incorrect email or password.", "error");
         // this.showBackendErrors(error);
@@ -2674,7 +2674,7 @@ app.mixin({
     // loadmore pagination and search functions start
 
     async search(status = null) {
-      console.log(status);
+      // console.log(status);
       if (this.searchQuery == "") return false;
       let obj = { query: this.searchQuery };
       if (
@@ -2684,7 +2684,7 @@ app.mixin({
         obj.admin_approval = status;
       }
       // if (status) obj.admin_approval = status;
-      console.log(obj);
+      // console.log(obj);
       const response = await api.get(this.endpoint, {
         params: obj,
       });
@@ -2692,13 +2692,13 @@ app.mixin({
       this.lastPage = response?.data?.last_page;
       this.openJobs = response?.data?.data;
       // console.log(response?.data);
-      console.log("last page : ", this.lastPage);
-      console.log("curr search : ", this.currentPage);
+      // console.log("last page : ", this.lastPage);
+      // console.log("curr search : ", this.currentPage);
     },
 
     async loadMore(status = null, reset = null, increment_page = true) {
       this.$store.commit("SET_ENDOFRESULT", false);
-      console.log("check computed : ", this.loadMorePrevData);
+      // console.log("check computed : ", this.loadMorePrevData);
       if (this.loadMorePrevData != null) {
         this.currentPage = this.loadMorePrevData.currentPage;
         this.lastPage = this.loadMorePrevData.lastPage;
@@ -2706,7 +2706,7 @@ app.mixin({
         this.$store.commit("SET_LOADMOREPREVDATA", null);
         return false;
       }
-      console.log(status, "l1");
+      // console.log(status, "l1");
       // if (this.currentPage > this.lastPage) {
       //   return;
       // }
@@ -2727,7 +2727,7 @@ app.mixin({
       } else {
         url = `${this.endpoint}?page=${this.currentPage}`;
       }
-      console.log("url ::: ", url);
+      // console.log("url ::: ", url);
 
       if (
         this.endpoint == "/admin/all-lawyers" ||
@@ -2736,7 +2736,7 @@ app.mixin({
         url = url + `&admin_approval=${status}`;
       }
 
-      console.log("url 2 ::: ", url);
+      // console.log("url 2 ::: ", url);
       try {
         const response = await this.fetchData(url);
 
@@ -2763,22 +2763,22 @@ app.mixin({
       if (index != null) {
         this.openJobs.splice(index, 1);
       }
-      console.log("before first if", this.currentPage, this.lastPage);
+      // console.log("before first if", this.currentPage, this.lastPage);
       if (this.currentPage < this.lastPage) {
-        console.log("under first if");
+        // console.log("under first if");
         this.currentPage--;
         if (status) {
-          console.log("under nested if");
+          // console.log("under nested if");
           await this.loadMore(status);
         } else {
-          console.log("under nested else");
+          // console.log("under nested else");
           await this.loadMore();
         }
       }
     },
 
     async clearSearch(status = null) {
-      console.log(status);
+      // console.log(status);
       if (this.searchQuery == "") return false;
       this.clear = true;
       this.openJobs = [];

@@ -146,7 +146,7 @@ export default {
         api
           .post("/verify-otp", { otp: otp, email: this.otpEmail })
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             let dashboardUrl = null;
             if (res?.data?.data?.type == "lawyer") {
               dashboardUrl = "lawyer-profile";

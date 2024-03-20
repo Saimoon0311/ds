@@ -52,9 +52,9 @@ export default {
       return this.$store.state.loginUser;
     },
   },
-  mounted(){
-    console.log('jobdata from job header : ' , this.jobData)
-  }
+  // mounted(){
+  //   console.log('jobdata from job header : ' , this.jobData)
+  // }
 };
 </script>
   

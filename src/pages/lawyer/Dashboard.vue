@@ -623,7 +623,7 @@ export default {
       return this.$store.state.dataTab;
     },
     userFields() {
-      console.log("user : ", this.$store.getters?.loginUser);
+      // console.log("user : ", this.$store.getters?.loginUser);
       return `${this.$store.getters?.loginUser?.fields}`;
     },
     userLocations() {
@@ -636,12 +636,12 @@ export default {
       return this.$store.getters.adminApprovalStatus;
     },
     subscriptionStatus() {
-      console.log("ss tt uu : ", this.$store.getters.subscriptionStatus);
+      // console.log("ss tt uu : ", this.$store.getters.subscriptionStatus);
       return this.$store.getters.subscriptionStatus;
     },
   },
   async created() {
-    console.log('job tab name : ', this.jobTabName);
+    // console.log('job tab name : ', this.jobTabName);
     if (this.jobTabName) {
       this.tab = this.jobTabName;
     }
@@ -657,7 +657,7 @@ export default {
 
   mounted() {
     // this.getNextUser();
-    console.log('accepted unseen proposals : ', this.accepted_unseen_proposals);
+    // console.log('accepted unseen proposals : ', this.accepted_unseen_proposals);
     this.proposalAcceptMessage(0);
   },
 
@@ -772,7 +772,7 @@ export default {
     getNextUser() {
       if (this.currentPage < this.lastPage) {
         let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-        console.log(bottomOfWindow);
+        // console.log(bottomOfWindow);
         if (bottomOfWindow) {
           this.loadMore();
           if (this.jobTabName) {

@@ -206,7 +206,7 @@ export default {
   watch: {
     // for pagination
     currentPaginationPage() {
-      console.log('watch run');
+      // console.log('watch run');
       this.getPaginatedData();
     },
     // for pagination

@@ -324,7 +324,7 @@ export default {
   watch: {
     // for pagination
     currentPaginationPage() {
-      console.log("watch run");
+      // console.log("watch run");
       this.getPaginatedData();
     },
     // for pagination
@@ -335,7 +335,7 @@ export default {
   },
 
   created() {
-    console.log("under created 222 ", this.jobData?.notifications?.length);
+    // console.log("under created 222 ", this.jobData?.notifications?.length);
     if (this.jobData?.notifications?.length > 0) {
       this.resetCount("job");
     }
@@ -353,7 +353,7 @@ export default {
       if (!this.isMobileDevice()) {
         const { definition } = this.openFeeEstimateModal(type);
         this.tooltipText = definition;
-        console.log(this.tooltipText);
+        // console.log(this.tooltipText);
         this.isTooltipVisible = true;
         this.tooltipId = id;
       }
@@ -379,7 +379,7 @@ export default {
       if (this.isMobileDevice()) {
         const { definition } = this.openFeeEstimateModal(type);
         this.tooltipText = definition;
-        console.log(this.tooltipText);
+        // console.log(this.tooltipText);
         this.isTooltipVisible = !this.isTooltipVisible;
         this.tooltipId = id;
         // alert(this.tooltipText);
@@ -399,7 +399,7 @@ export default {
 
     goToMessagePage2(item = null) {
       if (item) {
-        console.log("item mm mm : ", item);
+        // console.log("item mm mm : ", item);
         this.saveJobInfo(item?.job);
         // this.saveLoadMoreData();
 
@@ -465,12 +465,12 @@ export default {
       $(this.$refs.myModal).modal("hide");
     },
     disableMessageButton(item) {
-      console.log("lawyer id : ", item?.lawyer_id);
-      console.log("chats : ", item?.job?.chats);
-      console.log(
-        "chats match : ",
-        item.job.chats.some((chat) => chat.lawyer_id === item.lawyer_id)
-      );
+      // console.log("lawyer id : ", item?.lawyer_id);
+      // console.log("chats : ", item?.job?.chats);
+      // console.log(
+      //   "chats match : ",
+      //   item.job.chats.some((chat) => chat.lawyer_id === item.lawyer_id)
+      // );
       if (item?.lawyer_id && item?.job?.chats) {
         return item.job.chats.some((chat) => chat.lawyer_id === item.lawyer_id);
       }
@@ -545,21 +545,21 @@ export default {
       chat_lawyer_id
     ) {
       try {
-        console.log("handle acccpt : ", chat_lawyer_id);
+        // console.log("handle acccpt : ", chat_lawyer_id);
         let status = "Accept";
-        console.log(proposal_id, lawyer, job_id, chat_id);
+        // console.log(proposal_id, lawyer, job_id, chat_id);
         // console.log(this.getJobChat(chat_id));
 
-        console.log("accept bid job : ", this.jobData);
+        // console.log("accept bid job : ", this.jobData);
 
         // check if lawyer and client has chat on this job
         if (lawyer?.id === chat_lawyer_id) {
-          console.log("f1 chat id, ", db);
+          // console.log("f1 chat id, ", db);
           const messagesRef = collection(db, "chats", chat_id, "messages");
-          console.log("f2 message ref, ", messagesRef);
+          // console.log("f2 message ref, ", messagesRef);
           this.getJobChat(messagesRef)
             .then((messages) => {
-              console.log("ms : ", messages);
+              // console.log("ms : ", messages);
               this.changeStatus({
                 status,
                 proposal_id,

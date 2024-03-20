@@ -97,7 +97,7 @@ export default {
                 const stripeScript = document.createElement('script');
                 stripeScript.src = 'https://js.stripe.com/v3/';
                 //   stripeScript.onload = this.loadStripe;
-                console.log(stripeScript);
+                // console.log(stripeScript);
                 stripeScript.onload = () => { 
                     this.stripe = window.Stripe('pk_test_51NUgYaBknhiYNvPSEv46DkXpdgX4MoovIFoTjRbRFaXJfdj6ZYFVfbcfmjXRIPjFqF8YANCpk3oI64bLr2zkZP3r0073AAlaXc');
                     this.stripeLoaded = true;
@@ -108,7 +108,7 @@ export default {
                     this.cardElement = elements.create('card');
                     this.cardElement.mount('#card-element');
 
-                    console.log('sub : ' + this.stripe);
+                    // console.log('sub : ' + this.stripe);
                 }
                 document.head.appendChild(stripeScript);
             } else {

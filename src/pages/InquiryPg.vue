@@ -34,7 +34,7 @@
   
     computed: {
       loginUserData() {
-        console.log("dhuurr", this.$store.getters?.loginUser);
+        // console.log("dhuurr", this.$store.getters?.loginUser);
         return this.$store.getters?.loginUser;
       },
     },

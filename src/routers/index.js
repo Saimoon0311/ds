@@ -83,7 +83,7 @@ function reverse_guard(to, from, next) {
   api
     .get("/verify")
     .then((response) => {
-      console.log("revers if");
+      // console.log("revers if");
       // next('/');
       // router.go -1
 
@@ -471,7 +471,7 @@ const routes = [
 const router = createRouter({
   // history: createWebHistory(),
   history: createWebHistory(process.env.BASE_URL),
-  base: process.env.NODE_ENV == 'production' ? '/app/' : '/',
+  base: process.env.NODE_ENV == 'production' ? '/' : '/',
   routes,
   scrollBehavior() {
     // Scroll to the top of the page when navigating to a new route
@@ -498,14 +498,14 @@ const isLoggedIn = () => {
 router.beforeEach(async (to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!isLoggedIn()) {
-      console.log("not match");
+      // console.log("not match");
       next({ path: "/" });
     } else {
-      console.log("match else");
+      // console.log("match else");
       try {
-        console.log("match try");
+        // console.log("match try");
         let result = await api.get("/verify");
-        console.log("user all data ::: ", result?.data);
+        // console.log("user all data ::: ", result?.data);
         if (
           to.meta.clientAndlawyerNotAllowed &&
           result?.data?.data?.type != "admin"

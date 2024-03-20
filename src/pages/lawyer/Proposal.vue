@@ -2517,7 +2517,7 @@ export default {
     //     }
     // },
     jobData() {
-      console.log("job data : ", this.$store.state.jobData);
+      // console.log("job data : ", this.$store.state.jobData);
       return this.$store.state.jobData;
     },
     loginUser() {
@@ -2646,7 +2646,7 @@ export default {
     },
 
     setTwoDigitsAfterDecimal(key) {
-      console.log("key : ", key);
+      // console.log("key : ", key);
       if (isNaN(this.form[key])) {
         this.form[key] = null;
       } else {
@@ -2665,7 +2665,7 @@ export default {
         }
       }
       if (this.selectedOption == "Item" && this.rows2.length > 0) {
-        console.log("item by item  : ", this.rows2);
+        // console.log("item by item  : ", this.rows2);
         for (const item of this.rows2) {
           grandTotal += parseFloat(item.total);
         }
@@ -2681,7 +2681,7 @@ export default {
         );
       }
 
-      console.log("item by item  2: ", grandTotal);
+      // console.log("item by item  2: ", grandTotal);
       // <option disabled selected value="">Select an option</option>
       //           <option value="Fixed">Fixed fee</option>
       //           <option value="Hourly">Hourly rate</option>
@@ -2691,12 +2691,12 @@ export default {
       //           <option value="Success">Success fee</option>
       //           <option value="Pro">Pro bono</option>
 
-      console.log(this.selectedOption);
+      // console.log(this.selectedOption);
       // let arr = [];
       let total = 0;
       switch (this.selectedOption) {
         case "Fixed":
-          console.log("under fixed");
+          // console.log("under fixed");
           total = parseFloat(this.form.fixed_fee_amount);
           // +
           // parseFloat(this.form.disbursement_amount);
@@ -2732,8 +2732,8 @@ export default {
           break;
       }
 
-      console.log("total : : : ", total);
-      console.log("items : : : ", this.rows);
+      // console.log("total : : : ", total);
+      // console.log("items : : : ", this.rows);
       // parseFloat(this.form.disbursement_amount)
 
       let disbursement = 0;
@@ -2750,11 +2750,11 @@ export default {
           : disbursement + total;
       this.totals["totalExcludingGst"] = total;
       this.totals["gst"] = this.getGst(total, disbursement);
-      console.log("t1 : ", this.totals["totalExcludingGst"]);
-      console.log("t2 : ", this.totals["gst"]);
+      // console.log("t1 : ", this.totals["totalExcludingGst"]);
+      // console.log("t2 : ", this.totals["gst"]);
       this.totals["totalIncludingGst"] =
         this.totals["totalExcludingGst"] + this.totals["gst"];
-      console.log("t3 : ", this.totals["totalIncludingGst"]);
+      // console.log("t3 : ", this.totals["totalIncludingGst"]);
 
       // let disbursement = 0;
       // if(this.isNumericString(this.form.disbursement_amount)){
@@ -2775,7 +2775,7 @@ export default {
       //   console.log('t4 under if : ' , disbursement);
       // this.totals["totalIncludingGst"] += disbursement;
       // }
-      console.log("cons sole log : ", this.totals);
+      // console.log("cons sole log : ", this.totals);
     },
 
     // getTotalWithGst(...valuesArray){
@@ -2890,7 +2890,7 @@ export default {
         true
       );
       if (arr.length > 0) {
-        console.log("dis burse : ", arr[0]);
+        // console.log("dis burse : ", arr[0]);
         this.summaryHtmlDisbursement = arr[0];
         this.summaryHtmlItemByItemTasks = arr[2];
         this.summaryHtmlFeeEarners = arr[1];
@@ -2927,7 +2927,7 @@ export default {
         job_id: null,
       }),
         (this.isVisible = "Yes");
-      console.log("reset ", this.form);
+      // console.log("reset ", this.form);
       (this.paySucc = "No"),
         // this.newRow.itemDisbursement = "";
         // this.newRow.costAud = "";
@@ -2946,7 +2946,7 @@ export default {
 
     handleOptionChange() {
       this.currentSchema = this.selectedOption;
-      console.log("schema", this.currentSchema);
+      // console.log("schema", this.currentSchema);
       this.resetForm();
       if (this.selectedOption == "Success") {
         this.form.uplift_percentage = this.uplift_percentage_old;
@@ -2954,13 +2954,13 @@ export default {
       }
       if (this.selectedOption == "Retainer") {
         this.form.retainer_limitation = this.retainer_limitation_old;
-        console.log("t f r i :", this.form.retainer_limitation);
+        // console.log("t f r i :", this.form.retainer_limitation);
       }
       // console.log('schema', this.selectedOption);
     },
     async submitStepForm() {
-      console.log("form data : ", this.form);
-      console.log(api);
+      // console.log("form data : ", this.form);
+      // console.log(api);
 
       // charge_type
       // fixed_fee_amount
@@ -2989,7 +2989,7 @@ export default {
         this.form.fee_earners = null;
       }
 
-      console.log("rows 3 : ", this.rows3);
+      // console.log("rows 3 : ", this.rows3);
       this.form.disbursements = this.rows; // Itemise Disbursements
       this.form.specificTasks = this.rows2; // item by item specific tasks
       this.form.feeEarners = this.rows3; // additional fee earner
@@ -3106,9 +3106,9 @@ export default {
     },
 
     editRow3(index) {
-      console.log(index);
+      // console.log(index);
       this.editRow = index;
-      console.log("row s 3 : ", this.rows3[index]);
+      // console.log("row s 3 : ", this.rows3[index]);
       this.newRow3.title = this.rows3[index].title;
       this.newRow3.hourlyRate = this.rows3[index].hourlyRate;
       this.newRow3.estimatedHours = this.rows3[index].estimatedHours;
@@ -3167,7 +3167,7 @@ export default {
       if (this.currentStep == 2) {
         this.openSummaryTab();
       }
-      console.log("this ::::: ", this);
+      // console.log("this ::::: ", this);
       this.currentStep++;
     },
 
@@ -3190,7 +3190,7 @@ export default {
     },
     proPrevStep() {
       // alert("asd", this.currentStep);
-      console.log("asdasd", this.currentStep);
+      // console.log("asdasd", this.currentStep);
       if (this.currentStep == 2) {
         this.currentStep = 0;
       }

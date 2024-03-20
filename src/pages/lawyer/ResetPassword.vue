@@ -78,7 +78,7 @@ export default {
     methods: {
         submitData(formData) {
             try {
-                console.log(formData)
+                // console.log(formData)
                 formData.email = this.email;
                 formData.token = this.token;
                 api.post('/forget-password', formData)
@@ -87,7 +87,7 @@ export default {
                         this.$router.push({ path: '/login' });
                     })
                     .catch(error => console.log("getResults : ", error));
-                console.log(formData);
+                // console.log(formData);
             } catch (error) {
                 console.error('API request error:', error);
             }

@@ -23,7 +23,7 @@ export default {
     // if (isSupported()) {
     if (messaging) {
       onMessage(messaging, (payload) => {
-        console.log('Message received. ', payload);
+        // console.log('Message received. ', payload);
         this.$store.commit('SET_NOTI', payload);
       });
     }
@@ -90,7 +90,7 @@ export default {
       handler(newValue) {
         if (newValue) {
           // Handle the changes, for example, display a notification
-          console.log('noti changed:', newValue);
+          // console.log('noti changed:', newValue);
           // this.$swal(newValue?.notification?.title, newValue?.notification?.body, 'success');
 
           this.$swal({
@@ -105,9 +105,9 @@ export default {
           });
 
           const noti = JSON.parse(newValue?.data?.payload);
-          console.log(noti);
+          // console.log(noti);
           if (noti?.noti_status == "message") {
-            console.log('if');
+            // console.log('if');
             // const page = this.getLastPartOfUrl();
             const currentUrl = window.location.href;
             if (!currentUrl.includes("messages-history")) {
@@ -118,7 +118,7 @@ export default {
             //   this.$store.commit('SET_NOTI_COUNT_MSG', ++this.noti_msg);
             // }
           } else {
-            console.log('else');
+            // console.log('else');
             this.$store.commit('SET_NOTI_COUNT_JOB', ++this.noti_job);
           }
 

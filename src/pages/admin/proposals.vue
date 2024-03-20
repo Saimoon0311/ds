@@ -362,14 +362,14 @@ export default {
   watch: {
     // for pagination
     currentPaginationPage() {
-      console.log('watch run');
+      // console.log('watch run');
       this.getPaginatedData();
     },
     // for pagination
   },
 
   async mounted() {
-    console.log('admin pro run run ');
+    // console.log('admin pro run run ');
     // for pagination
     this.getData();
     this.fetchAreas();
@@ -425,7 +425,7 @@ export default {
       this.clear = true;
       this.data_paginated = [];
       this.searchQueryNumberPagination = "";
-      console.log('data url : ', this.dataUrl);
+      // console.log('data url : ', this.dataUrl);
       this.$store.commit('SET_ENDPOINT_FOR_PAGINATED_DATA', this.dataUrl);
       this.getPaginatedData();
       this.clear = false;
@@ -458,7 +458,7 @@ export default {
 
 
     deleteProposal(id){
-      console.log(id);
+      // console.log(id);
       this.$swal({
         title: 'Are you sure?',
         text: "You want to delete this proposal ?",

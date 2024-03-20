@@ -423,14 +423,14 @@ export default {
         if(this.lawyer_data.length > 0){
           this.startChatForClient(this.lawyer_data[0], 0);
         }
-        console.log(this.lawyer_data);
+        // console.log(this.lawyer_data);
       });
       }else{
         this.loadMessages();
       }
-      console.log('user second :' , this.userSecond);  
+      // console.log('user second :' , this.userSecond);  
     } else {
-      console.log("else mounte");
+      // console.log("else mounte");
       // for lawyer
       this.loadMessages();
     }

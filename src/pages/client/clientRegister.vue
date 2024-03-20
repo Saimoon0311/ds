@@ -100,7 +100,7 @@
                 <label class="form-check-label tac" for="termsAndConditions">
                     &nbsp;I have read and agree to the 
                     <!-- <router-link to="https://makinglawsimple.com.au/app/terms-of-use-client" target="_blank" >terms and conditions.</router-link> -->
-                    <router-link to="https://makinglawsimple.com.au/app/terms-and-conditions-for-clients" target="_blank" >terms and conditions.</router-link>
+                    <router-link to="https://makinglawsimple.com.au/terms-and-conditions-for-clients" target="_blank" >terms and conditions.</router-link>
                 </label>
                 <span class="invalid-feedback">{{errors.tandc}}</span>
             </div>
@@ -183,7 +183,7 @@ export default {
     methods: {
         updateMetaDescription(newDescription) {
       const metaDescriptionTag = document.querySelector('meta[name="description"]');
-      console.log('tag check',metaDescriptionTag);
+    //   console.log('tag check',metaDescriptionTag);
       if (metaDescriptionTag) {
         metaDescriptionTag.setAttribute('content', newDescription);
       } else {
@@ -199,7 +199,7 @@ export default {
         },
         getCurrentPageOption() {
             const currentRoute = this.$route.path;
-            console.log('c user', currentRoute);
+            // console.log('c user', currentRoute);
             // Compare current route with the routes associated with each option
             if (currentRoute === '/client-register') {
                 return 'client'; // If current route is '/page1', select 'page1'
@@ -212,10 +212,10 @@ export default {
         changePage() {
             if (this.pageOption === 'client') {
                 this.$router.push('/client-register');
-                console.log('asd', this.pageOption);
+                // console.log('asd', this.pageOption);
 
             } else if (this.pageOption === 'lawyer') {
-                console.log('asd', this.pageOption);
+                // console.log('asd', this.pageOption);
                 this.$router.push('/lawyer-register');
             }
         },

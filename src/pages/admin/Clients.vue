@@ -345,11 +345,11 @@ export default {
     };
   },
 
-  watch: {
-    pageStatus(newQuery) {
-      console.log('pageStatus : ', newQuery);
-    },
-  },
+  // watch: {
+  //   pageStatus(newQuery) {
+  //     console.log('pageStatus : ', newQuery);
+  //   },
+  // },
 
   computed: {
     userName() {
@@ -359,7 +359,7 @@ export default {
       return this.$store.getters.adminApprovalStatus;
     },
     subscriptionStatus() {
-      console.log("ss tt uu : ", this.$store.getters.subscriptionStatus);
+      // console.log("ss tt uu : ", this.$store.getters.subscriptionStatus);
       return this.$store.getters.subscriptionStatus;
     },
   },
@@ -475,7 +475,7 @@ export default {
     setModalData(keyName, value, user_id) {
       this.form[keyName] = value;
       this.form.user_id = user_id;
-      console.log(this.form);
+      // console.log(this.form);
     },
 
     async setStatus(status) {

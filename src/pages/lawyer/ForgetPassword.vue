@@ -67,7 +67,7 @@ export default {
     methods: {
         submitData(formData) {
             try {
-                console.log(formData)
+                // console.log(formData)
                 api.post('/send-forget-password-email/', formData)
                     .then(res => {
                         alert('Reset Password link has been sent to your email address');

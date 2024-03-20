@@ -103,7 +103,7 @@ export default {
     },
     getCurrentPageOption() {
       const currentRoute = this.$route.path;
-      console.log('c user', currentRoute);
+      // console.log('c user', currentRoute);
       // Compare current route with the routes associated with each option
       if (currentRoute === '/client-login') {
         return 'client'; // If current route is '/page1', select 'page1'
@@ -116,10 +116,10 @@ export default {
     changePage() {
       if (this.pageOption === 'client') {
         this.$router.push('/client-login');
-        console.log('asd', this.pageOption);
+        // console.log('asd', this.pageOption);
 
       } else if (this.pageOption === 'lawyer') {
-        console.log('asd', this.pageOption);
+        // console.log('asd', this.pageOption);
         this.$router.push('/lawyer-login');
       }
     }

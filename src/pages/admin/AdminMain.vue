@@ -442,7 +442,7 @@ export default {
       return this.$store.getters.adminApprovalStatus;
     },
     subscriptionStatus() {
-      console.log("ss tt uu : ", this.$store.getters.subscriptionStatus);
+      // console.log("ss tt uu : ", this.$store.getters.subscriptionStatus);
       return this.$store.getters.subscriptionStatus;
     },
   },
@@ -456,7 +456,7 @@ export default {
       api
         .get("/admin/dashboard-data")
         .then((res) => {
-          console.log("dashboard data : ", res?.data);
+          // console.log("dashboard data : ", res?.data);
           this.outstandingJobs= res?.data?.outstandingJobs;
           this.revenue = res?.data?.revenue;
           this.lawyers = res?.data?.lawyers;
@@ -476,8 +476,8 @@ export default {
           this.pieseries[1] = this.cancelations_percent;
           this.pieseries[2] = this.nonsubscribers;
 
-          console.log('pei pie : ' , this.pieseries);
-          console.log(sub_data_total);
+          // console.log('pei pie : ' , this.pieseries);
+          // console.log(sub_data_total);
           
           this.jobs = res?.data?.jobs;
           this.proposals = res?.data?.proposals;
@@ -510,7 +510,7 @@ export default {
       this.form[keyName] = value;
       // }
       this.form.user_id = user_id;
-      console.log(this.form);
+      // console.log(this.form);
     },
 
     setModal(type, user_id) {
@@ -518,7 +518,7 @@ export default {
       if (type == "fields") {
         this.fetchOptions();
         this.selectedOptionIds = this.selectedOptionIdsShow;
-        console.log("idssss ::::: ", this.selectedOptionIdsShow);
+        // console.log("idssss ::::: ", this.selectedOptionIdsShow);
       } else if (type == "locations") {
         this.fetchOptions_locations();
         this.selectedOptionIds_locations = this.selectedOptionIdsShow_locations;
@@ -530,11 +530,11 @@ export default {
         const response = await api.get(
           `/get-active-fields?user_id=${this.form.user_id}`
         );
-        console.log(
-          "sundak  :::: ",
-          this.form.user_id,
-          response?.data?.myFields
-        );
+        // console.log(
+        //   "sundak  :::: ",
+        //   this.form.user_id,
+        //   response?.data?.myFields
+        // );
         this.options = response?.data?.allFields;
         this.selectedOptionIds = response?.data?.myFields ?? [];
         this.selectedOptionIdsShow = response?.data?.myFields ?? [];
@@ -549,7 +549,7 @@ export default {
         const response = await api.get(
           `/get-active-locations?user_id=${this.form.user_id}`
         );
-        console.log("sundak  :::: ", response?.data);
+        // console.log("sundak  :::: ", response?.data);
         this.options_locations = response?.data?.allLocations;
         this.selectedOptionIds_locations = response?.data?.myLocations ?? [];
         this.selectedOptionIdsShow_locations =
@@ -561,7 +561,7 @@ export default {
 
     // fields
     saveSelectedFields(user_id, index) {
-      console.log("Selected Option IDs:", this.selectedOptionIds);
+      // console.log("Selected Option IDs:", this.selectedOptionIds);
       if (this.selectedOptionIds.length == 0) {
         return false;
       }
@@ -600,7 +600,7 @@ export default {
 
     // locations
     saveSelectedLocations(user_id, index) {
-      console.log("Selected Option IDs:", this.selectedOptionIds_locations);
+      // console.log("Selected Option IDs:", this.selectedOptionIds_locations);
       if (this.selectedOptionIds_locations.length == 0) {
         return false;
       }
@@ -616,10 +616,10 @@ export default {
             // this.fetchOptions_locations();
             // this.fetchUserData();
             this.closeModal(`#StateModal${index}`);
-            console.log("loc ::::: ", this.openJobs);
+            // console.log("loc ::::: ", this.openJobs);
             if (this.openJobs.length > 0) {
-              console.log("index ::::: ", this.openJobs);
-              console.log("index ::::: ", res);
+              // console.log("index ::::: ", this.openJobs);
+              // console.log("index ::::: ", res);
               const openJobsIndex = this.openJobs.findIndex(
                 (user) => user.email === res?.data?.data?.email
               );
@@ -678,7 +678,7 @@ export default {
     },
 
     reject(id, index) {
-      console.log(id, index);
+      // console.log(id, index);
 
       this.$swal
         .fire({

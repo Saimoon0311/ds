@@ -169,7 +169,7 @@ export default {
                         console.log("getResults : ", error)
                         this.showBackendErrors(error);
                     });
-                console.log(formData);
+                // console.log(formData);
             } catch (error) {
                 console.error('API request error:', error);
             }

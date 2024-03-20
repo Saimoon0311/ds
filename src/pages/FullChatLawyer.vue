@@ -201,8 +201,8 @@ export default {
   },
 
   created() {
-    console.log('job data on chat page : ', this.jobTabName);
-    console.log('job data on chat page 2 : ', 'abc');
+    // console.log('job data on chat page : ', this.jobTabName);
+    // console.log('job data on chat page 2 : ', 'abc');
     if (!this.isNotHeaderChatComputed && this.jobTabName) {
       this.$store.commit('SET_DATATAB', null);
     }
@@ -215,17 +215,17 @@ export default {
 
   mounted() {
     this.scrollToBottom();
-    console.log('f check start')
-    console.log('userFirst : ', this.userFirst);
-    console.log('userSecond : ', this.userSecond);
-    console.log('jobId : ', this.jobId);
-    console.log('jobData : ', this.jobData);
-    console.log('chatStatus : ', this.chatStatus);
-    console.log('chatId : ', this.chatId);
-    console.log('f check end')
+    // console.log('f check start')
+    // console.log('userFirst : ', this.userFirst);
+    // console.log('userSecond : ', this.userSecond);
+    // console.log('jobId : ', this.jobId);
+    // console.log('jobData : ', this.jobData);
+    // console.log('chatStatus : ', this.chatStatus);
+    // console.log('chatId : ', this.chatId);
+    // console.log('f check end')
 
     this.fetchChatMembers();
-    console.log('load run run run')
+    // console.log('load run run run')
     this.loadMessages(true);
   },
 
@@ -236,15 +236,15 @@ export default {
       handler(newValue) {
         if (newValue) {
           // Handle the changes, for example, display a notification
-          console.log('noti changed 2 3 4 5 6 7:', newValue);
-          console.log('data : ', this.client_data);
-          console.log('data 2 : ', this.client_data2);
+          // console.log('noti changed 2 3 4 5 6 7:', newValue);
+          // console.log('data : ', this.client_data);
+          // console.log('data 2 : ', this.client_data2);
           // this.$swal(newValue?.notification?.title, newValue?.notification?.body, 'success');
 
           // if lawyer message exist in chat and recieve message from client as a replay
           if (this.userFirst?.type == 'lawyer') {
             const noti = JSON.parse(newValue?.data?.payload);
-            console.log(noti?.sender_id);
+            // console.log(noti?.sender_id);
             const userFirstMessageExist = this.messages.some(msg => msg.sender_email === this.userFirst?.email);
             if (userFirstMessageExist && noti?.sender_id == this.userSecond?.id) {
               this.$store.commit("SET_CHATSTATUS", "old");
@@ -254,7 +254,7 @@ export default {
 
           // this.moveObjectToTop(this.client_data2, noti?.chat_id)
           // console.log(this.client_data2);
-          console.log('sel index before load : ', this.userSelectedIndex);
+          // console.log('sel index before load : ', this.userSelectedIndex);
           this.fetchChatMembers(false);
 
 
@@ -270,11 +270,11 @@ export default {
       return this.$store.state.isNotHeaderChat;
     },
     noti_msg() {
-      console.log('pay payp pya 1: ', this.$store.state.noti_count_msg);
+      // console.log('pay payp pya 1: ', this.$store.state.noti_count_msg);
       return this.$store.state.noti_count_msg;
     },
     notificationPayload() {
-      console.log('pay payp pya 2: ', this.$store.state.noti);
+      // console.log('pay payp pya 2: ', this.$store.state.noti);
       return this.$store.state.noti;
     },
     // lawyerEligibleStatus() {
@@ -297,7 +297,7 @@ export default {
       return this.$store.state.userToChat;
     },
     jobData() {
-      console.log('job data 2 2 2 : ', this.$store.state.jobData);
+      // console.log('job data 2 2 2 : ', this.$store.state.jobData);
       return this.$store.state.jobData;
     },
   },
@@ -320,14 +320,14 @@ export default {
 
         let index = 0;
         if (this.client_data2.length > 0) {
-          console.log('maaz : ', res?.data?.job);
+          // console.log('maaz : ', res?.data?.job);
           if (res?.data?.job != null) {
             this.myJobData = res?.data?.job;
-            console.log('check state job data 101: ', res?.data);
-            console.log('check state job data 102: ', this.client_data2);
-            console.log('check state job data 103: ', this.client_data2.findIndex(job => job.job_id === res?.data?.job.id));
+            // console.log('check state job data 101: ', res?.data);
+            // console.log('check state job data 102: ', this.client_data2);
+            // console.log('check state job data 103: ', this.client_data2.findIndex(job => job.job_id === res?.data?.job.id));
             index = this.client_data2.findIndex(job => job.job_id === res?.data?.job.id);
-            console.log('maaz 10 : ', index)
+            // console.log('maaz 10 : ', index)
             // add object for new chats
             if (index == -1) {
               let obj = {
@@ -345,14 +345,14 @@ export default {
           }
 
           if (index == 0) {
-            console.log('A2 : ', this.client_data2[0]?.job);
+            // console.log('A2 : ', this.client_data2[0]?.job);
             this.$store.commit("SET_JOB_DATA", this.client_data2[0]?.job);
             this.$store.commit('SET_USERTOCHAT', this.userFirst?.type == 'lawyer' ? this.client_data2[0]?.client : this.client_data2[0]?.lawyer);
-            console.log('maaz 2 : ', this.userSecond);
+            // console.log('maaz 2 : ', this.userSecond);
           }
-          console.log('is start chat :1 ', startChat);
+          // console.log('is start chat :1 ', startChat);
           if (startChat) {
-            console.log('is start chat :1 under if', startChat);
+            // console.log('is start chat :1 under if', startChat);
             this.startChatForAllMessages(this.client_data2[index], false, 0);
           }
         }
@@ -379,15 +379,15 @@ export default {
           }
           obj[this.userSecond?.type] = this.userSecond;
           this.client_data2.unshift(obj);
-          console.log('is start chat :2', startChat);
+          // console.log('is start chat :2', startChat);
           if (startChat) {
-            console.log('is start chat :2 under if', startChat);
+            // console.log('is start chat :2 under if', startChat);
             this.startChatForAllMessages(this.client_data2[0], false, 0);
           }
         }
 
-        console.log('in de x : ', this.client_data);
-        console.log('in de x 2 : ', this.client_data.filter((item) => item?.id == this.userSelectedIndex));
+        // console.log('in de x : ', this.client_data);
+        // console.log('in de x 2 : ', this.client_data.filter((item) => item?.id == this.userSelectedIndex));
         const selectedJobIndex = this.client_data.findIndex(item => item.id === this.userSelectedIndex)
         const selectedJob = this.client_data.filter((item) => item?.id == this.userSelectedIndex)
 
@@ -397,7 +397,7 @@ export default {
           this.userSeenStatusUpdate(selectedJob[0], selectedJobIndex);
         }
 
-        console.log(' cleint data : ', this.client_data);
+        // console.log(' cleint data : ', this.client_data);
       }).catch((err) => {
         console.log(err);
       })
@@ -427,12 +427,12 @@ export default {
 
     filterItems() {
       const query = this.searchClient.toLowerCase();
-      console.log(query);
-      console.log('item : ', this.client_data);
+      // console.log(query);
+      // console.log('item : ', this.client_data);
       const arr = this.client_data.filter((item) => {
         const fullName = `${item?.client?.first_name ?? item?.lawyer?.first_name} ${item?.client?.last_name ?? item?.lawyer?.last_name}`.toLowerCase();
-        console.log('filter name : ', fullName);
-        console.log('query name : ', query);
+        // console.log('filter name : ', fullName);
+        // console.log('query name : ', query);
         return fullName.includes(query);
       });
       this.client_data2 = arr;
@@ -514,9 +514,9 @@ export default {
       const userSecondEmail = this.userSecond?.email;
       const indexOfUserFirst = this.messages.findIndex(message => message.sender_email === userFirstEmail);
 
-      console.log('c 1 : ', this.messages);
-      console.log('c 2 : ', userFirstEmail);
-      console.log('c 3 : ', indexOfUserFirst);
+      // console.log('c 1 : ', this.messages);
+      // console.log('c 2 : ', userFirstEmail);
+      // console.log('c 3 : ', indexOfUserFirst);
 
       if (indexOfUserFirst !== -1) {
         this.lawyerMessageExist = true;
@@ -526,17 +526,28 @@ export default {
           .some(message => message.sender_email === userSecondEmail);
 
         if (userSecondExistsAfterUserFirst) {
-          console.log('old if if if');
+          // console.log('old if if if');
           this.$store.commit("SET_CHATSTATUS", "old");
         } else {
-          console.log('new if if if');
-          console.log(`${userSecondEmail} does not exist after the first occurrence of ${userFirstEmail}.`);
-          this.$store.commit("SET_CHATSTATUS", "new");
+          // console.log('new if if if');
+          // console.log(`${userSecondEmail} does not exist after the first occurrence of ${userFirstEmail}.`);
+          const userSecondExistBeforeUserFirst = this.messages.some(message => message.sender_email === userSecondEmail);
+          if(userSecondExistBeforeUserFirst){
+            this.$store.commit("SET_CHATSTATUS", "old");
+          }else{
+            this.$store.commit("SET_CHATSTATUS", "new");
+          }
+
         }
       } else {
-        console.log('else if if if');
-        console.log(`${userFirstEmail} not found in messages.`);
-        this.$store.commit("SET_CHATSTATUS", "new");
+        // console.log('else if if if');
+        // console.log(`${userFirstEmail} not found in messages.`);
+        const userSecondExistAnywhere = this.messages.some(message => message.sender_email === userSecondEmail);
+          if(userSecondExistAnywhere){
+            this.$store.commit("SET_CHATSTATUS", "old");
+          }else{
+            this.$store.commit("SET_CHATSTATUS", "new");
+          }
       }
 
 
@@ -589,8 +600,8 @@ export default {
 
     startChatForAllMessages(data, changeJobData = true, rowIndex = null) {
 
-      console.log('user 1 data : ', this.userFirst);
-      console.log('user 2 data : ', this.userSecond);
+      // console.log('user 1 data : ', this.userFirst);
+      // console.log('user 2 data : ', this.userSecond);
 
       // if (this.userFirst?.type == "lawyer") {
       //   this.checkChatStatusForLawyer();
@@ -605,35 +616,35 @@ export default {
       //   // }
       // }
 
-      console.log("start chat for all messages");
+      // console.log("start chat for all messages");
       const index = data?.id;
       if (changeJobData) {
-        console.log('A1 : ', data?.job);
+        // console.log('A1 : ', data?.job);
         this.$store.commit("SET_JOB_DATA", data?.job);
         // this.$store.commit('SET_USERTOCHAT', data?.client);
         this.$store.commit('SET_USERTOCHAT', this.userFirst?.type == 'lawyer' ? data?.client : data?.lawyer);
       }
-      console.log('ddddd ttttt aaa  : ', data);
+      // console.log('ddddd ttttt aaa  : ', data);
       this.myJobData = data?.job;
-      console.log('hit 1')
+      // console.log('hit 1')
       this.userSelectedIndex = index;
       this.clientSelected = true;
 
       this.chatId = data?.chat_id;
       this.hideInput = data?.is_closed;
-      console.log('load run run run')
+      // console.log('load run run run')
       this.loadMessages(true);
-      console.log('seen : ', data?.client_seen);
-      console.log('indeex : ', rowIndex);
+      // console.log('seen : ', data?.client_seen);
+      // console.log('indeex : ', rowIndex);
 
       const checkSeen = (this.loginUser?.type == "client") ? data?.client_seen : data?.lawyer_seen;
 
       if (!checkSeen && rowIndex != null) {
-        console.log('under');
+        // console.log('under');
         this.userSeenStatusUpdate(data, rowIndex);
       }
 
-      console.log('hit 22222222222222222  : ', data);
+      // console.log('hit 22222222222222222  : ', data);
     },
 
     closeChatForAllMessages() {
@@ -653,7 +664,7 @@ export default {
       const type = this.loginUser?.type;
       api2.post('/update-seen-status', { "id": data?.id, "status": true, type }).then(() => {
         // console.log(this.lawyer_data)
-        console.log(index)
+        // console.log(index)
         type == "client" ? this.client_data[index].client_seen = 1 : this.client_data[index].lawyer_seen = 1;
       }).catch((err) => {
         console.log(err);
@@ -662,16 +673,16 @@ export default {
     },
 
     loadMessages(runSnapshot) {
-      console.log('chat id 1::::: ', this.chatId);
+      // console.log('chat id 1::::: ', this.chatId);
       if (this.chatId == null) {
         // this.chatId = (this.userFirst?.type == "lawyer") ? `${this.userFirst?.email}_${this.userSecond?.email}` : `${this.userSecond?.email}_${this.userFirst?.email}`;
         this.chatId = (this.userFirst?.type == "lawyer") ? `${this.userFirst?.id}_${this.userSecond?.id}` : `${this.userSecond?.id}_${this.userFirst?.id}`;
         this.chatId = `${this.chatId}_${this.jobId}`;
       }
-      console.log('chat id 2::::: ', this.chatId);
+      // console.log('chat id 2::::: ', this.chatId);
       const messagesRef = collection(db, 'chats', this.chatId, 'messages');
-      console.log('chat id 3::::: ', messagesRef);
-      console.log('chat id 3 3::::: ', this.messages)
+      // console.log('chat id 3::::: ', messagesRef);
+      // console.log('chat id 3 3::::: ', this.messages)
 
       // Store the unsubscribe function
       if (this.messageUnsubscribe) {
@@ -680,7 +691,7 @@ export default {
 
       if (runSnapshot) {
         this.messageUnsubscribe = onSnapshot(messagesRef, (snapshot) => {
-          console.log('che dt id : ', this.chatId);
+          // console.log('che dt id : ', this.chatId);
           console.log('snap :::: ', snapshot);
           console.log('load run ', runSnapshot);
 
@@ -695,7 +706,7 @@ export default {
         });
       }
 
-      console.log('chat id 4::::: 4', this.messages);
+      // console.log('chat id 4::::: 4', this.messages);
 
     },
 
@@ -720,10 +731,10 @@ export default {
 
 
     sendMessage() {
-      console.log(addDoc);
-      console.log(serverTimestamp);
-      console.log(this.chatStatus);
-      console.log(this.userFirst?.type);
+      // console.log(addDoc);
+      // console.log(serverTimestamp);
+      // console.log(this.chatStatus);
+      // console.log(this.userFirst?.type);
 
       if (this.newMessage == "" || this.newMessage == null) {
         return false;
@@ -752,21 +763,21 @@ export default {
 
       // console.log(this.chatId);
       const messagesRef = collection(db, 'chats', this.chatId, 'messages');
-      console.log(messagesRef);
+      // console.log(messagesRef);
       addDoc(messagesRef, {
         sender_name: `${this.userFirst?.first_name}`,
         sender_email: this.userFirst?.email,
         text: this.newMessage,
         timestamp: serverTimestamp(),
       }).then((docRef) => {
-        console.log(this.userFirst);
+        // console.log(this.userFirst);
 
 
-        console.log('dosra user : ', this.userSecond);
+        // console.log('dosra user : ', this.userSecond);
 
 
         // if (this.chatStatus == "new" && this.userFirst?.type == "lawyer") {
-        console.log(' cht status : ', this.chatStatus);
+        // console.log(' cht status : ', this.chatStatus);
         this.saveChatInDB();
         // if (this.chatStatus != "new" && this.userFirst?.type == "lawyer") {
         //   const type = this.loginUser?.type;

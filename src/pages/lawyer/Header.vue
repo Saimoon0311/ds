@@ -181,7 +181,7 @@ export default {
   },
   computed: {
     noti_msg() {
-      console.log('no : ', this.$store.state.noti_count_msg);
+      // console.log('no : ', this.$store.state.noti_count_msg);
       return this.$store.state.noti_count_msg;
     },
     loginUserData() {
@@ -204,7 +204,7 @@ export default {
 
   methods: {
     updateDimensions() {
-      console.log('reun');
+      // console.log('reun');
       this.screenWidth = window.innerWidth;
       this.runFunctionIfMobile();
     },
@@ -212,7 +212,7 @@ export default {
     runFunctionIfMobile() {
       if (window.innerWidth <= 991) {
         this.isMobileScreen = true;
-        console.log('Running function for mobile ', this.isMobileScreen);
+        // console.log('Running function for mobile ', this.isMobileScreen);
       }
     },
   },

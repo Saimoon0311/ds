@@ -50,7 +50,7 @@ const store = createStore({
       state.isNotHeaderChat = value;
     },
     SET_NOTI_COUNT_MSG(state,value){
-      console.log('under state : ',value);
+      // console.log('under state : ',value);
       state.noti_count_msg = value;
     },
     SET_NOTI_COUNT_JOB(state,value){

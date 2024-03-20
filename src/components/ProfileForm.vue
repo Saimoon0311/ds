@@ -350,7 +350,7 @@ export default {
         async fetchOptions() {
             try {
                 const response = await api.get('/get-active-fields');
-                console.log('sundak  :::: ', response?.data?.allFields);
+                // console.log('sundak  :::: ', response?.data?.allFields);
                 this.options = response?.data?.allFields;
                 this.selectedOptionIds = response?.data?.myFields ?? [];
                 this.selectedOptionIdsShow = response?.data?.myFields ?? [];
@@ -363,7 +363,7 @@ export default {
         async fetchOptions_locations() {
             try {
                 const response = await api.get('/get-active-locations');
-                console.log('sundak  :::: ', response?.data?.allLocations);
+                // console.log('sundak  :::: ', response?.data?.allLocations);
                 this.options_locations = response?.data?.allLocations;
                 this.selectedOptionIds_locations = response?.data?.myLocations ?? [];
                 this.selectedOptionIdsShow_locations = response?.data?.myLocations ?? [];
@@ -374,7 +374,7 @@ export default {
 
         // fields
         saveSelectedFields() {
-            console.log('Selected Option IDs:', this.selectedOptionIds);
+            // console.log('Selected Option IDs:', this.selectedOptionIds);
             if (this.selectedOptionIds.length == 0) {
                 return false;
             }
@@ -394,7 +394,7 @@ export default {
 
         // locations
         saveSelectedLocations() {
-            console.log('Selected Option IDs:', this.selectedOptionIds_locations);
+            // console.log('Selected Option IDs:', this.selectedOptionIds_locations);
             if (this.selectedOptionIds_locations.length == 0) {
                 return false;
             }
@@ -427,7 +427,7 @@ export default {
                 formDataObject[keyName] = this.form[keyName];
             }
 
-            console.log('formDataObject:', formDataObject);
+            // console.log('formDataObject:', formDataObject);
 
             try {
                 // Assuming your API expects an object

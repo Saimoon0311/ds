@@ -2001,7 +2001,7 @@ export default {
   methods: {
     handleOptionChange() {
       this.currentSchema = this.schema[this.selectedOption];
-      console.log("schema", this.currentSchema);
+      // console.log("schema", this.currentSchema);
       // console.log('schema', this.selectedOption);
     },
     async submitStepForm() {
@@ -2020,12 +2020,12 @@ export default {
       this.form.lawyer_id = this.loginUser?.email;
       this.form.charge_type = this.selectedOption;
 
-      console.log("rows 3 : ", this.rows3);
+      // console.log("rows 3 : ", this.rows3);
       this.form.disbursements = this.rows; // Itemise Disbursements
       this.form.specificTasks = this.rows2; // item by item specific tasks
       this.form.feeEarners = this.rows3; // additional fee earner
 
-      console.log(this.form);
+      // console.log(this.form);
 
       api
         .post("/lawyer/create-proposal", this.form)
@@ -2130,7 +2130,7 @@ export default {
     },
     proPrevStep() {
       alert("asd", this.currentStep);
-      console.log("asdasd", this.currentStep);
+      // console.log("asdasd", this.currentStep);
       if (this.currentStep == 2) {
         this.currentStep = 0;
       }

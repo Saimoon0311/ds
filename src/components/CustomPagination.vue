@@ -47,15 +47,15 @@ export default {
     },
     methods: {
         previousPage() {
-            console.log('prev func');
+            // console.log('prev func');
             this.$store.commit('page_decrement');
         },
         nextPage() {
-            console.log('next func');
+            // console.log('next func');
             this.$store.commit('page_increment');
         },
         gotoPage(page) {
-            console.log('goto func');
+            // console.log('goto func');
             this.$store.commit('set_pagination_page', page);
         },
     },
